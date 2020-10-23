@@ -4,7 +4,7 @@ import { Link as ReachRouterLink } from "react-router-dom";
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 450px;
   position: relative;
   animation: change 10s ease-in infinite;
 
