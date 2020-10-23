@@ -4,7 +4,7 @@ import { Link as ReachRouterLink } from "react-router-dom";
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  height: 450px;
+  height: 650px;
   position: relative;
   animation: change 10s ease-in infinite;
 
@@ -13,7 +13,7 @@ export const Background = styled.div`
   background: url(${({ src }) =>
       src
         ? `../images/misc/${src}.jpg`
-        : "../images/misc/background1resizedx.png"})
+        : "../images/misc/background1resized2xx.png"})
     left / cover no-repeat;
 
   @media (max-width: 1200px) {

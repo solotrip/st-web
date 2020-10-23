@@ -76,7 +76,7 @@ Header.Search = function HeaderSearch({
         value={searchTerm}
         onChange={({ target }) => {
           setSearchTerm(target.value);
-          window.scrollTo(0, 280);
+          window.scrollTo(0, 200);
         }}
         placeholder="  🔍 Search anywhere or anything"
         active={searchActive}

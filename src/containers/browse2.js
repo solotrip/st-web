@@ -60,7 +60,7 @@ export function BrowseContainer({ slides }) {
   }, [searchTerm]);
 
   const changeBackground = () => {
-    if (window.scrollY >= 275) {
+    if (window.scrollY >= 195) {
       setNavBar(true);
     } else {
       setNavBar(false);
