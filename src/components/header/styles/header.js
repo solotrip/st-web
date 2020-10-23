@@ -4,36 +4,37 @@ import { Link as ReachRouterLink } from "react-router-dom";
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  height: 450px;
+  height: 500px;
+  position: relative;
+  animation: change 10s ease-in infinite;
 
+  overflow: hidden;
+  margin: 0 0 -100px 0;
   background: url(${({ src }) =>
       src
         ? `../images/misc/${src}.jpg`
-        : "../images/misc/background1resized.jpg"})
+        : "../images/misc/background1resizedx.png"})
     left / cover no-repeat;
 
-  @media (max-width: 1100px) {
+  @media (max-width: 1200px) {
     ${({ dontShowOnSmallViewPort }) =>
       dontShowOnSmallViewPort && `background: cover;`}
   }
+
+  /*@keyframes change {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }*/
 `;
 
-export const Container = styled.div`
-  display: flex;
-  margin: 0 56px;
-  height: 64px;
-  padding: 18px 0;
-  justify-content: space-between;
-  align-items: center;
-
-  a {
-    display: flex;
-  }
-
-  @media (max-width: 1000px) {
-    margin: 0 30px;
-  }
-`;
+export const Container = styled.div``;
 
 export const Link = styled.p`
   color: rgba(60, 60, 60, 1);
@@ -44,7 +45,7 @@ export const Link = styled.p`
 
   &:hover {
     font-weight: bold;
-    transition: font-weight 0s;
+    transition: font-weight 0.1s;
   }
 
   &:last-of-type {
@@ -91,13 +92,14 @@ export const SearchInput = styled.input`
   transition: width 0.5s;
   height: 36px;
   font-size: 16px;
-  width: 390px;
+  width: 100%;
+  box-shadow: 2px 3px 28px 1px rgba(0, 0, 0, 0.1);
 
   border-radius: 16px;
   margin-top: 20px;
-  display: flex;
-  margin-left: 20px;
-  margin-rigth: 20px;
+  display: grid;
+
+  margin-vertical: 10;
 `;
 
 export const Searchbar = styled.div`
@@ -105,14 +107,15 @@ export const Searchbar = styled.div`
   height: 92px;
   border-radius: 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  margin-right: 40px;
 `;
 
 export const Search = styled.div`
   display: flex;
   flex-direction: row;
-  margin-right: 20px;
-  margin-left: px;
+  margin-right: 40px;
+  margin-left: 40px;
   svg {
     color: #4d4d4d;
     cursor: pointer;
@@ -133,7 +136,7 @@ export const SearchIcon = styled.button`
 export const ButtonLink = styled(ReachRouterLink)`
   display: block;
   background: rgba(60, 60, 60, 1);
-  width: 84px;
+
   height: fit-content;
   color: rgba(234, 234, 234, 1);
   border: 1;
@@ -144,6 +147,34 @@ export const ButtonLink = styled(ReachRouterLink)`
   cursor: pointer;
   text-decoration: none;
   box-sizing: border-box;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 10px;
+
+  &:hover {
+    background: #3c82eb;
+    color: white;
+  }
+`;
+
+export const ButtonLink2 = styled(ReachRouterLink)`
+  display: block;
+
+  /*background: rgba(169, 97, 109, 1);*/
+  background: rgba(120, 130, 159, 1);
+  height: fit-content;
+  color: rgba(234, 234, 234, 1);
+  border: 1;
+  border-color: white;
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 8px 17px;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 
   &:hover {
     background: #3c82eb;
@@ -215,7 +246,7 @@ export const Profile = styled.div`
 `;
 
 export const Feature = styled(Container)`
-  padding: 150px 0 1000px 0;
+  padding: 0px 0 1000px 0;
   flex-direction: column;
   align-items: normal;
   width: 50%;
@@ -227,7 +258,6 @@ export const Feature = styled(Container)`
 `;
 
 export const FeatureContainer = styled.div`
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
 `;
@@ -248,17 +278,7 @@ export const Text = styled.p`
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.45);
 `;
 
-export const Logo = styled.img`
-  margin-top: 120px;
-  height: 300px;
-  margin-right: 0px;
-
-  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(68, 81, 92, 0.8));
-  @media (min-width: 1449px) {
-    height: 45px;
-    width: 167px;
-  }
-`;
+export const Logo = styled.img``;
 
 export const PlayButton = styled.button`
   box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);

@@ -9,6 +9,7 @@ import {
   Logo,
   Group,
   ButtonLink,
+  ButtonLink2,
   Feature,
   Text,
   FeatureCallOut,
@@ -73,9 +74,11 @@ Header.Search = function HeaderSearch({
     <Search {...restProps}>
       <SearchInput
         value={searchTerm}
-        onChange={({ target }) => setSearchTerm(target.value)}
-        //onClick={() => setsearchActive((searchActive) => !searchActive)}
-        placeholder="Search anywhere or anything"
+        onChange={({ target }) => {
+          setSearchTerm(target.value);
+          window.scrollTo(0, 280);
+        }}
+        placeholder="  🔍 Search anywhere or anything"
         active={searchActive}
       />
     </Search>
@@ -104,6 +107,10 @@ Header.Group = function HeaderGroup({ children, ...restProps }) {
 
 Header.ButtonLink = function HeaderButtonLink({ children, ...restProps }) {
   return <ButtonLink {...restProps}>{children}</ButtonLink>;
+};
+
+Header.ButtonLink2 = function HeaderButtonLink2({ children, ...restProps }) {
+  return <ButtonLink2 {...restProps}>{children}</ButtonLink2>;
 };
 
 Header.Logo = function HeaderLogo({ to, ...restProps }) {

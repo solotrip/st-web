@@ -7,6 +7,8 @@ import { Form, Footer } from "../components";
 
 import * as ROUTES from "../constants/routes";
 
+import "../containers/browse.css";
+
 export default function Signin() {
   const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
@@ -39,7 +41,7 @@ export default function Signin() {
     <>
       <HeaderContainer>
         <Form>
-          <Form.Title>Sign In</Form.Title>
+          <Form.Title>🤘 Login </Form.Title>
           {error && <Form.Error>{error}</Form.Error>}
 
           <Form.Base onSubmit={handleSignin} method="POST">
@@ -57,7 +59,7 @@ export default function Signin() {
               onChange={({ target }) => setPassword(target.value)}
             />
             <Form.Submit disabled={isInvalid} type="submit">
-              Sign in
+              Login
             </Form.Submit>
           </Form.Base>
 

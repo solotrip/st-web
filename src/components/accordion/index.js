@@ -46,9 +46,13 @@ Accordion.Header = function AccordionHeader({ children, ...restProps }) {
       {children}
 
       {toggleShow ? (
-        <img src="/images/icons/close-slim.png" alt="Close" />
+        <img
+          src="/images/icons/chevron-right.png"
+          style={{ transform: `rotate(${90}deg)` }}
+          alt="Close"
+        />
       ) : (
-        <img src="images/icons/add.png" alt="Open" />
+        <img src="images/icons/chevron-right.png" alt="Open" />
       )}
     </Header>
   );

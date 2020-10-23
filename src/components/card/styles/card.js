@@ -2,6 +2,7 @@ import styled from "styled-components/macro";
 
 export const Title = styled.p`
   font-size: 24px;
+
   color: #3c3c3c;
   font-weight: regular;
   margin-left: 56px;
@@ -39,8 +40,7 @@ export const Container = styled.div`
   margin-bottom: 50px;
   box-sizing: border-box;
   background-color: white;
-  margin-left: auto;
-  margin-right: auto;
+
   border-radius: 16px;
   max-height: 326px;
   -webkit-box-shadow: 10px 26px 42px -20px rgba(0, 0, 0, 0.56);
@@ -48,6 +48,7 @@ export const Container = styled.div`
   box-shadow: 10px 26px 42px -20px rgba(0, 0, 0, 0.56);
   padding-bottom: 30px;
   max-width: 752px;
+  z-index: 900;
 
   > ${Title} {
     @media (max-width: 1000px) {
