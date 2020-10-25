@@ -19,11 +19,22 @@ const SkeletonCard = (props) => {
                     />
                   </h2>
 
+                  {index % 3 == 0 && (
+                    <hr
+                      style={{
+                        border: "1px solid rgba(234,234,234,1)",
+                        width: "752px",
+
+                        marginTop: "-10px",
+                      }}
+                    />
+                  )}
+
                   <Skeleton
                     height={120}
                     width={180}
                     duration={1.5}
-                    style={{ borderRadius: 16 }}
+                    style={{ borderRadius: 16, marginTop: "10px" }}
                   />
                 </li>
               ))}

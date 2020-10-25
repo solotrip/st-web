@@ -161,9 +161,9 @@ export const ButtonLink2 = styled(ReachRouterLink)`
   display: block;
 
   /*background: rgba(169, 97, 109, 1);*/
-  background: rgba(120, 130, 159, 1);
+  background: rgba(234, 234, 234, 1);
   height: fit-content;
-  color: rgba(234, 234, 234, 1);
+  color: rgba(60, 60, 60, 1);
   border: 1;
   border-color: white;
   font-size: 15px;

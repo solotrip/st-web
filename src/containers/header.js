@@ -2,7 +2,7 @@ import React from "react";
 
 import { Header } from "../components";
 import * as ROUTES from "../constants/routes";
-import logo from "../constants/SolotripLogo2.png";
+import logo from "../constants/Logox2.png";
 //import logo from "../../src/logo.svg";
 
 import "./browse.css";

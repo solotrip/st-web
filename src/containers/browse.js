@@ -8,7 +8,7 @@ import React, {
 import Fuse from "fuse.js";
 import { Card, Header, Loading, Player, Accordion } from "../components";
 import * as ROUTES from "../constants/routes";
-import logo from "../constants/SolotripLogo2.png";
+import logo from "../constants/Logox2.png";
 import { FirebaseContext } from "../context/firebase";
 import { SelectProfileContainer } from "./profiles";
 import { FooterContainer } from "./footer";
@@ -127,7 +127,7 @@ export function BrowseContainer({ slides }) {
             <Header.Searchbar>
               <Sticky
                 innerZ={999}
-                top={5}
+                top={-5}
                 enabled={true}
                 className={navBar ? "searchheaderscrolled " : "searchheader"}
               >

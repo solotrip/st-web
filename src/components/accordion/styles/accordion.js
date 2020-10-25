@@ -2,21 +2,20 @@ import styled from "styled-components/macro";
 
 export const Container = styled.div`
   display: flex;
-  margin: -10px;
+  margin: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 export const Inner = styled.div`
-  padding: 0px 0px;
   flex-direction: column;
-  max-width: 815px;
-  margin: 0px;
 `;
 
 export const Item = styled.div`
   color: #3c3c3c;
   margin-bottom: 10px;
 
-  width: 100%;
+  margin-left: 0px;
 
   &:first-of-type {
     margin-top: 3em;
@@ -32,7 +31,7 @@ export const Header = styled.div`
   background: transparent;
   padding: 1.2em;
   user-select: none;
-  width: 230px;
+  width: 45vh;
 
   img {
     margin-left: auto;

@@ -1,9 +1,9 @@
 import styled from "styled-components/macro";
 
 export const Title = styled.p`
-  font-size: 24px;
+  font-size: 22px;
 
-  color: #3c3c3c;
+  color: black;
   font-weight: regular;
   margin-left: 56px;
   margin-right: 56px;
@@ -43,9 +43,7 @@ export const Container = styled.div`
 
   border-radius: 16px;
   max-height: 326px;
-  -webkit-box-shadow: 10px 26px 42px -20px rgba(0, 0, 0, 0.56);
-  -moz-box-shadow: 10px 26px 42px -20px rgba(0, 0, 0, 0.56);
-  box-shadow: 10px 26px 42px -20px rgba(0, 0, 0, 0.56);
+
   padding-bottom: 30px;
   max-width: 752px;
   z-index: 900;
@@ -202,7 +200,7 @@ export const Feature = styled.div`
   background-position-x: right;
   background-repeat: no-repeat;
   background-color: #eaeaea;
-  z-index: 1;
+  z-index: 899;
   border-radius: 16px;
   -webkit-box-shadow: 10px 26px 42px -20px rgba(0, 0, 0, 0.56);
   -moz-box-shadow: 10px 26px 42px -20px rgba(0, 0, 0, 0.56);

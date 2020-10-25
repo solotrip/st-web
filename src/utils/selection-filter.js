@@ -2,23 +2,23 @@ export default function selectionFilter({ series, films } = []) {
   return {
     series: [
       {
-        title: "🚓 Safety First",
+        title: "Safety First",
         data: series?.filter((item) => item.genre === "safety-first"),
       },
       {
-        title: "🏛️ Cultural",
+        title: "Cultural",
         data: series?.filter((item) => item.genre === "cultural"),
       },
       {
-        title: "🎒 Backpacker",
+        title: "Backpacker",
         data: series?.filter((item) => item.genre === "backpacker"),
       },
       {
-        title: "💸 Budget Friendly",
+        title: "Budget Friendly",
         data: series?.filter((item) => item.genre === "budget-friendly"),
       },
       {
-        title: "🏖️ Stress Free",
+        title: "Stress Free",
         data: series?.filter((item) => item.genre === "stress-free"),
       },
     ],
