@@ -3,7 +3,9 @@ import styled from "styled-components/macro";
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  height: 450px;
+  
+ 
+  
 
   background: url(${({ src }) =>
       src
@@ -19,20 +21,15 @@ export const Background = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  padding: 230px 56px;
-  margin: auto;
-
+  padding: 230px 0px 0px 0px;
   flex-direction: column;
   background-color: #f3f3f3;
+ 
   @media (max-width: 1000px) {
     padding: 70px 30px;
   }
 
-  background: url(${({ src }) =>
-      src
-        ? `../images/misc/${src}.jpg`
-        : "../images/misc/background1resized2.jpg"})
-    left / cover no-repeat;
+  
 
   @media (max-width: 1100px) {
     ${({ dontShowOnSmallViewPort }) =>
@@ -44,7 +41,7 @@ export const Column = styled.div`
   flex-direction: column;
   display: flex;
   text-align: middle;
-  margin: auto;
+  
 `;
 
 export const Row = styled.div`
@@ -69,7 +66,7 @@ export const Title = styled.p`
   color: #757575;
   margin-bottom: 60px;
   margin-top: 0px;
-  margin: auto;
+  
 `;
 
 export const Text = styled.p`

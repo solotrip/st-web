@@ -21,7 +21,9 @@ export function HeaderContainer({ children }) {
             className="mainlogo"
           />
           <Header.Group>
-            <Header.ButtonLink to="/signup">🍳 Sunny Sign Up</Header.ButtonLink>
+            <Header.ButtonLink className="glow-on-hover" to="/signup">
+              🍳 Sunny Sign Up
+            </Header.ButtonLink>
             <Header.ButtonLink2 to="/signin">🤘 Login </Header.ButtonLink2>
           </Header.Group>
         </Header.Frame>

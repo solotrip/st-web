@@ -158,6 +158,14 @@ export function BrowseContainer({ slides }) {
             {slideRows.map((slideItem) => (
               <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
                 <Card.Title>{slideItem.title}</Card.Title>
+                <hr
+                  style={{
+                    border: "1px solid rgba(234,234,234,0.3)",
+                    width: "100%",
+                    marginBottom: "30px",
+                    marginTop: "-10px",
+                  }}
+                />
 
                 <Card.Entities>
                   {slideItem.data.map((item) => (

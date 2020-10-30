@@ -1,11 +1,10 @@
 .content {
   width: 100%;
   max-width: 1200px;
-
   background-color: rgb(243, 243, 243);
-  padding: 40px;
+  margin-left: 0px;
   display: grid;
-  grid-template-columns: 4fr 8fr 0fr;
+  grid-template-columns: 3fr 8fr 0fr;
   margin-top: -200px;
 }
 
@@ -21,13 +20,25 @@
   padding: 40px;
   padding-top: 0px;
   display: grid;
-  grid-template-columns: 6fr 9fr 3fr;
+  margin-left:-40px;
+  grid-template-columns: 3fr 6fr 1fr;
+}
+.mainFooter {
+  width: 100%;
+  margin-top: -100px;
+  background-color: transparent;
+  padding-top: 0px;
+  display: grid;
+
+  grid-template-columns: 4fr 13fr ;
+}
+.bottomFooterImage {
+    margin-top: -600px;
 }
 
 .mainHeaderScroll {
   width: 100%;
   max-width: 1200px;
-
   background-color: transparent;
   padding: 20px;
   display: grid;
@@ -53,6 +64,7 @@
   max-width: 752px;
   z-index: 900;
 }
+
 .list {
   display: flex;
   justify-content: space-between;
@@ -67,30 +79,34 @@
 skeletonitem {
   background-color: white;
 }
+
 .card {
   width: calc(33% - 20px);
-
   margin-bottom: 60px;
-
-  padding: 10px;
+  padding: 0px;
 }
+
 .card-link {
   color: inherit;
   text-decoration: none;
 }
+
 .card-image {
   width: 100%;
 }
+
 .channel-image {
   border-radius: 100%;
   padding: 0, 10px, 0, 0;
   width: 40px;
   height: 40px;
 }
+
 .card-title {
   margin-top: 10px;
   margin-bottom: 0;
 }
+
 .card-channel {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -116,12 +132,10 @@ skeletonitem {
   margin-top: 0px;
   height: 50px;
   margin-right: 0px;
-  margin-left: 20px;
+  margin-left: -20px;
   padding-bottom: -150px;
   padding-top: -50px;
-
   transition: background-position 275ms ease;
-
   @media (min-width: 1449px) {
     height: 45px;
     width: 167px;
@@ -132,8 +146,7 @@ skeletonitem {
   margin-top: 0px;
   height: 50px;
   margin-right: 0px;
-  margin-left: 20px;
-
+  margin-left: -20px;
   @media (min-width: 1449px) {
     height: 45px;
     width: 167px;
@@ -147,9 +160,8 @@ skeletonitem {
   padding: 18px 54px;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0);
+  background: transparent;
   transition: background ease-in-out 0.1s;
-
   @media (max-width: 1000px) {
     margin: 0 30px;
   }
@@ -162,9 +174,9 @@ skeletonitem {
   padding: 18px 54px;
   justify-content: space-between;
   align-items: center;
-  animation: mymove 0.3s;
-  background-color: rgba(0, 0, 0, 1);
-
+  animation: mymove ease 0.3s;
+  background: linear-gradient(104deg, rgba(243,243,243,1) 30%, rgba(243,243,243,1) 100%);
+  border-bottom: 1px solid rgb(200, 200, 200);
   @media (max-width: 1000px) {
     margin: 0 30px;
   }
@@ -178,7 +190,6 @@ skeletonitem {
   justify-content: space-between;
   align-items: center;
   background: rgba(0, 0, 0, 0);
-
   @media (max-width: 1000px) {
     margin: 0 30px;
   }
@@ -186,10 +197,13 @@ skeletonitem {
 
 @keyframes mymove {
   from {
-    background-color: transparent;
+      
+    
   }
   to {
-    background-color: rgba(0, 0, 0, 1);
+  background: linear-gradient(104deg, rgba(243,243,243,1) 30%, rgba(243,243,243,1) 100%);
+  border-bottom: 1px solid rgb(200, 200, 200);
+  
   }
 }
 
@@ -200,4 +214,95 @@ skeletonitem {
 
 .logcontent {
   margin-top: 0px;
+}
+
+.glow-on-hover:focus {
+    outline: none;
+}
+
+.glow-on-hover {
+  background: rgba(60, 60, 60, 1);
+  height: fit-content;
+  color: rgba(234, 234, 234, 1);
+  font-size: 15px;
+  border-radius: 8px;
+  padding: 8px 17px;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 10px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  
+}
+
+.glow-on-hover:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: transparent;
+}
+
+.glow-on-hover:active:after {
+  background: transparent;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 1;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }

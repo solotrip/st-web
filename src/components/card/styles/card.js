@@ -44,6 +44,8 @@ export const Container = styled.div`
   border-radius: 16px;
   max-height: 326px;
 
+  border: 1px solid rgb(234, 234, 234);
+
   padding-bottom: 30px;
   max-width: 752px;
   z-index: 900;

@@ -5,11 +5,9 @@ import { Footer } from "../components";
 export function FooterContainer() {
   return (
     <Footer>
-      <Footer.Title>
-        "The Journey of a thousand miles begins with one step." -Lao Tzu
-      </Footer.Title>
-      <Footer.Text>-</Footer.Text>
-      <Footer.Break></Footer.Break>
+
+
+      
       <Footer.Row>
         <Footer.Column>
           <Footer.Link href="#">🇪🇸 Barcelona</Footer.Link>
@@ -40,19 +38,23 @@ export function FooterContainer() {
           <Footer.Link href="#">Contact us</Footer.Link>
         </Footer.Column>
 
-        <Footer.Column>
+        
+
+        {/*<Footer.Column>
           <Footer.Link href="#">Voyagers </Footer.Link>
           <Footer.Link href="#">Locals </Footer.Link>
           <Footer.Link href="#">Partners</Footer.Link>
           <Footer.Link href="#">Become a Solotripper</Footer.Link>
-        </Footer.Column>
+        </Footer.Column>*/}
+        
       </Footer.Row>
-      <Footer.Break />
-      <Footer.Break />
-      <Footer.Title></Footer.Title>
+
+      <Footer.Title/>
+
       <Footer.Title>
         © 2020 Made for people who ❤️ to 🚣 🏕️ 🛩️ 🏖️ and more.
       </Footer.Title>
+      
     </Footer>
   );
 }

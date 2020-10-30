@@ -9,10 +9,11 @@ import "./filter.css";
 export function FilterContainer() {
   return (
     <div className="filtersection">
-      <Accordion>
+      <Accordion className="accordionsection">
         {faqsData.map((item) => (
           <Accordion.Item key={item.id}>
             <Accordion.Header>{item.header}</Accordion.Header>
+
             <Accordion.Body>{item.body}</Accordion.Body>
           </Accordion.Item>
         ))}

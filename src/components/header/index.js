@@ -80,6 +80,7 @@ Header.Search = function HeaderSearch({
         }}
         placeholder="  🔍 Search anywhere or anything"
         active={searchActive}
+        styles={{backgroundcolor: "red"}}
       />
     </Search>
   );

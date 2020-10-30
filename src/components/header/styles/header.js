@@ -4,17 +4,22 @@ import { Link as ReachRouterLink } from "react-router-dom";
 export const Background = styled.div`
   display: flex;
   flex-direction: column;
-  height: 650px;
+  ${({ left }) =>
+      left ? `height:650px;` : 'height:300px; margin-top:300px;'}
   position: relative;
   animation: change 10s ease-in infinite;
 
   overflow: hidden;
-  margin: 0 0 -100px 0;
+  margin: 0 0 0 0;
   background: url(${({ src }) =>
       src
-        ? `../images/misc/${src}.jpg`
+        ? `../images/misc/${src}.png`
         : "../images/misc/background1resized2xx.png"})
-    left / cover no-repeat;
+
+    
+
+     ${({ left }) =>
+      left ? `left / cover no-repeat;` : 'bottom / cover no-repeat;'}
 
   @media (max-width: 1200px) {
     ${({ dontShowOnSmallViewPort }) =>
@@ -86,9 +91,9 @@ export const Group = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  background-color: #eaeaea;
+  
   color: #4d4d4d;
-  border: 1px solid white;
+  border: 1px solid rgb(200,200,200);
   transition: width 0.5s;
   height: 36px;
   font-size: 16px;
@@ -100,6 +105,16 @@ export const SearchInput = styled.input`
   display: grid;
 
   margin-vertical: 10;
+
+
+  &:focus {
+    outline: none;
+    border: 2px solid rgb(100,168,227);
+    box-shadow: 4px 6px 28px 2px rgba(100, 168, 227, 0.5);
+
+  }
+
+
 `;
 
 export const Searchbar = styled.div`

@@ -8,10 +8,12 @@ import React, {
 import Fuse from "fuse.js";
 import { Card, Header, Loading, Player, Accordion } from "../components";
 import * as ROUTES from "../constants/routes";
-import logo from "../constants/Logox2.png";
+import logo from "../constants/Logowhiteplus.png";
+import blacklogo from "../constants/Logolittle.png";
 import { FirebaseContext } from "../context/firebase";
 import { SelectProfileContainer } from "./profiles";
 import { FooterContainer } from "./footer";
+
 import { Background } from "../components/header/styles/header";
 
 import { Container, Row, Col } from "react-bootstrap";
@@ -30,6 +32,8 @@ export function BrowseContainer({ slides }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [slideRows, setSlideRows] = useState([]);
   const [navBar, setNavBar] = useState(false);
+
+  const [navBar2, setNavBar2] = useState(false);
 
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
@@ -67,11 +71,20 @@ export function BrowseContainer({ slides }) {
     }
   };
 
+  const makeBlackLogo = () => {
+    if (window.scrollY >= 300) {
+      setNavBar2(true);
+    } else {
+      setNavBar2(false);
+    }
+  };
+
   window.addEventListener("scroll", changeBackground);
+  window.addEventListener("scroll", makeBlackLogo);
 
   return (
     <div className="mainBackground">
-      <Header dontShowOnSmallViewPort>
+      <Header left={true} dontShowOnSmallViewPort>
         <Sticky enabled={true} top={0} innerZ={999}>
           <Header.Frame className={navBar ? "navbarTopScrolled " : "navbarTop"}>
             <Header.Group>
@@ -79,40 +92,40 @@ export function BrowseContainer({ slides }) {
                 //className="mainlogo"
                 className={navBar ? "mainlogoScrolled " : "mainlogo"}
                 to={ROUTES.HOME}
-                src={logo}
+                src={navBar ? blacklogo:logo}
                 alt="Solotrip"
               />
-
               <Header.TextLink2
                 active={category === "series" ? "true" : "false"}
                 onClick={() => setCategory("series")}
               >
-                {""}
-              </Header.TextLink2>
+                {""}{" "}
+              </Header.TextLink2>{" "}
               <Header.TextLink2
                 active={category === "films" ? "true" : "false"}
                 onClick={() => setCategory("films")}
               >
-                {""}
-              </Header.TextLink2>
+                {""}{" "}
+              </Header.TextLink2>{" "}
             </Header.Group>
-
             <Header.Group className="loginsignup">
-              <Header.ButtonLink to="/signup">
-                🍳 Sunny Sign Up
-              </Header.ButtonLink>
-              <Header.ButtonLink2 to="/signin">🤘 Login </Header.ButtonLink2>
-            </Header.Group>
-          </Header.Frame>
+              <Header.ButtonLink className="glow-on-hover" to="/signup">
+                {" "}
+                🍳Sunny Sign Up{" "}
+              </Header.ButtonLink>{" "}
+              <Header.ButtonLink2 to="/signin">
+                {" "}
+                🤘Login{" "}
+              </Header.ButtonLink2>{" "}
+            </Header.Group>{" "}
+          </Header.Frame>{" "}
         </Sticky>
-
         <div className="mainHeader">
           <Header.FeautureContainer />
           <Header.FeatureContainer>
             <Header.FeatureCallOut>
-              Find the best destination for you.
+              Find the best destination for you.{" "}
             </Header.FeatureCallOut>
-
             <Header.Searchbar>
               <Sticky
                 innerZ={999}
@@ -123,67 +136,69 @@ export function BrowseContainer({ slides }) {
                 <Header.Search
                   searchTerm={searchTerm}
                   setSearchTerm={setSearchTerm}
-                />
-              </Sticky>
-            </Header.Searchbar>
-          </Header.FeatureContainer>
-        </div>
+                />{" "}
+              </Sticky>{" "}
+            </Header.Searchbar>{" "}
+          </Header.FeatureContainer>{" "}
+        </div>{" "}
       </Header>
-
       <div className="content">
-        <Sticky
-          enabled={true}
-          top={120}
-          bottomBoundary={760 + 300 * (slideRows.length - 1)}
-        >
-          <FilterContainer height={window.height} />
+        <Sticky enabled={true} top="#header" bottomBoundary={960 + 300 * (slideRows.length - 1)} >
+          <FilterContainer style={{ width: "100px" }} />{" "}
         </Sticky>
-
         {loading ? (
           <SkeletonCard items={slideRows.length * 3} />
         ) : (
           <Card.Group>
-            {console.log("slide rows is", slideRows)}
+            {" "}
+            {console.log("slide rows is", slideRows)}{" "}
             {slideRows.map((slideItem) => (
               <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
-                <Card.Title>{slideItem.title}</Card.Title>
+                <Card.Title> {slideItem.title} </Card.Title>{" "}
                 <hr
                   style={{
-                    border: "1px solid rgba(234,234,234,1)",
-                    width: "752px",
+                    border: "1px solid rgba(234,234,234,0.3)",
+                    width: "100%",
                     marginBottom: "30px",
                     marginTop: "-10px",
                   }}
                 />
-
                 <Card.Entities>
+                  {" "}
                   {slideItem.data.map((item) => (
                     <Card.Item key={item.docId} item={item}>
                       <Card.Image
                         src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
                       />
-
                       <Card.Meta>
-                        <Card.SubTitle>{item.title}</Card.SubTitle>
-
-                        <Card.ButtonLink>Inspect</Card.ButtonLink>
-                        <Card.Text>{item.description}</Card.Text>
-                      </Card.Meta>
+                        <Card.SubTitle> {item.title} </Card.SubTitle>
+                        <Card.ButtonLink> Inspect </Card.ButtonLink>{" "}
+                        <Card.Text> {item.description} </Card.Text>{" "}
+                      </Card.Meta>{" "}
                     </Card.Item>
-                  ))}
-                </Card.Entities>
+                  ))}{" "}
+                </Card.Entities>{" "}
                 <Card.Feature category={category}>
                   <Player>
-                    <Card.CityButton>City Details</Card.CityButton>
-                  </Player>
-                </Card.Feature>
+                    <Card.CityButton> City Details </Card.CityButton>{" "}
+                  </Player>{" "}
+                </Card.Feature>{" "}
               </Card>
-            ))}
+            ))}{" "}
           </Card.Group>
-        )}
-        <div></div>
+        )}{" "}
+        <div> </div>{" "}
+      </div>{" "}
+      <div className="mainFooter">
+        <div />
+        <FooterContainer />
+       
       </div>
-      <FooterContainer />
+       <Header className="bottomFooterImage" src="background1resized2c"/>
+
+      
+      
     </div>
+    
   );
 }

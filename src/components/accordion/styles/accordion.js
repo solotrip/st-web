@@ -5,20 +5,31 @@ export const Container = styled.div`
   margin: 0px;
   margin-top: 10px;
   margin-bottom: 10px;
+
+  border-radius: 16px;
+
+  margin-left: -50px;
+  
 `;
 
 export const Inner = styled.div`
   flex-direction: column;
+  
+  
 `;
 
 export const Item = styled.div`
   color: #3c3c3c;
   margin-bottom: 10px;
+  background-color: transparent;
 
-  margin-left: 0px;
+  border-radius: 4px;
+  border-radius: 16px;
+
+  margin-left: 20px;
 
   &:first-of-type {
-    margin-top: 3em;
+    margin-top: 6em;
   }
 `;
 
@@ -31,7 +42,10 @@ export const Header = styled.div`
   background: transparent;
   padding: 1.2em;
   user-select: none;
-  width: 45vh;
+  width: 30vh;
+  
+  /*increase the margin-left*/
+  margin-left: 60px;
 
   img {
     margin-left: auto;
@@ -57,6 +71,12 @@ export const Body = styled.div`
   padding: 0.8em 2.2em 0.8em 1.2em;
   white-space: pre-wrap;
   user-select: none;
+  border: 1px solid rgb(234, 234, 234);
+  background-color: rgba(135,206,235,0.7);
+  border-radius: 16px;
+
+  margin-left: 60px;
+
 
   @media (max-width: 600px) {
     font-size: 16px;
@@ -66,16 +86,19 @@ export const Body = styled.div`
 
 export const Frame = styled.div`
   margin-bottom: 10px;
+  background-color: brown;
+ 
 `;
 
 export const Title = styled.p`
   font-size: 18px;
   color: #3c3c3c;
   font-weight: regular;
-  margin-top: 40px;
-  margin-left: 20px;
+  margin-top: 140px;
+  margin-left: 0px;
   line-height: 1.1;
-  margin-top: 10px;
+  
   color: #3c3c3c;
   text-align: left;
+  border: 1px solid rgb(234, 234, 234);
 `;
