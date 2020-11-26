@@ -1,0 +1,12 @@
+@import '../../../styles/mixins';
+
+.header {
+  display: flex;
+  margin: 0 32px;
+  height: 100%;
+}
+
+.search {
+  position: sticky;
+  top: 5px;
+}

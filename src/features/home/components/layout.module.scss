@@ -1,0 +1,54 @@
+@import '../../../styles/mixins';
+
+.layout {
+  background: #F3F3F3;
+  min-height: 100vh;
+  height: 2000px;
+}
+
+.header {
+
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  @include xs-to-md {
+    //margin-top: 150px;
+  }
+}
+
+.sidebar {
+  padding: 48px 24px;
+  width: 300px;
+  overflow-y: scroll;
+  max-height: 90vh;
+  position: sticky;
+  top: 80px;
+  // TODO: add custom scrollbar for all browsers
+  scrollbar-color: rgba(0,0,0,0.25);
+  scrollbar-width: thin;
+  @include xs-to-md {
+   display: none;
+  }
+}
+
+.content {
+  margin: 24px;
+  width: 600px;
+  @include xl {
+    width: 750px;
+  }
+  @include xs-to-md {
+    width: 100%;
+  }
+  &.shrink {
+    margin-top: 420px;
+    @include xs-to-md {
+      margin-top: 170px;
+    }
+  }
+}

@@ -1,18 +1,12 @@
-import React from "react";
-import { render } from "react-dom";
-import App from "./app";
-import { GlobalStyles } from "./global-styles";
-import "normalize.css";
-import { firebase } from "./lib/firebase.prod";
-import { FirebaseContext } from "./context/firebase";
-import { ParallaxProvider } from "react-scroll-parallax";
+import React from 'react'
+import { render } from 'react-dom'
+import App from './app'
 
-render(
-  <>
-    <FirebaseContext.Provider value={{ firebase }}>
-      <GlobalStyles />
-      <App />
-    </FirebaseContext.Provider>
-  </>,
-  document.getElementById("root")
-);
+if (module.hot) {
+  module.hot.accept('./app', () => {
+    const NextApp = require('./app').default
+    render(<NextApp/>, document.getElementById('root'))
+  })
+}
+
+render(<App/>, document.getElementById('root'))

@@ -1,0 +1,94 @@
+@import '../../../styles/mixins';
+
+.wrapper {
+  width: 100%;
+  height: 400px;
+  background-image: url('../../../assets/images/mountain.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  @include xs-to-md {
+    height: 150px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 300px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('../../../assets/images/bottom-wave-border.svg') top left;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    @include xs-to-md {
+      height: 80px;
+      top: 70px;
+    }
+  }
+}
+
+.shrink {
+  height: 80px;
+  position: fixed;
+  align-content: center;
+  background: #242B2E;
+  z-index: 1;
+
+  .header {
+    &::after {
+      background: none;
+    }
+  }
+
+  :global {
+    .card {
+      background: none;
+      box-shadow: none;
+    }
+  }
+
+  .content {
+    margin: 0 24px;
+    align-self: center;
+  }
+
+  .logo {
+    height: 40px;
+    align-self: center;
+  }
+}
+
+.logo {
+  margin: 0 24px;
+  width: 300px;
+  height: 100px;
+  background: url("../../../assets/images/logo-text.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.content {
+  z-index: 1;
+  margin: 0 24px;
+  width: 600px;
+  align-self: flex-end;
+  @include xl {
+    width: 750px;
+  }
+  @include xs-to-md {
+    width: 100%;
+  }
+}
