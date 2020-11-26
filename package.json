@@ -126,15 +126,6 @@
     "husky": "^4.3.0",
     "lint-staged": "^10.5.1",
     "react-is": "^17.0.1"
-  },
-  "husky": {
-    "hooks": {
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css,scss,md}": [
-      "eslint --fix",
-      "git add"
-    ]
   }
+
 }
