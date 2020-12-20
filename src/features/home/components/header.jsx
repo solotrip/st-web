@@ -7,15 +7,24 @@ import styles from './header.module.scss'
 
 const Header = ({ children, shrink }) => {
   return (
-    <div className={cn(styles.wrapper, { [styles.shrink]: shrink })}>
-      <div className={styles.header}>
-        <Link className={styles.logo} to="/" tabIndex={-1}/>
-        <div className={styles.content}>{children}</div>
+    <div className={styles.tabBar}>
+      <div className={cn(styles.wrapper, { [styles.shrink]: shrink })}>
+        <div className={styles.header}>
+          {shrink ? (
+            <div className={styles.flexBox}>
+              <Link className={styles.tabBarLogo} to='/' tabIndex={-1} />
+              <Link className={styles.tabBarText} to='/' tabIndex={-1} />
+            </div>
+          ) : (
+            <Link className={styles.noLogo} tabIndex={-1} />
+          )}
+
+          <div className={styles.content}>{children}</div>
+        </div>
       </div>
     </div>
   )
 }
-
 
 Header.propTypes = {
   children: PropTypes.node

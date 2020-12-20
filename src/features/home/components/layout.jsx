@@ -8,7 +8,7 @@ import styles from './layout.module.scss'
 const Layout = ({ children, header, sidebar }) => {
   const [shrink, setShrink] = useState(false)
   const windowWidth = useWindowWidth()
-  const shrinkThreshold = windowWidth > 1024 ? -328 : -76
+  const shrinkThreshold = windowWidth > 1024 ? -408 : -76
   useScrollPosition(({ prevPos, currPos }) => {
     if (currPos.y <= shrinkThreshold) {
       setShrink(true)
@@ -19,21 +19,22 @@ const Layout = ({ children, header, sidebar }) => {
 
   return (
     <div className={styles.layout}>
+      <div className={styles.tabBar}>
+        <div className={styles.flexBox}>
+          <div className={styles.tabBarLogo}></div>
+          <div className={styles.tabBarText}></div>
+        </div>
+      </div>
       <div className={styles.header}>{header({ shrink })}</div>
       <div className={styles.main}>
-        <div
-          className={styles.sidebar}>
-          {sidebar}</div>
-        <div
-          className={cn(styles.content, { [styles.shrink]: shrink })}
-        >
+        <div className={styles.sidebar}>{sidebar}</div>
+        <div className={cn(styles.content, { [styles.shrink]: shrink })}>
           {children}
         </div>
       </div>
     </div>
   )
 }
-
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

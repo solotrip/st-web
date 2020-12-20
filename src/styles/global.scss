@@ -1,6 +1,6 @@
-@import-normalize ;
-@import "_global/fonts";
-@import "mixins";
+@import-normalize;
+@import '_global/fonts';
+@import 'mixins';
 
 html,
 body {
@@ -49,7 +49,7 @@ body {
 }
 
 hr {
-  color: #E0E0E0;
+  color: #e0e0e0;
 }
 
 .glow-on-hover {
@@ -77,18 +77,18 @@ hr {
   }
 
   &:before {
-    content: "";
+    content: '';
     background: linear-gradient(
-                    45deg,
-                    #ff0000,
-                    #ff7300,
-                    #fffb00,
-                    #48ff00,
-                    #00ffd5,
-                    #002bff,
-                    #7a00ff,
-                    #ff00c8,
-                    #ff0000
+      45deg,
+      #ff0000,
+      #ff7300,
+      #fffb00,
+      #48ff00,
+      #00ffd5,
+      #002bff,
+      #7a00ff,
+      #ff00c8,
+      #ff0000
     );
     position: absolute;
     top: 0;
@@ -114,7 +114,7 @@ hr {
 
   &:after {
     z-index: -1;
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -126,7 +126,6 @@ hr {
   &:hover:before {
     opacity: 1;
   }
-
 }
 
 @keyframes glowing {
