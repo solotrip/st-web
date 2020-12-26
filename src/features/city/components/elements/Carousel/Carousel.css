@@ -1,0 +1,26 @@
+.carouselWrapper {
+  position: relative;
+  margin-left: 0px;
+}
+
+.imgWrap {
+  position: 'absolute';
+  top: 0;
+  left: 0;
+}
+.imgWrap:hover {
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+}
+.dn {
+  display: none;
+}
+
+.eachimage {
+  border-radius: 16px;
+  box-shadow: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.2);
+  transform: scale(1.8);
+}

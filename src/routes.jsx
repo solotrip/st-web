@@ -8,6 +8,7 @@ import {
 import LoginContainer from './features/auth/containers/login'
 import SignupContainer from './features/auth/containers/signup'
 import SearchContainer from './features/home/containers/search'
+import CityContainer from './features/city/containers/city'
 
 const NotAuthenticatedRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -28,6 +29,7 @@ const Routes = () => (
       <NotAuthenticatedRoute path='/login' component={LoginContainer} />
       <NotAuthenticatedRoute path='/signup' component={SignupContainer} />
       <Route path='/' component={SearchContainer} exact />
+      <Route path='/cities/:slug' component={CityContainer} exact />
     </Switch>
   </Router>
 )

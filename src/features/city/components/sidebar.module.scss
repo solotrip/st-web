@@ -1,0 +1,80 @@
+.sidebar {
+  padding: 0px 0px;
+  width: 340px;
+  margin-left: -300px;
+  margin-right: 0px;
+  max-height: 90vh;
+  position: sticky;
+  top: 80px;
+  justify-content: center;
+  align-content: center;
+  // TODO: add custom scrollbar for all browsers
+
+  background-color: transparent;
+}
+
+.toc {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  height: 580px;
+  width: 280px;
+  border-radius: 16px;
+  filter: drop-shadow(0px 1px 1px#979797);
+}
+.tocContent {
+  background-color: rgba($color: #4ca7e7, $alpha: 1);
+  border-radius: 0px;
+  transition: all 300ms;
+}
+
+.tocContentNotSelected {
+  background-color: white;
+  border-radius: 16px;
+  transition: all 300ms;
+}
+
+.item {
+  font: 14px Roboto;
+  font-weight: medium;
+  padding-top: auto;
+  margin-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: auto;
+  color: rgba($color: #979797, $alpha: 1);
+  transition: all 300ms;
+
+  width: fit-content;
+}
+
+.selectedItem {
+  font: 20px Roboto;
+  font-weight: medium;
+  padding-top: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+  margin-bottom: auto;
+  color: rgba($color: #2e2e2e, $alpha: 1);
+  transition: all 200ms;
+}
+
+.itemBackground {
+  background-color: blue;
+}
+
+.selectedItemBackground {
+  background-color: cadetblue;
+}
+
+.whiteItemBackground {
+  background-color: white;
+  margin-right: 3px;
+
+  border-radius: 0px;
+  .first-child {
+    border-radius: 30px;
+  }
+}
