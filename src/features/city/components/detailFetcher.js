@@ -1,6 +1,6 @@
 var detailTemplate = [
   {
-    SectionTitle: 'Media',
+    SectionTitle: 'Intro',
     SectionContent: {
       photos: {
         name: 'Media',

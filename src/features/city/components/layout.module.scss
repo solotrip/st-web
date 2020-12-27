@@ -1,7 +1,17 @@
 @import '../../../styles/mixins';
 
+$bg-dark-mode: #000;
+$grey-dark-mode: rgba(66, 66, 66, 0.712);
+$white-text: #fff;
+$primary: rgb(0, 132, 255);
+
 .layout {
   background: #f3f3f3;
+  min-height: 100vh;
+}
+
+.layout.dark-mode {
+  background: #242b2e;
   min-height: 100vh;
 }
 
@@ -61,6 +71,18 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  @include xs-to-md {
+    //margin-top: 150px;
+  }
+}
+
+.main dark-mode {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: yellowgreen;
   @include xs-to-md {
     //margin-top: 150px;
   }

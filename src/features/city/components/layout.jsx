@@ -16,6 +16,9 @@ import DetailTag from './elements/detailTag'
 
 import detailFetcher from './detailFetcher'
 
+import '../styles.scss'
+import ThemeMode from '../ThemeChanger'
+
 var titles = []
 
 var fetched = detailFetcher()
@@ -43,12 +46,16 @@ const Layout = ({ children, header, sidebar, content }) => {
   return (
     <div className={styles.layout}>
       <div className={styles.tabBar}></div>
+
       <div className={styles.header}>{header({ shrink })}</div>
-      <div className={styles.main}>
+      <div className='main'>
         <Sidebar className={styles.sidebar} items={titles}></Sidebar>
 
         {<DetailContent detailsparam={fetched} />}
-        <div>{content}</div>
+        <div>
+          <ThemeMode />
+          {content}
+        </div>
       </div>
     </div>
   )

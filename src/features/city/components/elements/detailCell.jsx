@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './detailCell.module.scss'
+
 const DetailCell = ({ objectKey, value, i, rowAt }) => {
   return (
     <div className={styles.cell}>

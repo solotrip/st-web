@@ -11,10 +11,12 @@ const Header = ({ children, shrink }) => {
       <div className={cn(styles.wrapper, { [styles.shrink]: shrink })}>
         <div className={styles.header}>
           {shrink ? (
-            <div className={styles.flexBox}>
-              <Link className={styles.tabBarLogo} to='/' tabIndex={-1} />
-              <Link className={styles.tabBarText} to='/' tabIndex={-1} />
-            </div>
+            <>
+              <div className={styles.flexBox}>
+                <Link className={styles.tabBarLogo} to='/' tabIndex={-1} />
+                <Link className={styles.tabBarText} to='/' tabIndex={-1} />
+              </div>
+            </>
           ) : (
             <Link className={styles.noLogo} tabIndex={-1} />
           )}

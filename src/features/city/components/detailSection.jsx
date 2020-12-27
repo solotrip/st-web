@@ -2,16 +2,6 @@ import React from 'react'
 import styles from './detailSection.module.scss'
 import DetailClassifier from './detailClassifier'
 
-const dataTemplate = {
-  SectionTitle: 'Scores',
-  SectionType: 0,
-  SectionContent: {
-    WalkScore: 9.7,
-    EcoScore: 5.4,
-    SocialScore: 4.6
-  }
-}
-
 const DetailSection = ({
   SectionTitle,
   SectionContent,
@@ -53,7 +43,7 @@ const DetailSection = ({
   return (
     <>
       <h2 className={styles.sectionTitle}>
-        {SectionTitle === 'Media' ? '' : SectionTitle}
+        {SectionTitle === 'Intro' ? '' : SectionTitle}
       </h2>
       <div className={styles.sectionWrapper}>
         <div className={styles.holder}>
