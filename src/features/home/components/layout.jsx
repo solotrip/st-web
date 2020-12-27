@@ -4,7 +4,7 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useWindowWidth } from '@react-hook/window-size'
 import cn from 'classnames'
 import styles from './layout.module.scss'
-import ThemeMode from '../../city/ThemeChanger'
+import ThemeMode from '../../../theme/ThemeChanger'
 
 const Layout = ({ children, header, sidebar }) => {
   const [shrink, setShrink] = useState(false)

@@ -4,7 +4,11 @@ import header from './header'
 import Sidebar from './sidebar'
 import DetailContent from './detailContent'
 
+import { useTranslation, Trans } from 'react-i18next'
+
 const CityDetails = () => {
+  const { t, i18n } = useTranslation(['translation'])
+
   return (
     <>
       <Layout

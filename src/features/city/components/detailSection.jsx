@@ -2,6 +2,9 @@ import React from 'react'
 import styles from './detailSection.module.scss'
 import DetailClassifier from './detailClassifier'
 
+//i18n
+import { useTranslation, Trans } from 'react-i18next'
+
 const DetailSection = ({
   SectionTitle,
   SectionContent,
@@ -10,6 +13,8 @@ const DetailSection = ({
 }) => {
   var itemCount = SectionContent ? Object.keys(SectionContent).length : 0
   var rows = Math.ceil(itemCount / 4)
+
+  const { t, i18n } = useTranslation(['translation'])
 
   for (var row in rows) {
     return <div className={styles.row}> row is {row}</div>
@@ -43,7 +48,12 @@ const DetailSection = ({
   return (
     <>
       <h2 className={styles.sectionTitle}>
-        {SectionTitle === 'Intro' ? '' : SectionTitle}
+        {/* Implementing i18n here to Section titles */}
+        {/*<Trans i18nKey={`translation:${SectionTitle}`}>*/}
+
+        {SectionTitle === 'Intro' || SectionTitle === 'Keşif'
+          ? ''
+          : t(`translation:${SectionTitle}`)}
       </h2>
       <div className={styles.sectionWrapper}>
         <div className={styles.holder}>

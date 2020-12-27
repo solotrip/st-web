@@ -1,11 +1,28 @@
 import React from 'react'
 import styles from './detailContent.module.scss'
 import DetailSection from './detailSection'
-import ThemeMode from '../ThemeChanger'
+import ThemeMode from '../../../theme/ThemeChanger'
+
+import { useTranslation } from 'react-i18next'
 
 var titles = []
+var code = true
 
 const DetailContent = ({ detailsparam }) => {
+  const { t, i18n } = useTranslation(['translation'])
+
+  const changeLanguage = () => {
+    if (code) {
+      i18n.changeLanguage('tr')
+      console.log('changed to tr')
+      code = false
+    } else {
+      i18n.changeLanguage('en')
+      console.log('changed to en')
+      code = true
+    }
+  }
+
   const details = detailsparam.map((item, i) => {
     if (titles.includes(item.SectionTitle)) {
     } else {
@@ -17,7 +34,7 @@ const DetailContent = ({ detailsparam }) => {
       <>
         <div id={item.SectionTitle}>
           <DetailSection
-            SectionTitle={item.SectionTitle}
+            SectionTitle={t(`translation:${item.SectionTitle}`)}
             SectionContent={item.SectionContent}
             SectionType={item.SectionType}
             key={i}
@@ -36,7 +53,12 @@ const DetailContent = ({ detailsparam }) => {
   return (
     <>
       <div className={styles.wrapper}>{details}</div>
-      <ThemeMode page='city' />
+      <div className={styles.switches}>
+        <ThemeMode page='city' />
+        <button type='button' onClick={() => changeLanguage()}>
+          {t('translation:Change Language')}
+        </button>
+      </div>
     </>
   )
 }

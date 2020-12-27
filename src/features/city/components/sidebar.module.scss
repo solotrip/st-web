@@ -60,6 +60,17 @@
   color: rgba($color: #2e2e2e, $alpha: 1);
   transition: all 200ms;
 }
+.selectedItem.dark-mode {
+  font: 20px Roboto;
+  font-weight: medium;
+  padding-top: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+  margin-bottom: auto;
+  color: white;
+  transition: all 200ms;
+}
 
 .itemBackground {
   background-color: blue;

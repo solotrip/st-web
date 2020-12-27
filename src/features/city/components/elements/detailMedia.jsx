@@ -3,10 +3,13 @@ import Carousel from './Carousel/Carousel'
 import axios from 'axios'
 import styles from './detailMedia.module.scss'
 
+import { useTranslation } from 'react-i18next'
+
 const SPLASHBASE_URL = 'http://www.splashbase.co/api/v1/images/latest'
 
 const DetailMedia = props => {
   const [imgList, setImgList] = useState([])
+  const { t, i18n } = useTranslation(['translation'])
 
   useEffect(() => {
     axios
@@ -23,7 +26,7 @@ const DetailMedia = props => {
     <div className={styles.wrapper}>
       <div className={styles.titleHolder}>
         {' '}
-        <h1 className={styles.titleNormal}>This is</h1>{' '}
+        <h1 className={styles.titleNormal}>{t('translation:This is')}</h1>{' '}
         <h1 className={styles.titleHighlighted}>Oslo</h1>
       </div>
 

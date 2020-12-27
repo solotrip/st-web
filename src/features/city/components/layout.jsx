@@ -16,8 +16,8 @@ import DetailTag from './elements/detailTag'
 
 import detailFetcher from './detailFetcher'
 
-import '../styles.scss'
-import ThemeMode from '../ThemeChanger'
+import '../../../theme/styles.scss'
+import ThemeMode from '../../../theme/ThemeChanger'
 
 var titles = []
 

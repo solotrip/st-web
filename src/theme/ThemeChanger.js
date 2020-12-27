@@ -1,8 +1,11 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 
+import { useTranslation } from 'react-i18next'
+
 const ThemeChanger = ({ page }) => {
   const [themeState, setThemeState] = useState(true)
+  const { t, i18n } = useTranslation(['translation'])
 
   var element = document.getElementsByClassName(
     'sidebar_whiteItemBackground__1toqw'
@@ -97,46 +100,48 @@ const ThemeChanger = ({ page }) => {
           darks.push(text[j].classList.add('dark-mode'))
         }
         for (var i = 0; i < element.length; i++) {
-          darks.push(element[i].classList.remove('dark-mode'))
+          darks.push(element[i].classList.add('dark-mode'))
         }
         return [
-          document
-            .querySelector('#root > div > div.main')
-            .classList.add('dark-mode'),
-          back[0].classList.add('dark-mode'),
-          navbar[0].classList.add('dark-mode'),
-          element[0].classList.add('dark-mode'),
-          element[1].classList.add('dark-mode'),
-          element[2].classList.add('dark-mode'),
-          element[3].classList.add('dark-mode'),
-          element[4].classList.add('dark-mode'),
-          element[5].classList.add('dark-mode'),
-          element[6].classList.add('dark-mode'),
-          element[7].classList.add('dark-mode'),
-          element[8].classList.add('dark-mode'),
-          element[9].classList.add('dark-mode'),
-          cell[0].classList.add('dark-mode'),
-          darks,
+          document.querySelector('#root > div > div.main') &&
+            document
+              .querySelector('#root > div > div.main')
+              .classList.add('dark-mode'),
+          back[0] && back[0].classList.add('dark-mode'),
+          navbar[0] && navbar[0].classList.add('dark-mode'),
+          element[0] && element[0].classList.add('dark-mode'),
+          element[1] && element[1].classList.add('dark-mode'),
+          element[2] && element[2].classList.add('dark-mode'),
+          element[3] && element[3].classList.add('dark-mode'),
+          element[4] && element[4].classList.add('dark-mode'),
+          element[5] && element[5].classList.add('dark-mode'),
+          element[6] && element[6].classList.add('dark-mode'),
+          element[7] && element[7].classList.add('dark-mode'),
+          element[8] && element[8].classList.add('dark-mode'),
+          element[9] && element[9].classList.add('dark-mode'),
+          cell[0] && cell[0].classList.add('dark-mode'),
+          darks && darks,
           setThemeState(false)
         ]
       } else if (getTheme === 'light') {
         return [
-          document
-            .querySelector('#root > div > div.main')
-            .classList.remove('dark-mode'),
-          back[0].classList.remove('dark-mode'),
-          navbar[0].classList.remove('dark-mode'),
-          element[0].classList.remove('dark-mode'),
-          element[1].classList.remove('dark-mode'),
-          element[2].classList.remove('dark-mode'),
-          element[3].classList.remove('dark-mode'),
-          element[4].classList.remove('dark-mode'),
-          element[5].classList.remove('dark-mode'),
-          element[6].classList.remove('dark-mode'),
-          element[7].classList.remove('dark-mode'),
-          element[8].classList.remove('dark-mode'),
-          element[9].classList.remove('dark-mode'),
-          cell[0].classList.remove('dark-mode'),
+          document.querySelector('#root > div > div.main') &&
+            document
+              .querySelector('#root > div > div.main')
+              .classList.remove('dark-mode'),
+          back[0] && back[0].classList.remove('dark-mode'),
+          navbar[0] && navbar[0].classList.remove('dark-mode'),
+          element[0] && element[0].classList.remove('dark-mode'),
+          element[1] && element[1].classList.remove('dark-mode'),
+          element[2] && element[2].classList.remove('dark-mode'),
+          element[3] && element[3].classList.remove('dark-mode'),
+          element[4] && element[4].classList.remove('dark-mode'),
+          element[5] && element[5].classList.remove('dark-mode'),
+          element[6] && element[6].classList.remove('dark-mode'),
+          element[7] && element[7].classList.remove('dark-mode'),
+          element[8] && element[8].classList.remove('dark-mode'),
+          element[9] && element[9].classList.remove('dark-mode'),
+          cell[0] && cell[0].classList.remove('dark-mode'),
           setThemeState(true)
         ]
       }
@@ -163,7 +168,7 @@ const ThemeChanger = ({ page }) => {
   return (
     <div>
       <button onClick={handleChange}>
-        {themeState ? 'Light Mode' : 'Dark Mode'}
+        {themeState ? t('translation:Light Mode') : t('translation:Dark Mode')}
       </button>
     </div>
   )

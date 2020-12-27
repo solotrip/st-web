@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import styles from './sidebar.module.scss'
 import { Link } from 'react-scroll'
 
-import '../styles.scss'
+import '../../../theme/styles.scss'
+
+import { useTranslation } from 'react-i18next'
 
 const Sidebar = ({ items }) => {
   const [selected, setSelected] = useState(0)
+  const { t, i18n } = useTranslation(['translation'])
 
   const handleClick = index => {
     setSelected(index)
@@ -36,7 +39,7 @@ const Sidebar = ({ items }) => {
                 handleClick(index)
               }}
             >
-              {item}
+              {t(`translation:${item}`)}
             </button>
           </Link>
         </div>

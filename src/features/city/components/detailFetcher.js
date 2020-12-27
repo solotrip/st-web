@@ -578,7 +578,7 @@ var detailTemplate = [
       starGazing: {
         name: 'Star Gazing',
         type: 'table',
-        value: 'yes(low light pollution)'
+        value: 'yes'
       },
       plugTypes: {
         name: 'Plug Types',

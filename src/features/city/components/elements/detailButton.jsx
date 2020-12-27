@@ -1,6 +1,10 @@
 import React from 'react'
 import styles from './detailButton.module.scss'
+
+import { useTranslation } from 'react-i18next'
+
 const DetailButton = ({ objectKey, value }) => {
+  const { t, i18n } = useTranslation(['translation'])
   return (
     <div className={styles.wrapper}>
       <button
@@ -9,7 +13,7 @@ const DetailButton = ({ objectKey, value }) => {
           console.log('https://')
         }}
       >
-        Visit Site
+        {t('translation:Visit Site')}
       </button>
     </div>
   )
