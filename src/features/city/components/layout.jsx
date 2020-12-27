@@ -52,10 +52,7 @@ const Layout = ({ children, header, sidebar, content }) => {
         <Sidebar className={styles.sidebar} items={titles}></Sidebar>
 
         {<DetailContent detailsparam={fetched} />}
-        <div>
-          <ThemeMode />
-          {content}
-        </div>
+        <div>{content}</div>
       </div>
     </div>
   )

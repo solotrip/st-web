@@ -35,14 +35,14 @@
 
 .tabBarText {
   margin-left: -120px;
-  margin-top: -55px;
+  margin-top: 5px;
   width: 200px;
-  height: 200px;
+  height: 80px;
   background: url('../../../assets/images/text.png');
-  background-size: contain;
+  background-size: 200px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-color: transparent;
+  //background-color: darkcyan;
   @include xs-to-md {
     display: none;
   }
@@ -149,10 +149,4 @@
   @include xs-to-md {
     width: 100%;
   }
-}
-
-.button {
-  margin-right: 0px;
-  background-color: pink;
-  height: 20px;
 }

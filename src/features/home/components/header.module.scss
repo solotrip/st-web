@@ -3,7 +3,6 @@
 .wrapper {
   width: 100%;
   height: 400px;
-
   background-image: url('../../../assets/images/mountains3.png');
   background-repeat: no-repeat;
   background-size: 1100px;
@@ -35,14 +34,14 @@
 
 .tabBarText {
   margin-left: -120px;
-  margin-top: -55px;
+  margin-top: 5px;
   width: 200px;
-  height: 200px;
+  height: 80px;
   background: url('../../../assets/images/text.png');
-  background-size: contain;
+  background-size: 200px;
   background-repeat: no-repeat;
   background-position: center center;
-  background-color: transparent;
+  //background-color: darkcyan;
   @include xs-to-md {
     display: none;
   }

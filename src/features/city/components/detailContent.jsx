@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './detailContent.module.scss'
 import DetailSection from './detailSection'
+import ThemeMode from '../ThemeChanger'
 
 var titles = []
 
@@ -32,7 +33,12 @@ const DetailContent = ({ detailsparam }) => {
     )
   })
 
-  return <div className={styles.wrapper}>{details}</div>
+  return (
+    <>
+      <div className={styles.wrapper}>{details}</div>
+      <ThemeMode page='city' />
+    </>
+  )
 }
 
 export default DetailContent
