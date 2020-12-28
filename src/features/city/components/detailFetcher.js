@@ -1,6 +1,7 @@
 var detailTemplate = [
   {
     SectionTitle: 'Intro',
+    PrefferedSectionIndex: 0,
     SectionContent: {
       photos: {
         name: 'Media',
@@ -11,6 +12,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Activities',
+    PrefferedSectionIndex: 1,
     SectionContent: {
       activitiesChart: {
         name: 'Activities',
@@ -82,6 +84,7 @@ var detailTemplate = [
 
   {
     SectionTitle: 'Scores',
+    PrefferedSectionIndex: 2,
     SectionContent: {
       WalkScore: {
         name: 'Walk Score',
@@ -154,6 +157,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Budget',
+    PrefferedSectionIndex: 3,
     SectionContent: {
       PieChart: {
         name: 'Pie',
@@ -192,6 +196,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Flights',
+    PrefferedSectionIndex: 4,
 
     SectionContent: {
       minCost: {
@@ -286,6 +291,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Visa Status',
+    PrefferedSectionIndex: 5,
     SectionContent: {
       visaOf: {
         name: 'Visa of',
@@ -338,6 +344,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Weather and Nature',
+    PrefferedSectionIndex: 6,
     SectionContent: {
       TemperatureChart: {
         name: 'Temperature',
@@ -419,6 +426,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Culture',
+    PrefferedSectionIndex: 7,
     SectionContent: {
       cultureScore: {
         name: 'Culture Score',
@@ -469,6 +477,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Transportation',
+    PrefferedSectionIndex: 8,
     SectionContent: {
       transportCost: {
         name: 'Transport Daily',
@@ -547,6 +556,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Overall',
+    PrefferedSectionIndex: 9,
     SectionContent: {
       OverallSpread: {
         name: 'Overall',
@@ -617,8 +627,22 @@ var detailTemplate = [
 //TO-DO: after organizing mongo structure,
 //get details with axios. Now it is just a silly template.
 
+function predicateBy (prop) {
+  return function (a, b) {
+    if (a[prop] > b[prop]) {
+      return 1
+    } else if (a[prop] < b[prop]) {
+      return -1
+    }
+    return 0
+  }
+}
+
+var sortedDetails
+
 const detailFetcher = () => {
-  return detailTemplate
+  sortedDetails = detailTemplate.sort(predicateBy('PrefferedSectionIndex'))
+  return sortedDetails
 }
 
 export default detailFetcher

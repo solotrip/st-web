@@ -5,9 +5,21 @@
 }
 
 .switches {
+  margin-top: -30px;
+  margin-left: -70px;
+
   width: 100px;
   height: 100px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+}
+
+.switchLeft {
+  background-color: gray;
+  margin-right: 20px;
+}
+
+.switchRight {
+  margin-left: 30px;
 }

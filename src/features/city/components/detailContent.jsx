@@ -55,7 +55,11 @@ const DetailContent = ({ detailsparam }) => {
       <div className={styles.wrapper}>{details}</div>
       <div className={styles.switches}>
         <ThemeMode page='city' />
-        <button type='button' onClick={() => changeLanguage()}>
+        <button
+          className={styles.switchRight}
+          type='button'
+          onClick={() => changeLanguage()}
+        >
           {t('translation:Change Language')}
         </button>
       </div>

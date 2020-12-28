@@ -19,6 +19,8 @@ const ThemeChanger = ({ page }) => {
     var cell = document.getElementsByClassName('detailCell_cell__LNP8P')
 
     var navbar = document.getElementsByClassName('header_header__2Wfjy')
+
+    var tag = document.getElementsByClassName('detailTag_wrapper__x81PX')
   }
 
   var mainPageBackground = document.getElementsByClassName(
@@ -40,6 +42,10 @@ const ThemeChanger = ({ page }) => {
         }
         for (var j = 0; j < text.length; j++) {
           text[j].classList.add('dark-mode')
+        }
+
+        for (var z = 0; z < tag.length; z++) {
+          tag[z].classList.add('dark-mode')
         }
 
         back[0].classList.add('dark-mode')
@@ -68,6 +74,10 @@ const ThemeChanger = ({ page }) => {
         }
         for (var j = 0; j < text.length; j++) {
           text[j].classList.remove('dark-mode')
+        }
+
+        for (var z = 0; z < tag.length; z++) {
+          tag[z].classList.remove('dark-mode')
         }
 
         back[0].classList.remove('dark-mode')
@@ -101,6 +111,9 @@ const ThemeChanger = ({ page }) => {
         }
         for (var i = 0; i < element.length; i++) {
           darks.push(element[i].classList.add('dark-mode'))
+        }
+        for (var z = 0; z < tag.length; z++) {
+          darks.push(tag[z].classList.add('dark-mode'))
         }
         return [
           document.querySelector('#root > div > div.main') &&
