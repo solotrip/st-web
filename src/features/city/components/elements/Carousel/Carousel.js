@@ -37,6 +37,10 @@ const Carousel = props => {
   const elementsInLeft = Math.ceil(visibleImages / 2)
   const elementsInRight = visibleImages - elementsInLeft
 
+  const openImgViewer = () => {
+    //OpenImgViewer
+  }
+
   const constructVisibleItemsProps = () => {
     const visibleItemsProps = {}
     visibleItemsProps.order = []
@@ -108,6 +112,9 @@ const Carousel = props => {
         cycleToNextImage(index)
       }
     } else {
+      //Open large image with a bigger react image viewer.
+
+      //openImgViewer()
       window.open(large_url)
     }
   }

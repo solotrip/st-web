@@ -1,5 +1,8 @@
-.cell {
+.cellOuter {
   margin: 20px;
+}
+
+.cell {
   background-color: white;
   height: 200px;
   width: 180px;
@@ -41,4 +44,7 @@
 .comparedTo {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.toolTip {
 }

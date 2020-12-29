@@ -638,6 +638,9 @@ function predicateBy (prop) {
   }
 }
 
+//TO-DO: Suggestion based details.
+const suggestionFetcher = () => {}
+
 var sortedDetails
 
 const detailFetcher = () => {

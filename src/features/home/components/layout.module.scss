@@ -3,7 +3,6 @@
 .layout {
   background: #f3f3f3;
   min-height: 100vh;
-  height: 2000px;
 }
 
 .flexBox {
@@ -70,7 +69,7 @@
   top: 80px;
   // TODO: add custom scrollbar for all browsers
   scrollbar-color: rgba(0, 0, 0, 0.25);
-  scrollbar-width: none;
+
   @include xs-to-md {
     display: none;
   }
@@ -80,7 +79,7 @@
   margin: 24px;
   width: 600px;
   @include xl {
-    width: 750px;
+    width: 810px;
   }
   @include xs-to-md {
     width: 100%;
