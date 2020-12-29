@@ -1,4 +1,5 @@
 /* eslint-disable */
+//wow
 import React from 'react'
 import styles from './city-card.module.scss'
 import { Link } from 'react-router-dom'
