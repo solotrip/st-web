@@ -26,11 +26,17 @@ const Layout = ({ children, header, sidebar }) => {
           <div className={styles.tabBarText}></div>
         </div>
       </div>
-      <div className={styles.header}>{header({ shrink })}</div>
+      <div className={styles.header}>
+        <div className={styles.holder}>
+          <div className={styles.themeHolder}>
+            <ThemeMode page='home' />
+          </div>
+          <div className={styles.headerHolder}>{header({ shrink })}</div>
+        </div>
+      </div>
       <div className={styles.main}>
         <div className={styles.sidebar}>{sidebar}</div>
         <div className={cn(styles.content, { [styles.shrink]: shrink })}>
-          <ThemeMode page='home' />
           {children}
         </div>
       </div>

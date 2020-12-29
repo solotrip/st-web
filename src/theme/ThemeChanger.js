@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
+import styles from './ThemeChanger.module.scss'
+
 const ThemeChanger = ({ page }) => {
   const [themeState, setThemeState] = useState(true)
   const { t, i18n } = useTranslation(['translation'])
@@ -180,7 +182,7 @@ const ThemeChanger = ({ page }) => {
   }, [handleChange, themeState])
   return (
     <div>
-      <button onClick={handleChange}>
+      <button onClick={handleChange} className={styles.switch}>
         {themeState ? t('translation:Light Mode') : t('translation:Dark Mode')}
       </button>
     </div>
