@@ -31,6 +31,7 @@ const ThemeChanger = ({ page }) => {
   var tabBar = document.getElementsByClassName('layout_tabBar__1e2w0')
   var shrink = document.getElementsByClassName('header_shrink__2mEqi')
   var search = document.getElementsByClassName('search-page_search__1_xkO')
+  var toctitle = document.getElementsByClassName('accordion_name__aJvu_')
 
   const handleChange = () => {
     if (themeState) {
@@ -61,6 +62,9 @@ const ThemeChanger = ({ page }) => {
         tabBar[0].classList.add('dark-mode')
         shrink[0] && shrink[0].classList.add('dark-mode')
         search[0] && search[0].classList.add('dark-mode')
+        for (var x = 0; x < toctitle.length; x++) {
+          toctitle[x].classList.add('dark-mode')
+        }
       }
 
       setThemeState(!themeState)
@@ -93,6 +97,9 @@ const ThemeChanger = ({ page }) => {
         tabBar[0].classList.remove('dark-mode')
         shrink[0] && shrink[0].classList.remove('dark-mode')
         search[0] && search[0].classList.remove('dark-mode')
+        for (var x = 0; x < toctitle.length; x++) {
+          toctitle[x].classList.remove('dark-mode')
+        }
       }
 
       setThemeState(!themeState)
@@ -162,12 +169,17 @@ const ThemeChanger = ({ page }) => {
       }
     } else {
       if (getTheme === 'dark') {
+        for (var x = 0; x < toctitle.length; x++) {
+          lights.push(toctitle[x].classList.add('dark-mode'))
+        }
         return [
           mainPageBackground[0].classList.add('dark-mode'),
           tabBar[0].classList.add('dark-mode'),
           shrink[0] && shrink[0].classList.add('dark-mode'),
           search[0] && search[0].classList.add('dark-mode'),
-          setThemeState(false)
+          toctitle[0] && toctitle[0].classList.add('dark-mode'),
+          setThemeState(false),
+          lights && lights
         ]
       } else if (getTheme == 'light') {
         return [
@@ -175,6 +187,7 @@ const ThemeChanger = ({ page }) => {
           tabBar[0].classList.remove('dark-mode'),
           shrink[0] && shrink[0].classList.remove('dark-mode'),
           search[0] && search[0].classList.remove('dark-mode'),
+          toctitle[0] && toctitle[0].classList.remove('dark-mode'),
           setThemeState(true)
         ]
       }
