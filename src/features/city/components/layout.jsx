@@ -52,7 +52,7 @@ const Layout = ({ children, header, sidebar, content }) => {
   const shrinkThreshold = windowWidth > 1024 ? -58 : -76
   useScrollPosition(({ prevPos, currPos }) => {
     if (currPos.y <= shrinkThreshold) {
-      setShrink(true)
+      setShrink(false)
     } else {
       setShrink(false)
     }
