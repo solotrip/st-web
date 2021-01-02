@@ -53,16 +53,7 @@ const DetailContent = ({ detailsparam }) => {
   return (
     <>
       <div className={styles.wrapper}>{details}</div>
-      <div className={styles.switches}>
-        <ThemeMode page='city' />
-        <button
-          className={styles.switchRight}
-          type='button'
-          onClick={() => changeLanguage()}
-        >
-          {t('translation:Change Language')}
-        </button>
-      </div>
+      <div className={styles.switches}></div>
     </>
   )
 }

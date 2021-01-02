@@ -113,6 +113,7 @@ div.main.dark-mode {
   background-color: #25262c;
 }
 
+/*
 .header_header__2Wfjy {
   background-color: rgba(37, 43, 46, 1);
 }
@@ -120,8 +121,9 @@ div.main.dark-mode {
 .header_header__2Wfjy.dark-mode {
   background-color: #25262c;
 }
+*/
 
-//Main
+//Main Layout
 
 .layout_layout__3zzgH {
   background-color: #f3f3f3;
@@ -131,6 +133,17 @@ div.main.dark-mode {
   background-color: #1b1b21;
 }
 
+//City Layout
+.layout_layout__1idy2 {
+  background-color: #f3f3f3;
+}
+
+.layout_layout__1idy2.dark-mode {
+  background-color: #1b1b21;
+}
+
+//main tabbar
+
 .layout_tabBar__1e2w0 {
   background-color: #252b2e;
 }
@@ -139,12 +152,32 @@ div.main.dark-mode {
   background-color: #25262c;
 }
 
+//city tabbar
+.layout_tabBar__OFXLm {
+  background-color: #252b2e;
+}
+
+.layout_tabBar__OFXLm.dark-mode {
+  background-color: #25262c;
+}
+
+//main shrink
 .header_shrink__2mEqi {
   /*background-color: palevioletred;*/
   background-color: #252b2e;
 }
 
 .header_shrink__2mEqi.dark-mode {
+  background-color: #25262c;
+}
+
+//city shrink
+
+.header_shrink__3E5NY {
+  background-color: #252b2e;
+}
+
+.header_shrink__3E5NY.dark-mode {
   background-color: #25262c;
 }
 

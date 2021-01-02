@@ -18,8 +18,10 @@ import detailFetcher from './detailFetcher'
 
 import '../../../theme/styles.scss'
 import ThemeMode from '../../../theme/ThemeChanger'
+import { useTranslation } from 'react-i18next'
 
 var titles = []
+var code = true
 
 var fetched = detailFetcher()
 console.log('detail fetcher works!', fetched)
@@ -31,23 +33,54 @@ for (var section in sections) {
 }
 
 const Layout = ({ children, header, sidebar, content }) => {
-  const [shrink, setShrink] = useState(true)
+  const { t, i18n } = useTranslation(['translation'])
+  const [shrink, setShrink] = useState(false)
+
+  const changeLanguage = () => {
+    if (code) {
+      i18n.changeLanguage('tr')
+      console.log('changed to tr')
+      code = false
+    } else {
+      i18n.changeLanguage('en')
+      console.log('changed to en')
+      code = true
+    }
+  }
 
   const windowWidth = useWindowWidth()
-  const shrinkThreshold = windowWidth > 1024 ? -408 : -76
+  const shrinkThreshold = windowWidth > 1024 ? -58 : -76
   useScrollPosition(({ prevPos, currPos }) => {
     if (currPos.y <= shrinkThreshold) {
       setShrink(true)
     } else {
-      setShrink(true)
+      setShrink(false)
     }
   })
 
   return (
     <div className={styles.layout}>
-      <div className={styles.tabBar}></div>
-
-      <div className={styles.header}>{header({ shrink })}</div>
+      <div className={styles.tabBar}>
+        <div className={styles.flexBox}>
+          <div className={styles.tabBarLogo}></div>
+          <div className={styles.tabBarText}></div>
+        </div>
+      </div>
+      <div className={styles.switches}>
+        <div className={styles.header}>
+          <div className={styles.themeHolder}>
+            <ThemeMode page='city' />
+            <button
+              className={styles.switchRight}
+              onClick={() => changeLanguage()}
+              type='button'
+            >
+              {t('translation:Change Language')}
+            </button>
+          </div>
+          <div className={styles.headerHolder}>{header({ shrink })}</div>
+        </div>
+      </div>
       <div className='main'>
         <Sidebar className={styles.sidebar} items={titles}></Sidebar>
 

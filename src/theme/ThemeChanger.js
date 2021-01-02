@@ -23,6 +23,14 @@ const ThemeChanger = ({ page }) => {
     var navbar = document.getElementsByClassName('header_header__2Wfjy')
 
     var tag = document.getElementsByClassName('detailTag_wrapper__x81PX')
+
+    var cityTabBar = document.getElementsByClassName('layout_tabBar__OFXLm')
+
+    var cityPageBackground = document.getElementsByClassName(
+      'layout_layout__1idy2'
+    )
+
+    var cityShrink = document.getElementsByClassName('header_shrink__3E5NY')
   }
 
   var mainPageBackground = document.getElementsByClassName(
@@ -54,6 +62,13 @@ const ThemeChanger = ({ page }) => {
         back[0].classList.add('dark-mode')
 
         navbar[0].classList.add('dark-mode')
+
+        cityPageBackground[0].classList.add('dark-mode')
+
+        cityShrink[0] && cityShrink[0].classList.add('dark-mode')
+
+        cityTabBar[0].classList.add('dark-mode')
+
         for (var t = 0; t < cell.length; t++) {
           cell[t].classList.add('dark-mode')
         }
@@ -88,6 +103,12 @@ const ThemeChanger = ({ page }) => {
 
         back[0].classList.remove('dark-mode')
         navbar[0].classList.remove('dark-mode')
+
+        cityPageBackground[0].classList.remove('dark-mode')
+
+        cityShrink[0] && cityShrink[0].classList.remove('dark-mode')
+
+        cityTabBar[0].classList.remove('dark-mode')
 
         for (var t = 0; t < cell.length; t++) {
           cell[t].classList.remove('dark-mode')
@@ -131,6 +152,10 @@ const ThemeChanger = ({ page }) => {
               .classList.add('dark-mode'),
           back[0] && back[0].classList.add('dark-mode'),
           navbar[0] && navbar[0].classList.add('dark-mode'),
+          cityPageBackground[0] &&
+            cityPageBackground[0].classList.add('dark-mode'),
+          cityShrink[0] && cityShrink[0].classList.add('dark-mode'),
+          cityTabBar && cityTabBar[0].classList.add('dark-mode'),
           element[0] && element[0].classList.add('dark-mode'),
           element[1] && element[1].classList.add('dark-mode'),
           element[2] && element[2].classList.add('dark-mode'),
@@ -153,6 +178,10 @@ const ThemeChanger = ({ page }) => {
               .classList.remove('dark-mode'),
           back[0] && back[0].classList.remove('dark-mode'),
           navbar[0] && navbar[0].classList.remove('dark-mode'),
+          cityPageBackground[0] &&
+            cityPageBackground[0].classList.remove('dark-mode'),
+          cityShrink[0] && cityShrink[0].classList.remove('dark-mode'),
+          cityTabBar && cityTabBar[0].classList.remove('dark-mode'),
           element[0] && element[0].classList.remove('dark-mode'),
           element[1] && element[1].classList.remove('dark-mode'),
           element[2] && element[2].classList.remove('dark-mode'),

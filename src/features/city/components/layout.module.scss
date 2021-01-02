@@ -1,17 +1,7 @@
 @import '../../../styles/mixins';
 
-$bg-dark-mode: #000;
-$grey-dark-mode: rgba(66, 66, 66, 0.712);
-$white-text: #fff;
-$primary: rgb(0, 132, 255);
-
 .layout {
   background: #f3f3f3;
-  min-height: 100vh;
-}
-
-.layout.dark-mode {
-  background: #242b2e;
   min-height: 100vh;
 }
 
@@ -23,12 +13,6 @@ $primary: rgb(0, 132, 255);
 .tabBar {
   background: #242b2e;
   height: 80px;
-}
-
-.content {
-  background-color: green;
-  height: 500px;
-  width: 100px;
 }
 
 .tabBarLogo {
@@ -76,29 +60,16 @@ $primary: rgb(0, 132, 255);
   }
 }
 
-.main dark-mode {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: yellowgreen;
-  @include xs-to-md {
-    //margin-top: 150px;
-  }
-}
-
 .sidebar {
-  padding: 0px 0px;
-  width: 400px;
-  margin-left: -400px;
-  margin-right: 50px;
+  padding: 48px 24px;
+  width: 300px;
+  overflow-y: scroll;
   max-height: 90vh;
   position: sticky;
   top: 80px;
   // TODO: add custom scrollbar for all browsers
+  scrollbar-color: rgba(0, 0, 0, 0.25);
 
-  background-color: red;
   @include xs-to-md {
     display: none;
   }
@@ -108,7 +79,7 @@ $primary: rgb(0, 132, 255);
   margin: 24px;
   width: 600px;
   @include xl {
-    width: 750px;
+    width: 810px;
   }
   @include xs-to-md {
     width: 100%;
@@ -119,4 +90,19 @@ $primary: rgb(0, 132, 255);
       margin-top: 170px;
     }
   }
+}
+
+.holder {
+  //background-color: greenyellow;
+}
+
+.themeHolder {
+  //background-color: hotpink;
+  width: 100px;
+  margin-left: auto;
+  margin-right: 100px;
+}
+
+.headerHolder {
+  //background-color: darkcyan;
 }

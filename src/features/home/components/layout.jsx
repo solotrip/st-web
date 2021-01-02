@@ -9,7 +9,7 @@ import ThemeMode from '../../../theme/ThemeChanger'
 const Layout = ({ children, header, sidebar }) => {
   const [shrink, setShrink] = useState(false)
   const windowWidth = useWindowWidth()
-  const shrinkThreshold = windowWidth > 1024 ? -408 : -76
+  const shrinkThreshold = windowWidth > 1024 ? -468 : -260
   useScrollPosition(({ prevPos, currPos }) => {
     if (currPos.y <= shrinkThreshold) {
       setShrink(true)

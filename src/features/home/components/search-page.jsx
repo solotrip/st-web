@@ -17,6 +17,20 @@ import image4 from '../../../assets/images/random4.jpg'
 
 let images = [image1, image, image2, image3, image4]
 
+let cities = [
+  'Barcelona',
+  'Amsterdam',
+  'San Fransisco',
+  'Yozgat',
+  'Bodrum',
+  'Gümüşhane',
+  'Gotham',
+  'Arkansas',
+  'Ankara',
+  'Oslo',
+  'Nur-Sultan'
+]
+
 const SearchPage = ({
   filters,
   filterValues,
@@ -73,9 +87,21 @@ const SearchPage = ({
     </CityCard>
   ))
 
+  const suggestedCities = cities.map(city => (
+    <CityCard
+      id={city}
+      key={`card-${city}`}
+      imgsr={images[Math.floor(Math.random() * 4)]}
+    >
+      {city}
+    </CityCard>
+  ))
+
   return (
     <Layout header={header} sidebar={sidebar}>
-      <div className={styles.results}>{resultCards}</div>
+      <div className={styles.results}>
+        {resultCards.length !== 0 ? resultCards : suggestedCities}
+      </div>
     </Layout>
   )
 }
