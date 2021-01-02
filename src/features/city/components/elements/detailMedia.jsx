@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 const SPLASHBASE_URL = 'http://www.splashbase.co/api/v1/images/latest'
 
-const DetailMedia = props => {
+const DetailMedia = ({ showTitle = 'true' }) => {
   const [imgList, setImgList] = useState([])
   const { t, i18n } = useTranslation(['translation'])
 
@@ -24,11 +24,15 @@ const DetailMedia = props => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.titleHolder}>
-        {' '}
-        <h1 className={styles.titleNormal}>{t('translation:This is')}</h1>{' '}
-        <h1 className={styles.titleHighlighted}>Oslo</h1>
-      </div>
+      {showTitle && (
+        <div className={styles.titleHolder}>
+          {' '}
+          <h1 className={styles.titleNormal}>
+            {t('translation:This is')}
+          </h1>{' '}
+          <h1 className={styles.titleHighlighted}>Oslo</h1>
+        </div>
+      )}
 
       {imgList.length === 0 && <div>Loading...</div>}
       {imgList.length > 0 && (

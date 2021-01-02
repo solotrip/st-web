@@ -22,5 +22,7 @@ li {
 .eachimage {
   border-radius: 16px;
   box-shadow: 0 0.2rem 0.25rem rgba(0, 0, 0, 0.2);
-  transform: scale(1.8);
+
+  /*Scale was 1.8*/
+  transform: scale(2);
 }

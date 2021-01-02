@@ -1,4 +1,5 @@
 var detailTemplate = [
+  /*
   {
     SectionTitle: 'Intro',
     PrefferedSectionIndex: 0,
@@ -9,7 +10,7 @@ var detailTemplate = [
         value: ['photo1', 'photo2', 'photo3']
       }
     }
-  },
+  },*/
   {
     SectionTitle: 'Activities',
     PrefferedSectionIndex: 1,

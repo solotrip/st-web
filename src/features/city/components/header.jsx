@@ -5,6 +5,8 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import cn from 'classnames'
 import styles from './header.module.scss'
 
+import DetailMedia from './elements/detailMedia'
+
 const Header = ({ children, shrink }) => {
   return (
     <div className={styles.tabBar}>
@@ -18,7 +20,10 @@ const Header = ({ children, shrink }) => {
               </div>
             </>
           ) : (
-            <Link className={styles.noLogo} tabIndex={-1} />
+            <>
+              <Link className={styles.noLogo} to='/' tabIndex={-1} />
+              <DetailMedia showTitle={false} />
+            </>
           )}
 
           <div className={styles.content}>{children}</div>

@@ -6,6 +6,7 @@ import cn from 'classnames'
 import styles from './layout.module.scss'
 import DetailContent from './detailContent'
 import Sidebar from './sidebar'
+import { Link } from 'react-router-dom'
 
 //for testing purpose
 import DetailMedia from './elements/detailMedia'
@@ -62,8 +63,8 @@ const Layout = ({ children, header, sidebar, content }) => {
     <div className={styles.layout}>
       <div className={styles.tabBar}>
         <div className={styles.flexBox}>
-          <div className={styles.tabBarLogo}></div>
-          <div className={styles.tabBarText}></div>
+          <Link className={styles.tabBarLogo} to='/' />
+          <Link className={styles.tabBarText} to='/' />
         </div>
       </div>
       <div className={styles.switches}>

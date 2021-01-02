@@ -1,5 +1,10 @@
 .wrapper {
-  /*background-color: darkorange;*/
+  //All of them added for header to work. It was auto margined both from left and right.
+  margin-top: 50px;
+  margin-bottom: 100px;
+  display: flex;
+  margin-left: 170px;
+  margin-right: auto;
 }
 
 .item {
