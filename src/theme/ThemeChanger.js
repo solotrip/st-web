@@ -225,7 +225,11 @@ const ThemeChanger = ({ page }) => {
   return (
     <div>
       <button onClick={handleChange} className={styles.switch}>
-        {themeState ? t('translation:Light Mode') : t('translation:Dark Mode')}
+        {themeState ? (
+          <div className={styles.lightMode}>{t('translation:Light Mode')}</div>
+        ) : (
+          <div className={styles.darkMode}>{t('translation:Dark Mode')}</div>
+        )}
       </button>
     </div>
   )

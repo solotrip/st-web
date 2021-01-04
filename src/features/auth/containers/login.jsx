@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, reset } from '../slice'
-import LoginPage from '../components/login-page'
+import LoginPage from '../components/alternative-login-page'
 
 const LoginContainer = () => {
   const dispatch = useDispatch()
-  const { error } = useSelector(
-    state => state.auth
-  )
+  const { error } = useSelector(state => state.auth)
   useEffect(() => {
     dispatch(reset())
   }, [dispatch])

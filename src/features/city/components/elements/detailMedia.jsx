@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 const SPLASHBASE_URL = 'http://www.splashbase.co/api/v1/images/latest'
 
-const DetailMedia = ({ showTitle = 'true' }) => {
+const DetailMedia = ({ showTitle = 'true', showCarousels }) => {
   const [imgList, setImgList] = useState([])
   const { t, i18n } = useTranslation(['translation'])
 
@@ -23,29 +23,31 @@ const DetailMedia = ({ showTitle = 'true' }) => {
   }, [])
 
   return (
-    <div className={styles.wrapper}>
-      {showTitle && (
-        <div className={styles.titleHolder}>
-          {' '}
-          <h1 className={styles.titleNormal}>
-            {t('translation:This is')}
-          </h1>{' '}
-          <h1 className={styles.titleHighlighted}>Oslo</h1>
-        </div>
-      )}
+    showCarousels && (
+      <div className={styles.wrapper}>
+        {showTitle && (
+          <div className={styles.titleHolder}>
+            {' '}
+            <h1 className={styles.titleNormal}>
+              {t('translation:This is')}
+            </h1>{' '}
+            <h1 className={styles.titleHighlighted}>Oslo</h1>
+          </div>
+        )}
 
-      {imgList.length === 0 && <div>Loading...</div>}
-      {imgList.length > 0 && (
-        <Carousel
-          imgList={imgList}
-          img_width={242500 / 727.5}
-          img_height={(350 / 485) * (242500 / 727.5)}
-          visibleImages={5}
-          duration={300}
-          radius={16}
-        />
-      )}
-    </div>
+        {imgList.length === 0 && <div>Loading...</div>}
+        {imgList.length > 0 && (
+          <Carousel
+            imgList={imgList}
+            img_width={242500 / 727.5}
+            img_height={(350 / 485) * (242500 / 727.5)}
+            visibleImages={5}
+            duration={300}
+            radius={16}
+          />
+        )}
+      </div>
+    )
   )
 }
 

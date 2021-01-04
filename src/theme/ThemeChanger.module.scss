@@ -1,3 +1,16 @@
 .switch {
   font-size: 50px;
+  transform: scale(1.01);
+  transition: all 0.2s ease-in-out;
+}
+
+.lightMode {
+  transform: rotate3d(1, 1, 0, 180deg);
+  transition: all 0.5s ease-in-out;
+}
+
+.darkMode {
+  transform: rotate3d(1, 0, 0, 180deg);
+
+  transition: all 0.5s ease-in-out;
 }

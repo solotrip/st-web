@@ -22,11 +22,24 @@ const Header = ({ children, shrink }) => {
           ) : (
             <>
               <Link className={styles.noLogo} to='/' tabIndex={-1} />
-              <DetailMedia showTitle={false} />
             </>
           )}
-
+          <DetailMedia showTitle={false} showCarousels={!shrink} />
           <div className={styles.content}>{children}</div>
+          {shrink && (
+            <div className={styles.signupLogin}>
+              <Link to='/login'>
+                <button className={styles.signup}>
+                  <span role='img' aria-labelledby='panda1'>
+                    🔑
+                  </span>
+                </button>
+              </Link>
+              <Link className={styles.loginHolder} to='/signup'>
+                <button className={styles.login}>➥</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -105,5 +105,81 @@
 
 .headerHolder {
   //background-color: darkcyan;
-  margin-top: -28px;
+}
+
+//Form styling
+
+.motto {
+  //background-color: yellowgreen;
+  width: 500px;
+}
+
+.gradientText {
+  @include roboto-medium;
+  font-size: 48px;
+  background-image: linear-gradient(45deg, #465557, #996945);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.loginBox {
+  margin-top: -100px;
+  margin-left: 50px;
+  background-color: white;
+  height: 421px;
+  width: 342px;
+  border-radius: 16px;
+  filter: drop-shadow(0px 0px 5px #888888);
+}
+
+.heading {
+  @include roboto-medium;
+  font-size: 36px;
+  align-self: flex-start;
+  padding-left: 20px;
+}
+
+.button {
+  margin-top: 24px;
+  height: 47px;
+  background-color: #3cafeb;
+  width: 182px;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.checkBox {
+  margin-left: 20px;
+}
+
+.link {
+  width: 300px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  @include roboto-light;
+  //background-color: yellowgreen;
+  color: $text-color;
+  text-align: center;
+  span {
+    color: $active-text-color;
+  }
+}
+
+.form {
+  width: 100%;
+}
+
+.formElement {
+  background-color: #eaeaea;
+  width: 300px;
+  padding-left: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 24px;
+  height: 47px;
+  border-radius: 16px;
 }
