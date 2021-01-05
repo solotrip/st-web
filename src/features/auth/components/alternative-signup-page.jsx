@@ -4,18 +4,23 @@ import { useForm } from 'react-hook-form'
 import Button from '../../../components/button'
 import { Text } from '../../../components/input'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import styles from './alternative-login-page.module.scss'
+import styles from './alternative-signup-page.module.scss'
 import Header from '../../home/components/header'
 import ThemeMode from '../../../theme/ThemeChanger'
 import cn from 'classnames'
 
 import Checkbox from '../../../components/input/checkbox'
 
-const LoginPage = ({ loginFunc, error }) => {
-  const onLogin = ({ email, password }) => {
-    loginFunc({ email, password })
-  }
-  const { register, handleSubmit, watch, errors } = useForm()
+const SignupPage = ({ registerFunc, error }) => {
+  const onSubmit = ({ email, password, username }) =>
+    registerFunc({
+      email,
+      password,
+      username,
+      name: username
+    })
+  const { register, handleSubmit } = useForm()
+
   const shrink = false
   const header = props => <Header wrapperMode={false} {...props}></Header>
 
@@ -24,18 +29,16 @@ const LoginPage = ({ loginFunc, error }) => {
   return (
     <div className={styles.layout}>
       <div className={styles.tabBar}>
-        <Link to='/'>
-          <div className={styles.flexBox}>
-            <div className={styles.tabBarLogo} />
-            <div className={styles.tabBarText} />
-          </div>
-        </Link>
+        <div className={styles.flexBox}>
+          <Link className={styles.tabBarLogo} to='/' />
+          <Link className={styles.tabBarText} to='/' />
+        </div>
       </div>
 
       <div className={styles.header}>
         <div className={styles.holder}>
           <div className={styles.themeHolder}>
-            <ThemeMode page='login' />
+            <ThemeMode page='signup' />
           </div>
           <div className={styles.headerHolder}>{header({ shrink })}</div>
         </div>
@@ -47,19 +50,27 @@ const LoginPage = ({ loginFunc, error }) => {
           <text className={styles.gradientText}>Explore with Itinaries.</text>
         </div>
         <div className={styles.loginBox}>
-          <h1 className={styles.heading}>Login</h1>
-          <form onSubmit={handleSubmit(onLogin)} className={styles.form}>
+          <h1 className={styles.heading}>Signup</h1>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <Text
+              placeholder='Username'
               className={styles.formElement}
+              name='username'
+              ref={register({
+                required: true
+              })}
+            />
+            <Text
               placeholder='Email'
+              className={styles.formElement}
               name='email'
               ref={register({
                 required: true
               })}
             />
             <Text
-              className={styles.formElement}
               placeholder='Password'
+              className={styles.formElement}
               name='password'
               type='password'
               ref={register({
@@ -69,25 +80,24 @@ const LoginPage = ({ loginFunc, error }) => {
             <span>{error}</span>
             <div className={styles.checkBox}>
               <Checkbox
-                name='Remember me'
+                name='I accept Terms of Use'
                 checked={value || false}
                 onClick={() => {
                   setValue(!value)
                 }}
               />
             </div>
-
             <Button
-              text='Login'
+              text='Sign Up'
               icon={ChevronRightIcon}
+              onClick={onSubmit}
               className={styles.button}
-              onClick={handleSubmit(onLogin)}
             />
           </form>
 
-          <Link to='signup' className={styles.linko}>
+          <Link to='login' className={styles.linko}>
             <div className={styles.link}>
-              New to Solotrip? <span>Join now!</span>
+              Already have an account? <span>Login</span>
             </div>
           </Link>
         </div>
@@ -96,4 +106,4 @@ const LoginPage = ({ loginFunc, error }) => {
   )
 }
 
-export default LoginPage
+export default SignupPage

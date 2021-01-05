@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import styles from './ThemeChanger.module.scss'
+import DetailContent from '../features/city/components/detailContent'
 
 const ThemeChanger = ({ page }) => {
   const [themeState, setThemeState] = useState(true)
@@ -31,6 +32,46 @@ const ThemeChanger = ({ page }) => {
     )
 
     var cityShrink = document.getElementsByClassName('header_shrink__3E5NY')
+  } else if (page == 'login') {
+    var loginLayout = document.getElementsByClassName(
+      'alternative-login-page_layout__2yPTZ'
+    )
+
+    var loginBox = document.getElementsByClassName(
+      'alternative-login-page_loginBox__3b02I'
+    )
+
+    var loginBoxHeader = document.getElementsByClassName(
+      'alternative-login-page_heading__1kMeK'
+    )
+
+    var loginBoxLink = document.getElementsByClassName(
+      'alternative-login-page_link__1bbEr'
+    )
+
+    var loginRememberMe = document.getElementsByClassName(
+      'checkbox_labelContainer__1D4fu'
+    )
+  } else if (page == 'signup') {
+    var signupLayout = document.getElementsByClassName(
+      'alternative-signup-page_layout__VyK1H'
+    )
+
+    var signupBox = document.getElementsByClassName(
+      'alternative-signup-page_loginBox__1Fqug'
+    )
+
+    var signupBoxHeader = document.getElementsByClassName(
+      'alternative-signup-page_heading__2WBiY'
+    )
+
+    var signupBoxLink = document.getElementsByClassName(
+      'alternative-signup-page_link__2pWML'
+    )
+
+    var signupTermsOfUse = document.getElementsByClassName(
+      'checkbox_labelContainer__1D4fu'
+    )
   }
 
   var mainPageBackground = document.getElementsByClassName(
@@ -72,6 +113,18 @@ const ThemeChanger = ({ page }) => {
         for (var t = 0; t < cell.length; t++) {
           cell[t].classList.add('dark-mode')
         }
+      } else if (page == 'login') {
+        loginLayout && loginLayout[0].classList.add('dark-mode')
+        loginBox && loginBox[0].classList.add('dark-mode')
+        loginBoxHeader && loginBoxHeader[0].classList.add('dark-mode')
+        loginBoxLink && loginBoxLink[0].classList.add('dark-mode')
+        loginRememberMe && loginRememberMe[0].classList.add('dark-mode')
+      } else if (page == 'signup') {
+        signupLayout && signupLayout[0].classList.add('dark-mode')
+        signupBox && signupBox[0].classList.add('dark-mode')
+        signupBoxHeader && signupBoxHeader[0].classList.add('dark-mode')
+        signupBoxLink && signupBoxLink[0].classList.add('dark-mode')
+        signupTermsOfUse && signupTermsOfUse[0].classList.add('dark-mode')
       } else {
         mainPageBackground[0].classList.add('dark-mode')
         tabBar[0].classList.add('dark-mode')
@@ -113,6 +166,18 @@ const ThemeChanger = ({ page }) => {
         for (var t = 0; t < cell.length; t++) {
           cell[t].classList.remove('dark-mode')
         }
+      } else if (page == 'login') {
+        loginLayout && loginLayout[0].classList.remove('dark-mode')
+        loginBox && loginBox[0].classList.remove('dark-mode')
+        loginBoxHeader && loginBoxHeader[0].classList.remove('dark-mode')
+        loginBoxLink && loginBoxLink[0].classList.remove('dark-mode')
+        loginRememberMe && loginRememberMe[0].classList.remove('dark-mode')
+      } else if (page == 'signup') {
+        signupLayout && signupLayout[0].classList.remove('dark-mode')
+        signupBox && signupBox[0].classList.remove('dark-mode')
+        signupBoxHeader && signupBoxHeader[0].classList.remove('dark-mode')
+        signupBoxLink && signupBoxLink[0].classList.remove('dark-mode')
+        signupTermsOfUse && signupTermsOfUse[0].classList.remove('dark-mode')
       } else {
         mainPageBackground[0].classList.remove('dark-mode')
         tabBar[0].classList.remove('dark-mode')
@@ -193,6 +258,49 @@ const ThemeChanger = ({ page }) => {
           element[8] && element[8].classList.remove('dark-mode'),
           element[9] && element[9].classList.remove('dark-mode'),
           cell[0] && cell[0].classList.remove('dark-mode'),
+          setThemeState(true)
+        ]
+      }
+    } else if (page == 'login') {
+      if (getTheme === 'dark') {
+        return [
+          loginLayout && loginLayout[0].classList.add('dark-mode'),
+          loginBox && loginBox[0].classList.add('dark-mode'),
+          loginBoxHeader[0] && loginBoxHeader[0].classList.add('dark-mode'),
+          loginBoxLink[0] && loginBoxLink[0].classList.add('dark-mode'),
+          loginRememberMe[0] && loginRememberMe[0].classList.add('dark-mode'),
+          setThemeState(false)
+        ]
+      } else if (getTheme == 'light') {
+        return [
+          loginLayout && loginLayout[0].classList.remove('dark-mode'),
+          loginBox && loginBox[0].classList.remove('dark-mode'),
+          loginBoxHeader[0] && loginBoxHeader[0].classList.remove('dark-mode'),
+          loginBoxLink[0] && loginBoxLink[0].classList.remove('dark-mode'),
+          loginRememberMe[0] &&
+            loginRememberMe[0].classList.remove('dark-mode'),
+          setThemeState(true)
+        ]
+      }
+    } else if (page == 'signup') {
+      if (getTheme === 'dark') {
+        return [
+          signupLayout && signupLayout[0].classList.add('dark-mode'),
+          signupBox && signupBox[0].classList.add('dark-mode'),
+          signupBoxHeader[0] && signupBoxHeader[0].classList.add('dark-mode'),
+          signupBoxLink[0] && signupBoxLink[0].classList.add('dark-mode'),
+          signupTermsOfUse[0] && signupTermsOfUse[0].classList.add('dark-mode'),
+          setThemeState(false)
+        ]
+      } else if (getTheme == 'light') {
+        return [
+          signupLayout && signupLayout[0].classList.remove('dark-mode'),
+          signupBox && signupBox[0].classList.remove('dark-mode'),
+          signupBoxHeader[0] &&
+            signupBoxHeader[0].classList.remove('dark-mode'),
+          signupBoxLink[0] && signupBoxLink[0].classList.remove('dark-mode'),
+          signupTermsOfUse[0] &&
+            signupTermsOfUse[0].classList.remove('dark-mode'),
           setThemeState(true)
         ]
       }
