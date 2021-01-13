@@ -26,7 +26,7 @@ let cities = [
   'Gümüşhane',
   'Gotham',
   'Arkansas',
-  'Ankara',
+  'Eskisehir',
   'Oslo',
   'Nur-Sultan'
 ]

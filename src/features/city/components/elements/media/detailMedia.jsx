@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Carousel from './Carousel/Carousel'
+import Carousel from '../carousel/Carousel'
 import axios from 'axios'
 import styles from './detailMedia.module.scss'
 

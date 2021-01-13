@@ -4,31 +4,31 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import styles from './ThemeChanger.module.scss'
-import DetailContent from '../features/city/components/detailContent'
+import DetailContent from '../features/city/components/content/detailContent'
 
 const ThemeChanger = ({ page }) => {
   const [themeState, setThemeState] = useState(true)
   const { t, i18n } = useTranslation(['translation'])
 
   var element = document.getElementsByClassName(
-    'sidebar_whiteItemBackground__1toqw'
+    'sidebar_whiteItemBackground__7xM3a'
   )
 
   if (page == 'city') {
-    var text = document.getElementsByClassName('sidebar_selectedItem__2vdyr')
+    var text = document.getElementsByClassName('sidebar_selectedItem__3AXjZ')
 
-    var back = document.getElementsByClassName('sidebar_toc__wdCC_')
+    var back = document.getElementsByClassName('sidebar_toc__1vGTB')
 
-    var cell = document.getElementsByClassName('detailCell_cell__LNP8P')
+    var cell = document.getElementsByClassName('detailCell_cell__1gCE3')
 
-    var navbar = document.getElementsByClassName('header_header__2Wfjy')
+    var navbar = document.getElementsByClassName('header_header__2jKVG')
 
-    var tag = document.getElementsByClassName('detailTag_wrapper__x81PX')
+    var tag = document.getElementsByClassName('detailTag_wrapper__39grK')
 
-    var cityTabBar = document.getElementsByClassName('layout_tabBar__OFXLm')
+    var cityTabBar = document.getElementsByClassName('layout_tabBar__2pa3u')
 
     var cityPageBackground = document.getElementsByClassName(
-      'layout_layout__1idy2'
+      'layout_layout__2TJG4'
     )
 
     var cityShrink = document.getElementsByClassName('header_shrink__3E5NY')
@@ -100,15 +100,15 @@ const ThemeChanger = ({ page }) => {
           tag[z].classList.add('dark-mode')
         }
 
-        back[0].classList.add('dark-mode')
+        back[0] && back[0].classList.add('dark-mode')
 
-        navbar[0].classList.add('dark-mode')
+        navbar[0] && navbar[0].classList.add('dark-mode')
 
         cityPageBackground[0].classList.add('dark-mode')
 
         cityShrink[0] && cityShrink[0].classList.add('dark-mode')
 
-        cityTabBar[0].classList.add('dark-mode')
+        cityTabBar[0] && cityTabBar[0].classList.add('dark-mode')
 
         for (var t = 0; t < cell.length; t++) {
           cell[t].classList.add('dark-mode')
@@ -154,14 +154,14 @@ const ThemeChanger = ({ page }) => {
           tag[z].classList.remove('dark-mode')
         }
 
-        back[0].classList.remove('dark-mode')
-        navbar[0].classList.remove('dark-mode')
+        back[0] && back[0].classList.remove('dark-mode')
+        navbar[0] && navbar[0].classList.remove('dark-mode')
 
         cityPageBackground[0].classList.remove('dark-mode')
 
         cityShrink[0] && cityShrink[0].classList.remove('dark-mode')
 
-        cityTabBar[0].classList.remove('dark-mode')
+        cityTabBar[0] && cityTabBar[0].classList.remove('dark-mode')
 
         for (var t = 0; t < cell.length; t++) {
           cell[t].classList.remove('dark-mode')
@@ -220,7 +220,7 @@ const ThemeChanger = ({ page }) => {
           cityPageBackground[0] &&
             cityPageBackground[0].classList.add('dark-mode'),
           cityShrink[0] && cityShrink[0].classList.add('dark-mode'),
-          cityTabBar && cityTabBar[0].classList.add('dark-mode'),
+          cityTabBar[0] && cityTabBar[0].classList.add('dark-mode'),
           element[0] && element[0].classList.add('dark-mode'),
           element[1] && element[1].classList.add('dark-mode'),
           element[2] && element[2].classList.add('dark-mode'),
@@ -246,7 +246,7 @@ const ThemeChanger = ({ page }) => {
           cityPageBackground[0] &&
             cityPageBackground[0].classList.remove('dark-mode'),
           cityShrink[0] && cityShrink[0].classList.remove('dark-mode'),
-          cityTabBar && cityTabBar[0].classList.remove('dark-mode'),
+          cityTabBar[0] && cityTabBar[0].classList.remove('dark-mode'),
           element[0] && element[0].classList.remove('dark-mode'),
           element[1] && element[1].classList.remove('dark-mode'),
           element[2] && element[2].classList.remove('dark-mode'),

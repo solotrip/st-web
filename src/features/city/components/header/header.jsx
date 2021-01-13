@@ -5,7 +5,10 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import cn from 'classnames'
 import styles from './header.module.scss'
 
-import DetailMedia from './elements/detailMedia'
+import ImageSlider from '../image-slider/image-slider'
+import { SliderData } from '../image-slider/slider-data'
+
+import DetailMedia from '../elements/media/detailMedia'
 
 const Header = ({ children, shrink }) => {
   return (
@@ -24,7 +27,9 @@ const Header = ({ children, shrink }) => {
               <Link className={styles.noLogo} to='/' tabIndex={-1} />
             </>
           )}
-          <DetailMedia showTitle={false} showCarousels={!shrink} />
+          <ImageSlider slides={SliderData} />
+
+          {/*<DetailMedia showTitle={false} showCarousels={!shrink} />*/}
           <div className={styles.content}>{children}</div>
           {shrink && (
             <div className={styles.signupLogin}>

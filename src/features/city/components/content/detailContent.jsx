@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './detailContent.module.scss'
-import DetailSection from './detailSection'
-import ThemeMode from '../../../theme/ThemeChanger'
+import DetailSection from '../section/detailSection'
+import ThemeMode from '../../../../theme/ThemeChanger'
 
 import { useTranslation } from 'react-i18next'
 
@@ -23,7 +23,10 @@ const DetailContent = ({ detailsparam }) => {
     }
   }
 
-  const details = detailsparam.map((item, i) => {
+  //get rid of duplicates in detailsparam.
+  let detailsNoDup = [...new Set(detailsparam)]
+
+  const details = detailsNoDup.map((item, i) => {
     if (titles.includes(item.SectionTitle)) {
     } else {
       titles.push(item.SectionTitle)

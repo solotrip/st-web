@@ -1,8 +1,8 @@
-@import '../../../styles/mixins';
+@import '../../../../styles/mixins';
 
 .layout {
   background: #f3f3f3;
-  min-height: 100vh;
+  //min-height: 100vh;
 }
 
 .flexBox {
@@ -11,8 +11,41 @@
 }
 
 .tabBar {
-  background: #242b2e;
+  margin-top: 100px;
+  position: fixed;
+  //background: #242b2e;
+
+  background-color: rgba($color: #ffffff, $alpha: 0.03);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  -moz-backdrop-filter: blur(20px);
   height: 80px;
+  width: 100%;
+  //width: 1420px;
+  z-index: 1;
+  -webkit-transition: background-color 0.2s ease-out;
+  -moz-transition: background-color 0.2s ease-out;
+  -o-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+}
+
+.tabBarFaded {
+  margin-top: 100px;
+  position: fixed;
+  background-color: rgba($color: #25262c, $alpha: 0.5);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  -moz-backdrop-filter: blur(20px);
+  height: 80px;
+  width: 100%;
+  //width: 1420px;
+  z-index: 1;
+  -webkit-transition: background-color 0.2s ease-out;
+  -moz-transition: background-color 0.2s ease-out;
+  -o-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
 }
 
 .tabBarLogo {
@@ -20,7 +53,7 @@
   margin-left: 160px;
   width: 200px;
   height: 40px;
-  background: url('../../../assets/images/logo.png');
+  background: url('../../../../assets/images/logo.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -31,12 +64,12 @@
 }
 
 .tabBarText {
-  margin-left: 280px;
-  margin-top: -60px;
+  margin-left: -120px;
+  margin-top: 25px;
   width: 200px;
-  height: 200px;
-  background: url('../../../assets/images/text.png');
-  background-size: contain;
+  //height: 200px;
+  background: url('../../../../assets/images/text.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   background-color: transparent;
@@ -106,4 +139,7 @@
 .headerHolder {
   //background-color: darkcyan;
   margin-top: -28px;
+}
+
+.switchRight {
 }

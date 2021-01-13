@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './detailSection.module.scss'
-import DetailClassifier from './detailClassifier'
+import DetailClassifier from '../classifier/detailClassifier'
 
 //i18n
 import { useTranslation, Trans } from 'react-i18next'

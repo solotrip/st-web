@@ -1,19 +1,152 @@
+/* eslint-disable */
 var detailTemplate = [
-  /*
   {
-    SectionTitle: 'Intro',
+    SectionTitle: 'Overview',
     PrefferedSectionIndex: 0,
     SectionContent: {
-      photos: {
-        name: 'Media',
-        type: 'media',
-        value: ['photo1', 'photo2', 'photo3']
+      highlight1: {
+        name: 'Highlight',
+        type: 'highlight',
+        value: 'Visa Free for Turkish Citizens'
+      },
+      highlight2: {
+        name: 'Highlight',
+        type: 'highlight',
+        value: 'One of the Top 10 Camping Places'
+      },
+      highlight3: {
+        name: 'Highlight',
+        type: 'highlight',
+        value: 'Most travelers spend 3-5 days'
+      },
+      highlight4: {
+        name: 'Highlight',
+        type: 'highlight',
+        value:
+          'Budget travelers spend 300$ on average (20% less than the other cities in Asia)'
+      },
+      highlight5: {
+        name: 'Highlight',
+        type: 'highlight',
+        value: 'Best time to visit is spring.'
+      },
+      highlight6: {
+        name: 'Highlight',
+        type: 'highlight',
+        value: 'Not walkable. ( Walk Score 4.3, %60 less than avg )'
+      },
+      highlight7: {
+        name: 'Highlight',
+        type: 'highlight',
+        value: 'Local people doesn’t speak English well'
+      },
+      highlight8: {
+        name: 'Highlight',
+        type: 'highlight',
+        value: 'Too much air pollution on May'
+      },
+      break: {
+        name: 'break',
+        type: 'break',
+        value: ''
+      },
+
+      flightCost: {
+        name: 'Flight Cost',
+        type: 'cost',
+        value: 290
+      },
+      accomodationCost: {
+        name: 'Accom. Cost',
+        type: 'cost',
+        value: 290
+      },
+      flightCost3: {
+        name: 'Total Budget',
+        type: 'cost',
+        value: 290
+      },
+      break2: {
+        name: 'break',
+        type: 'break',
+        value: ''
+      },
+      OverallSpread: {
+        name: 'Overall',
+        type: 'radar',
+        value: {
+          data: [44, 55, 13, 43, 9, 12, 30],
+          labels: [
+            'Social',
+            'Walkable',
+            'Safe',
+            'Luxury',
+            'Budget',
+            'Family',
+            'Activity'
+          ]
+        }
+      },
+
+      OverallScore: {
+        name: 'Overall Score',
+        type: 'score',
+        value: 6.7
+      },
+      totalBudget: {
+        name: 'Total Daily Budget',
+        type: 'table',
+        value: '630$'
+      },
+      starGazing: {
+        name: 'Star Gazing',
+        type: 'table',
+        value: 'yes'
+      },
+      plugTypes: {
+        name: 'Plug Types',
+        type: 'table',
+        value: '🔌 🔌'
+      },
+      currency: {
+        name: 'Currency',
+        type: 'table',
+        value: 'Kyat'
+      },
+      timeDifference: {
+        name: 'Time Difference',
+        type: 'table',
+        value: 'GMT+3'
+      },
+      phoneCode: {
+        name: 'Country Phone Code',
+        type: 'table',
+        value: '+90'
+      },
+      religiousTolerance: {
+        name: 'Religious Tolerance',
+        type: 'table',
+        value: 'High'
+      },
+      localFood: {
+        name: 'Local Food',
+        type: 'table',
+        value: 'Oslo Tuna'
       }
     }
-  },*/
+  },
+  {
+    SectionTitle: 'Similar Cities',
+    PrefferedSectionIndex: 1,
+    SectionContent: {
+      kars: { name: 'Similar City', type: 'city', value: 'Kars' },
+      oslo: { name: 'Similar City', type: 'city', value: 'Oslo' },
+      ardahan: { name: 'Similar City', type: 'city', value: 'Ardahan' }
+    }
+  },
   {
     SectionTitle: 'Activities',
-    PrefferedSectionIndex: 1,
+    PrefferedSectionIndex: 2,
     SectionContent: {
       activitiesChart: {
         name: 'Activities',
@@ -85,7 +218,7 @@ var detailTemplate = [
 
   {
     SectionTitle: 'Scores',
-    PrefferedSectionIndex: 2,
+    PrefferedSectionIndex: 3,
     SectionContent: {
       WalkScore: {
         name: 'Walk Score',
@@ -158,7 +291,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Budget',
-    PrefferedSectionIndex: 3,
+    PrefferedSectionIndex: 4,
     SectionContent: {
       PieChart: {
         name: 'Pie',
@@ -197,7 +330,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Flights',
-    PrefferedSectionIndex: 4,
+    PrefferedSectionIndex: 5,
 
     SectionContent: {
       minCost: {
@@ -292,7 +425,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Visa Status',
-    PrefferedSectionIndex: 5,
+    PrefferedSectionIndex: 6,
     SectionContent: {
       visaOf: {
         name: 'Visa of',
@@ -345,7 +478,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Weather and Nature',
-    PrefferedSectionIndex: 6,
+    PrefferedSectionIndex: 7,
     SectionContent: {
       TemperatureChart: {
         name: 'Temperature',
@@ -427,7 +560,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Culture',
-    PrefferedSectionIndex: 7,
+    PrefferedSectionIndex: 8,
     SectionContent: {
       cultureScore: {
         name: 'Culture Score',
@@ -478,7 +611,7 @@ var detailTemplate = [
   },
   {
     SectionTitle: 'Transportation',
-    PrefferedSectionIndex: 8,
+    PrefferedSectionIndex: 9,
     SectionContent: {
       transportCost: {
         name: 'Transport Daily',
@@ -554,74 +687,6 @@ var detailTemplate = [
         value: '0.9km'
       }
     }
-  },
-  {
-    SectionTitle: 'Overall',
-    PrefferedSectionIndex: 9,
-    SectionContent: {
-      OverallSpread: {
-        name: 'Overall',
-        type: 'radar',
-        value: {
-          data: [44, 55, 13, 43, 9, 12, 30],
-          labels: [
-            'Social',
-            'Walkable',
-            'Safe',
-            'Luxury',
-            'Budget',
-            'Family',
-            'Activity'
-          ]
-        }
-      },
-
-      OverallScore: {
-        name: 'Overall Score',
-        type: 'score',
-        value: 6.7
-      },
-      totalBudget: {
-        name: 'Total Daily Budget',
-        type: 'table',
-        value: '630$'
-      },
-      starGazing: {
-        name: 'Star Gazing',
-        type: 'table',
-        value: 'yes'
-      },
-      plugTypes: {
-        name: 'Plug Types',
-        type: 'table',
-        value: '🔌 🔌'
-      },
-      currency: {
-        name: 'Currency',
-        type: 'table',
-        value: 'Kyat'
-      },
-      timeDifference: {
-        name: 'Time Difference',
-        type: 'table',
-        value: 'GMT+3'
-      },
-      phoneCode: {
-        name: 'Country Phone Code',
-        type: 'table',
-        value: '+90'
-      },
-      religiousTolerance: {
-        name: 'Religious Tolerance',
-        type: 'table',
-        value: 'High'
-      },
-      localFood: {
-        name: 'Local Food',
-        type: 'table',
-        value: 'Oslo Tuna'
-      }
-    }
   }
 ]
 
@@ -641,6 +706,22 @@ function predicateBy (prop) {
 
 //TO-DO: Suggestion based details.
 const suggestionFetcher = () => {}
+
+//TO-DO: Take subparts of the data and send it to different pages.
+// (Just like it is a different api endpoint.)
+
+let returnArray = []
+
+export const detailPartitioner = indexes => {
+  // do not forget to clear return array,
+  //otherwise it will append unless it is re-rendered.
+  returnArray = []
+  sortedDetails = detailTemplate.sort(predicateBy('PrefferedSectionIndex'))
+  indexes.forEach(index => {
+    returnArray.push(sortedDetails[index])
+  })
+  return returnArray
+}
 
 var sortedDetails
 

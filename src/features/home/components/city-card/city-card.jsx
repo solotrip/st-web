@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const CityCard = ({ key, id, imgsr }) => {
   return (
     <div className={styles.wrapper}>
-      <Link to={{ pathname: `cities/${id}` }}>
+      <Link to={{ pathname: `cities/${id}/overview` }}>
         <div className={styles.cardHolder}>
           <div className={styles.hover}>
             <img className={styles.image} src={imgsr} />

@@ -1,10 +1,13 @@
 import React from 'react'
-import DetailCell from './elements/detailCell'
-import DetailChart from './elements/detailChart'
-import DetailTable from './elements/detailTable'
-import DetailMedia from './elements/detailMedia'
-import DetailTag from './elements/detailTag'
-import DetailButton from './elements/detailButton'
+import DetailCell from '../elements/cell/detailCell'
+import DetailChart from '../elements/chart/detailChart'
+import DetailTable from '../elements/table/detailTable'
+import DetailMedia from '../elements/media/detailMedia'
+import DetailTag from '../elements/tag/detailTag'
+import DetailButton from '../elements/button/detailButton'
+import DetailHighlight from '../elements/highlight/detailHighlight'
+import DetailBreak from '../elements/break/detailBreak'
+import SimilarCity from '../elements/similar-city/similarCity'
 
 var ComponentClassified
 const DetailClassifier = ({ objectKey, value, type, i, rowAt }) => {
@@ -35,6 +38,18 @@ const DetailClassifier = ({ objectKey, value, type, i, rowAt }) => {
 
   if (type == 'activity') {
     ComponentClassified = DetailTag
+  }
+
+  if (type == 'highlight') {
+    ComponentClassified = DetailHighlight
+  }
+
+  if (type == 'break') {
+    ComponentClassified = DetailBreak
+  }
+
+  if (type == 'city') {
+    ComponentClassified = SimilarCity
   }
 
   return (

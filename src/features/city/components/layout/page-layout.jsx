@@ -4,21 +4,21 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useWindowWidth } from '@react-hook/window-size'
 import cn from 'classnames'
 import styles from './layout.module.scss'
-import DetailContent from './detailContent'
-import Sidebar from './sidebar'
+import DetailContent from '../content/detailContent'
+import Sidebar from '../sidebar/sidebar'
 import { Link } from 'react-router-dom'
 
 //for testing purpose
-import DetailMedia from './elements/detailMedia'
-import DetailFlight from './elements/detailFlight'
-import DetailChart from './elements/detailChart'
-import DetailTable from './elements/detailTable'
-import DetailTag from './elements/detailTag'
+import DetailMedia from '../elements/media/detailMedia'
+import DetailFlight from '../elements/flight/detailFlight'
+import DetailChart from '../elements/chart/detailChart'
+import DetailTable from '../elements/table/detailTable'
+import DetailTag from '../elements/tag/detailTag'
 
-import detailFetcher from './detailFetcher'
+import detailFetcher from '../detailFetcher'
 
-import '../../../theme/styles.scss'
-import ThemeMode from '../../../theme/ThemeChanger'
+import '../../../../theme/styles.scss'
+import ThemeMode from '../../../../theme/ThemeChanger'
 import { useTranslation } from 'react-i18next'
 
 var titles = []
@@ -33,9 +33,20 @@ for (var section in sections) {
   titles.push(sections[section].SectionTitle)
 }
 
-const Layout = ({ children, header, sidebar, content }) => {
+const Layout = ({
+  children,
+  header,
+  sidebar,
+  content,
+  fetchedContent,
+  page,
+  city
+}) => {
   const { t, i18n } = useTranslation(['translation'])
   const [shrink, setShrink] = useState(false)
+  const [faded, setFaded] = useState(styles.tabBar)
+
+  //let slugPage = (page && page.toLowerCase().replace(/\s/g, '-')) || ''
 
   const changeLanguage = () => {
     if (code) {
@@ -50,22 +61,26 @@ const Layout = ({ children, header, sidebar, content }) => {
   }
 
   const windowWidth = useWindowWidth()
-  const shrinkThreshold = -300
+  const shrinkThreshold = -450
   const offset = window.scrollY
   //const shrinkThreshold = windowWidth > 1024 ? -668 : -270
   useScrollPosition(({ prevPos, currPos }) => {
     if (currPos.y <= shrinkThreshold) {
-      setShrink(true)
+      //that was faded.
+      setFaded(styles.tabBarFaded)
+      setShrink(false)
+
       //} else if (currPos.y <= shrinkThreshold && currPos.y < prevPos.y) {
       //  setShrink(false)
     } else {
+      setFaded(styles.tabBar)
       setShrink(false)
     }
   })
 
   return (
     <div className={styles.layout}>
-      <div className={styles.tabBar}>
+      <div className={faded}>
         <div className={styles.flexBox}>
           <Link className={styles.tabBarLogo} to='/' />
           <Link className={styles.tabBarText} to='/' />
@@ -73,6 +88,7 @@ const Layout = ({ children, header, sidebar, content }) => {
       </div>
       <div className={styles.switches}>
         <div className={styles.header}>
+          <div className={styles.headerHolder}>{header({ shrink })}</div>
           <div className={styles.themeHolder}>
             <ThemeMode page='city' />
             <button
@@ -83,13 +99,18 @@ const Layout = ({ children, header, sidebar, content }) => {
               {t('translation:Change Language')}
             </button>
           </div>
-          <div className={styles.headerHolder}>{header({ shrink })}</div>
         </div>
       </div>
       <div className='main'>
-        <Sidebar className={styles.sidebar} items={titles}></Sidebar>
+        <Sidebar
+          className={styles.sidebar}
+          items={titles}
+          page={page}
+          city={city}
+        ></Sidebar>
 
-        {<DetailContent detailsparam={fetched} />}
+        {<DetailContent detailsparam={fetchedContent} />}
+
         <div>{content}</div>
       </div>
     </div>

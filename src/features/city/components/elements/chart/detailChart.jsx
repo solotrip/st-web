@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './detailChart.module.scss'
 import Chart from 'react-apexcharts'
 
-import forestImage from '../../../../assets/images/forest.jpg'
+import forestImage from '../../../../../assets/images/forest.jpg'
 
 const DetailChart = ({
   type = 'line-chart-blue',

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React from 'react'
 import styles from './detailCell.module.scss'
-import Tooltip from './Tooltip/Tooltip'
+import Tooltip from '../tooltip/Tooltip'
 
 import { useTranslation } from 'react-i18next'
 
