@@ -1,13 +1,52 @@
 @import '../../../styles/mixins';
 
 .layout {
-  background: #F3F3F3;
+  background: #f3f3f3;
   min-height: 100vh;
-  height: 2000px;
+}
+
+.flexBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.tabBar {
+  background: #242b2e;
+  height: 80px;
+}
+
+.tabBarLogo {
+  margin-top: 20px;
+  margin-left: 160px;
+  width: 200px;
+  height: 40px;
+  background: url('../../../assets/images/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.tabBarText {
+  margin-left: 280px;
+  margin-top: -60px;
+  width: 200px;
+  height: 200px;
+  background: url('../../../assets/images/text.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+  @include xs-to-md {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .header {
-
 }
 
 .main {
@@ -29,10 +68,10 @@
   position: sticky;
   top: 80px;
   // TODO: add custom scrollbar for all browsers
-  scrollbar-color: rgba(0,0,0,0.25);
-  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.25);
+
   @include xs-to-md {
-   display: none;
+    display: none;
   }
 }
 
@@ -40,7 +79,7 @@
   margin: 24px;
   width: 600px;
   @include xl {
-    width: 750px;
+    width: 810px;
   }
   @include xs-to-md {
     width: 100%;
@@ -51,4 +90,19 @@
       margin-top: 170px;
     }
   }
+}
+
+.holder {
+  //background-color: greenyellow;
+}
+
+.themeHolder {
+  //background-color: hotpink;
+  width: 100px;
+  margin-left: auto;
+  margin-right: 100px;
+}
+
+.headerHolder {
+  //background-color: darkcyan;
 }

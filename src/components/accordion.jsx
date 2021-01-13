@@ -4,11 +4,7 @@ import cn from 'classnames'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import styles from './accordion.module.scss'
 
-const Accordion = ({
-  children,
-  name,
-  expandedDefault
-}) => {
+const Accordion = ({ children, name, expandedDefault }) => {
   const [expanded, setExpanded] = useState(expandedDefault)
   const expand = () => {
     setExpanded(!expanded)
@@ -24,14 +20,13 @@ const Accordion = ({
       >
         <span className={styles.name}>{name}</span>
         <span className={styles.icon}>
-          <ChevronRightIcon fontSize='default'/>
+          <ChevronRightIcon fontSize='default' />
         </span>
       </button>
-      <div
-        className={styles.content}
-        aria-expanded={expanded}
-      >{children}</div>
-      <hr/>
+      <div className={styles.content} aria-expanded={expanded}>
+        {children}
+      </div>
+      <hr className={styles.sepator} />
     </div>
   )
 }
@@ -45,6 +40,5 @@ Accordion.propTypes = {
   expandedDefault: PropTypes.bool,
   name: PropTypes.string
 }
-
 
 export default Accordion

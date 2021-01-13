@@ -4,11 +4,12 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import { useWindowWidth } from '@react-hook/window-size'
 import cn from 'classnames'
 import styles from './layout.module.scss'
+import ThemeMode from '../../../theme/ThemeChanger'
 
 const Layout = ({ children, header, sidebar }) => {
   const [shrink, setShrink] = useState(false)
   const windowWidth = useWindowWidth()
-  const shrinkThreshold = windowWidth > 1024 ? -328 : -76
+  const shrinkThreshold = windowWidth > 1024 ? -468 : -260
   useScrollPosition(({ prevPos, currPos }) => {
     if (currPos.y <= shrinkThreshold) {
       setShrink(true)
@@ -19,21 +20,29 @@ const Layout = ({ children, header, sidebar }) => {
 
   return (
     <div className={styles.layout}>
-      <div className={styles.header}>{header({ shrink })}</div>
+      <div className={styles.tabBar}>
+        <div className={styles.flexBox}>
+          <div className={styles.tabBarLogo}></div>
+          <div className={styles.tabBarText}></div>
+        </div>
+      </div>
+      <div className={styles.header}>
+        <div className={styles.holder}>
+          <div className={styles.themeHolder}>
+            <ThemeMode page='home' />
+          </div>
+          <div className={styles.headerHolder}>{header({ shrink })}</div>
+        </div>
+      </div>
       <div className={styles.main}>
-        <div
-          className={styles.sidebar}>
-          {sidebar}</div>
-        <div
-          className={cn(styles.content, { [styles.shrink]: shrink })}
-        >
+        <div className={styles.sidebar}>{sidebar}</div>
+        <div className={cn(styles.content, { [styles.shrink]: shrink })}>
           {children}
         </div>
       </div>
     </div>
   )
 }
-
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,

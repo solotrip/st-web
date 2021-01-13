@@ -14,15 +14,17 @@ const SearchContainer = () => {
 
   const updateFilterCallback = useCallback(
     (filterId, variables) => dispatch(updateFilter(filterId, variables)),
-    [dispatch])
+    [dispatch]
+  )
 
-  const resetFiltersCallback = useCallback(
-    () => dispatch(resetFilters()),
-    [dispatch])
+  const resetFiltersCallback = useCallback(() => dispatch(resetFilters()), [
+    dispatch
+  ])
 
   const updateQueryCallback = useCallback(
     value => dispatch(updateQuery(value)),
-    [dispatch])
+    [dispatch]
+  )
 
   return (
     <SearchPage

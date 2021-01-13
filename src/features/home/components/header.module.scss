@@ -3,13 +3,162 @@
 .wrapper {
   width: 100%;
   height: 400px;
-  background-image: url('../../../assets/images/mountain.jpg');
+  background-image: url('../../../assets/images/mountains3.png');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 1100px;
   background-position: center center;
+
   @include xs-to-md {
-    height: 150px;
+    height: 200px;
+    background-size: 500px;
   }
+}
+.nowrapper {
+  margin-top: -100px;
+  width: 100%;
+  height: 400px;
+  background-image: url('../../../assets/images/mountains3.png');
+  background-repeat: no-repeat;
+  background-size: 1100px;
+  background-position: center center;
+
+  @include xs-to-md {
+    height: 200px;
+    background-size: 500px;
+  }
+}
+.flexBox {
+  display: flex;
+  flex-direction: row;
+}
+.tabBarLogo {
+  margin-top: 20px;
+  margin-left: -30px;
+  width: 200px;
+  height: 40px;
+  background: url('../../../assets/images/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.tabBarText {
+  margin-left: -120px;
+  margin-top: 5px;
+  width: 200px;
+  height: 80px;
+  background: url('../../../assets/images/text.png');
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  //background-color: darkcyan;
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.loginHolder {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.login {
+  margin-top: auto;
+  margin-bottom: auto;
+
+  width: 90px;
+  height: 30px;
+}
+.signupLogin {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: -65px;
+}
+
+.signup {
+  margin-top: auto;
+  margin-bottom: auto;
+  color: white;
+  margin-left: -30px;
+  margin-right: 5px;
+  border-radius: 10px;
+  background-color: transparent;
+
+  height: 30px;
+  width: 90px;
+  &::after {
+    font-size: 16px;
+    content: 'Login';
+    position: absolute;
+    padding-left: 5px;
+    padding-top: 5px;
+    right: 10;
+    bottom: 5;
+    opacity: 0;
+  }
+
+  &:hover {
+    transition: all 0.5s;
+    border-radius: 10px;
+
+    padding: 0rem 1.5rem 0rem 0rem;
+    color: #ffffff;
+
+    &::after {
+      opacity: 1;
+      transition: all 0.5s;
+      color: #ffffff;
+    }
+  }
+}
+
+.login {
+  margin-right: -180px;
+  background: transparent;
+  color: #3cafeb;
+  cursor: pointer;
+
+  border: 1px solid #3cafeb;
+  transition: all 0.5s;
+  border-radius: 10px;
+  position: relative;
+  width: 90px;
+
+  &::after {
+    font-size: 16px;
+    content: 'Signup';
+    position: absolute;
+    padding-left: 5px;
+    left: 50%;
+    top: 44%;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    background: #3cafeb;
+    transition: all 0.5s;
+    border-radius: 10px;
+    box-shadow: 0px 1px 3px #3cafeb;
+    padding: 0rem 3.5rem 0rem 0rem;
+    color: #ffffff;
+
+    &::after {
+      opacity: 1;
+      transition: all 0.5s;
+      color: #ffffff;
+    }
+  }
+}
+
+.tabBar {
+  background: transparent;
 }
 
 .header {
@@ -24,9 +173,9 @@
     display: block;
     top: 300px;
     left: 0;
-    width: 100%;
+    width: 0%;
     height: 100px;
-    background: url('../../../assets/images/bottom-wave-border.svg') top left;
+
     background-size: 100% 100%;
     background-repeat: no-repeat;
     @include xs-to-md {
@@ -39,8 +188,9 @@
 .shrink {
   height: 80px;
   position: fixed;
+  margin-top: -147px;
   align-content: center;
-  background: #242B2E;
+  background: #242b2e;
   z-index: 1;
 
   .header {
@@ -63,18 +213,34 @@
 
   .logo {
     height: 40px;
+    width: 200px;
     align-self: center;
   }
 }
 
 .logo {
-  margin: 0 24px;
-  width: 300px;
-  height: 100px;
-  background: url("../../../assets/images/logo-text.png");
+  margin: 10px 24px;
+
+  width: 200px;
+  height: 40px;
+  background: url('../../../assets/images/logo-text.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+
+  @include xs-to-md {
+    display: none;
+  }
+}
+.noLogo {
+  margin: 10px 24px;
+
+  width: 200px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+
   @include xs-to-md {
     display: none;
   }
@@ -85,6 +251,7 @@
   margin: 0 24px;
   width: 600px;
   align-self: flex-end;
+
   @include xl {
     width: 750px;
   }

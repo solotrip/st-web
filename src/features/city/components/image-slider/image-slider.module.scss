@@ -1,0 +1,79 @@
+.slider {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  margin-left: -9.5%;
+  width: 125.5%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  height: 500px;
+}
+
+.cityNameHolder {
+  position: absolute;
+  //background-color: yellow;
+
+  //border-radius: 0px 0px 16px 16px;
+  background: rgb(27, 27, 34);
+  background: linear-gradient(
+    0deg,
+    rgba(27, 27, 34, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  margin-left: -9.5%;
+  width: 125.5%;
+  height: 160px;
+  bottom: 9%;
+  left: 0%;
+}
+
+.cityName {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  font-size: 48px;
+  color: white;
+}
+
+.rightArrow {
+  position: absolute;
+  bottom: 10%;
+  right: auto;
+  margin-left: 40px;
+  font-size: 3rem;
+  color: #50ace9;
+  background-color: lightblue;
+  border-radius: 20px;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.leftArrow {
+  position: absolute;
+  bottom: 10%;
+  left: auto;
+  background-color: #2f333d;
+  border-radius: 20px;
+  font-size: 3rem;
+  color: #50ace9;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 0ms ease;
+}
+
+.slideActive {
+  opacity: 1;
+  transition-duration: 0ms;
+}

@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+}
+
+.cardHolder {
+  height: 350px;
+  width: 250px;
+  border-radius: 16px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 60px;
+  display: grid;
+  transition: all 0.2s ease-in-out;
+  :hover {
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.image {
+  width: 250px;
+  height: 350px;
+  border-radius: 16px;
+}
+
+.titleHolder {
+  background-color: rgba($color: #ffffff, $alpha: 0.03);
+  margin-top: -90px;
+  height: 90px;
+  display: flex;
+
+  border-radius: 0px 0px 16px 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  -moz-backdrop-filter: blur(20px);
+}
+
+.title {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 24px;
+
+  margin-top: auto;
+  margin-bottom: auto;
+  color: white;
+  z-index: 1;
+  margin-left: 10px;
+}
+
+.hover {
+  //Colorful hovering is not active right now.
+
+  :hover {
+    box-shadow: inset 0 0 30px whitesmoke, inset 10px 0 40px #50ace9,
+      inset -10px 0 40px #0ff, inset 10px 0 150px #50ace9,
+      inset -10px 0 150px #0ff, 0 0 25px #fff, -5px 0 40px #50ace9,
+      5px 0 40px #0ff;
+    transition: 0.5s;
+    z-index: 2;
+  }
+}
