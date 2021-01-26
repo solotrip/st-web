@@ -4,7 +4,7 @@ import cn from 'classnames'
 import _ from 'lodash'
 import Tag from './tag'
 import styles from './search.module.scss'
-import { Close, SearchOutlined } from '@material-ui/icons'
+import { MdClose, MdSearch } from 'react-icons/md'
 
 const Search = ({
   defaultValue,
@@ -42,7 +42,7 @@ const Search = ({
         { [styles.filled]: filled },
         className
       )}>
-      <SearchOutlined/>
+      <MdSearch className={styles.searchIcon}/>
       <div className={styles.innerContainer}>
         {tags &&
         tags.map(t => (
@@ -64,7 +64,7 @@ const Search = ({
       </div>
       {
         (tags.length > 0 || value) &&
-        <Close
+        <MdClose
           className={styles.resetButton}
           onClick={handleReset}
           onKeyDown={handleReset}

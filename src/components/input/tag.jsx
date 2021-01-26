@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 import PropTypes from 'prop-types'
-import { Close } from '@material-ui/icons'
+import { MdClose } from 'react-icons/md'
 import styles from './tag.module.scss'
 
 const Tag = ({
@@ -20,7 +20,7 @@ const Tag = ({
       {icon}
       <span className={styles.name}>{name}</span>
       {onRemove &&
-      <Close
+      <MdClose
         className={styles.icon}
         fontSize='inherit'
       />}

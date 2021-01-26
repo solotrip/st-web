@@ -1,4 +1,4 @@
-@import '../../../../styles/mixins';
+@import 'styles/mixins';
 
 .layout {
   background: #f3f3f3;
@@ -10,7 +10,7 @@
   flex-direction: row;
 }
 
-.tabBar {
+.navbar {
   margin-top: 100px;
   position: fixed;
   //background: #242b2e;
@@ -48,7 +48,7 @@
   transition: background-color 0.2s ease-out;
 }
 
-.tabBarLogo {
+.logo {
   margin-top: 20px;
   margin-left: 160px;
   width: 200px;
@@ -63,7 +63,7 @@
   }
 }
 
-.tabBarText {
+.text {
   margin-left: -120px;
   margin-top: 25px;
   width: 200px;
@@ -117,6 +117,7 @@
   @include xs-to-md {
     width: 100%;
   }
+
   &.shrink {
     margin-top: 420px;
     @include xs-to-md {

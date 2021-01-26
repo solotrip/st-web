@@ -1,4 +1,4 @@
-@import '../../styles/mixins';
+@import 'styles/mixins';
 
 .container {
   @include roboto-medium;
@@ -29,7 +29,7 @@
   left: 0;
   height: 18px;
   width: 18px;
-  border: 1px solid #C4C4C4;
+  border: 1px solid $alternative-border-color;
   background-color: transparent;
   border-radius: 6px;
 
@@ -40,8 +40,8 @@
 }
 
 .container .input:checked ~ .checkmark {
-  background-color: #63BAF0;
-  border-color: #57B1EC
+  background-color: $primary-color;
+  border-color: $primary-color
 }
 
 .checkmark:after {
@@ -59,7 +59,7 @@
   top: 2px;
   width: 3px;
   height: 7px;
-  border: solid white;
+  border: solid $white;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);

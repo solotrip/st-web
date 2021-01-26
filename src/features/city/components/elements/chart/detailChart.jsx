@@ -6,7 +6,6 @@ import forestImage from '../../../../../assets/images/forest.jpg'
 
 const DetailChart = ({
   type = 'line-chart-blue',
-  inspecting = 'Popularity Score',
   yaxis = 'Number of People',
   chartData,
   chartName,
@@ -57,7 +56,7 @@ const DetailChart = ({
       },
       xaxis: {
         type: 'datetime',
-        categories: chartLabels,
+        categories: chartLabels || [],
         tickAmount: 10,
         labels: {}
       },
@@ -127,7 +126,7 @@ const DetailChart = ({
       dataLabels: {
         enabled: true,
         style: {},
-        formatter: function (value, { seriesIndex, dataPointIndex, w }) {
+        formatter: function(value, { seriesIndex, dataPointIndex, w }) {
           return (
             w.config.labels[seriesIndex] +
             '\n' +
@@ -161,7 +160,7 @@ const DetailChart = ({
     }
   }
 
-  const forest2 = {
+  const forest = {
     series: chartData,
     options: {
       stroke: {
@@ -197,7 +196,7 @@ const DetailChart = ({
         },
         enabled: true,
         style: {},
-        formatter: function (value, { seriesIndex, dataPointIndex, w }) {
+        formatter: function(value, { seriesIndex, dataPointIndex, w }) {
           return (
             w.config.labels[seriesIndex] +
             '\n' +
@@ -311,7 +310,7 @@ const DetailChart = ({
     heightHolder = 350
     styleType = 'pie'
   } else if (type == 'forest') {
-    state = forest2
+    state = forest
     heightHolder = 350
     styleType = 'donut'
   } else if (type == 'radar') {

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Layout from './layout'
-import Button from '../../../components/button'
-import { Text } from '../../../components/input'
+import { Button } from 'components'
+import { Text } from 'components'
 import logo from '../../../assets/images/logo-text.png'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import { MdChevronRight } from 'react-icons/md'
 import styles from './signup-page.module.scss'
 import { useForm } from 'react-hook-form'
 
@@ -13,7 +13,7 @@ const SignupPage = ({ registerFunc, error }) => {
     email,
     password,
     username,
-    name:username
+    name: username
   })
   const { register, handleSubmit } = useForm()
   return (
@@ -45,7 +45,7 @@ const SignupPage = ({ registerFunc, error }) => {
         />
         <span>{error}</span>
         <Button
-          text="Sign Up" icon={ChevronRightIcon} onClick={onSubmit}
+          text="Sign Up" icon={MdChevronRight} onClick={onSubmit}
           className={styles.button}/>
       </form>
       <Link to="/login" className={styles.link}>

@@ -1,11 +1,4 @@
-import Text from './text'
-import Range from './range'
-import Checkbox from './checkbox'
-import Search from './search'
-
-export {
-  Text,
-  Range,
-  Checkbox,
-  Search
-}
+export { default as Text } from './text'
+export { default as Range } from './range'
+export { default as Checkbox } from './checkbox'
+export { default as Search } from './search'

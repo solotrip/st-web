@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel from '../carousel/Carousel'
 import axios from 'axios'
 import styles from './detailMedia.module.scss'
@@ -7,19 +7,19 @@ import { useTranslation } from 'react-i18next'
 
 const SPLASHBASE_URL = 'http://www.splashbase.co/api/v1/images/latest'
 
-const DetailMedia = ({ showTitle = 'true', showCarousels }) => {
+const DetailMedia = ({ showTitle = true, showCarousels }) => {
   const [imgList, setImgList] = useState([])
   const { t, i18n } = useTranslation(['translation'])
 
   useEffect(() => {
     axios
-      .get(SPLASHBASE_URL)
-      .then(resp => {
-        setImgList(resp.data.images)
-      })
-      .catch(err => {
-        console.log('Unable to Fetch Image from splashbase', err)
-      })
+    .get(SPLASHBASE_URL)
+    .then(resp => {
+      setImgList(resp.data.images)
+    })
+    .catch(err => {
+      console.log('Unable to Fetch Image from splashbase', err)
+    })
   }, [])
 
   return (
@@ -27,11 +27,10 @@ const DetailMedia = ({ showTitle = 'true', showCarousels }) => {
       <div className={styles.wrapper}>
         {showTitle && (
           <div className={styles.titleHolder}>
-            {' '}
             <h1 className={styles.titleNormal}>
               {t('translation:This is')}
             </h1>{' '}
-            <h1 className={styles.titleHighlighted}>Oslo</h1>
+            <h1 className={styles.titleHighlighted}> Oslo</h1>
           </div>
         )}
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import history from 'history/browser'
+import { initializeAuthentication } from 'utils/auth'
 import * as AuthApi from '../../api/auth'
 import _ from 'lodash'
 
@@ -33,8 +34,16 @@ export const register = createAsyncThunk(
     return { accessToken }
   })
 
+export const initialize = createAsyncThunk(
+  'auth/init', async () => {
+    return await initializeAuthentication()
+  }
+)
+
 const initialState = {
-  error: null
+  error: null,
+  loading: true,
+  loggedIn: false
 }
 
 const authSlice = createSlice({
@@ -46,11 +55,25 @@ const authSlice = createSlice({
     }
   },
   extraReducers: {
+    [initialize.pending]: state => {
+      state.error = null
+      state.loading = true
+      state.loggedIn = false
+    },
+    [initialize.fulfilled]: (state, action) => {
+      state.loggedIn = action.payload
+      state.loading = false
+    },
+    [initialize.error]: (state, action) => {
+      state.loggedIn = false
+      state.loading = true
+      state.error = _.get(action.error, 'data', action.error.message)
+    },
     [login.pending]: state => {
       state.error = null
     },
-    [login.fulfilled]: (state, action) => {
-      state.accessToken = action.payload.accessToken
+    [login.fulfilled]: state => {
+      state.loggedIn = true
     },
     [login.rejected]: (state, action) => {
       state.error = _.get(action.error, 'data', action.error.message)
@@ -58,8 +81,8 @@ const authSlice = createSlice({
     [register.pending]: state => {
       state.error = null
     },
-    [register.fulfilled]: (state, action) => {
-      state.accessToken = action.payload.accessToken
+    [register.fulfilled]: state => {
+      state.loggedIn = true
     },
     [register.rejected]: (state, action) => {
       state.error = _.get(action.error, 'data', action.error.message)

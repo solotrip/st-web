@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react'
 import styles from './detailTable.module.scss'
 import Tooltip from '../tooltip/Tooltip'
@@ -6,7 +5,7 @@ import Tooltip from '../tooltip/Tooltip'
 import { useTranslation } from 'react-i18next'
 
 const DetailTable = ({ objectKey, value }) => {
-  const { t, i18n } = useTranslation(['table'])
+  const { t } = useTranslation(['table'])
   return (
     <div className={styles.wrapper}>
       <Tooltip
@@ -15,11 +14,12 @@ const DetailTable = ({ objectKey, value }) => {
         direction='bottom'
       >
         <div className={styles.sameRow}>
-          <div className={styles.name}>{t(`table:${objectKey}`)}: </div>{' '}
+          <div className={styles.name}>{t(`table:${objectKey}`)}:</div>
+          {' '}
           <div className={styles.value}>{t(`table:${value}`)}</div>
         </div>
       </Tooltip>
-      <hr className={styles.line} />
+      <hr className={styles.line}/>
     </div>
   )
 }

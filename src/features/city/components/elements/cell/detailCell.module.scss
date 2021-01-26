@@ -1,9 +1,11 @@
+@import 'styles/mixins';
+
 .cellOuter {
   margin: 20px;
 }
 
 .cell {
-  background-color: white;
+  background-color: $card-bg-color;
   height: 200px;
   width: 180px;
   display: flex;
@@ -14,14 +16,14 @@
 .title {
   margin-left: auto;
   margin-right: auto;
-  color: rgba($color: #a5a2a2, $alpha: 1);
+  color: $text-color;
   font-size: 24px;
 }
 
 .value {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 0px;
+  margin-top: 0;
   font-size: 72px;
   color: rgba($color: #50ace9, $alpha: 1);
 }

@@ -1,15 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import Button from '../../../components/button'
-import { Text } from '../../../components/input'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import styles from './alternative-signup-page.module.scss'
+import { Button, Checkbox, TextInput } from 'components'
+import { MdChevronRight } from 'react-icons/md'
+import styles from './alternative-page.module.scss'
 import Header from '../../home/components/header'
-import ThemeMode from '../../../theme/ThemeChanger'
 import cn from 'classnames'
 
-import Checkbox from '../../../components/input/checkbox'
 
 const SignupPage = ({ registerFunc, error }) => {
   const onSubmit = ({ email, password, username }) =>
@@ -22,60 +19,47 @@ const SignupPage = ({ registerFunc, error }) => {
   const { register, handleSubmit } = useForm()
 
   const shrink = false
-  const header = props => <Header wrapperMode={false} {...props}></Header>
+  const header = props => <Header wrapperMode={false} {...props}/>
 
   const [value, setValue] = useState(false)
 
   return (
     <div className={styles.layout}>
-      <div className={styles.tabBar}>
-        <div className={styles.flexBox}>
-          <Link className={styles.tabBarLogo} to='/' />
-          <Link className={styles.tabBarText} to='/' />
-        </div>
-      </div>
-
       <div className={styles.header}>
-        <div className={styles.holder}>
-          <div className={styles.themeHolder}>
-            <ThemeMode page='signup' />
-          </div>
-          <div className={styles.headerHolder}>{header({ shrink })}</div>
-        </div>
+        {header({ shrink })}
       </div>
       <div className={styles.main}>
         <div className={styles.motto}>
-          <text className={styles.gradientText}>Research Destinations,</text>
-          <br />{' '}
-          <text className={styles.gradientText}>Explore with Itinaries.</text>
+          <span className={styles.gradientText}>Research Destinations,</span>
+          <span className={styles.gradientText}>Explore with Itinaries.</span>
         </div>
-        <div className={styles.loginBox}>
+        <div className={cn(styles.loginBox, 'card')}>
           <h1 className={styles.heading}>Signup</h1>
           <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <Text
+            <TextInput
               placeholder='Username'
-              className={styles.formElement}
               name='username'
               ref={register({
                 required: true
               })}
+              filled
             />
-            <Text
+            <TextInput
               placeholder='Email'
-              className={styles.formElement}
               name='email'
               ref={register({
                 required: true
               })}
+              filled
             />
-            <Text
+            <TextInput
               placeholder='Password'
-              className={styles.formElement}
               name='password'
               type='password'
               ref={register({
                 required: true
               })}
+              filled
             />
             <span>{error}</span>
             <div className={styles.checkBox}>
@@ -89,13 +73,13 @@ const SignupPage = ({ registerFunc, error }) => {
             </div>
             <Button
               text='Sign Up'
-              icon={ChevronRightIcon}
+              icon={MdChevronRight}
               onClick={onSubmit}
               className={styles.button}
             />
           </form>
 
-          <Link to='login' className={styles.linko}>
+          <Link to='login'>
             <div className={styles.link}>
               Already have an account? <span>Login</span>
             </div>

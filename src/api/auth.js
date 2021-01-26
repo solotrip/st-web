@@ -14,8 +14,8 @@ export async function register({ name, username, email, password }) {
 }
 
 
-export async function refresh({ refreshToken }) {
+export async function refresh({ refreshToken, cancelToken }) {
   const url = SOLOTRIP_V1('auth/refresh')
-  const response = await axios.post(url, { refreshToken })
+  const response = await axios.post(url, { refreshToken }, { cancelToken })
   return response.data
 }

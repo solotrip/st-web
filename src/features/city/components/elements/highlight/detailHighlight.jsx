@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './detailHighlight.module.scss'
 
 const DetailHighlight = ({ value }) => {
+  const highlights = value.map((v, index) => (
+    <li key={`hl-${index}`} className={styles.highlight}>⚈ {v.value}</li>))
   return (
-    <div className={styles.wrapper}>
-      <ul>
-        <div className={styles.highlight}>⚈ {value}</div>
-      </ul>
-    </div>
+    <ul className={styles.list}>
+      {highlights}
+    </ul>
   )
 }
 

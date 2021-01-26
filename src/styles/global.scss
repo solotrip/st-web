@@ -1,6 +1,27 @@
 @import-normalize;
 @import '_global/fonts';
 @import 'mixins';
+@import '~swiper/swiper.scss';
+@import '_theme/dark';
+@import '_theme/light';
+
+html {
+  @include light-theme;
+
+  // Prevent scroll appearing jump
+  overflow-y: scroll;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    @include dark-theme;
+  }
+}
+
+html.dark {
+  @include dark-theme;
+}
+
 
 html,
 body {
@@ -44,52 +65,34 @@ body {
 .card {
   padding: 16px;
   border-radius: 16px;
-  //ThemeChanger styles.scss controls it.
-  /*background: #ffffff;*/
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background: $card-bg-color;
+  @extend .shadow;
+
+  &.no-padding {
+    padding: 0;
+  }
 }
 
 hr {
-  color: #e0e0e0;
+  color: $border-color;
 }
 
 .glow-on-hover {
-  background: rgba(60, 60, 60, 1);
-  height: fit-content;
-  color: rgba(234, 234, 234, 1);
-  font-size: 15px;
-  border-radius: 8px;
-  padding: 8px 17px;
-  cursor: pointer;
-  text-decoration: none;
-  box-sizing: border-box;
-  text-align: center;
-  margin-left: auto;
-  margin-right: 10px;
-  border: none;
-  outline: none;
-  color: #fff;
-  background: #111;
   position: relative;
-  z-index: 0;
-
-  &:focus {
-    outline: none;
-  }
 
   &:before {
     content: '';
     background: linear-gradient(
-      45deg,
-      #ff0000,
-      #ff7300,
-      #fffb00,
-      #48ff00,
-      #00ffd5,
-      #002bff,
-      #7a00ff,
-      #ff00c8,
-      #ff0000
+                    45deg,
+                    #ff0000,
+                    #ff7300,
+                    #fffb00,
+                    #48ff00,
+                    #00ffd5,
+                    #002bff,
+                    #7a00ff,
+                    #ff00c8,
+                    #ff0000
     );
     position: absolute;
     top: 0;
@@ -102,7 +105,7 @@ hr {
     animation: glowing 20s linear infinite;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    border-radius: 10px;
+    border-radius: 16px;
   }
 
   &:active {
@@ -124,6 +127,7 @@ hr {
     top: 0;
     border-radius: 10px;
   }
+
   &:hover:before {
     opacity: 1;
   }

@@ -1,70 +1,52 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import Button from '../../../components/button'
-import { Text } from '../../../components/input'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import styles from './alternative-login-page.module.scss'
+import { Button, Checkbox, TextInput } from 'components'
+import { MdChevronRight } from 'react-icons/md'
+import styles from './alternative-page.module.scss'
 import Header from '../../home/components/header'
-import ThemeMode from '../../../theme/ThemeChanger'
 import cn from 'classnames'
-
-import Checkbox from '../../../components/input/checkbox'
 
 const LoginPage = ({ loginFunc, error }) => {
   const onLogin = ({ email, password }) => {
     loginFunc({ email, password })
   }
-  const { register, handleSubmit, watch, errors } = useForm()
+  const { register, handleSubmit } = useForm()
   const shrink = false
-  const header = props => <Header wrapperMode={false} {...props}></Header>
+  const header = props => <Header wrapperMode={false} {...props} />
 
   const [value, setValue] = useState(false)
 
   return (
     <div className={styles.layout}>
-      <div className={styles.tabBar}>
-        <Link to='/'>
-          <div className={styles.flexBox}>
-            <div className={styles.tabBarLogo} />
-            <div className={styles.tabBarText} />
-          </div>
-        </Link>
-      </div>
 
       <div className={styles.header}>
-        <div className={styles.holder}>
-          <div className={styles.themeHolder}>
-            <ThemeMode page='login' />
-          </div>
-          <div className={styles.headerHolder}>{header({ shrink })}</div>
-        </div>
+        {header({ shrink })}
       </div>
       <div className={styles.main}>
         <div className={styles.motto}>
-          <text className={styles.gradientText}>Research Destinations,</text>
-          <br />{' '}
-          <text className={styles.gradientText}>Explore with Itinaries.</text>
+          <span className={styles.gradientText}>Research Destinations,</span>
+          <span className={styles.gradientText}>Explore with Itineraries.</span>
         </div>
-        <div className={styles.loginBox}>
+        <div className={cn([styles.loginBox, 'card'])}>
           <h1 className={styles.heading}>Login</h1>
           <form onSubmit={handleSubmit(onLogin)} className={styles.form}>
-            <Text
-              className={styles.formElement}
+            <TextInput
               placeholder='Email'
               name='email'
               ref={register({
                 required: true
               })}
+              filled
             />
-            <Text
-              className={styles.formElement}
+            <TextInput
               placeholder='Password'
               name='password'
               type='password'
               ref={register({
                 required: true
               })}
+              filled
             />
             <span>{error}</span>
             <div className={styles.checkBox}>
@@ -79,13 +61,13 @@ const LoginPage = ({ loginFunc, error }) => {
 
             <Button
               text='Login'
-              icon={ChevronRightIcon}
+              icon={MdChevronRight}
               className={styles.button}
               onClick={handleSubmit(onLogin)}
             />
           </form>
 
-          <Link to='signup' className={styles.linko}>
+          <Link to='signup'>
             <div className={styles.link}>
               New to Solotrip? <span>Join now!</span>
             </div>

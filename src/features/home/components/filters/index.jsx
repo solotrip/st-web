@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import _ from 'lodash'
 import Filter from './filter'
-import Accordion from '../../../../components/accordion'
+import { Accordion } from 'components'
 import styles from './filters.module.scss'
 
 const Filters = ({ filters, filterValues, error, loading, updateFilter }) => {

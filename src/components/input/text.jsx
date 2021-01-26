@@ -44,7 +44,8 @@ Text.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   className: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  filled: PropTypes.bool
 }
 
 

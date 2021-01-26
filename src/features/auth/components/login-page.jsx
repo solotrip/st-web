@@ -2,10 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import Layout from './layout'
-import Button from '../../../components/button'
-import { Text } from '../../../components/input'
-import logo from '../../../assets/images/logo-text.png'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
+import { Button, TextInput } from 'components'
+import logo from 'assets/images/logo-text.png'
+import { MdChevronRight } from 'react-icons/md'
 import styles from './login-page.module.scss'
 
 
@@ -19,14 +18,14 @@ const LoginPage = ({ loginFunc, error }) => {
       <img src={logo} alt="Solotrip"/>
       <h1 className={styles.heading}>Login</h1>
       <form onSubmit={handleSubmit(onLogin)} className={styles.form}>
-        <Text
+        <TextInput
           placeholder="Email"
           name="email"
           ref={register({
             required: true
           })}
         />
-        <Text
+        <TextInput
           placeholder="Password"
           name="password"
           type='password'
@@ -37,7 +36,7 @@ const LoginPage = ({ loginFunc, error }) => {
         <span>{error}</span>
         <Button
           text="Login"
-          icon={ChevronRightIcon}
+          icon={MdChevronRight}
           className={styles.button}
           onClick={handleSubmit(onLogin)}
         />

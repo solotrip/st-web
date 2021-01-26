@@ -1,0 +1,43 @@
+@import 'styles/mixins';
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.wrapper {
+
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes fade {
+  from {
+    filter: blur(32px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
+
+
+.loaded {
+  .image {
+    animation: fade 1s ease-in-out;
+  }
+}
+
+.placeholder {
+  background: $highlight-bg-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}

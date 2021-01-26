@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import { Checkbox, Range } from '../../../../components/input'
+import { Checkbox, RangeInput } from 'components'
 import styles from './filter.module.scss'
 
 const Filter = ({ filter, value, updateFilter }) => {
@@ -25,9 +25,10 @@ const Filter = ({ filter, value, updateFilter }) => {
       }
       {
         isRange() && (
-          <Range
+          <RangeInput
             name={filter.name}
-            icon={filter.icon}/>
+            icon={filter.icon}
+          />
         )
       }
     </div>
