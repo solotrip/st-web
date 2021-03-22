@@ -1,0 +1,44 @@
+@import 'styles/mixins';
+
+.wrapper {
+  margin-top: 50px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: $card-bg-color;
+  height: 30px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  border-radius: $border-radius;
+  margin-bottom: 20px;
+}
+
+.activity {
+  margin: auto;
+  color: $primary-color;
+  align-content: center;
+}
+
+.outerWrapper {
+}
+
+.toolTip {
+  margin-top: 50px;
+  padding-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: $card-bg-color;
+  height: 30px;
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  border-radius: $border-radius;
+  margin-bottom: 20px;
+}
+
+.wrapper2 {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 150px;
+}

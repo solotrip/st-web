@@ -1,0 +1,19 @@
+@import 'styles/mixins';
+
+.container {
+  padding: 32px;
+
+}
+
+.content {
+  padding: 32px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sectionTitle {
+  @include roboto-medium;
+  font-size: 36px;
+  font-weight: 500;
+}

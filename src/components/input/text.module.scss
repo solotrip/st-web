@@ -1,0 +1,33 @@
+@import 'styles/mixins';
+
+.input {
+  flex: 1;
+  color: $text-color;
+  height: 100%;
+  padding: 10px 8px 10px 8px;
+  min-width: 40%;
+  font-size: 16px;
+  background: none;
+  border: none;
+  line-height: 100%;
+}
+
+.filled {
+  background: $highlight-bg-color;
+  border-radius: 16px;
+  border: none;
+  > .input {
+    padding: 10px 12px 10px 12px;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: none;
+  margin: 4px 0;
+  &:not(.filled) {
+    border-bottom: 1px solid $border-color;
+  }
+}

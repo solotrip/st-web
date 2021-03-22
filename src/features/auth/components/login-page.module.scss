@@ -1,0 +1,24 @@
+@import 'styles/mixins';
+
+.heading {
+  @include roboto-light;
+  font-size: 24px;
+  align-self: flex-start;
+}
+
+.button {
+  margin: 16px 0;
+}
+
+.link {
+  @include roboto-light;
+  color: $text-color;
+
+  span {
+    color: $active-text-color;
+  }
+}
+
+.form {
+  width: 100%;
+}

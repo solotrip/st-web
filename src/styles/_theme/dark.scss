@@ -1,0 +1,17 @@
+@mixin dark-theme {
+  --color-bg: #1B1B22;
+  --color-card-bg: #25262C;
+  --color-text: #fefefe;
+  --color-sub-text: #e0e0e0;
+  --color-active-text: #3cafeb;
+  --color-text-inverted: #2e2e2e;
+  --color-sub-text-inverted: #404040;
+  --color-highlight-bg: #1c1c20;
+  --color-border: #1f1f23;
+  --color-border-alternative: #4f4f53;
+  --color-primary: #3cafeb;
+  --color-primary-light: #6495ce;
+  --color-navbar: #242b2e;
+  --color-navbar-text: #ffffff;
+}
+

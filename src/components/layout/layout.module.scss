@@ -1,0 +1,54 @@
+@import 'styles/mixins';
+
+.layout {
+  background: $bg-color;
+  min-height: 100vh;
+}
+
+.flexBox {
+  display: flex;
+  flex-direction: row;
+}
+
+.header {
+
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &.noHeader {
+   margin-top: 80px;
+  }
+}
+
+.sidebar {
+  @include custom-scroll;
+  padding: 48px 24px;
+  width: $sidebar-width;
+  overflow-y: scroll;
+  max-height: 90vh;
+  position: sticky;
+  top: 80px;
+
+
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.content {
+  margin: 24px;
+  width: 600px;
+  @include xl {
+    width: 810px;
+  }
+  @include xs-to-md {
+    width: 100%;
+  }
+}
+

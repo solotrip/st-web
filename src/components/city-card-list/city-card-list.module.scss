@@ -1,0 +1,16 @@
+@import 'styles/mixins';
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+
+
+  &::after {
+    content: "";
+    flex: auto;
+  }
+}
+
+.card {
+  flex: 1;
+}
