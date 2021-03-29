@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import styles from "./recommendation.module.scss";
 import ProgressBar from "./ProgressBar";
-import CloudIcon from "../../../../assets/images/cloud.png";
-//import Stories from "react-insta-stories";
+import VisibilitySensor from "react-visibility-sensor";
 
+let zerothProgress = 0.0;
 let firstProgress = 0.2;
 let secondProgress = 0.4;
 let thirdProgress = 0.6;
 let forthProgress = 0.8;
 let fifthProgress = 1.0;
+
+let increase = 0.0;
 
 const inactiveTabImages = [
   "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-overview_j66PG19F7ujCa.png)",
@@ -27,7 +29,7 @@ const activeTabImages = [
 ];
 
 const Recommendation = ({ recommendation, stories, user }) => {
-  const [progressPercent, setProgressPercent] = useState(firstProgress);
+  const [progressPercent, setProgressPercent] = useState(zerothProgress);
 
   const [firstTabImage, setFirstTabImage] = useState(activeTabImages[0]);
   const [secondTabImage, setSecondTabImage] = useState(inactiveTabImages[1]);
@@ -89,7 +91,7 @@ const Recommendation = ({ recommendation, stories, user }) => {
       humidity: `Humidity: ${recommendation.climate.humidity}`,
       riskLevel: "Risk level has decreased from 3 to 2.",
     },
-    { combinedEvents, combinedActivities },
+    { events: combinedEvents, activities: combinedActivities },
     {
       hotelPrice:
         `Hotel price ${recommendation.hotel_price}$ ( ` +
@@ -108,11 +110,41 @@ const Recommendation = ({ recommendation, stories, user }) => {
   ];
   const [activeTabContent, setActiveTabContent] = useState(segmentedContent[0]);
 
-  const handleProgressPercent = (e) => {
-    const percentValue = e.target.value;
-    const percentValueInt = parseFloat(percentValue);
-    setProgressPercent(percentValue);
-    e.target.style.width = 100;
+  async function autoReplayLoop() {
+    setTimeout(() => {
+      const x = autoReplayProgress(0.2);
+    }, 0);
+
+    setTimeout(() => {
+      const x = autoReplayProgress(0.4);
+    }, 2000);
+
+    setTimeout(() => {
+      const x = autoReplayProgress(0.6);
+    }, 4000);
+
+    setTimeout(() => {
+      const x = autoReplayProgress(0.8);
+    }, 6000);
+    setTimeout(() => {
+      const x = autoReplayProgress(1.0);
+    }, 8000);
+  }
+
+  async function autoReplayProgress(x) {
+    let i = 0.0;
+
+    const timer = await setTimeout(() => {
+      i = i + x;
+      clearTimeout(timer);
+      //increase = progressPercent + i;
+
+      checkActiveTab(i);
+      setProgressPercent(i);
+    }, 1000);
+  }
+
+  function checkActiveTab(percentValueInt) {
     if (percentValueInt === firstProgress) {
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
@@ -157,88 +189,107 @@ const Recommendation = ({ recommendation, stories, user }) => {
       setFifthTabImage(activeTabImages[4]);
       setActiveTabContent(segmentedContent[4]);
     }
+  }
+
+  const handleProgressPercent = (e) => {
+    const percentValue = e.target.value;
+    const percentValueInt = parseFloat(percentValue);
+    setProgressPercent(percentValue);
+    e.target.style.width = 100;
+    checkActiveTab(percentValueInt);
   };
 
   console.log("single recommendation is", recommendation);
   return (
     <div className={styles.wrapper}>
-      <div
-        className={styles.cell}
-        style={{
-          backgroundImage: "url(" + recommendation.image + ")",
+      <VisibilitySensor
+        onChange={(isVisible) => {
+          isVisible && autoReplayLoop();
         }}
       >
-        <div className={styles.title}>{recommendation.name}</div>
-        <div className={styles.text}>
-          {Object.values(activeTabContent).map(function (element) {
-            return <div className={styles.textElement}> {element} </div>;
-          })}
-        </div>
+        <div
+          className={styles.cell}
+          style={{
+            backgroundImage: "url(" + recommendation.image + ")",
+          }}
+        >
+          <div className={styles.title}>{recommendation.name}</div>
+          <div className={styles.text}>
+            {Object.values(activeTabContent).map(function (element) {
+              return <div className={styles.textElement}> {element} </div>;
+            })}
+          </div>
 
-        <div className={styles.progressBar}>
-          <ProgressBar width={355} percent={progressPercent} />
-        </div>
+          <div className={styles.progressBar}>
+            <ProgressBar width={355} percent={progressPercent} />
+          </div>
 
-        <div className={styles.recommendationTabs}>
-          {/* <div className={styles.centeredTabs}></div>*/}
-          <button
-            className={styles.tabButton}
-            style={{
-              height: "26px",
-              width: `30px`,
-              backgroundImage: `${firstTabImage}`,
-            }}
-            value={firstProgress}
-            onClick={handleProgressPercent}
-          ></button>
-          <button
-            className={styles.tabButton}
-            style={{
-              height: "23px",
-              width: `30px`,
-              backgroundImage: `${secondTabImage}`,
-            }}
-            value={secondProgress}
-            onClick={handleProgressPercent}
-          ></button>{" "}
-          <button
-            className={styles.tabButton}
-            style={{
-              height: "24px",
-              width: `30px`,
-              backgroundImage: `${thirdTabImage}`,
-            }}
-            value={thirdProgress}
-            onClick={handleProgressPercent}
-          >
-            {" "}
-          </button>{" "}
-          <button
-            className={styles.tabButton}
-            style={{
-              height: "29px",
-              width: `30px`,
-              backgroundImage: `${forthTabImage}`,
-            }}
-            value={forthProgress}
-            onClick={handleProgressPercent}
-          >
-            {" "}
-          </button>
-          <button
-            className={styles.tabButton}
-            style={{
-              height: "30px",
-              width: `37px`,
-              backgroundImage: `${fifthTabImage}`,
-            }}
-            value={fifthProgress}
-            onClick={handleProgressPercent}
-          >
-            {" "}
-          </button>
+          <div className={styles.recommendationTabs}>
+            {/* <div className={styles.centeredTabs}></div>*/}
+            <button
+              className={styles.tabButton}
+              style={{
+                height: "26px",
+                width: `30px`,
+                backgroundImage: `${firstTabImage}`,
+              }}
+              value={firstProgress}
+              onClick={handleProgressPercent}
+              onMouseEnter={handleProgressPercent}
+            ></button>
+            <button
+              className={styles.tabButton}
+              style={{
+                height: "23px",
+                width: `30px`,
+                backgroundImage: `${secondTabImage}`,
+              }}
+              value={secondProgress}
+              onClick={handleProgressPercent}
+              onMouseEnter={handleProgressPercent}
+            ></button>{" "}
+            <button
+              className={styles.tabButton}
+              style={{
+                height: "24px",
+                width: `30px`,
+                backgroundImage: `${thirdTabImage}`,
+              }}
+              value={thirdProgress}
+              onClick={handleProgressPercent}
+              onMouseEnter={handleProgressPercent}
+            >
+              {" "}
+            </button>{" "}
+            <button
+              className={styles.tabButton}
+              style={{
+                height: "29px",
+                width: `30px`,
+                backgroundImage: `${forthTabImage}`,
+              }}
+              value={forthProgress}
+              onClick={handleProgressPercent}
+              onMouseEnter={handleProgressPercent}
+            >
+              {" "}
+            </button>
+            <button
+              className={styles.tabButton}
+              style={{
+                height: "30px",
+                width: `37px`,
+                backgroundImage: `${fifthTabImage}`,
+              }}
+              value={fifthProgress}
+              onClick={handleProgressPercent}
+              onMouseEnter={handleProgressPercent}
+            >
+              {" "}
+            </button>
+          </div>
         </div>
-      </div>
+      </VisibilitySensor>
     </div>
   );
 };
