@@ -111,24 +111,18 @@ const Recommendation = ({ recommendation, stories, user }) => {
   const [activeTabContent, setActiveTabContent] = useState(segmentedContent[0]);
 
   async function autoReplayLoop() {
-    setTimeout(() => {
-      const x = autoReplayProgress(0.2);
-    }, 0);
-
-    setTimeout(() => {
-      const x = autoReplayProgress(0.4);
-    }, 2000);
-
-    setTimeout(() => {
-      const x = autoReplayProgress(0.6);
-    }, 4000);
-
-    setTimeout(() => {
-      const x = autoReplayProgress(0.8);
-    }, 6000);
-    setTimeout(() => {
-      const x = autoReplayProgress(1.0);
-    }, 8000);
+    for (let i = 0; i <= 5000; i = i + 100) {
+      setTimeout(function () {
+        const x = autoReplayProgress(i / 5000);
+      }, i);
+    }
+    /*
+    for (let i = 0; i < 15000; i = i + 50) {
+      setTimeout(function () {
+        const x = autoReplayProgress((i + 50) / 15000);
+      }, i);
+    }
+    */
   }
 
   async function autoReplayProgress(x) {
@@ -137,15 +131,13 @@ const Recommendation = ({ recommendation, stories, user }) => {
     const timer = await setTimeout(() => {
       i = i + x;
       clearTimeout(timer);
-      //increase = progressPercent + i;
-
       checkActiveTab(i);
       setProgressPercent(i);
     }, 1000);
   }
 
   function checkActiveTab(percentValueInt) {
-    if (percentValueInt === firstProgress) {
+    if (percentValueInt >= firstProgress && percentValueInt < secondProgress) {
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
       setFirstTabImage(activeTabImages[0]);
@@ -154,7 +146,10 @@ const Recommendation = ({ recommendation, stories, user }) => {
       setForthTabImage(inactiveTabImages[3]);
       setFifthTabImage(inactiveTabImages[4]);
       setActiveTabContent(segmentedContent[0]);
-    } else if (percentValueInt === secondProgress) {
+    } else if (
+      percentValueInt >= secondProgress &&
+      percentValueInt < thirdProgress
+    ) {
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
       setFirstTabImage(inactiveTabImages[0]);
@@ -163,14 +158,20 @@ const Recommendation = ({ recommendation, stories, user }) => {
       setForthTabImage(inactiveTabImages[3]);
       setFifthTabImage(inactiveTabImages[4]);
       setActiveTabContent(segmentedContent[1]);
-    } else if (percentValueInt === thirdProgress) {
+    } else if (
+      percentValueInt >= thirdProgress &&
+      percentValueInt < forthProgress
+    ) {
       setFirstTabImage(inactiveTabImages[0]);
       setSecondTabImage(inactiveTabImages[1]);
       setThirdTabImage(activeTabImages[2]);
       setForthTabImage(inactiveTabImages[3]);
       setFifthTabImage(inactiveTabImages[4]);
       setActiveTabContent(segmentedContent[2]);
-    } else if (percentValueInt === forthProgress) {
+    } else if (
+      percentValueInt >= forthProgress &&
+      percentValueInt < fifthProgress
+    ) {
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
       setFirstTabImage(inactiveTabImages[0]);
@@ -179,7 +180,7 @@ const Recommendation = ({ recommendation, stories, user }) => {
       setForthTabImage(activeTabImages[3]);
       setFifthTabImage(inactiveTabImages[4]);
       setActiveTabContent(segmentedContent[3]);
-    } else if (percentValueInt === fifthProgress) {
+    } else if (percentValueInt >= fifthProgress) {
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
       setFirstTabImage(inactiveTabImages[0]);
