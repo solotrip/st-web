@@ -1,5 +1,5 @@
 @mixin light-theme {
-  --color-bg: #f3f3f3;
+  --color-bg: #cdcaca;
   --color-card-bg: #ffffff;
   --color-text: #2e2e2e;
   --color-sub-text: #404040;
@@ -7,11 +7,14 @@
   --color-text-inverted: #fefefe;
   --color-sub-text-inverted: #e0e0e0;
   --color-highlight-bg: #e0e0e0;
-  --color-border: #E0E0E0;
+  --color-border: #e0e0e0;
   --color-border-alternative: #a0a0af;
-  --color-primary: #3cafeb;
+  --color-primary: #18b2f8;
   --color-primary-light: #6495ce;
-  --color-navbar: #242b2e;
-  --color-navbar-text: #ffffff;
+  --color-navbar: #ffffff;
+  --filter-navbar: blur(100px);
+  --color-navbar-text: #000000;
+  --color-tabbar: rgba($color: #2e2e2e, $alpha: 0.8);
+  --shadow-text: 0px 4px 10px #5ac8fa;
+  --active-month: #18b2f8;
 }
-

@@ -1,3 +1,4 @@
+@import "styles/mixins";
 .TabBar {
   height: 520px;
   width: 100px;
@@ -7,7 +8,7 @@
 .RecommendationsContent {
   height: 600px;
   width: 100px;
-  background-color: #292934;
+  background-color: $bg-color;
 }
 
 .wrapper {

@@ -1,31 +1,104 @@
-@import 'styles/mixins';
-
+@import "styles/mixins";
 
 .navbar {
   z-index: 2;
   background: $navbar-color;
-  height: 80px;
+  backdrop-filter: blur(100px);
+  height: 108px;
   width: 100%;
   position: fixed;
   display: block;
-  top: 0;
+  bottom: 0;
   left: 0;
 }
 
 .container {
+  //background-color: blueviolet;
   width: 100%;
-  height: 80px;
+  height: 100px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 0 64px;
+  padding: 0 0px;
   @include xs-to-md {
-    padding: 0 8px;
+    padding: 0 0px;
   }
 }
 
+.row1 {
+  margin-top: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  //background-color: blueviolet;
+}
+.row2 {
+  margin-top: 0px;
+  // background-color: salmon;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+}
+
+.col1 {
+  //background-color: green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.colImage {
+  //background-color: cadetblue;
+  width: 60px;
+  height: 60px;
+  border-radius: 13px;
+}
+
+.colText {
+  //background-color: chartreuse;
+  margin-top: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+.col2 {
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.attentionText {
+  margin-top: 10px;
+  margin-left: 10px;
+  //background-color: lightcoral;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.menuButtonHolder {
+  margin-top: 20px;
+  //background-color: lightgreen;
+}
+
+.menuButtonHolder2 {
+  margin-top: -15px;
+  //background-color: lightgreen;
+}
+
 .logo {
+  margin-top: 10px;
   display: flex;
   align-items: center;
 
@@ -33,7 +106,7 @@
     width: 40px;
     height: 40px;
     margin: 0 16px;
-    background: url('../../../assets/images/logo.svg');
+    background: url("../../../assets/images/p.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right center;
@@ -43,7 +116,7 @@
   .text {
     width: 200px;
     height: 36px;
-    background: url('../../../assets/images/logo-text.svg');
+    background: url("../../../assets/images/logo-text.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left center;
@@ -52,7 +125,6 @@
     }
   }
 }
-
 
 .actions {
   display: flex;
@@ -63,7 +135,6 @@
 
 .header {
 }
-
 
 .login {
   width: 90px;
@@ -100,14 +171,11 @@
   }
   50% {
     transform: rotate(60deg);
-
   }
   100% {
     transform: rotate(0deg);
-
   }
 }
-
 
 .signup {
   height: 30px;
@@ -124,7 +192,48 @@
   }
 }
 
+.signup2 {
+  margin-top: 15px;
+  height: 35px;
+  background-color: #1697dc;
+  color: #ffffff;
+  border-radius: 16px;
+  width: 150px;
+  text-align: center;
+  justify-content: center;
+  line-height: 30px;
+}
 
 .profile {
   color: $navbar-text-color;
+}
+
+.sheet {
+  background-color: $navbar-color;
+  height: 100%;
+}
+
+.sheetrow1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sheetHeader {
+  background-color: $navbar-color;
+}
+
+.sheetTitle {
+  font-size: 24px;
+}
+
+.closeSheet {
+  background-color: $navbar-color;
+  width: 50px;
+  margin-left: 10px;
+}
+
+.closeIcon {
+  background-color: $navbar-color;
+  width: 40px;
+  height: 40px;
 }

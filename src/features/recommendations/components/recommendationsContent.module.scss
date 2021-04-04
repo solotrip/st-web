@@ -1,5 +1,6 @@
+@import "styles/mixins";
 .wrapper {
-  background-color: #292934;
+  background-color: $bg-color;
   height: 1700px;
   // margin-top: 100px;
   padding-top: 100px;

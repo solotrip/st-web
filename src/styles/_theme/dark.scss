@@ -1,6 +1,6 @@
 @mixin dark-theme {
-  --color-bg: #1B1B22;
-  --color-card-bg: #25262C;
+  --color-bg: #292934;
+  --color-card-bg: #25262c;
   --color-text: #fefefe;
   --color-sub-text: #e0e0e0;
   --color-active-text: #3cafeb;
@@ -11,7 +11,10 @@
   --color-border-alternative: #4f4f53;
   --color-primary: #3cafeb;
   --color-primary-light: #6495ce;
-  --color-navbar: #242b2e;
+  --color-navbar: #1e1e1e;
+  --filter-navbar: blur(100px);
   --color-navbar-text: #ffffff;
+  --color-tabbar: rgba($color: #2e2e2e, $alpha: 0.1);
+  --shadow-text: 0px 4px 10px #5e5ce6;
+  --active-month: #3cafeb;
 }
-

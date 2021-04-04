@@ -110,10 +110,15 @@ const Recommendation = ({ recommendation, stories, user }) => {
   ];
   const [activeTabContent, setActiveTabContent] = useState(segmentedContent[0]);
 
+  function resetReplayLoop() {
+    checkActiveTab(0);
+    setProgressPercent(0);
+  }
+
   async function autoReplayLoop() {
-    for (let i = 0; i <= 5000; i = i + 100) {
+    for (let i = 0; i <= 8000; i = i + 100) {
       setTimeout(function () {
-        const x = autoReplayProgress(i / 5000);
+        const x = autoReplayProgress(i / 8000);
       }, i);
     }
     /*
@@ -130,10 +135,11 @@ const Recommendation = ({ recommendation, stories, user }) => {
 
     const timer = await setTimeout(() => {
       i = i + x;
-      clearTimeout(timer);
+      //clearTimeout(timer);
       checkActiveTab(i);
       setProgressPercent(i);
     }, 1000);
+    //clearTimeout(timer);
   }
 
   function checkActiveTab(percentValueInt) {
@@ -202,10 +208,12 @@ const Recommendation = ({ recommendation, stories, user }) => {
 
   console.log("single recommendation is", recommendation);
   return (
+    //<div className={styles.wrapper} onTouchStart={autoReplayLoop}>
     <div className={styles.wrapper}>
       <VisibilitySensor
         onChange={(isVisible) => {
-          isVisible && autoReplayLoop();
+          //isVisible && resetReplayLoop();
+          //isVisible && autoReplayLoop();
         }}
       >
         <div

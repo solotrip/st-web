@@ -1,0 +1,44 @@
+[{
+    "category": "interest",
+    "name": "Movie",
+    "selected": true
+  },
+  {
+    "category": "interest",
+    "name": "Music"
+  },
+  {
+    "category": "interest",
+    "name": "Gaming"
+  },
+  {
+    "category": "interest",
+    "name": "Football"
+  },
+  {
+    "category": "interest",
+    "name": "F1",
+    "selected": true
+  },
+  {
+    "category": "interest",
+    "name": "esports"
+  },
+  {
+    "category": "interest",
+    "name": "Basketball"
+  },
+
+  {
+    "category": "activity",
+    "name": "Hiking"
+  },
+  {
+    "category": "activity",
+    "name": "Mountain Bike"
+  },
+  {
+    "category": "activity",
+    "name": "Swimming"
+  }
+]
