@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { register, reset } from '../slice'
-import SignupPage from '../components/alternative-signup-page'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { register, reset } from "../slice";
+import SignupPage from "../components/recommendation-signup";
 
 const SignupContainer = () => {
-  const dispatch = useDispatch()
-  const { error } = useSelector(state => state.auth)
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.auth);
   useEffect(() => {
-    dispatch(reset())
-  }, [dispatch])
+    dispatch(reset());
+  }, [dispatch]);
   return (
     <SignupPage
       error={error}
@@ -18,12 +18,12 @@ const SignupContainer = () => {
             name,
             username,
             email,
-            password
+            password,
           })
         )
       }
     />
-  )
-}
+  );
+};
 
-export default SignupContainer
+export default SignupContainer;

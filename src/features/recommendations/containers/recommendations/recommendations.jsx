@@ -55,7 +55,7 @@ const RecommendationsContainer = () => {
           recommendations={recommendations}
           className={styles.RecommendationsContent}
         />
-        <Navbar isLoggedIn={true} items={items} />
+        <Navbar isLoggedIn={false} items={items} />
       </div>
     </>
   );

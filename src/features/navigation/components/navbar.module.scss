@@ -143,6 +143,8 @@
 
 .signupLogin {
   display: flex;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .login {
@@ -178,17 +180,19 @@
 }
 
 .signup {
-  height: 30px;
-  background: transparent;
-  color: #ffffff;
+  margin-top: 15px;
+  height: 35px;
+  background: $navbar-color;
   border: 1px solid #3cafeb;
   border-radius: 16px;
-  width: 90px;
+  width: 150px;
   text-align: center;
+  justify-content: center;
   line-height: 30px;
 
   &:hover {
     border: none;
+    background-color: $navbar-color;
   }
 }
 

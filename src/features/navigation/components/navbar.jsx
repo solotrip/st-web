@@ -8,6 +8,8 @@ import Sheet from "react-modal-sheet";
 import { FiX as CloseIcon, FiCheck as ApplyIcon } from "react-icons/fi";
 import InterestsContainer from "../../recommendations/containers/interests/interests";
 import CalendarContainer from "../../recommendations/containers/calendar/calendar";
+import SignupContainer from "../../auth/containers/signup";
+import LoginContainer from "../../auth/containers/login";
 import InterestsMock from "../../recommendations/interests.json";
 import FiltersMock from "../../recommendations/filters.json";
 import CalendarAlt from "../../recommendations/containers/calendar/calendarAlt";
@@ -67,6 +69,18 @@ const Navbar = ({ isLoggedIn, loading, children, items }) => {
                 >
                   <span role="img" aria-label="Signup"></span>
                   Signup
+                </button>
+              </div>
+            )}
+            {!isLoggedIn && !loading && (
+              <div className={styles.signupLogin}>
+                <button
+                  className={cn(styles.signup, "glow-on-hover")}
+                  onClick={handleOpenSheet}
+                  name="Login"
+                >
+                  <span role="img" aria-label="Login"></span>
+                  Login
                 </button>
               </div>
             )}
@@ -151,6 +165,8 @@ const Navbar = ({ isLoggedIn, loading, children, items }) => {
               )}
 
               {openTab == "Calendar" && <CalendarAlt />}
+              {openTab == "Signup" && <SignupContainer />}
+              {openTab == "Login" && <LoginContainer />}
 
               {/* Your sheet content goes here */}
             </div>
