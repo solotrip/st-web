@@ -15,6 +15,48 @@ import FiltersMock from "../../recommendations/filters.json";
 import CalendarAlt from "../../recommendations/containers/calendar/calendarAlt";
 
 const Navbar = ({ isLoggedIn, loading, children, items }) => {
+  function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+
+      height: undefined,
+    });
+
+    useEffect(() => {
+      // Handler to call on window resize
+
+      function handleResize() {
+        // Set window width/height to state
+
+        setWindowSize({
+          width: window.innerWidth,
+
+          height: window.innerHeight,
+        });
+      }
+
+      // Add event listener
+
+      window.addEventListener("resize", handleResize);
+
+      // Call handler right away so state gets updated with initial window size
+
+      handleResize();
+
+      // Remove event listener on cleanup
+
+      return () => window.removeEventListener("resize", handleResize);
+    }, []); // Empty array ensures that effect is only run on mount
+
+    return windowSize;
+  }
+  const size = useWindowSize();
+  const screenThreshold = 700;
+
   const menuItems = [<ThemeSwitch key="nav-theme-switch" />];
 
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -42,77 +84,164 @@ const Navbar = ({ isLoggedIn, loading, children, items }) => {
     setOpenTab(tabToOpen);
   };
   return (
-    <div className={styles.navbar}>
-      {!isLoggedIn ? (
-        <div className={styles.container}>
-          <div className={styles.row1}>
-            <Link to="/" className={styles.logo}>
-              <div className={styles.icon} />
-            </Link>
-            <div className={styles.attentionText}>
-              Join to save your interests and access your recommendations from
-              anywhere.
-            </div>
-            <div className={styles.menuButtonHolder}>
-              <MenuButton items={menuItems} />
-            </div>
-          </div>
-
-          {children && <div className={styles.content}>{children}</div>}
-          <div className={styles.actions}>
-            {!isLoggedIn && !loading && (
-              <div className={styles.signupLogin}>
-                <button
-                  className={cn(styles.signup2, "glow-on-hover")}
-                  onClick={handleOpenSheet}
-                  name="Signup"
-                >
-                  <span role="img" aria-label="Signup"></span>
-                  Signup
-                </button>
-              </div>
-            )}
-            {!isLoggedIn && !loading && (
-              <div className={styles.signupLogin}>
-                <button
-                  className={cn(styles.signup, "glow-on-hover")}
-                  onClick={handleOpenSheet}
-                  name="Login"
-                >
-                  <span role="img" aria-label="Login"></span>
-                  Login
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      ) : (
-        <div className={styles.container}>
-          <div className={styles.row2}>
-            {items.map((item) => (
-              <button
-                className={styles.col1}
-                onClick={handleOpenSheet}
-                name={item.name}
+    <div
+      className={
+        size.width < screenThreshold ? styles.navbar : styles.navbarVertical
+      }
+    >
+      {
+        <div>
+          {!isLoggedIn ? (
+            <div
+              className={
+                size.width < screenThreshold
+                  ? styles.container
+                  : styles.containerVertical
+              }
+            >
+              <div
+                className={
+                  size.width < screenThreshold
+                    ? styles.row1
+                    : styles.row1Vertical
+                }
               >
-                <button
-                  className={styles.colImage}
-                  style={{
-                    backgroundImage: "url(" + item.image + ")",
-                  }}
-                  name={item.name}
-                />
-                <button className={styles.colText} name={item.name}>
-                  {item.name}
-                </button>
-              </button>
-            ))}
-            <div className={styles.menuButtonHolder2}>
-              <MenuButton items={menuItems} />
+                <Link
+                  to="/"
+                  className={
+                    size.width < screenThreshold
+                      ? styles.logo
+                      : styles.logoVertical
+                  }
+                >
+                  <div className={styles.icon} />
+                </Link>
+                {size.width < screenThreshold && (
+                  <div className={styles.attentionText}>
+                    Join to save your interests and access your recommendations
+                    from anywhere.
+                  </div>
+                )}
+                <div
+                  className={
+                    size.width < screenThreshold
+                      ? styles.menuButtonHolder
+                      : styles.menuButtonHolderVertical
+                  }
+                >
+                  <MenuButton items={menuItems} />
+                </div>
+              </div>
+              {console.log("widht is: ", size.width)}
+              {children && <div className={styles.content}>{children}</div>}
+              <div
+                className={
+                  size.width < screenThreshold
+                    ? styles.actions
+                    : styles.actionsVertical
+                }
+              >
+                {!isLoggedIn && !loading && (
+                  <div
+                    className={
+                      size.width < screenThreshold
+                        ? styles.signupLogin
+                        : styles.signupLoginVertical
+                    }
+                  >
+                    <button
+                      className={cn(styles.signup2, "glow-on-hover")}
+                      onClick={handleOpenSheet}
+                      name="Signup"
+                    >
+                      <span role="img" aria-label="Signup"></span>
+                      Signup
+                    </button>
+                  </div>
+                )}
+                {!isLoggedIn && !loading && (
+                  <div
+                    className={
+                      size.width < screenThreshold
+                        ? styles.signupLogin
+                        : styles.signupLoginVertical
+                    }
+                  >
+                    <button
+                      className={cn(styles.signup, "glow-on-hover")}
+                      onClick={handleOpenSheet}
+                      name="Login"
+                    >
+                      <span role="img" aria-label="Login"></span>
+                      Login
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div
+              className={
+                size.width < screenThreshold
+                  ? styles.container
+                  : styles.containerVertical
+              }
+            >
+              <div
+                className={
+                  size.width < screenThreshold
+                    ? styles.row2
+                    : styles.row2Vertical
+                }
+              >
+                {size.width >= screenThreshold && (
+                  <Link
+                    to="/"
+                    className={
+                      size.width < screenThreshold
+                        ? styles.logo
+                        : styles.logoVertical2
+                    }
+                  >
+                    <div className={styles.icon} />
+                  </Link>
+                )}
+                {items.map((item) => (
+                  <button
+                    className={
+                      size.width < screenThreshold
+                        ? styles.col1
+                        : styles.col1Vertical
+                    }
+                    onClick={handleOpenSheet}
+                    name={item.name}
+                  >
+                    <button
+                      className={styles.colImage}
+                      style={{
+                        backgroundImage: "url(" + item.image + ")",
+                      }}
+                      name={item.name}
+                    />
+                    <button className={styles.colText} name={item.name}>
+                      {item.name}
+                    </button>
+                  </button>
+                ))}
+                <div
+                  className={
+                    size.width < screenThreshold
+                      ? styles.menuButtonHolder2
+                      : styles.menuButtonHolderVertical2
+                  }
+                >
+                  <MenuButton items={menuItems} />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      }
       <Sheet
         isOpen={sheetOpen}
         onClose={() => setSheetOpen(false)}

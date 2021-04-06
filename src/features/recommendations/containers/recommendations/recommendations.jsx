@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import recommendations from "../../recommendations.json";
 
@@ -55,6 +55,7 @@ const RecommendationsContainer = () => {
           recommendations={recommendations}
           className={styles.RecommendationsContent}
         />
+
         <Navbar isLoggedIn={true} items={items} />
       </div>
     </>

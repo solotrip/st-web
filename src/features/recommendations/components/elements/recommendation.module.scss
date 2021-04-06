@@ -1,13 +1,29 @@
-.wrapper {
+.wrapperNotCentered {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   align-self: center;
-
+  padding-left: 130px;
   margin-top: 35px;
+  margin: 50px;
+
+  // background-color: coral;
+  height: 398px;
+  flex: 1;
+}
+.wrapperCentered {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: center;
+  //padding-left: 140px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   //background-color: coral;
   height: 398px;
+  flex: 1;
 }
 
 .cell {
@@ -28,8 +44,8 @@
 }
 
 .recommendationTabs {
-  background-color: rgba($color: #2e2e2e, $alpha: 0.4);
-  backdrop-filter: blur(100px);
+  background-color: rgba($color: #292934, $alpha: 0.8);
+  //backdrop-filter: blur(20px);
   width: auto;
   height: 89px;
   display: flex;

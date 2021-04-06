@@ -1,7 +1,16 @@
 @import "styles/mixins";
 .wrapper {
   background-color: $bg-color;
-  height: 1700px;
-  // margin-top: 100px;
+  //background-color: cadetblue;
+
   padding-top: 100px;
+  padding-bottom: 200px;
+
+  //after there
+  display: flex;
+  flex-flow: row wrap;
+  justify-items: center;
+
+  &::after {
+  }
 }

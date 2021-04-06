@@ -28,7 +28,8 @@ const activeTabImages = [
   "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-flights-blue_B5W9fmzAk1OLF.png)",
 ];
 
-const Recommendation = ({ recommendation, stories, user }) => {
+const Recommendation = ({ recommendation, stories, user, size }) => {
+  const screenThreshold = 700;
   const [progressPercent, setProgressPercent] = useState(zerothProgress);
 
   const [firstTabImage, setFirstTabImage] = useState(activeTabImages[0]);
@@ -209,7 +210,14 @@ const Recommendation = ({ recommendation, stories, user }) => {
   console.log("single recommendation is", recommendation);
   return (
     //<div className={styles.wrapper} onTouchStart={autoReplayLoop}>
-    <div className={styles.wrapper}>
+    <div
+      className={
+        size.width < screenThreshold
+          ? styles.wrapperCentered
+          : styles.wrapperNotCentered
+      }
+    >
+      {console.log("width-size in single recommendation is : ", size.width)}
       <VisibilitySensor
         onChange={(isVisible) => {
           //isVisible && resetReplayLoop();
