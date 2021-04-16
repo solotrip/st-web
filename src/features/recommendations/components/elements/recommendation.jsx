@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import styles from "./recommendation.module.scss";
 import ProgressBar from "./ProgressBar";
 import VisibilitySensor from "react-visibility-sensor";
+import { ReactComponent as OverviewImage } from "../../../../assets/overview.svg";
+import { ReactComponent as CloudImage } from "../../../../assets/cloud.svg";
+import { ReactComponent as EventsImage } from "../../../../assets/events.svg";
+import { ReactComponent as AccommodationImage } from "../../../../assets/accommodation.svg";
+import { ReactComponent as FlightsImage } from "../../../../assets/flights.svg";
 
 let zerothProgress = 0.0;
-let firstProgress = 0.2;
-let secondProgress = 0.4;
-let thirdProgress = 0.6;
-let forthProgress = 0.8;
+let firstProgress = 0.25;
+let secondProgress = 0.5;
+let thirdProgress = 0.75;
+let forthProgress = 1.0;
 let fifthProgress = 1.0;
 
 let increase = 0.0;
@@ -29,14 +34,28 @@ const activeTabImages = [
 ];
 
 const Recommendation = ({ recommendation, stories, user, size }) => {
+  const [isRecommendationActive, setIsRecommendationActive] = useState(false);
+  const [textStyle, setTextStyle] = useState(styles.text);
+  const [textElementStyle, setTextElementStyle] = useState(styles.textEvents);
   const screenThreshold = 700;
-  const [progressPercent, setProgressPercent] = useState(zerothProgress);
+  const [progressPercent, setProgressPercent] = useState(firstProgress);
+
+  const [activeButton, setActiveButton] = useState("first");
 
   const [firstTabImage, setFirstTabImage] = useState(activeTabImages[0]);
   const [secondTabImage, setSecondTabImage] = useState(inactiveTabImages[1]);
   const [thirdTabImage, setThirdTabImage] = useState(inactiveTabImages[2]);
   const [forthTabImage, setForthTabImage] = useState(inactiveTabImages[3]);
   const [fifthTabImage, setFifthTabImage] = useState(inactiveTabImages[4]);
+  const [bestActivityIcon, setBestActivityIcon] = useState();
+
+  const [overviewStyles, setOverviewStyles] = useState(styles.svgImage);
+  const [cloudStyles, setCloudStyles] = useState(styles.svgImage);
+  const [eventsStyles, setEventsStyles] = useState(styles.svgImageActive);
+  const [accommodationStyles, setAccommodationStyles] = useState(
+    styles.svgImage
+  );
+  const [flightsStyles, setFlightsStyles] = useState(styles.svgImage);
 
   let firstEvent = "";
   let combinedEvents;
@@ -50,8 +69,59 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
     return combinedEvents;
   });
 
+  const showEvents = recommendation.events.map((event) => {
+    const div = <div className={textStyle}>{event.title}</div>;
+    return div;
+  });
+
+  const bestActivityIconHandler = () => {
+    if (recommendation.activities[0] == "Hiking") {
+      setBestActivityIcon("🥾");
+    } else if (recommendation.activities[0] == "Walking") {
+      setBestActivityIcon("🚶🏽‍♀️");
+    } else if (recommendation.activities[0] == "Mountain Bike") {
+      setBestActivityIcon("🚵‍♀️");
+    } else if (recommendation.activities[0] == "Kayak/ Canoe") {
+      setBestActivityIcon("🛶");
+    }
+  };
+
+  function handleShowEvents() {
+    const divs = recommendation.events.map((event) => {
+      const div1 = (
+        <div className={textElementStyle}>
+          {event.category == "sports" && "⚽ "}
+          {event.category == "expos" && "🍷 "}
+          {event.title}
+        </div>
+      );
+      return div1;
+    });
+
+    const activitydivs = recommendation.activities.map((activity) => {
+      const activitydiv1 = (
+        <div className={textElementStyle}>
+          {activity == "Hiking" && "🥾 "}
+          {activity == "Walking" && "🚶🏽‍♀️ "}
+          {activity == "Mountain Bike" && "🚵‍♀️ "}
+          {activity == "Kayak/ Canoe" && "🛶 "}
+          {activity}
+        </div>
+      );
+
+      return activitydiv1;
+    });
+    return (
+      <div className={textStyle}>
+        {divs}
+        {activitydivs}
+      </div>
+    );
+  }
+
   let firstActivity = "";
   let combinedActivities;
+  let timer;
 
   var cheaperThanYearlyAverage =
     parseFloat(recommendation.hotel_price) <
@@ -77,25 +147,11 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
   );
 
   const segmentedContent = [
+    {},
     {
-      matchScore: `Matchscore is ${recommendation.matchScore}`,
-      bestActivity: `Best time for ${recommendation.activities[0]}`,
-      bucketlisted: `on your bucketlist`,
-      eventCount: `${recommendation.events.length} events you may like`,
-      visaFree: recommendation.country.visa_free_for.includes(user.country)
-        ? "visa free for you"
-        : "",
-    },
-    {
-      temperature: `minimum: ${recommendation.climate.t_min}°C maximum: ${recommendation.climate.t_max}°C `,
-      averagetemp: `average: ${recommendation.climate.t_avg}°C`,
-      humidity: `Humidity: ${recommendation.climate.humidity}`,
-      riskLevel: "Risk level has decreased from 3 to 2.",
-    },
-    { events: combinedEvents, activities: combinedActivities },
-    {
-      hotelPrice:
-        `Hotel price ${recommendation.hotel_price}$ ( ` +
+      hotelPrice: `🏨 Room in Hotel ${recommendation.hotel_price}$`,
+      hotelPriceInfo:
+        "(" +
         parseInt(
           Math.abs(
             (100 *
@@ -107,21 +163,41 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
         "%" +
         cheaperThanYearlyAverage,
     },
-    {},
+    {
+      route1: `🛬 Istanbul - ${recommendation.name}  350$`,
+      route2: `🛬 Istanbul - Amsterdam - ${recommendation.name}  650$`,
+      route3: `🛬 Istanbul - London - ${recommendation.name}  530$`,
+    },
+    {
+      bestActivity: `🏄‍♀️  Best time for ${recommendation.activities[0]}`,
+      visaFree: recommendation.country.visa_free_for.includes(user.country)
+        ? "🛂      Visa free for you"
+        : "",
+      temperatureMin: `❄️  minimum: ${recommendation.climate.t_min}°C `,
+      temperatureMax: `🔥 maximum: ${recommendation.climate.t_max}°C `,
+      tripdays: "🚀 3 days trip recommended",
+      riskLevel: "🦠 COVID: 343 daily cases in USA",
+    },
   ];
   const [activeTabContent, setActiveTabContent] = useState(segmentedContent[0]);
 
   function resetReplayLoop() {
-    checkActiveTab(0);
-    setProgressPercent(0);
+    //checkActiveTab(0);
+    //setProgressPercent(0);
+    setActiveButton("first");
+    setActiveTabContent(segmentedContent[0]);
   }
 
   async function autoReplayLoop() {
+    let d = 0.0;
+    clearTimeout(timer);
     for (let i = 0; i <= 8000; i = i + 100) {
       setTimeout(function () {
-        const x = autoReplayProgress(i / 8000);
+        const x = autoReplayProgress(i / 8000, d);
       }, i);
     }
+    //setActiveButton("first");
+    //setActiveTabContent(segmentedContent[0]);
     /*
     for (let i = 0; i < 15000; i = i + 50) {
       setTimeout(function () {
@@ -131,10 +207,10 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
     */
   }
 
-  async function autoReplayProgress(x) {
-    let i = 0.0;
+  async function autoReplayProgress(x, i) {
+    //let i = 0.0;
 
-    const timer = await setTimeout(() => {
+    timer = await setTimeout(() => {
       i = i + x;
       //clearTimeout(timer);
       checkActiveTab(i);
@@ -145,69 +221,76 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
 
   function checkActiveTab(percentValueInt) {
     if (percentValueInt >= firstProgress && percentValueInt < secondProgress) {
+      setActiveButton("first");
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
-      setFirstTabImage(activeTabImages[0]);
-      setSecondTabImage(inactiveTabImages[1]);
-      setThirdTabImage(inactiveTabImages[2]);
-      setForthTabImage(inactiveTabImages[3]);
-      setFifthTabImage(inactiveTabImages[4]);
+      setOverviewStyles(styles.svgImage);
+      setCloudStyles(styles.svgImage);
+      setEventsStyles(styles.svgImageEvents);
+      setAccommodationStyles(styles.svgImage);
+      setFlightsStyles(styles.svgImage);
+
+      setTextStyle(styles.text);
+
       setActiveTabContent(segmentedContent[0]);
+      handleShowEvents();
     } else if (
       percentValueInt >= secondProgress &&
       percentValueInt < thirdProgress
     ) {
+      setActiveButton("second");
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
-      setFirstTabImage(inactiveTabImages[0]);
-      setSecondTabImage(activeTabImages[1]);
-      setThirdTabImage(inactiveTabImages[2]);
-      setForthTabImage(inactiveTabImages[3]);
-      setFifthTabImage(inactiveTabImages[4]);
+      setTextStyle(styles.text1);
+      setOverviewStyles(styles.svgImage);
+      setCloudStyles(styles.svgImage);
+      setEventsStyles(styles.svgImage);
+      setAccommodationStyles(styles.svgImageActive);
+      setFlightsStyles(styles.svgImage);
+
       setActiveTabContent(segmentedContent[1]);
     } else if (
       percentValueInt >= thirdProgress &&
       percentValueInt < forthProgress
     ) {
-      setFirstTabImage(inactiveTabImages[0]);
-      setSecondTabImage(inactiveTabImages[1]);
-      setThirdTabImage(activeTabImages[2]);
-      setForthTabImage(inactiveTabImages[3]);
-      setFifthTabImage(inactiveTabImages[4]);
+      setActiveButton("third");
+      setTextStyle(styles.text2);
+      setOverviewStyles(styles.svgImage);
+      setCloudStyles(styles.svgImage);
+      setEventsStyles(styles.svgImage);
+      setAccommodationStyles(styles.svgImage);
+      setFlightsStyles(styles.svgImageActive);
+
       setActiveTabContent(segmentedContent[2]);
-    } else if (
-      percentValueInt >= forthProgress &&
-      percentValueInt < fifthProgress
-    ) {
+      //handleShowEvents();
+    } else if (percentValueInt >= forthProgress) {
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
-      setFirstTabImage(inactiveTabImages[0]);
-      setSecondTabImage(inactiveTabImages[1]);
-      setThirdTabImage(inactiveTabImages[2]);
-      setForthTabImage(activeTabImages[3]);
-      setFifthTabImage(inactiveTabImages[4]);
+      setActiveButton("forth");
+      setTextStyle(styles.text3);
+      setOverviewStyles(styles.svgImageActive);
+      setCloudStyles(styles.svgImage);
+      setEventsStyles(styles.svgImage);
+      setAccommodationStyles(styles.svgImage);
+      setFlightsStyles(styles.svgImage);
+
       setActiveTabContent(segmentedContent[3]);
-    } else if (percentValueInt >= fifthProgress) {
-      console.log("first progress is: ", firstProgress);
-      console.log("percentvalue is: ", percentValueInt);
-      setFirstTabImage(inactiveTabImages[0]);
-      setSecondTabImage(inactiveTabImages[1]);
-      setThirdTabImage(inactiveTabImages[2]);
-      setForthTabImage(inactiveTabImages[3]);
-      setFifthTabImage(activeTabImages[4]);
-      setActiveTabContent(segmentedContent[4]);
     }
   }
 
   const handleProgressPercent = (e) => {
+    const currentButton = e.target.name;
+    setActiveButton(currentButton);
     const percentValue = e.target.value;
     const percentValueInt = parseFloat(percentValue);
     setProgressPercent(percentValue);
-    e.target.style.width = 100;
+    //e.target.style.width = 100;
     checkActiveTab(percentValueInt);
+
+    setTextStyle(styles.text);
+    setTextElementStyle(styles.textEvents);
   };
 
-  console.log("single recommendation is", recommendation);
   return (
     //<div className={styles.wrapper} onTouchStart={autoReplayLoop}>
     <div
@@ -222,87 +305,117 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
         onChange={(isVisible) => {
           //isVisible && resetReplayLoop();
           //isVisible && autoReplayLoop();
+          //autoReplayLoop();
         }}
       >
         <div
-          className={styles.cell}
+          className={isRecommendationActive ? styles.cellDark : styles.cell}
+          onMouseEnter={() => {
+            setIsRecommendationActive(true);
+            //autoReplayLoop();
+            //resetReplayLoop();
+            //setActiveButton("first");
+            //setActiveTabContent(segmentedContent[0]);
+          }}
+          onMouseLeave={() => {
+            setIsRecommendationActive(false);
+            // resetReplayLoop();
+            // setActiveButton("first");
+            // setActiveTabContent(segmentedContent[0]);
+          }}
           style={{
             backgroundImage: "url(" + recommendation.image + ")",
           }}
         >
+          {bestActivityIconHandler}
           <div className={styles.title}>{recommendation.name}</div>
-          <div className={styles.text}>
-            {Object.values(activeTabContent).map(function (element) {
-              return <div className={styles.textElement}> {element} </div>;
-            })}
+
+          <div className={styles.matchScore}>
+            {recommendation.matchScore + "%"}
           </div>
+
+          <div className={styles.matchScoreAlt}>match</div>
+
+          {activeButton !== "first" && (
+            <div className={textStyle}>
+              {Object.values(activeTabContent).map(function (element) {
+                return <div className={textElementStyle}> {element} </div>;
+              })}
+            </div>
+          )}
+
+          {activeButton == "first" && handleShowEvents()}
 
           <div className={styles.progressBar}>
             <ProgressBar width={355} percent={progressPercent} />
           </div>
-
           <div className={styles.recommendationTabs}>
             {/* <div className={styles.centeredTabs}></div>*/}
             <button
+              name="first"
               className={styles.tabButton}
-              style={{
-                height: "26px",
-                width: `30px`,
-                backgroundImage: `${firstTabImage}`,
-              }}
               value={firstProgress}
               onClick={handleProgressPercent}
               onMouseEnter={handleProgressPercent}
-            ></button>
+            >
+              <EventsImage
+                className={
+                  activeButton == "first" ? styles.svgImageActive : eventsStyles
+                }
+                onMouseEnter={handleProgressPercent}
+                onClick={handleProgressPercent}
+              />
+            </button>
             <button
+              name="second"
               className={styles.tabButton}
-              style={{
-                height: "23px",
-                width: `30px`,
-                backgroundImage: `${secondTabImage}`,
-              }}
               value={secondProgress}
               onClick={handleProgressPercent}
               onMouseEnter={handleProgressPercent}
-            ></button>{" "}
+            >
+              <AccommodationImage
+                className={
+                  activeButton == "second"
+                    ? styles.svgImageActive
+                    : accommodationStyles
+                }
+                onMouseEnter={handleProgressPercent}
+                onClick={handleProgressPercent}
+              />
+            </button>{" "}
             <button
+              name="third"
               className={styles.tabButton}
-              style={{
-                height: "24px",
-                width: `30px`,
-                backgroundImage: `${thirdTabImage}`,
-              }}
               value={thirdProgress}
               onClick={handleProgressPercent}
               onMouseEnter={handleProgressPercent}
             >
-              {" "}
-            </button>{" "}
+              <FlightsImage
+                className={
+                  activeButton == "third"
+                    ? styles.svgImageActive
+                    : flightsStyles
+                }
+                onMouseEnter={handleProgressPercent}
+                onClick={handleProgressPercent}
+              />
+            </button>
             <button
+              name="forth"
               className={styles.tabButton}
-              style={{
-                height: "29px",
-                width: `30px`,
-                backgroundImage: `${forthTabImage}`,
-              }}
               value={forthProgress}
               onClick={handleProgressPercent}
               onMouseEnter={handleProgressPercent}
             >
-              {" "}
-            </button>
-            <button
-              className={styles.tabButton}
-              style={{
-                height: "30px",
-                width: `37px`,
-                backgroundImage: `${fifthTabImage}`,
-              }}
-              value={fifthProgress}
-              onClick={handleProgressPercent}
-              onMouseEnter={handleProgressPercent}
-            >
-              {" "}
+              <OverviewImage
+                className={
+                  activeButton == "forth"
+                    ? styles.svgImageActive
+                    : overviewStyles
+                }
+                onMouseEnter={handleProgressPercent}
+                onClick={handleProgressPercent}
+              />
             </button>
           </div>
         </div>

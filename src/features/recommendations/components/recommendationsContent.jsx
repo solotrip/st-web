@@ -52,7 +52,11 @@ const RecommendationsContent = ({ recommendations }) => {
     },
   ];
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={
+        size.width < screenThreshold ? styles.wrapperCentered : styles.wrapper
+      }
+    >
       {recommendations.map((recommendation) => {
         return (
           <Recommendation

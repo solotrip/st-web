@@ -5,12 +5,7 @@ import styles from "./navbar.module.scss";
 import { MenuButton } from "components";
 import ThemeSwitch from "./theme-switch";
 import Sheet from "react-modal-sheet";
-import {
-  FiX as CloseIcon,
-  FiCheck as ApplyIcon,
-  FiChevronRight as NextIcon,
-  FiChevronLeft as BackIcon,
-} from "react-icons/fi";
+import { FiX as CloseIcon, FiCheck as ApplyIcon } from "react-icons/fi";
 import InterestsContainer from "../../recommendations/containers/interests/interests";
 import CalendarContainer from "../../recommendations/containers/calendar/calendar";
 import SignupContainer from "../../auth/containers/signup";
@@ -19,14 +14,7 @@ import InterestsMock from "../../recommendations/interests.json";
 import FiltersMock from "../../recommendations/filters.json";
 import CalendarAlt from "../../recommendations/containers/calendar/calendarAlt";
 
-const Navbar = ({
-  isLoggedIn,
-  loading,
-  children,
-  items,
-  availableMonths,
-  onboarding,
-}) => {
+const Navbar = ({ isLoggedIn, loading, children, items }) => {
   function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
 
@@ -68,31 +56,6 @@ const Navbar = ({
   }
   const size = useWindowSize();
   const screenThreshold = 700;
-  const [activeButton, setActiveButton] = useState(
-    availableMonths[0].monthName
-  );
-
-  const [activeButtonWeeks, setActiveButtonWeeks] = useState(
-    availableMonths[0].weeks
-  );
-
-  const [activeWeek, setActiveWeek] = useState(activeButtonWeeks[0]);
-  const handleActiveButton = (e) => {
-    const name = e.target.name;
-    setActiveButton(name);
-    var weeks = [];
-    const weekString = e.target.value;
-    var weekSplitted = weekString.split(",");
-    //weeks.push(e.target.value);
-    console.log("weeks are", weekSplitted);
-    weeks = weeks.concat(weekSplitted);
-    setActiveButtonWeeks(weeks);
-  };
-
-  const handleActiveWeek = (e) => {
-    const week = e.target.name;
-    setActiveWeek(week);
-  };
 
   const menuItems = [<ThemeSwitch key="nav-theme-switch" />];
 
@@ -102,22 +65,6 @@ const Navbar = ({
   const [interestListDefault, setInterestListDefault] = useState();
   const [interestList, setInterestList] = useState();
 
-  function handleNextSheetTab(direction) {
-    const tabs = ["Interests", "Calendar", "Bucketlist"];
-    const index = tabs.findIndex((tab) => tab === openTab);
-    console.log(
-      "next pressed and current tab is:",
-      openTab,
-      "will changed to: ",
-      tabs[index + 1]
-    );
-    if (direction === "next") {
-      setOpenTab(tabs[index + 1]);
-    } else if (direction === "previous") {
-      setOpenTab(tabs[index - 1]);
-    }
-  }
-
   const fetchData = async () => {
     return await fetch("https://restcountries.eu/rest/v2/all")
       .then((response) => response.json())
@@ -126,13 +73,6 @@ const Navbar = ({
         setInterestListDefault(data);
       });
   };
-
-  useEffect(() => {
-    if (onboarding) {
-      setSheetOpen(true);
-      setOpenTab("Interests");
-    }
-  }, []);
 
   useEffect(() => {
     fetchData();
@@ -151,7 +91,7 @@ const Navbar = ({
     >
       {
         <div>
-          {size.width < screenThreshold ? (
+          {!isLoggedIn ? (
             <div
               className={
                 size.width < screenThreshold
@@ -166,63 +106,97 @@ const Navbar = ({
                     : styles.row1Vertical
                 }
               >
+                <Link
+                  to="/"
+                  className={
+                    size.width < screenThreshold
+                      ? styles.logo
+                      : styles.logoVertical
+                  }
+                >
+                  <div className={styles.icon} />
+                </Link>
+                {size.width < screenThreshold && (
+                  <div className={styles.attentionText}>
+                    Join to save your interests and access your recommendations
+                    from anywhere.
+                  </div>
+                )}
                 <div
                   className={
                     size.width < screenThreshold
-                      ? styles.actions
-                      : styles.actionsVertical
+                      ? styles.menuButtonHolder
+                      : styles.menuButtonHolderVertical
                   }
                 >
-                  <div className={styles.monthSelector}>
-                    {availableMonths.map((month) => (
-                      <button
-                        name={month.monthName}
-                        key={month.monthName}
-                        value={month.weeks}
-                        onClick={handleActiveButton}
-                        className={
-                          activeButton === month.monthName
-                            ? styles.activeMonth
-                            : styles.month
-                        }
-                      >
-                        {month.monthName}
-                      </button>
-                    ))}
-                  </div>
-                  <div className={styles.weekSelector}>
-                    {activeButtonWeeks.map((week) => (
-                      <button
-                        name={week}
-                        className={
-                          activeWeek === week ? styles.activeWeek : styles.week
-                        }
-                        onClick={handleActiveWeek}
-                        key={week}
-                      >
-                        {week}
-                      </button>
-                    ))}
-                  </div>
+                  <MenuButton items={menuItems} />
                 </div>
-                <button
-                  className={cn(styles.signup2, "glow-on-hover")}
-                  onClick={handleOpenSheet}
-                  name="Interests"
-                >
-                  <span role="img" aria-label="Preferences"></span>
-                  Preferences
-                </button>
               </div>
               {console.log("widht is: ", size.width)}
               {children && <div className={styles.content}>{children}</div>}
+              <div
+                className={
+                  size.width < screenThreshold
+                    ? styles.actions
+                    : styles.actionsVertical
+                }
+              >
+                {!isLoggedIn && !loading && (
+                  <div
+                    className={
+                      size.width < screenThreshold
+                        ? styles.signupLogin
+                        : styles.signupLoginVertical
+                    }
+                  >
+                    <button
+                      className={cn(styles.signup2, "glow-on-hover")}
+                      onClick={handleOpenSheet}
+                      name="Signup"
+                    >
+                      <span role="img" aria-label="Signup"></span>
+                      Signup
+                    </button>
+                  </div>
+                )}
+                {!isLoggedIn && !loading && (
+                  <div
+                    className={
+                      size.width < screenThreshold
+                        ? styles.signupLogin
+                        : styles.signupLoginVertical
+                    }
+                  >
+                    <button
+                      className={cn(styles.signup, "glow-on-hover")}
+                      onClick={handleOpenSheet}
+                      name="Login"
+                    >
+                      <span role="img" aria-label="Login"></span>
+                      Login
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           ) : (
-            <div className={styles.containerVertical}>
-              <div className={styles.row2Vertical}>
+            <div
+              className={
+                size.width < screenThreshold
+                  ? styles.container
+                  : styles.containerVertical
+              }
+            >
+              <div
+                className={
+                  size.width < screenThreshold
+                    ? styles.row2
+                    : styles.row2Vertical
+                }
+              >
                 {size.width >= screenThreshold && (
                   <Link
-                    to="/recommendations"
+                    to="/"
                     className={
                       size.width < screenThreshold
                         ? styles.logo
@@ -234,7 +208,11 @@ const Navbar = ({
                 )}
                 {items.map((item) => (
                   <button
-                    className={styles.col1Vertical}
+                    className={
+                      size.width < screenThreshold
+                        ? styles.col1
+                        : styles.col1Vertical
+                    }
                     onClick={handleOpenSheet}
                     name={item.name}
                   >
@@ -250,7 +228,13 @@ const Navbar = ({
                     </button>
                   </button>
                 ))}
-                <div className={styles.menuButtonHolderVertical2}>
+                <div
+                  className={
+                    size.width < screenThreshold
+                      ? styles.menuButtonHolder2
+                      : styles.menuButtonHolderVertical2
+                  }
+                >
                   <MenuButton items={menuItems} />
                 </div>
               </div>
@@ -269,94 +253,25 @@ const Navbar = ({
       >
         <Sheet.Container>
           <Sheet.Header className={styles.sheetHeader} />
-          <div className={styles.sheetrow1}>
-            {!onboarding ||
-              (onboarding && openTab == "Interests" && (
+
+          <Sheet.Content disableDrag={true}>
+            <div className={styles.sheet}>
+              <div className={styles.sheetrow1}>
                 <button
                   className={styles.closeSheet}
                   onClick={() => setSheetOpen(false)}
                 >
                   <CloseIcon className={styles.closeIcon} />
                 </button>
-              ))}
+                <div className={styles.sheetTitle}>{openTab}</div>
 
-            {onboarding && openTab !== "Interests" && (
-              <button
-                className={styles.closeSheet}
-                onClick={() => handleNextSheetTab("previous")}
-              >
-                <BackIcon className={styles.closeIcon} />
-              </button>
-            )}
-
-            <div className={styles.sheetTabs}>
-              <button
-                className={openTab == "Interests" && styles.activeSheetTab}
-                name="Interests"
-                onClick={() => setOpenTab("Interests")}
-              >
-                Interests
-              </button>
-              <button
-                className={openTab == "Calendar" && styles.activeSheetTab}
-                name="Calendar"
-                onClick={() => setOpenTab("Calendar")}
-              >
-                Dates
-              </button>
-              <button
-                name="Bucketlist"
-                className={openTab == "Bucketlist" && styles.activeSheetTab}
-                onClick={() => setOpenTab("Bucketlist")}
-              >
-                Bucketlist
-              </button>
-            </div>
-
-            {!onboarding ||
-              (onboarding && openTab == "Bucketlist" && (
                 <button
                   className={styles.closeSheet}
                   onClick={() => setSheetOpen(false)}
                 >
                   <ApplyIcon className={styles.closeIcon} />
                 </button>
-              ))}
-            {onboarding && openTab !== "Bucketlist" && (
-              <button
-                className={styles.closeSheet}
-                onClick={() => handleNextSheetTab("next")}
-              >
-                <NextIcon className={styles.closeIcon} />
-              </button>
-            )}
-          </div>
-
-          <Sheet.Content disableDrag={true}>
-            {onboarding && openTab == "Interests" && (
-              <div className={styles.onboardingText}>
-                Welcome to Pulfy!
-                <div>
-                  To know you better, select the ones that interest you and
-                  click next.
-                </div>
               </div>
-            )}
-            {onboarding && openTab == "Calendar" && (
-              <div className={styles.onboardingText}>
-                <div>Select your available dates and click next.</div>
-              </div>
-            )}
-            {onboarding && openTab == "Bucketlist" && (
-              <div className={styles.onboardingText}>
-                <div>
-                  Select cities or countries on your Bucketlist and click check.
-                </div>
-              </div>
-            )}
-
-            <div className={styles.sheetTitle}></div>
-            <div className={styles.sheet}>
               {openTab == "Interests" && (
                 <InterestsContainer
                   data={InterestsMock}

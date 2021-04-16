@@ -1,12 +1,13 @@
+@import "styles/mixins";
 .wrapperNotCentered {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   align-self: center;
-  padding-left: 130px;
-  margin-top: 35px;
-  margin: 50px;
+
+  margin-top: 50px;
+  margin-bottom: 50px;
 
   // background-color: coral;
   height: 398px;
@@ -20,19 +21,35 @@
   align-self: center;
   //padding-left: 140px;
   margin-top: 50px;
-  margin-bottom: 50px;
-  //background-color: coral;
+  margin-bottom: 0px;
+
   height: 398px;
   flex: 1;
 }
 
 .cell {
-  //background-color: cornflowerblue;
   background-position: center bottom;
-  box-shadow: 0px 10px 15px -10px #3cafeb;
+
   height: 398px;
   width: 355px;
   border-radius: 15px;
+  transition: 1s ease;
+  background-blend-mode: overlay;
+
+  background-color: rgba($color: #292934, $alpha: 0.9);
+}
+.cellDark {
+  background-position: center bottom;
+  box-shadow: 0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4),
+    5px 5px 0px 0px rgba($color: #5e5ce6, $alpha: 0.4);
+
+  height: 398px;
+  width: 355px;
+  border-radius: 15px;
+  background-blend-mode: overlay;
+  transition: 1s ease;
+
+  background-color: rgba($color: #000000, $alpha: 0.7);
 }
 
 .title {
@@ -40,43 +57,132 @@
   margin-top: 20px;
   margin-left: 10px;
   text-shadow: 0px 4px 5px 0px #000000;
-  font-size: 36px;
+  font-size: 30px;
+}
+
+.matchScore {
+  //background-color: seagreen;
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  top: 0;
+  margin-left: auto;
+  //margin-bottom: auto;
+  font-size: 24px;
+  color: #3cafeb;
+  transition: 1s ease;
+}
+
+.matchScoreAlt {
+  //background-color: yellowgreen;
+  text-align: center;
+  width: 70px;
+  height: 16px;
+  top: 0;
+  margin-left: auto;
+  //margin-bottom: auto;
+  font-size: 14px;
+  color: white;
+  transition: 1s ease;
 }
 
 .recommendationTabs {
   background-color: rgba($color: #292934, $alpha: 0.8);
   //backdrop-filter: blur(20px);
-  width: auto;
+  //background-color: saddlebrown;
+  width: 355px;
   height: 89px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-items: center;
-  align-self: center;
-  margin-top: 0px;
+  justify-content: space-between;
+
+  left: 0;
+  margin-left: 0px;
   border-radius: 0px 0px 15px 15px;
 }
 
 .centeredTabs {
-  background-color: green;
+  //background-color: green;
   width: 300px;
   height: 50px;
 }
 
 .tabButton {
-  width: 30px;
-  height: 30px;
+  //background-color: seagreen;
+  width: 50px;
 }
 
 .progressBar {
-  margin-top: 90px;
+  //background-color: #5e5ce6;
+  //margin-top: 90px;
+  padding-top: 40px;
+  bottom: 0;
 }
 
 .text {
   color: #ffffff;
   margin-top: 30px;
   text-shadow: 0px 4px 4px #000000;
+  font-size: 16px;
+  height: 130px;
+  transition: 1s ease-in-out;
+}
+.textDisappeared {
+  color: #ffffff;
+  margin-top: 150px;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 16px;
+  height: 130px;
+  transition: 1s ease-in-out;
+}
+.textEvents {
+  color: #ffffff;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: 0.5s ease;
+}
+
+.text1 {
+  color: #ffffff;
+  margin-top: 30px;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 20px;
+  height: 130px;
+  animation: 2s slide-right;
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.text2 {
+  color: #ffffff;
+  margin-top: 30px;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 20px;
+  height: 130px;
+  transition: 1s ease;
+}
+.text3 {
+  color: #ffffff;
+  margin-top: 30px;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 20px;
+  height: 130px;
+  transition: 1s ease;
+}
+.text4 {
+  color: #ffffff;
+  margin-top: 30px;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 20px;
   height: 130px;
   transition: 1s ease;
 }
@@ -85,4 +191,34 @@
   text-shadow: 0px 4px 4px #000000;
   margin-top: 10px;
   transition: 1s ease;
+}
+
+.overview {
+  .icon {
+    width: 40px;
+    height: 40px;
+    margin-top: 30px;
+    margin-right: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    //background-color: aquamarine;
+  }
+}
+.svgImageActive {
+  pointer-events: none;
+  path {
+    fill: #3cafeb;
+  }
+}
+
+.svgImage {
+  //background-color: skyblue;
+  pointer-events: none;
+  path:hover {
+    fill: #3cafeb;
+  }
+  path:active {
+    fill: #3cafeb;
+  }
 }

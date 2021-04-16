@@ -2,9 +2,26 @@
 .wrapper {
   background-color: $bg-color;
   //background-color: cadetblue;
+  padding-left: 200px;
 
-  padding-top: 100px;
-  padding-bottom: 200px;
+  padding-top: 0px;
+  padding-bottom: 100px;
+
+  //after there
+  display: flex;
+  flex-flow: row wrap;
+  justify-items: center;
+
+  &::after {
+  }
+}
+
+.wrapperCentered {
+  background-color: $bg-color;
+  //background-color: cadetblue;
+
+  padding-top: 50px;
+  padding-bottom: 100px;
 
   //after there
   display: flex;

@@ -39,7 +39,7 @@ const RecommendationsContainer = () => {
     },
     {
       monthName: "Sep",
-      weeks: ["29-4", "5-11", "12-18", "19-25", "25-1"],
+      weeks: ["29-4", "5-11", "12-18", "19-25"],
     },
     {
       monthName: "Oct",
@@ -50,13 +50,17 @@ const RecommendationsContainer = () => {
   return (
     <>
       <div className={styles.wrapper}>
-        <TabBar availableMonths={availableMonths} className={styles.TabBar} />
         <RecommendationsContent
           recommendations={recommendations}
           className={styles.RecommendationsContent}
         />
 
-        <Navbar isLoggedIn={true} items={items} />
+        <Navbar
+          isLoggedIn={false}
+          items={items}
+          availableMonths={availableMonths}
+          onboarding={true}
+        />
       </div>
     </>
   );
