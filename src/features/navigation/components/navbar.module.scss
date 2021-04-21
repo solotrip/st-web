@@ -16,7 +16,7 @@
   background: $navbar-color;
   backdrop-filter: blur(100px);
   height: 100%;
-  width: 150px;
+  width: 250px;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -172,14 +172,14 @@
 
 .logo {
   margin-top: 10px;
-  display: flex;
+  display: none;
   align-items: center;
 
   .icon {
     width: 40px;
     height: 40px;
     margin: 0 0px;
-    background: url("../../../assets/images/p.png");
+    background: url("../../../assets/pulfy.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right center;
@@ -209,7 +209,7 @@
     width: 40px;
     height: 40px;
     margin: 0 0px;
-    background: url("../../../assets/images/p.png");
+    background: url("../../../assets/pulfy.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right center;
@@ -240,7 +240,7 @@
     width: 40px;
     height: 40px;
     margin: 0 0px;
-    background: url("../../../assets/images/p.png");
+    background: url("../../../assets/pulfy.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right center;
@@ -436,6 +436,7 @@
 .monthSelector {
   //background-color: blue;
   width: 200px;
+  margin-left: 20px;
   margin-top: 15px;
   font-size: 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

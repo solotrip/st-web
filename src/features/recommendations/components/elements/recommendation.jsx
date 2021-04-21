@@ -8,46 +8,25 @@ import { ReactComponent as EventsImage } from "../../../../assets/events.svg";
 import { ReactComponent as AccommodationImage } from "../../../../assets/accommodation.svg";
 import { ReactComponent as FlightsImage } from "../../../../assets/flights.svg";
 
+import {
+  AiFillPlayCircle as PlayButton,
+  AiFillPauseCircle as PauseButton,
+} from "react-icons/ai";
+
 let zerothProgress = 0.0;
 let firstProgress = 0.25;
 let secondProgress = 0.5;
 let thirdProgress = 0.75;
 let forthProgress = 1.0;
-let fifthProgress = 1.0;
 
-let increase = 0.0;
-
-const inactiveTabImages = [
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-overview_j66PG19F7ujCa.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-cloud_D7-pl5BTXM.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-events_zmbNvePjr7.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-accomodation_0B-H1EFiux.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-flights_1v6KjXggfG.png)",
-];
-
-const activeTabImages = [
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-overview-blue_bBnWBO8YjA47R.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-cloud-blue_wnRWP0O6ql7ur.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-events-blue_HZI3DqcjN.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-accomodation-blue_I5cv42xjprH2B.png)",
-  "url(https://ik.imagekit.io/7zlqc1cmihe/hi/hi-flights-blue_B5W9fmzAk1OLF.png)",
-];
-
-const Recommendation = ({ recommendation, stories, user, size }) => {
+const Recommendation = ({ recommendation, user, size }) => {
   const [isRecommendationActive, setIsRecommendationActive] = useState(false);
   const [textStyle, setTextStyle] = useState(styles.text);
   const [textElementStyle, setTextElementStyle] = useState(styles.textEvents);
   const screenThreshold = 700;
-  const [progressPercent, setProgressPercent] = useState(firstProgress);
+  const [progressPercent, setProgressPercent] = useState(zerothProgress);
 
   const [activeButton, setActiveButton] = useState("first");
-
-  const [firstTabImage, setFirstTabImage] = useState(activeTabImages[0]);
-  const [secondTabImage, setSecondTabImage] = useState(inactiveTabImages[1]);
-  const [thirdTabImage, setThirdTabImage] = useState(inactiveTabImages[2]);
-  const [forthTabImage, setForthTabImage] = useState(inactiveTabImages[3]);
-  const [fifthTabImage, setFifthTabImage] = useState(inactiveTabImages[4]);
-  const [bestActivityIcon, setBestActivityIcon] = useState();
 
   const [overviewStyles, setOverviewStyles] = useState(styles.svgImage);
   const [cloudStyles, setCloudStyles] = useState(styles.svgImage);
@@ -56,36 +35,554 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
     styles.svgImage
   );
   const [flightsStyles, setFlightsStyles] = useState(styles.svgImage);
+  const [sectionTitle, setSectionTitle] = useState("Events");
 
-  let firstEvent = "";
-  let combinedEvents;
-  const eventsCombined = recommendation.events.forEach((event) => {
-    console.log("title is: ", event.title);
-    const categoryAndTitle = event.category + ": " + event.title;
-    combinedEvents = firstEvent.concat(categoryAndTitle, ", ");
-    console.log("combined events are : ", combinedEvents);
-    firstEvent = combinedEvents;
+  const [playAnimation, setPlayAnimation] = useState(false);
 
-    return combinedEvents;
-  });
+  const [eventsHolderStyles, setEventsHolderStyles] = useState(
+    styles.eventsHolderAnimate
+  );
 
-  const showEvents = recommendation.events.map((event) => {
-    const div = <div className={textStyle}>{event.title}</div>;
-    return div;
-  });
+  async function handlePlayAnimation() {
+    let timer;
+    //setActiveButton("first");
+    //setActiveTabContent(segmentedContent[0]);
 
-  const bestActivityIconHandler = () => {
-    if (recommendation.activities[0] == "Hiking") {
-      setBestActivityIcon("🥾");
-    } else if (recommendation.activities[0] == "Walking") {
-      setBestActivityIcon("🚶🏽‍♀️");
-    } else if (recommendation.activities[0] == "Mountain Bike") {
-      setBestActivityIcon("🚵‍♀️");
-    } else if (recommendation.activities[0] == "Kayak/ Canoe") {
-      setBestActivityIcon("🛶");
-    }
-  };
+    setPlayAnimation(true);
 
+    timer = await setTimeout(() => {
+      setActiveButton("first");
+    }, 0);
+    timer = await setTimeout(() => {
+      setActiveButton("second");
+    }, 2500);
+
+    timer = await setTimeout(() => {
+      setActiveButton("third");
+    }, 5000);
+
+    timer = await setTimeout(() => {
+      setActiveButton("forth");
+    }, 7500);
+  }
+
+  function handleShowEvents() {
+    const div1 = (
+      <>
+        <div className={styles.eventsHolder}>
+          <div className={styles.sectionTitle}> Events </div>
+          <div className={styles.eventsContentHolder}>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Superbowl Semifinal</div>
+                <div className={styles.eventDescription}> 120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Coldplay Concert</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div className={styles.eventPhoto} />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Chocolate Festival</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div className={styles.eventPhoto} />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>event name</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div className={styles.eventPhoto} />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>event name</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+    return div1;
+  }
+
+  function handleShowAccommodation() {
+    const div1 = (
+      <>
+        <div className={styles.eventsHolder}>
+          <div className={styles.sectionTitle}> Accommodation </div>
+          <div className={styles.eventsContentHolder}>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Private Room Rental </div>
+                <div className={styles.eventDescription}>from 28$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Entire Home Rental</div>
+                <div className={styles.eventDescription}>from 44$</div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Hostel Bed</div>
+                <div className={styles.eventDescription}>from 10$</div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Room in 5-star Hotel</div>
+                <div className={styles.eventDescription}>from 55$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+    return div1;
+  }
+
+  function handleShowTransportation() {
+    const div1 = (
+      <>
+        <div className={styles.eventsHolder}>
+          <div className={styles.sectionTitle}> Flights </div>
+          <div className={styles.eventsContentHolder}>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  Istanbul - {recommendation.name}{" "}
+                </div>
+                <div className={styles.eventDescription}>from 350$</div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  {recommendation.name} - Istanbul{" "}
+                </div>
+                <div className={styles.eventDescription}>from 410$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  London - {recommendation.name}{" "}
+                </div>
+                <div className={styles.eventDescription}>from 480$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  {recommendation.name} - Amsterdam
+                </div>
+                <div className={styles.eventDescription}>from 530$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+    return div1;
+  }
+
+  function handleShowContent() {
+    const div1 = (
+      <div className={styles.eventsFrame}>
+        <div className={eventsHolderStyles}>
+          <div className={styles.sectionTitle}> Events </div>
+          <div className={styles.eventsContentHolder}>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Superbowl Semifinal</div>
+                <div className={styles.eventDescription}> 120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Coldplay Concert</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div className={styles.eventPhoto} />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Chocolate Festival</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div className={styles.eventPhoto} />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>event name</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div className={styles.eventPhoto} />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>event name</div>
+                <div className={styles.eventDescription}>120$ - Mar 19 </div>
+              </div>
+              <button className={styles.buyButton}>Buy</button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.eventsHolder}>
+          <div className={styles.sectionTitle}> Accommodation </div>
+          <div className={styles.eventsContentHolder}>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Private Room Rental </div>
+                <div className={styles.eventDescription}>from 28$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Entire Home Rental</div>
+                <div className={styles.eventDescription}>from 44$</div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Hostel Bed</div>
+                <div className={styles.eventDescription}>from 10$</div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Room in 5-star Hotel</div>
+                <div className={styles.eventDescription}>from 55$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.eventsHolder}>
+          <div className={styles.sectionTitle}> Flights </div>
+          <div className={styles.eventsContentHolder}>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  Istanbul - {recommendation.name}{" "}
+                </div>
+                <div className={styles.eventDescription}>from 350$</div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  {recommendation.name} - Istanbul{" "}
+                </div>
+                <div className={styles.eventDescription}>from 410$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  London - {recommendation.name}{" "}
+                </div>
+                <div className={styles.eventDescription}>from 480$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>
+                  {recommendation.name} - Amsterdam
+                </div>
+                <div className={styles.eventDescription}>from 530$ </div>
+              </div>
+              <button className={styles.buyButton}>Book</button>
+            </div>
+          </div>
+        </div>
+        <div className={styles.eventsHolder}>
+          <div className={styles.sectionTitle}>Overview</div>
+          <div className={styles.eventsContentHolder}>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1502680390469-be75c86b636f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Activities</div>
+                <div className={styles.eventDescription}>
+                  Trekking,Surfing,Scuba Diving
+                </div>
+              </div>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1454789476662-53eb23ba5907?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=989&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Weather</div>
+                <div className={styles.eventDescription}>
+                  min 13°C, max 28°C
+                </div>
+              </div>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/flagged/photo-1584036561584-b03c19da874c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>COVID-19</div>
+                <div className={styles.eventDescription}>318 Daily Cases</div>
+              </div>
+            </div>
+            <div className={styles.eventCell}>
+              <div
+                className={styles.eventPhoto}
+                style={{
+                  backgroundImage:
+                    "url(" +
+                    "https://images.unsplash.com/photo-1613244469730-f1aa82dbe7df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" +
+                    ")",
+                }}
+              />
+              <div className={styles.eventDetails}>
+                <div className={styles.eventName}>Status</div>
+                <div className={styles.eventDescription}>
+                  Visa free for you, PCR test is necessary.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+    return div1;
+  }
+  /*
   function handleShowEvents() {
     const divs = recommendation.events.map((event) => {
       const div1 = (
@@ -113,14 +610,14 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
     });
     return (
       <div className={textStyle}>
+        <div className={styles.sectionTitle}> Events </div>
         {divs}
         {activitydivs}
       </div>
     );
   }
+  */
 
-  let firstActivity = "";
-  let combinedActivities;
   let timer;
 
   var cheaperThanYearlyAverage =
@@ -128,23 +625,6 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
     parseFloat(recommendation.overall_avg_hotel_price)
       ? "cheaper than yearly average.)"
       : "more expensive than yearly average.)";
-
-  const activitiesCombined = recommendation.activities.forEach((activity) => {
-    console.log("title is: ", activity);
-    combinedActivities = firstActivity.concat(activity, ", ");
-    console.log("combined events are : ", combinedActivities);
-    firstActivity = combinedActivities;
-
-    return combinedActivities;
-  });
-
-  console.log(
-    "hotel price is :",
-    parseFloat(recommendation.hotel_price),
-    parseFloat(recommendation.overall_avg_hotel_price),
-    parseFloat(recommendation.hotel_price) >
-      parseFloat(recommendation.overall_avg_hotel_price)
-  );
 
   const segmentedContent = [
     {},
@@ -231,14 +711,16 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
       setFlightsStyles(styles.svgImage);
 
       setTextStyle(styles.text);
+      setSectionTitle("Events");
 
       setActiveTabContent(segmentedContent[0]);
-      handleShowEvents();
+      //handleShowEvents();
     } else if (
       percentValueInt >= secondProgress &&
       percentValueInt < thirdProgress
     ) {
       setActiveButton("second");
+      setSectionTitle("Accommodation");
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
       setTextStyle(styles.text1);
@@ -254,6 +736,7 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
       percentValueInt < forthProgress
     ) {
       setActiveButton("third");
+      setSectionTitle("Flights");
       setTextStyle(styles.text2);
       setOverviewStyles(styles.svgImage);
       setCloudStyles(styles.svgImage);
@@ -267,6 +750,7 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
       console.log("first progress is: ", firstProgress);
       console.log("percentvalue is: ", percentValueInt);
       setActiveButton("forth");
+      setSectionTitle("Overview");
       setTextStyle(styles.text3);
       setOverviewStyles(styles.svgImageActive);
       setCloudStyles(styles.svgImage);
@@ -279,8 +763,24 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
   }
 
   const handleProgressPercent = (e) => {
+    //disable autoanimation
+    setPlayAnimation(false);
     const currentButton = e.target.name;
     setActiveButton(currentButton);
+
+    if (currentButton == "first") {
+      setEventsHolderStyles(styles.eventsHolderAnimate);
+    } else if (currentButton == "second" && activeButton == "first") {
+      setEventsHolderStyles(styles.eventsHolderAnimate2);
+    } else if (currentButton == "second" && activeButton !== "first") {
+      setEventsHolderStyles(styles.eventsHolderAnimate2reverse);
+    } else if (currentButton == "third" && activeButton !== "forth") {
+      setEventsHolderStyles(styles.eventsHolderAnimate3);
+    } else if (currentButton == "third" && activeButton == "forth") {
+      setEventsHolderStyles(styles.eventsHolderAnimate3reverse);
+    } else if (currentButton == "forth") {
+      setEventsHolderStyles(styles.eventsHolderAnimate4);
+    }
     const percentValue = e.target.value;
     const percentValueInt = parseFloat(percentValue);
     setProgressPercent(percentValue);
@@ -312,6 +812,9 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
           className={isRecommendationActive ? styles.cellDark : styles.cell}
           onMouseEnter={() => {
             setIsRecommendationActive(true);
+            setPlayAnimation(true);
+            setEventsHolderStyles(styles.eventsHolderFullAnimate);
+
             //autoReplayLoop();
             //resetReplayLoop();
             //setActiveButton("first");
@@ -319,6 +822,10 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
           }}
           onMouseLeave={() => {
             setIsRecommendationActive(false);
+            setPlayAnimation(false);
+            setEventsHolderStyles(styles.eventsHolderAnimate);
+            //setPlayAnimation(true);
+            //handlePlayAnimation();
             // resetReplayLoop();
             // setActiveButton("first");
             // setActiveTabContent(segmentedContent[0]);
@@ -327,27 +834,54 @@ const Recommendation = ({ recommendation, stories, user, size }) => {
             backgroundImage: "url(" + recommendation.image + ")",
           }}
         >
-          {bestActivityIconHandler}
           <div className={styles.title}>{recommendation.name}</div>
+          {/*activeButton !== "first" &&
+            activeButton !== "second" &&
+            activeButton !== "third" && (
+              <div className={textStyle}>
+                <div className={styles.sectionTitle}> {sectionTitle} </div>
+                {Object.values(activeTabContent).map(function (element) {
+                  return <div className={textElementStyle}> {element} </div>;
+                })}
+              </div>
+              )*/}
+          {handleShowContent()}
 
-          <div className={styles.matchScore}>
-            {recommendation.matchScore + "%"}
-          </div>
-
-          <div className={styles.matchScoreAlt}>match</div>
-
-          {activeButton !== "first" && (
-            <div className={textStyle}>
-              {Object.values(activeTabContent).map(function (element) {
-                return <div className={textElementStyle}> {element} </div>;
-              })}
-            </div>
-          )}
-
-          {activeButton == "first" && handleShowEvents()}
-
+          <button
+            className={styles.playStopFlow}
+            onClick={() => {
+              !playAnimation &&
+                setEventsHolderStyles(styles.eventsHolderFullAnimate);
+              playAnimation &&
+                setEventsHolderStyles(styles.eventsHolderAnimate);
+              setPlayAnimation(!playAnimation);
+            }}
+          >
+            {playAnimation ? (
+              <>
+                <PauseButton />
+                <div className={styles.playStopText}>Pause</div>
+              </>
+            ) : (
+              <>
+                <PlayButton />
+                <div className={styles.playStopText}>Play</div>
+              </>
+            )}
+          </button>
           <div className={styles.progressBar}>
-            <ProgressBar width={355} percent={progressPercent} />
+            {playAnimation ? (
+              <ProgressBar
+                width={355}
+                percent={1.0}
+                play={playAnimation}
+                animationHandler={(event) =>
+                  console.log("animation handling for", event.animationName)
+                }
+              />
+            ) : (
+              <ProgressBar width={355} percent={progressPercent} play={false} />
+            )}
           </div>
           <div className={styles.recommendationTabs}>
             {/* <div className={styles.centeredTabs}></div>*/}

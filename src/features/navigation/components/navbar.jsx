@@ -166,6 +166,16 @@ const Navbar = ({
                     : styles.row1Vertical
                 }
               >
+                <Link
+                  to="/recommendations"
+                  className={
+                    size.width < screenThreshold
+                      ? styles.logo
+                      : styles.logoVertical2
+                  }
+                >
+                  <div className={styles.icon} />
+                </Link>
                 <div
                   className={
                     size.width < screenThreshold

@@ -59,7 +59,7 @@ const RecommendationsContainer = () => {
           isLoggedIn={false}
           items={items}
           availableMonths={availableMonths}
-          onboarding={true}
+          onboarding={false}
         />
       </div>
     </>
