@@ -824,6 +824,13 @@ const Recommendation = ({ recommendation, user, size }) => {
             setIsRecommendationActive(false);
             setPlayAnimation(false);
             setEventsHolderStyles(styles.eventsHolderAnimate);
+            setActiveButton("first");
+            setOverviewStyles(styles.svgImage);
+            setCloudStyles(styles.svgImage);
+            setEventsStyles(styles.svgImageEvents);
+            setAccommodationStyles(styles.svgImage);
+            setFlightsStyles(styles.svgImage);
+            setProgressPercent(firstProgress);
             //setPlayAnimation(true);
             //handlePlayAnimation();
             // resetReplayLoop();
@@ -857,7 +864,7 @@ const Recommendation = ({ recommendation, user, size }) => {
               setPlayAnimation(!playAnimation);
             }}
           >
-            {playAnimation ? (
+            {/*playAnimation ? (
               <>
                 <PauseButton />
                 <div className={styles.playStopText}>Pause</div>
@@ -867,7 +874,7 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <PlayButton />
                 <div className={styles.playStopText}>Play</div>
               </>
-            )}
+            )*/}
           </button>
           <div className={styles.progressBar}>
             {playAnimation ? (

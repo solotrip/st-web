@@ -13,9 +13,10 @@ const MenuButton = ({ items }) => {
     modifiers: [{}],
     strategy: "fixed",
     placement: "bottom-end",
+    zIndex: "3",
   });
   return (
-    <>
+    <div className={styles.wrapper}>
       <ClickAwayListener onClickAway={() => setShow(false)}>
         <button
           onClick={() => setShow(!show)}
@@ -30,7 +31,7 @@ const MenuButton = ({ items }) => {
           <button
             className="card"
             ref={setPopperElement}
-            style={styles.popper}
+            style={{ ...styles.popper, zIndex: 10000 }}
             {...attributes.popper}
             onClick={() => setShow(!show)}
           >
@@ -38,7 +39,7 @@ const MenuButton = ({ items }) => {
           </button>
         )}
       </ClickAwayListener>
-    </>
+    </div>
   );
 };
 

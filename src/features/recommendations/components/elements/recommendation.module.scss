@@ -7,7 +7,7 @@
   align-self: center;
 
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 
   // background-color: coral;
   height: 438px;
@@ -270,7 +270,7 @@
   margin-top: 0px;
   text-shadow: 0px 4px 4px #000000;
   font-size: 16px;
-  height: 285px;
+  height: 315px;
   width: 415px;
   //padding-right: 60px;
   //margin-left: -100px;
@@ -453,17 +453,84 @@
   0% {
     margin-left: 0px;
   }
+  5% {
+    margin-left: 0px;
+  }
+  10% {
+    margin-left: 0px;
+  }
+  15% {
+    margin-left: 0px;
+  }
+  20% {
+    margin-left: 0px;
+  }
+  25% {
+    margin-left: 0px;
+  }
+  29% {
+    margin-left: 0px;
+  }
 
-  33% {
+  30% {
+    margin-left: -355px;
+  }
+  35% {
+    margin-left: -355px;
+  }
+  40% {
+    margin-left: -355px;
+  }
+  45% {
+    margin-left: -355px;
+  }
+  50% {
+    margin-left: -355px;
+  }
+  55% {
     margin-left: -355px;
   }
 
-  66% {
+  59% {
+    margin-left: -355px;
+  }
+
+  60% {
+    margin-left: -710px;
+  }
+  65% {
+    margin-left: -710px;
+  }
+  70% {
+    margin-left: -710px;
+  }
+  75% {
     margin-left: -710px;
   }
 
-  100% {
+  80% {
+    margin-left: -710px;
+  }
+  85% {
+    margin-left: -710px;
+  }
+
+  89% {
+    margin-left: -710px;
+  }
+
+  90% {
     margin-left: -1065px;
+  }
+  95% {
+    margin-left: -1065px;
+  }
+  99% {
+    margin-left: -1065px;
+  }
+
+  100% {
+    margin-left: 355px;
   }
 }
 

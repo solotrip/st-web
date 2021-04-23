@@ -2,14 +2,18 @@
 
 .navbar {
   z-index: 2;
-  background: $navbar-color;
+
   backdrop-filter: blur(100px);
   height: 78px;
   width: 100%;
-  position: fixed;
+  position: absolute;
+
   display: block;
   top: 0;
   left: 0;
+  @include xs-to-sm {
+    position: fixed;
+  }
 }
 .navbarVertical {
   z-index: 2;
@@ -27,8 +31,10 @@
 
 .container {
   //background-color: blueviolet;
+  background: $navbar-color;
+  border-bottom: 0.1px solid $navbar-color-border;
   width: 100%;
-  height: 100px;
+  height: 78px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -61,6 +67,9 @@
   justify-content: center;
   width: 100%;
   height: 40px;
+  @include xs-to-sm {
+    justify-content: center;
+  }
   //background-color: blueviolet;
 }
 
@@ -172,14 +181,24 @@
 
 .logo {
   margin-top: 10px;
-  display: none;
+
+  margin-right: 10px;
+  margin-left: 50px;
   align-items: center;
+  @include xs-to-sm {
+    display: none;
+  }
 
   .icon {
     width: 40px;
     height: 40px;
     margin: 0 0px;
     background: url("../../../assets/pulfy.svg");
+    fill: #3cafeb;
+    path {
+      fill: #3cafeb;
+    }
+
     background-size: contain;
     background-repeat: no-repeat;
     background-position: right center;
@@ -264,8 +283,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 40px;
+  margin-right: 50px;
 
   @include xs-to-md {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 
@@ -479,4 +502,77 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 500;
+}
+
+.pulfy {
+  //background-color: deeppink;
+  font-size: 28px;
+  //font-family: "Montserrat", sans-serif;
+
+  font-family: "proxima-nova", sans-serif;
+
+  margin-top: 230px;
+  text-shadow: 0px 2px 7px #000000;
+  font-weight: bolder;
+  margin-right: 30px;
+  @include xs-to-sm {
+    //display: none;
+  }
+  color: white;
+}
+
+.pulfyIcon {
+  height: 52px;
+  width: 52px;
+  margin-top: 240px;
+  margin-right: 10px;
+  margin-left: 30px;
+  -webkit-filter: drop-shadow(0px 2px 7px rgba(0, 0, 0, 1));
+  filter: drop-shadow(0px 2px 7px rgba(0, 0, 0, 1));
+  path {
+    //fill: #3cafeb;
+  }
+
+  @include xs-to-sm {
+    //display: none;
+  }
+}
+
+.videoHolder {
+  background-color: black;
+}
+
+.headerHolder {
+  margin-top: -100px;
+  background: linear-gradient(
+    -180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(234, 234, 234, 0) 70%
+  );
+  height: 540px;
+}
+
+.headerMotto {
+  //background-color: yellowgreen;
+  color: white;
+  font-size: 50px;
+  width: 50%;
+  padding-left: 40px;
+  margin-top: -300px;
+  max-height: 300px;
+  text-shadow: 4px 4px 7px #000000;
+}
+
+.headerSubtitle {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.recommendationsTitle {
+  //padding-top: 900px;
+  padding-left: 50px;
+  padding-top: 50px;
+  font-size: 30px;
+  padding-bottom: 30px;
+  background-color: yellowgreen;
 }

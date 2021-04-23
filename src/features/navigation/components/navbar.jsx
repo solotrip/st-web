@@ -19,6 +19,9 @@ import InterestsMock from "../../recommendations/interests.json";
 import FiltersMock from "../../recommendations/filters.json";
 import CalendarAlt from "../../recommendations/containers/calendar/calendarAlt";
 
+import { ReactComponent as PulfyIcon } from "../../../assets/pulfy.svg";
+
+import Combined from "./combined.mp4";
 const Navbar = ({
   isLoggedIn,
   loading,
@@ -144,45 +147,13 @@ const Navbar = ({
     setOpenTab(tabToOpen);
   };
   return (
-    <div
-      className={
-        size.width < screenThreshold ? styles.navbar : styles.navbarVertical
-      }
-    >
+    <div className={styles.navbar}>
       {
         <div>
           {size.width < screenThreshold ? (
-            <div
-              className={
-                size.width < screenThreshold
-                  ? styles.container
-                  : styles.containerVertical
-              }
-            >
-              <div
-                className={
-                  size.width < screenThreshold
-                    ? styles.row1
-                    : styles.row1Vertical
-                }
-              >
-                <Link
-                  to="/recommendations"
-                  className={
-                    size.width < screenThreshold
-                      ? styles.logo
-                      : styles.logoVertical2
-                  }
-                >
-                  <div className={styles.icon} />
-                </Link>
-                <div
-                  className={
-                    size.width < screenThreshold
-                      ? styles.actions
-                      : styles.actionsVertical
-                  }
-                >
+            <div className={styles.container}>
+              <div className={styles.row1}>
+                <div className={styles.actions}>
                   <div className={styles.monthSelector}>
                     {availableMonths.map((month) => (
                       <button
@@ -225,47 +196,101 @@ const Navbar = ({
                 </button>
               </div>
               {console.log("widht is: ", size.width)}
-              {children && <div className={styles.content}>{children}</div>}
             </div>
           ) : (
-            <div className={styles.containerVertical}>
-              <div className={styles.row2Vertical}>
-                {size.width >= screenThreshold && (
-                  <Link
-                    to="/recommendations"
-                    className={
-                      size.width < screenThreshold
-                        ? styles.logo
-                        : styles.logoVertical2
-                    }
-                  >
-                    <div className={styles.icon} />
-                  </Link>
-                )}
-                {items.map((item) => (
-                  <button
-                    className={styles.col1Vertical}
-                    onClick={handleOpenSheet}
-                    name={item.name}
-                  >
-                    <button
-                      className={styles.colImage}
-                      style={{
-                        backgroundImage: "url(" + item.image + ")",
-                      }}
-                      name={item.name}
-                    />
-                    <button className={styles.colText} name={item.name}>
-                      {item.name}
-                    </button>
+            <div className={styles.videoHoldera}>
+              <div className={styles.headerHolder}>
+                <video
+                  autoPlay="autoplay"
+                  //src="file:///Users/username/folder/video.webm"
+                  src={Combined}
+                  type="video/mp4"
+                  loop="loop"
+                  muted
+                  preload="auto"
+                  className={styles.videoHolder}
+                  style={{
+                    width: "100%",
+                    position: "absolute",
+                    left: "50%",
+                    right: "50%",
+                    top: "250px",
+                    height: "600px",
+                    objectFit: "cover",
+                    transform: "translate(-50%,-50%)",
+                    zIndex: "-999",
+                  }}
+                >
+                  your browser does not support video tag.
+                </video>
+                <div className={styles.row1}>
+                  <button>
+                    {" "}
+                    <PulfyIcon className={styles.pulfyIcon} />
                   </button>
-                ))}
-                <div className={styles.menuButtonHolderVertical2}>
-                  <MenuButton items={menuItems} />
+                  <button className={styles.pulfy}>pulfy</button>
+                </div>
+              </div>
+              <div className={styles.headerMotto}>
+                Track concerts, events, activities, destinations, accommodations
+                and flights.
+                {/*  All combined. */}
+                <div className={styles.headerSubtitle}>
+                  Set your preferences to get recommendations.
+                </div>
+              </div>
+              <button
+                className={cn(styles.signup2, "glow-on-hover")}
+                onClick={handleOpenSheet}
+                name="Interests"
+                style={{
+                  marginLeft: "40px",
+                  width: "230px",
+                  height: "50px",
+                  fontSize: "20px",
+                  marginTop: "30px",
+                }}
+              >
+                <span role="img" aria-label="Preferences"></span>
+                Set your Preferences
+              </button>
+              <div className={styles.actions} style={{ marginTop: "100px" }}>
+                <div className={styles.monthSelector}>
+                  {availableMonths.map((month) => (
+                    <button
+                      name={month.monthName}
+                      key={month.monthName}
+                      value={month.weeks}
+                      onClick={handleActiveButton}
+                      className={
+                        activeButton === month.monthName
+                          ? styles.activeMonth
+                          : styles.month
+                      }
+                    >
+                      {month.monthName}
+                    </button>
+                  ))}
+                </div>
+                <div className={styles.weekSelector}>
+                  {activeButtonWeeks.map((week) => (
+                    <button
+                      name={week}
+                      className={
+                        activeWeek === week ? styles.activeWeek : styles.week
+                      }
+                      onClick={handleActiveWeek}
+                      key={week}
+                    >
+                      {week}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           )}
+
+          {children && <div className={styles.content}>{children}</div>}
         </div>
       }
       <Sheet
@@ -280,15 +305,14 @@ const Navbar = ({
         <Sheet.Container>
           <Sheet.Header className={styles.sheetHeader} />
           <div className={styles.sheetrow1}>
-            {!onboarding ||
-              (onboarding && openTab == "Interests" && (
-                <button
-                  className={styles.closeSheet}
-                  onClick={() => setSheetOpen(false)}
-                >
-                  <CloseIcon className={styles.closeIcon} />
-                </button>
-              ))}
+            {!onboarding || (onboarding && openTab == "Interests") ? (
+              <button
+                className={styles.closeSheet}
+                onClick={() => setSheetOpen(false)}
+              >
+                <CloseIcon className={styles.closeIcon} />
+              </button>
+            ) : null}
 
             {onboarding && openTab !== "Interests" && (
               <button
@@ -321,17 +345,18 @@ const Navbar = ({
               >
                 Bucketlist
               </button>
+
+              <MenuButton items={menuItems} />
             </div>
 
-            {!onboarding ||
-              (onboarding && openTab == "Bucketlist" && (
-                <button
-                  className={styles.closeSheet}
-                  onClick={() => setSheetOpen(false)}
-                >
-                  <ApplyIcon className={styles.closeIcon} />
-                </button>
-              ))}
+            {!onboarding || (onboarding && openTab == "Bucketlist") ? (
+              <button
+                className={styles.closeSheet}
+                onClick={() => setSheetOpen(false)}
+              >
+                <ApplyIcon className={styles.closeIcon} />
+              </button>
+            ) : null}
             {onboarding && openTab !== "Bucketlist" && (
               <button
                 className={styles.closeSheet}

@@ -1,5 +1,6 @@
 @mixin light-theme {
-  --color-navbar: #cdcaca;
+  --color-navbar-border: #d6d9dc;
+  --color-navbar: #ffffff;
   --color-card-bg: #ffffff;
   --color-text: #2e2e2e;
   --color-sub-text: #404040;
@@ -15,7 +16,7 @@
   --filter-navbar: blur(100px);
   --color-navbar-text: #000000;
   --color-tabbar: #ffffff;
-  --shadow-text: 0px 4px 10px #5e5ce6;
+  --shadow-text: 0px 4px 10px #3af3ff;
   --active-month: #18b2f8;
   --cell-highlighter: 0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4);
 }

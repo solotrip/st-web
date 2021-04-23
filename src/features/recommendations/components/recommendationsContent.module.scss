@@ -1,10 +1,18 @@
 @import "styles/mixins";
+
+.outerWrapper {
+  padding-top: 550px;
+  background-color: $bg-color;
+}
+
+.outerWrapperCentered {
+  padding-top: 50px;
+}
 .wrapper {
   background-color: $bg-color;
   //background-color: cadetblue;
-  padding-left: 300px;
+  padding-left: 30px;
 
-  padding-top: 0px;
   padding-bottom: 100px;
 
   //after there
@@ -30,4 +38,13 @@
 
   &::after {
   }
+}
+
+.title {
+  //padding-top: 900px;
+  padding-left: 50px;
+  padding-top: 50px;
+  font-size: 30px;
+  padding-bottom: 30px;
+  //background-color: yellowgreen;
 }
