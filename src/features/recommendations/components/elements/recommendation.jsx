@@ -571,6 +571,20 @@ const Recommendation = ({ recommendation, user, size }) => {
         onChange={(isVisible) => {
           //isVisible && resetReplayLoop();
           //isVisible && autoReplayLoop();
+
+          isVisible &&
+            size.width < screenThreshold &&
+            setEventsHolderStyles(styles.eventsHolderFullAnimate);
+          isVisible && size.width < screenThreshold && setPlayAnimation(true);
+          isVisible &&
+            size.width < screenThreshold &&
+            setIsRecommendationActive(true);
+
+          !isVisible && setEventsHolderStyles(styles.eventsHolderAnimate);
+          !isVisible && setPlayAnimation(false);
+          !isVisible &&
+            size.width < screenThreshold &&
+            setIsRecommendationActive(false);
         }}
       >
         <div
