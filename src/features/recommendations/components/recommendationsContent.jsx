@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styles from "./recommendationsContent.module.scss";
 import Recommendation from "./elements/recommendation";
+import cn from "classnames";
 
-const RecommendationsContent = ({ recommendations }) => {
+const RecommendationsContent = ({
+  recommendations,
+  isOnboarding,
+  handleOpenSheet,
+}) => {
+  let recommmendationList;
+
+  const [onboarding, setOnboarding] = useState(isOnboarding);
+
+  if (!onboarding) {
+    recommmendationList = recommendations;
+  } else if (onboarding) {
+    recommmendationList = recommendations.slice(0, 3);
+  }
   function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
 
@@ -51,17 +65,18 @@ const RecommendationsContent = ({ recommendations }) => {
         "https://ik.imagekit.io/stmedia/tr:h-800,w-640,fo-auto/Boston-US-a506bdbb-41d2-4d48-b2e4-2180706cbcfa",
     },
   ];
+
   return (
     <div
       className={
-        size.width < screenThreshold
-          ? styles.outerWrapperCentered
-          : styles.outerWrapper
+        !onboarding ? styles.outerWrapperCentered : styles.outerWrapper
       }
     >
       {size.width > screenThreshold && (
         <div>
-          <div className={styles.title}> Recommendations</div>
+          <div className={styles.title}>
+            {onboarding ? "This Month" : "Recommendations"}{" "}
+          </div>
         </div>
       )}
       <div
@@ -69,7 +84,7 @@ const RecommendationsContent = ({ recommendations }) => {
           size.width < screenThreshold ? styles.wrapperCentered : styles.wrapper
         }
       >
-        {recommendations.map((recommendation) => {
+        {recommmendationList.map((recommendation) => {
           return (
             <Recommendation
               recommendation={recommendation}
@@ -79,6 +94,26 @@ const RecommendationsContent = ({ recommendations }) => {
           );
         })}
       </div>
+      {onboarding && (
+        <div className={styles.wantMore}>
+          <div className={styles.wantMoreText}>Want more?</div>
+          <div className={styles.wantMoreButton}>
+            <button
+              className={cn(styles.signup2, "glow-on-hover")}
+              onClick={handleOpenSheet}
+              style={{
+                width: "230px",
+                height: "50px",
+                fontSize: "20px",
+              }}
+              name="Interests"
+            >
+              <span role="img" aria-label="Preferences"></span>
+              Set your Preferences
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

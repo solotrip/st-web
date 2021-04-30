@@ -12,14 +12,15 @@ import {
   FiChevronLeft as BackIcon,
 } from "react-icons/fi";
 import InterestsContainer from "../../recommendations/containers/interests/interests";
-import CalendarContainer from "../../recommendations/containers/calendar/calendar";
 import SignupContainer from "../../auth/containers/signup";
 import LoginContainer from "../../auth/containers/login";
 import InterestsMock from "../../recommendations/interests.json";
 import FiltersMock from "../../recommendations/filters.json";
 import CalendarAlt from "../../recommendations/containers/calendar/calendarAlt";
 
-import { ReactComponent as PulfyIcon } from "../../../assets/pulfy.svg";
+import { ReactComponent as PulfyIcon } from "../../../assets/pold.svg";
+
+import RecommendationsContent from "../../recommendations/components/recommendationsContent";
 
 import Combined from "./combined.mp4";
 const Navbar = ({
@@ -28,7 +29,9 @@ const Navbar = ({
   children,
   items,
   availableMonths,
-  onboarding,
+  isOnboarding,
+  tabToOpen,
+  recommendations,
 }) => {
   function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
@@ -69,6 +72,7 @@ const Navbar = ({
 
     return windowSize;
   }
+
   const size = useWindowSize();
   const screenThreshold = 700;
   const [activeButton, setActiveButton] = useState(
@@ -78,6 +82,8 @@ const Navbar = ({
   const [activeButtonWeeks, setActiveButtonWeeks] = useState(
     availableMonths[0].weeks
   );
+
+  const [onboarding, setOnboarding] = useState(isOnboarding);
 
   const [activeWeek, setActiveWeek] = useState(activeButtonWeeks[0]);
   const handleActiveButton = (e) => {
@@ -130,12 +136,15 @@ const Navbar = ({
       });
   };
 
+  /*
   useEffect(() => {
     if (onboarding) {
       setSheetOpen(true);
       setOpenTab("Interests");
     }
   }, []);
+
+  */
 
   useEffect(() => {
     fetchData();
@@ -146,285 +155,392 @@ const Navbar = ({
     setSheetOpen(true);
     setOpenTab(tabToOpen);
   };
+
+  if (tabToOpen) {
+    handleOpenSheet(tabToOpen);
+  }
   return (
-    <div className={styles.navbar}>
-      {
-        <div>
-          {size.width < screenThreshold ? (
-            <div className={styles.container}>
-              <div className={styles.row1}>
-                <div className={styles.actions}>
-                  <div className={styles.monthSelector}>
-                    {availableMonths.map((month) => (
-                      <button
-                        name={month.monthName}
-                        key={month.monthName}
-                        value={month.weeks}
-                        onClick={handleActiveButton}
-                        className={
-                          activeButton === month.monthName
-                            ? styles.activeMonth
-                            : styles.month
-                        }
-                      >
-                        {month.monthName}
-                      </button>
-                    ))}
+    <>
+      <div className={!onboarding ? styles.navbarFixed : styles.navbar}>
+        {
+          <div>
+            {!onboarding ? (
+              <div className={styles.container}>
+                <div className={styles.row1}>
+                  <div className={styles.logoTextHolder}>
+                    <button>
+                      {" "}
+                      <PulfyIcon className={styles.pulfyIconBar} />
+                    </button>
+                    <button className={styles.pulfyBar}>pulfy</button>
                   </div>
-                  <div className={styles.weekSelector}>
-                    {activeButtonWeeks.map((week) => (
-                      <button
-                        name={week}
-                        className={
-                          activeWeek === week ? styles.activeWeek : styles.week
-                        }
-                        onClick={handleActiveWeek}
-                        key={week}
-                      >
-                        {week}
-                      </button>
-                    ))}
+                  <div className={styles.actions}>
+                    <div className={styles.monthSelector}>
+                      {availableMonths.map((month) => (
+                        <button
+                          name={month.monthName}
+                          key={month.monthName}
+                          value={month.weeks}
+                          onClick={handleActiveButton}
+                          className={
+                            activeButton === month.monthName
+                              ? styles.activeMonth
+                              : styles.month
+                          }
+                        >
+                          {month.monthName}
+                        </button>
+                      ))}
+                    </div>
+                    <div className={styles.weekSelector}>
+                      {activeButtonWeeks.map((week) => (
+                        <button
+                          name={week}
+                          className={
+                            activeWeek === week
+                              ? styles.activeWeek
+                              : styles.week
+                          }
+                          onClick={handleActiveWeek}
+                          key={week}
+                        >
+                          {week}
+                        </button>
+                      ))}
+                    </div>
                   </div>
+                  <button
+                    className={cn(styles.signup2, "glow-on-hover")}
+                    onClick={handleOpenSheet}
+                    name="Interests"
+                  >
+                    <span role="img" aria-label="Preferences"></span>
+                    Preferences
+                  </button>
                 </div>
+                {console.log("widht is: ", size.width)}
+              </div>
+            ) : (
+              <>
+                <div className={styles.videoHoldera}>
+                  <div className={styles.headerHolder}>
+                    <video
+                      autoPlay="autoplay"
+                      //src="file:///Users/username/folder/video.webm"
+                      src={Combined}
+                      type="video/mp4"
+                      loop="loop"
+                      muted
+                      preload="auto"
+                      className={styles.videoHolder}
+                      style={{
+                        width: "100%",
+                        position: "absolute",
+                        left: "50%",
+                        right: "50%",
+                        top: "250px",
+                        height: "600px",
+                        objectFit: "cover",
+                        transform: "translate(-50%,-50%)",
+                        zIndex: "-999",
+                      }}
+                    >
+                      your browser does not support video tag.
+                    </video>
+                    <div className={styles.row1}>
+                      <button>
+                        {" "}
+                        <PulfyIcon className={styles.pulfyIcon} />
+                      </button>
+                      <button className={styles.pulfy}>pulfy</button>
+                    </div>
+                  </div>
+                  <div className={styles.headerMotto}>
+                    {/* Track concerts, events, activities, destinations, accommodations
+                and flights.*/}{" "}
+                    <div> Track everything you want to do.</div>
+                    <div>Get personalized recommendations.</div>
+                    {/*  All combined. */}
+                    <div className={styles.headerSubtitle}>
+                      {/*  Set your preferences to get recommendations. */}
+                      <div className={styles.headerSubtitleElement}>
+                        Concerts, events, activities, destinations,
+                        accommodations and flights. All trackable.
+                      </div>
+
+                      <div className={styles.headerSubtitleElement}>
+                        Start tracking by setting your preferences.
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    className={cn(styles.signup2, "glow-on-hover")}
+                    onClick={handleOpenSheet}
+                    name="Interests"
+                    style={{
+                      marginLeft: "5vw",
+                      width: "230px",
+                      height: "50px",
+                      fontSize: "20px",
+                      marginTop: "30px",
+                    }}
+                  >
+                    <span role="img" aria-label="Preferences"></span>
+                    Set your Preferences
+                  </button>
+                  <button
+                    className={cn(styles.signup, "glow-on-hover")}
+                    onClick={handleOpenSheet}
+                    name="Login"
+                    style={{
+                      marginLeft: "5vw",
+                      width: "230px",
+                      height: "50px",
+                      fontSize: "20px",
+                      marginTop: "15px",
+                    }}
+                  >
+                    <span role="img" aria-label="Preferences"></span>
+                    Login
+                  </button>
+                </div>
+
+                {/*
+              <div className={styles.loginSignupHolder}>
+                {" "}
                 <button
                   className={cn(styles.signup2, "glow-on-hover")}
                   onClick={handleOpenSheet}
-                  name="Interests"
+                  name="Signup"
                 >
-                  <span role="img" aria-label="Preferences"></span>
-                  Preferences
-                </button>
+                  <span role="img" aria-label="Signup"></span>
+                  Signup
+                </button>{" "}
+                <button
+                  className={cn(styles.signup2, "glow-on-hover")}
+                  onClick={handleOpenSheet}
+                  name="Login"
+                  style={{ marginLeft: "10px" }}
+                >
+                  <span role="img" aria-label="Login"></span>
+                  Login
+                </button>{" "}
               </div>
-              {console.log("widht is: ", size.width)}
-            </div>
-          ) : (
-            <div className={styles.videoHoldera}>
-              <div className={styles.headerHolder}>
-                <video
-                  autoPlay="autoplay"
-                  //src="file:///Users/username/folder/video.webm"
-                  src={Combined}
-                  type="video/mp4"
-                  loop="loop"
-                  muted
-                  preload="auto"
-                  className={styles.videoHolder}
-                  style={{
-                    width: "100%",
-                    position: "absolute",
-                    left: "50%",
-                    right: "50%",
-                    top: "250px",
-                    height: "600px",
-                    objectFit: "cover",
-                    transform: "translate(-50%,-50%)",
-                    zIndex: "-999",
+
+              <div className={styles.howItWorksHolder}>
+                <div className={styles.howItWorksTitle}> How it works</div>
+                <div className={styles.howItWorks}>
+                  <div className={styles.howItWorksElement}>Interests</div>+
+                  <div className={styles.howItWorksElement}>
+                    Available Dates
+                  </div>
+                  +
+                  <div className={styles.howItWorksElement}>
+                    Bucketlist Destinations
+                  </div>
+                </div>
+                </div>*/}
+              </>
+            )}
+
+            {children && <div className={styles.content}>{children}</div>}
+          </div>
+        }
+        <Sheet
+          isOpen={sheetOpen}
+          onClose={() => setSheetOpen(false)}
+          springConfig={{
+            stiffness: 300,
+            damping: 20,
+            mass: 0.2,
+          }}
+        >
+          <Sheet.Container>
+            <Sheet.Header className={styles.sheetHeader} />
+            <div className={styles.sheetrow1}>
+              {!onboarding ||
+              (onboarding && openTab == "Interests") ||
+              openTab == "Login" ||
+              openTab == "Signup" ? (
+                <button
+                  className={styles.closeSheet}
+                  onClick={() => setSheetOpen(false)}
+                >
+                  <CloseIcon className={styles.closeIcon} />
+                </button>
+              ) : null}
+
+              {onboarding &&
+                openTab !== "Interests" &&
+                openTab !== "Login" &&
+                openTab !== "Signup" && (
+                  <button
+                    className={styles.closeSheet}
+                    onClick={() => handleNextSheetTab("previous")}
+                  >
+                    <BackIcon className={styles.closeIcon} />
+                  </button>
+                )}
+
+              <div className={styles.sheetTabs}>
+                {openTab !== "Login" && openTab !== "Signup" ? (
+                  <>
+                    <button
+                      className={
+                        openTab == "Interests" && styles.activeSheetTab
+                      }
+                      name="Interests"
+                      onClick={() => setOpenTab("Interests")}
+                    >
+                      Interests
+                    </button>
+                    <button
+                      className={openTab == "Calendar" && styles.activeSheetTab}
+                      name="Calendar"
+                      onClick={() => setOpenTab("Calendar")}
+                    >
+                      Dates
+                    </button>
+                    <button
+                      name="Bucketlist"
+                      className={
+                        openTab == "Bucketlist" && styles.activeSheetTab
+                      }
+                      onClick={() => setOpenTab("Bucketlist")}
+                    >
+                      Bucketlist
+                    </button>
+
+                    <MenuButton items={menuItems} />
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className={openTab == "Login" && styles.activeSheetTab}
+                      name="Login"
+                      onClick={() => setOpenTab("Login")}
+                    >
+                      Login
+                    </button>
+                    <button
+                      name="Signup"
+                      className={openTab == "Signup" && styles.activeSheetTab}
+                      onClick={() => setOpenTab("Signup")}
+                    >
+                      Signup
+                    </button>
+                    <MenuButton items={menuItems} />
+                  </>
+                )}
+              </div>
+
+              {!onboarding ||
+              (onboarding && openTab == "Bucketlist") ||
+              openTab == "Login" ||
+              openTab == "Signup" ? (
+                <button
+                  className={styles.closeSheet}
+                  onClick={() => {
+                    setOnboarding(false);
+                    setSheetOpen(false);
+                    console.log("onboarding kapatiliyor: ", onboarding);
+
+                    {
+                      //setOnboarding(false);
+                    }
                   }}
                 >
-                  your browser does not support video tag.
-                </video>
-                <div className={styles.row1}>
-                  <button>
-                    {" "}
-                    <PulfyIcon className={styles.pulfyIcon} />
+                  <ApplyIcon className={styles.closeIcon} />
+                </button>
+              ) : null}
+              {onboarding &&
+                openTab !== "Bucketlist" &&
+                openTab !== "Login" &&
+                openTab !== "Signup" && (
+                  <button
+                    className={styles.closeSheet}
+                    onClick={() => handleNextSheetTab("next")}
+                  >
+                    <NextIcon className={styles.closeIcon} />
                   </button>
-                  <button className={styles.pulfy}>pulfy</button>
-                </div>
-              </div>
-              <div className={styles.headerMotto}>
-                Track concerts, events, activities, destinations, accommodations
-                and flights.
-                {/*  All combined. */}
-                <div className={styles.headerSubtitle}>
-                  Set your preferences to get recommendations.
-                </div>
-              </div>
-              <button
-                className={cn(styles.signup2, "glow-on-hover")}
-                onClick={handleOpenSheet}
-                name="Interests"
-                style={{
-                  marginLeft: "40px",
-                  width: "230px",
-                  height: "50px",
-                  fontSize: "20px",
-                  marginTop: "30px",
-                }}
-              >
-                <span role="img" aria-label="Preferences"></span>
-                Set your Preferences
-              </button>
-              <div className={styles.actions} style={{ marginTop: "100px" }}>
-                <div className={styles.monthSelector}>
-                  {availableMonths.map((month) => (
-                    <button
-                      name={month.monthName}
-                      key={month.monthName}
-                      value={month.weeks}
-                      onClick={handleActiveButton}
-                      className={
-                        activeButton === month.monthName
-                          ? styles.activeMonth
-                          : styles.month
-                      }
-                    >
-                      {month.monthName}
-                    </button>
-                  ))}
-                </div>
-                <div className={styles.weekSelector}>
-                  {activeButtonWeeks.map((week) => (
-                    <button
-                      name={week}
-                      className={
-                        activeWeek === week ? styles.activeWeek : styles.week
-                      }
-                      onClick={handleActiveWeek}
-                      key={week}
-                    >
-                      {week}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {children && <div className={styles.content}>{children}</div>}
-        </div>
-      }
-      <Sheet
-        isOpen={sheetOpen}
-        onClose={() => setSheetOpen(false)}
-        springConfig={{
-          stiffness: 300,
-          damping: 20,
-          mass: 0.2,
-        }}
-      >
-        <Sheet.Container>
-          <Sheet.Header className={styles.sheetHeader} />
-          <div className={styles.sheetrow1}>
-            {!onboarding || (onboarding && openTab == "Interests") ? (
-              <button
-                className={styles.closeSheet}
-                onClick={() => setSheetOpen(false)}
-              >
-                <CloseIcon className={styles.closeIcon} />
-              </button>
-            ) : null}
-
-            {onboarding && openTab !== "Interests" && (
-              <button
-                className={styles.closeSheet}
-                onClick={() => handleNextSheetTab("previous")}
-              >
-                <BackIcon className={styles.closeIcon} />
-              </button>
-            )}
-
-            <div className={styles.sheetTabs}>
-              <button
-                className={openTab == "Interests" && styles.activeSheetTab}
-                name="Interests"
-                onClick={() => setOpenTab("Interests")}
-              >
-                Interests
-              </button>
-              <button
-                className={openTab == "Calendar" && styles.activeSheetTab}
-                name="Calendar"
-                onClick={() => setOpenTab("Calendar")}
-              >
-                Dates
-              </button>
-              <button
-                name="Bucketlist"
-                className={openTab == "Bucketlist" && styles.activeSheetTab}
-                onClick={() => setOpenTab("Bucketlist")}
-              >
-                Bucketlist
-              </button>
-
-              <MenuButton items={menuItems} />
+                )}
             </div>
 
-            {!onboarding || (onboarding && openTab == "Bucketlist") ? (
-              <button
-                className={styles.closeSheet}
-                onClick={() => setSheetOpen(false)}
-              >
-                <ApplyIcon className={styles.closeIcon} />
-              </button>
-            ) : null}
-            {onboarding && openTab !== "Bucketlist" && (
-              <button
-                className={styles.closeSheet}
-                onClick={() => handleNextSheetTab("next")}
-              >
-                <NextIcon className={styles.closeIcon} />
-              </button>
-            )}
-          </div>
-
-          <Sheet.Content disableDrag={true}>
-            {onboarding && openTab == "Interests" && (
-              <div className={styles.onboardingText}>
-                Welcome to Pulfy!
-                <div>
-                  To know you better, select the ones that interest you and
-                  click next.
+            <Sheet.Content disableDrag={true}>
+              {onboarding && openTab == "Interests" && (
+                <div className={styles.onboardingText}>
+                  <div>
+                    To know you better, select the ones that interest you and
+                    click next.
+                  </div>
                 </div>
-              </div>
-            )}
-            {onboarding && openTab == "Calendar" && (
-              <div className={styles.onboardingText}>
-                <div>Select your available dates and click next.</div>
-              </div>
-            )}
-            {onboarding && openTab == "Bucketlist" && (
-              <div className={styles.onboardingText}>
-                <div>
-                  Select cities or countries on your Bucketlist and click check.
+              )}
+              {onboarding && openTab == "Calendar" && (
+                <div className={styles.onboardingText}>
+                  <div>Select your available dates and click next.</div>
                 </div>
+              )}
+              {onboarding && openTab == "Bucketlist" && (
+                <div className={styles.onboardingText}>
+                  <div>
+                    Select cities or countries on your Bucketlist and click
+                    check.
+                  </div>
+                </div>
+              )}
+
+              <div className={styles.sheetTitle}></div>
+              <div className={styles.sheet}>
+                {openTab == "Interests" && (
+                  <InterestsContainer
+                    data={InterestsMock}
+                    placeHolder={"Search interests or topics"}
+                  />
+                )}
+
+                {openTab == "Bucketlist" && (
+                  <InterestsContainer
+                    data={interestList}
+                    placeHolder={"Search destinations"}
+                  />
+                )}
+
+                {openTab == "Filters" && (
+                  <InterestsContainer
+                    data={FiltersMock}
+                    placeHolder={"Search filters"}
+                  />
+                )}
+
+                {openTab == "Calendar" && <CalendarAlt />}
+                {openTab == "Signup" && <SignupContainer />}
+                {openTab == "Login" && <LoginContainer />}
+
+                {/* Your sheet content goes here */}
               </div>
-            )}
+            </Sheet.Content>
+          </Sheet.Container>
 
-            <div className={styles.sheetTitle}></div>
-            <div className={styles.sheet}>
-              {openTab == "Interests" && (
-                <InterestsContainer
-                  data={InterestsMock}
-                  placeHolder={"Search interests or topics"}
-                />
-              )}
-
-              {openTab == "Bucketlist" && (
-                <InterestsContainer
-                  data={interestList}
-                  placeHolder={"Search destinations"}
-                />
-              )}
-
-              {openTab == "Filters" && (
-                <InterestsContainer
-                  data={FiltersMock}
-                  placeHolder={"Search filters"}
-                />
-              )}
-
-              {openTab == "Calendar" && <CalendarAlt />}
-              {openTab == "Signup" && <SignupContainer />}
-              {openTab == "Login" && <LoginContainer />}
-
-              {/* Your sheet content goes here */}
-            </div>
-          </Sheet.Content>
-        </Sheet.Container>
-
-        <Sheet.Backdrop />
-      </Sheet>
-    </div>
+          <Sheet.Backdrop />
+        </Sheet>
+      </div>
+      {onboarding && (
+        <RecommendationsContent
+          recommendations={recommendations}
+          className={styles.RecommendationsContent}
+          isOnboarding={onboarding}
+          handleOpenSheet={handleOpenSheet}
+        />
+      )}
+      {!onboarding && (
+        <RecommendationsContent
+          recommendations={recommendations}
+          className={styles.RecommendationsContent}
+          isOnboarding={false}
+          handleOpenSheet={handleOpenSheet}
+        />
+      )}
+    </>
   );
 };
 

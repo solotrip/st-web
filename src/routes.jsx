@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SearchContainer from "./features/home/containers/search";
-import CityRoutes from "./features/city/routes";
 import AuthRoutes from "./features/auth/routes";
 import RecommendationRoutes from "./features/recommendations/routes";
 
@@ -20,11 +19,11 @@ const DevRoutes = () => (
 
 const Routes = () => (
   <Router>
-    <Route path="/" component={SearchContainer} exact />
+    {/*<Route path="/" component={SearchContainer} exact />*/}
 
     <RecommendationRoutes />
     <AuthRoutes />
-    <CityRoutes />
+    {/*<CityRoutes /> */}
 
     {/*<NavbarContainer /> */}
     {process.env.NODE_ENV === "development" && <DevRoutes />}

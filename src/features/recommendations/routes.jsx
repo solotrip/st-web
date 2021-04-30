@@ -5,7 +5,7 @@ import RecommendationsContainer from "./containers/recommendations/recommendatio
 
 const Routes = () => (
   <Switch>
-    <Route path="/recommendations" component={RecommendationsContainer} />
+    <Route path="/" component={RecommendationsContainer} />
   </Switch>
 );
 export default Routes;

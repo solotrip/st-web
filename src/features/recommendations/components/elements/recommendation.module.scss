@@ -30,6 +30,8 @@
 .cell {
   background-position: center bottom;
 
+  box-shadow: 0px 2px 2px 5px $navbar-color;
+
   height: 438px;
   width: 355px;
   border-radius: 15px;
@@ -539,6 +541,9 @@
   display: flex;
   flex-direction: column;
   width: 355px;
+  :hover {
+    color: #3cafeb;
+  }
 }
 
 .eventCell {
@@ -561,7 +566,6 @@
 }
 
 .eventDetails {
-  //background-color: darkgoldenrod;
   display: flex;
   flex-direction: column;
   height: 40px;
@@ -580,7 +584,6 @@
 }
 
 .buyButton {
-  background-color: #3cafeb;
   margin-left: auto;
   justify-content: center;
   height: 35px;
@@ -591,5 +594,11 @@
   line-height: 30px;
   border-radius: 16px;
   text-shadow: none;
-  margin-right: 10px;
+  margin-right: 0px;
+}
+
+.buyNow {
+  height: 20px;
+  width: 20px;
+  margin-left: 30px;
 }

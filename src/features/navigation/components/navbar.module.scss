@@ -7,13 +7,28 @@
   height: 78px;
   width: 100%;
   position: absolute;
+  background-color: salmon;
 
   display: block;
   top: 0;
   left: 0;
   @include xs-to-sm {
-    position: fixed;
+    //position: fixed;
   }
+}
+
+.navbarFixed {
+  z-index: 2;
+
+  backdrop-filter: blur(100px);
+  height: 78px;
+  width: 100%;
+  position: fixed;
+  background-color: salmon;
+
+  display: block;
+  top: 0;
+  left: 0;
 }
 .navbarVertical {
   z-index: 2;
@@ -362,6 +377,7 @@
   text-align: center;
   justify-content: center;
   line-height: 30px;
+  color: #3cafeb;
 
   &:hover {
     border: none;
@@ -506,14 +522,14 @@
 
 .pulfy {
   //background-color: deeppink;
-  font-size: 28px;
+  font-size: 34px;
   //font-family: "Montserrat", sans-serif;
 
-  font-family: "proxima-nova", sans-serif;
+  font-family: "Roboto";
 
   margin-top: 230px;
   text-shadow: 0px 2px 7px #000000;
-  font-weight: bolder;
+  font-weight: 500;
   margin-right: 30px;
   @include xs-to-sm {
     //display: none;
@@ -521,14 +537,31 @@
   color: white;
 }
 
+.pulfyBar {
+  //background-color: deeppink;
+  font-size: 34px;
+  //font-family: "Montserrat", sans-serif;
+
+  font-family: "Roboto";
+
+  //text-shadow: 0px 2px 7px #000000;
+  font-weight: 500;
+  margin-right: 30px;
+  @include xs-to-sm {
+    display: none;
+  }
+  //color: white;
+}
+
 .pulfyIcon {
   height: 52px;
   width: 52px;
   margin-top: 240px;
-  margin-right: 10px;
+  margin-right: 0px;
   margin-left: 30px;
-  -webkit-filter: drop-shadow(0px 2px 7px rgba(0, 0, 0, 1));
-  filter: drop-shadow(0px 2px 7px rgba(0, 0, 0, 1));
+  -webkit-filter: brightness(1.4);
+  filter: brightness(1.4);
+
   path {
     //fill: #3cafeb;
   }
@@ -538,26 +571,42 @@
   }
 }
 
+.pulfyIconBar {
+  height: 52px;
+  width: 52px;
+  margin-top: 10px;
+
+  margin-right: 0px;
+  margin-left: 30px;
+  //-webkit-filter: drop-shadow(0px 2px 7px rgba(0, 0, 0, 1));
+  //filter: drop-shadow(0px 2px 7px rgba(0, 0, 0, 1));
+  path {
+    //fill: #3cafeb;
+  }
+
+  @include xs-to-sm {
+    display: none;
+  }
+}
+
 .videoHolder {
   background-color: black;
 }
 
 .headerHolder {
+  background-image: linear-gradient(black, transparent);
   margin-top: -100px;
-  background: linear-gradient(
-    -180deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(234, 234, 234, 0) 70%
-  );
+
   height: 540px;
 }
 
 .headerMotto {
   //background-color: yellowgreen;
   color: white;
-  font-size: 50px;
-  width: 50%;
-  padding-left: 40px;
+  //font-size: 50px;
+  font-size: calc(18px + 3vw);
+  width: 100%;
+  padding-left: 5vw;
   margin-top: -300px;
   max-height: 300px;
   text-shadow: 4px 4px 7px #000000;
@@ -565,7 +614,8 @@
 
 .headerSubtitle {
   margin-top: 20px;
-  font-size: 20px;
+  //font-size: 20px;
+  font-size: calc(12px + 1vw);
 }
 
 .recommendationsTitle {
@@ -575,4 +625,77 @@
   font-size: 30px;
   padding-bottom: 30px;
   background-color: yellowgreen;
+}
+
+.headerSubtitleElement {
+  padding-bottom: 10px;
+}
+
+.howItWorksHolder {
+  background-color: slateblue;
+  height: 450px;
+  width: 100%;
+}
+
+.howItWorksTitle {
+  //font-size: 50px;
+  font-size: calc(18px + 2vw);
+  width: 100%;
+  padding-left: 40px;
+  margin-top: 100px;
+  max-height: 300px;
+  //text-shadow: 4px 4px 7px #000000;
+}
+
+.howItWorks {
+  background-color: salmon;
+  margin-top: 80px;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  align-items: center;
+}
+
+.howItWorksElement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $navbar-color;
+  width: 20vw;
+  height: 20vw;
+  border-radius: 16px;
+  justify-content: center;
+  justify-self: center;
+  text-align: center;
+  align-content: center;
+  font-size: calc(12px + 1vw);
+}
+
+.logoTextHolder {
+  //background-color: goldenrod;
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  // margin-top: -200px;
+}
+
+.loginSignupHolder {
+  background-color: hotpink;
+  margin-top: calc(-400px);
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+  @include xs-to-sm {
+    display: none;
+  }
+}
+
+.RecommendationsContent {
+  height: 600px;
+  width: 100px;
+  background-color: blueviolet;
 }

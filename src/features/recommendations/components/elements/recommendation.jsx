@@ -13,6 +13,9 @@ import {
   AiFillPauseCircle as PauseButton,
 } from "react-icons/ai";
 
+import { BsBoxArrowUpRight as AddIcon2 } from "react-icons/bs";
+import { FaExternalLinkAlt as AddIcon } from "react-icons/fa";
+
 let zerothProgress = 0.0;
 let firstProgress = 0.25;
 let secondProgress = 0.5;
@@ -66,237 +69,6 @@ const Recommendation = ({ recommendation, user, size }) => {
     }, 7500);
   }
 
-  function handleShowEvents() {
-    const div1 = (
-      <>
-        <div className={styles.eventsHolder}>
-          <div className={styles.sectionTitle}> Events </div>
-          <div className={styles.eventsContentHolder}>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>Superbowl Semifinal</div>
-                <div className={styles.eventDescription}> 120$ - Mar 19 </div>
-              </div>
-              <button className={styles.buyButton}>Buy</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>Coldplay Concert</div>
-                <div className={styles.eventDescription}>120$ - Mar 19 </div>
-              </div>
-              <button className={styles.buyButton}>Buy</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div className={styles.eventPhoto} />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>Chocolate Festival</div>
-                <div className={styles.eventDescription}>120$ - Mar 19 </div>
-              </div>
-              <button className={styles.buyButton}>Buy</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div className={styles.eventPhoto} />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>event name</div>
-                <div className={styles.eventDescription}>120$ - Mar 19 </div>
-              </div>
-              <button className={styles.buyButton}>Buy</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div className={styles.eventPhoto} />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>event name</div>
-                <div className={styles.eventDescription}>120$ - Mar 19 </div>
-              </div>
-              <button className={styles.buyButton}>Buy</button>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-    return div1;
-  }
-
-  function handleShowAccommodation() {
-    const div1 = (
-      <>
-        <div className={styles.eventsHolder}>
-          <div className={styles.sectionTitle}> Accommodation </div>
-          <div className={styles.eventsContentHolder}>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>Private Room Rental </div>
-                <div className={styles.eventDescription}>from 28$ </div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>Entire Home Rental</div>
-                <div className={styles.eventDescription}>from 44$</div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>Hostel Bed</div>
-                <div className={styles.eventDescription}>from 10$</div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>Room in 5-star Hotel</div>
-                <div className={styles.eventDescription}>from 55$ </div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-    return div1;
-  }
-
-  function handleShowTransportation() {
-    const div1 = (
-      <>
-        <div className={styles.eventsHolder}>
-          <div className={styles.sectionTitle}> Flights </div>
-          <div className={styles.eventsContentHolder}>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>
-                  Istanbul - {recommendation.name}{" "}
-                </div>
-                <div className={styles.eventDescription}>from 350$</div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>
-                  {recommendation.name} - Istanbul{" "}
-                </div>
-                <div className={styles.eventDescription}>from 410$ </div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>
-                  London - {recommendation.name}{" "}
-                </div>
-                <div className={styles.eventDescription}>from 480$ </div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-            <div className={styles.eventCell}>
-              <div
-                className={styles.eventPhoto}
-                style={{
-                  backgroundImage:
-                    "url(" +
-                    "https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZQ/MW-HE536_airpla_20190225131547_ZQ.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7" +
-                    ")",
-                }}
-              />
-              <div className={styles.eventDetails}>
-                <div className={styles.eventName}>
-                  {recommendation.name} - Amsterdam
-                </div>
-                <div className={styles.eventDescription}>from 530$ </div>
-              </div>
-              <button className={styles.buyButton}>Book</button>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-    return div1;
-  }
-
   function handleShowContent() {
     const div1 = (
       <div className={styles.eventsFrame}>
@@ -317,7 +89,9 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>Superbowl Semifinal</div>
                 <div className={styles.eventDescription}> 120$ - Mar 19 </div>
               </div>
-              <button className={styles.buyButton}>Buy</button>
+              <button className={styles.buyButton}>
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div
@@ -333,7 +107,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>Coldplay Concert</div>
                 <div className={styles.eventDescription}>120$ - Mar 19 </div>
               </div>
-              <button className={styles.buyButton}>Buy</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div className={styles.eventPhoto} />
@@ -341,7 +118,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>Chocolate Festival</div>
                 <div className={styles.eventDescription}>120$ - Mar 19 </div>
               </div>
-              <button className={styles.buyButton}>Buy</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div className={styles.eventPhoto} />
@@ -349,7 +129,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>event name</div>
                 <div className={styles.eventDescription}>120$ - Mar 19 </div>
               </div>
-              <button className={styles.buyButton}>Buy</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div className={styles.eventPhoto} />
@@ -357,7 +140,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>event name</div>
                 <div className={styles.eventDescription}>120$ - Mar 19 </div>
               </div>
-              <button className={styles.buyButton}>Buy</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
           </div>
         </div>
@@ -378,7 +164,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>Private Room Rental </div>
                 <div className={styles.eventDescription}>from 28$ </div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div
@@ -394,7 +183,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>Entire Home Rental</div>
                 <div className={styles.eventDescription}>from 44$</div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div
@@ -410,7 +202,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>Hostel Bed</div>
                 <div className={styles.eventDescription}>from 10$</div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div
@@ -426,7 +221,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 <div className={styles.eventName}>Room in 5-star Hotel</div>
                 <div className={styles.eventDescription}>from 55$ </div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
           </div>
         </div>
@@ -449,7 +247,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 </div>
                 <div className={styles.eventDescription}>from 350$</div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div
@@ -467,7 +268,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 </div>
                 <div className={styles.eventDescription}>from 410$ </div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div
@@ -485,7 +289,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 </div>
                 <div className={styles.eventDescription}>from 480$ </div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
             <div className={styles.eventCell}>
               <div
@@ -503,7 +310,10 @@ const Recommendation = ({ recommendation, user, size }) => {
                 </div>
                 <div className={styles.eventDescription}>from 530$ </div>
               </div>
-              <button className={styles.buyButton}>Book</button>
+              <button className={styles.buyButton}>
+                {" "}
+                <AddIcon className={styles.buyNow} />
+              </button>
             </div>
           </div>
         </div>
@@ -659,51 +469,11 @@ const Recommendation = ({ recommendation, user, size }) => {
       riskLevel: "🦠 COVID: 343 daily cases in USA",
     },
   ];
-  const [activeTabContent, setActiveTabContent] = useState(segmentedContent[0]);
-
-  function resetReplayLoop() {
-    //checkActiveTab(0);
-    //setProgressPercent(0);
-    setActiveButton("first");
-    setActiveTabContent(segmentedContent[0]);
-  }
-
-  async function autoReplayLoop() {
-    let d = 0.0;
-    clearTimeout(timer);
-    for (let i = 0; i <= 8000; i = i + 100) {
-      setTimeout(function () {
-        const x = autoReplayProgress(i / 8000, d);
-      }, i);
-    }
-    //setActiveButton("first");
-    //setActiveTabContent(segmentedContent[0]);
-    /*
-    for (let i = 0; i < 15000; i = i + 50) {
-      setTimeout(function () {
-        const x = autoReplayProgress((i + 50) / 15000);
-      }, i);
-    }
-    */
-  }
-
-  async function autoReplayProgress(x, i) {
-    //let i = 0.0;
-
-    timer = await setTimeout(() => {
-      i = i + x;
-      //clearTimeout(timer);
-      checkActiveTab(i);
-      setProgressPercent(i);
-    }, 1000);
-    //clearTimeout(timer);
-  }
 
   function checkActiveTab(percentValueInt) {
     if (percentValueInt >= firstProgress && percentValueInt < secondProgress) {
       setActiveButton("first");
-      console.log("first progress is: ", firstProgress);
-      console.log("percentvalue is: ", percentValueInt);
+
       setOverviewStyles(styles.svgImage);
       setCloudStyles(styles.svgImage);
       setEventsStyles(styles.svgImageEvents);
@@ -713,7 +483,7 @@ const Recommendation = ({ recommendation, user, size }) => {
       setTextStyle(styles.text);
       setSectionTitle("Events");
 
-      setActiveTabContent(segmentedContent[0]);
+      //setActiveTabContent(segmentedContent[0]);
       //handleShowEvents();
     } else if (
       percentValueInt >= secondProgress &&
@@ -721,8 +491,7 @@ const Recommendation = ({ recommendation, user, size }) => {
     ) {
       setActiveButton("second");
       setSectionTitle("Accommodation");
-      console.log("first progress is: ", firstProgress);
-      console.log("percentvalue is: ", percentValueInt);
+
       setTextStyle(styles.text1);
       setOverviewStyles(styles.svgImage);
       setCloudStyles(styles.svgImage);
@@ -730,7 +499,7 @@ const Recommendation = ({ recommendation, user, size }) => {
       setAccommodationStyles(styles.svgImageActive);
       setFlightsStyles(styles.svgImage);
 
-      setActiveTabContent(segmentedContent[1]);
+      //setActiveTabContent(segmentedContent[1]);
     } else if (
       percentValueInt >= thirdProgress &&
       percentValueInt < forthProgress
@@ -744,11 +513,9 @@ const Recommendation = ({ recommendation, user, size }) => {
       setAccommodationStyles(styles.svgImage);
       setFlightsStyles(styles.svgImageActive);
 
-      setActiveTabContent(segmentedContent[2]);
+      //setActiveTabContent(segmentedContent[2]);
       //handleShowEvents();
     } else if (percentValueInt >= forthProgress) {
-      console.log("first progress is: ", firstProgress);
-      console.log("percentvalue is: ", percentValueInt);
       setActiveButton("forth");
       setSectionTitle("Overview");
       setTextStyle(styles.text3);
@@ -758,7 +525,7 @@ const Recommendation = ({ recommendation, user, size }) => {
       setAccommodationStyles(styles.svgImage);
       setFlightsStyles(styles.svgImage);
 
-      setActiveTabContent(segmentedContent[3]);
+      //setActiveTabContent(segmentedContent[3]);
     }
   }
 
@@ -784,7 +551,7 @@ const Recommendation = ({ recommendation, user, size }) => {
     const percentValue = e.target.value;
     const percentValueInt = parseFloat(percentValue);
     setProgressPercent(percentValue);
-    //e.target.style.width = 100;
+
     checkActiveTab(percentValueInt);
 
     setTextStyle(styles.text);
@@ -792,7 +559,6 @@ const Recommendation = ({ recommendation, user, size }) => {
   };
 
   return (
-    //<div className={styles.wrapper} onTouchStart={autoReplayLoop}>
     <div
       className={
         size.width < screenThreshold
@@ -805,7 +571,6 @@ const Recommendation = ({ recommendation, user, size }) => {
         onChange={(isVisible) => {
           //isVisible && resetReplayLoop();
           //isVisible && autoReplayLoop();
-          //autoReplayLoop();
         }}
       >
         <div
@@ -831,27 +596,13 @@ const Recommendation = ({ recommendation, user, size }) => {
             setAccommodationStyles(styles.svgImage);
             setFlightsStyles(styles.svgImage);
             setProgressPercent(firstProgress);
-            //setPlayAnimation(true);
-            //handlePlayAnimation();
-            // resetReplayLoop();
-            // setActiveButton("first");
-            // setActiveTabContent(segmentedContent[0]);
           }}
           style={{
             backgroundImage: "url(" + recommendation.image + ")",
           }}
         >
           <div className={styles.title}>{recommendation.name}</div>
-          {/*activeButton !== "first" &&
-            activeButton !== "second" &&
-            activeButton !== "third" && (
-              <div className={textStyle}>
-                <div className={styles.sectionTitle}> {sectionTitle} </div>
-                {Object.values(activeTabContent).map(function (element) {
-                  return <div className={textElementStyle}> {element} </div>;
-                })}
-              </div>
-              )*/}
+
           {handleShowContent()}
 
           <button
@@ -863,19 +614,7 @@ const Recommendation = ({ recommendation, user, size }) => {
                 setEventsHolderStyles(styles.eventsHolderAnimate);
               setPlayAnimation(!playAnimation);
             }}
-          >
-            {/*playAnimation ? (
-              <>
-                <PauseButton />
-                <div className={styles.playStopText}>Pause</div>
-              </>
-            ) : (
-              <>
-                <PlayButton />
-                <div className={styles.playStopText}>Play</div>
-              </>
-            )*/}
-          </button>
+          ></button>
           <div className={styles.progressBar}>
             {playAnimation ? (
               <ProgressBar
@@ -891,7 +630,6 @@ const Recommendation = ({ recommendation, user, size }) => {
             )}
           </div>
           <div className={styles.recommendationTabs}>
-            {/* <div className={styles.centeredTabs}></div>*/}
             <button
               name="first"
               className={styles.tabButton}

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 import recommendations from "../../recommendations.json";
 
 import styles from "./recommendations.module.scss";
-import TabBar from "../../components/tabBar";
 
-import RecommendationsContent from "../../components/recommendationsContent";
 import Navbar from "features/navigation/components/navbar";
 
+const onboardingDefault = true;
+
 const RecommendationsContainer = () => {
+  const [onboarding, setOnboarding] = useState(onboardingDefault);
+
   const items = [
     {
       name: "Interests",
@@ -49,17 +50,20 @@ const RecommendationsContainer = () => {
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <RecommendationsContent
+      <div className={styles.wrapperx}>
+        {/* <RecommendationsContent
           recommendations={recommendations}
-          className={styles.RecommendationsContent}
+          className={styles.RecommendationsContentx}
+          isOnboarding={onboarding}
         />
+       */}
 
         <Navbar
           isLoggedIn={false}
           items={items}
           availableMonths={availableMonths}
-          onboarding={false}
+          isOnboarding={onboarding}
+          recommendations={recommendations}
         />
       </div>
     </>
