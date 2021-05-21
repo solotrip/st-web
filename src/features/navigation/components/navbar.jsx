@@ -17,6 +17,7 @@ import LoginContainer from "../../auth/containers/login";
 import InterestsMock from "../../recommendations/interests.json";
 import FiltersMock from "../../recommendations/filters.json";
 import CalendarAlt from "../../recommendations/containers/calendar/calendarAlt";
+import Dates from "../../recommendations/containers/calendar/dates";
 
 import { ReactComponent as PulfyIcon } from "../../../assets/pold.svg";
 
@@ -103,6 +104,18 @@ const Navbar = ({
     setActiveWeek(week);
   };
 
+  const [datesText, setDatesText] = useState("");
+
+  function handleText(from, to) {
+    setDatesText(from + " - " + to);
+  }
+
+  const holidays = [
+    { title: "Annual Leave", dates: "Mar 18 - Mar 23" },
+    { title: "Spring Break", dates: "July 9 - Aug 21" },
+    { title: "Special Holiday", dates: "Nov 11 - Nov 21" },
+  ];
+
   const menuItems = [<ThemeSwitch key="nav-theme-switch" />];
 
   const [sheetOpen, setSheetOpen] = useState(false);
@@ -112,7 +125,7 @@ const Navbar = ({
   const [interestList, setInterestList] = useState();
 
   function handleNextSheetTab(direction) {
-    const tabs = ["Interests", "Calendar", "Bucketlist"];
+    const tabs = ["Interests", "Dates", "Bucketlist"];
     const index = tabs.findIndex((tab) => tab === openTab);
     console.log(
       "next pressed and current tab is:",
@@ -225,13 +238,15 @@ const Navbar = ({
                 <div className={styles.videoHoldera}>
                   <div className={styles.headerHolder}>
                     <video
-                      autoPlay="autoplay"
+                      autoPlay
                       //src="file:///Users/username/folder/video.webm"
                       src={Combined}
+                      playsInline
                       type="video/mp4"
                       loop="loop"
                       muted
                       preload="auto"
+                      id="myVideo"
                       className={styles.videoHolder}
                       style={{
                         width: "100%",
@@ -304,42 +319,6 @@ const Navbar = ({
                     Login
                   </button>
                 </div>
-
-                {/*
-              <div className={styles.loginSignupHolder}>
-                {" "}
-                <button
-                  className={cn(styles.signup2, "glow-on-hover")}
-                  onClick={handleOpenSheet}
-                  name="Signup"
-                >
-                  <span role="img" aria-label="Signup"></span>
-                  Signup
-                </button>{" "}
-                <button
-                  className={cn(styles.signup2, "glow-on-hover")}
-                  onClick={handleOpenSheet}
-                  name="Login"
-                  style={{ marginLeft: "10px" }}
-                >
-                  <span role="img" aria-label="Login"></span>
-                  Login
-                </button>{" "}
-              </div>
-
-              <div className={styles.howItWorksHolder}>
-                <div className={styles.howItWorksTitle}> How it works</div>
-                <div className={styles.howItWorks}>
-                  <div className={styles.howItWorksElement}>Interests</div>+
-                  <div className={styles.howItWorksElement}>
-                    Available Dates
-                  </div>
-                  +
-                  <div className={styles.howItWorksElement}>
-                    Bucketlist Destinations
-                  </div>
-                </div>
-                </div>*/}
               </>
             )}
 
@@ -395,9 +374,9 @@ const Navbar = ({
                       Interests
                     </button>
                     <button
-                      className={openTab == "Calendar" && styles.activeSheetTab}
-                      name="Calendar"
-                      onClick={() => setOpenTab("Calendar")}
+                      className={openTab == "Dates" && styles.activeSheetTab}
+                      name="Dates"
+                      onClick={() => setOpenTab("Dates")}
                     >
                       Dates
                     </button>
@@ -475,9 +454,13 @@ const Navbar = ({
                   </div>
                 </div>
               )}
-              {onboarding && openTab == "Calendar" && (
+              {onboarding && openTab == "Dates" && (
                 <div className={styles.onboardingText}>
-                  <div>Select your available dates and click next.</div>
+                  <div>
+                    Select your available times. You can add a new date or edit
+                    by clicking an item.
+                    {datesText}
+                  </div>
                 </div>
               )}
               {onboarding && openTab == "Bucketlist" && (
@@ -512,6 +495,12 @@ const Navbar = ({
                   />
                 )}
 
+                {openTab == "Dates" && (
+                  <Dates
+                    handler={() => setOpenTab("Calendar")}
+                    dateList={holidays}
+                  />
+                )}
                 {openTab == "Calendar" && <CalendarAlt />}
                 {openTab == "Signup" && <SignupContainer />}
                 {openTab == "Login" && <LoginContainer />}

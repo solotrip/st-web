@@ -453,6 +453,7 @@
   padding-right: 10px;
   font-size: 20px;
   font-weight: 400;
+  color: $inactive-month;
 }
 .activeWeek {
   color: $active-month;
@@ -486,6 +487,7 @@
   font-size: 25px;
   font-weight: 400;
   padding-right: 10px;
+  color: $inactive-month;
 }
 .activeMonth {
   color: $active-month;
@@ -551,6 +553,7 @@
     display: none;
   }
   //color: white;
+  color: $logo-text-color;
 }
 
 .pulfyIcon {

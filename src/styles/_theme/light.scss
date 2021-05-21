@@ -1,6 +1,7 @@
 @mixin light-theme {
-  --color-navbar-border: #d6d9dc;
-  --color-navbar: #ffffff;
+  --color-logo-text: #0e2c49;
+  --color-navbar-border: #ecf3f5;
+  --color-navbar: #ecf3f5;
   --color-card-bg: #ffffff;
   --color-text: #2e2e2e;
   --color-sub-text: #404040;
@@ -16,7 +17,9 @@
   --filter-navbar: blur(100px);
   --color-navbar-text: #000000;
   --color-tabbar: #ffffff;
-  --shadow-text: 0px 4px 10px #3af3ff;
-  --active-month: #18b2f8;
+  --shadow-text: 0px 4px 10px #bdbdbd;
+  --active-month: #556f75;
+  --inactive-month: #bdbdbd;
   --cell-highlighter: 0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4);
+  --cell-bg-image: url("https://wallpaperaccess.com/full/340618.png");
 }

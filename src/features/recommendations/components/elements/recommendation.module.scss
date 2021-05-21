@@ -28,20 +28,30 @@
 }
 
 .cell {
-  background-position: center bottom;
+  //background-position: center bottom;
+  background-image: $cell-bg-image;
+  // background-repeat: no repeat;
+  // background-attachment: fixed;
+  //background-position: bottom;
+  //background-position-y: 100px;
 
   box-shadow: 0px 2px 2px 5px $navbar-color;
 
   height: 438px;
   width: 355px;
   border-radius: 15px;
-  transition: 1s ease;
-  background-blend-mode: overlay;
+  transition: 0.6s ease;
 
-  background-color: rgba($color: #292934, $alpha: 0.9);
+  //background-blend-mode: overlay;
+
+  //background-color: rgba($color: #292934, $alpha: 0.9);
 }
 .cellDark {
-  background-position: center bottom;
+  //background-position: center bottom;
+  background-image: $cell-bg-image;
+  // background-repeat: no repeat;
+  // background-attachment: fixed;
+  // background-position: bottom;
   box-shadow: 0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4),
     5px 5px 0px 0px rgba($color: #5e5ce6, $alpha: 0.4);
 
@@ -49,9 +59,30 @@
   width: 355px;
   border-radius: 15px;
   background-blend-mode: overlay;
-  transition: 1s ease;
+  transition: 0.6s ease;
 
-  background-color: rgba($color: #000000, $alpha: 0.8);
+  animation-duration: 6s;
+  //animation-name: changeBgPosition;
+  //animation-iteration-count: 1;
+  //animation-fill-mode: both;
+  //animation-iteration-count: infinite;
+
+  //background-color: rgba($color: #000000, $alpha: 0.8);
+}
+
+@keyframes changeBgPosition {
+  0% {
+    background-position: 0px;
+  }
+  50% {
+    background-position: 100px;
+  }
+  75% {
+    background-position: 100px;
+  }
+  100% {
+    background-position: 0px;
+  }
 }
 
 .title {

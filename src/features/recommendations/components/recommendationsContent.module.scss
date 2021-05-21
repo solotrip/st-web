@@ -45,9 +45,20 @@
   //padding-top: 900px;
   padding-left: 5vw;
   padding-top: 50px;
-  font-size: calc(12px + 2vw);
+  font-size: 37px;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 36px;
+  white-space: pre-wrap;
+  text-align: left;
   padding-bottom: 30px;
   background-color: $bg-color;
+  color: $logo-text-color;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serif;
+  //font-family: Poppins, Helvetica, Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-line-clamp: none;
   //background-color: salmon;
   //background-color: yellowgreen;
 }

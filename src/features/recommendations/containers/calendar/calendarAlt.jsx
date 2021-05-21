@@ -53,6 +53,7 @@ export default class CalendarAlt extends React.Component {
         <div className={styles.wrapper}>
           <DayPicker
             className="Selectable"
+            mode="range"
             numberOfMonths={this.props.numberOfMonths}
             selectedDays={[from, { from, to }]}
             modifiers={modifiers}

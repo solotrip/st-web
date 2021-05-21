@@ -8,6 +8,8 @@ import { ReactComponent as EventsImage } from "../../../../assets/events.svg";
 import { ReactComponent as AccommodationImage } from "../../../../assets/accommodation.svg";
 import { ReactComponent as FlightsImage } from "../../../../assets/flights.svg";
 
+import blueGradient from "../../../../assets/bluegradient.jpg";
+
 import {
   AiFillPlayCircle as PlayButton,
   AiFillPauseCircle as PauseButton,
@@ -611,9 +613,12 @@ const Recommendation = ({ recommendation, user, size }) => {
             setFlightsStyles(styles.svgImage);
             setProgressPercent(firstProgress);
           }}
-          style={{
-            backgroundImage: "url(" + recommendation.image + ")",
-          }}
+          style={
+            {
+              //backgroundImage: "url(" + recommendation.image + ")",
+              //backgroundImage: "url(" + blueGradient + ")",
+            }
+          }
         >
           <div className={styles.title}>{recommendation.name}</div>
 
