@@ -1,0 +1,18 @@
+@import "styles/mixins";
+
+.outerWrapperCentered {
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+  @include xs-to-md {
+    padding: 75px 5px;
+  }
+}
+
+.wrapperCentered {
+
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 1200px;
+  align-items: flex-start;
+}

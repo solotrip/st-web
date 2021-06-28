@@ -1,11 +1,17 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import OnboardedRoutesWrapper from 'components/routes/onboarded-routes-wrapper'
 //Pages
-import RecommendationsContainer from "./containers/recommendations/recommendations";
+import RecommendationsContainer from './containers/recommendations'
+
 
 const Routes = () => (
   <Switch>
-    <Route path="/" component={RecommendationsContainer} />
+    <Route path="/recommendations">
+      <OnboardedRoutesWrapper>
+        <RecommendationsContainer/>
+      </OnboardedRoutesWrapper>
+    </Route>
   </Switch>
-);
-export default Routes;
+)
+export default Routes

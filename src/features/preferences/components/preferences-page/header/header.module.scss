@@ -1,0 +1,58 @@
+@import "styles/mixins";
+
+.container {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include xs-to-sm {
+    @include custom-horizontal-scroll;
+    overflow-y: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 5px;
+    min-height: 60px;
+    width: 100vw;
+    overflow-x: auto;
+  }
+}
+
+.item {
+  @include roboto-light;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin: 0 16px;
+  width: 60px;
+  color: $border-color;
+}
+
+.active {
+  color: $primary-color;
+  border-bottom: 2px solid $primary-color;
+
+  .name {
+    @include roboto-medium;
+  }
+
+}
+
+.name {
+  @include roboto-regular;
+}
+
+.signup {
+  width: unset;
+  font-size: 1.3rem;
+  border-left: 2px solid $text-color;
+  padding: 0 0 0 16px;
+  margin-left: 0;
+
+  .name {
+    color: $text-color;
+  }
+}

@@ -19,7 +19,7 @@ const Range = React.forwardRef(
         <input
           className={cn(styles.input)}
           onChange={onChange}
-          type='range'
+          type="range"
           ref={ref}
           {...props}
         />

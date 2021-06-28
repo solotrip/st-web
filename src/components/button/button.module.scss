@@ -10,9 +10,25 @@
   border-radius: 16px;
   width: 100%;
   color: #ffffff;
+
+  &:disabled {
+    background: $border-color;
+  }
 }
 
 .buttonText {
   @include roboto-light;
   font-size: 18px;
+}
+
+.loading {
+  animation: infinite;
+}
+
+.icon {
+  margin-left: 4px;
+}
+
+.secondary {
+  background: $warning-color;
 }

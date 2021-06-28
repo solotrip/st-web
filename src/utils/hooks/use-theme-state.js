@@ -1,4 +1,5 @@
 import createPersistedState from 'use-persisted-state'
+
 const useThemeState = createPersistedState('theme')
 export const DARK_CLASS = 'dark'
 export const LIGHT_CLASS = 'light'

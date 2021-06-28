@@ -4,8 +4,15 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import rootReducer from './reducers'
 
+const resettableRootReducer = (state, action) => {
+  if (action.type === 'store/reset') {
+    return rootReducer(undefined, action)
+  }
+  return rootReducer(state, action)
+}
+
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: resettableRootReducer,
   middleware: [...getDefaultMiddleware()]
 })
 

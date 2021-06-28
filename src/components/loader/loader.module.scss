@@ -11,10 +11,12 @@
 .logo {
   align-items: center;
   justify-content: center;
+
   img {
     width: 60px;
     height: 60px;
     animation: up-and-down 2s ease-in-out infinite;
+    fill: $primary-color;
   }
 }
 

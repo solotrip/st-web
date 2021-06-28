@@ -10,7 +10,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "apexcharts": "^3.26.3",
     "axios": "^0.21.1",
     "blurhash": "^1.1.3",
     "classnames": "^2.2.6",
@@ -23,36 +22,26 @@
     "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "qs": "^6.9.4",
-    "react": "^17.0.0",
-    "react-apexcharts": "^1.3.7",
+    "react": "^17.0.2",
     "react-blurhash": "^0.1.3",
     "react-click-away-listener": "^1.5.1",
-    "react-dates": "^21.8.0",
     "react-day-picker": "^7.4.10",
-    "react-dom": "^17.0.0",
+    "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-hook-form": "^6.10.1",
+    "react-hook-form": "^7.9.0",
     "react-i18next": "^11.8.4",
     "react-icons": "^4.2.0",
-    "react-insta-stories": "^2.1.3",
-    "react-lazyload": "^3.1.0",
     "react-modal-sheet": "^1.3.0",
-    "react-month-picker": "^2.2.1",
-    "react-on-screen": "^2.1.1",
     "react-popper": "^2.2.4",
-    "react-rainbow-components": "^1.25.0",
     "react-redux": "^7.2.2",
     "react-responsive": "^8.2.0",
     "react-responsive-carousel": "^3.2.11",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.0",
-    "react-tabs": "^3.2.1",
-    "react-tapper": "^0.1.23",
-    "react-tiny-popover": "^6.0.4",
+    "react-scripts": "^4.0.3",
+    "react-select": "^4.3.1",
     "react-visibility-sensor": "^5.1.1",
     "redux": "^4.0.5",
-    "swiper": "^6.6.2",
     "use-persisted-state": "^0.3.3"
   },
   "scripts": {
@@ -67,76 +56,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "plugin:jsx-a11y/recommended",
-      "plugin:react-hooks/recommended"
-    ],
-    "plugins": [
-      "jsx-a11y",
-      "react-hooks"
-    ],
-    "env": {
-      "browser": true,
-      "es6": true,
-      "jest": true
-    },
-    "rules": {
-      "max-len": [
-        "warn",
-        {
-          "code": 80
-        }
-      ],
-      "indent": [
-        "warn",
-        2,
-        {
-          "ignoredNodes": [
-            "JSXElement",
-            "JSXElement > *",
-            "JSXAttribute",
-            "JSXIdentifier",
-            "JSXNamespacedName",
-            "JSXMemberExpression",
-            "JSXSpreadAttribute",
-            "JSXExpressionContainer",
-            "JSXOpeningElement",
-            "JSXClosingElement",
-            "JSXText",
-            "JSXEmptyExpression",
-            "JSXSpreadChild"
-          ]
-        }
-      ],
-      "semi": [
-        "warn",
-        "never"
-      ],
-      "quotes": [
-        "warn",
-        "single"
-      ],
-      "comma-dangle": [
-        "warn",
-        "never"
-      ],
-      "camelcase": [
-        "warn"
-      ],
-      "object-curly-spacing": [
-        "warn",
-        "always"
-      ],
-      "react/jsx-closing-bracket-location": [
-        1,
-        "line-aligned"
-      ],
-      "arrow-parens": [
-        "warn",
-        "as-needed"
-      ],
-      "linebreak-style": 0
-    }
+      ".eslintrc.json"
+    ]
   },
   "browserslist": {
     "production": [
@@ -157,7 +78,7 @@
     "@storybook/addon-links": "^6.0.28",
     "@storybook/node-logger": "^6.0.28",
     "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "^6.2.9",
+    "@storybook/react": "^6.3.0",
     "babel-loader": "^8.1.0",
     "eslint-plugin-jsx-a11y": "^6.3.0",
     "eslint-plugin-react": "^7.20.0",

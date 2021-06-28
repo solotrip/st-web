@@ -22,7 +22,7 @@ const App = () => {
     } else if (appTheme === LIGHT_CLASS) {
       document.documentElement.classList.remove(DARK_CLASS)
       document.documentElement.classList.add(LIGHT_CLASS)
-    } else if (appTheme === NO_PREF_CLASS)  {
+    } else if (appTheme === NO_PREF_CLASS) {
       document.documentElement.classList.remove(DARK_CLASS)
       document.documentElement.classList.remove(LIGHT_CLASS)
     }

@@ -16,7 +16,7 @@ const Slider = ({ items }) => {
     </div>
   ))
   return (
-    <Carousel className={styles.carousel} showStatus={false}  infiniteLoop>
+    <Carousel className={styles.carousel} showStatus={false} infiniteLoop>
       {slides}
     </Carousel>
   )

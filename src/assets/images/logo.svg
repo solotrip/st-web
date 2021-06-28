@@ -1,1 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 79.7 98.96"><defs><style>.cls-1{fill:url(#radial-gradient);}.cls-2{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:3px;}</style><radialGradient id="radial-gradient" cx="37.63" cy="51.04" fx="9.50255180734263" fy="36.94061478710526" r="44.92" gradientTransform="translate(0 -21.53) scale(1 1.42)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#84cdf2"/><stop offset="0.33" stop-color="#82cbf1"/><stop offset="0.5" stop-color="#7ac4ec"/><stop offset="0.64" stop-color="#6cb8e5"/><stop offset="0.75" stop-color="#59a6db"/><stop offset="0.86" stop-color="#4190cd"/><stop offset="0.88" stop-color="#3b8bca"/></radialGradient></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2"><path class="cls-1" d="M39.85,0C43.94,0,59,.61,70.08,13.17c12,13.57,9.55,30.12,9.18,32.38C75,72.51,39.85,99,39.85,99S4.75,72.51.44,45.55C.07,43.29-2.33,26.74,9.62,13.17,20.68.61,35.76,0,39.85,0Z"/><path class="cls-2" d="M15.5,54.24l14-19a.5.5,0,0,1,.75-.06l4.1,4.1a.51.51,0,0,0,.74,0l9.16-10.54a.51.51,0,0,1,.78,0L64.2,54.08a.49.49,0,0,1-.4.79L15.9,55A.5.5,0,0,1,15.5,54.24Z"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.7 98.96">
+    <defs>
+        <style>.cls-1{fill:url(#radial-gradient);}.cls-2{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:3px;}
+        </style>
+        <radialGradient id="radial-gradient" cx="37.63" cy="51.04" fx="9.50255180734263" fy="36.94061478710526"
+                        r="44.92" gradientTransform="translate(0 -21.53) scale(1 1.42)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#84cdf2"/>
+            <stop offset="0.33" stop-color="#82cbf1"/>
+            <stop offset="0.5" stop-color="#7ac4ec"/>
+            <stop offset="0.64" stop-color="#6cb8e5"/>
+            <stop offset="0.75" stop-color="#59a6db"/>
+            <stop offset="0.86" stop-color="#4190cd"/>
+            <stop offset="0.88" stop-color="#3b8bca"/>
+        </radialGradient>
+    </defs>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_2-2" data-name="Layer 2">
+            <path class="cls-1"
+                  d="M39.85,0C43.94,0,59,.61,70.08,13.17c12,13.57,9.55,30.12,9.18,32.38C75,72.51,39.85,99,39.85,99S4.75,72.51.44,45.55C.07,43.29-2.33,26.74,9.62,13.17,20.68.61,35.76,0,39.85,0Z"/>
+            <path class="cls-2"
+                  d="M15.5,54.24l14-19a.5.5,0,0,1,.75-.06l4.1,4.1a.51.51,0,0,0,.74,0l9.16-10.54a.51.51,0,0,1,.78,0L64.2,54.08a.49.49,0,0,1-.4.79L15.9,55A.5.5,0,0,1,15.5,54.24Z"/>
+        </g>
+    </g>
+</svg>

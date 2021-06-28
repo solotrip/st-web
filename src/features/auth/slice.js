@@ -1,49 +1,94 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import history from 'history/browser'
-import { initializeAuthentication } from 'utils/auth'
+import {
+  clearTokens,
+  initializeAuthentication,
+  updateAccessToken,
+  updateRefreshToken
+} from 'utils/auth'
+import { fetchProfile } from 'features/profile/slice'
 import * as AuthApi from '../../api/auth'
 import _ from 'lodash'
 
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({ email, password }) => {
+  async ({ email, password, history }, { dispatch }) => {
     const { accessToken, refreshToken } = await AuthApi.login({
       email,
       password
     })
-    localStorage.setItem('accessToken', accessToken)
-    localStorage.setItem('refreshToken', refreshToken)
-    history.replace('/')
-    return { accessToken }
+    updateAccessToken(accessToken)
+    updateRefreshToken(refreshToken)
+    dispatch(fetchProfile())
+    history.replace('/recommendations')
   })
+
+export const logout = createAsyncThunk('' +
+  'auth/logout', async ({ history }, { dispatch }) => {
+  clearTokens()
+  dispatch({ type: 'store/reset' })
+  history.replace('/')
+})
+
+export const createGuest = createAsyncThunk(
+  'auth/createGuest',
+  async (_, { dispatch }) => {
+    const { accessToken, refreshToken } = await AuthApi.createGuestUser()
+    updateAccessToken(accessToken)
+    updateRefreshToken(refreshToken)
+    dispatch(fetchProfile())
+  })
+
 
 export const register = createAsyncThunk(
   'auth/register', async ({
-    name, username, email, password
-  }) => {
+    name, username, email, password, history
+  }, { dispatch }) => {
     const { accessToken, refreshToken } = await AuthApi.register({
       name,
       username,
       email,
       password
     })
-    localStorage.setItem('accessToken', accessToken)
-    localStorage.setItem('refreshToken', refreshToken)
-    history.replace('/')
-    return { accessToken }
+    updateAccessToken(accessToken)
+    updateRefreshToken(refreshToken)
+    dispatch(fetchProfile())
+    history.replace('/recommendations')
   })
 
+
+/**
+ * If called with ensureAuth=true,
+ * it will create a guest user if user has not authenticated before.
+ */
 export const initialize = createAsyncThunk(
-  'auth/init', async () => {
-    return await initializeAuthentication()
+  'auth/init', async (ensureAuth = false, { dispatch, getState }) => {
+    const {
+      isAuthenticated,
+      isGuest,
+      username
+    } = await initializeAuthentication()
+
+    if (!isAuthenticated && ensureAuth) {
+      dispatch(createGuest())
+    } else {
+      // Fetch profile only once to prevent unnecessary calls
+      if (isAuthenticated && getState().profile.data === null) {
+        dispatch(fetchProfile())
+      }
+      return {
+        isAuthenticated,
+        isGuest,
+        username
+      }
+    }
   }
 )
 
 const initialState = {
   error: null,
   loading: true,
-  loggedIn: false
+  isAuthenticated: false
 }
 
 const authSlice = createSlice({
@@ -51,21 +96,44 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     reset(state) {
-      state = initialState
+      state = { ...initialState }
     }
   },
   extraReducers: {
     [initialize.pending]: state => {
       state.error = null
-      state.loading = true
-      state.loggedIn = false
+      if (!state.isAuthenticated) {
+        state.loading = true
+      }
     },
     [initialize.fulfilled]: (state, action) => {
-      state.loggedIn = action.payload
-      state.loading = false
+      if (action.payload) {
+        state.isAuthenticated = action.payload.isAuthenticated
+        if (state.isAuthenticated) {
+          state.username = action.payload.username
+          state.isGuest = action.payload.isGuest
+        }
+        state.loading = false
+      }
     },
     [initialize.error]: (state, action) => {
-      state.loggedIn = false
+      state.isAuthenticated = false
+      state.loading = true
+      state.error = _.get(action.error, 'data', action.error.message)
+    },
+    [createGuest.pending]: state => {
+      state.error = null
+      state.loading = true
+      state.isAuthenticated = false
+    },
+    [createGuest.fulfilled]: state => {
+      state.isAuthenticated = true
+      state.username = 'Guest'
+      state.isGuest = true
+      state.loading = false
+    },
+    [createGuest.error]: (state, action) => {
+      state.isAuthenticated = false
       state.loading = true
       state.error = _.get(action.error, 'data', action.error.message)
     },
@@ -73,7 +141,7 @@ const authSlice = createSlice({
       state.error = null
     },
     [login.fulfilled]: state => {
-      state.loggedIn = true
+      state.isAuthenticated = true
     },
     [login.rejected]: (state, action) => {
       state.error = _.get(action.error, 'data', action.error.message)
@@ -82,10 +150,13 @@ const authSlice = createSlice({
       state.error = null
     },
     [register.fulfilled]: state => {
-      state.loggedIn = true
+      state.isAuthenticated = true
     },
     [register.rejected]: (state, action) => {
       state.error = _.get(action.error, 'data', action.error.message)
+    },
+    [logout.fulfilled]: state => {
+      state = { ...initialState }
     }
   }
 })

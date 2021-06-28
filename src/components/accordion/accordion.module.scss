@@ -32,7 +32,7 @@
   transition: transform 0.1s ease-out;
 }
 
-.content {
+.container {
   height: auto;
   max-height: 0;
   overflow: hidden;
@@ -55,7 +55,7 @@
     transform: rotate(90deg);
   }
 
-  .content {
+  .container {
     height: auto;
     max-height: 100vh;
   }

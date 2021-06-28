@@ -1,0 +1,14 @@
+@import "../../../../styles/mixins";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.interestList {
+  margin-top: 120px;
+}

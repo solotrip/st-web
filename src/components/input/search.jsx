@@ -51,7 +51,7 @@ const Search = ({
             onRemove={t.onRemove}
             name={t.name}
             icon={t.icon &&
-            <span role='img' aria-label={t.icon}>{t.icon}</span>}/>
+            <span role="img" aria-label={t.icon}>{t.icon}</span>}/>
         ))
         }
         <input
@@ -68,7 +68,7 @@ const Search = ({
           className={styles.resetButton}
           onClick={handleReset}
           onKeyDown={handleReset}
-          role='button'/>
+          role="button"/>
       }
 
     </div>

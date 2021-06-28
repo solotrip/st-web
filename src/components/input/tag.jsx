@@ -14,7 +14,7 @@ const Tag = ({
       className={cn(styles.tag, { [styles.removable]: onRemove })}
       onClick={onRemove}
       onKeyDown={onRemove}
-      role='button'
+      role="button"
       tabIndex={-1}
     >
       {icon}
@@ -22,7 +22,7 @@ const Tag = ({
       {onRemove &&
       <MdClose
         className={styles.icon}
-        fontSize='inherit'
+        fontSize="inherit"
       />}
     </div>
   )

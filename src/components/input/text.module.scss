@@ -16,6 +16,7 @@
   background: $highlight-bg-color;
   border-radius: 16px;
   border: none;
+
   > .input {
     padding: 10px 12px 10px 12px;
   }
@@ -27,6 +28,7 @@
   width: 100%;
   border: none;
   margin: 4px 0;
+
   &:not(.filled) {
     border-bottom: 1px solid $border-color;
   }

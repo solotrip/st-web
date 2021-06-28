@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { usePopper } from "react-popper";
-import { MdMoreVert } from "react-icons/md";
-import ClickAwayListener from "react-click-away-listener";
-import menuStyles from "./menu-button.module.scss";
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { usePopper } from 'react-popper'
+import { MdMoreVert } from 'react-icons/md'
+import ClickAwayListener from 'react-click-away-listener'
+import menuStyles from './menu-button.module.scss'
 
 const MenuButton = ({ items }) => {
-  const [show, setShow] = useState(false);
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
+  const [show, setShow] = useState(false)
+  const [referenceElement, setReferenceElement] = useState(null)
+  const [popperElement, setPopperElement] = useState(null)
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     modifiers: [{}],
-    strategy: "fixed",
-    placement: "bottom-end",
-    zIndex: "3",
-  });
+    strategy: 'fixed',
+    placement: 'bottom-end',
+    zIndex: '3'
+  })
   return (
     <div className={styles.wrapper}>
       <ClickAwayListener onClickAway={() => setShow(false)}>
@@ -24,7 +24,7 @@ const MenuButton = ({ items }) => {
           type="button"
           ref={setReferenceElement}
         >
-          <MdMoreVert size={24} />
+          <MdMoreVert size={24}/>
         </button>
 
         {show && (
@@ -40,11 +40,11 @@ const MenuButton = ({ items }) => {
         )}
       </ClickAwayListener>
     </div>
-  );
-};
+  )
+}
 
 MenuButton.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.node),
-};
+  items: PropTypes.arrayOf(PropTypes.node)
+}
 
-export default MenuButton;
+export default MenuButton

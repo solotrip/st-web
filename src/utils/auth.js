@@ -17,14 +17,21 @@ export const initializeAuthentication = async () => {
       clearTokens()
     } else {
       try {
-        await refreshTokenAsync()
-        return true
+        if(_isAccessTokenExpired()) {
+          await refreshTokenAsync()
+
+        }
+        return {
+          isAuthenticated: true,
+          isGuest: getIsGuest(),
+          username: getUsername()
+        }
       } catch (e) {
         clearTokens()
       }
     }
   }
-  return false
+  return { isAuthenticated: false }
 }
 
 export const hasLoggedIn = () => {
@@ -32,8 +39,13 @@ export const hasLoggedIn = () => {
 }
 
 export const getUsername = () => {
-  const decodedToken = jwt.decode(token)
+  const decodedToken = jwt.decode(getAccessToken())
   return decodedToken.username
+}
+
+export const getIsGuest = () => {
+  const decodedToken = jwt.decode(getAccessToken())
+  return decodedToken.isGuest
 }
 
 const _isTokenExpired = token => {
@@ -45,7 +57,6 @@ const _isTokenExpired = token => {
 const _isAccessTokenExpired = () => {
   return _isTokenExpired(getAccessToken())
 }
-
 
 const _isRefreshTokenExpired = () => {
   return _isTokenExpired(_getRefreshToken())
@@ -83,7 +94,7 @@ const getAccessToken = () => {
   return token
 }
 
-const updateAccessToken = newToken => {
+export const updateAccessToken = newToken => {
   token = newToken
   localStorage.setItem('accessToken', newToken)
 }

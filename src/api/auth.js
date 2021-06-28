@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { axios as authAxios } from '../utils/st-api-client'
+
 import { SOLOTRIP_V1 } from '../constants/urls'
 
 export async function login({ email, password }) {
@@ -9,7 +11,18 @@ export async function login({ email, password }) {
 
 export async function register({ name, username, email, password }) {
   const url = SOLOTRIP_V1('auth/register')
-  const response = await axios.post(url, { name, username, email, password })
+  const response = await authAxios.post(url, {
+    name,
+    username,
+    email,
+    password
+  })
+  return response.data
+}
+
+export async function createGuestUser() {
+  const url = SOLOTRIP_V1('auth/guest')
+  const response = await axios.post(url)
   return response.data
 }
 

@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { register, reset } from "../slice";
-import SignupPage from "../components/recommendation-signup";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../slice'
+import SignupPage from '../components/signup'
+import { useHistory } from 'react-router-dom'
 
 const SignupContainer = () => {
-  const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.auth);
-  useEffect(() => {
-    dispatch(reset());
-  }, [dispatch]);
+  const dispatch = useDispatch()
+  const { error } = useSelector(state => state.auth)
+  const history = useHistory()
+
   return (
     <SignupPage
       error={error}
@@ -19,11 +19,12 @@ const SignupContainer = () => {
             username,
             email,
             password,
+            history
           })
         )
       }
     />
-  );
-};
+  )
+}
 
-export default SignupContainer;
+export default SignupContainer
