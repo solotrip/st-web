@@ -11,7 +11,6 @@ i18n
 // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
-
     lng: 'en',
     fallbackLng: 'en',
     whitelist: ['en', 'tr'],

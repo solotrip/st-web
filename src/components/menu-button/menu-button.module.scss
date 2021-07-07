@@ -1,10 +1,15 @@
-@import 'styles/mixins';
-.content {
+@import "styles/mixins";
 
+.container {
 }
 
-
 .button {
+  z-index: 999;
   padding: 0 16px;
   color: $navbar-text-color;
+}
+
+.wrapper {
+  background-color: darkviolet;
+  z-index: 999;
 }

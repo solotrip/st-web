@@ -20,7 +20,7 @@ const Accordion = ({ children, name, expandedDefault }) => {
       >
         <span className={styles.name}>{name}</span>
         <span className={styles.icon}>
-          <MdChevronRight fontSize='default'/>
+          <MdChevronRight fontSize="default"/>
         </span>
       </button>
       <div className={styles.content} aria-expanded={expanded}>

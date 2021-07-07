@@ -1,10 +1,13 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import SearchContainer from './features/home/containers/search'
-import CityRoutes from './features/city/routes'
+import HomeContainer from './features/home/containers/home'
 import AuthRoutes from './features/auth/routes'
+import RecommendationRoutes from './features/recommendations/routes'
+import {
+  OnboardingRoutes,
+  PreferencesRoutes
+} from './features/preferences/routes'
 
-import NavbarContainer from './features/navigation/containers/navbar'
 import { Loader } from 'components'
 
 /**
@@ -13,16 +16,19 @@ import { Loader } from 'components'
  */
 const DevRoutes = () => (
   <Switch>
-    <Route path='/test/loading' component={Loader}/>
+    <Route path="/test/loading" component={Loader}/>
   </Switch>
 )
 
 const Routes = () => (
   <Router>
-    <Route path='/' component={SearchContainer} exact/>
+    <Route path="/" component={HomeContainer} exact/>
+    <OnboardingRoutes/>
     <AuthRoutes/>
-    <CityRoutes/>
-    <NavbarContainer/>
+    <RecommendationRoutes/>
+    <PreferencesRoutes/>
+    <Route path="/404">404</Route>
+
     {process.env.NODE_ENV === 'development' && <DevRoutes/>}
   </Router>
 )

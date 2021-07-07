@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  //background-color: red;
+  height: 100px;
+  //width: 100px;
+}
+
+.checkbox {
+  //background-color: cadetblue;
+  // width: 100px;
+  height: 20px;
+  margin: auto;
+}
+
+.dateContent {
+  //background-color: cornflowerblue;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.dateTitle {
+  //background-color: coral;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.dateInfo {
+  //background-color: darkgoldenrod;
+}
+
+.editLabel {
+  //background-color: darkkhaki;
+  margin-top: auto;
+  margin-bottom: auto;
+}

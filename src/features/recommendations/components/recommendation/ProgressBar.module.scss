@@ -1,0 +1,57 @@
+.progressDiv {
+  background-color: rgb(233, 233, 233);
+  border-radius: 0.4rem;
+}
+
+.progress {
+  background: rgb(24, 204, 147);
+  background: linear-gradient(
+                  90deg,
+                  rgba(60, 175, 235, 1) 0%,
+                  rgba(60, 175, 235, 1) 52%,
+                  rgba(60, 175, 235, 1) 100%
+  );
+
+  height: 4px;
+  transition: 1s linear;
+  transition-delay: 0s;
+  border-radius: 0.4rem;
+  margin: 0;
+}
+
+.progressPlay {
+  background: rgb(24, 204, 147);
+  background: linear-gradient(
+                  90deg,
+                  rgba(60, 175, 235, 1) 0%,
+                  rgba(60, 175, 235, 1) 52%,
+                  rgba(60, 175, 235, 1) 100%
+  );
+
+  height: 4px;
+  animation-duration: 15s;
+  animation-name: changewidth;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  border-radius: 0.4rem;
+  animation-direction: forward;
+  margin: 0;
+}
+
+@keyframes changewidth {
+  0% {
+    width: 0px;
+  }
+
+  100% {
+    width: 355px;
+  }
+}
+
+.progressComp h1 {
+  font-size: 10px;
+}
+
+.percentNumber {
+  color: rgb(121, 121, 121);
+}

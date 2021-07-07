@@ -1,5 +1,5 @@
 import axiosOriginal from 'axios'
-import { getValidAccessToken, clearTokens } from 'utils/auth'
+import { clearTokens, getValidAccessToken } from 'utils/auth'
 import qs from 'qs'
 import history from 'history/browser'
 

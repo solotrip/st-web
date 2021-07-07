@@ -18,10 +18,10 @@ const SearchPage = ({
   const tags = useMemo(() => {
     const filterIds = Object.keys(filterValues)
     return filters.filter(f => filterIds.includes(f.uuid))
-      .map(f => ({
-        ...f,
-        onRemove: () => updateFilter(f.uuid, false)
-      }))
+    .map(f => ({
+      ...f,
+      onRemove: () => updateFilter(f.uuid, false)
+    }))
   }, [filterValues, filters, updateFilter])
 
   const handleSearch = value => {
@@ -39,7 +39,7 @@ const SearchPage = ({
     <Header>
       <div className={cn('card', styles.search)}>
         <SearchInput
-          placeholder='Search'
+          placeholder="Search"
           onChange={handleSearch}
           tags={tags}
           maxLength={100}

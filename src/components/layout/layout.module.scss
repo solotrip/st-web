@@ -22,7 +22,7 @@
   justify-content: center;
 
   &.noHeader {
-   margin-top: 80px;
+    margin-top: 80px;
   }
 }
 
@@ -41,7 +41,7 @@
   }
 }
 
-.content {
+.container {
   margin: 24px;
   width: 600px;
   @include xl {

@@ -1,7 +1,6 @@
 @import-normalize;
 @import '_global/fonts';
 @import 'mixins';
-@import '~swiper/swiper.scss';
 @import '_theme/dark';
 @import '_theme/light';
 
@@ -22,11 +21,19 @@ html.dark {
   @include dark-theme;
 }
 
-
 html,
 body {
+  background-color: $bg-color !important;
   text-rendering: geometricPrecision;
   margin: 0;
+  overflow: hidden;
+}
+
+#root {
+  overflow-y: auto;
+  height: 100vh;
+  // Prevent scroll appear/ disappear jump
+  margin-left: calc(100vw - 100%);
 }
 
 * {
@@ -144,3 +151,17 @@ hr {
     background-position: 0 0;
   }
 }
+
+.spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

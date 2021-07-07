@@ -20,7 +20,8 @@ const Text = React.forwardRef(
           styles.inputContainer,
           { [styles.filled]: filled },
           className
-        )}>
+        )}
+      >
         {BeforeComponent && <BeforeComponent/>}
         <input
           className={styles.input}

@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { register, reset } from '../slice'
-import SignupPage from '../components/alternative-signup-page'
+import { register } from '../slice'
+import SignupPage from '../components/signup'
+import { useHistory } from 'react-router-dom'
 
 const SignupContainer = () => {
   const dispatch = useDispatch()
   const { error } = useSelector(state => state.auth)
-  useEffect(() => {
-    dispatch(reset())
-  }, [dispatch])
+  const history = useHistory()
+
   return (
     <SignupPage
       error={error}
@@ -18,7 +18,8 @@ const SignupContainer = () => {
             name,
             username,
             email,
-            password
+            password,
+            history
           })
         )
       }

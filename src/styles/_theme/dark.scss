@@ -1,17 +1,26 @@
 @mixin dark-theme {
-  --color-bg: #1B1B22;
-  --color-card-bg: #25262C;
+  --color-logo-text: #ffffff;
+  --color-tabbar: #292934;
+  --color-navbar: #161b22;
+  --color-navbar-border: #161b22;
+  --color-bg: #090c10;
+  --color-card-bg: #25262c;
   --color-text: #fefefe;
   --color-sub-text: #e0e0e0;
   --color-active-text: #3cafeb;
   --color-text-inverted: #2e2e2e;
   --color-sub-text-inverted: #404040;
-  --color-highlight-bg: #1c1c20;
+  --color-highlight-bg: #2c2c30;
   --color-border: #1f1f23;
   --color-border-alternative: #4f4f53;
   --color-primary: #3cafeb;
   --color-primary-light: #6495ce;
-  --color-navbar: #242b2e;
+  --filter-navbar: blur(100px);
   --color-navbar-text: #ffffff;
+  --shadow-text: 0px 4px 10px #5e5ce6;
+  --active-month: #3cafeb;
+  --inactive-month: #bdbdbd;
+  --cell-highlighter: 0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4);
+  --cell-bg-image: url("https://wallpaperaccess.com/full/1155023.jpg");
+  --color-warning: #c04444;
 }
-

@@ -1,0 +1,47 @@
+@import "styles/mixins";
+
+.coordinate {
+  margin-right: 10px;
+}
+
+.button {
+  width: unset;
+  padding: 5px 20px;
+  min-width: 280px;
+  margin: 10px 0;
+}
+
+.select {
+
+  :global(.rs__control) {
+    background-color: $highlight-bg-color;
+    color: $text-color;
+    border-color: $border-color;
+    border-radius: 16px;
+  }
+  :global(.rs__menu) {
+    background-color: $highlight-bg-color;
+  }
+
+  :global(.rs__option--is-focused),:global(.rs__option--is-selected), :global(.rs__option:hover) {
+    background-color: $card-bg-color ;
+  }
+  :global(.rs__option:hover) {
+    background-color: $card-bg-color !important;
+  }
+  :global(.rs__multi-value) {
+    background-color: $card-bg-color;
+  }
+  :global(.rs__menu-list) {
+    @include custom-scroll;
+  }
+  :global(.rs__multi-value__label) {
+    color: $text-color;
+  }
+  :global(.rs__input) {
+    color: $text-color;
+  }
+  :global(.rs__multi-value__remove):hover {
+    background-color: $warning-color;
+  }
+}

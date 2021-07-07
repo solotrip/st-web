@@ -12,29 +12,34 @@ const MenuButton = ({ items }) => {
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     modifiers: [{}],
     strategy: 'fixed',
-    placement: 'bottom-end'
+    placement: 'bottom-end',
+    zIndex: '3'
   })
   return (
-    <>
+    <div className={styles.wrapper}>
       <ClickAwayListener onClickAway={() => setShow(false)}>
         <button
           onClick={() => setShow(!show)}
           className={menuStyles.button}
-          type='button'
+          type="button"
           ref={setReferenceElement}
         >
           <MdMoreVert size={24}/>
         </button>
 
-        {show && <div className='card'
-                      ref={setPopperElement}
-                      style={styles.popper}
-                      {...attributes.popper}>
-          {items}
-        </div>
-        }
+        {show && (
+          <button
+            className="card"
+            ref={setPopperElement}
+            style={{ ...styles.popper, zIndex: 10000 }}
+            {...attributes.popper}
+            onClick={() => setShow(!show)}
+          >
+            {items}
+          </button>
+        )}
       </ClickAwayListener>
-    </>
+    </div>
   )
 }
 

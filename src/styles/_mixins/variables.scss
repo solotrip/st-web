@@ -1,5 +1,6 @@
 // Colors
 $text-color: var(--color-text);
+$logo-text-color: var(--color-logo-text);
 $sub-text-color: var(--color-sub-text);
 $bg-color: var(--color-bg);
 $card-bg-color: var(--color-card-bg);
@@ -12,9 +13,19 @@ $inverted-text-color: var(--color-text-inverted);
 $primary-color: var(--color-primary);
 $light-primary-color: var(--color-primary-light);
 $navbar-color: var(--color-navbar);
+$navbar-color-border: var(--color-navbar-border);
 $navbar-text-color: var(--color-navbar-text);
+$tabbar-color: var(--color-tabbar);
+$navbar-filter: var(--filter-navbar);
+$text-shadow: var(--shadow-text);
+$active-month: var(--active-month);
+$inactive-month: var(--inactive-month);
+$cell-highlighter: var(--cell-highlighter);
+$cell-bg-image: var(--cell-bg-image);
+$warning-color: var(--color-warning);
 
 $white: #ffffff;
+$green: #58cf52;
 
 $sidebar-width: 300px;
 $border-radius: 16px;
