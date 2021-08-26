@@ -1,0 +1,16 @@
+@import 'styles/mixins';
+
+.image {
+  height: 600px;
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+}
+
+.carousel {
+  :global(.control-arrow) {
+    &:hover {
+      background: transparent !important;
+    }
+  }
+}

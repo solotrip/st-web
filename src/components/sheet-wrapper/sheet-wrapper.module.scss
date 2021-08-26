@@ -1,0 +1,27 @@
+@import 'styles/mixins';
+@use 'sass:color';
+
+.sheetHeader {
+  background-color: $navbar-color;
+}
+
+
+.container {
+  :global(.react-modal-sheet-container) {
+    background-color: $navbar-color !important;
+    z-index: 4;
+  }
+}
+
+:global(.react-modal-sheet-backdrop) {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  z-index: 3;
+}
+
+.closeSheet {
+  position: absolute;
+  right: 8px;
+  top: 40px;
+  font-size: 32px;
+  z-index: 5;
+}

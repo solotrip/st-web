@@ -1,0 +1,173 @@
+@import "styles/mixins";
+
+.navbarFixed {
+  z-index: 999;
+  backdrop-filter: blur(100px);
+  height: 58px;
+  width: 100%;
+  position: fixed;
+  background: $navbar-color;
+  display: flex;
+  top: 0;
+  left: 0;
+  //border-bottom: 1px solid $navbar-color-border;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  align-self: center;
+  padding: 0 5px;
+}
+
+.logoTextHolder {
+  display: flex;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulfyBar {
+  @include xs-to-sm {
+    display: none;
+  }
+}
+
+.pulfyIconBar {
+  height: 36px;
+  width: 36px;
+}
+
+.actions {
+  //background-color: yellowgreen;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  //justify-content: space-between;
+  margin-left: 10px;
+  flex: 1;
+  @include xs-to-sm {
+    max-width: calc(100% - 100px);
+  }
+}
+
+.logod {
+  @include xs-to-md {
+    display: none;
+  }
+}
+.logodd {
+  //width: 40px;
+  //height: 40px;
+}
+
+.monthSelector {
+  width: 100%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include xs-to-sm {
+  }
+}
+
+.month {
+  @include roboto-light;
+  padding: 0 5px;
+  margin: 0 5px;
+  font-size: 25px;
+  color: $inactive-month;
+}
+
+.activeMonth {
+  @include roboto-regular;
+  color: $active-month;
+  text-shadow: $text-shadow;
+}
+
+.weekSelector {
+  padding-left: 10px;
+  margin-top: 5px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include xs-to-sm {
+    overflow-x: auto;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 100%;
+    @include custom-horizontal-scroll;
+  }
+}
+
+.week {
+  @include roboto-light;
+  font-size: 20px;
+  min-width: 5rem;
+  text-align: center;
+  color: $inactive-month;
+}
+
+.activeWeek {
+  @include roboto-regular;
+  color: $active-month;
+  text-shadow: $text-shadow;
+}
+
+.interestButton {
+  text-align: center;
+  line-height: 35px;
+  height: 35px;
+  background-color: #1697dc;
+  color: #ffffff;
+  border-radius: 16px;
+  width: 120px;
+  display: none;
+
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.interestIconButton {
+  //background-color: yellowgreen;
+
+  padding: 6px;
+  display: block;
+  @include xs-to-md {
+    display: block;
+  }
+  margin-right: 20px;
+}
+
+.circleEdit {
+  width: 30px;
+  height: 30px;
+}
+
+.bellEdit {
+  width: 26px;
+  height: 26px;
+}
+
+.calendarEdit {
+  width: 26px;
+  height: 26px;
+  margin-left: 10px;
+}
+
+.currentDates {
+  font-size: 24px;
+  min-width: 5rem;
+  text-align: center;
+  font-weight: 500;
+  //background-color: yellowgreen;
+  //color: $inactive-month;
+}

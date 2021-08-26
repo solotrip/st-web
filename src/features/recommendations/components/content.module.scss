@@ -1,0 +1,54 @@
+@import "styles/mixins";
+
+.outerWrapperCentered {
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+  @include xs-to-md {
+    padding: 75px 5px;
+  }
+}
+
+.mostOuted {
+  display: flex;
+  flex-direction: row;
+  background-color: $bg-color;
+}
+
+.wrapperCentered {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 1200px;
+  align-items: flex-start;
+}
+
+.rowin {
+  //background-color: yellowgreen;
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 1200px;
+  align-items: flex-start;
+}
+
+.segmented {
+  // background-color: white;
+  margin-top: 0px;
+  border-radius: 16px;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+}
+
+.mapbox {
+  background-color: $bg-color;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  right: 0px;
+  //width: 100px;
+  height: 100vh;
+  width: calc(130%);
+  display: flex;
+  @include xs-to-md {
+    display: none;
+  }
+}

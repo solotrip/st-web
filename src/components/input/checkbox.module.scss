@@ -1,0 +1,80 @@
+@import 'styles/mixins';
+
+.container {
+  @include roboto-medium;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+  border-radius: 8px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  border: 1px solid $alternative-border-color;
+  background-color: transparent;
+  border-radius: 6px;
+
+}
+
+.container:hover .input ~ .checkmark {
+  background-color: transparent;
+}
+
+.container .input:checked ~ .checkmark {
+  background-color: $primary-color;
+  border-color: $primary-color
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container .input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 3px;
+  height: 7px;
+  border: solid $white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.name {
+
+}
+
+.icon {
+
+}
+
+.labelContainer {
+  display: inline-flex;
+  align-items: center;
+}

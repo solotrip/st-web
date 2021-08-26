@@ -1,0 +1,75 @@
+@mixin custom-scroll {
+  scrollbar-color: rgba(0, 0, 0, 0.25);
+  scrollbar-width: thin;
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1); /* color of the scroll thumb */
+    border-radius: 4px; /* roundness of the scroll thumb */
+    border: 2px solid rgba(0, 0, 0, 0.05); /* creates padding around scroll thumb */
+  }
+
+  &::-webkit-scrollbar {
+    width: 4px; /* width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05); /* color of the tracking area */
+  }
+}
+
+@mixin custom-horizontal-scroll {
+  scrollbar-color: rgba(0, 0, 0, 0.25);
+  scrollbar-width: none;
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1); /* color of the scroll thumb */
+    border-radius: 4px; /* roundness of the scroll thumb */
+    border: 2px solid rgba(0, 0, 0, 0.05); /* creates padding around scroll thumb */
+  }
+
+  &::-webkit-scrollbar {
+    height: 0px; /* width of the entire scrollbar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05); /* color of the tracking area */
+  }
+}
+
+
+.shadow {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/**
+Styles applied with this mixin will only apply on dark theme
+ */
+@mixin whenDark {
+  html.dark & {
+    @content;
+  }
+  @media (prefers-color-scheme: dark) {
+    & {
+      @content;
+    }
+  }
+}
+
+/**
+Styles applied with this mixin will only apply on light theme
+ */
+@mixin whenLight {
+  html.light & {
+    @content;
+  }
+
+  @media (prefers-color-scheme: light) {
+    & {
+      @content;
+    }
+  }
+
+  @media (prefers-color-scheme: no-preference) {
+    & {
+      @content;
+    }
+  }
+}

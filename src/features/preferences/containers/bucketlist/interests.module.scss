@@ -1,0 +1,13 @@
+@import "../../../../styles/mixins";
+
+.wrapper {
+  background-color: $navbar-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.interestList {
+  margin-top: 120px;
+}
