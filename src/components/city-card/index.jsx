@@ -7,9 +7,11 @@ import { Image } from 'components'
 
 const CityCard = ({ name, id, image, className }) => {
   return (
-    <Link className={cn([styles.wrapper, className])}
-          to={{ pathname: `/cities/${id}/overview` }}>
-      <Image alt={`${name}`} className={styles.image} src={image}/>
+    <Link
+      className={cn([styles.wrapper, className])}
+      to={{ pathname: `/cities/${id}/overview` }}
+    >
+      <Image alt={`${name}`} className={styles.image} src={image} />
       <div className={styles.content}>
         <div className={styles.title}>{name}</div>
       </div>

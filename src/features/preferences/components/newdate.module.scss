@@ -1,0 +1,52 @@
+@import "styles/mixins";
+.wrapper {
+  width: 100%;
+
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.center {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  //  max-width: 350px;
+  //margin: 0 auto;
+  // background-color: blueviolet;
+}
+
+.howLong {
+  margin-top: 20px;
+  display: flexs;
+}
+
+.input {
+  background-color: $card-bg-color;
+  border-radius: 16px;
+  height: 30px;
+  //border-color: rgb(55, 65, 81);
+  color: $text-color;
+}
+.field {
+  width: 90%;
+  height: 50px;
+  font-size: 16px;
+  background-color: $card-bg-color;
+  border: 0px solid white;
+  border-radius: 10px;
+  transition: 0.1s ease-in;
+  margin-top: 10px;
+  color: $text-color;
+  text-indent: 10px;
+}
+
+.field:focus {
+  border: 1px solid #3cafeb;
+}

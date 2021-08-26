@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import cn from "classnames";
 import styles from "./header.module.scss";
 import { MdSettings } from "react-icons/md";
@@ -39,17 +39,14 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
   return (
     <div className={styles.navbarFixed}>
       <div className={styles.container}>
-        <Link
-          to="/recommendations/preferences/3"
-          className={styles.logoTextHolder}
-        >
+        <Link to="/recommendations" className={styles.logoTextHolder}>
           {/*<PulfyIcon className={styles.pulfyIconBar} />*/}
           <img
             className={styles.calendarEdit}
             src={
               appTheme == "light"
-                ? "https://ik.imagekit.io/7zlqc1cmihe/calendaredit_FkubfbVH4.svg?updatedAt=1629286595546"
-                : "https://ik.imagekit.io/7zlqc1cmihe/lightcalendaredit_WyMEb8aUo.svg?updatedAt=1629315661303"
+                ? "https://ik.imagekit.io/7zlqc1cmihe/goback_b9jA88tXl.svg?updatedAt=1629375128527"
+                : "https://ik.imagekit.io/7zlqc1cmihe/lightgoback_ltxjEwdDjz.svg?updatedAt=1629375128470"
             }
             alt=""
           />
@@ -57,7 +54,7 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
           {/*<span className={styles.pulfyBar}>pulfy</span>*/}
         </Link>
         <div className={styles.actions}>
-          <div className={styles.currentDates}> 28 June - 5 July</div>
+          <div className={styles.currentDates}>Notifications</div>
 
           {/*<div className={styles.monthSelector}>
             {availableMonths.map((month) => (
@@ -96,30 +93,7 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
         >
           Preferences
         </Link>
-        <Link className={styles.interestIconButton} to="/notifications">
-          <img
-            className={styles.backpackEdit}
-            src={
-              appTheme == "light"
-                ? "https://ik.imagekit.io/7zlqc1cmihe/backpack_WhntvpOxYc.svg?updatedAt=1629412156833"
-                : "https://ik.imagekit.io/7zlqc1cmihe/lightbackpack_7_ePEvmV6.svg?updatedAt=1629412156777"
-            }
-            alt=""
-          />
-          {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
-        </Link>
-        <Link className={styles.interestIconButton} to="/notifications">
-          <img
-            className={styles.bellEdit}
-            src={
-              appTheme == "light"
-                ? "https://ik.imagekit.io/7zlqc1cmihe/belledit_bpnuI1-uGa.svg?updatedAt=1629286595477"
-                : "https://ik.imagekit.io/7zlqc1cmihe/lightbelledit_nazmTUMRwk.svg?updatedAt=1629315661331"
-            }
-            alt=""
-          />
-          {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
-        </Link>
+
         <Link
           className={styles.interestIconButton}
           to="/recommendations/preferences/4"
