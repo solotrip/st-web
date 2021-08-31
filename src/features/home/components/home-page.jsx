@@ -1,357 +1,70 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import cn from "classnames";
+import Footer from "./footer";
+
 import styles from "./home-page.module.scss";
-import { ReactComponent as PulfyIcon } from "../../../assets/pold.svg";
 import { Link } from "react-router-dom";
-//import Combined from "assets/combined.mp4";
-import Recommendation from "../../recommendations/components/recommendation/index";
-import Content from "../../recommendations/components/content";
+
 import { isMobile } from "react-device-detect";
 
 import ImageShadow from "react-image-shadow";
 import "react-image-shadow/assets/index.css";
 
-import { profileSelector } from "../../profile/slice";
-
 import {
   FaExternalLinkAlt as AddIcon,
   FaChevronLeft,
   FaChevronRight,
-  FaRegHeart,
-  FaHeart,
 } from "react-icons/fa";
 
 let yourspecs = [
   {
     link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
+      "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     title: "Events & Festivals",
+    key: 14,
   },
   {
     link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+      "https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
     title: "Acommodation",
+    key: 24,
   },
   {
     link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
+      "https://images.unsplash.com/photo-1605590427165-3884d6aa6731?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
     title: "Flights",
+    key: 34,
   },
   {
     link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+      "https://images.unsplash.com/photo-1523384709476-df63a9564991?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=668&q=80",
     title: "Visa Status",
+    key: 44,
   },
   {
     link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
+      "https://images.unsplash.com/photo-1565881606991-789a8dff9dbb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=802&q=80",
     title: "Attractions",
+    key: 54,
   },
   {
     link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+      "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1778&q=80",
     title: "Covid Stats",
+    key: 74,
   },
   {
     link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
+      "https://images.unsplash.com/photo-1585391443707-de9291b9acb2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGNvdW50cnl8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
     title: "General Status",
+    key: 84,
   },
   {
     link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
+      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     title: "Cost of Living",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Events & Festivals",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Acommodation",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Flights",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Visa Status",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Attractions",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Covid Stats",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "General Status",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Cost of Living",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Events & Festivals",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Acommodation",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Flights",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Visa Status",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Attractions",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Covid Stats",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "General Status",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Cost of Living",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Events & Festivals",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Acommodation",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Flights",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Visa Status",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "Attractions",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Covid Stats",
-  },
-  {
-    link:
-      "https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg",
-    title: "General Status",
-  },
-  {
-    link:
-      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-    title: "Cost of Living",
+    key: 64,
   },
 ];
-
-let recommendation = {
-  activities: ["activity1", "activity2"],
-  bucketlisted: false,
-  climate: {
-    humidity: 66.3,
-    rainy_days: 9,
-    t_avg: 22,
-    t_max: 28.6,
-    t_min: 15.7,
-    w_speed: 9.7,
-  },
-  country: {
-    country_code: "PL",
-    ISO2: "PL",
-    emoji_flag: "🇵🇱",
-    name: "Poland",
-    visa_free_for: [
-      "IT",
-      "WS",
-      "SC",
-      "MO",
-      "MT",
-      "ME",
-      "VG",
-      "RO",
-      "AD",
-      "PW",
-      "FO",
-      "RS",
-      "GU",
-      "HM",
-      "GB",
-      "MH",
-      "NZ",
-      "ES",
-      "CR",
-      "SE",
-      "DK",
-      "HU",
-      "BR",
-      "CZ",
-      "DE",
-      "JP",
-      "MK",
-      "MD",
-      "BL",
-      "TW",
-      "VU",
-      "VI",
-      "CY",
-      "SV",
-      "PF",
-      "GD",
-      "HK",
-      "AR",
-      "BS",
-      "BN",
-      "BG",
-      "VE",
-      "FK",
-      "GL",
-      "HN",
-      "JE",
-      "TT",
-      "IL",
-      "NL",
-      "CO",
-      "DM",
-      "LU",
-      "NU",
-      "AT",
-      "LT",
-      "SM",
-      "BE",
-      "CH",
-      "BA",
-      "PA",
-      "US",
-      "GI",
-      "SG",
-      "AS",
-      "AI",
-      "AW",
-      "BM",
-      "KY",
-      "LC",
-      "PM",
-      "VC",
-      "TC",
-      "WF",
-      "AX",
-      "BB",
-      "IO",
-      "CL",
-      "CK",
-      "CW",
-      "FI",
-      "GT",
-      "IS",
-      "KI",
-      "LI",
-      "MU",
-      "MX",
-      "PY",
-      "KN",
-      "MF",
-      "TL",
-      "TO",
-      "HR",
-      "EE",
-      "FR",
-      "TF",
-      "IE",
-      "LV",
-      "MY",
-      "FM",
-      "MC",
-      "MS",
-      "NI",
-      "NF",
-      "MP",
-      "NO",
-      "PN",
-      "SX",
-      "SI",
-      "GS",
-      "UY",
-      "TV",
-      "AG",
-      "AU",
-      "CA",
-      "GR",
-      "GG",
-      "IM",
-      "KR",
-      "NC",
-      "PE",
-      "PR",
-      "SH",
-      "SK",
-      "UA",
-      "SJ",
-      "PT",
-      "SB",
-      "AE",
-      "AL",
-      "GE",
-      "VA",
-    ],
-    visa_on_arrival_for: [],
-    languages: ["Polish"],
-    names: {
-      name_de: "Polen",
-      name_en: "Poland",
-      name_es: "Polonia",
-      name_fr: "Pologne",
-      name_it: "Polonia",
-      name_ru: "Польша",
-      name_tr: "Polonya",
-      name_zh: "波兰",
-    },
-  },
-  events: [],
-  name: "Budapest",
-  popular: true,
-  sid: "budapest",
-};
 
 const HomePage = ({}) => {
   //const { data: user, loading: profileLoading } = useSelector(profileSelector);
@@ -431,8 +144,11 @@ const HomePage = ({}) => {
                     width={80}
                     shadowBlur={10}
                     alt="a"
+                    key={spec.key + "887"}
                   />
-                  <div className={styles.slideText}>{spec.title}</div>
+                  <div className={styles.slideText} key={spec.key + "34"}>
+                    {spec.title}
+                  </div>
                 </div>
               ))}
             </div>
@@ -471,8 +187,11 @@ const HomePage = ({}) => {
                     width={80}
                     shadowBlur={10}
                     alt="a"
+                    key={spec.key + "111"}
                   />
-                  <div className={styles.slideText}>{spec.title}</div>
+                  <div className={styles.slideText} key={spec.key + "134"}>
+                    {spec.title}
+                  </div>
                 </div>
               ))}
             </div>
@@ -552,6 +271,7 @@ const HomePage = ({}) => {
             width={"60%"}
             shadowBlur={10}
             alt="a"
+            key="1"
           />
           <ImageShadow
             className={styles.calendar}
@@ -562,6 +282,7 @@ const HomePage = ({}) => {
             shadowBlur={10}
             style={{ paddingTop: "20px" }}
             alt="a"
+            key="2"
           />
           <ImageShadow
             className={styles.calendar}
@@ -572,9 +293,84 @@ const HomePage = ({}) => {
             shadowBlur={10}
             style={{ paddingTop: "20px" }}
             alt="a"
+            key="3"
           />
         </div>
       </div>
+      {!isMobile ? (
+        <div className={styles.featuresHolder}>
+          <div className={styles.featureImage}>
+            <div className={styles.arrowHolder}>
+              <div className={styles.arrowLeft2}>
+                <FaChevronLeft />
+              </div>
+              <div className={styles.arrowRight2}>
+                <FaChevronRight />
+              </div>
+            </div>
+            <div className={styles.slideHolder}>
+              {yourspecs.map((spec) => (
+                <div>
+                  <ImageShadow
+                    src={
+                      "https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671"
+                    }
+                    className={styles.slideElement2}
+                    width={250}
+                    shadowBlur={8}
+                    alt="a"
+                    key={spec.key + "211"}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={styles.featureText}>
+            <div className={styles.featureTitle}>Infinite Customization.</div>
+            <div className={styles.featureSubtitle}>
+              You can customize your recommendations with different
+              combinations.
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.featuresHolder}>
+          <div className={styles.featureText}>
+            <div className={styles.featureTitle}>Infinite Customization.</div>
+            <div className={styles.featureSubtitle}>
+              You can customize your recommendations with different
+              combinations.
+            </div>
+          </div>
+          <div className={styles.featureImage}>
+            <div className={styles.arrowHolder}>
+              <div className={styles.arrowLeft2}>
+                <FaChevronLeft />
+              </div>
+              <div className={styles.arrowRight2}>
+                <FaChevronRight />
+              </div>
+            </div>
+            <div className={styles.slideHolder}>
+              {yourspecs.map((spec) => (
+                <div>
+                  <ImageShadow
+                    src={
+                      "https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671"
+                    }
+                    className={styles.slideElement2}
+                    width={250}
+                    shadowBlur={10}
+                    alt="a"
+                    key={spec.key + "211"}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className={styles.wrapper}>
         <div className={styles.row2}>
           <div className={styles.row1Subtitle}>
@@ -585,6 +381,8 @@ const HomePage = ({}) => {
           </Link>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

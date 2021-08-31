@@ -3,12 +3,21 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  // justify-content: center;
+  //salign-items: center;
+  //background-color: sienna;
+}
+
+.dateAdder {
+  //background-color: yellowgreen;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .interestList {
-  margin-top: 120px;
+  //margin-top: 120px;
 }
 
 .actionButton {

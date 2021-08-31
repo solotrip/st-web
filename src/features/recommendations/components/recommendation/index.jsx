@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./alternative.module.scss";
+import styles from "./recommendation.module.scss";
 import _interesection from "lodash/intersection";
 import useThemeState from "utils/hooks/use-theme-state";
 
@@ -66,7 +66,13 @@ const images = [
   },
 ];
 
-const Recommendation = ({ recommendation, user, size = 1024 }) => {
+const Recommendation = ({
+  recommendation,
+  user,
+  size = 1024,
+
+  activeHandler,
+}) => {
   const [isRecommendationActive, setIsRecommendationActive] = useState(false);
 
   //We will update it on backend.
@@ -97,6 +103,9 @@ const Recommendation = ({ recommendation, user, size = 1024 }) => {
       {isMobile && (
         <>
           <div
+            onMouseEnter={() => {
+              activeHandler(recommendation.sid);
+            }}
             className={styles.wrapper}
             style={
               appTheme == "light"
@@ -115,7 +124,6 @@ const Recommendation = ({ recommendation, user, size = 1024 }) => {
                   }
             }
           >
-            {console.log("current recommendation is: ", { recommendation })}
             <div className={styles.titleAndHeart}>
               <div className={styles.title}>
                 {recommendation.name} {recommendation.country.emoji_flag}
@@ -167,6 +175,7 @@ const Recommendation = ({ recommendation, user, size = 1024 }) => {
                         width={80}
                         shadowBlur={10}
                         alt="a"
+                        key={image.link + "1"}
                       />
                       <div className={styles.slideText}>Event1</div>
                     </div>
@@ -298,6 +307,7 @@ const Recommendation = ({ recommendation, user, size = 1024 }) => {
                         width={80}
                         shadowBlur={10}
                         alt="a"
+                        key={image.link + "2"}
                       />
                       <div className={styles.slideText}>POI1</div>
                     </div>

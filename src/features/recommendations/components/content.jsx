@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "./content.module.scss";
 import Recommendation from "./recommendation/index";
 import useThemeState from "utils/hooks/use-theme-state";
+import Footer from "../../home/components/footer";
 
-import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const Map = ReactMapboxGl({
@@ -28,6 +29,23 @@ const Content = ({ recommendations, user, mapEnabled = true }) => {
   const [mapboxTheme, setMapboxTheme] = useState(
     "mapbox://styles/naberk/cksnplg9i2mvi18pgkkuf1fol"
   );
+  const [active, setActive] = useState("edirne");
+
+  const [centerCoordinates, setCenterCoordinates] = useState([
+    28.9784,
+    41.0082,
+  ]);
+
+  function activeHandler(param) {
+    setActive(param);
+    if (param === "alberobello") {
+      setCenterCoordinates([17.2409, 40.7864]);
+    } else if (param === "san-giovanni-rotondo") {
+      setCenterCoordinates([15.7292, 41.7066]);
+    } else if (param === "monza") {
+      setCenterCoordinates([35.1685, 31.7944]);
+    }
+  }
 
   useEffect(() => {
     appTheme == "light"
@@ -45,10 +63,12 @@ const Content = ({ recommendations, user, mapEnabled = true }) => {
                   key={`rec-${recommendation.sid}`}
                   recommendation={recommendation}
                   user={user}
+                  activeHandler={activeHandler}
                 />
               );
             })}
           </div>
+          <Footer />
         </div>
       </div>
       {mapEnabled && (
@@ -59,16 +79,19 @@ const Content = ({ recommendations, user, mapEnabled = true }) => {
               height: "100vh",
               width: "100%",
             }}
+            center={centerCoordinates}
+            zoom={[7]}
+            pitch={[30]}
           >
             <Layer
               type="symbol"
               id="marker"
-              layout={{ "icon-image": "marker-15" }}
+              layout={{ "icon-image": "marker-1" }}
             >
-              <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
+              <Feature coordinates={centerCoordinates} />
+              <Marker coordinates={centerCoordinates} />
             </Layer>
           </Map>
-          ;
         </div>
       )}
     </div>

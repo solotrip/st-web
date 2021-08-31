@@ -61,26 +61,41 @@ const NotificationsContainer = () => {
       timeStamp: "1 day ago",
     },
     {
-      dates: "28 June - 5 July",
-      notificationText: "Berlin is a good idea for these dates",
+      dates: "New Feature",
+      notificationText:
+        "Now you can import your Foursquare trips to get better recommendations.",
       notificationDetails: {
         image:
           "https://images.unsplash.com/photo-1552553302-9211bf7f7053?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
-        title: "Berlinale International Film Festival",
-        subtitle: "July 3 - 5",
+        title: "Foursquare Import",
+        subtitle: "",
       },
       hasSeen: true,
       sid: "1",
       timeStamp: "1 day ago",
     },
     {
-      dates: "28 June - 5 July",
-      notificationText: "Berlin is a good idea for these dates",
+      dates: "New Feauture",
+      notificationText: "Now you can track flight prices.",
       notificationDetails: {
         image:
           "https://images.unsplash.com/photo-1552553302-9211bf7f7053?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
-        title: "Berlinale International Film Festival",
-        subtitle: "July 3 - 5",
+        title: "Track Flight Prices",
+        subtitle: "",
+      },
+      hasSeen: true,
+      sid: "1",
+      timeStamp: "1 day ago",
+    },
+    {
+      dates: "New Feature",
+      notificationText:
+        "Now you can import your Airbnb Trips to get better recommendations.",
+      notificationDetails: {
+        image:
+          "https://images.unsplash.com/photo-1552553302-9211bf7f7053?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",
+        title: "Airbnb Import",
+        subtitle: "",
       },
       hasSeen: true,
       sid: "1",
