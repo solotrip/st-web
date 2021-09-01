@@ -17,52 +17,110 @@ import {
 
 let yourspecs = [
   {
-    link:
-      "https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    link: "https://source.unsplash.com/5Rt5KhbUp5g/400x300",
     title: "Events & Festivals",
     key: 14,
   },
   {
-    link:
-      "https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+    link: "https://source.unsplash.com/IQKuHc2lils/400x300",
     title: "Acommodation",
     key: 24,
   },
   {
-    link:
-      "https://images.unsplash.com/photo-1605590427165-3884d6aa6731?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+    link: "https://source.unsplash.com/x2lS3Xl_Lzw/400x300",
     title: "Flights",
     key: 34,
   },
   {
-    link:
-      "https://images.unsplash.com/photo-1523384709476-df63a9564991?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=668&q=80",
+    link: "https://source.unsplash.com/gMJ3tFOLvnA/400x300",
     title: "Visa Status",
     key: 44,
   },
   {
-    link:
-      "https://images.unsplash.com/photo-1565881606991-789a8dff9dbb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=802&q=80",
+    link: "https://source.unsplash.com/nnzkZNYWHaU/400x300",
     title: "Attractions",
     key: 54,
   },
   {
-    link:
-      "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1778&q=80",
+    link: "https://source.unsplash.com/rnr8D3FNUNY/400x300",
     title: "Covid Stats",
     key: 74,
   },
   {
-    link:
-      "https://images.unsplash.com/photo-1585391443707-de9291b9acb2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGNvdW50cnl8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60",
+    link: "https://source.unsplash.com/1lfI7wkGWZ4/400x300",
     title: "General Status",
     key: 84,
   },
   {
-    link:
-      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    link: "https://source.unsplash.com/ZVprbBmT8QA/400x300",
     title: "Cost of Living",
     key: 64,
+  },
+];
+
+let bucketlist = [
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/France_Marseille_071_Z_zcXbsw6.jpeg",
+    title: "Marseille",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Poland_Warsaw_081_hszpzFXzc.jpeg",
+    title: "Warsaw",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Belgium_Brussels_043_ywtsNgEVe.jpeg",
+    title: "Brussels",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Britain_Oxford_061_CWq5_ZI6V.jpeg",
+    title: "Oxford",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Czech_Republic_Prague_014_K3DSjNySSMU.jpeg",
+    title: "Prague",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Italy_Taormina_068_0fGbxxOWH.jpeg",
+    title: "Taormina",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Britain_Cambridge_067_FMIKN5uSm.jpeg",
+    title: "Cambridge",
+  },
+
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Italy_Lombardy_073_OdqaupZ6EY.jpeg",
+    title: "Lombardy",
+  },
+
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Sweden_Stockholm_035_7J-e0AYhX.jpeg",
+    title: "Stockholm",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Italy_Milan_009_rcyh_cGrtRoR.jpeg",
+    title: "Milan",
+  },
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Portugal_Azores_078_ZN9sCXr4M.jpeg",
+    title: "Azores",
+  },
+
+  {
+    link:
+      "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Croatia_Zagreb_069_K6DbU9BV8.jpeg",
+    title: "Zagreb",
   },
 ];
 
@@ -141,7 +199,7 @@ const HomePage = ({}) => {
                   <ImageShadow
                     src={spec.link}
                     className={styles.slideElement}
-                    width={80}
+                    width={160}
                     shadowBlur={10}
                     alt="a"
                     key={spec.key + "887"}
@@ -184,7 +242,7 @@ const HomePage = ({}) => {
                   <ImageShadow
                     src={spec.link}
                     className={styles.slideElement}
-                    width={80}
+                    width={160}
                     shadowBlur={10}
                     alt="a"
                     key={spec.key + "111"}
@@ -256,47 +314,40 @@ const HomePage = ({}) => {
       )}
       <div className={styles.featuresHolder}>
         <div className={styles.featureText}>
-          <div className={styles.featureTitle}>Get Notifications.</div>
+          <div className={styles.featureTitle}>Your Bucketlist.</div>
           <div className={styles.featureSubtitle}>
-            Updates, status changes, cancellations of events and flights. All
-            the things that matter to you.
+            Prioritize the destinations you want to go.
           </div>
         </div>
+
         <div className={styles.featureImage}>
-          <ImageShadow
-            className={styles.calendar}
-            src={
-              "https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.36.12_Ac3kgVKY5-.png?updatedAt=1629805024074"
-            }
-            width={"60%"}
-            shadowBlur={10}
-            alt="a"
-            key="1"
-          />
-          <ImageShadow
-            className={styles.calendar}
-            src={
-              "https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.35.29_laUsGjaOK.png?updatedAt=1629805023868"
-            }
-            width={"60%"}
-            shadowBlur={10}
-            style={{ paddingTop: "20px" }}
-            alt="a"
-            key="2"
-          />
-          <ImageShadow
-            className={styles.calendar}
-            src={
-              "https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.35.55_79AdExil-7V.png?updatedAt=1629805024034"
-            }
-            width={"60%"}
-            shadowBlur={10}
-            style={{ paddingTop: "20px" }}
-            alt="a"
-            key="3"
-          />
+          <div className={styles.arrowHolder}>
+            <div className={styles.arrowLeft3}>
+              <FaChevronLeft />
+            </div>
+            <div className={styles.arrowRight3}>
+              <FaChevronRight />
+            </div>
+          </div>
+          <div className={styles.slideHolder}>
+            {bucketlist.map((spec) => (
+              <div>
+                <ImageShadow
+                  src={spec.link}
+                  className={styles.slideElement3}
+                  shadowBlur={10}
+                  alt="a"
+                  key={spec.key + "111"}
+                />
+                <div className={styles.slideText} key={spec.key + "134"}>
+                  {spec.title}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+
       {!isMobile ? (
         <div className={styles.featuresHolder}>
           <div className={styles.featureImage}>
@@ -370,6 +421,49 @@ const HomePage = ({}) => {
           </div>
         </div>
       )}
+      <div className={styles.featuresHolder}>
+        <div className={styles.featureText}>
+          <div className={styles.featureTitle}>Get Notifications.</div>
+          <div className={styles.featureSubtitle}>
+            Updates, status changes, cancellations of events and flights. All
+            the things that matter to you.
+          </div>
+        </div>
+        <div className={styles.featureImage}>
+          <ImageShadow
+            className={styles.calendar}
+            src={
+              "https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.36.12_Ac3kgVKY5-.png?updatedAt=1629805024074"
+            }
+            width={"60%"}
+            shadowBlur={10}
+            alt="a"
+            key="1"
+          />
+          <ImageShadow
+            className={styles.calendar}
+            src={
+              "https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.35.29_laUsGjaOK.png?updatedAt=1629805023868"
+            }
+            width={"60%"}
+            shadowBlur={10}
+            style={{ paddingTop: "20px" }}
+            alt="a"
+            key="2"
+          />
+          <ImageShadow
+            className={styles.calendar}
+            src={
+              "https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.35.55_79AdExil-7V.png?updatedAt=1629805024034"
+            }
+            width={"60%"}
+            shadowBlur={10}
+            style={{ paddingTop: "20px" }}
+            alt="a"
+            key="3"
+          />
+        </div>
+      </div>
 
       <div className={styles.wrapper}>
         <div className={styles.row2}>

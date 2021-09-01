@@ -16,16 +16,16 @@ export const PreferencesRoutes = () => (
     <OnboardedRoutesWrapper>
       <PreferencesContainer page={PreferencesPage}>
         <Switch>
-          <Route path="/recommendations/preferences/1">
+          {/* <Route path="/recommendations/preferences/1">
             <EventInterestsContainer />
           </Route>
           <Route path="/recommendations/preferences/2">
             <ActivityInterestsContainer />
-          </Route>
-          <Route path="/recommendations/preferences/3">
+          </Route>*/}
+          <Route path="/recommendations/preferences/1">
             <DatesContainer />
           </Route>
-          <Route path="/recommendations/preferences/4">
+          <Route path="/recommendations/preferences/2">
             <SettingsContainer showLogout />
           </Route>
         </Switch>

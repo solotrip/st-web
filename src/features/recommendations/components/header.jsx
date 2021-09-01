@@ -40,7 +40,7 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
     <div className={styles.navbarFixed}>
       <div className={styles.container}>
         <Link
-          to="/recommendations/preferences/3"
+          to="/recommendations/preferences/1"
           className={styles.logoTextHolder}
         >
           {/*<PulfyIcon className={styles.pulfyIconBar} />*/}
@@ -92,7 +92,7 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
         </div>
         <Link
           className={cn(styles.interestButton, "glow-on-hover")}
-          to="/recommendations/preferences/4"
+          to="/recommendations/preferences/2"
         >
           Preferences
         </Link>
@@ -122,7 +122,7 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
         </Link>
         <Link
           className={styles.interestIconButton}
-          to="/recommendations/preferences/4"
+          to="/recommendations/preferences/2"
         >
           <img
             className={styles.circleEdit}
