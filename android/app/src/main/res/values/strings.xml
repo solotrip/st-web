@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">pulfy</string>
+    <string name="title_activity_main">pulfy</string>
+    <string name="package_name">com.solotrip.pulfy</string>
+    <string name="custom_url_scheme">com.solotrip.pulfy</string>
+</resources>

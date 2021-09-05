@@ -25,6 +25,7 @@
   //-webkit-backdrop-filter: blur(50px);
 
   border-radius: 15px;
+  background-image: $card-bg-url;
 }
 
 .wrapper2 {
@@ -107,6 +108,7 @@
   flex-direction: row;
   justify-content: space-between;
   //background-color: #5e5ce6;
+
   width: 90%;
 }
 
@@ -115,11 +117,36 @@
   //margin-top: 10px;
 
   width: 50px;
-  height: 60px;
-  color: white;
-  transition: 0.6s ease;
+  height: auto;
+  //color: white;
+  //transition: 0.6s ease;
 
+  background-image: $heart-not-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
   //stroke: yellowgreen;
+}
+.heartFilled {
+  //background-color: blue;
+  //margin-top: 10px;
+
+  width: 50px;
+  height: auto;
+  //color: white;
+  //transition: 0.6s ease;
+
+  background-image: $heart-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
+  //stroke: yellowgreen;
+}
+
+.planeIcon {
+  background-image: $plane-image;
+  background-repeat: no-repeat;
+  //background-color: forestgreen;
+  width: 70px;
+  height: 70px;
 }
 
 .slider {

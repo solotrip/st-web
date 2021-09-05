@@ -14,6 +14,22 @@
   justify-content: center;
 }
 
+.navbarFixedIos {
+  z-index: 999;
+  backdrop-filter: blur(100px);
+  height: 78px;
+  width: 100%;
+  position: fixed;
+  background: $navbar-color;
+  display: flex;
+  top: 0;
+  padding-top: 40px;
+  //margin-bottom: 10px;
+  left: 0;
+  //border-bottom: 1px solid $navbar-color-border;
+  justify-content: center;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -148,21 +164,49 @@
 .circleEdit {
   width: 30px;
   height: 30px;
+  background-image: $circle;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: center;
+  display: flex;
+  border: none;
+  outline: none;
 }
 
 .bellEdit {
   width: 26px;
   height: 26px;
+  background-image: $bell;
+  background-repeat: no-repeat;
+  background-size: 26px 26px;
+  background-position: center;
+  display: flex;
+  border: none;
+  outline: none;
 }
 .backpackEdit {
   width: 30px;
   height: 30px;
+  background-image: $backpack;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: center;
+  display: flex;
+  border: none;
+  outline: none;
 }
 
 .calendarEdit {
-  width: 26px;
-  height: 26px;
-  margin-left: 10px;
+  width: 36px;
+  height: 36px;
+
+  background-image: $calendar;
+  background-repeat: no-repeat;
+  background-size: 26px 26px;
+  background-position: center;
+  display: flex;
+  border: none;
+  outline: none;
 }
 
 .currentDates {

@@ -36,6 +36,21 @@
   background-color: #161b22;
 }
 
+.navbarIos {
+  z-index: 999;
+  backdrop-filter: blur(100px);
+  height: 58px;
+  width: 100%;
+  position: fixed;
+  background: $navbar-color;
+  display: flex;
+  top: 40px;
+  left: 0;
+  //border-bottom: 1px solid $navbar-color-border;
+  justify-content: space-between;
+  background-color: #161b22;
+}
+
 .logo {
   //background-color: deeppink;
   margin-left: 20px;
@@ -376,6 +391,28 @@
   color: #ffffff;
   text-shadow: 0px 4px 4px #000000;
   font-size: 14px;
+  :hover {
+    color: #3cafeb;
+    text-decoration-color: #3cafeb;
+  }
+}
+
+.slideText2 {
+  //object-fit: contain;
+  //background-color: aquamarine;
+
+  padding: 4px;
+  margin-left: auto;
+  display: flex;
+  margin: 10px;
+  z-index: 1;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  text-justify: distribute;
+  color: #ffffff;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 18px;
   :hover {
     color: #3cafeb;
     text-decoration-color: #3cafeb;

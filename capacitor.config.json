@@ -1,0 +1,6 @@
+{
+  "appId": "com.solotrip.pulfy",
+  "appName": "pulfy",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}

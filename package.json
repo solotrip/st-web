@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "^3.2.2",
+    "@capacitor/cli": "^3.2.2",
+    "@capacitor/core": "^3.2.2",
+    "@capacitor/geolocation": "^1.1.0",
+    "@capacitor/ios": "^3.2.2",
     "@fluentui/react-icons": "^1.1.137",
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@popperjs/core": "^2.6.0",

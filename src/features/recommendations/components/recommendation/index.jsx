@@ -81,6 +81,17 @@ const Recommendation = ({
   const screenThreshold = 700;
   const [appTheme] = useThemeState();
 
+  const [heartStyle, setHeartStyle] = useState(styles.heart);
+
+  const handleHeart = () => {
+    setIsLiked(!isLiked);
+    if (isLiked) {
+      setHeartStyle(styles.heartFilled);
+    } else {
+      setHeartStyle(styles.heart);
+    }
+  };
+
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < 720 ? true : true
   );
@@ -107,7 +118,7 @@ const Recommendation = ({
               activeHandler(recommendation.sid);
             }}
             className={styles.wrapper}
-            style={
+            /*style={
               appTheme == "light"
                 ? {
                     //backgroundImage: "url(" + recommendation.images + ")",
@@ -122,37 +133,19 @@ const Recommendation = ({
                       " https://ik.imagekit.io/7zlqc1cmihe/bg_5Ynn94efqO.svg?updatedAt=1629555736815" +
                       ")",
                   }
-            }
+            }*/
           >
             <div className={styles.titleAndHeart}>
               <div className={styles.title}>
                 {recommendation.name} {recommendation.country.emoji_flag}
               </div>
-              <button
-                className={styles.heart}
-                onClick={() => setIsLiked(!isLiked)}
-              >
-                {appTheme == "light" ? (
+              <button className={heartStyle} onClick={() => handleHeart()}>
+                {
                   <img
-                    className={styles.heart}
-                    src={
-                      isLiked
-                        ? "https://ik.imagekit.io/7zlqc1cmihe/heartv4_T4ahx34bT.svg?updatedAt=1629582861881"
-                        : "https://ik.imagekit.io/7zlqc1cmihe/heartv2_2QKKmFKJv.svg?updatedAt=1629582782615"
-                    }
+                    className={isLiked ? styles.heartFilled : styles.heart}
                     alt=""
                   />
-                ) : (
-                  <img
-                    className={styles.heart}
-                    src={
-                      isLiked
-                        ? "https://ik.imagekit.io/7zlqc1cmihe/heartfilled2_Ov6xMyOPf.svg?updatedAt=1629582643214"
-                        : "https://ik.imagekit.io/7zlqc1cmihe/heartempty_jXpJojhM0.svg?updatedAt=1629582643236"
-                    }
-                    alt=""
-                  />
-                )}
+                }
               </button>
             </div>
             <div className={styles.wrapper2}>
@@ -187,6 +180,7 @@ const Recommendation = ({
                     <div className={styles.statRow}>
                       <div className={styles.statImage}>
                         <ImageShadow
+                          //className={styles.planeIcon}
                           src={
                             appTheme == "light"
                               ? "https://ik.imagekit.io/7zlqc1cmihe/darkplane_6qiv8c4PG.svg?updatedAt=1629578118558"

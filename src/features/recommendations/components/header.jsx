@@ -13,6 +13,8 @@ import useThemeState, {
   NO_PREF_CLASS,
 } from "utils/hooks/use-theme-state";
 
+import { Capacitor } from "@capacitor/core";
+
 <svg width="0" height="0">
   <linearGradient id="blue-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
     <stop stopColor="#7a6ded" offset="0%" />
@@ -37,21 +39,28 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
   };
 
   return (
-    <div className={styles.navbarFixed}>
+    <div
+      className={
+        Capacitor.getPlatform() === "ios"
+          ? styles.navbarFixedIos
+          : styles.navbarFixed
+      }
+    >
       <div className={styles.container}>
         <Link
           to="/recommendations/preferences/1"
           className={styles.logoTextHolder}
         >
           {/*<PulfyIcon className={styles.pulfyIconBar} />*/}
-          <img
+          <div
             className={styles.calendarEdit}
-            src={
+            /*src={
               appTheme == "light"
                 ? "https://ik.imagekit.io/7zlqc1cmihe/calendaredit_FkubfbVH4.svg?updatedAt=1629286595546"
                 : "https://ik.imagekit.io/7zlqc1cmihe/lightcalendaredit_WyMEb8aUo.svg?updatedAt=1629315661303"
             }
-            alt=""
+            */
+            //alt=""
           />
 
           {/*<span className={styles.pulfyBar}>pulfy</span>*/}
@@ -97,26 +106,27 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
           Preferences
         </Link>
         <Link className={styles.interestIconButton} to="/notifications">
-          <img
+          <div
             className={styles.backpackEdit}
-            src={
+            /*src={
               appTheme == "light"
                 ? "https://ik.imagekit.io/7zlqc1cmihe/backpack_WhntvpOxYc.svg?updatedAt=1629412156833"
                 : "https://ik.imagekit.io/7zlqc1cmihe/lightbackpack_7_ePEvmV6.svg?updatedAt=1629412156777"
             }
-            alt=""
+            alt=""*/
           />
           {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
         </Link>
         <Link className={styles.interestIconButton} to="/notifications">
-          <img
+          <div
             className={styles.bellEdit}
-            src={
+            /*src={
               appTheme == "light"
                 ? "https://ik.imagekit.io/7zlqc1cmihe/belledit_bpnuI1-uGa.svg?updatedAt=1629286595477"
                 : "https://ik.imagekit.io/7zlqc1cmihe/lightbelledit_nazmTUMRwk.svg?updatedAt=1629315661331"
             }
             alt=""
+            */
           />
           {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
         </Link>
@@ -124,14 +134,15 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
           className={styles.interestIconButton}
           to="/recommendations/preferences/2"
         >
-          <img
+          <div
             className={styles.circleEdit}
-            src={
+            /*src={
               appTheme == "light"
                 ? "https://ik.imagekit.io/7zlqc1cmihe/circleedit_9_q8p7yt7b.svg?updatedAt=1629286595546"
                 : "https://ik.imagekit.io/7zlqc1cmihe/lightcircleedit_xMRSIRFl5.svg?updatedAt=1629315661340"
             }
             alt=""
+            */
           />
           {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
         </Link>

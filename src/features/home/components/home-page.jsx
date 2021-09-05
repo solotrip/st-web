@@ -9,6 +9,8 @@ import { isMobile } from "react-device-detect";
 import ImageShadow from "react-image-shadow";
 import "react-image-shadow/assets/index.css";
 
+//import { Capacitor } from "@capacitor/core";
+
 import {
   FaExternalLinkAlt as AddIcon,
   FaChevronLeft,
@@ -62,65 +64,65 @@ let bucketlist = [
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/France_Marseille_071_Z_zcXbsw6.jpeg",
-    title: "Marseille",
+    title: "Marseille 🇫🇷",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Poland_Warsaw_081_hszpzFXzc.jpeg",
-    title: "Warsaw",
+    title: "Warsaw 🇵🇱",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Belgium_Brussels_043_ywtsNgEVe.jpeg",
-    title: "Brussels",
+    title: "Brussels 🇧🇪",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Britain_Oxford_061_CWq5_ZI6V.jpeg",
-    title: "Oxford",
+    title: "Oxford 🇬🇧",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Czech_Republic_Prague_014_K3DSjNySSMU.jpeg",
-    title: "Prague",
+    title: "Prague 🇨🇿",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Italy_Taormina_068_0fGbxxOWH.jpeg",
-    title: "Taormina",
+    title: "Taormina 🇮🇹",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Britain_Cambridge_067_FMIKN5uSm.jpeg",
-    title: "Cambridge",
+    title: "Cambridge 🇬🇧",
   },
 
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Italy_Lombardy_073_OdqaupZ6EY.jpeg",
-    title: "Lombardy",
+    title: "Lombardy 🇮🇹",
   },
 
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Sweden_Stockholm_035_7J-e0AYhX.jpeg",
-    title: "Stockholm",
+    title: "Stockholm 🇸🇪",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Italy_Milan_009_rcyh_cGrtRoR.jpeg",
-    title: "Milan",
+    title: "Milan 🇮🇹",
   },
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Portugal_Azores_078_ZN9sCXr4M.jpeg",
-    title: "Azores",
+    title: "Azores 🇵🇹",
   },
 
   {
     link:
       "https://ik.imagekit.io/7zlqc1cmihe/Europe_Popular_Destinations/tr:h-400/Croatia_Zagreb_069_K6DbU9BV8.jpeg",
-    title: "Zagreb",
+    title: "Zagreb 🇭🇷",
   },
 ];
 
@@ -316,7 +318,7 @@ const HomePage = ({}) => {
         <div className={styles.featureText}>
           <div className={styles.featureTitle}>Your Bucketlist.</div>
           <div className={styles.featureSubtitle}>
-            Prioritize the destinations you want to go.
+            Prioritize the recommendations from destinations you want to go.
           </div>
         </div>
 
@@ -339,7 +341,7 @@ const HomePage = ({}) => {
                   alt="a"
                   key={spec.key + "111"}
                 />
-                <div className={styles.slideText} key={spec.key + "134"}>
+                <div className={styles.slideText2} key={spec.key + "134"}>
                   {spec.title}
                 </div>
               </div>
