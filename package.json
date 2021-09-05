@@ -8,6 +8,7 @@
     "@capacitor/core": "^3.2.2",
     "@capacitor/geolocation": "^1.1.0",
     "@capacitor/ios": "^3.2.2",
+    "@craco/craco": "^6.2.0",
     "@fluentui/react-icons": "^1.1.137",
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@popperjs/core": "^2.6.0",
@@ -60,9 +61,9 @@
     "use-persisted-state": "^0.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
@@ -78,7 +79,9 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not chrome < 51",
+      "not safari < 10"
     ],
     "development": [
       "last 1 chrome version",
