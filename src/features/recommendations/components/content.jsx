@@ -4,6 +4,10 @@ import Recommendation from "./recommendation/index";
 import useThemeState from "utils/hooks/use-theme-state";
 import Footer from "../../home/components/footer";
 
+import {useDispatch,useSelector} from "react-redux"
+import { addToBucketlist,
+  removeFromBucketlist} from "../../preferences/containers/bucketlist/slice"
+
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -11,6 +15,9 @@ const Map = ReactMapboxGl({
   accessToken:
     "pk.eyJ1IjoibmFiZXJrIiwiYSI6ImNrc25sdngyaTFxZHUydm94ZXpuYXp6Y2wifQ.tOkAADvCBh7-SvAYKbQCtA",
 });
+
+
+
 
 //var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
 
@@ -24,6 +31,9 @@ var map = new mapboxgl.Map({
 */
 
 const Content = ({ recommendations, user, mapEnabled = true }) => {
+  let bucketlist = []
+   bucketlist   = useSelector(state => state.preferences.bucketlist)
+  
   const [appTheme] = useThemeState();
   //default dark map.
   const [mapboxTheme, setMapboxTheme] = useState(
@@ -64,6 +74,7 @@ const Content = ({ recommendations, user, mapEnabled = true }) => {
                   recommendation={recommendation}
                   user={user}
                   activeHandler={activeHandler}
+                  bucketlisted={bucketlist.bucketlisted.includes(recommendation.sid)}
                 />
               );
             })}

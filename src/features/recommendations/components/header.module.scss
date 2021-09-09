@@ -217,6 +217,7 @@
   width: 110%;
   text-align: start;
   font-weight: 500;
+  max-height: 50px;
   //background-color: burlywood;
   //color: $inactive-month;
   @include xs-to-sm {

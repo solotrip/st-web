@@ -34,7 +34,7 @@ const DatesContainer = () => {
     <div className={styles.wrapper}>
       {activeView === "availabilities" ? (
         //availabilities.map((availability) => <Date data={availability} />)
-        <AvailabilityContainer defaults={defaults} options={options} />
+        <AvailabilityContainer />
       ) : (
         <NewDate />
       )}

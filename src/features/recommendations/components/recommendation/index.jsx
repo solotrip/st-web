@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./recommendation.module.scss";
 import _interesection from "lodash/intersection";
 import useThemeState from "utils/hooks/use-theme-state";
+import {useDispatch,useSelector} from "react-redux"
+import {addToBucketlist, removeFromBucketlist} from "../../../preferences/containers/bucketlist/slice"
 
 import {
   FaExternalLinkAlt as AddIcon,
@@ -70,25 +72,28 @@ const Recommendation = ({
   recommendation,
   user,
   size = 1024,
-
   activeHandler,
+  bucketlisted
 }) => {
-  const [isRecommendationActive, setIsRecommendationActive] = useState(false);
+  const dispatch = useDispatch()
+  
 
-  //We will update it on backend.
-  const [isLiked, setIsLiked] = useState(false);
+  
   const [showFullImage, setShowFullImage] = useState(false);
   const screenThreshold = 700;
   const [appTheme] = useThemeState();
 
-  const [heartStyle, setHeartStyle] = useState(styles.heart);
+  
 
-  const handleHeart = () => {
-    setIsLiked(!isLiked);
-    if (isLiked) {
-      setHeartStyle(styles.heartFilled);
+  const handleHeart = (sid) => {
+    //setIsLiked(!bucketlisted);
+    if (bucketlisted) {
+      dispatch(removeFromBucketlist(sid))
+      //setHeartStyle(styles.heartFilled);
     } else {
-      setHeartStyle(styles.heart);
+      dispatch(addToBucketlist(sid))
+
+      //setHeartStyle(styles.heart);
     }
   };
 
@@ -113,36 +118,22 @@ const Recommendation = ({
     <>
       {isMobile && (
         <>
+        {/*console.log("recommendation details are: ", recommendation)*/}
           <div
             onMouseEnter={() => {
               activeHandler(recommendation.sid);
             }}
             className={styles.wrapper}
-            /*style={
-              appTheme == "light"
-                ? {
-                    //backgroundImage: "url(" + recommendation.images + ")",
-                    backgroundImage:
-                      "url(" +
-                      " https://ik.imagekit.io/7zlqc1cmihe/lightestbg_dfEKSQu9CD.svg?updatedAt=1629668445797" +
-                      ")",
-                  }
-                : {
-                    backgroundImage:
-                      "url(" +
-                      " https://ik.imagekit.io/7zlqc1cmihe/bg_5Ynn94efqO.svg?updatedAt=1629555736815" +
-                      ")",
-                  }
-            }*/
+           
           >
             <div className={styles.titleAndHeart}>
               <div className={styles.title}>
                 {recommendation.name} {recommendation.country.emoji_flag}
               </div>
-              <button className={heartStyle} onClick={() => handleHeart()}>
+              <button className={bucketlisted ? styles.heartFilled : styles.heart} onClick={() => handleHeart(recommendation.sid)}>
                 {
                   <img
-                    className={isLiked ? styles.heartFilled : styles.heart}
+                    className={bucketlisted ? styles.heartFilled : styles.heart}
                     alt=""
                   />
                 }
@@ -180,7 +171,7 @@ const Recommendation = ({
                     <div className={styles.statRow}>
                       <div className={styles.statImage}>
                         <ImageShadow
-                          //className={styles.planeIcon}
+                        
                           src={
                             appTheme == "light"
                               ? "https://ik.imagekit.io/7zlqc1cmihe/darkplane_6qiv8c4PG.svg?updatedAt=1629578118558"

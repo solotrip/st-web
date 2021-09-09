@@ -13,6 +13,8 @@ import useThemeState, {
   NO_PREF_CLASS,
 } from "utils/hooks/use-theme-state";
 
+import {useSelector} from "react-redux"
+
 import { Capacitor } from "@capacitor/core";
 
 <svg width="0" height="0">
@@ -23,6 +25,10 @@ import { Capacitor } from "@capacitor/core";
 </svg>;
 
 const Header = ({ availableDates, onSelect, activeDateIndex }) => {
+
+  const availabilities   = useSelector(state => state.preferences.availabilities.availabilities)
+  const selectedAvailability = useSelector(state =>  state.preferences.availabilities.selectedAvailability)
+
   const [appTheme] = useThemeState();
   const { months: availableMonths, dates } = useMemo(
     () => groupByMonths(availableDates),
@@ -38,7 +44,8 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
     onSelect(index);
   };
 
-  return (
+  return (<>
+  {console.log("header availabilities: ",availabilities)}
     <div
       className={
         Capacitor.getPlatform() === "ios"
@@ -66,7 +73,7 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
           {/*<span className={styles.pulfyBar}>pulfy</span>*/}
         </Link>
         <div className={styles.actions}>
-          <div className={styles.currentDates}> 28 June - 5 July</div>
+          <div className={styles.currentDates}> { selectedAvailability !== null ?  selectedAvailability.label : availabilities[0].label}</div>
 
           {/*<div className={styles.monthSelector}>
             {availableMonths.map((month) => (
@@ -148,7 +155,9 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
         </Link>
       </div>
     </div>
+    </>
   );
+ 
 };
 
 Header.propTypes = {
