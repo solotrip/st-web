@@ -6,11 +6,17 @@ export const availabilitySlice = createSlice({
     selectedAvailability: null,
     availabilities: [
       {
-        value: "march_30-august_29",
-        label: "Summer Vacation (March 30 - August 29)",
+        value: ["Summer Vacation", "Mar 30 - Aug 29"],
+        label: "Summer Vacation",
       },
-      { value: "june_4-june_5", label: "My Weekend Getaway (June 4 - 5)" },
-      { value: "january_1-january_15", label: "Winterfell (January 1 - 15)" },
+      {
+        value: ["My Weekend Getaway", "Jun 4 - 5"],
+        label: "My Weekend Getaway (June 4 - 5)",
+      },
+      {
+        value: ["Winterfell", "Jan 1 - 15"],
+        label: "Winterfell (January 1 - 15)",
+      },
     ],
   },
   reducers: {

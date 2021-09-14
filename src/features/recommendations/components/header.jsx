@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import cn from "classnames";
@@ -13,9 +13,17 @@ import useThemeState, {
   NO_PREF_CLASS,
 } from "utils/hooks/use-theme-state";
 
-import {useSelector} from "react-redux"
+import {useSelector,useDispatch} from "react-redux"
+import { addToSaved,removeFromSaved  } from "../../saved/slice"
 
 import { Capacitor } from "@capacitor/core";
+
+import TextTransition, { presets } from "react-text-transition";
+
+const TEXTS = [
+  "Weekend Getaway",
+  "June 4-5",
+];
 
 <svg width="0" height="0">
   <linearGradient id="blue-gradient" x1="100%" y1="100%" x2="0%" y2="0%">
@@ -24,7 +32,19 @@ import { Capacitor } from "@capacitor/core";
   </linearGradient>
 </svg>;
 
-const Header = ({ availableDates, onSelect, activeDateIndex }) => {
+const Header = ({ availableDates, onSelect, activeDateIndex, recommendations,isSaved }) => {
+
+  const [index, setIndex] = useState(0);
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const intervalId = setInterval(() =>
+      setIndex(index => index + 1),
+      3000 // every 3 seconds
+    );
+    return () => clearTimeout(intervalId);
+  }, []);
 
   const availabilities   = useSelector(state => state.preferences.availabilities.availabilities)
   const selectedAvailability = useSelector(state =>  state.preferences.availabilities.selectedAvailability)
@@ -44,6 +64,30 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
     onSelect(index);
   };
 
+  const handleSave = () => {
+
+
+    const newSavedItem = { 
+      "id": 1,
+      "name": "Weekend Getaway",
+ "dateString": "April 3 - April 5",
+ recommendations: recommendations
+    }
+    
+
+    if (isSaved) {
+      dispatch(removeFromSaved(newSavedItem))
+
+    } else {
+      dispatch(addToSaved(newSavedItem))
+
+
+    }
+console.log('handle save pressed!')
+  
+
+  }
+
   return (<>
   {console.log("header availabilities: ",availabilities)}
     <div
@@ -54,26 +98,66 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
       }
     >
       <div className={styles.container}>
+      
+        
+      <div className={styles.logo1}>
+          <div className={styles.logoIcon1}>
+            <img
+              style={{ width: "100px" }}
+              alt=""
+            />
+          </div>
+          
+        </div>
+        
+        <div className={styles.actions}>
+        
+          <div className={styles.calendarAndDate}>
         <Link
           to="/recommendations/preferences/1"
           className={styles.logoTextHolder}
         >
-          {/*<PulfyIcon className={styles.pulfyIconBar} />*/}
+         
           <div
             className={styles.calendarEdit}
-            /*src={
-              appTheme == "light"
-                ? "https://ik.imagekit.io/7zlqc1cmihe/calendaredit_FkubfbVH4.svg?updatedAt=1629286595546"
-                : "https://ik.imagekit.io/7zlqc1cmihe/lightcalendaredit_WyMEb8aUo.svg?updatedAt=1629315661303"
-            }
-            */
-            //alt=""
+           
           />
 
-          {/*<span className={styles.pulfyBar}>pulfy</span>*/}
+         
         </Link>
-        <div className={styles.actions}>
-          <div className={styles.currentDates}> { selectedAvailability !== null ?  selectedAvailability.label : availabilities[0].label}</div>
+          <Link  className={styles.currentDates}to="/recommendations/preferences/1">
+          
+          
+          <TextTransition
+        text={selectedAvailability !== null ?   selectedAvailability.value[index % selectedAvailability.value.length] :availabilities[0].value[index % availabilities[0].value.length] }
+        springConfig={ presets.wobbly } inline={true} 
+      />
+
+
+          
+         {/* <div className={styles.currentDates}> { selectedAvailability !== null ?  selectedAvailability.label : availabilities[0].label}</div>*/}
+          </Link>
+          </div>
+          <div className={styles.filterSave}>
+          <Link className={styles.interestIconButton} to="/notifications">
+          <div
+            className={styles.filterEdit}
+            
+          />
+         
+        </Link>
+        <button
+          className={styles.interestIconButton2}
+          onClick={handleSave}
+        >
+          <div
+            className={styles.savedEdit}
+           
+          />
+      
+        </button>
+        </div>
+          
 
           {/*<div className={styles.monthSelector}>
             {availableMonths.map((month) => (
@@ -112,47 +196,8 @@ const Header = ({ availableDates, onSelect, activeDateIndex }) => {
         >
           Preferences
         </Link>
-        <Link className={styles.interestIconButton} to="/notifications">
-          <div
-            className={styles.backpackEdit}
-            /*src={
-              appTheme == "light"
-                ? "https://ik.imagekit.io/7zlqc1cmihe/backpack_WhntvpOxYc.svg?updatedAt=1629412156833"
-                : "https://ik.imagekit.io/7zlqc1cmihe/lightbackpack_7_ePEvmV6.svg?updatedAt=1629412156777"
-            }
-            alt=""*/
-          />
-          {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
-        </Link>
-        <Link className={styles.interestIconButton} to="/notifications">
-          <div
-            className={styles.bellEdit}
-            /*src={
-              appTheme == "light"
-                ? "https://ik.imagekit.io/7zlqc1cmihe/belledit_bpnuI1-uGa.svg?updatedAt=1629286595477"
-                : "https://ik.imagekit.io/7zlqc1cmihe/lightbelledit_nazmTUMRwk.svg?updatedAt=1629315661331"
-            }
-            alt=""
-            */
-          />
-          {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
-        </Link>
-        <Link
-          className={styles.interestIconButton}
-          to="/recommendations/preferences/2"
-        >
-          <div
-            className={styles.circleEdit}
-            /*src={
-              appTheme == "light"
-                ? "https://ik.imagekit.io/7zlqc1cmihe/circleedit_9_q8p7yt7b.svg?updatedAt=1629286595546"
-                : "https://ik.imagekit.io/7zlqc1cmihe/lightcircleedit_xMRSIRFl5.svg?updatedAt=1629315661340"
-            }
-            alt=""
-            */
-          />
-          {/*<CircleEdit24Regular style={{ stroke: "url(#blue-gradient)" }} />*/}
-        </Link>
+       
+        
       </div>
     </div>
     </>

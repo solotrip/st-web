@@ -4,6 +4,7 @@ import _interesection from "lodash/intersection";
 import useThemeState from "utils/hooks/use-theme-state";
 import {useDispatch,useSelector} from "react-redux"
 import {addToBucketlist, removeFromBucketlist} from "../../../preferences/containers/bucketlist/slice"
+import { addToWishlist,removeFromWishlist  } from "../../../wishlist/slice"
 
 import {
   FaExternalLinkAlt as AddIcon,
@@ -73,7 +74,7 @@ const Recommendation = ({
   user,
   size = 1024,
   activeHandler,
-  bucketlisted
+  wishlisted
 }) => {
   const dispatch = useDispatch()
   
@@ -85,13 +86,13 @@ const Recommendation = ({
 
   
 
-  const handleHeart = (sid) => {
-    //setIsLiked(!bucketlisted);
-    if (bucketlisted) {
-      dispatch(removeFromBucketlist(sid))
+  const handleHeart = (reco) => {
+    //setIsLiked(!wishlisted);
+    if (wishlisted) {
+      dispatch(removeFromWishlist(reco))
       //setHeartStyle(styles.heartFilled);
     } else {
-      dispatch(addToBucketlist(sid))
+      dispatch(addToWishlist(reco))
 
       //setHeartStyle(styles.heart);
     }
@@ -130,10 +131,10 @@ const Recommendation = ({
               <div className={styles.title}>
                 {recommendation.name} {recommendation.country.emoji_flag}
               </div>
-              <button className={bucketlisted ? styles.heartFilled : styles.heart} onClick={() => handleHeart(recommendation.sid)}>
+              <button className={wishlisted ? styles.heartFilled : styles.heart} onClick={() => handleHeart(recommendation)}>
                 {
                   <img
-                    className={bucketlisted ? styles.heartFilled : styles.heart}
+                    className={wishlisted ? styles.heartFilled : styles.heart}
                     alt=""
                   />
                 }

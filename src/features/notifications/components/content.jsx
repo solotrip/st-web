@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./content.module.scss";
 import Notification from "./notification";
+import Footer from "../../home/components/footer";
 
 const Content = ({ notifications, user }) => {
   return (
+    <div className={styles.mostOuted}>
     <div className={styles.outerWrapperCentered}>
       <div className={styles.wrapperCentered}>
         <div className={styles.rowin}>
@@ -17,7 +19,9 @@ const Content = ({ notifications, user }) => {
             );
           })}
         </div>
+        <Footer />
       </div>
+    </div>
     </div>
   );
 };

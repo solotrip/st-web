@@ -1,0 +1,20 @@
+@import "styles/mixins";
+.holder {
+    //background-color: aqua;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    z-index: 3;
+    display: none;
+    @include xs-to-md {
+        display: flex;
+      }
+    
+}
+
+.element { 
+    font-size: 20px;
+    background-color: blue;
+}

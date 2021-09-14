@@ -5,14 +5,14 @@ import {
   fetchAvailableDates,
   recommendationsSelector,
   updateActiveDate,
-} from "../slice";
-import Content from "../components/content";
-import Header from "../components/header";
+} from "../../recommendations/slice";
+
+import {wishlistSelector } from "../slice"
+import Content from "../../recommendations/components/content";
+import Header from "../../notifications/components/header";
 import { profileSelector } from "../../profile/slice";
 
-import {  savedSelector} from "../../saved/slice"
-
-const RecommendationsContainer = () => {
+const WishlistContainer = () => {
   const {
     recommendations,
     loadingRecommendations,
@@ -21,7 +21,7 @@ const RecommendationsContainer = () => {
     activeDateIndex,
   } = useSelector(recommendationsSelector);
 
-  const { saved } = useSelector(savedSelector);
+  const {wishlist } = useSelector(wishlistSelector)
 
   const { data: user, loading: profileLoading } = useSelector(profileSelector);
   const dispatch = useDispatch();
@@ -50,16 +50,14 @@ const RecommendationsContainer = () => {
           availableDates={availableDates}
           onSelect={onDateSelect}
           activeDateIndex={activeDateIndex}
-          recommendations={recommendations}
-          //saved.includes(recommendation) ... COMPLETE AFTER "SAVED" REDUX.
-          isSaved= {false}
+          headerName="Wishlist"
         />
       </Loader>
       <Loader loading={loadingRecommendations}>
-        <Content recommendations={recommendations} user={user} />
+        <Content recommendations={wishlist} user={user} mapEnabled={true} />
       </Loader>
     </Loader>
   );
 };
 
-export default RecommendationsContainer;
+export default WishlistContainer;

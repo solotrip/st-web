@@ -5,14 +5,14 @@ import {
   fetchAvailableDates,
   recommendationsSelector,
   updateActiveDate,
-} from "../slice";
+} from "../../recommendations/slice";
+
+import {savedSelector } from "../slice"
 import Content from "../components/content";
-import Header from "../components/header";
+import Header from "../../notifications/components/header";
 import { profileSelector } from "../../profile/slice";
 
-import {  savedSelector} from "../../saved/slice"
-
-const RecommendationsContainer = () => {
+const SavedContainer = () => {
   const {
     recommendations,
     loadingRecommendations,
@@ -42,24 +42,23 @@ const RecommendationsContainer = () => {
     },
     [dispatch]
   );
+  
 
-  return (
+   return (
     <Loader loading={profileLoading}>
       <Loader loading={loadingAvailableDates}>
         <Header
           availableDates={availableDates}
           onSelect={onDateSelect}
           activeDateIndex={activeDateIndex}
-          recommendations={recommendations}
-          //saved.includes(recommendation) ... COMPLETE AFTER "SAVED" REDUX.
-          isSaved= {false}
+          headerName="Saved"
         />
       </Loader>
       <Loader loading={loadingRecommendations}>
-        <Content recommendations={recommendations} user={user} />
+        <Content saved={saved} user={user} />
       </Loader>
     </Loader>
   );
 };
 
-export default RecommendationsContainer;
+export default SavedContainer;

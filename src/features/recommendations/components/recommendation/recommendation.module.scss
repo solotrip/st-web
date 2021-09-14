@@ -11,7 +11,7 @@
   margin-top: 30px;
   margin-bottom: 60px;
   width: 100%;
-  max-width: 720px;
+  max-width: 520px;
   background-repeat: no-repeat;
   background-size: cover;
   border-bottom: 2px solid #aeb9ea;
@@ -32,7 +32,7 @@
   //background-color: darkgoldenrod;
   margin-top: 50px;
   width: 100%;
-  max-width: 720px;
+  max-width: 520px;
   display: flex;
 }
 
@@ -86,7 +86,7 @@
   width: calc(100%);
   margin-top: 10px;
   height: 300px;
-  max-width: 720px;
+  max-width: 520px;
 
   //border-radius: 16px;
 }
@@ -100,7 +100,7 @@
   margin-top: 10px;
   text-align: left;
   font-weight: 500;
-  max-width: 720px;
+  max-width: 520px;
 }
 
 .titleAndHeart {
@@ -155,7 +155,7 @@
   text-align: left;
   font-weight: 500;
   font-size: 18px;
-  max-width: 720px;
+  max-width: 520px;
 }
 
 .slideHolder {
@@ -167,11 +167,11 @@
   width: calc(100vw - 0px);
   margin-left: 20px;
   //width: 300px;
-  padding: 10px;
+  //padding: 10px;
   margin-top: 5px;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none;
-  max-width: 700px;
+  max-width: 500px;
 }
 
 .slideHolder::-webkit-scrollbar {
@@ -185,8 +185,8 @@
   height: 80px;
   border-radius: 16px;
   padding: 4px;
-  margin-left: 12px;
-  margin-right: 12px;
+  //margin-left: 12px;
+  margin-right: 20px;
   display: flex;
   flex-direction: row;
   z-index: 1;
@@ -226,7 +226,7 @@
   //padding-top: 30px;
   //margin-top: 150px;
   //margin-bottom: 10px;
-  max-width: 720px;
+  max-width: 520px;
 }
 
 .statRow {
@@ -292,10 +292,10 @@
 
 .arrowLeft {
   //background-color: cornflowerblue;
-  margin-top: 70px;
-  margin-bottom: -70px;
+  margin-top: 60px;
+  margin-bottom: -60px;
   position: relative;
-  z-index: 3;
+  z-index: 2;
   width: 30px;
   //position: fixed;
   //top: 0;
@@ -305,10 +305,10 @@
 
 .arrowRight {
   //background-color: rebeccapurple;
-  margin-top: 70px;
-  margin-bottom: -70px;
+  margin-top: 60px;
+  margin-bottom: -60px;
   position: relative;
-  z-index: 3;
+  z-index: 2;
   width: 30px;
   //position: fixed;
   //top: 0;
@@ -322,5 +322,5 @@
   width: 98vw;
   display: flex;
   justify-content: space-between;
-  max-width: 720px;
+  max-width: 520px;
 }

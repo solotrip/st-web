@@ -30,9 +30,9 @@ var map = new mapboxgl.Map({
 
 */
 
-const Content = ({ recommendations, user, mapEnabled = true }) => {
-  let bucketlist = []
-   bucketlist   = useSelector(state => state.preferences.bucketlist)
+const Content = ({ recommendations, user, mapEnabled = true}) => {
+  let wishlist = []
+   wishlist   = useSelector(state => state.wishlist.wishlist)
   
   const [appTheme] = useThemeState();
   //default dark map.
@@ -74,7 +74,7 @@ const Content = ({ recommendations, user, mapEnabled = true }) => {
                   recommendation={recommendation}
                   user={user}
                   activeHandler={activeHandler}
-                  bucketlisted={bucketlist.bucketlisted.includes(recommendation.sid)}
+                  wishlisted={wishlist.includes(recommendation)}
                 />
               );
             })}

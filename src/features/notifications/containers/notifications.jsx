@@ -130,6 +130,7 @@ const NotificationsContainer = () => {
           availableDates={availableDates}
           onSelect={onDateSelect}
           activeDateIndex={activeDateIndex}
+          headerName="Notifications"
         />
       </Loader>
       <Loader loading={loadingRecommendations}>

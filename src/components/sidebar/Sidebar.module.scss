@@ -1,0 +1,127 @@
+@import "styles/mixins";
+
+.navbar {
+    background-color: $bg-color;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  
+  .menu-bars {
+    margin-left: 2rem;
+    font-size: 2rem;
+    background: none;
+  }
+  
+  .navMenu{
+    background-color: $bg-color;
+    //width: 220px;
+    //background-color: brown;
+    //height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 850ms;
+    z-index: 3;
+    @include xs-to-md {
+        display: none;
+      }
+  }
+  
+  .navMenuActive {
+    background-color: $bg-color;
+    //background-color: brown;
+    margin-top: 30vh;
+  
+
+    width: 270px;
+    //height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+   
+    z-index: 3;
+    @include xs-to-md {
+        display: none;
+      }
+    left: 0;
+    transition: 350ms;
+  }
+  
+  .navText{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 8px 0px 8px 16px;
+    list-style: none;
+    height: 60px;
+  }
+
+  .navTextActive{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 8px 0px 8px 16px;
+    list-style: none;
+    height: 60px;
+    
+  }
+  .navTextActive a {
+    text-decoration: none;
+    //color: #ffffff;
+    font-size: 18px;
+    width: 250px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    //padding: 0 16px;
+    border-radius: 16px;
+    //background-color: #3cafeb;
+
+    //color: #ffffff;
+    //border: 2px solid #3cafeb;
+    background-color: #3cafeb;
+    color: #ffffff;
+    
+  }
+  
+  .navText a {
+    text-decoration: none;
+    color: $text-color;
+    font-size: 18px;
+    width: 250px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    //padding: 0 16px;
+    //border-radius: 4px;
+    border-radius: 16px;
+  }
+  
+  .navText a:hover {
+    background-color: #3cafeb;
+    color: #ffffff;
+    border-radius: 16px;
+
+    
+  }
+  
+  .navMenuItems {
+    width: 100%;
+  }
+  
+  .navbar-toggle {
+    background-color: #060b26;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  
+  span {
+    margin-left: 16px;
+  }
