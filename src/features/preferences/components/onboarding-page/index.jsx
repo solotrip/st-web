@@ -4,20 +4,25 @@ import cn from 'classnames'
 import styles from './onboarding-page.module.scss'
 import Header from './header'
 import Footer from './footer'
+import { SheetWrapper } from 'components'
 
 const OnboardingPage = ({ children, onNext, nextEnabled }) => {
 
   return (
-    <div className={styles.page}>
+    
+     
+    <SheetWrapper>
+    <div className={cn(styles.container)}>
       <Header/>
-      <div className={cn(styles.container, 'card')}>
-        <div className={cn(styles.content)}>
-          {children}
-        </div>
+      <div className={styles.content}>
+        {children}
       </div>
-      <Footer onNext={onNext} nextEnabled={nextEnabled}/>
     </div>
+    <Footer onNext={onNext} nextEnabled={nextEnabled}/>
+  </SheetWrapper>
+    
   )
+  
 }
 
 OnboardingPage.propTypes = {

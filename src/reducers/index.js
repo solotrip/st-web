@@ -10,6 +10,7 @@ import recommendations from "features/recommendations/slice";
 import navigation from "components/navigation/slice";
 import wishlist from "features/wishlist/slice";
 import saved from "features/saved/slice";
+import clusters from "features/preferences/containers/area-cluster/slice";
 
 export default combineReducers({
   auth,
@@ -20,4 +21,5 @@ export default combineReducers({
   navigation,
   wishlist,
   saved,
+  clusters,
 });

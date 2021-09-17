@@ -9,11 +9,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  
   @include xs-to-sm {
     margin-bottom: 5px;
     height: 75px;
     width: 100%;
   }
+
 }
 
 .item {

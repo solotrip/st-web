@@ -50,9 +50,11 @@ const PreferencesContainer = ({ children, page: Page, isOnboarding }) => {
       switch (i) {
         case "1":
           dispatch(updateEventInterests());
+          //dispatch(updateAvailableDates());
           break;
         case "2":
           dispatch(updateActivityInterests());
+          //dispatch(updateAreaClusters());
           break;
         case "4":
           dispatch(updatePassportCountries());

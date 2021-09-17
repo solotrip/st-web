@@ -6,21 +6,14 @@ import { useParams } from 'react-router-dom'
 const Header = () => {
 
   const links = [
-    {
-      name: 'Interests',
-      link: '/preferences/1'
-    },
-    {
-      name: 'Activities',
-      link: '/onboarding/2'
-    },
+  
     {
       name: 'Dates',
-      link: '/onboarding/3'
+      link: '/onboarding/1'
     },
     {
-      name: 'Settings',
-      link: '/onboarding/3'
+      name: 'Places',
+      link: '/onboarding/2'
     }
   ]
   const { index } = useParams()

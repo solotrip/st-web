@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import styles from "./notification.module.scss";
 import _interesection from "lodash/intersection";
 
-import {
-  FaExternalLinkAlt as AddIcon,
-  FaChevronLeft,
-  FaChevronRight,
-  FaRegHeart,
-} from "react-icons/fa";
+
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

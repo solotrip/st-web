@@ -1,20 +1,11 @@
 import React from "react";
 import { useSpring, animated, useTransition } from "react-spring";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { selectTab } from "../navigation/slice";
-import { Link } from "react-router-dom";
 
 function MenuItem(propsComp) {
-  const {
-    text,
-    value,
-    logo,
-    isActive,
-    color,
-    backgroundColor,
-    link,
-  } = propsComp;
+  const { value, logo, isActive, backgroundColor } = propsComp;
   const dispatch = useDispatch();
   const transitions = useTransition(isActive, null, {
     from: { opacity: 0, width: 0 },
@@ -39,11 +30,8 @@ function MenuItem(propsComp) {
       style={{
         display: "flex",
         alignItems: "center",
-        //margin: "0px 10px 0px 0",
         cursor: "pointer",
-        //padding: "10px 20px",
         padding: "10px 10px 10px 0px",
-        //paddingRight: "0px",
         backgroundColor: x.interpolate({
           range: [0, 1],
           output: ["transparent", backgroundColor],

@@ -92,10 +92,6 @@
     display: none;
   }
 }
-.logodd {
-  //width: 40px;
-  //height: 40px;
-}
 
 .monthSelector {
   width: 100%;
@@ -321,21 +317,17 @@
   }
 }
 
-.currentDates:hover{
-  //color: $active-month;
 
-}
+
 
 
 
 
 
 .logo1 {
-  //background-color: deeppink;
   margin-left: 30px;
   margin-right: 120px;
   width: 120px;
- // margin-right: 0px;
 
   display: flex;
   flex-direction: row;
@@ -348,12 +340,9 @@
 }
 
 .logoIcon1 {
-  //width: 60px;
   margin-top: auto;
   height: 45px;
   content:$logo;
-  //background-color: deepskyblue;
-  //background-image: url("https://ik.imagekit.io/7zlqc1cmihe/lastp4_MmOcmyp_zWi.png?updatedAt=1629746068742");
 }
 
 
@@ -361,7 +350,6 @@
 
 
 .logoText1 {
-  //background-color: firebrick;
   margin-left: 0px;
   font-family: "Reem Kufi", sans-serif;
   font-size: 20px;

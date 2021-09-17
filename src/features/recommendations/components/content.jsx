@@ -3,11 +3,7 @@ import styles from "./content.module.scss";
 import Recommendation from "./recommendation/index";
 import useThemeState from "utils/hooks/use-theme-state";
 import Footer from "../../home/components/footer";
-
-import {useDispatch,useSelector} from "react-redux"
-import { addToBucketlist,
-  removeFromBucketlist} from "../../preferences/containers/bucketlist/slice"
-
+import {useSelector} from "react-redux"
 import ReactMapboxGl, { Layer, Feature, Marker } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -16,24 +12,9 @@ const Map = ReactMapboxGl({
     "pk.eyJ1IjoibmFiZXJrIiwiYSI6ImNrc25sdngyaTFxZHUydm94ZXpuYXp6Y2wifQ.tOkAADvCBh7-SvAYKbQCtA",
 });
 
-
-
-
-//var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-
-/*mapboxgl.accessToken =
-  "pk.eyJ1IjoibmFiZXJrIiwiYSI6ImNrc25sdngyaTFxZHUydm94ZXpuYXp6Y2wifQ.tOkAADvCBh7-SvAYKbQCtA";
-var map = new mapboxgl.Map({
-  container: "YOUR_CONTAINER_ELEMENT_ID",
-  style: "mapbox://styles/mapbox/streets-v11",
-});
-
-*/
-
 const Content = ({ recommendations, user, mapEnabled = true}) => {
   let wishlist = []
    wishlist   = useSelector(state => state.wishlist.wishlist)
-  
   const [appTheme] = useThemeState();
   //default dark map.
   const [mapboxTheme, setMapboxTheme] = useState(

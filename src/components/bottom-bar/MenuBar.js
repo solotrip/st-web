@@ -1,9 +1,6 @@
 import React from "react";
 import MenuItem from "./MenuItem";
-import EventsLogo from "./Icons/Events";
-import FeaturedLogo from "./Icons/Featured";
-import Search from "./Icons/Search";
-import Slider from "./Icons/Slider";
+
 import {
   CircleEdit24Regular,
   Alert28Regular,

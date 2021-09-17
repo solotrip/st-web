@@ -4,6 +4,7 @@ import EventInterestsContainer from "./containers/event-interests";
 import OnboardingContainer from "./containers/onboarding";
 import OnboardedRoutesWrapper from "components/routes/onboarded-routes-wrapper";
 import ActivityInterestsContainer from "./containers/activity-interests";
+import AreaClusterContainer from "./containers/area-cluster"
 import DatesContainer from "./containers/dates/index";
 import SettingsContainer from "./containers/settings";
 import PreferencesContainer from "./containers/preferences";
@@ -39,19 +40,22 @@ export const OnboardingRoutes = () => (
     <OnboardingContainer>
       <PreferencesContainer page={OnboardingPage} isOnboarding>
         <Switch>
-          <Route path="/onboarding/1">
+          { /*<Route path="/onboarding/1">
             <EventInterestsContainer />
           </Route>
           <Route path="/onboarding/2">
             <ActivityInterestsContainer />
-          </Route>
-          <Route path="/onboarding/3">
+</Route> */}
+          <Route path="/onboarding/1">
             <DatesContainer />
           </Route>
-          <Route path="/onboarding/4">
-            <SettingsContainer />
+          <Route path="/onboarding/2">
+            
+            {/*  WE ARE GOING TO PUT AREACLUSTERCONTAINER HERE! */}
+          
+          <AreaClusterContainer/>
           </Route>
-          <Route path="/onboarding/5">
+          <Route path="/onboarding/3">
             <OnboardingCompleteContainer />
           </Route>
         </Switch>

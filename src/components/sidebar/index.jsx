@@ -1,26 +1,15 @@
-import React, { useState } from 'react';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
+import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import  styles from './Sidebar.module.scss';
 import { IconContext } from 'react-icons';
-
-
 import {useDispatch,useSelector} from "react-redux"
 import {selectTab} from "../navigation/slice"
 
 function SideBar() {
-  const [sidebar, setSidebar] = useState(true);
-  //const [activeTab,setActiveTab] = useState("Recommendations");
-
-
   const activeTab   = useSelector(state => state.navigation.activeTab);
- // const selectedAvailability = [useSelector(state =>  state.preferences.availabilities.selectedAvailability)]
  const dispatch = useDispatch();
-
-  //const showSidebar = () => setSidebar(!sidebar);
-
 const handleSelect =(param) => { 
   if(param !== "Preferences" ) { 
     dispatch(selectTab(param))
@@ -28,14 +17,11 @@ const handleSelect =(param) => {
     dispatch(selectTab("Recommendations"))
   }
 }
-  
-
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>
         <nav className={styles.navMenuActive}>
           <div className={styles.navMenuItems}>
-           
             {SidebarData.map((item, index) => {
               return (
                 <Link to={item.path}>
