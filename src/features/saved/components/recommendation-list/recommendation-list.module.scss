@@ -6,12 +6,22 @@
   flex-wrap: wrap;
   
 
-  //background-color:$card-bg-color;
-  max-width: 900px;
+  //background-color:#3cafeb;
+  //max-width: 900px;
   height: 100px;
 border-radius: 16px;
   flex: 1;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 20px;
+
+ 
+}
+
+.wrapper:hover{ 
+    background-color: #3cafeb;
 }
 
 
@@ -47,7 +57,7 @@ border-radius: 16px;
 .content { 
     //background-color: purple;
     height: 100%;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-content: space-between;
@@ -58,6 +68,7 @@ border-radius: 16px;
     font-size: 18px;
     font-weight: 400;
     margin-top: 8px;
+    text-align: left;
   }
   
   .subtitle {
@@ -85,9 +96,9 @@ border-radius: 16px;
     font-size: 14px;
     font-weight: 200;
     text-align: left;
-    //margin-bottom: 10px;
+    
     padding-bottom: 10px;
-    border-bottom: 0.1px solid $text-color;
+    //border-bottom: 0.1px solid $text-color;
   }
   
 

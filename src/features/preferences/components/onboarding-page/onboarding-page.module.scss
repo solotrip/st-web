@@ -1,4 +1,4 @@
-@import "styles/mixins";
+@import 'styles/mixins';
 
 .container {
   @include custom-scroll;
@@ -15,5 +15,4 @@
   flex: 1;
   width: 100%;
   margin-top: 80px;
-
 }

@@ -3,15 +3,16 @@ import * as UserApi from 'api/user'
 import _ from 'lodash'
 
 export const fetchInterests = createAsyncThunk(
-  'profile/activityInterests/fetchInterests', async () => {
+  'profile/activityInterests/fetchInterests',
+  async () => {
     const interests = await UserApi.getInterests()
-    return interests
-      .filter(interest => interest.category === 'activity')
+    return interests.filter(interest => interest.category === 'activity')
   }
 )
 
 export const updateInterests = createAsyncThunk(
-  'profile/activityInterests/updateInterests', async (_, { getState }) => {
+  'profile/activityInterests/updateInterests',
+  async (_, { getState }) => {
     const { interestsSelected } = activityInterestsSelector(getState())
     const payload = Object.keys(interestsSelected).map(iid => ({
       iid,
@@ -50,7 +51,10 @@ const activityInterestsSlice = createSlice({
     },
     [fetchInterests.rejected]: (state, action) => {
       state.errorInterests = _.get(
-        action.error, 'data', action.error.toString())
+        action.error,
+        'data',
+        action.error.toString()
+      )
       state.loadingInterests = false
     },
     [updateInterests.fulfilled]: state => {
@@ -62,14 +66,16 @@ const activityInterestsSlice = createSlice({
     },
     [updateInterests.rejected]: (state, action) => {
       state.errorInterests = _.get(
-        action.error, 'data', action.error.toString())
+        action.error,
+        'data',
+        action.error.toString()
+      )
     }
   }
 })
 
-export const activityInterestsSelector = state => (
+export const activityInterestsSelector = state =>
   state.preferences.activityInterests
-)
 
 export const activityInterestsSelectedCountSelector = createSelector(
   activityInterestsSelector,
@@ -81,9 +87,6 @@ export const activityInterestsHasSelectedSelector = createSelector(
   state => state.interests.filter(interest => interest.selected).length > 0
 )
 
-
-export const {
-  updateInterestsSelected
-} = activityInterestsSlice.actions
+export const { updateInterestsSelected } = activityInterestsSlice.actions
 
 export default activityInterestsSlice.reducer

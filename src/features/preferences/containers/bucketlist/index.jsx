@@ -7,11 +7,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchInterests } from '../../slice'
 
 const InterestsContainer = () => {
-  const {
-    interests,
-    loadingInterests,
-    errorInterests
-  } = useSelector((state) => state.preferences)
+  const { interests, loadingInterests, errorInterests } = useSelector(
+    state => state.preferences
+  )
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
 
@@ -19,7 +17,7 @@ const InterestsContainer = () => {
     dispatch(fetchInterests())
   }, [])
 
-  const updateInput = async (input) => {
+  const updateInput = async input => {
     setInput(input)
   }
 
@@ -31,11 +29,11 @@ const InterestsContainer = () => {
         placeHolder="Hiking, swimming etc."
       />
       <Loader loading={loadingInterests}>
-        <InterestList interests={
-          interests.filter((interest) => {
+        <InterestList
+          interests={interests.filter(interest => {
             return interest.name.toLowerCase().includes(input.toLowerCase())
-          })
-        }/>
+          })}
+        />
       </Loader>
     </div>
   )

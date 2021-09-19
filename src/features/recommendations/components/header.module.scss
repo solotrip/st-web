@@ -1,4 +1,4 @@
-@import "styles/mixins";
+@import 'styles/mixins';
 
 .navbarFixed {
   z-index: 3;
@@ -75,14 +75,14 @@
   align-items: flex-start;
   justify-content: space-between;
   max-width: 600px;
-  
+
   margin-left: 10px;
   flex: 1;
   @include xs-to-sm {
     //smax-width: calc(100% - 100px);
   }
 }
-.calendarAndDate { 
+.calendarAndDate {
   background-color: #3cafeb;
   display: flex;
   flex-direction: row;
@@ -92,13 +92,11 @@
   border-radius: 16px;
 }
 
-
 .logod {
   @include xs-to-md {
     display: none;
   }
 }
-
 
 .monthSelector {
   width: 100%;
@@ -199,11 +197,10 @@
   display: block;
   margin-right: 20px;
 }
-  @include xs-to-md {
-    display: none;
-  }
-  //margin-left: 20px;
-  
+@include xs-to-md {
+  display: none;
+}
+//margin-left: 20px;
 
 .circleEdit {
   width: 30px;
@@ -293,50 +290,42 @@
   margin-left: 10px;
 }
 
-
 .currentDates {
   font-size: 20px;
- // font-size: clamp(16px, 2vw, 24px);
+  // font-size: clamp(16px, 2vw, 24px);
 
   //min-width: 5rem;
   //width: 110%;
- // margin-top: 5px;
+  // margin-top: 5px;
   text-align: start;
   //font-weight: 700;
- // font-weight: bold;
- height: 100%;
- margin-top: 8px;
- margin-bottom: auto;
- // max-height: 50px;
+  // font-weight: bold;
+  height: 100%;
+  margin-top: 8px;
+  margin-bottom: auto;
+  // max-height: 50px;
   margin-right: 10px;
   //max-width: 400px;
   //background-color: violet;
   //background-color: burlywood;
   overflow: hidden;
-   text-overflow: ellipsis;
-   display: -webkit-box;
-   -webkit-line-clamp: 1; /* number of lines to show */
-   -webkit-box-orient: vertical;
- color: #ffffff;
- 
-  
- @include xs-to-sm {
-   
-   //font-size: 18px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  color: #ffffff;
+
+  @include xs-to-sm {
+    //font-size: 18px;
   }
 }
-
-
-
-
-
 
 .logo1 {
   //background-color: deeppink;
   margin-left: 30px;
   margin-right: 120px;
   width: 120px;
- // margin-right: 0px;
+  // margin-right: 0px;
 
   display: flex;
   flex-direction: row;
@@ -352,19 +341,15 @@
   //width: 60px;
   margin-top: auto;
   height: 45px;
-  content:$logo;
+  content: $logo;
   //background-color: deepskyblue;
   //background-image: url("https://ik.imagekit.io/7zlqc1cmihe/lastp4_MmOcmyp_zWi.png?updatedAt=1629746068742");
 }
 
-
-
-
-
 .logoText1 {
   //background-color: firebrick;
   margin-left: 0px;
-  font-family: "Reem Kufi", sans-serif;
+  font-family: 'Reem Kufi', sans-serif;
   font-size: 20px;
   font-weight: 500;
 }

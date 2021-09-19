@@ -1,126 +1,106 @@
-import React from "react";
-import MenuItem from "./MenuItem";
+import React from 'react'
+import MenuItem from './MenuItem'
 
 import {
   CircleEdit24Regular,
   Alert28Regular,
   Bookmark28Regular,
   Star28Regular,
-  Heart28Regular,
-} from "@fluentui/react-icons";
+  Heart28Regular
+} from '@fluentui/react-icons'
 
-import styles from "./MenuBar.module.scss";
-import { Link } from "react-router-dom";
+import styles from './MenuBar.module.scss'
+import { Link } from 'react-router-dom'
 
 function MenuBar(props) {
-  const { active, setActive } = props;
+  const { active, setActive } = props
 
   return (
-    <div className={styles.menuBar} id={"menu-bar-horizontal"}>
+    <div className={styles.menuBar} id={'menu-bar-horizontal'}>
       <Link to="/recommendations">
         <MenuItem
-          value={"Recommendations"}
+          value={'Recommendations'}
           className={styles.item}
           logo={
             <Star28Regular
               width={10}
               height={10}
-              fill={active === "Recommendations" ? "#3CAFEB" : "#9292B0"}
-              primaryFill={active === "Recommendations" ? "#FFFFFF" : "#3CAFEB"}
+              fill={active === 'Recommendations' ? '#3CAFEB' : '#9292B0'}
+              primaryFill={active === 'Recommendations' ? '#FFFFFF' : '#3CAFEB'}
               className={styles.icon}
             />
           }
-          text={""}
-          isActive={active === "Recommendations"}
+          text={''}
+          isActive={active === 'Recommendations'}
           setActive={setActive}
-          color={"#FFFFFF"}
-          backgroundColor={"rgba(60, 175, 235, 1)"}
+          color={'#FFFFFF'}
+          backgroundColor={'rgba(60, 175, 235, 1)'}
         />
       </Link>
 
       <Link to="/wishlist">
         <MenuItem
-          value={"Wishlist"}
+          value={'Wishlist'}
           className={styles.item}
           logo={
             <Heart28Regular
               width={10}
               height={10}
-              fill={active === "Wishlist" ? "#3CAFEB" : "#9292B0"}
-              primaryFill={active === "Wishlist" ? "#FFFFFF" : "#3CAFEB"}
+              fill={active === 'Wishlist' ? '#3CAFEB' : '#9292B0'}
+              primaryFill={active === 'Wishlist' ? '#FFFFFF' : '#3CAFEB'}
               className={styles.icon}
             />
           }
-          text={""}
-          isActive={active === "Wishlist"}
+          text={''}
+          isActive={active === 'Wishlist'}
           setActive={setActive}
-          color={"#FFFFFF"}
-          backgroundColor={"rgba(60, 175, 235, 1)"}
-        />
-      </Link>
-      <Link to="/saved">
-        <MenuItem
-          value={"Saved"}
-          className={styles.item}
-          logo={
-            <Bookmark28Regular
-              width={10}
-              height={10}
-              fill={active === "Saved" ? "#3CAFEB" : "#9292B0"}
-              primaryFill={active === "Saved" ? "#FFFFFF" : "#3CAFEB"}
-              className={styles.icon}
-            />
-          }
-          text={""}
-          isActive={active === "Saved"}
-          setActive={setActive}
-          color={"#FFFFFF"}
-          backgroundColor={"rgba(60, 175, 235, 1)"}
+          color={'#FFFFFF'}
+          backgroundColor={'rgba(60, 175, 235, 1)'}
         />
       </Link>
       <Link to="/notifications">
         <MenuItem
-          value={"Notifications"}
+          value={'Notifications'}
           className={styles.item}
           logo={
             <Alert28Regular
               width={10}
               height={10}
-              fill={active === "Notifications" ? "#3CAFEB" : "#9292B0"}
+              fill={active === 'Notifications' ? '#3CAFEB' : '#9292B0'}
               //className={"iconClass"}
-              primaryFill={active === "Notifications" ? "#FFFFFF" : "#3CAFEB"}
+              primaryFill={active === 'Notifications' ? '#FFFFFF' : '#3CAFEB'}
               className={styles.icon}
             />
           }
-          text={""}
-          isActive={active === "Notifications"}
+          text={''}
+          isActive={active === 'Notifications'}
           setActive={setActive}
-          color={"#FFFFFF"}
-          backgroundColor={"rgba(60, 175, 235, 1)"}
+          color={'#FFFFFF'}
+          backgroundColor={'rgba(60, 175, 235, 1)'}
         />
       </Link>
-      <Link to="/recommendations/preferences/2">
+      <Link to="/recommendations/preferences">
         <MenuItem
-          value={"Preferences"}
+          value={'Preferences'}
           className={styles.item}
           logo={
             <CircleEdit24Regular
               width={10}
               height={10}
-              fill={active === "Preferences" ? "#3CAFEB" : "#9292B0"}
-              primaryFill={active === "Preferences" ? "#FFFFFF" : "#3CAFEB"}
+              fill={active === 'Preferences' ? '#3CAFEB' : '#9292B0'}
+              primaryFill={active === 'Preferences' ? '#FFFFFF' : '#3CAFEB'}
               className={styles.icon}
             />
           }
-          text={""}
-          isActive={active === "Preferences"}
+          text={''}
+          isActive={active === 'Preferences'}
           setActive={setActive}
-          color={"#FFFFFF"}
-          backgroundColor={"rgba(60, 175, 235, 1)"}
+          color={'#FFFFFF'}
+          backgroundColor={'rgba(60, 175, 235, 1)'}
         />
       </Link>
     </div>
-  );
+  )
 }
 
-export default MenuBar;
+export default MenuBar

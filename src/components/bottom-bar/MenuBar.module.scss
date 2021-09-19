@@ -1,24 +1,22 @@
-@import "styles/mixins";
+@import 'styles/mixins';
 .menu-bar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: $card-bg-color;
-    margin-bottom: 120px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    width: 100%;
-    transform: scale(1.2);
-    box-shadow: 0px 10px 40px 0px #18236b33;
-  }
-  
-  
-  .menuBar{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: $card-bg-color;
-    width: 100%;
-    box-shadow: 0px 10px 40px 0px #18236b33;
-  }
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $card-bg-color;
+  margin-bottom: 120px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 100%;
+  transform: scale(1.2);
+  box-shadow: 0px 10px 40px 0px #18236b33;
+}
 
+.menuBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: $card-bg-color;
+  width: 100%;
+  box-shadow: 0px 10px 40px 0px #18236b33;
+}

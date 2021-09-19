@@ -15,14 +15,16 @@ const SearchPage = ({
   error,
   loading
 }) => {
-  const tags = useMemo(() => {
-    const filterIds = Object.keys(filterValues)
-    return filters.filter(f => filterIds.includes(f.uuid))
-    .map(f => ({
-      ...f,
-      onRemove: () => updateFilter(f.uuid, false)
-    }))
-  }, [filterValues, filters, updateFilter])
+  const tags = useMemo(
+    () => {
+      const filterIds = Object.keys(filterValues)
+      return filters.filter(f => filterIds.includes(f.uuid)).map(f => ({
+        ...f,
+        onRemove: () => updateFilter(f.uuid, false)
+      }))
+    },
+    [filterValues, filters, updateFilter]
+  )
 
   const handleSearch = value => {
     updateQuery(value)
@@ -53,7 +55,7 @@ const SearchPage = ({
   return (
     <Layout header={header} sidebar={sidebar}>
       <div className={styles.results}>
-        <CityCardList data={results} className={styles.results}/>
+        <CityCardList data={results} className={styles.results} />
       </div>
     </Layout>
   )

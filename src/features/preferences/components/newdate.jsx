@@ -1,90 +1,73 @@
-import React, { useState } from "react";
-import styles from "./newdate.module.scss";
-import { SegmentedControl } from "segmented-control";
-import Date from "../components/date";
-import CalendarAlt from "./calendarAlt";
+import React, { useState } from 'react'
+import styles from './newdate.module.scss'
+import { SegmentedControl } from 'segmented-control'
+import CalendarAlt from './calendarAlt'
+
+import SavedContainer from '../../saved/containers/saved'
 
 const NewDate = ({}) => {
-  const [activeTab, setActiveTab] = useState("calendar");
-  const [travelLength, setTravelLength] = useState("weekend");
-  const [season, setSeason] = useState("summer");
-
-  let holidays = [
-    { title: "Kurban Bayrami", dates: "11 - 16 Jun" },
-    { title: "Ramazan Bayrami", dates: "11 - 16 Jun" },
-  ];
+  const [activeTab, setActiveTab] = useState('calendar')
+  const [travelLength, setTravelLength] = useState('weekend')
+  const [season, setSeason] = useState('summer')
 
   return (
     <div className={styles.wrapper}>
       <SegmentedControl
         name="oneDisabled"
         options={[
-          { label: "Calendar", value: "calendar", default: true },
-          { label: "Flexible", value: "flexible" },
-          { label: "Holiday List", value: "holiday-list" },
+          { label: 'Calendar', value: 'calendar', default: true },
+          { label: 'Flexible', value: 'flexible' },
+          { label: 'Recent Queries', value: 'recent-queries' }
         ]}
-        setValue={(newValue) => {
-          setActiveTab(newValue);
+        setValue={newValue => {
+          setActiveTab(newValue)
         }}
-        style={{ width: "100%", color: "#3cafeb" }}
+        style={{ width: '100%', color: '#3cafeb' }}
       />
-      {activeTab === "calendar" && <CalendarAlt />}
-      {activeTab === "flexible" && (
+      {activeTab === 'calendar' && <CalendarAlt />}
+      {activeTab === 'flexible' && (
         <>
           <div className={styles.center}>
             <div className={styles.howLong}>
-              {" "}
-              How long would you like to travel?{" "}
+              How long would you like to travel?
             </div>
             <SegmentedControl
               name="travelLengthSelector"
               options={[
-                { label: "Weekend", value: "weekend", default: true },
-                { label: "Week", value: "week" },
-                { label: "Month", value: "month" },
+                { label: 'Weekend', value: 'weekend', default: true },
+                { label: 'Week', value: 'week' },
+                { label: 'Month', value: 'month' }
               ]}
-              setValue={(newValue) => {
-                setTravelLength(newValue);
+              setValue={newValue => {
+                setTravelLength(newValue)
               }}
-              style={{ width: "100%", color: "#3cafeb", fontSize: "16px" }}
+              style={{ width: '100%', color: '#3cafeb', fontSize: '16px' }}
             />
           </div>
           <div className={styles.center}>
             <div className={styles.howLong}>
-              {" "}
-              Which season do you want to go?{" "}
+              Which season do you want to go?{' '}
             </div>
             <SegmentedControl
               name="seasonSelector"
               options={[
-                { label: "Winter", value: "winter" },
-                { label: "Spring", value: "spring" },
-                { label: "Summer", value: "summer", default: true },
-                { label: "Fall", value: "fall" },
+                { label: 'Winter', value: 'winter' },
+                { label: 'Spring', value: 'spring' },
+                { label: 'Summer', value: 'summer', default: true },
+                { label: 'Fall', value: 'fall' }
               ]}
-              setValue={(newValue) => {
-                setSeason(newValue);
+              setValue={newValue => {
+                setSeason(newValue)
               }}
-              style={{ width: "100%", color: "#3cafeb", fontSize: "16px" }}
+              style={{ width: '100%', color: '#3cafeb', fontSize: '16px' }}
             />
           </div>
         </>
       )}
-      {activeTab === "holiday-list" && (
-        <div>
-          {holidays.map((holiday) => (
-            <Date data={holiday} />
-          ))}
-        </div>
-      )}
-      {
-        <div className={styles.center}>
-          <div className={styles.howLong}> Give a title for your dates.</div>
-          <input className={styles.field} type="text" placeholder="Title" />
-        </div>
-      }
+      {activeTab === 'recent-queries' && <SavedContainer />}
+      {<div className={styles.center} />}
     </div>
-  );
-};
+  )
+}
 
-export default NewDate;
+export default NewDate

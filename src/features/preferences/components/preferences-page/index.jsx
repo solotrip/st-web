@@ -6,17 +6,20 @@ import Footer from './footer'
 import Header from './header'
 import { SheetWrapper } from 'components'
 
-const PreferencesPage = ({ children, onNext, nextEnabled, isGuest }) => {
-
+const PreferencesPage = ({
+  children,
+  onNext,
+  nextEnabled,
+  isGuest,
+  isSettings
+}) => {
   return (
     <SheetWrapper>
       <div className={cn(styles.container)}>
-        <Header isGuest={isGuest}/>
-        <div className={styles.content}>
-          {children}
-        </div>
+        {!isSettings && <Header isGuest={isGuest} />}
+        <div className={styles.content}>{children}</div>
       </div>
-      <Footer onNext={onNext} nextEnabled={nextEnabled}/>
+      <Footer onNext={onNext} nextEnabled={nextEnabled} />
     </SheetWrapper>
   )
 }

@@ -1,4 +1,4 @@
-@import "styles/mixins";
+@import 'styles/mixins';
 
 .wrapper {
   display: flex;
@@ -164,8 +164,8 @@
   overflow-y: hidden;
   overflow-x: scroll;
 
-  width: calc(100vw - 0px);
-  margin-left: 20px;
+  width: calc(100%);
+  //margin-left: 20px;
   //width: 300px;
   //padding: 10px;
   margin-top: 5px;
@@ -181,15 +181,15 @@
 .slideElement {
   //object-fit: contain;
   //background-color: saddlebrown;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 180px;
   border-radius: 16px;
   padding: 4px;
   //margin-left: 12px;
   margin-right: 20px;
   display: flex;
   flex-direction: row;
-  z-index: 1;
+  z-index: 0;
   text-align: center;
   :hover {
     //color: #3cafeb;
@@ -198,22 +198,28 @@
 }
 .slideText {
   padding: 4px;
-  margin-left: auto;
-  display: flex;
+  //margin-left: auto;
   margin: 10px;
+  z-index: 2;
+  text-align: left;
 
-  z-index: 1;
-  text-align: center;
-  justify-self: center;
-  justify-content: center;
-  text-justify: distribute;
   //color: #ffffff;
-  // text-shadow: 0px 4px 4px #000000;
-  font-size: 14px;
+  text-shadow: 0px 4px 4px #000000;
+  font-size: 18px;
   :hover {
     color: #3cafeb;
     text-decoration-color: #3cafeb;
   }
+  margin-top: -30px;
+  position: relative;
+  margin-bottom: 30px;
+  //background-color: #aeb9ea;
+  margin-left: 10px;
+
+  width: 140px;
+  display: inline-block;
+  inset-block-end: 20px;
+  word-wrap: break-word;
 }
 
 .stats {
@@ -292,8 +298,8 @@
 
 .arrowLeft {
   //background-color: cornflowerblue;
-  margin-top: 60px;
-  margin-bottom: -60px;
+  margin-top: 100px;
+  margin-bottom: -100px;
   position: relative;
   z-index: 2;
   width: 30px;
@@ -305,8 +311,8 @@
 
 .arrowRight {
   //background-color: rebeccapurple;
-  margin-top: 60px;
-  margin-bottom: -60px;
+  margin-top: 100px;
+  margin-bottom: -100px;
   position: relative;
   z-index: 2;
   width: 30px;

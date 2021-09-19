@@ -4,12 +4,11 @@ import OnboardedRoutesWrapper from 'components/routes/onboarded-routes-wrapper'
 //Pages
 import WishlistContainer from './containers/wishlist'
 
-
 const Routes = () => (
   <Switch>
     <Route path="/wishlist">
       <OnboardedRoutesWrapper>
-        <WishlistContainer/>
+        <WishlistContainer />
       </OnboardedRoutesWrapper>
     </Route>
   </Switch>

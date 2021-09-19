@@ -5,9 +5,12 @@ import styles from './ProgressBar.module.scss'
 const ProgressBar = ({ width, percent, status, play, animationHandler }) => {
   const [value, setValue] = React.useState(0)
 
-  React.useEffect(() => {
-    setValue(percent * width)
-  }, [setValue, percent, width])
+  React.useEffect(
+    () => {
+      setValue(percent * width)
+    },
+    [setValue, percent, width]
+  )
 
   return (
     <div className={styles.progressComp}>

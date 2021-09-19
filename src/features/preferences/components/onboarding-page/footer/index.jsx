@@ -23,10 +23,9 @@ const Footer = ({ onNext, nextEnabled }) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <Link to={`/onboarding/${indexNumber - 1}`}
-              className={cn(
-                styles.back, { [styles.hidden]: indexNumber === 1 }
-              )}
+        <Link
+          to={`/onboarding/${indexNumber - 1}`}
+          className={cn(styles.back, { [styles.hidden]: indexNumber === 1 })}
         >
           Back
         </Link>

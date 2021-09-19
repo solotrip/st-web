@@ -1,4 +1,4 @@
-@import "../../../../styles/mixins";
+@import '../../../../styles/mixins';
 
 .wrapper {
   display: flex;
@@ -8,108 +8,101 @@
   width: 100%;
 }
 
-
 .arrowLeft3 {
-    margin-top: 150px;
-    margin-bottom: -150px;
-    position: relative;
-    z-index: 3;
-    width: 30px;
-    //position: fixed;
-    //top: 0;
-    // left: 0;
-    color: $text-color;
-  }
-  
-  .arrowRight3 {
-    margin-top: 150px;
-    margin-bottom: -150px;
-    position: relative;
-    z-index: 3;
-    width: 30px;
-    color: $text-color;
-  }
-  
-  .arrowHolder {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .calendar {
-    padding-left: 20px;
-    padding-left: 10px;
-  }
-  
-
-  .slideHolder {
-    display: flex;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    padding: 10px;
-  
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none;
-     width: 99%;
-    
-  }
-  
-  .slideHolder::-webkit-scrollbar {
-    display: none;
-  }
-
-  .slideElement {
-    height: 220px;
-    margin-right: 5px;
-    margin-left: 5px;
-    margin-top: 20px;
-   
-  }
-
- 
-
-  .selected { 
-      background-color: #3cafeb;
-      border-radius: 16px;
-      margin-right: 5px;
-      margin-left: 5px;
-  }
-
-  .notSelected { 
-    background-color: transparent;
-    border-radius: 16px;
-    margin-right: 5px;
-    margin-left: 5px;
+  margin-top: 150px;
+  margin-bottom: -150px;
+  position: relative;
+  z-index: 3;
+  width: 30px;
+  //position: fixed;
+  //top: 0;
+  // left: 0;
+  color: $text-color;
 }
 
+.arrowRight3 {
+  margin-top: 150px;
+  margin-bottom: -150px;
+  position: relative;
+  z-index: 3;
+  width: 30px;
+  color: $text-color;
+}
 
-  .slideText2 {
-    padding: 4px;
-    margin-left: auto;
-    display: flex;
-    margin: 10px;
-    z-index: 1;
-    text-align: center;
-    justify-self: center;
-    justify-content: center;
-    text-justify: distribute;
-    color: $text-color;
-    font-size: 18px;
-    margin-top: 20px;
-    :hover {
-      color: #3cafeb;
-      text-decoration-color: #3cafeb;
-    }
-  }
+.arrowHolder {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
-  .featuresHolder {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-bottom: 100px;
-  }
+.calendar {
+  padding-left: 20px;
+  padding-left: 10px;
+}
 
-  .title {
-      margin-top: 30px;
-      margin-bottom: -20px;
+.slideHolder {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 10px;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  width: 99%;
+}
+
+.slideHolder::-webkit-scrollbar {
+  display: none;
+}
+
+.slideElement {
+  height: 220px;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+.selected {
+  background-color: #3cafeb;
+  border-radius: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.notSelected {
+  background-color: transparent;
+  border-radius: 16px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.slideText2 {
+  padding: 4px;
+  margin-left: auto;
+  display: flex;
+  margin: 10px;
+  z-index: 1;
+  text-align: center;
+  justify-self: center;
+  justify-content: center;
+  text-justify: distribute;
+  color: $text-color;
+  font-size: 18px;
+  margin-top: 20px;
+  :hover {
+    color: #3cafeb;
+    text-decoration-color: #3cafeb;
   }
+}
+
+.featuresHolder {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.title {
+  margin-top: 30px;
+  margin-bottom: -20px;
+}

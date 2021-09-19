@@ -6,12 +6,12 @@ const Dates = ({ handler, dateList = [] }) => {
   return (
     <div className={styles.wrapper}>
       <button className={styles.signup} onClick={handler}>
-        <span role="img" aria-label="Add New"></span>
+        <span role="img" aria-label="Add New" />
         Add New
       </button>
       {dateList.map((data, index) => {
         if (data) {
-          return <Date data={data} handler={handler}/>
+          return <Date data={data} handler={handler} />
         }
         return null
       })}

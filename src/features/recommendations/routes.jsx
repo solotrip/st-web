@@ -4,12 +4,11 @@ import OnboardedRoutesWrapper from 'components/routes/onboarded-routes-wrapper'
 //Pages
 import RecommendationsContainer from './containers/recommendations'
 
-
 const Routes = () => (
   <Switch>
     <Route path="/recommendations">
       <OnboardedRoutesWrapper>
-        <RecommendationsContainer/>
+        <RecommendationsContainer />
       </OnboardedRoutesWrapper>
     </Route>
   </Switch>

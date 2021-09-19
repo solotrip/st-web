@@ -7,22 +7,15 @@ import Footer from './footer'
 import { SheetWrapper } from 'components'
 
 const OnboardingPage = ({ children, onNext, nextEnabled }) => {
-
   return (
-    
-     
     <SheetWrapper>
-    <div className={cn(styles.container)}>
-      <Header/>
-      <div className={styles.content}>
-        {children}
+      <div className={cn(styles.container)}>
+        <Header />
+        <div className={styles.content}>{children}</div>
       </div>
-    </div>
-    <Footer onNext={onNext} nextEnabled={nextEnabled}/>
-  </SheetWrapper>
-    
+      <Footer onNext={onNext} nextEnabled={nextEnabled} />
+    </SheetWrapper>
   )
-  
 }
 
 OnboardingPage.propTypes = {

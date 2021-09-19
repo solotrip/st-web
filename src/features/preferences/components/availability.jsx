@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styles from "./availability.module.scss";
-import cn from "classnames";
+import React, { useState } from 'react'
+import styles from './availability.module.scss'
+import cn from 'classnames'
 
 const Availability = ({ name, selected }) => {
-  const [isSelected, setIsSelected] = useState(selected);
+  const [isSelected, setIsSelected] = useState(selected)
   return (
     <button
       className={isSelected ? styles.listItemSelected : styles.listItem}
@@ -13,14 +13,14 @@ const Availability = ({ name, selected }) => {
       <button
         className={cn({
           [styles.addButton]: !isSelected,
-          [styles.removeButton]: isSelected,
+          [styles.removeButton]: isSelected
         })}
         onClick={() => setIsSelected(!isSelected)}
       >
-        {!isSelected ? "Select" : "Selected"}
+        {!isSelected ? 'Select' : 'Selected'}
       </button>
     </button>
-  );
-};
+  )
+}
 
-export default Availability;
+export default Availability

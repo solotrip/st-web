@@ -2,21 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as AreaApi from '../../api/area'
 import _ from 'lodash'
 
-export const fetchFilters = createAsyncThunk(
-  'home/fetchFilters', async () => {
-    return await AreaApi.getFilters()
-  }
-)
+export const fetchFilters = createAsyncThunk('home/fetchFilters', async () => {
+  return await AreaApi.getFilters()
+})
 
 export const searchAreas = createAsyncThunk(
   'home/searchAreas',
   async (params, thunkAPI) => {
     const { filterValues, query } = thunkAPI.getState().home
-    const filters = Object.keys(filterValues).map(k =>
-      ({
-        id: k,
-        variables: filterValues[k] === true ? undefined : filterValues[k]
-      }))
+    const filters = Object.keys(filterValues).map(k => ({
+      id: k,
+      variables: filterValues[k] === true ? undefined : filterValues[k]
+    }))
     return await AreaApi.searchAreas({ filters, query })
   }
 )

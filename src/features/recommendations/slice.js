@@ -3,10 +3,8 @@ import * as UserApi from 'api/user'
 import _ from 'lodash'
 
 export const updateActiveDate = createAsyncThunk(
-  'profile/recommendations/updateActiveDate', async (index, {
-    dispatch,
-    getState
-  }) => {
+  'profile/recommendations/updateActiveDate',
+  async (index, { dispatch, getState }) => {
     const {
       availableDates,
       activeDateIndex,
@@ -27,7 +25,8 @@ export const updateActiveDate = createAsyncThunk(
   }
 )
 export const fetchAvailableDates = createAsyncThunk(
-  'profile/recommendations/fetchAvailableDates', async () => {
+  'profile/recommendations/fetchAvailableDates',
+  async () => {
     return UserApi.getAvailableDates()
   }
 )
@@ -61,7 +60,10 @@ const recommendationsSlice = createSlice({
     },
     [updateActiveDate.rejected]: (state, action) => {
       state.errorRecommendations = _.get(
-        action.error, 'data', action.error.toString())
+        action.error,
+        'data',
+        action.error.toString()
+      )
       state.loadingRecommendations = false
     },
     [fetchAvailableDates.pending]: state => {
@@ -76,14 +78,15 @@ const recommendationsSlice = createSlice({
     },
     [fetchAvailableDates.rejected]: (state, action) => {
       state.errorRecommendations = _.get(
-        action.error, 'data', action.error.toString())
+        action.error,
+        'data',
+        action.error.toString()
+      )
       state.loadingAvailableDates = false
     }
   }
 })
 
-export const recommendationsSelector = state => (
-  state.recommendations
-)
+export const recommendationsSelector = state => state.recommendations
 
 export default recommendationsSlice.reducer
