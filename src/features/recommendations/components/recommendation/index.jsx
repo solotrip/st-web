@@ -18,7 +18,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import ImageShadow from 'react-image-shadow'
 import 'react-image-shadow/assets/index.css'
 
-const images = [
+const eventImages = [
   {
     link:
       'https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg'
@@ -50,22 +50,71 @@ const images = [
   {
     link:
       'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
+  }
+]
+
+const poiImages = [
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3165-poi_59468_M0YkpD8fnyM?updatedAt=1632692845537'
   },
   {
     link:
-      'https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg'
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_274-poi_20497968_foB1aqNJdb_?updatedAt=1632692845296'
   },
   {
     link:
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_6361-poi_24837_0MGy0uu1fs?updatedAt=1632692845569'
   },
   {
     link:
-      'https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg'
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3417-poi_6163165_uXeyYqal1T?updatedAt=1632692845178'
   },
   {
     link:
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_9247-poi_48882_upLEZLpV4zf?updatedAt=1632692844138'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_38-poi_5065_2a4cbn2GHb?updatedAt=1632692844059'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_103-poi_34917_IS64Havj7v?updatedAt=1632692844650'
+  },
+  {
+    link: 'https://ik.imagekit.io/7zlqc1cmihe/allofpois2/city_5-poi_1863'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3165-poi_59468_M0YkpD8fnyM?updatedAt=1632692845537'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_274-poi_20497968_foB1aqNJdb_?updatedAt=1632692845296'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_6361-poi_24837_0MGy0uu1fs?updatedAt=1632692845569'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3417-poi_6163165_uXeyYqal1T?updatedAt=1632692845178'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_9247-poi_48882_upLEZLpV4zf?updatedAt=1632692844138'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_38-poi_5065_2a4cbn2GHb?updatedAt=1632692844059'
+  },
+  {
+    link:
+      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_103-poi_34917_IS64Havj7v?updatedAt=1632692844650'
+  },
+  {
+    link: 'https://ik.imagekit.io/7zlqc1cmihe/allofpois2/city_5-poi_1863'
   }
 ]
 
@@ -150,17 +199,19 @@ const Recommendation = ({
                   </div>
                 </div>
                 <div className={styles.slideHolder}>
-                  {images.map(image => (
-                    <div>
+                  {eventImages.map(image => (
+                    <div className={styles.slideElementTextHolder}>
                       <ImageShadow
                         src={image.link}
-                        className={styles.slideElement}
+                        className={styles.slideElementEvent}
                         width={150}
                         shadowBlur={30}
                         alt="a"
                         key={image.link + '1'}
                       />
-                      <div className={styles.slideText}>Roskilde Festival</div>
+                      <div className={styles.slideTextEvent}>
+                        Roskilde Festival
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -282,12 +333,12 @@ const Recommendation = ({
                   </div>
                 </div>
                 <div className={styles.slideHolder}>
-                  {images.map(image => (
-                    <div>
+                  {poiImages.map(image => (
+                    <div className={styles.slideElementTextHolder}>
                       <ImageShadow
                         src={image.link}
                         className={styles.slideElement}
-                        width={150}
+                        width={100}
                         shadowBlur={30}
                         alt="a"
                         key={image.link + '2'}

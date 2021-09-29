@@ -181,7 +181,25 @@
 .slideElement {
   //object-fit: contain;
   //background-color: saddlebrown;
-  width: 120px;
+  width: 100px;
+  height: 120px;
+  border-radius: 16px;
+  padding: 4px;
+  //margin-left: 12px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  z-index: 0;
+  text-align: center;
+  :hover {
+    //color: #3cafeb;
+  }
+  margin-bottom: -10px;
+}
+.slideElementEvent {
+  //object-fit: contain;
+  //background-color: saddlebrown;
+  width: 150px;
   height: 180px;
   border-radius: 16px;
   padding: 4px;
@@ -205,12 +223,40 @@
 
   //color: #ffffff;
   text-shadow: 0px 4px 4px #000000;
+  font-size: 16px;
+  :hover {
+    color: #3cafeb;
+    text-decoration-color: #3cafeb;
+  }
+  //margin-top: -30px;
+  margin-top: 30px;
+  position: relative;
+  //margin-bottom: 30px;
+  //background-color: #aeb9ea;
+  margin-left: 10px;
+
+  width: 100px;
+  display: inline-block;
+  inset-block-end: 20px;
+  word-wrap: break-word;
+}
+
+.slideTextEvent {
+  padding: 4px;
+  //margin-left: auto;
+  margin: 10px;
+  z-index: 2;
+  text-align: left;
+
+  //color: #ffffff;
+  text-shadow: 0px 4px 4px #000000;
   font-size: 18px;
   :hover {
     color: #3cafeb;
     text-decoration-color: #3cafeb;
   }
   margin-top: -30px;
+  //margin-top: 30px;
   position: relative;
   margin-bottom: 30px;
   //background-color: #aeb9ea;
@@ -220,6 +266,11 @@
   display: inline-block;
   inset-block-end: 20px;
   word-wrap: break-word;
+}
+
+.slideElementTextHolder {
+  //background-color: red;
+  //width: 350px;
 }
 
 .stats {
