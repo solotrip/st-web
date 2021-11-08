@@ -7,10 +7,15 @@ import useThemeState, {
   LIGHT_CLASS,
   NO_PREF_CLASS
 } from 'utils/hooks/use-theme-state'
+import { ToastContainer } from 'react-toastify'
 import { Loader } from 'components'
 import './styles/global.scss'
 import './i18n/i18n'
-
+// Import css files
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import 'react-image-shadow/assets/index.css'
+import 'react-toastify/dist/ReactToastify.min.css'
 
 const App = () => {
   // Set the theme if user has changed it
@@ -33,6 +38,9 @@ const App = () => {
       <Suspense fallback={<Loader/>}>
         <Provider store={store}>
           <Routes/>
+          <ToastContainer position={'bottom-right'}
+                          theme={appTheme === LIGHT_CLASS ? 'light' : 'dark'}
+          />
         </Provider>
       </Suspense>
     </React.StrictMode>

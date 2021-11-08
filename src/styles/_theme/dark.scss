@@ -8,7 +8,6 @@
   --backpack: url("https://ik.imagekit.io/7zlqc1cmihe/lightbackpack_7_ePEvmV6.svg?updatedAt=1629412156777");
   --calendar: url("https://ik.imagekit.io/7zlqc1cmihe/lightcalendaredit_WyMEb8aUo.svg?updatedAt=1629315661303");
   --calendar-white: url("https://ik.imagekit.io/7zlqc1cmihe/whitecalendar_H-aSRT9SjH6.svg?updatedAt=1631486504468");
-  --plane-image: url("https://ik.imagekit.io/7zlqc1cmihe/f1_gUi3gVo9UM.svg?updatedAt=1629383611517");
   --heart-selected: url("https://ik.imagekit.io/7zlqc1cmihe/heartfilled2_Ov6xMyOPf.svg?updatedAt=1629582643214");
   --heart-not-selected: url("https://ik.imagekit.io/7zlqc1cmihe/heartempty_jXpJojhM0.svg?updatedAt=1629582643236");
   --card-bg-url: url("https://ik.imagekit.io/7zlqc1cmihe/bg_5Ynn94efqO.svg?updatedAt=1629555736815");
@@ -17,7 +16,8 @@
   --color-navbar: #161b22;
   --color-navbar-border: #161b22;
   --color-bg: #161b22;
-  --color-card-bg: #25262c;
+  --color-purple: #AEB9EA;
+  --color-card-bg: #161d27;
   --color-text: #fefefe;
   --color-sub-text: #e0e0e0;
   --color-active-text: #3cafeb;
@@ -28,11 +28,10 @@
   --color-border-alternative: #4f4f53;
   --color-primary: #3cafeb;
   --color-primary-light: #6495ce;
+  --color-primary-disabled: #9292B0;
   --filter-navbar: blur(100px);
   --color-navbar-text: #ffffff;
-  --shadow-text: 0px 4px 10px #5e5ce6;
-  --active-month: #3cafeb;
-  --inactive-month: #bdbdbd;
+  --shadow-text: 0px 4px 8px rgba(62, 60, 90, 0.8);
   --cell-highlighter: 0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4);
   --cell-bg-image: url("https://wallpaperaccess.com/full/1155023.jpg");
   --color-warning: #c04444;

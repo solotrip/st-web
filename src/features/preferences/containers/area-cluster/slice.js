@@ -1,31 +1,48 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
+import * as UserApi from 'api/user'
 
-export const clusterSlice = createSlice({
-  name: 'clusters',
+
+export const updateBucketlist = createAsyncThunk('bucketlist/update',
+  async (_, { getState }) => {
+    const { sids } = bucketlistSelector(getState())
+    return await UserApi.updateBucketlist(
+      Object.keys(sids).filter(sid => !!sids[sid])
+    )
+  })
+
+export const bucketlistSlice = createSlice({
+  name: 'bucketlist',
   initialState: {
-    selectedClusters: []
+    pending: false,
+    sids: {}
   },
   reducers: {
-    selectClusters: (state, { payload }) => {
-      state.selectedClusters = payload
+    toggleSelected: (state, { payload }) => {
+      console.log(payload)
+      state.sids[payload] = !state.sids[payload]
+    }
+  },
+  extraReducers: {
+    [updateBucketlist.pending]: state => {
+      state.pending = true
     },
-    addToClusters: (state, { payload }) => {
-      state.selectedClusters = [...state.selectedClusters, payload]
+    [updateBucketlist.fulfilled]: state => {
+      state.pending = false
     },
-    removeFromClusters: (state, { payload }) => {
-      state.selectedClusters.splice(
-        state.selectedClusters.findIndex(c => c === payload),
-        1
-      )
+    [updateBucketlist.rejected]: state => {
+      state.pending = false
     }
   }
 })
 
-// Action creators are generated for each case reducer function
-export const {
-  selectClusters,
-  addToClusters,
-  removeFromClusters
-} = clusterSlice.actions
+export const bucketlistSelector = state => state.preferences.bucketlist
+export const bucketlistHasSelectedSelector = createSelector(
+  bucketlistSelector,
+  state => Object.keys(state.sids).length > 0
+)
 
-export default clusterSlice.reducer
+export const {
+  toggleSelected
+} = bucketlistSlice.actions
+
+export default bucketlistSlice.reducer

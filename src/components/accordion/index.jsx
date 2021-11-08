@@ -16,14 +16,14 @@ const Accordion = ({ children, name, expandedDefault }) => {
         className={styles.header}
         tabIndex={0}
         onKeyDown={expand}
-        onClick={() => expand()}
+        onClick={expand}
       >
         <span className={styles.name}>{name}</span>
         <span className={styles.icon}>
           <MdChevronRight fontSize="default"/>
         </span>
       </button>
-      <div className={styles.content} aria-expanded={expanded}>
+      <div className={styles.container} aria-expanded={expanded}>
         {children}
       </div>
       <hr className={styles.sepator}/>

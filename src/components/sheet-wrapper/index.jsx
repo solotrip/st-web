@@ -4,17 +4,21 @@ import PropTypes from 'prop-types'
 import styles from './sheet-wrapper.module.scss'
 import Sheet from 'react-modal-sheet'
 import { FiX as CloseIcon } from 'react-icons/fi'
+import Footer from './footer'
 
-const SheetWrapper = ({ children }) => {
+const SheetWrapper = ({ children, ...rest }) => {
   const { path } = useParams()
   const history = useHistory()
   const location = useLocation()
 
   const closeSheet = useCallback(() => {
     if (path) {
-      history.replace(`/${path}`)
+      history.replace({ pathname: `/${path}`, search: location.search })
     } else {
-      history.replace(location.pathname.split('/').slice(0, -1).join('/'))
+      history.replace({
+        pathname: location.pathname.split('/').slice(0, -1).join('/'),
+        search: location.search
+      })
     }
 
   }, [history, path, location])
@@ -29,6 +33,7 @@ const SheetWrapper = ({ children }) => {
         damping: 20,
         mass: 0.2
       }}
+      {...rest}
     >
       <div className={styles.container}>
         <Sheet.Container>
@@ -60,5 +65,9 @@ SheetWrapper.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string
 }
+
+SheetWrapper.Footer = Footer
+SheetWrapper.Content = ({ children }) => (
+  <div className={styles.content}>{children}</div>)
 
 export default SheetWrapper

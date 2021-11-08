@@ -165,3 +165,21 @@ hr {
   }
 }
 
+.relative-container {
+  position: relative;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}

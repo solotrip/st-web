@@ -1,360 +1,246 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styles from './recommendation.module.scss'
-import _interesection from 'lodash/intersection'
-import useThemeState from 'utils/hooks/use-theme-state'
-import { useDispatch, useSelector } from 'react-redux'
-
-import { addToWishlist, removeFromWishlist } from '../../../wishlist/slice'
-
-import {
-  FaExternalLinkAlt as AddIcon,
-  FaChevronLeft,
-  FaChevronRight,
-  FaRegHeart,
-  FaHeart
-} from 'react-icons/fa'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import ImageShadow from 'react-image-shadow'
-import 'react-image-shadow/assets/index.css'
-
-const eventImages = [
-  {
-    link:
-      'https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg'
-  },
-  {
-    link:
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-  },
-  {
-    link:
-      'https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg'
-  },
-  {
-    link:
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-  },
-  {
-    link:
-      'https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg'
-  },
-  {
-    link:
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-  },
-  {
-    link:
-      'https://seatgeek.com/images/performers-landscape/super-bowl-e0465e/11591/huge.jpg'
-  },
-  {
-    link:
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80'
-  }
-]
-
-const poiImages = [
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3165-poi_59468_M0YkpD8fnyM?updatedAt=1632692845537'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_274-poi_20497968_foB1aqNJdb_?updatedAt=1632692845296'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_6361-poi_24837_0MGy0uu1fs?updatedAt=1632692845569'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3417-poi_6163165_uXeyYqal1T?updatedAt=1632692845178'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_9247-poi_48882_upLEZLpV4zf?updatedAt=1632692844138'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_38-poi_5065_2a4cbn2GHb?updatedAt=1632692844059'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_103-poi_34917_IS64Havj7v?updatedAt=1632692844650'
-  },
-  {
-    link: 'https://ik.imagekit.io/7zlqc1cmihe/allofpois2/city_5-poi_1863'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3165-poi_59468_M0YkpD8fnyM?updatedAt=1632692845537'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_274-poi_20497968_foB1aqNJdb_?updatedAt=1632692845296'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_6361-poi_24837_0MGy0uu1fs?updatedAt=1632692845569'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_3417-poi_6163165_uXeyYqal1T?updatedAt=1632692845178'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_9247-poi_48882_upLEZLpV4zf?updatedAt=1632692844138'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_38-poi_5065_2a4cbn2GHb?updatedAt=1632692844059'
-  },
-  {
-    link:
-      'https://ik.imagekit.io/7zlqc1cmihe/poi/city_103-poi_34917_IS64Havj7v?updatedAt=1632692844650'
-  },
-  {
-    link: 'https://ik.imagekit.io/7zlqc1cmihe/allofpois2/city_5-poi_1863'
-  }
-]
+import { HorizontalScroll, Image } from 'components'
+import { ReactComponent as Cloud } from 'assets/images/icons/cloud.svg'
+import { ReactComponent as Home } from 'assets/images/icons/home.svg'
+import { ReactComponent as Passport } from 'assets/images/icons/passport.svg'
+import { ReactComponent as Plane } from 'assets/images/icons/plane.svg'
+import { formatAsMonthDay } from 'utils/date'
 
 const Recommendation = ({
   recommendation,
-  user,
-  size = 1024,
+  recommendationId,
+  query,
   activeHandler,
-  wishlisted
+  wishlisted,
+  toggleWishlist
 }) => {
-  const dispatch = useDispatch()
 
-  const [showFullImage, setShowFullImage] = useState(false)
-  const screenThreshold = 700
-  const [appTheme] = useThemeState()
+  const {
+    sid,
+    country,
+    name,
+    startDate,
+    endDate,
+    events,
 
-  const handleHeart = reco => {
-    //setIsLiked(!wishlisted);
-    if (wishlisted) {
-      dispatch(removeFromWishlist(reco))
-      //setHeartStyle(styles.heartFilled);
-    } else {
-      dispatch(addToWishlist(reco))
+    hotelPrice,
+    hostelPrice,
+    rentalPrice,
 
-      //setHeartStyle(styles.heart);
-    }
-  }
+    fastestFlightCost,
+    cheapestFlightCost,
+    bestFlightCost,
+    top_pois: topPois,
+    climate = {}
+  } = recommendation
 
-  const [isMobile, setIsMobile] = useState(
-    window.innerWidth < 720 ? true : true
-  )
+  const {
+    t_min: minTemperature,
+    t_max: maxTemperature
+  } = climate
 
-  //choose the screen size
-  const handleResize = () => {
-    if (window.innerWidth < 720) {
-      setIsMobile(true)
-    } else {
-      setIsMobile(true)
-    }
-  }
-
-  // create an event listener
-  useEffect(() => {
-    window.addEventListener('resize', handleResize)
-  })
   return (
-    <>
-      {isMobile && (
-        <>
-          {/*console.log("recommendation details are: ", recommendation)*/}
-          <div
-            onMouseEnter={() => {
-              activeHandler(recommendation.sid)
-            }}
-            className={styles.wrapper}
-          >
-            <div className={styles.titleAndHeart}>
-              <div className={styles.title}>
-                {recommendation.name} {recommendation.country.emoji_flag}
-              </div>
-              <button
-                className={wishlisted ? styles.heartFilled : styles.heart}
-                onClick={() => handleHeart(recommendation)}
-              >
-                {
-                  <img
-                    className={wishlisted ? styles.heartFilled : styles.heart}
-                    alt=""
-                  />
-                }
-              </button>
-            </div>
-            <div className={styles.wrapper2}>
-              <div className={styles.cell}>
-                <div className={styles.slider}>Events & Festivals</div>
-                <div className={styles.arrowHolder}>
-                  <div className={styles.arrowLeft}>
-                    <FaChevronLeft />
-                  </div>
-                  <div className={styles.arrowRight}>
-                    <FaChevronRight />
-                  </div>
-                </div>
-                <div className={styles.slideHolder}>
-                  {eventImages.map(image => (
-                    <div className={styles.slideElementTextHolder}>
-                      <ImageShadow
-                        src={image.link}
-                        className={styles.slideElementEvent}
-                        width={150}
-                        shadowBlur={30}
-                        alt="a"
-                        key={image.link + '1'}
-                      />
-                      <div className={styles.slideTextEvent}>
-                        Roskilde Festival
-                      </div>
-                    </div>
-                  ))}
-                </div>
 
-                <div className={styles.content}>
-                  <div className={styles.stats}>
-                    <div className={styles.statRow}>
-                      <div className={styles.statImage}>
-                        <ImageShadow
-                          src={
-                            appTheme == 'light'
-                              ? 'https://ik.imagekit.io/7zlqc1cmihe/darkplane_6qiv8c4PG.svg?updatedAt=1629578118558'
-                              : 'https://ik.imagekit.io/7zlqc1cmihe/f1_gUi3gVo9UM.svg?updatedAt=1629383611517'
-                          }
-                          width={'50px'}
-                        />
-                      </div>
-                      <div className={styles.statContent}>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>
-                            Fastest
-                          </div>
-                          <div className={styles.statContentCellRow2}>655$</div>
-                        </div>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>
-                            Cheapest
-                          </div>
-                          <div className={styles.statContentCellRow2}>155$</div>
-                        </div>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>Best</div>
-                          <div className={styles.statContentCellRow2}>355$</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.statRow}>
-                      <div className={styles.statImage}>
-                        <ImageShadow
-                          src={
-                            appTheme == 'light'
-                              ? 'https://ik.imagekit.io/7zlqc1cmihe/darkhome_Em0WLXxzpp.svg?updatedAt=1629578118545'
-                              : 'https://ik.imagekit.io/7zlqc1cmihe/f2_t5dpjC4Hni.svg?updatedAt=1629383611512'
-                          }
-                          width={'50px'}
-                        />
-                      </div>
-                      <div className={styles.statContent}>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>
-                            Hotel
-                          </div>
-                          <div className={styles.statContentCellRow2}>200$</div>
-                        </div>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>
-                            Hostel
-                          </div>
-                          <div className={styles.statContentCellRow2}>22$</div>
-                        </div>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>
-                            Airbnb
-                          </div>
-                          <div className={styles.statContentCellRow2}>55$</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.statRow}>
-                      <div className={styles.statImagePass}>
-                        <ImageShadow
-                          src={
-                            appTheme == 'light'
-                              ? 'https://ik.imagekit.io/7zlqc1cmihe/darkpass_9y2utfZOS.svg?updatedAt=1629578118493'
-                              : 'https://ik.imagekit.io/7zlqc1cmihe/f3_312aF4qJe.svg?updatedAt=1629383611526'
-                          }
-                          width={'40px'}
-                        />
-                      </div>
-                      <div className={styles.statContent}>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>
-                            Visa free for you.
-                          </div>
-                          <div className={styles.statContentCellRow2}>
-                            PCR test is necessary.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.statRow}>
-                      <div className={styles.statImagePass}>
-                        <ImageShadow
-                          src={
-                            appTheme == 'light'
-                              ? 'https://ik.imagekit.io/7zlqc1cmihe/darkcloud_WU3lopNi2.svg?updatedAt=1629578118570'
-                              : 'https://ik.imagekit.io/7zlqc1cmihe/f4_qLTwoX-Hg.svg?updatedAt=1629383611412'
-                          }
-                          width={'50px'}
-                        />
-                      </div>
-                      <div className={styles.statContent}>
-                        <div className={styles.statContentCell}>
-                          <div className={styles.statContentCellRow1}>
-                            min 13°C, max 28°C
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+    <div
+      onMouseEnter={() => {
+        activeHandler(sid)
+      }}
+      className={styles.recommendationCard}
+    >
+      <div className={styles.header}>
+        <div className={styles.titleContainer}>
+          <h2 className={styles.title}>
+            {name}
+            <i>{country.name}</i> {country.emoji_flag}
+          </h2>
+          <span className={styles.date}>
+            {formatAsMonthDay(startDate)}
+            {startDate !== endDate
+              ? ` - ${formatAsMonthDay(endDate)}` : ''}
+          </span>
+        </div>
+        <button
+          className={wishlisted ? styles.heartFilled : styles.heart}
+          onClick={() => toggleWishlist({ query, recommendationId, sid })}
+        >
+          {
+            <img
+              className={wishlisted ? styles.heartFilled : styles.heart}
+              alt=""
+            />
+          }
+        </button>
+      </div>
+      <div className={styles.content}>
+        {(events && events.length > 0) && (
+          <>
+            <div className={styles.sectionTitle}>Events & Festivals</div>
+            <HorizontalScroll className={styles.slide} settings={
+              {
+                responsive: undefined,
+                slidesToShow: Math.min(events.length, 3),
+                slidesToScroll: 2
+              }
+            } items={events.map(event => (
+              <div key={`${sid}-poi-${event.id}`}
+                   className={styles.slide}
+              >
+                <Image
+                  src={(event.images && event.images.length > 1)
+                  && event.images[0]}
+                  className={styles.slideImage}
+                  containerClassName={styles.slideImageContainer}
+                  width={100}
+                  height={100}
+                  shadowBlur={30}
+                  alt={event.title}
+                  key={event.eid}
+                />
+                <div className="flex center">
+                  <div className={styles.slideText}>
+                    {event.title}
                   </div>
                 </div>
-                <div className={styles.slider}>What to See</div>
-                <div className={styles.arrowHolder}>
-                  <div className={styles.arrowLeft}>
-                    <FaChevronLeft />
-                  </div>
-                  <div className={styles.arrowRight}>
-                    <FaChevronRight />
-                  </div>
-                </div>
-                <div className={styles.slideHolder}>
-                  {poiImages.map(image => (
-                    <div className={styles.slideElementTextHolder}>
-                      <ImageShadow
-                        src={image.link}
-                        className={styles.slideElement}
-                        width={100}
-                        shadowBlur={30}
-                        alt="a"
-                        key={image.link + '2'}
-                      />
-                      <div className={styles.slideText}>
-                        Basilica of the Sagrada Familia
-                      </div>
+              </div>
+            ))}
+            />
+
+          </>
+        )
+        }
+        <div className={styles.stats}>
+          {(fastestFlightCost || cheapestFlightCost || bestFlightCost) && (
+            <div className={styles.statRow}>
+              <div className={styles.statImage}>
+                <Plane/>
+              </div>
+              <div className={styles.statContent}>
+                {fastestFlightCost && (
+                  <div className={styles.statContentCell}>
+                    <div className={styles.statName}>
+                      Fastest
                     </div>
-                  ))}
+                    <div className={styles.statValue}>{fastestFlightCost}</div>
+                  </div>
+                )}
+                {cheapestFlightCost && (
+                  <div className={styles.statContentCell}>
+                    <div className={styles.statName}>
+                      Cheapest
+                    </div>
+                    <div className={styles.statValue}>{cheapestFlightCost}</div>
+                  </div>
+                )}
+                {bestFlightCost && (
+                  <div className={styles.statContentCell}>
+                    <div className={styles.statName}>Best</div>
+                    <div className={styles.statValue}>{bestFlightCost}</div>
+                  </div>
+
+                )}
+              </div>
+            </div>
+          )}
+          {(hotelPrice || hostelPrice || rentalPrice) &&
+          < div className={styles.statRow}>
+            <div className={styles.statImage}>
+              <Home/>
+            </div>
+            <div className={styles.statContent}>
+              {hotelPrice && (
+                <div className={styles.statContentCell}>
+                  <div className={styles.statName}>
+                    Hotel
+                  </div>
+                  <div className={styles.statValue}>{hotelPrice}</div>
+                </div>
+              )}
+              {hostelPrice && (
+                <div className={styles.statContentCell}>
+                  <div className={styles.statName}>
+                    Hostel
+                  </div>
+                  <div
+                    className={styles.statValue}
+                  >{hostelPrice}</div>
+                </div>
+              )}
+              {rentalPrice && (
+                <div className={styles.statContentCell}>
+                  <div className={styles.statName}>
+                    Airbnb
+                  </div>
+                  <div className={styles.statValue}>{rentalPrice}</div>
+                </div>
+              )}
+            </div>
+          </div>
+          }
+          <div className={styles.statRow}>
+            <div className={styles.statImage}>
+              <Passport/>
+            </div>
+            <div className={styles.statContent}>
+              <div className={styles.statContentCell}>
+                <div className={styles.statName}>
+                  Visa free for you.
+                </div>
+                <div className={styles.statValue}>
+                  PCR test is necessary.
                 </div>
               </div>
             </div>
           </div>
-        </>
-      )}
-    </>
+          {(minTemperature != null && maxTemperature != null) && (
+            <div className={styles.statRow}>
+              <div className={styles.statImage}>
+                <Cloud/>
+              </div>
+              <div className={styles.statContent}>
+                <div className={styles.statContentCell}>
+                  <div className={styles.statName}>
+                    min {minTemperature}°C, max {maxTemperature}°C
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        {(topPois && topPois.length > 0) && (
+          <>
+            <div className={styles.sectionTitle}>What to See</div>
+            <HorizontalScroll className={styles.slide} settings={
+              {
+                responsive: undefined,
+                slidesToShow: 3,
+                slidesToScroll: 2
+              }
+            } items={topPois.map(poi => (
+              <div key={`${sid}-poi-${poi.id}`}
+                   className={styles.slide}
+              >
+                <Image
+                  src={poi.imageLink}
+                  className={styles.slideImage}
+                  width={100}
+                  height={100}
+                  shadowBlur={30}
+                  alt={poi.name}
+                  key={poi.id}
+                />
+                <div className={styles.slideText}>
+                  {poi.name}
+                </div>
+              </div>
+            ))}
+            />
+
+          </>
+        )
+        }
+      </div>
+    </div>
   )
 }
 

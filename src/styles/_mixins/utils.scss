@@ -1,3 +1,5 @@
+@import "variables";
+
 @mixin custom-scroll {
   scrollbar-color: rgba(0, 0, 0, 0.25);
   scrollbar-width: thin;
@@ -26,7 +28,7 @@
   }
 
   &::-webkit-scrollbar {
-    height: 0px; /* width of the entire scrollbar */
+    height: 0; /* width of the entire scrollbar */
   }
 
   &::-webkit-scrollbar-track {
@@ -37,6 +39,10 @@
 
 .shadow {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.textShadow {
+  text-shadow: $text-shadow;
 }
 
 /**

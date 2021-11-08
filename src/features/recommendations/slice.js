@@ -1,33 +1,49 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import * as UserApi from 'api/user'
+import * as RecommendationsApi from 'api/recommendation'
 import _ from 'lodash'
+import qs from 'qs'
 
-export const updateActiveDate = createAsyncThunk(
-  'profile/recommendations/updateActiveDate',
-  async (index, { dispatch, getState }) => {
-    const {
-      availableDates,
-      activeDateIndex,
-      recommendations
-    } = recommendationsSelector(getState())
-    if (activeDateIndex !== index || recommendations.length === 0) {
-      dispatch(recommendationsSlice.actions.startFetchingRecommendations())
-      try {
-        dispatch(recommendationsSlice.actions.updateActiveDateState(index))
-        return UserApi.getRecommendations({
-          start: availableDates[index].start,
-          end: availableDates[index].end
-        })
-      } catch (e) {
-        dispatch(recommendationsSlice.actions.errorReccommendations(e))
-      }
+
+export const fetchRecommendations = createAsyncThunk(
+  'recommendations/fetchRecommendations',
+  async ({
+    start,
+    end,
+    months,
+    duration,
+    weekendOnly,
+    filters,
+    lat,
+    lon
+  }, { getState }) => {
+    const payload = {
+      start,
+      end,
+      months,
+      duration,
+      weekendOnly,
+      filters,
+      lat,
+      lon
     }
+    const {
+      activeRecommendationId,
+      recommendations
+    } = getState().recommendations
+    if (activeRecommendationId && qs.stringify(
+      recommendations[activeRecommendationId].query) === qs.stringify(payload)
+    ) {
+      return recommendations[activeRecommendationId]
+    }
+    return RecommendationsApi.getRecommendations(payload)
   }
 )
-export const fetchAvailableDates = createAsyncThunk(
-  'profile/recommendations/fetchAvailableDates',
-  async () => {
-    return UserApi.getAvailableDates()
+
+
+export const fetchHolidays = createAsyncThunk(
+  'recommendations/fetchHolidays',
+  async country => {
+    return RecommendationsApi.getHolidays(country)
   }
 )
 
@@ -36,55 +52,46 @@ const recommendationsSlice = createSlice({
   initialState: {
     loadingRecommendations: true,
     errorRecommendations: null,
-    recommendations: [],
-    availableDates: [],
-    loadingAvailableDates: true,
-    errorAvailableDates: null,
-    activeDateIndex: 0
-  },
-  reducers: {
-    updateActiveDateState(state, action) {
-      state.activeDateIndex = action.payload
-    },
-    startFetchingRecommendations(state) {
-      state.errorRecommendations = null
-      state.loadingRecommendations = true
-    }
+    recommendations: {},
+    holidays: [],
+    filters: [],
+    errorHolidays: null,
+    activeRecommendationId: null,
+    loadingHolidays: true
   },
   extraReducers: {
-    [updateActiveDate.fulfilled]: (state, action) => {
-      if (action.payload) {
-        state.recommendations = action.payload
-        state.loadingRecommendations = false
-      }
-    },
-    [updateActiveDate.rejected]: (state, action) => {
-      state.errorRecommendations = _.get(
-        action.error,
-        'data',
-        action.error.toString()
-      )
+    [fetchRecommendations.fulfilled]: (state, action) => {
+      const { recommendationId } = action.payload
+      state.recommendations[recommendationId] = action.payload
+      state.activeRecommendationId = recommendationId
       state.loadingRecommendations = false
-    },
-    [fetchAvailableDates.pending]: state => {
-      state.errorRecommendations = null
-      if (state.availableDates.length === 0) {
-        state.loadingAvailableDates = true
-      }
-    },
-    [fetchAvailableDates.fulfilled]: (state, action) => {
-      state.availableDates = action.payload
-      state.loadingAvailableDates = false
-    },
-    [fetchAvailableDates.rejected]: (state, action) => {
-      state.errorRecommendations = _.get(
-        action.error,
-        'data',
-        action.error.toString()
-      )
-      state.loadingAvailableDates = false
     }
+  },
+  [fetchRecommendations.rejected]: (state, action) => {
+    state.errorRecommendations = _.get(
+      action.error,
+      'data',
+      action.error.toString()
+    )
+    state.loadingRecommendations = false
+  },
+  [fetchRecommendations.pending]: state => {
+    state.errorRecommendations = null
+    state.loadingRecommendations = true
+  },
+  [fetchHolidays.fulfilled]: (state, action) => {
+    state.holidays = action.payload
+    state.loadingAvailableDates = false
+  },
+  [fetchHolidays.rejected]: (state, action) => {
+    state.errorRecommendations = _.get(
+      action.error,
+      'data',
+      action.error.toString()
+    )
+    state.loadingAvailableDates = false
   }
+
 })
 
 export const recommendationsSelector = state => state.recommendations

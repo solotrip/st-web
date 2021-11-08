@@ -6,13 +6,13 @@ import { useParams } from 'react-router-dom'
 const Header = () => {
 
   const links = [
-  
+
     {
-      name: 'Dates',
+      name: 'Bucketlist',
       link: '/onboarding/1'
     },
     {
-      name: 'Places',
+      name: 'Finish',
       link: '/onboarding/2'
     }
   ]
@@ -24,7 +24,8 @@ const Header = () => {
       [styles.active]: i === indexNumber - 1,
       [styles.filled]: i < indexNumber - 1,
       [styles.last]: i === links.length - 1
-    })}>
+    })}
+    >
       <span className={styles.index}>{i + 1}</span>
       <span className={styles.name}>{item.name}</span>
     </div>

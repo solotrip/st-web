@@ -1,59 +1,49 @@
-import React, { useState } from "react";
-import styles from "./notification.module.scss";
-import _interesection from "lodash/intersection";
+import React from 'react'
+import styles from './notification.module.scss'
+import { NOTIFICATION_TYPES } from 'constants/index'
+import Logo from 'assets/images/logo.svg'
+import { formatAsMonthDay, getTimeDiffString } from 'utils/date'
 
-
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-const Notification = ({ notification, user, size = 1024 }) => {
-  const screenThreshold = 700;
-
+const Notification = ({ notification }) => {
+  const { content, body, data, hasSeen } = notification
   return (
     <div
-      className={
-        size.width < screenThreshold
-          ? styles.wrapperCentered
-          : styles.wrapperNotCentered
-      }
+      className={styles.wrapper}
     >
-      <div className={styles.cell}>
-        <div className={styles.firstRow}>
-          <div className={styles.dateHolder}>{notification.dates}</div>
-          <div>
-            {!notification.hasSeen && (
-              <img
-                className={styles.notSeen}
-                src={
-                  "https://ik.imagekit.io/7zlqc1cmihe/reddot_wYbUrVkJvLu.svg?updatedAt=1629379244841"
-                }
-                alt=""
-              />
-            )}
-          </div>
+      {<img
+        className={styles.image}
+        src={content.new.image || Logo}
+        alt={content.new.name}
+      />}
+      <div className={styles.content}>
+        <div className={styles.title}>
+          {
+            (data.type === NOTIFICATION_TYPES.WISHLIST ||
+              data.type === NOTIFICATION_TYPES.RECOMMENDATION) &&
+            (
+              <div
+                className={styles.dateHolder}
+              >
+                {`${formatAsMonthDay(content.new.startDate)} -` +
+                ` ${formatAsMonthDay(content.new.endDate)}`}
+              </div>
+            )
+          }
+          {!hasSeen && (
+            <div className={styles.notSeen}/>
+          )}
         </div>
-        <div className={styles.secondRow}> {notification.notificationText}</div>
-        <div className={styles.thirdRow}>
-          <img
-            className={styles.image}
-            src={notification.notificationDetails.image}
-            alt=""
-          />
-          <div className={styles.innerRow}>
-            <div className={styles.title}>
-              {notification.notificationDetails.title}
-            </div>
-            <div className={styles.subtitle}>
-              {" "}
-              {notification.notificationDetails.subtitle}
-            </div>
-          </div>
+        <div className={styles.body}>{body}</div>
+        <div
+          className={styles.notificationTime}
+        >
+          {getTimeDiffString(notification.updatedAt)}
         </div>
-        <div className={styles.forthRow}> {notification.timeStamp}</div>
       </div>
-    </div>
-  );
-};
 
-export default Notification;
+
+    </div>
+  )
+}
+
+export default Notification

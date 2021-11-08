@@ -1,93 +1,59 @@
 @import "styles/mixins";
 
-.wrapperNotCentered {
+.wrapper {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  align-self: center;
+  align-items: flex-start;
+  border-bottom: 1px solid $text-color;
+  padding: 10px;
+  @include xs-to-sm {
+    margin-top: 50px;
+    margin-bottom: 0;
+  }
+}
 
-  //background-color: coral;
-
+.content {
+  display: flex;
   flex: 1;
-}
-
-.wrapperCentered {
-  display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  align-self: center;
-  //padding-left: 140px;
-  margin-top: 50px;
-  margin-bottom: 0px;
-
-  height: 512px;
-  flex: 1;
-}
-
-.cell {
-  display: flex;
-  flex-direction: column;
-  // align-items: flex-start;
-  //justify-content: start;
   justify-content: space-between;
-  margin-top: 10px;
-  //background-color: yellowgreen;
-  min-width: 300px;
-  width: 100%;
-  //flex: 1;
-}
-.firstRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  //background-color: burlywood;
 }
 
 .dateHolder {
   text-align: start;
   font-size: 18px;
-  font-weight: bolder;
   min-width: 5rem;
   font-weight: 500;
 }
 
 .notSeen {
-  //background-color: aqua;
-  width: 20px;
-  height: 20px;
+  content: '';
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background: $warning-color;
 }
 
-.secondRow {
-  //background-color: chocolate;
-  margin-top: 10px;
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.body {
   font-size: 20px;
   font-weight: 300;
-  margin-bottom: 15px;
-}
-
-.thirdRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  //background-color: crimson;
-  margin-bottom: 15px;
-  margin-top: 10px;
 }
 
 .image {
   width: 50px;
   height: 50px;
-  border-radius: 13px;
-  //background-color: darkcyan;
+  object-fit: contain;
+  border-radius: 50%;
   margin-right: 10px;
 }
 
 .innerRow {
   display: flex;
   flex-direction: column;
-  //background-color: darkgoldenrod;
 }
 
 .title {
@@ -97,16 +63,15 @@
 }
 
 .subtitle {
+  @include roboto-light;
+
   font-size: 16px;
-  font-weight: 300;
 }
 
-.forthRow {
-  //background-color: darkgreen;
+.notificationTime {
+  @include roboto-thin;
+
   font-size: 14px;
-  font-weight: 200;
   text-align: right;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 0.1px solid $text-color;
+  margin-top: 8px;
 }

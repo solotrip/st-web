@@ -4,32 +4,45 @@ import { BlurhashCanvas } from 'react-blurhash'
 import cn from 'classnames'
 import styles from './image.module.scss'
 
-const Image = ({ blurHash, height, width, alt, className, ...props }) => {
+const Image = ({
+  blurHash,
+  height,
+  width,
+  alt,
+  className,
+  ...props
+}) => {
   const [loaded, setLoaded] = useState(false)
   const placeholder = blurHash ? <BlurhashCanvas
       className={cn([styles.placeholder, className])}
       hash={blurHash}
       width={Math.floor(width / height * 100)}
       height={100}
-      punch={1}/> :
+      punch={1}
+  /> :
     <div className={cn([styles.placeholder, className])}/>
   const handleLoad = () => {
     setLoaded(true)
   }
   return (
-    <div className={cn([styles.container, { [styles.loaded]: loaded }])}>
-      {!loaded && placeholder}
-      <img
-        className={cn([styles.image, className])}
-        alt={alt} {...props}
-        onLoad={handleLoad}/>
+    <div
+      className={cn([styles.container, { [styles.loaded]: loaded }])}
+    >
+      {!loaded &&
+      <div className={styles.placeholderContainer}>{placeholder}</div>}
+      <div className={styles.imageContainer}>
+        <img
+          className={cn(styles.image, className,
+            { [styles.notLoaded]: !loaded })}
+          alt={alt} {...props}
+          onLoad={handleLoad}
+        />
+      </div>
     </div>
   )
 }
 
-Image.defaultProps = {
-  settings: {}
-}
+Image.defaultProps = {}
 
 Image.propTypes = {
   src: PropTypes.string.isRequired,

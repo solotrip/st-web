@@ -1,5 +1,6 @@
+/* eslint-disable max-len*/
 import React from 'react'
-import Footer from './footer'
+import { Footer } from 'components'
 
 import styles from './home-page.module.scss'
 import { Link } from 'react-router-dom'
@@ -120,7 +121,7 @@ let bucketlist = [
   }
 ]
 
-const HomePage = ({}) => {
+const HomePage = () => {
   //const { data: user, loading: profileLoading } = useSelector(profileSelector);
   return (
     <div className={styles.outer}>
@@ -133,7 +134,7 @@ const HomePage = ({}) => {
               alt=""
             />
           </div>
-          <div className={styles.logoText} />
+          <div className={styles.logoText}/>
         </div>
         <div className={styles.login}>
           <Link to="/login">
@@ -145,7 +146,7 @@ const HomePage = ({}) => {
       <div className={styles.wrapper}>
         <div className={styles.row1}>
           <div className={styles.row1Title}>
-            <div>Personalized </div>
+            <div>Personalized</div>
             <div>Travel</div>
             <div>Recommendations</div>
           </div>
@@ -183,22 +184,21 @@ const HomePage = ({}) => {
           <div className={styles.featureImage}>
             <div className={styles.arrowHolder}>
               <div className={styles.arrowLeft}>
-                <FaChevronLeft />
+                <FaChevronLeft/>
               </div>
               <div className={styles.arrowRight}>
-                <FaChevronRight />
+                <FaChevronRight/>
               </div>
             </div>
             <div className={styles.slideHolder}>
-              {yourspecs.map(spec => (
-                <div>
+              {yourspecs.map((spec, index) => (
+                <div key={`${index}-rec`}>
                   <ImageShadow
                     src={spec.link}
-                    className={styles.slideElement}
                     width={160}
                     shadowBlur={10}
                     alt="a"
-                    key={spec.key + '887'}
+                    k
                   />
                   <div className={styles.slideText} key={spec.key + '34'}>
                     {spec.title}
@@ -226,22 +226,21 @@ const HomePage = ({}) => {
           <div className={styles.featureImage}>
             <div className={styles.arrowHolder}>
               <div className={styles.arrowLeft}>
-                <FaChevronLeft />
+                <FaChevronLeft/>
               </div>
               <div className={styles.arrowRight}>
-                <FaChevronRight />
+                <FaChevronRight/>
               </div>
             </div>
             <div className={styles.slideHolder}>
               {yourspecs.map(spec => (
-                <div>
+                <div key={`${spec.link}-spec`}>
                   <ImageShadow
                     src={spec.link}
-                    className={styles.slideElement}
                     width={160}
                     shadowBlur={10}
                     alt="a"
-                    key={spec.key + '111'}
+
                   />
                   <div className={styles.slideText} key={spec.key + '134'}>
                     {spec.title}
@@ -319,23 +318,23 @@ const HomePage = ({}) => {
         <div className={styles.featureImage}>
           <div className={styles.arrowHolder}>
             <div className={styles.arrowLeft3}>
-              <FaChevronLeft />
+              <FaChevronLeft/>
             </div>
             <div className={styles.arrowRight3}>
-              <FaChevronRight />
+              <FaChevronRight/>
             </div>
           </div>
           <div className={styles.slideHolder}>
             {bucketlist.map(spec => (
-              <div>
+              <div key={`bl-${spec.link}`}>
                 <ImageShadow
                   src={spec.link}
                   className={styles.slideElement3}
                   shadowBlur={10}
                   alt="a"
-                  key={spec.key + '111'}
+
                 />
-                <div className={styles.slideText2} key={spec.key + '134'}>
+                <div>
                   {spec.title}
                 </div>
               </div>
@@ -349,15 +348,15 @@ const HomePage = ({}) => {
           <div className={styles.featureImage}>
             <div className={styles.arrowHolder}>
               <div className={styles.arrowLeft2}>
-                <FaChevronLeft />
+                <FaChevronLeft/>
               </div>
               <div className={styles.arrowRight2}>
-                <FaChevronRight />
+                <FaChevronRight/>
               </div>
             </div>
             <div className={styles.slideHolder}>
-              {yourspecs.map(spec => (
-                <div>
+              {yourspecs.map((spec,i) => (
+                <div key={`${i}-ys`}>
                   <ImageShadow
                     src={
                       'https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671'
@@ -366,7 +365,6 @@ const HomePage = ({}) => {
                     width={250}
                     shadowBlur={8}
                     alt="a"
-                    key={spec.key + '211'}
                   />
                 </div>
               ))}
@@ -392,15 +390,15 @@ const HomePage = ({}) => {
           <div className={styles.featureImage}>
             <div className={styles.arrowHolder}>
               <div className={styles.arrowLeft2}>
-                <FaChevronLeft />
+                <FaChevronLeft/>
               </div>
               <div className={styles.arrowRight2}>
-                <FaChevronRight />
+                <FaChevronRight/>
               </div>
             </div>
             <div className={styles.slideHolder}>
-              {yourspecs.map(spec => (
-                <div>
+              {yourspecs.map((spec, i) => (
+                <div key={`${i}-ys3`}>
                   <ImageShadow
                     src={
                       'https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671'
@@ -409,7 +407,6 @@ const HomePage = ({}) => {
                     width={250}
                     shadowBlur={10}
                     alt="a"
-                    key={spec.key + '211'}
                   />
                 </div>
               ))}
@@ -472,7 +469,7 @@ const HomePage = ({}) => {
         </div>
       </div>
 
-      <Footer />
+      <Footer/>
     </div>
   )
 }

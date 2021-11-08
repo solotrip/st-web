@@ -17,6 +17,7 @@ const Search = ({
   ...props
 }) => {
   const [value, setValue] = useState(defaultValue)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedChangeHandler = useCallback(
     _.debounce(
       value => {
@@ -24,7 +25,7 @@ const Search = ({
       },
       500,
       { trailing: true, leading: false }),
-    [onChange]
+    []
   )
   const changeHandler = e => {
     setValue(e.target.value)
@@ -33,7 +34,7 @@ const Search = ({
   const handleReset = useCallback(() => {
     setValue('')
     onReset()
-  })
+  }, [setValue, onReset])
 
   return (
     <div
@@ -41,7 +42,8 @@ const Search = ({
         styles.inputContainer,
         { [styles.filled]: filled },
         className
-      )}>
+      )}
+    >
       <MdSearch className={styles.searchIcon}/>
       <div className={styles.innerContainer}>
         {tags &&
@@ -51,7 +53,8 @@ const Search = ({
             onRemove={t.onRemove}
             name={t.name}
             icon={t.icon &&
-            <span role="img" aria-label={t.icon}>{t.icon}</span>}/>
+            <span role="img" aria-label={t.icon}>{t.icon}</span>}
+          />
         ))
         }
         <input
@@ -68,7 +71,8 @@ const Search = ({
           className={styles.resetButton}
           onClick={handleReset}
           onKeyDown={handleReset}
-          role="button"/>
+          role="button"
+        />
       }
 
     </div>

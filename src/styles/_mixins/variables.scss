@@ -12,28 +12,26 @@ $light-text-color: #fefefe;
 $inverted-text-color: var(--color-text-inverted);
 $primary-color: var(--color-primary);
 $light-primary-color: var(--color-primary-light);
+$disabled-primary-color: var(--color-primary-disabled);
 $navbar-color: var(--color-navbar);
 $navbar-color-border: var(--color-navbar-border);
 $navbar-text-color: var(--color-navbar-text);
 $tabbar-color: var(--color-tabbar);
 $navbar-filter: var(--filter-navbar);
 $text-shadow: var(--shadow-text);
-$active-month: var(--active-month);
-$inactive-month: var(--inactive-month);
 $cell-highlighter: var(--cell-highlighter);
 $cell-bg-image: var(--cell-bg-image);
 $warning-color: var(--color-warning);
 
 $white: #ffffff;
 $green: #58cf52;
-
+$purple: var(--color-purple);
 $sidebar-width: 300px;
 $border-radius: 16px;
 
 $card-bg-url: var(--card-bg-url);
 $heart-selected: var(--heart-selected);
 $heart-not-selected: var(--heart-not-selected);
-$plane-image: var(--plane-image);
 $calendar: var(--calendar);
 $calendar-white: var(--calendar-white);
 $backpack: var(--backpack);
@@ -43,3 +41,4 @@ $saved: var(--saved);
 $filter: var(--filter);
 $logo: var(--logo);
 $hamburger: var(--hamburger);
+

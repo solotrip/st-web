@@ -1,40 +1,35 @@
 import React from 'react'
-import * as FaIcons from 'react-icons/fa'
-import * as AiIcons from 'react-icons/ai'
-import * as IoIcons from 'react-icons/io'
-
 import {
-  CircleEdit24Regular,
   Alert28Regular,
-  Bookmark28Regular,
-  Star28Regular,
-  Heart28Regular
+  CircleEdit24Regular,
+  Heart28Regular,
+  Star28Regular
 } from '@fluentui/react-icons'
 
 export const SidebarData = [
   {
     title: 'Recommendations',
     path: '/recommendations',
-    icon: <Star28Regular />,
+    icon: <Star28Regular/>,
     cName: 'navText'
   },
 
   {
     title: 'Wishlist',
     path: '/wishlist',
-    icon: <Heart28Regular />,
+    icon: <Heart28Regular/>,
     cName: 'navText'
   },
   {
     title: 'Notifications',
     path: '/notifications',
-    icon: <Alert28Regular />,
+    icon: <Alert28Regular/>,
     cName: 'navText'
   },
   {
     title: 'Preferences',
     path: '/recommendations/preferences',
-    icon: <CircleEdit24Regular />,
+    icon: <CircleEdit24Regular/>,
     cName: 'navText'
   }
 ]

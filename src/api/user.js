@@ -38,12 +38,6 @@ export async function getAvailableDates() {
   return response.data
 }
 
-export async function getRecommendations({ start, end }) {
-  const url = SOLOTRIP_V1('profile/recommendations')
-  const response = await axios.get(url, { params: { start, end } })
-  return response.data
-}
-
 export async function updateAvailableDates(
   selectedAvailableDates = [],
   excludeWeekends = false,
@@ -57,5 +51,11 @@ export async function updateAvailableDates(
       excludePublicHolidays
     }
   })
+  return response.data
+}
+
+export async function updateBucketlist(sids) {
+  const url = SOLOTRIP_V1('profile/bucketlist')
+  const response = await axios.put(url, { sids })
   return response.data
 }

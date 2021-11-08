@@ -1,68 +1,38 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Loader } from 'components'
-import {
-  fetchAvailableDates,
-  recommendationsSelector,
-  updateActiveDate
-} from '../../recommendations/slice'
-
-import { wishlistSelector } from '../slice'
-import Content from '../../recommendations/components/content'
-import Header from '../../notifications/components/header'
-import { profileSelector } from '../../profile/slice'
+import { fetchWishlist, removeFromWishlist, wishlistSelector } from '../slice'
+import Content from 'features/recommendations/components/content'
+import { profileSelector } from 'features/profile/slice'
 
 const WishlistContainer = () => {
-  const {
-    recommendations,
-    loadingRecommendations,
-    availableDates,
-    loadingAvailableDates,
-    activeDateIndex
-  } = useSelector(recommendationsSelector)
-
-  const { wishlist } = useSelector(wishlistSelector)
+  const { wishlist, loading } = useSelector(wishlistSelector)
 
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
   const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchWishlist())
+  }, [dispatch])
 
-  useEffect(
-    () => {
-      dispatch(fetchAvailableDates())
-    },
-    [dispatch]
-  )
 
-  useEffect(
-    () => {
-      if (availableDates.length > 0) {
-        dispatch(updateActiveDate(0))
-      }
-    },
-    [dispatch, availableDates]
-  )
+  const removeFromWishlistHandler = useCallback(({
+    recommendationId
+  }) => {
+    dispatch(removeFromWishlist(recommendationId))
+  }, [dispatch])
 
-  const onDateSelect = useCallback(
-    index => {
-      dispatch(updateActiveDate(index))
-    },
-    [dispatch]
-  )
 
   return (
-    <Loader loading={profileLoading}>
-      <Loader loading={loadingAvailableDates}>
-        <Header
-          availableDates={availableDates}
-          onSelect={onDateSelect}
-          activeDateIndex={activeDateIndex}
-          headerName="Wishlist"
-        />
-      </Loader>
-      <Loader loading={loadingRecommendations}>
-        <Content recommendations={wishlist} user={user} mapEnabled={true} />
-      </Loader>
-    </Loader>
+    <div className="flex-col">
+      <Content
+        loading={loading || profileLoading}
+        recommendations={wishlist.map(w => ({ ...w.data, wishlisted: true }))}
+        user={user}
+        mapEnabled={true} wishlist={wishlist}
+        toggleWishlist={removeFromWishlistHandler}
+        noItemsMessage="There is nothing here. Not yet"
+        title="Wishlist"
+      />
+    </div>
   )
 }
 

@@ -12,11 +12,15 @@ export {
 } from './input'
 export { default as Layout } from './layout'
 export { default as Loader } from './loader'
-export { default as MenuButton } from './menu-button'
 export {
   default as NotAuthenticatedRoute
 } from './routes/not-authenticated-route'
 export { default as Slider } from './slider'
 export { default as SheetWrapper } from './sheet-wrapper'
 export { default as ThemeSwitch } from './theme-switch'
+export { default as Footer } from './footer'
+export { default as Calendar } from './calendar'
+export { default as MonthPicker } from './month-picker'
+export { default as HorizontalScroll } from './horizontal-scroll'
+export { default as SettingsSection } from './settings-section'
 

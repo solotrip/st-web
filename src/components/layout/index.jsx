@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 import styles from './layout.module.scss'
 
-const Layout = ({ children, header, sidebar }) => {
+const Layout = ({ children, header, bottomBar, sidebar }) => {
 
   return (
     <div className={styles.layout}>
@@ -11,10 +11,11 @@ const Layout = ({ children, header, sidebar }) => {
         {header}
       </div>}
       <div className={cn(styles.main, { noHeader: !header })}>
-        <div className={styles.sidebar}>{sidebar}</div>
+        {sidebar}
         <div className={cn(styles.content)}>
           {children}
         </div>
+        {bottomBar}
       </div>
     </div>
   )

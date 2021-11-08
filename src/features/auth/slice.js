@@ -6,8 +6,10 @@ import {
   updateRefreshToken
 } from 'utils/auth'
 import { fetchProfile } from 'features/profile/slice'
-import * as AuthApi from '../../api/auth'
+import * as AuthApi from 'api/auth'
 import _ from 'lodash'
+import { registerDevice } from 'utils/notification'
+import { fetchTracked, trackSelector } from 'features/track/slice'
 
 
 export const login = createAsyncThunk(
@@ -62,7 +64,10 @@ export const register = createAsyncThunk(
  * it will create a guest user if user has not authenticated before.
  */
 export const initialize = createAsyncThunk(
-  'auth/init', async (ensureAuth = false, { dispatch, getState }) => {
+  'auth/init', async ({ ensureAuth, history } = false, {
+    dispatch,
+    getState
+  }) => {
     const {
       isAuthenticated,
       isGuest,
@@ -73,9 +78,16 @@ export const initialize = createAsyncThunk(
       dispatch(createGuest())
     } else {
       // Fetch profile only once to prevent unnecessary calls
-      if (isAuthenticated && getState().profile.data === null) {
-        dispatch(fetchProfile())
+      if (isAuthenticated) {
+        if (getState().profile.data === null) {
+          dispatch(fetchProfile())
+        }
+        if (!trackSelector(getState()).initialized) {
+          dispatch(fetchTracked())
+        }
       }
+
+      await registerDevice(history)
       return {
         isAuthenticated,
         isGuest,
@@ -119,7 +131,7 @@ const authSlice = createSlice({
     [initialize.error]: (state, action) => {
       state.isAuthenticated = false
       state.loading = true
-      state.error = _.get(action.error, 'data', action.error.message)
+      state.error = _.get(action.error, 'data', JSON.stringify(action.error))
     },
     [createGuest.pending]: state => {
       state.error = null

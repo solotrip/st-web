@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1006259222509",
+    "project_id": "pulfy-2021",
+    "storage_bucket": "pulfy-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006259222509:android:3c5f086e0dd8105f53d9e4",
+        "android_client_info": {
+          "package_name": "com.solotrip.pulfy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006259222509-vo86nvpj6o6hq2d0cl4vlb79p41hhedu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKolx7zXBU88kX_IPC3TfNWOA5_zcKC74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006259222509-vo86nvpj6o6hq2d0cl4vlb79p41hhedu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1006259222509-s6b5eoa43sdcttdcnqql6heb0qfodgl8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.solotrip.pulfy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

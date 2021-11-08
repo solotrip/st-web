@@ -1,29 +1,15 @@
 @import "styles/mixins";
 
-.rowin {
-  margin-top: 30px;
-  @include xs-to-md {
-    padding: 20px;
-    margin-top: 50px;
-  }
+.notifications {
 
 }
-.outerWrapperCentered {
-  display: flex;
-  justify-content: center;
-  padding-left: 300px;
-  padding-right: 100px;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  @include xs-to-md {
-    padding: 75px 5px;
-    padding-top: 10px;
-  }
-}
 
-.wrapperCentered {
+.page {
   display: flex;
-  flex-flow: row wrap;
-  max-width: 1200px;
+  flex-direction: column;
   align-items: flex-start;
+  padding: 16px 32px;
+  @include xs-to-md {
+    padding-bottom: 75px;
+  }
 }

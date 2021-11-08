@@ -1,196 +1,98 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import * as RecommendationApi from 'api/recommendation'
+import _ from 'lodash'
+
+
+export const addToWishlist = createAsyncThunk(
+  'wishlist/add',
+  async ({ query, areaSid }) => {
+    return RecommendationApi.addToWishlist({ ...query, areaSid })
+  }
+)
+
+export const removeFromWishlist = createAsyncThunk(
+  'wishlist/remove',
+  async wishlistId => {
+    await RecommendationApi.removeFromWishlist(wishlistId)
+    return { wishlistId }
+  }
+)
+
+export const fetchWishlist = createAsyncThunk(
+  'wishlist/fetch',
+  async (_, { getState }) => {
+    const { wishlist, initialized } = wishlistSelector(getState())
+    if (initialized) {
+      return wishlist
+    }
+    return RecommendationApi.getWishlist()
+  }
+)
 
 export const wishlistSlice = createSlice({
   name: 'wishlist',
   initialState: {
-    wishlist: [
-      {
-        name: 'Zaandam',
-        sid: 'zaandam',
-        matchScore: 0.4841840275782473,
-        distance: 2408.627401242022,
-        bucketlisted: false,
-        has_visited: false,
-        popular: true,
-        country: {
-          country_code: 'NL',
-          ISO2: 'NL',
-          emoji_flag: '🇳🇱',
-          name: 'Netherlands',
-          visa_free_for: [
-            'SK',
-            'MO',
-            'PL',
-            'PR',
-            'TV',
-            'PN',
-            'SG',
-            'DE',
-            'IL',
-            'JP',
-            'AS',
-            'BS',
-            'GU',
-            'KI',
-            'MD',
-            'MS',
-            'LC',
-            'TL',
-            'AI',
-            'AU',
-            'GS',
-            'FM',
-            'KN',
-            'DM',
-            'TF',
-            'HM',
-            'TW',
-            'VG',
-            'PF',
-            'GR',
-            'LU',
-            'NO',
-            'MF',
-            'ES',
-            'AG',
-            'AT',
-            'TC',
-            'GI',
-            'FI',
-            'IT',
-            'LI',
-            'IO',
-            'HN',
-            'NI',
-            'MP',
-            'NZ',
-            'IE',
-            'AE',
-            'UY',
-            'RS',
-            'MT',
-            'PA',
-            'PM',
-            'GE',
-            'HU',
-            'SC',
-            'US',
-            'GD',
-            'VC',
-            'IM',
-            'SV',
-            'AL',
-            'AD',
-            'BM',
-            'KY',
-            'PT',
-            'BL',
-            'UA',
-            'VE',
-            'CO',
-            'KR',
-            'LV',
-            'MH',
-            'MU',
-            'MX',
-            'MC',
-            'RO',
-            'SM',
-            'SI',
-            'SB',
-            'CH',
-            'TT',
-            'GB',
-            'VI',
-            'AR',
-            'CK',
-            'CR',
-            'CY',
-            'DK',
-            'EE',
-            'FK',
-            'FR',
-            'GL',
-            'HK',
-            'IS',
-            'MK',
-            'MY',
-            'NF',
-            'PW',
-            'PY',
-            'SH',
-            'SE',
-            'VU',
-            'AX',
-            'BA',
-            'BR',
-            'BN',
-            'CA',
-            'CL',
-            'CZ',
-            'FO',
-            'GT',
-            'JE',
-            'ME',
-            'NC',
-            'NU',
-            'PE',
-            'WS',
-            'WF',
-            'SJ',
-            'BB',
-            'BG',
-            'VA',
-            'LT',
-            'TO',
-            'BE',
-            'HR',
-            'GG'
-          ],
-          visa_on_arrival_for: [],
-          languages: ['Dutch'],
-          names: {
-            name_de: 'Niederlande',
-            name_en: 'Netherlands',
-            name_es: 'Países Bajos',
-            name_fr: 'Pays-Bas',
-            name_it: 'Paesi Bassi',
-            name_ru: 'Нидерланды',
-            name_tr: 'Hollanda',
-            name_zh: '荷蘭'
-          }
-        },
-        climate: {
-          t_min: 10.3,
-          t_avg: 15,
-          t_max: 20.2,
-          rainy_days: 10,
-          humidity: 76.5,
-          w_speed: 18.3
-        },
-        hotel_price: 122.95,
-        overall_avg_hotel_price: 126.69727272727273,
-        activities: ['Inline Skate'],
-        events: []
-      }
-    ]
+    wishlist: [],
+    initialized: false,
+    loading: false,
+    error: null
   },
-  reducers: {
-    addToWishlist: (state, { payload }) => {
-      state.wishlist = [...state.wishlist, payload]
+  extraReducers: {
+    [addToWishlist.fulfilled]: (state, action) => {
+      state.wishlist = [...state.wishlist, action.payload]
+      state.loading = false
     },
-    removeFromWishlist: (state, { payload }) => {
-      state.wishlist.splice(
-        state.wishlist.findIndex(c => c.sid === payload.sid),
-        1
+    [addToWishlist.rejected]: (state, action) => {
+      state.error = _.get(
+        action.error,
+        'data',
+        action.error.toString()
       )
+      state.loading = false
+    },
+    [addToWishlist.pending]: state => {
+      state.loading = true
+      state.error = null
+    },
+    [removeFromWishlist.fulfilled]: (state, action) => {
+      state.wishlist = state
+        .wishlist.filter(w => w.wishlistId !== action.payload.wishlistId)
+      state.loading = false
+    },
+    [removeFromWishlist.rejected]: (state, action) => {
+      state.error = _.get(
+        action.error,
+        'data',
+        action.error.toString()
+      )
+      state.loading = false
+    },
+    [removeFromWishlist.pending]: state => {
+      state.loading = true
+      state.error = null
+    },
+    [fetchWishlist.fulfilled]: (state, action) => {
+      state.wishlist = action.payload
+      state.loading = false
+    },
+    [fetchWishlist.rejected]: (state, action) => {
+      state.error = _.get(
+        action.error,
+        'data',
+        action.error.toString()
+      )
+      state.loading = false
+      state.initialized = false
+    },
+    [fetchWishlist.pending]: state => {
+      state.loading = true
+      state.error = null
+      state.initialized = true
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions
-
 export const wishlistSelector = state => state.wishlist
 
 export default wishlistSlice.reducer

@@ -1,0 +1,22 @@
+@import "styles/mixins";
+
+.coordinate {
+ margin: 5px;
+  display: block;
+}
+
+.button {
+  width: unset;
+  padding: 5px 20px;
+  min-width: 280px;
+  margin: 10px 0;
+  @include xs-to-md {
+    padding: 5px 8px;
+    min-width: 165px;
+  }
+}
+
+.noLocationData {
+  margin: 5px;
+  line-height: 200%;
+}
