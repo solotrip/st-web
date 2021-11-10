@@ -10,6 +10,7 @@ import * as AuthApi from 'api/auth'
 import _ from 'lodash'
 import { registerDevice } from 'utils/notification'
 import { fetchTracked, trackSelector } from 'features/track/slice'
+import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
 
 
 export const login = createAsyncThunk(
@@ -84,6 +85,9 @@ export const initialize = createAsyncThunk(
         }
         if (!trackSelector(getState()).initialized) {
           dispatch(fetchTracked())
+        }
+        if (!wishlistSelector(getState()).initialized) {
+          dispatch(fetchWishlist())
         }
       }
 

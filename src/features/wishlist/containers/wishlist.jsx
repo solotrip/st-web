@@ -5,7 +5,7 @@ import Content from 'features/recommendations/components/content'
 import { profileSelector } from 'features/profile/slice'
 
 const WishlistContainer = () => {
-  const { wishlist, loading } = useSelector(wishlistSelector)
+  const { wishlist, loading, wishlisted } = useSelector(wishlistSelector)
 
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
   const dispatch = useDispatch()
@@ -15,9 +15,9 @@ const WishlistContainer = () => {
 
 
   const removeFromWishlistHandler = useCallback(({
-    recommendationId
+    recommendation
   }) => {
-    dispatch(removeFromWishlist(recommendationId))
+    dispatch(removeFromWishlist(recommendation))
   }, [dispatch])
 
 
@@ -25,9 +25,13 @@ const WishlistContainer = () => {
     <div className="flex-col">
       <Content
         loading={loading || profileLoading}
-        recommendations={wishlist.map(w => ({ ...w.data, wishlisted: true }))}
+        recommendationId={wishlist.wishlistId}
+        query={wishlist.query}
+        recommendations={Object.values(wishlist)
+          .map(w => ({ ...w.data }))}
         user={user}
         mapEnabled={true} wishlist={wishlist}
+        wishlistedIds={wishlisted}
         toggleWishlist={removeFromWishlistHandler}
         noItemsMessage="There is nothing here. Not yet"
         title="Wishlist"

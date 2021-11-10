@@ -38,6 +38,7 @@ const DateSelectorContainer = () => {
       end: formatAsDate(end),
       ...rest
     }
+    delete payload.type
     history.push({
       pathname: '/recommendations',
       search: qs.stringify(payload)

@@ -24,8 +24,15 @@ export const removeFromTracked = createAsyncThunk(
 
 export const fetchTracked = createAsyncThunk(
   'track/fetch',
-  async () => {
-    return RecommendationApi.getTrackedQueries()
+  async (_p, { getState }) => {
+    const { loading, initialized, tracked } = trackSelector(getState())
+    if (!initialized && loading) {
+      return RecommendationApi.getTrackedQueries()
+    }
+    if (initialized) {
+      return Object.values(tracked)
+    }
+    return null
   }
 )
 
@@ -75,6 +82,7 @@ export const trackSlice = createSlice({
     [fetchTracked.fulfilled]: (state, action) => {
       state.tracked = _.keyBy(action.payload, 'recommendationId')
       state.loading = false
+      state.initialized = true
     },
     [fetchTracked.rejected]: (state, action) => {
       state.error = _.get(
@@ -85,7 +93,6 @@ export const trackSlice = createSlice({
       state.loading = false
     },
     [fetchTracked.pending]: state => {
-      state.initialized = true
       state.loading = true
       state.error = null
     }

@@ -6,6 +6,7 @@ import { profileSelector } from '../../profile/slice'
 import {
   addToWishlist,
   fetchWishlist,
+  removeFromWishlist,
   wishlistSelector
 } from '../../wishlist/slice'
 import Header from '../components/header'
@@ -23,7 +24,7 @@ const RecommendationsContainer = () => {
     activeRecommendationId,
     loadingRecommendations
   } = useSelector(recommendationsSelector)
-  const { wishlist, loading: wishlistLoading } = useSelector(wishlistSelector)
+  const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
   const { coordinates } = useSelector(locationSelector)
   const dispatch = useDispatch()
@@ -56,14 +57,17 @@ const RecommendationsContainer = () => {
   }, [query, location, dispatch]
   )
 
-  const toggleWishlist = useCallback(({ query, recommendationId, sid }) => {
-    // TODO: Handle removing from wishlist
-    // if (wishlisted) {
-    //   dispatch(removeFromWishlist(recommendationId))
-    // } else {
-    dispatch(addToWishlist({ query, areaSid: sid }))
-    // }
-  }, [dispatch])
+  const toggleWishlist = useCallback(({
+    query,
+    recommendationId,
+    recommendation
+  }) => {
+    if (wishlisted[recommendation.id]) {
+      dispatch(removeFromWishlist(recommendation))
+    } else {
+      dispatch(addToWishlist({ query, recommendation }))
+    }
+  }, [dispatch, wishlisted])
 
   const openDateSheet = q => {
     history.replace({
@@ -80,12 +84,10 @@ const RecommendationsContainer = () => {
   }
   const loading = profileLoading
     || loadingRecommendations
-    || !activeRecommendationId || wishlistLoading
+    || !activeRecommendationId
   return (
     <>
-
       <div className="flex-col">
-
         <Header
           recommendationId={activeRecommendationId}
           loading={loading}
@@ -97,7 +99,7 @@ const RecommendationsContainer = () => {
           }
           recommendationId={activeRecommendationId} user={user}
           query={query}
-          wishlist={wishlist}
+          wishlistedIds={wishlisted}
           toggleWishlist={toggleWishlist}
         />
 

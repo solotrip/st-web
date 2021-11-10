@@ -62,7 +62,11 @@ const Recommendation = ({
         </div>
         <button
           className={wishlisted ? styles.heartFilled : styles.heart}
-          onClick={() => toggleWishlist({ query, recommendationId, sid })}
+          onClick={() => toggleWishlist({
+            query,
+            recommendation,
+            recommendationId
+          })}
         >
           {
             <img

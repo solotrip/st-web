@@ -19,7 +19,7 @@ const Content = ({
   user,
   mapEnabled = true,
   toggleWishlist,
-  wishlisted,
+  wishlistedIds,
   loading,
   noItemsMessage,
   title
@@ -52,7 +52,8 @@ const Content = ({
         {loading && <Loader/>}
         {(!loading && recommendations.length === 0) &&
         <span className={styles.noItems}>{noItemsMessage}</span>}
-        {(!loading && recommendations.length > 0) && recommendations.map(recommendation => {
+        {(!loading && recommendations.length > 0)
+        && recommendations.map(recommendation => {
           return (
             <Recommendation
               key={`rec-${recommendation.sid}`}
@@ -62,8 +63,7 @@ const Content = ({
               user={user}
               activeHandler={() => activeHandler(recommendation)}
               toggleWishlist={toggleWishlist}
-              // TODO: handle wishlisted
-              wishlisted={recommendation.wishlisted}
+              wishlisted={!!wishlistedIds[recommendation.id]}
             />
           )
         })}

@@ -17,11 +17,7 @@ export async function getWishlist() {
 
 export async function addToWishlist(query) {
   const url = SOLOTRIP_V1('profile/wishlist')
-  const response = await axios.post(url, null, {
-    params: {
-      query
-    }
-  })
+  const response = await axios.post(url, null, { params: query })
   return response.data
 }
 
