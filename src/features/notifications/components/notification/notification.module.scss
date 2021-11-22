@@ -1,0 +1,77 @@
+@import "styles/mixins";
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid $text-color;
+  padding: 10px;
+  @include xs-to-sm {
+    margin-top: 50px;
+    margin-bottom: 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dateHolder {
+  text-align: start;
+  font-size: 18px;
+  min-width: 5rem;
+  font-weight: 500;
+}
+
+.notSeen {
+  content: '';
+  height: 10px;
+  width: 10px;
+  border-radius: 10px;
+  background: $warning-color;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.body {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.innerRow {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  @include roboto-light;
+
+  font-size: 16px;
+}
+
+.notificationTime {
+  @include roboto-thin;
+
+  font-size: 14px;
+  text-align: right;
+  margin-top: 8px;
+}

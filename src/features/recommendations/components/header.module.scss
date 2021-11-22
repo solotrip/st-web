@@ -1,0 +1,44 @@
+@import 'styles/mixins';
+
+.navbarFixed, .navbarFixedIos {
+  z-index: 3;
+  height: 58px;
+  width: 100%;
+  background: $card-bg-color;
+  @extend .shadow;
+}
+
+.navbarFixedIos {
+  height: 78px;
+  display: flex;
+  padding-top: 40px;
+  justify-content: center;
+}
+
+.rightActions {
+  display: flex;
+  flex-direction: row;
+}
+
+.actions {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 584px;
+  padding: 0 16px;
+  flex: 1;
+  @include md-to-lg {
+    max-width: 450px;
+  }
+}
+
+.actionIcon {
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  margin: 0 8px;
+  fill: $primary-color;
+}

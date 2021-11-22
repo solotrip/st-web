@@ -1,0 +1,43 @@
+@import 'styles/mixins';
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  @include xs-to-sm {
+    justify-content: center;
+  }
+}
+
+.title {
+  width: 100%;
+}
+
+.noItems {
+  width: 100%;
+}
+
+.recommendations {
+  @include custom-scroll;
+  display: flex;
+  max-width: 584px;
+  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  height: 100%;
+  flex: 1;
+  @include xs-to-md {
+    padding-bottom: 70px;
+  }
+}
+
+.mapbox {
+  background-color: $bg-color;
+  flex: 1;
+  display: flex;
+  @include xs-to-md {
+    display: none;
+  }
+}

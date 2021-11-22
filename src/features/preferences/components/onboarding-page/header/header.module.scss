@@ -1,0 +1,101 @@
+@import "styles/mixins";
+
+.container {
+  position: absolute;
+  top: 5px;
+  margin: auto 0;
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  @include xs-to-sm {
+    margin-bottom: 5px;
+    height: 75px;
+    width: 100%;
+  }
+
+}
+
+.item {
+  @include roboto-light;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin: 0 16px;
+  width: 60px;
+  color: $border-color;
+
+  &:not(.last) > .index::after {
+    content: '';
+    position: relative;
+    display: block;
+    top: -24px;
+    left: 51px;
+    width: 36px;
+    border-top: 2px solid $border-color;
+  }
+
+  @include xs-to-sm {
+    margin: 0 4px;
+    &:not(.last) > .index::after {
+      left: 51px;
+      width: 12px;
+    }
+  }
+}
+
+.active {
+  color: $primary-color;
+
+  .name {
+    @include roboto-medium;
+  }
+
+  .index {
+    @include roboto-bold;
+    background: transparent;
+    border: 1px solid $primary-color;
+  }
+}
+
+.filled {
+  color: $primary-color;
+
+  .index {
+    border: 1px solid $primary-color;
+    background: $primary-color;
+    color: $white;
+
+  }
+
+  &:not(.last) > .index::after {
+    border-color: $primary-color;
+  }
+}
+
+.index {
+  @include roboto-regular;
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid $border-color;
+  border-radius: 50%;
+}
+
+.name {
+  @include roboto-regular;
+}
+
+.button {
+
+  &.hidden {
+    display: none;
+  }
+}
+

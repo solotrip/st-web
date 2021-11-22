@@ -1,0 +1,34 @@
+@import 'styles/mixins';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 36px;
+  background: linear-gradient(180deg, $primary-color 0%, $light-primary-color 100%);
+  border-radius: 16px;
+  width: 100%;
+  color: #ffffff;
+
+  &:disabled {
+    background: $border-color;
+  }
+}
+
+.buttonText {
+  @include roboto-light;
+  font-size: 18px;
+}
+
+.loading {
+  animation: infinite;
+}
+
+.icon {
+  margin-left: 4px;
+}
+
+.secondary {
+  background: $warning-color;
+}

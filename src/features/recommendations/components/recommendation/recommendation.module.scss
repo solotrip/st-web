@@ -1,0 +1,198 @@
+@import 'styles/mixins';
+
+.recommendationCard {
+  @extend .shadow;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 16px;
+  background-color: $card-bg-color;
+  background-image: $card-bg-url;
+  padding: 16px;
+}
+
+.content {
+  width: 100%;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: calc(90% - 20px);
+  background-repeat: round;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  height: 300px;
+  border-radius: 16px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  @include roboto-medium;
+  @extend .textShadow;
+  flex: 1;
+  font-size: 28px;
+  line-height: 30px;
+  margin-top: 10px;
+  text-align: left;
+
+  i {
+    @extend .textShadow;
+    line-height: 30px;
+    font-size: 24px;
+    color: $sub-text-color;
+    margin: 0 4px;
+  }
+}
+
+.date {
+  @extend .textShadow;
+  font-size: 20px;
+  color: $sub-text-color;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.heart {
+
+  width: 50px;
+  height: auto;
+  background-image: $heart-not-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.heartFilled {
+  width: 50px;
+  height: auto;
+  background-image: $heart-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.sectionTitle {
+  @extend .textShadow;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+}
+
+.slide {
+  padding: 4px 32px;
+}
+
+.slideImage {
+  width: 100px;
+  height: 100px;
+  @include xs-to-lg {
+    width: 75px;
+    height: 75px;
+  }
+}
+
+.slideImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.slideText {
+  @extend .textShadow;
+  z-index: 2;
+  text-align: center;
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 5px;
+  width: 100%;
+  max-width: 150px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 38px;
+}
+
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.statRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statImage {
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.statContent {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.statContentCell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.statName {
+  @extend .textShadow;
+  line-height: 20px;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  padding-bottom: 4px;
+}
+
+.statValue {
+  @extend .textShadow;
+  line-height: 18px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #3cafeb;
+  text-align: center;
+}
+
+.sectionIcon {
+  width: 50px;
+}
+

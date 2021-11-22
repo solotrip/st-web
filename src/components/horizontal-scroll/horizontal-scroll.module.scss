@@ -1,0 +1,18 @@
+@import 'styles/mixins';
+
+.horizontalScroll {
+  width: 100%;
+}
+
+.arrow {
+  background: none !important;
+  color: $text-color !important;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+
+  &::after, &::before {
+    content: none !important;
+  }
+
+}

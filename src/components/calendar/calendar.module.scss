@@ -1,0 +1,55 @@
+@import 'styles/mixins';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  background-color: $navbar-color;
+}
+
+.wrapperPrompt {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  background-color: $navbar-color;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.halfWrapperFrom {
+  display: flex;
+  justify-content: center;
+
+  width: 50%;
+  background-color: $navbar-color;
+}
+
+.halfWrapperTo {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  background-color: $navbar-color;
+}
+
+:global {
+  .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+    background-color: #f0f8ff !important;
+    color: #4a90e2;
+  }
+
+  .Selectable .DayPicker-Day {
+    border-radius: 0 !important;
+  }
+
+  .Selectable .DayPicker-Day--start {
+    border-top-left-radius: 50% !important;
+    border-bottom-left-radius: 50% !important;
+  }
+
+  .Selectable .DayPicker-Day--end {
+    border-top-right-radius: 50% !important;
+    border-bottom-right-radius: 50% !important;
+  }
+}

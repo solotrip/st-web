@@ -1,0 +1,11 @@
+{
+  "appId": "com.solotrip.pulfy",
+  "appName": "pulfy",
+  "webDir": "build",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
+    }
+  }
+}

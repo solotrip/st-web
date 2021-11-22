@@ -1,0 +1,66 @@
+@import 'styles/mixins';
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.wrapper {
+
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.placeholderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.imageContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+@keyframes fade {
+  from {
+    filter: blur(32px);
+  }
+  to {
+    filter: blur(0);
+  }
+}
+
+
+.loaded {
+  .image {
+    animation: fade 1s ease-in-out;
+  }
+}
+
+.notLoaded {
+  opacity: 0;
+}
+
+.placeholder {
+  background: $highlight-bg-color;
+
+  object-fit: cover;
+  object-position: center center;
+}
