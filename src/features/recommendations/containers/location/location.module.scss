@@ -1,7 +1,7 @@
 @import "styles/mixins";
 
 .coordinate {
- margin: 5px;
+  margin: 5px;
   display: block;
 }
 
@@ -16,7 +16,21 @@
   }
 }
 
-.noLocationData {
-  margin: 5px;
-  line-height: 200%;
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.item {
+  width: 100%;
+  text-align: start;
+  padding: 16px;
+  &:hover {
+    background: $primary-color;
+    color: $white;
+  }
 }

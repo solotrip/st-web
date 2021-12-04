@@ -1,18 +1,34 @@
-import { Redirect, Route } from 'react-router-dom'
-import React from 'react'
-import { getIsGuest } from '../../utils/auth'
+import { Redirect, Route, useHistory } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { initialize } from 'features/auth/slice'
+import { Loader } from 'components'
 
-const NotAuthenticatedRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      getIsGuest() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/recommendations"/>
-      )
-    }
-  />
-)
+const NotAuthenticatedRoute = ({ component: Component, ...rest }) => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  useEffect(() => {
+    dispatch(initialize({ history, ensureAuth: false }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch])
+  const { loading, isGuest, isAuthenticated } = useSelector(
+    state => state.auth
+  )
+  if (loading) {
+    return <Loader/>
+  }
+
+  if(isAuthenticated && !isGuest) {
+    return <Redirect to="/recommendations"/>
+  }
+  return (
+    <Route
+      {...rest}
+      render={props =>
+          <Component {...props} />
+      }
+    />
+  )
+}
 
 export default NotAuthenticatedRoute

@@ -22,7 +22,8 @@ const Content = ({
   wishlistedIds,
   loading,
   noItemsMessage,
-  title
+  title,
+  children
 }) => {
   const [appTheme] = useThemeState()
   //default dark map.
@@ -49,6 +50,7 @@ const Content = ({
 
       <div className={styles.recommendations}>
         {title && <h1 className={styles.title}>{title}</h1>}
+        {children}
         {loading && <Loader/>}
         {(!loading && recommendations.length === 0) &&
         <span className={styles.noItems}>{noItemsMessage}</span>}

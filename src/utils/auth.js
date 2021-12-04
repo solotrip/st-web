@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { refresh } from '../api/auth'
 import jwt from 'jsonwebtoken'
+import { Storage } from '@capacitor/storage'
 
 let refreshPromise
 let refreshCancelSource
@@ -12,39 +13,39 @@ let token
  * @return {Promise<boolean>} Is user logged in
  */
 export const initializeAuthentication = async () => {
-  if (hasLoggedIn()) {
-    if (_isRefreshTokenExpired()) {
-      clearTokens()
+  if (await hasLoggedIn()) {
+    if (await _isRefreshTokenExpired()) {
+      await clearTokens()
     } else {
       try {
-        if(_isAccessTokenExpired()) {
+        if(await _isAccessTokenExpired()) {
           await refreshTokenAsync()
 
         }
         return {
           isAuthenticated: true,
-          isGuest: getIsGuest(),
-          username: getUsername()
+          isGuest: await getIsGuest(),
+          username: await getUsername()
         }
       } catch (e) {
-        clearTokens()
+        await clearTokens()
       }
     }
   }
   return { isAuthenticated: false }
 }
 
-export const hasLoggedIn = () => {
-  return getAccessToken() && _getRefreshToken()
+export const hasLoggedIn = async () => {
+  return  (await getAccessToken()) && (await _getRefreshToken())
 }
 
-export const getUsername = () => {
-  const decodedToken = jwt.decode(getAccessToken())
+export const getUsername = async () => {
+  const decodedToken = jwt.decode(await getAccessToken())
   return decodedToken.username
 }
 
-export const getIsGuest = () => {
-  const decodedToken = jwt.decode(getAccessToken())
+export const getIsGuest = async () => {
+  const decodedToken = jwt.decode(await getAccessToken())
   return decodedToken.isGuest
 }
 
@@ -54,31 +55,32 @@ const _isTokenExpired = token => {
   return decodedToken.payload.exp < Math.floor(dateNow.getTime() / 1000) + 60
 }
 
-const _isAccessTokenExpired = () => {
-  return _isTokenExpired(getAccessToken())
+const _isAccessTokenExpired = async () => {
+  return _isTokenExpired(await getAccessToken())
 }
 
-const _isRefreshTokenExpired = () => {
-  return _isTokenExpired(_getRefreshToken())
+const _isRefreshTokenExpired = async () => {
+  return _isTokenExpired(await _getRefreshToken())
 }
 
-export const areTokensValid = () => {
-  const refreshToken = _getRefreshToken()
-  const accessToken = getAccessToken()
+export const areTokensValid = async () => {
+  const refreshToken = await _getRefreshToken()
+  const accessToken =  await getAccessToken()
   return accessToken && refreshToken
     && !_isTokenExpired(refreshToken)
     && !_isTokenExpired(accessToken)
 }
 
-const _getRefreshToken = () => {
-  return localStorage.getItem('refreshToken')
+const _getRefreshToken = async () => {
+  const { value } = await Storage.get({ key:'refreshToken' })
+  return value
 }
 
 export const getValidAccessToken = async () => {
-  let token = getAccessToken()
+  let token = await getAccessToken()
   if (token && _isTokenExpired(token)) {
     await refreshTokenAsync()
-    token = getAccessToken()
+    token = await getAccessToken()
   }
   return token
 }
@@ -87,30 +89,31 @@ export const getValidAccessToken = async () => {
  * Get the access token. It refreshes the access token if it is expired
  * @return {string} valid access token
  */
-const getAccessToken = () => {
+const getAccessToken = async () => {
   if (!token) {
-    token = localStorage.getItem('accessToken')
+    const { value } = await Storage.get({ key:'accessToken' })
+    token = value
   }
   return token
 }
 
-export const updateAccessToken = newToken => {
+export const updateAccessToken = async newToken => {
   token = newToken
-  localStorage.setItem('accessToken', newToken)
+  await Storage.set({ key:'accessToken', value:newToken })
 }
 
-export const updateRefreshToken = newToken => {
-  localStorage.setItem('refreshToken', newToken)
+export const updateRefreshToken = async newToken => {
+  await Storage.set({ key:'refreshToken',  value:newToken })
 }
 
-export const clearTokens = () => {
+export const clearTokens  =async () => {
   token = null
   if (refreshPromise) {
     refreshCancelSource.cancel()
     refreshPromise = null
   }
-  localStorage.removeItem('accessToken')
-  localStorage.removeItem('refreshToken')
+  await Storage.remove({ key:'accessToken' })
+  await Storage.remove({ key:'refreshToken' })
 }
 
 
@@ -118,7 +121,7 @@ export const refreshTokenAsync = async () => {
   if (refreshPromise) {
     return refreshPromise
   }
-  const refreshToken = _getRefreshToken()
+  const refreshToken = await _getRefreshToken()
   refreshCancelSource = axios.CancelToken.source()
   try {
     const { accessToken } = await refresh({
@@ -126,7 +129,7 @@ export const refreshTokenAsync = async () => {
       cancelToken: refreshCancelSource.token
     })
     refreshCancelSource = null
-    updateAccessToken(accessToken)
+    await updateAccessToken(accessToken)
   } catch (e) {
     // If it is not cancelled bubble the error up
     // If it is cancelled that means we are already handling some error

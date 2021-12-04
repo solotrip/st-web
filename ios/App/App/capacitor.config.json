@@ -2,5 +2,17 @@
 	"appId": "com.solotrip.pulfy",
 	"appName": "pulfy",
 	"webDir": "build",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		}
+	},
+	"server": {
+		"url": "http://192.168.1.40:8100"
+	}
 }

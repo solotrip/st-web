@@ -1,9 +1,13 @@
-import React from 'react'
-import { Button, SheetWrapper } from 'components'
+import React, { useEffect, useCallback } from 'react'
+import { SheetWrapper, SearchInput } from 'components'
 import styles from './location.module.scss'
-import { MdLocationSearching } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBrowserGeolocation, locationSelector } from './slice'
+import {
+  fetchCurrentLocation,
+  locationSelector,
+  searchLocation,
+  updateLocation
+} from './slice'
 import SettingsSection from 'components/settings-section'
 import qs from 'qs'
 import { useQuery } from 'utils/hooks/use-query'
@@ -11,66 +15,91 @@ import { useHistory } from 'react-router-dom'
 
 const LocationContainer = () => {
   const {
-    coordinates,
-    modified: locationModified,
-    loadingBrowserGeolocation
+    locations,
+    recentLocations,
+    fetchingCurrentLocation,
+    results,
+    query: searchQuery,
+    currentLocation,
+    errorCurrentLocation,
+    activeLocation
   } = useSelector(locationSelector)
   const dispatch = useDispatch()
   const query = useQuery()
   const history = useHistory()
 
-  const handleBrowserLocButton = () => {
-    dispatch(fetchBrowserGeolocation())
-  }
+  useEffect(() => {
+    dispatch(fetchCurrentLocation())
+  }, [])
 
   const onSubmit = () => {
+    const activeLoc = locations[activeLocation]
     history.replace({
       pathname: '/recommendations',
       search: qs.stringify({
         ...query,
-        lat: coordinates.latitude,
-        lon: coordinates.longitude
+        lat: activeLoc.lat,
+        lon: activeLoc.lon
       })
     })
   }
+  const handleSearch = (q) => {
+    dispatch(searchLocation({ query: q }))
+  }
+
+  const handleChange = useCallback((option) => {
+    dispatch(updateLocation(option))
+    history.replace({
+      pathname: '/recommendations',
+      search: qs.stringify({
+        ...query,
+        lat: option.lat,
+        lon: option.lon
+      })
+    })
+  }, [dispatch])
+
+  const options = searchQuery === '' ?
+    recentLocations
+    .filter(l => l !== currentLocation)
+    .map(l => locations[l])
+    : results
+  const currentLocOption = locations[currentLocation]
 
   return (
     <SheetWrapper snapPoints={[500]}>
       <SheetWrapper.Content>
-
         <SettingsSection
           title="Location"
-          description="We need this to find
-      best destinations from your location"
+          description=" "
         >
-          <Button onClick={handleBrowserLocButton}
-                  loading={loadingBrowserGeolocation}
-                  icon={MdLocationSearching}
-                  className={styles.button}
-          >
-            Update Location
-          </Button>
-          {coordinates ? (
-            <>
-          <span
-            className={styles.coordinate}
-          >
-            Longitude:<strong>{coordinates.longitude.toFixed(4)}</strong>
-          </span>
-              <span
-                className={styles.coordinate}
-              >
-            Latitude:<strong>{coordinates.latitude.toFixed(4)}</strong>
-          </span>
-            </>
-          ) : (
-            <span className={styles.noLocationData}>No location data</span>
-          )}
+          <SearchInput
+            onChange={handleSearch}
+            onReset={() => {handleSearch('')}}
+            filled
+          />
+          <div className={styles.list}>
+            {(!errorCurrentLocation && searchQuery === '') &&
+            (
+              <button className={styles.item} key={`loc-current`}
+                      onClick={() => {handleChange(currentLocOption)}}
+                      disabled={!currentLocOption}>
+                {
+                  !currentLocOption ?
+                    'Fetching current location...'
+                    : currentLocOption.fullname_en
+                }
+              </button>
+            )}
+            {options.map(o => (
+              <button className={styles.item} key={`loc-${o.lat}-${o.lon}`}
+                      onClick={() => handleChange(o)}>
+                {o.fullname_en}
+              </button>
+            ))}
+          </div>
         </SettingsSection>
       </SheetWrapper.Content>
-      <SheetWrapper.Footer onClick={onSubmit} text="Search"
-                           disabled={!coordinates || !locationModified}
-      />
     </SheetWrapper>
   )
 }

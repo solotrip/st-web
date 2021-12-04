@@ -14,11 +14,12 @@ const Routes = () => (
       <SheetWrapper><SignupContainer/></SheetWrapper>}
     />
     <NotAuthenticatedRoute path="/login" children={
-      <SheetWrapper><LoginContainer/></SheetWrapper>
+      <LoginContainer/>
     }
     />
     <NotAuthenticatedRoute path="/signup" children={
-      <SheetWrapper><SignupContainer/></SheetWrapper>}
+      <SignupContainer/>
+    }
     />
   </Switch>
 )

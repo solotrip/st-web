@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
+import { MdEdit } from 'react-icons/md'
 import { fetchRecommendations, recommendationsSelector } from '../slice'
 import { profileSelector } from '../../profile/slice'
 import {
@@ -11,9 +12,10 @@ import {
 } from '../../wishlist/slice'
 import Header from '../components/header'
 import Content from '../components/content'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation, Link } from 'react-router-dom'
 import qs from 'qs'
-import { locationSelector } from './location/slice'
+import { locationSelector, fillLocationData } from './location/slice'
+import styles from './recommendation.module.scss'
 
 const RecommendationsContainer = () => {
   const query = useQuery()
@@ -26,7 +28,7 @@ const RecommendationsContainer = () => {
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
-  const { coordinates } = useSelector(locationSelector)
+  const { activeLocation, locations } = useSelector(locationSelector)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -34,27 +36,31 @@ const RecommendationsContainer = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (location.pathname === '/recommendations') {
-      if (!query.start && !query.months)
-        return openDateSheet(query)
-      if ((!query.lat || !query.lon)) {
-        if (coordinates) {
-          return history.replace({
-            pathname: '/recommendations',
-            search: qs.stringify({
-              ...query,
-              lat: coordinates.latitude,
-              lon: coordinates.longitude
+      if (location.pathname === '/recommendations') {
+        if (!query.start && !query.months)
+          return openDateSheet(query)
+        if ((!query.lat || !query.lon)) {
+          if (activeLocation) {
+            return history.replace({
+              pathname: '/recommendations',
+              search: qs.stringify({
+                ...query,
+                lat: locations[activeLocation].lat,
+                lon: locations[activeLocation].lon
+              })
             })
-          })
+          }
+          return openLocationSheet(query)
         }
-        return openLocationSheet(query)
-      }
 
-      dispatch(fetchRecommendations(query))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, location, dispatch]
+        if (query.lat && query.lon && activeLocation === '') {
+          dispatch(fillLocationData({ lat: query.lat, lon: query.lon }))
+        }
+
+        dispatch(fetchRecommendations(query))
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [query, location, dispatch]
   )
 
   const toggleWishlist = useCallback(({
@@ -92,6 +98,7 @@ const RecommendationsContainer = () => {
           recommendationId={activeRecommendationId}
           loading={loading}
         />
+
         <Content
           loading={loading}
           recommendations={
@@ -101,7 +108,18 @@ const RecommendationsContainer = () => {
           query={query}
           wishlistedIds={wishlisted}
           toggleWishlist={toggleWishlist}
-        />
+        >
+          {activeLocation !== '' &&
+          <Link className={styles.fromLink} to={{
+            pathname: '/recommendations/location',
+            search: qs.stringify(query)
+          }}>
+            <span><b>From: </b>{locations[activeLocation].fullname_en}</span>
+            <MdEdit />
+          </Link>
+          }
+
+        </Content>
 
 
       </div>

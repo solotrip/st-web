@@ -11,6 +11,8 @@ import { ToastContainer } from 'react-toastify'
 import { Loader } from 'components'
 import './styles/global.scss'
 import './i18n/i18n'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 // Import css files
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -37,10 +39,12 @@ const App = () => {
     <React.StrictMode>
       <Suspense fallback={<Loader/>}>
         <Provider store={store}>
-          <Routes/>
-          <ToastContainer position={'bottom-right'}
-                          theme={appTheme === LIGHT_CLASS ? 'light' : 'dark'}
-          />
+          <PersistGate loading={null} persistor={ persistStore(store)}>
+            <Routes/>
+            <ToastContainer position={'bottom-right'}
+                            theme={appTheme === LIGHT_CLASS ? 'light' : 'dark'}
+            />
+          </PersistGate>
         </Provider>
       </Suspense>
     </React.StrictMode>

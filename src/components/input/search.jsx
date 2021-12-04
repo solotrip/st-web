@@ -66,7 +66,7 @@ const Search = ({
         />
       </div>
       {
-        (tags.length > 0 || value) &&
+        ((tags && tags.length > 0) || value) &&
         <MdClose
           className={styles.resetButton}
           onClick={handleReset}
@@ -78,7 +78,6 @@ const Search = ({
     </div>
   )
 }
-
 
 Search.defaultValues = {
   type: 'text',
@@ -94,6 +93,5 @@ Search.propTypes = {
   tags: PropTypes.array,
   onReset: PropTypes.func
 }
-
 
 export default Search

@@ -1,0 +1,17 @@
+@import "styles/mixins";
+
+.fromLink {
+  padding: 16px;
+  width: 100%;
+  font-size: 18px;
+  text-align: start;
+  background: $primary-color;
+  color: $text-color;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  svg {
+    font-size: 24px;
+  }
+}

@@ -1,38 +1,66 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import _ from 'lodash'
-import * as UserApi from 'api/user'
+import * as LocationApi from 'api/location'
 import { getGeolocation } from 'utils/geolocation'
-import { fetchProfile, updateProfileState } from '../../../profile/slice'
-//import { Capacitor } from "@capacitor/core";
-//import { Geolocation } from "@capacitor/geolocation";
 
-export const fetchBrowserGeolocation = createAsyncThunk(
+export const coordsToQuery = ({
+  latitude,
+  longitude
+}) => `${parseFloat(longitude.toFixed(2))},${parseFloat(latitude.toFixed(2))}`
+
+export const fetchCurrentLocation = createAsyncThunk(
   'profile/location/fetchBrowserGeolocation',
-  async () => {
-    return getGeolocation()
+  async (_, { getState }) => {
+
+    const coords = await getGeolocation()
+    const q = coordsToQuery(coords)
+    const { locations } = locationSelector(getState())
+    if (locations[q]) {
+      return {
+        q,
+        data: locations[q]
+      }
+    }
+    const data = await LocationApi.geocodeLocation({
+      lon: coords.longitude,
+      lat: coords.latitude
+    })
+    return {
+      q,
+      data
+    }
   }
 )
 
-export const updateLocation = createAsyncThunk(
-  'profile/location/update',
-  async (_, { getState, dispatch }) => {
-    //let coordinatesHolder;
-    const { modified, coordinates } = locationSelector(getState())
+export const searchLocation = createAsyncThunk(
+  'profile/location/search',
+  async ({ query }) => {
+    if (query === '') return []
+    return LocationApi.searchLocation({ query })
+  }
+)
 
-    //coordinatesHolder = coordinates;
-
-    //if (Capacitor.getPlatform() === "ios") {
-    //  const nativeCoordinates = await Geolocation.getCurrentPosition();
-    //  coordinatesHolder = nativeCoordinates.coords;
-    //}
-
-    if (modified) {
-      const data = await UserApi.updateLocation({
-        lat: coordinates.latitude,
-        lon: coordinates.longitude
+export const fillLocationData = createAsyncThunk(
+  'profile/location/fill',
+  async ({ lat, lon }, { getState }) => {
+    const q = coordsToQuery({
+      latitude: parseFloat(lat),
+      longitude: parseFloat(lon)
+    })
+    const { locations } = locationSelector(getState())
+    if (!locations[q]) {
+      const data = await LocationApi.geocodeLocation({
+        lon,
+        lat
       })
-      dispatch(updateProfileState(data))
-      return data
+      return {
+        q,
+        data
+      }
+    }
+    return {
+      q,
+      data: locations[q]
     }
   }
 )
@@ -40,45 +68,67 @@ export const updateLocation = createAsyncThunk(
 const locationSlice = createSlice({
   name: 'location',
   initialState: {
-    loadingBrowserGeolocation: false,
-    errorBrowserGeolocation: null,
-    coordinates: null,
-    modified: false
+    fetchingCurrentLocation: true,
+    searchingLocations: false,
+    currentLocation: '',
+    errorCurrentLocation: false,
+    recentLocations: [],
+    activeLocation: '',
+    locations: {},
+    query: '',
+    results: []
   },
-  reducers: {},
+  reducers: {
+    updateLocation: (state, action) => {
+      const key = coordsToQuery({
+        latitude: action.payload.lat,
+        longitude: action.payload.lon
+      })
+      state.activeLocation = key
+      state.recentLocations = _.uniq([key, ...state.recentLocations])
+      state.locations[key] = action.payload
+      state.query = ''
+      state.results = []
+    }
+  },
   extraReducers: {
-    [fetchBrowserGeolocation.pending]: state => {
-      state.errorBrowserGeolocation = null
-      state.loadingBrowserGeolocation = true
+    [fetchCurrentLocation.pending]: state => {
+      state.fetchingCurrentLocation = true
+      state.errorCurrentLocation = false
     },
-    [fetchBrowserGeolocation.fulfilled]: (state, action) => {
-      state.coordinates = action.payload
-      state.modified = true
-      state.loadingBrowserGeolocation = false
+    [fetchCurrentLocation.fulfilled]: (state, action) => {
+      state.locations[action.payload.q] = action.payload.data
+      state.currentLocation = action.payload.q
+      state.fetchingCurrentLocation = false
     },
-    [fetchBrowserGeolocation.rejected]: (state, action) => {
-      state.errorBrowserGeolocation = _.get(
-        action.error,
-        'data',
-        action.error.toString()
-      )
-      state.loadingBrowserGeolocation = false
+    [fillLocationData.fulfilled]: (state, action) => {
+      state.locations[action.payload.q] = action.payload.data
+      state.recentLocations = _.uniq([
+        action.payload.q, ...state.recentLocations
+      ])
+      state.activeLocation = action.payload.q
+      state.fetchingCurrentLocation = false
     },
-    [fetchProfile.fulfilled]: (state, action) => {
-      // If not previously modified, initialize the value when profile is loaded
-      if (!state.modified && _.has(action, 'payload.location.coordinates[0]')) {
-        state.coordinates = {
-          longitude: action.payload.location.coordinates[0],
-          latitude: action.payload.location.coordinates[1]
-        }
-      }
+    [fetchCurrentLocation.rejected]: state => {
+      state.fetchingCurrentLocation = false
+      state.errorCurrentLocation = true
     },
-    [updateLocation.fulfilled]: state => {
-      state.modified = false
+    [searchLocation.fulfilled]: (state, action) => {
+      state.results = action.payload
+      state.searchingLocations = false
+    },
+    [searchLocation.pending]: (state, action) => {
+      state.searchingLocations = true
+      state.query = action.meta.arg.query
+    },
+    [searchLocation.rejected]: state => {
+      state.searchingLocations = false
     }
   }
 })
 
 export const locationSelector = state => state.location
+
+export const { updateLocation } = locationSlice.actions
 
 export default locationSlice.reducer

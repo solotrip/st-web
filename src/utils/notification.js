@@ -2,20 +2,23 @@ import { PushNotifications } from '@capacitor/push-notifications'
 import * as NotificationService from 'api/notification'
 import { NOTIFICATION_TYPES } from 'constants/index'
 import { Capacitor } from '@capacitor/core'
+import { toast } from 'react-toastify'
 
 export async function registerDevice(history) {
   if(!Capacitor.isPluginAvailable('PushNotifications')) {
     return
   }
   const permissionRes = await PushNotifications.requestPermissions()
-  console.log(permissionRes.state)
-  PushNotifications.addListener('registration', _handleRegister)
-  PushNotifications.addListener('registrationError', _handleRegistrationError)
-  PushNotifications.addListener(
-    'pushNotificationActionPerformed',
-    _handleNotificationAction(history)
-  )
-  await PushNotifications.register()
+
+  if(permissionRes.receive === 'granted') {
+    PushNotifications.addListener('registration', _handleRegister)
+    PushNotifications.addListener('registrationError', _handleRegistrationError)
+    PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      _handleNotificationAction(history)
+    )
+    await PushNotifications.register()
+  }
 }
 
 async function _handleRegister(token) {
@@ -23,7 +26,7 @@ async function _handleRegister(token) {
 }
 
 async function _handleRegistrationError(e) {
-
+  toast.info(e)
 }
 
 export const _handleNotificationAction = history => action => {

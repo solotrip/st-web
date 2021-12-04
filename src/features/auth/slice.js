@@ -20,15 +20,15 @@ export const login = createAsyncThunk(
       email,
       password
     })
-    updateAccessToken(accessToken)
-    updateRefreshToken(refreshToken)
+    await updateAccessToken(accessToken)
+    await updateRefreshToken(refreshToken)
     dispatch(fetchProfile())
     history.replace('/recommendations')
   })
 
 export const logout = createAsyncThunk('' +
   'auth/logout', async ({ history }, { dispatch }) => {
-  clearTokens()
+  await clearTokens()
   dispatch({ type: 'store/reset' })
   history.replace('/')
 })
@@ -37,8 +37,8 @@ export const createGuest = createAsyncThunk(
   'auth/createGuest',
   async (_, { dispatch }) => {
     const { accessToken, refreshToken } = await AuthApi.createGuestUser()
-    updateAccessToken(accessToken)
-    updateRefreshToken(refreshToken)
+    await updateAccessToken(accessToken)
+    await updateRefreshToken(refreshToken)
     dispatch(fetchProfile())
   })
 
@@ -53,8 +53,8 @@ export const register = createAsyncThunk(
       email,
       password
     })
-    updateAccessToken(accessToken)
-    updateRefreshToken(refreshToken)
+    await updateAccessToken(accessToken)
+    await updateRefreshToken(refreshToken)
     dispatch(fetchProfile())
     history.replace('/recommendations')
   })
@@ -89,9 +89,9 @@ export const initialize = createAsyncThunk(
         if (!wishlistSelector(getState()).initialized) {
           dispatch(fetchWishlist())
         }
+        await registerDevice(history)
       }
 
-      await registerDevice(history)
       return {
         isAuthenticated,
         isGuest,
@@ -104,7 +104,9 @@ export const initialize = createAsyncThunk(
 const initialState = {
   error: null,
   loading: true,
-  isAuthenticated: false
+  isAuthenticated: false,
+  isGuest: false,
+  username: ''
 }
 
 const authSlice = createSlice({
