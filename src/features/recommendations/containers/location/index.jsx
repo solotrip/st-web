@@ -43,57 +43,66 @@ const LocationContainer = () => {
       })
     })
   }
-  const handleSearch = (q) => {
+  const handleSearch = q => {
     dispatch(searchLocation({ query: q }))
   }
 
-  const handleChange = useCallback((option) => {
-    dispatch(updateLocation(option))
-    history.replace({
-      pathname: '/recommendations',
-      search: qs.stringify({
-        ...query,
-        lat: option.lat,
-        lon: option.lon
+  const handleChange = useCallback(
+    option => {
+      dispatch(updateLocation(option))
+      history.replace({
+        pathname: '/recommendations',
+        search: qs.stringify({
+          ...query,
+          lat: option.lat,
+          lon: option.lon
+        })
       })
-    })
-  }, [dispatch])
+    },
+    [dispatch]
+  )
 
-  const options = searchQuery === '' ?
-    recentLocations
-    .filter(l => l !== currentLocation)
-    .map(l => locations[l])
-    : results
+  const options =
+    searchQuery === ''
+      ? recentLocations
+        .filter(l => l !== currentLocation)
+        .map(l => locations[l])
+      : results
   const currentLocOption = locations[currentLocation]
 
   return (
     <SheetWrapper snapPoints={[500]}>
       <SheetWrapper.Content>
-        <SettingsSection
-          title="Location"
-          description=" "
-        >
+        <SettingsSection title="Location" description=" ">
           <SearchInput
             onChange={handleSearch}
-            onReset={() => {handleSearch('')}}
+            onReset={() => {
+              handleSearch('')
+            }}
             filled
           />
           <div className={styles.list}>
-            {(!errorCurrentLocation && searchQuery === '') &&
-            (
-              <button className={styles.item} key={`loc-current`}
-                      onClick={() => {handleChange(currentLocOption)}}
-                      disabled={!currentLocOption}>
-                {
-                  !currentLocOption ?
-                    'Fetching current location...'
-                    : currentLocOption.fullname_en
-                }
-              </button>
+            {!errorCurrentLocation &&
+              searchQuery === '' && (
+                <button
+                  className={styles.item}
+                  key={'loc-current'}
+                  onClick={() => {
+                    handleChange(currentLocOption)
+                  }}
+                  disabled={!currentLocOption}
+                >
+                  {!currentLocOption
+                    ? 'Fetching current location...'
+                    : currentLocOption.fullname_en}
+                </button>
             )}
             {options.map(o => (
-              <button className={styles.item} key={`loc-${o.lat}-${o.lon}`}
-                      onClick={() => handleChange(o)}>
+              <button
+                className={styles.item}
+                key={`loc-${o.lat}-${o.lon}`}
+                onClick={() => handleChange(o)}
+              >
                 {o.fullname_en}
               </button>
             ))}
