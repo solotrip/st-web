@@ -10,6 +10,7 @@ import {
   removeFromWishlist,
   wishlistSelector
 } from '../../wishlist/slice'
+import { save } from '../../query/slice'
 import Header from '../components/header'
 import Content from '../components/content'
 import { useHistory, useLocation, Link } from 'react-router-dom'
@@ -32,14 +33,21 @@ const RecommendationsContainer = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchWishlist())
-  }, [dispatch])
+    dispatch(save(qs.stringify(query)))
+  }, [])
 
-  useEffect(() => {
+  useEffect(
+    () => {
+      dispatch(fetchWishlist())
+    },
+    [dispatch]
+  )
+
+  useEffect(
+    () => {
       if (location.pathname === '/recommendations') {
-        if (!query.start && !query.months)
-          return openDateSheet(query)
-        if ((!query.lat || !query.lon)) {
+        if (!query.start && !query.months) return openDateSheet(query)
+        if (!query.lat || !query.lon) {
           if (activeLocation) {
             return history.replace({
               pathname: '/recommendations',
@@ -60,20 +68,20 @@ const RecommendationsContainer = () => {
         dispatch(fetchRecommendations(query))
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [query, location, dispatch]
+    },
+    [query, location, dispatch]
   )
 
-  const toggleWishlist = useCallback(({
-    query,
-    recommendationId,
-    recommendation
-  }) => {
-    if (wishlisted[recommendation.id]) {
-      dispatch(removeFromWishlist(recommendation))
-    } else {
-      dispatch(addToWishlist({ query, recommendation }))
-    }
-  }, [dispatch, wishlisted])
+  const toggleWishlist = useCallback(
+    ({ query, recommendationId, recommendation }) => {
+      if (wishlisted[recommendation.id]) {
+        dispatch(removeFromWishlist(recommendation))
+      } else {
+        dispatch(addToWishlist({ query, recommendation }))
+      }
+    },
+    [dispatch, wishlisted]
+  )
 
   const openDateSheet = q => {
     history.replace({
@@ -88,42 +96,41 @@ const RecommendationsContainer = () => {
       search: qs.stringify(q)
     })
   }
-  const loading = profileLoading
-    || loadingRecommendations
-    || !activeRecommendationId
+  const loading =
+    profileLoading || loadingRecommendations || !activeRecommendationId
   return (
     <>
       <div className="flex-col">
-        <Header
-          recommendationId={activeRecommendationId}
-          loading={loading}
-        />
+        <Header recommendationId={activeRecommendationId} loading={loading} />
 
         <Content
           loading={loading}
           recommendations={
             !loading && recommendations[activeRecommendationId].recommendations
           }
-          recommendationId={activeRecommendationId} user={user}
+          recommendationId={activeRecommendationId}
+          user={user}
           query={query}
           wishlistedIds={wishlisted}
           toggleWishlist={toggleWishlist}
         >
-          {activeLocation !== '' &&
-          <Link className={styles.fromLink} to={{
-            pathname: '/recommendations/location',
-            search: qs.stringify(query)
-          }}>
-            <span><b>From: </b>{locations[activeLocation].fullname_en}</span>
-            <MdEdit />
-          </Link>
-          }
-
+          {activeLocation !== '' && (
+            <Link
+              className={styles.fromLink}
+              to={{
+                pathname: '/recommendations/location',
+                search: qs.stringify(query)
+              }}
+            >
+              <span>
+                <b>From: </b>
+                {locations[activeLocation].fullname_en}
+              </span>
+              <MdEdit />
+            </Link>
+          )}
         </Content>
-
-
       </div>
-
     </>
   )
 }
