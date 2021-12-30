@@ -10,6 +10,7 @@ import profile from 'features/profile/slice'
 import recommendations from 'features/recommendations/slice'
 import locationReducer from 'features/recommendations/containers/location/slice'
 import passport from 'features/recommendations/containers/passport-countries/slice'
+import activeReco from 'features/active-reco/slice'
 import filters from 'features/recommendations/containers/filters/slice'
 import navigation from 'components/navigation/slice'
 import wishlist from 'features/wishlist/slice'
@@ -45,5 +46,6 @@ export default combineReducers({
   location,
   passport,
   filters,
-  query
+  query,
+  activeReco
 })

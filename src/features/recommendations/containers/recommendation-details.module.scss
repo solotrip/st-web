@@ -13,6 +13,11 @@
 .title {
   width: 100%;
 }
+.subtitle {
+    text-align: right;
+    width: 100%;
+  }
+  
 
 .noItems {
   width: 100%;
@@ -43,4 +48,5 @@
   @include xs-to-md {
     display: none;
   }
+
 }

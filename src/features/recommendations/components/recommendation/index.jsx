@@ -1,23 +1,32 @@
-import React, { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+/* eslint-disable max-len */
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styles from './recommendation.module.scss'
 import { HorizontalScroll, Image } from 'components'
-import { ReactComponent as Cloud } from 'assets/images/icons/cloud.svg'
-import { ReactComponent as Home } from 'assets/images/icons/home.svg'
-import { ReactComponent as Passport } from 'assets/images/icons/passport.svg'
-import { ReactComponent as CovidTest } from 'assets/images/icons/test.svg'
-// eslint-disable-next-line max-len
-import { ReactComponent as Attraction } from 'assets/images/icons/attraction.svg'
-// eslint-disable-next-line max-len
-import { ReactComponent as Quarantine } from 'assets/images/icons/quarantine.svg'
 
+import { ReactComponent as Passport } from 'assets/images/new-icons/passport.svg'
+import { ReactComponent as Acommodation } from 'assets/images/new-icons/acommodation.svg'
+import { ReactComponent as Calendar } from 'assets/images/new-icons/calendar.svg'
+import { ReactComponent as Flights } from 'assets/images/new-icons/flights.svg'
+import { ReactComponent as Vaccine } from 'assets/images/new-icons/vaccine.svg'
+import { ReactComponent as Quarantine } from 'assets/images/new-icons/quarantine.svg'
+import { ReactComponent as Attraction } from 'assets/images/new-icons/attraction.svg'
+import { ReactComponent as Cloud } from 'assets/images/new-icons/cloud.svg'
+
+import { ReactComponent as EventsIcon } from 'assets/images/new-icons/events.svg'
+import { ReactComponent as Food } from 'assets/images/new-icons/food.svg'
+
+// eslint-disable-next-line no-unused-vars
 import { ReactComponent as Plane } from 'assets/images/icons/plane.svg'
 import { formatAsMonthDay } from 'utils/date'
 
 import { passportSelector } from '../../containers/passport-countries/slice'
 
+import { save } from '../../../active-reco/slice'
+
 let visaText = ''
+// eslint-disable-next-line no-unused-vars
 let visaSubText = ''
 let vaccinatedTestText = ''
 let vaccinatedQuarantineText = ''
@@ -25,6 +34,7 @@ let unvaccinatedTestText = ''
 let unvaccinatedQuarantineText = ''
 let restaurantText = ''
 let attractionsText = ''
+let temperatureText = ''
 
 const Recommendation = ({
   recommendation,
@@ -49,13 +59,18 @@ const Recommendation = ({
     fastestFlightCost,
     cheapestFlightCost,
     bestFlightCost,
+    // eslint-disable-next-line no-unused-vars
     top_pois: topPois,
+    // eslint-disable-next-line no-unused-vars
     climate = {}
   } = recommendation
 
-  const { t_min: minTemperature, t_max: maxTemperature } = climate
-
   const { passports } = useSelector(passportSelector)
+  const dispatch = useDispatch()
+
+  const handleActiveReco = () => {
+    dispatch(save(recommendation))
+  }
 
   function recommendationProcessor() {
     if (recommendation !== undefined) {
@@ -152,6 +167,13 @@ const Recommendation = ({
       } else if (restrictions['Tourist Attractions'] === 'Partially Open') {
         attractionsText = 'Attractions are restricted.'
       }
+
+      //Adding the temperature.
+      if (recommendation.climate.t_min && recommendation.climate.t_max) {
+        temperatureText = `min ${recommendation.climate.t_min}°C, max ${
+          recommendation.climate.t_max
+        }°C`
+      }
     }
   }
 
@@ -162,228 +184,188 @@ const Recommendation = ({
       onMouseEnter={() => {
         activeHandler(sid)
       }}
-      className={styles.recommendationCard}
+      className={styles.recommendationCard2}
     >
-      <div className={styles.header}>
-        <Link
-          to={`recommendations/recommendation/${id}`}
-          className={styles.titleContainer}
-        >
-          <h2 className={styles.title}>
-            {name}
-            <i>{country.name}</i> {country.emoji_flag}
-          </h2>
-          <span className={styles.date}>
-            {formatAsMonthDay(startDate)}
-            {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}
-          </span>
-        </Link>
-        <button
-          className={wishlisted ? styles.heartFilled : styles.heart}
-          onClick={() =>
-            toggleWishlist({
-              query,
-              recommendation,
-              recommendationId
-            })
-          }
-        >
-          {
-            <img
+      {' '}
+      <div className={styles.colorStrip} />
+      <div className={styles.cardContent}>
+        <div className={styles.header}>
+          <div className={styles.headerLine}>
+            {' '}
+            <div className={styles.headerUpLine}> Recommendation</div>{' '}
+            <button
               className={wishlisted ? styles.heartFilled : styles.heart}
-              alt=""
+              onClick={() =>
+                toggleWishlist({
+                  query,
+                  recommendation,
+                  recommendationId
+                })
+              }
             />
-          }
-        </button>
-      </div>
-      <Link
-        to={`recommendations/recommendation/${sid}/${startDate}/${endDate}`}
-        style={{ color: 'inherit', textDecoration: 'inherit' }}
-        className={styles.content}
-      >
-        {events &&
-          events.length > 0 && (
-          <>
-              <div className={styles.sectionTitle}>Events & Festivals</div>
-              <HorizontalScroll
-                className={styles.slide}
-                settings={{
-                  responsive: undefined,
-                  slidesToShow: Math.min(events.length, 3),
-                  slidesToScroll: 2
-                }}
-                items={events.map(event => (
-                  <div key={`${sid}-poi-${event.id}`} className={styles.slide}>
-                    <Image
-                      src={
-                        event.images &&
-                        event.images.length > 0 &&
-                        event.images[0]
-                      }
-                      className={styles.slideImage}
-                      containerClassName={styles.slideImageContainer}
-                      width={100}
-                      height={100}
-                      shadowBlur={30}
-                      alt={event.title}
-                      key={event.eid}
-                    />
-                    <div className="flex center">
-                      <div className={styles.slideText}>{event.title}</div>
-                    </div>
-                  </div>
-                ))}
-              />
-          </>
-        )}
-        <div className={styles.stats}>
-          {(fastestFlightCost || cheapestFlightCost || bestFlightCost) && (
-            <div className={styles.statRow}>
-              <div className={styles.statImage}>
-                <Plane />
-              </div>
-              <div className={styles.statContent}>
-                {fastestFlightCost && (
-                  <div className={styles.statContentCell}>
-                    <div className={styles.statName}>Fastest</div>
-                    <div className={styles.statValue}>{fastestFlightCost}</div>
-                  </div>
-                )}
-                {cheapestFlightCost && (
-                  <div className={styles.statContentCell}>
-                    <div className={styles.statName}>Cheapest</div>
-                    <div className={styles.statValue}>{cheapestFlightCost}</div>
-                  </div>
-                )}
-                {bestFlightCost && (
-                  <div className={styles.statContentCell}>
-                    <div className={styles.statName}>Best</div>
-                    <div className={styles.statValue}>{bestFlightCost}</div>
-                  </div>
-                )}
-              </div>
+          </div>
+          <div className={styles.headerLine}>
+            {' '}
+            <div className={styles.headerTitle}>{name}</div>{' '}
+            <div className={styles.country}>
+              <div>{country.emoji_flag}</div> &nbsp; <div>{country.name}</div>
             </div>
-          )}
-          {(hotelPrice || hostelPrice || rentalPrice) && (
-            <div className={styles.statRow}>
-              <div className={styles.statImage}>
-                <Home />
-              </div>
-              <div className={styles.statContent}>
-                {hotelPrice && (
-                  <div className={styles.statContentCell}>
-                    <div className={styles.statName}>Hotel</div>
-                    <div className={styles.statValue}>${hotelPrice}</div>
-                  </div>
-                )}
-                {hostelPrice && (
-                  <div className={styles.statContentCell}>
-                    <div className={styles.statName}>Hostel</div>
-                    <div className={styles.statValue}>{hostelPrice}</div>
-                  </div>
-                )}
-                {rentalPrice && (
-                  <div className={styles.statContentCell}>
-                    <div className={styles.statName}>Airbnb</div>
-                    <div className={styles.statValue}>{rentalPrice}</div>
-                  </div>
-                )}
-              </div>
+          </div>
+          <hr className={styles.hr} />
+        </div>
+
+        <div className={styles.content}>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Calendar />
             </div>
-          )}
-          <div className={styles.statRow}>
-            <div className={styles.statImage}>
+            <div className={styles.elementText}>
+              {formatAsMonthDay(startDate)}
+              {startDate !== endDate
+                ? ` - ${formatAsMonthDay(endDate)}`
+                : ''}{' '}
+            </div>
+          </div>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
               <Passport />
             </div>
-            <div className={styles.statContent}>
-              <div className={styles.statContentCell}>
-                <div className={styles.statName}>{visaText}</div>
-                <div className={styles.statValue}>{visaSubText}</div>
+            <div className={styles.elementText}>{visaText}</div>
+          </div>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Cloud />
+            </div>
+            <div className={styles.elementText}>{temperatureText}</div>
+          </div>
+          {(hotelPrice || hostelPrice || rentalPrice) && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Acommodation />
+              </div>
+              <div className={styles.elementText}>
+                {hotelPrice && `Hotel: $${Math.floor(hotelPrice)}`}
+                {hostelPrice && `,Hostel: $${Math.floor(hostelPrice)}`}
+                {rentalPrice && `,Airbnb: $${Math.floor(rentalPrice)}`}
               </div>
             </div>
-          </div>
-          {minTemperature != null &&
-            maxTemperature != null && (
-              <div className={styles.statRow}>
-                <div className={styles.statImage}>
-                  <Cloud />
-                </div>
-                <div className={styles.statContent}>
-                  <div className={styles.statContentCell}>
-                    <div className={styles.statName}>
-                      min {minTemperature}°C, max {maxTemperature}°C
-                    </div>
-                  </div>
-                </div>
-              </div>
           )}
-          <div className={styles.statRow}>
-            <div className={styles.statImage}>
-              <CovidTest />
-            </div>
-            <div className={styles.statContent}>
-              <div className={styles.statContentCell}>
-                <div className={styles.statName}>{vaccinatedTestText}</div>
-                <div className={styles.statValue}>{unvaccinatedTestText}</div>
+          {(fastestFlightCost || cheapestFlightCost || bestFlightCost) && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Flights />
+              </div>
+              <div className={styles.elementText}>
+                {fastestFlightCost &&
+                  `Fastest: $${Math.floor(fastestFlightCost)}`}
+                {cheapestFlightCost &&
+                  `,Cheapest: $${Math.floor(cheapestFlightCost)}`}
+                {bestFlightCost && `,Best: $${Math.floor(bestFlightCost)}`}
               </div>
             </div>
+          )}
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Vaccine />
+            </div>
+            <div className={styles.elementText}>{vaccinatedTestText}</div>
           </div>
-          <div className={styles.statRow}>
-            <div className={styles.statImage}>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Vaccine />
+            </div>
+            <div className={styles.elementText}>{unvaccinatedTestText}</div>
+          </div>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
               <Quarantine />
             </div>
-            <div className={styles.statContent}>
-              <div className={styles.statContentCell}>
-                <div className={styles.statName}>
-                  {vaccinatedQuarantineText}
-                </div>
-                <div className={styles.statValue}>
-                  {unvaccinatedQuarantineText}
-                </div>
-              </div>
+            <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
+          </div>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Quarantine />
+            </div>
+            <div className={styles.elementText}>
+              {unvaccinatedQuarantineText}
             </div>
           </div>
-          <div className={styles.statRow}>
-            <div className={styles.statImage}>
+
+          <div className={styles.contentElement}>
+            <div className={styles.elementIconAttraction}>
+              {' '}
               <Attraction />
             </div>
-            <div className={styles.statContent}>
-              <div className={styles.statContentCell}>
-                <div className={styles.statName}>{restaurantText}</div>
-                <div className={styles.statValue}>{attractionsText}</div>
-              </div>
+            <div className={styles.elementText}>{attractionsText}</div>
+          </div>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Food />
             </div>
+            <div className={styles.elementText}>{restaurantText}</div>
+          </div>
+          {events &&
+            events.length > 0 && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <EventsIcon />
+                </div>
+                {<div className={styles.elementText}>Events & Festivals</div>}
+              </div>
+          )}
+          <div className={styles.events}>
+            <HorizontalScroll
+              className={styles.slide}
+              settings={{
+                responsive: undefined,
+                slidesToShow: Math.min(events.length, 3),
+                slidesToScroll: 2
+              }}
+              items={events.map(event => (
+                <div key={`${sid}-poi-${event.id}`} className={styles.slide}>
+                  <Image
+                    src={
+                      event.images && event.images.length > 0 && event.images[0]
+                    }
+                    className={styles.slideImage}
+                    containerClassName={styles.slideImageContainer}
+                    width={200}
+                    height={120}
+                    shadowBlur={30}
+                    alt={event.title}
+                    key={event.eid}
+                  />
+                  <div className="flex center">
+                    <div className={styles.slideText}>{event.title}</div>
+                  </div>
+                  <div className={styles.slideText2}>
+                    {formatAsMonthDay(event.start)}
+                    {event.start !== event.end
+                      ? ` - ${formatAsMonthDay(event.end)}`
+                      : ''}{' '}
+                  </div>
+                </div>
+              ))}
+            />
+            <Link to={`recommendations/recommendation/${id}`}>
+              <button onClick={handleActiveReco} className={styles.showDetails}>
+                Show Details{' '}
+              </button>
+            </Link>
           </div>
         </div>
-        {topPois &&
-          topPois.length > 0 && (
-          <>
-              <div className={styles.sectionTitle}>What to See</div>
-              <HorizontalScroll
-                className={styles.slidePois}
-                settings={{
-                  responsive: undefined,
-                  slidesToShow: 3,
-                  slidesToScroll: 2
-                }}
-                items={topPois.map(poi => (
-                  <div key={`${sid}-poi-${poi.id}`} className={styles.slide}>
-                    <Image
-                      src={poi.imageLink}
-                      className={styles.slideImage}
-                      width={100}
-                      height={100}
-                      shadowBlur={30}
-                      alt={poi.name}
-                      key={poi.id}
-                    />
-                    <div className={styles.slideText}>{poi.name}</div>
-                  </div>
-                ))}
-              />
-          </>
-        )}
-      </Link>
+      </div>
     </div>
   )
 }

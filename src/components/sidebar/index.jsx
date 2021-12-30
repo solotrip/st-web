@@ -5,8 +5,15 @@ import styles from './Sidebar.module.scss'
 import { IconContext } from 'react-icons'
 import { Footer } from 'components'
 
+import { useSelector } from 'react-redux'
+import { querySelector } from '../../features/query/slice'
+
 function SideBar() {
   const location = useLocation()
+  const { query } = useSelector(querySelector)
+  console.log({ location })
+  let searcher = location.search !== '' ? location.search : query
+  console.log({ searcher })
   return (
     <IconContext.Provider value={{ color: '#fff' }}>
       <div className={styles.sidebar}>
@@ -16,7 +23,7 @@ function SideBar() {
           {SidebarData.map((item, index) => {
             return (
               <NavLink
-                to={{ pathname: item.path, search: location.search }}
+                to={{ pathname: item.path, search: searcher }}
                 className={styles.item}
                 activeClassName={styles.active}
                 key={`sidebar-${item.title}`}

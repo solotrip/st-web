@@ -22,10 +22,11 @@
   flex-direction: column;
   background-color: $card-content;
   width: 100%;
-  margin-left:auto;
-  margin-right: auto;
+  margin-left:0px;
+  margin-right: 90px;
   //min-height: 650px;
   min-width: 322px;
+  max-width: 322px;
   margin-top: 37px;
   border-radius: 5px;
   
@@ -132,7 +133,7 @@
 .contentElement { 
   display: flex;
   flex-direction: row;
-  margin-top: 6px;
+  margin-top: 20px;
 
   margin-bottom: 12px;
   font-size: 15px;
@@ -156,25 +157,26 @@
 .elementText {
   margin-top: 1px;
   line-height: 19px;
-  font-size: 15px;
+  //font-size: 15px;
   margin-left: 18px;
 }
 
 .slide {
   //padding: 4px 32px;
-  padding: 2px;
+  margin-top: 5px;
+
 }
 
 .slideImage {
   width: 100%;
-  height: 100%;
+  height: 150px;
   border-radius: 5px;
   
 }
 
 .slideImageContainer {
   display: flex;
-  width: 100%;
+  width: 200px;
   
 }
 

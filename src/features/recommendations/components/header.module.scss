@@ -1,11 +1,31 @@
 @import 'styles/mixins';
 
+.notExpanded {
+ // background-color: darkcyan;
+  height: 58px;
+  transition: height 0.3s;
+  transition-timing-function: ease-out;
+}
+.expanded { 
+ background-color: $bg-color;
+ height: 265px;
+ @include md-to-xl {
+  height: 130px;
+
+}
+ transition: height 0.3s;
+ transition-timing-function: ease-out;
+}
+
 .navbarFixed, .navbarFixedIos {
   z-index: 3;
   height: 58px;
   width: 100%;
-  background: $card-bg-color;
-  @extend .shadow;
+  //background: $card-bg-color;
+  //@extend .shadow;
+
+
+  
 }
 
 .navbarFixedIos {
@@ -18,6 +38,13 @@
 .rightActions {
   display: flex;
   flex-direction: row;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 .actions {
@@ -40,5 +67,77 @@
   width: 24px;
   line-height: 24px;
   margin: 0 8px;
-  fill: $primary-color;
+  fill: white;
+}
+
+
+.editSearch {
+  
+  width: calc(100vw - 72px);
+  max-width: 600px;
+  height: 36px;
+  margin-left: 0px;
+  margin-right: 9px;
+  background:rgba(118,118,128,0.24);
+  border-radius: 10px;
+}
+
+.queryText { 
+  text-align: left;
+  padding-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+}
+
+.bell { 
+  margin-top: 3px;
+}
+
+.fromLink {
+  margin: 5px;
+  padding: 16px;
+  
+  font-size: 18px;
+  text-align: start;
+  background: $primary-color;
+  color: $text-color;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  svg {
+    font-size: 24px;
+  }
+  transition: height 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.expandedElements{
+  
+  //background-color: darkgreen;
+  margin-left: 12px;
+  display: flex;
+  z-index: 3;
+  flex-direction: column;
+  position: absolute;
+  transition-timing-function: ease-in;
+  @include md-to-xl {
+    flex-direction: row;
+  }
+
+}
+
+.expandedElementsHidden{ 
+  //background-color: darkgreen;
+  margin-left: 12px;
+  position: absolute;
+  display: flex;
+  transition-timing-function: ease-out;
+  @include md-to-xl {
+    flex-direction: row;
+  }
+  
+
 }

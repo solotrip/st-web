@@ -9,6 +9,8 @@
     margin-top: 50px;
     margin-bottom: 0;
   }
+  background-color: yellowgreen;
+  width: 100%;
 }
 
 .content {
@@ -74,4 +76,241 @@
   font-size: 14px;
   text-align: right;
   margin-top: 8px;
+}
+
+
+@import 'styles/mixins';
+
+.recommendationCard {
+  @extend .shadow;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 16px;
+  background-color: $card-bg-color;
+  background-image: $card-bg-url;
+  padding: 16px;
+}
+
+
+.recommendationCard2{
+  display: flex;
+  flex-direction: column;
+  background-color: $card-content;
+  width: 100%;
+  max-width: 322px;
+  margin-left:auto;
+  margin-right: auto;
+  //min-height: 650px;
+  min-width: 322px;
+  margin-top: 37px;
+  border-radius: 5px;
+  
+}
+
+.colorStrip { 
+  width: 100%;
+  height: 10px;
+  background-color: #667A8f;
+  top:0%;
+  border-radius: 5px 5px 0px 0px;
+  bottom: 98.17%;
+}
+
+.cardContent { 
+  display: flex;
+  flex-direction: column;
+  
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header { 
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.headerLine { 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ 
+  height: 40px;
+  margin-top: 0px;
+}
+
+.headerUpLine { 
+  margin-top: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+  
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+}
+
+.heart {
+
+  margin-top: 5px;
+  margin-right: 2px;
+  width: 24px;
+  height: auto;
+  background-image: $heart-not-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.heartFilled {
+  width: 30px;
+  height: auto;
+  background-image: $heart-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.headerTitle {
+  margin-top: -10px;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  width: 100%;
+ 
+}
+
+.country {
+  margin-top: -7px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  
+
+}
+
+.hr { 
+  margin-top: -20px;
+  margin-bottom: 6px;
+}
+
+.content { 
+  
+  margin-top: 5px;
+}
+
+.contentElement { 
+  display: flex;
+  flex-direction: row;
+  margin-top: 6px;
+
+  margin-bottom: 12px;
+  font-size: 15px;
+
+}
+
+.elementIcon { 
+
+  width: 20px;
+  height: 20px;
+}
+.elementIconAttraction{ 
+
+  margin-left: 3px;
+  width: 11.67px;
+  height: 16.67px;
+  margin-right: 20-11.67-3px;
+ 
+}
+
+.elementText {
+  margin-top: 1px;
+  line-height: 19px;
+  font-size: 15px;
+  margin-left: 18px;
+}
+
+.slide {
+  //padding: 4px 32px;
+  padding: 2px;
+}
+
+.slideImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  
+}
+
+.slideImageContainer {
+  display: flex;
+  width: 100%;
+  
+}
+
+
+.slideText {
+  @extend .textShadow;
+  z-index: 2;
+  text-align: left;
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 10px;
+  width: 100%;
+
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  height: 38px;
+  margin-bottom: -5px;
+  
+}
+
+.slideText2 {
+  @extend .textShadow;
+  z-index: 2;
+  text-align: left;
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: -5px;
+  width: 100%;
+
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  
+}
+
+.showDetails {
+  margin-top: 17px;
+  background-color: #1697dc;
+  width: 100%;
+  height: 38.27px;
+  border-radius: 12px;
+  margin-bottom: 17px;
+  outline: none;
+  color: white;
+
 }

@@ -5,14 +5,15 @@ import AuthRoutes from './features/auth/routes'
 import RecommendationRoutes from './features/recommendations/routes'
 import NotificationRoutes from './features/notifications/routes'
 import WishlistRoutes from './features/wishlist/routes'
+import BrowseRoutes from './features/browse/routes'
 import SavedRoutes from './features/track/routes'
 import { OnboardingRoutes, SettingsRoute } from './features/preferences/routes'
 
 import { Layout, Loader, MonthPicker } from 'components'
 import BottomBar from './components/bottom-bar'
 import SideBar from './components/sidebar'
-import DateSelectorContainer
-  from './features/recommendations/containers/date-selector'
+// eslint-disable-next-line max-len
+import DateSelectorContainer from './features/recommendations/containers/date-selector'
 
 /**
  * These routes are just for development purposes
@@ -20,29 +21,33 @@ import DateSelectorContainer
  */
 const DevRoutes = () => (
   <Switch>
-    <Route path="/test/loading" component={Loader} exact/>
+    <Route path="/test/loading" component={Loader} exact />
     <Route path="/test/month-picker" exact>
-      <MonthPicker onSelect={() => {
-      }} defaultValue={[1, 2, 12]}
-      />
+      <MonthPicker onSelect={() => {}} defaultValue={[1, 2, 12]} />
     </Route>
     <Route path="/test/date-selector" exact>
-      <DateSelectorContainer/>
+      <DateSelectorContainer />
     </Route>
   </Switch>
 )
 
 const MainRoutes = () => {
   return (
-    <Route path={['/recommendations', '/notifications', '/wishlist', '/saved']}>
-      <Layout
-        sidebar={<SideBar/>}
-        bottomBar={<BottomBar/>}
-      >
-        <RecommendationRoutes/>
-        <NotificationRoutes/>
-        <WishlistRoutes/>
-        <SavedRoutes/>
+    <Route
+      path={[
+        '/recommendations',
+        '/notifications',
+        '/wishlist',
+        '/saved',
+        '/browse'
+      ]}
+    >
+      <Layout sidebar={<SideBar />} bottomBar={<BottomBar />}>
+        <BrowseRoutes />
+        <RecommendationRoutes />
+        <NotificationRoutes />
+        <WishlistRoutes />
+        <SavedRoutes />
       </Layout>
     </Route>
   )
@@ -50,13 +55,13 @@ const MainRoutes = () => {
 
 const Routes = () => (
   <Router>
-    <Route path="/" component={HomeContainer} exact/>
-    <OnboardingRoutes/>
-    <AuthRoutes/>
-    <MainRoutes/>
-    <SettingsRoute/>
+    <Route path="/" component={HomeContainer} exact />
+    <OnboardingRoutes />
+    <AuthRoutes />
+    <MainRoutes />
+    <SettingsRoute />
     <Route path="/404">404</Route>
-    {process.env.NODE_ENV === 'development' && <DevRoutes/>}
+    {process.env.NODE_ENV === 'development' && <DevRoutes />}
   </Router>
 )
 export default Routes

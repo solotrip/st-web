@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
-import { MdEdit } from 'react-icons/md'
-import { fetchRecommendations, recommendationsSelector } from '../slice'
+
+import {
+  fetchRecommendations,
+  recommendationsSelector
+} from '../../recommendations/slice'
 import { profileSelector } from '../../profile/slice'
 import {
   addToWishlist,
@@ -11,14 +14,29 @@ import {
   wishlistSelector
 } from '../../wishlist/slice'
 import { save } from '../../query/slice'
-import Header from '../components/header'
+import {
+  fetchNotifications,
+  notificationsSelector
+} from '../../notifications/slice'
+import Header from '../../recommendations/components/header'
 import Content from '../components/content'
-import { useHistory, useLocation, Link } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'qs'
-import { locationSelector, fillLocationData } from './location/slice'
-import styles from './recommendation.module.scss'
+import {
+  locationSelector,
+  fillLocationData
+} from '../../recommendations/containers/location/slice'
+import {
+  events,
+  restrictions,
+  visas,
+  activities,
+  weather,
+  featured,
+  attractions
+} from '../../../constants/browse'
 
-const RecommendationsContainer = () => {
+const BrowseContainer = () => {
   const query = useQuery()
   const location = useLocation()
   const history = useHistory()
@@ -30,10 +48,13 @@ const RecommendationsContainer = () => {
   const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
   const { activeLocation, locations } = useSelector(locationSelector)
+  const { notifications } = useSelector(notificationsSelector)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(save(qs.stringify(query)))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(
@@ -45,12 +66,19 @@ const RecommendationsContainer = () => {
 
   useEffect(
     () => {
-      if (location.pathname === '/recommendations') {
+      dispatch(fetchNotifications())
+    },
+    [dispatch]
+  )
+
+  useEffect(
+    () => {
+      if (location.pathname === '/browse') {
         if (!query.start && !query.months) return openDateSheet(query)
         if (!query.lat || !query.lon) {
           if (activeLocation) {
             return history.replace({
-              pathname: '/recommendations',
+              pathname: '/browse',
               search: qs.stringify({
                 ...query,
                 lat: locations[activeLocation].lat,
@@ -69,6 +97,7 @@ const RecommendationsContainer = () => {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [query, location, dispatch]
   )
 
@@ -112,11 +141,19 @@ const RecommendationsContainer = () => {
           user={user}
           query={query}
           wishlistedIds={wishlisted}
+          notifications={notifications}
           toggleWishlist={toggleWishlist}
+          events={events}
+          restrictions={restrictions}
+          visas={visas}
+          activities={activities}
+          weather={weather}
+          featured={featured}
+          attractions={attractions}
         />
       </div>
     </>
   )
 }
 
-export default RecommendationsContainer
+export default BrowseContainer

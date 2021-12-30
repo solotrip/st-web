@@ -8,6 +8,9 @@ import ReactMapboxGl, { Feature, Layer, Marker } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { Loader } from 'components'
 
+import { locationSelector } from '../containers/location/slice'
+import { useSelector } from 'react-redux'
+
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 })
@@ -28,9 +31,13 @@ const Content = ({
   const [appTheme] = useThemeState()
   //default dark map.
   const [mapboxTheme, setMapboxTheme] = useState(
-    'mapbox://styles/naberk/cksnplg9i2mvi18pgkkuf1fol'
+    'mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj'
   )
   const [active, setActive] = useState(null)
+
+  const { activeLocation, locations } = useSelector(locationSelector)
+
+  const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
 
   const activeHandler = param => {
     setActive(param)
@@ -39,36 +46,56 @@ const Content = ({
   useEffect(
     () => {
       appTheme === 'light'
-        ? setMapboxTheme('mapbox://styles/naberk/cksnq0g1q12vb17nzkij49ou6')
-        : setMapboxTheme('mapbox://styles/naberk/cksnplg9i2mvi18pgkkuf1fol')
+        ? setMapboxTheme('mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj')
+        : setMapboxTheme('mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj')
     },
     [appTheme]
+  )
+
+  useEffect(
+    () => {
+      if (
+        locations !== undefined &&
+        locations[activeLocation] !== undefined &&
+        locations[activeLocation].lon !== undefined &&
+        locations[activeLocation].lat !== undefined
+      ) {
+        setFocusLocation([
+          locations[activeLocation].lon,
+          locations[activeLocation].lat
+        ])
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [locations]
   )
   const coordinates = loading ? [] : recommendations.map(r => [r.lon, r.lat])
   return (
     <div className={styles.page}>
-
       <div className={styles.recommendations}>
         {title && <h1 className={styles.title}>{title}</h1>}
         {children}
-        {loading && <Loader/>}
-        {(!loading && recommendations.length === 0) &&
-        <span className={styles.noItems}>{noItemsMessage}</span>}
-        {(!loading && recommendations.length > 0)
-        && recommendations.map(recommendation => {
-          return (
-            <Recommendation
-              key={`rec-${recommendation.sid}`}
-              recommendationId={recommendationId}
-              query={query}
-              recommendation={recommendation}
-              user={user}
-              activeHandler={() => activeHandler(recommendation)}
-              toggleWishlist={toggleWishlist}
-              wishlisted={!!wishlistedIds[recommendation.id]}
-            />
-          )
-        })}
+        {loading && <Loader />}
+        {!loading &&
+          recommendations.length === 0 && (
+            <span className={styles.noItems}>{noItemsMessage}</span>
+        )}
+        {!loading &&
+          recommendations.length > 0 &&
+          recommendations.map(recommendation => {
+            return (
+              <Recommendation
+                key={`rec-${recommendation.sid}`}
+                recommendationId={recommendationId}
+                query={query}
+                recommendation={recommendation}
+                user={user}
+                activeHandler={() => activeHandler(recommendation)}
+                toggleWishlist={toggleWishlist}
+                wishlisted={!!wishlistedIds[recommendation.id]}
+              />
+            )
+          })}
       </div>
 
       {mapEnabled && (
@@ -79,8 +106,14 @@ const Content = ({
               height: '100vh',
               width: '100%'
             }}
-            center={active ? [active.lon, active.lat] : [0, 0]}
-            zoom={[7]}
+            center={
+              active
+                ? [active.lon, active.lat]
+                : locations && activeLocation && locations[activeLocation]
+                  ? [focusLocation[0], focusLocation[1]]
+                  : [-0.118092, 51.509865]
+            }
+            zoom={[10]}
             pitch={[30]}
           >
             <Layer
@@ -88,8 +121,8 @@ const Content = ({
               id="marker"
               layout={{ 'icon-image': 'marker-1' }}
             >
-              <Feature coordinates={coordinates}/>
-              <Marker coordinates={coordinates}/>
+              <Feature coordinates={coordinates} />
+              <Marker coordinates={coordinates} />
             </Layer>
           </Map>
         </div>
