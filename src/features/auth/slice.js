@@ -11,7 +11,10 @@ import _ from 'lodash'
 import { registerDevice } from 'utils/notification'
 import { fetchTracked, trackSelector } from 'features/track/slice'
 import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
-
+import {
+  FirebaseAuthentication
+} from '@robingenz/capacitor-firebase-authentication'
+import { toast } from 'react-toastify'
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -26,9 +29,38 @@ export const login = createAsyncThunk(
     history.replace('/recommendations')
   })
 
+export const loginWithGoogle = createAsyncThunk(
+  'auth/login',
+  async ({ history }, { dispatch }) => {
+    await FirebaseAuthentication.signInWithGoogle()
+    const { token } = await FirebaseAuthentication.getIdToken()
+    const { accessToken, refreshToken } = await AuthApi.loginWithGoogle({
+      token
+    })
+    await updateAccessToken(accessToken)
+    await updateRefreshToken(refreshToken)
+    dispatch(fetchProfile())
+    history.replace('/recommendations')
+  })
+
+export const loginWithApple = createAsyncThunk(
+  'auth/login',
+  async ({ history }, { dispatch }) => {
+    await FirebaseAuthentication.signInWithApple()
+    const { token } = await FirebaseAuthentication.getIdToken()
+    const { accessToken, refreshToken } = await AuthApi.loginWithApple({
+      token
+    })
+    await updateAccessToken(accessToken)
+    await updateRefreshToken(refreshToken)
+    dispatch(fetchProfile())
+    history.replace('/recommendations')
+  })
+
 export const logout = createAsyncThunk('' +
   'auth/logout', async ({ history }, { dispatch }) => {
   await clearTokens()
+  await FirebaseAuthentication.signOut()
   dispatch({ type: 'store/reset' })
   history.replace('/')
 })
@@ -137,6 +169,7 @@ const authSlice = createSlice({
     [initialize.error]: (state, action) => {
       state.isAuthenticated = false
       state.loading = true
+
       state.error = _.get(action.error, 'data', JSON.stringify(action.error))
     },
     [createGuest.pending]: state => {
@@ -162,7 +195,8 @@ const authSlice = createSlice({
       state.isAuthenticated = true
     },
     [login.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.message)
+      toast.error(_.get(action.error, 'data', action.error.message))
+      // state.error = _.get(action.error, 'data', action.error.message)
     },
     [register.pending]: state => {
       state.error = null
@@ -171,7 +205,8 @@ const authSlice = createSlice({
       state.isAuthenticated = true
     },
     [register.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.message)
+      toast.error(_.get(action.error, 'data', action.error.message))
+      // state.error = _.get(action.error, 'data', action.error.message)
     },
     [logout.fulfilled]: state => {
       state = { ...initialState }

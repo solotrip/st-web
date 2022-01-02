@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../slice'
+import { loginWithApple, loginWithGoogle, register } from '../slice'
 import SignupPage from '../components/signup'
 import { useHistory } from 'react-router-dom'
 
@@ -23,6 +23,8 @@ const SignupContainer = () => {
           })
         )
       }
+      loginWithApple={() => dispatch(loginWithApple({ history }))}
+      loginWithGoogle={() => dispatch(loginWithGoogle({ history }))}
     />
   )
 }

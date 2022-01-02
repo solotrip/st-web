@@ -10,3 +10,6 @@ project(':capacitor-push-notifications').projectDir = new File('../node_modules/
 
 include ':capacitor-storage'
 project(':capacitor-storage').projectDir = new File('../node_modules/@capacitor/storage/android')
+
+include ':robingenz-capacitor-firebase-authentication'
+project(':robingenz-capacitor-firebase-authentication').projectDir = new File('../node_modules/@robingenz/capacitor-firebase-authentication/android')

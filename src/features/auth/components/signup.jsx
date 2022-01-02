@@ -4,8 +4,11 @@ import { useForm } from 'react-hook-form'
 import { Button, Checkbox, TextInput } from 'components'
 import { MdChevronRight } from 'react-icons/md'
 import styles from './common-styles.module.scss'
+import cn from 'classnames'
+import { ReactComponent as GoogleIcon } from '../../../assets/images/google.svg'
+import { ReactComponent as AppleIcon } from '../../../assets/images/apple.svg'
 
-const SignupPage = ({ registerFunc, error }) => {
+const SignupPage = ({ registerFunc, error,loginWithApple, loginWithGoogle }) => {
   const onSubmit = ({ email, password, username }) =>
     registerFunc({
       email,
@@ -66,7 +69,22 @@ const SignupPage = ({ registerFunc, error }) => {
             Already have an account? <span>Login</span>
           </Link>
         </form>
-
+        <div className={styles.socialButtons}>
+          <button
+            className={cn(styles.socialLogin, styles.loginWithGoogle)}
+            onClick={loginWithGoogle}
+          >
+            <GoogleIcon/>
+            <span>Sign in with Google</span>
+          </button>
+          <button
+            className={cn(styles.socialLogin, styles.loginWithApple)}
+            onClick={loginWithApple}
+          >
+            <AppleIcon/>
+            <span>Sign in with Apple</span>
+          </button>
+        </div>
       </div>
     </div>
   )

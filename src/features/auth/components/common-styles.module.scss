@@ -40,3 +40,49 @@
     margin: 8px 0;
   }
 }
+
+.socialButtons {
+  display: flex;
+  flex-direction: column;
+}
+
+.socialLogin {
+
+  display: flex;
+  align-items: center;
+  background: $white;
+  color: $inverted-text-color;
+  margin: 4px;
+  border-radius: 4px;
+  height: 48px;
+  padding: 0;
+  svg {
+    fill: $black;
+    height: 100%;
+    width: auto;
+    padding: 0;
+    margin-right: 24px;
+  }
+  span {
+    @include roboto-medium;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+}
+
+.loginWithGoogle {
+  @include whenLight {
+    color: white;
+    background: #4285f4;
+  }
+}
+
+.loginWithApple {
+  @include whenLight {
+    background: $black;
+    color: white;
+    svg {
+      fill: $white;
+    }
+  }
+}

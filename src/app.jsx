@@ -13,6 +13,8 @@ import './styles/global.scss'
 import './i18n/i18n'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
+import 'utils/firebase'
+
 // Import css files
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'

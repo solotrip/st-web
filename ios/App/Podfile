@@ -17,4 +17,5 @@ end
 target 'App' do
   capacitor_pods
   pod 'Firebase/Messaging'
+  pod 'RobingenzCapacitorFirebaseAuthentication/Google', :path => '../../node_modules/@robingenz/capacitor-firebase-authentication'
 end
