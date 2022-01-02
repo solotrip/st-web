@@ -1,5 +1,5 @@
 {
-	"appId": "com.solotrip.pulfy",
+	"appId": "com.pulfy.pulfy",
 	"appName": "pulfy",
 	"webDir": "build",
 	"bundledWebRuntime": false,
@@ -9,6 +9,13 @@
 				"badge",
 				"sound",
 				"alert"
+			]
+		},
+		"FirebaseAuthentication": {
+			"skipNativeAuth": false,
+			"providers": [
+				"apple.com",
+				"google.com"
 			]
 		}
 	}

@@ -7,12 +7,64 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1006259222509:android:9a03a870824e87db53d9e4",
+        "android_client_info": {
+          "package_name": "com.pulfy.pulfy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1006259222509-9u8jqth56mdnhh6ma4vhlacf3cs086g1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pulfy.pulfy",
+            "certificate_hash": "92b89e5c0d99530b1149b419b77fe5a5fa7543fe"
+          }
+        },
+        {
+          "client_id": "1006259222509-vo86nvpj6o6hq2d0cl4vlb79p41hhedu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKolx7zXBU88kX_IPC3TfNWOA5_zcKC74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1006259222509-vo86nvpj6o6hq2d0cl4vlb79p41hhedu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1006259222509-s6b5eoa43sdcttdcnqql6heb0qfodgl8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.solotrip.pulfy"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1006259222509:android:3c5f086e0dd8105f53d9e4",
         "android_client_info": {
           "package_name": "com.solotrip.pulfy"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1006259222509-2o56pj7vjk1r4b4hqn66m6hgg2u7umi9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.solotrip.pulfy",
+            "certificate_hash": "92b89e5c0d99530b1149b419b77fe5a5fa7543fe"
+          }
+        },
         {
           "client_id": "1006259222509-vo86nvpj6o6hq2d0cl4vlb79p41hhedu.apps.googleusercontent.com",
           "client_type": 3

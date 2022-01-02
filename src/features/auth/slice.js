@@ -11,6 +11,10 @@ import _ from 'lodash'
 import { registerDevice } from 'utils/notification'
 import { fetchTracked, trackSelector } from 'features/track/slice'
 import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
+import {
+  FirebaseAuthentication
+} from '@robingenz/capacitor-firebase-authentication'
+import { toast } from 'react-toastify'
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -23,17 +27,43 @@ export const login = createAsyncThunk(
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile())
     history.replace('/browse')
-  }
-)
+  })
 
-export const logout = createAsyncThunk(
-  '' + 'auth/logout',
+export const loginWithGoogle = createAsyncThunk(
+  'auth/login',
   async ({ history }, { dispatch }) => {
-    await clearTokens()
-    dispatch({ type: 'store/reset' })
-    history.replace('/')
-  }
-)
+    await FirebaseAuthentication.signInWithGoogle()
+    const { token } = await FirebaseAuthentication.getIdToken()
+    const { accessToken, refreshToken } = await AuthApi.loginWithGoogle({
+      token
+    })
+    await updateAccessToken(accessToken)
+    await updateRefreshToken(refreshToken)
+    dispatch(fetchProfile())
+    history.replace('/browse')
+  })
+
+export const loginWithApple = createAsyncThunk(
+  'auth/login',
+  async ({ history }, { dispatch }) => {
+    await FirebaseAuthentication.signInWithApple()
+    const { token } = await FirebaseAuthentication.getIdToken()
+    const { accessToken, refreshToken } = await AuthApi.loginWithApple({
+      token
+    })
+    await updateAccessToken(accessToken)
+    await updateRefreshToken(refreshToken)
+    dispatch(fetchProfile())
+    history.replace('/browse')
+  })
+
+export const logout = createAsyncThunk('' +
+  'auth/logout', async ({ history }, { dispatch }) => {
+  await clearTokens()
+  await FirebaseAuthentication.signOut()
+  dispatch({ type: 'store/reset' })
+  history.replace('/')
+})
 
 export const createGuest = createAsyncThunk(
   'auth/createGuest',
@@ -42,12 +72,13 @@ export const createGuest = createAsyncThunk(
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile())
-  }
-)
+  })
+
 
 export const register = createAsyncThunk(
-  'auth/register',
-  async ({ name, username, email, password, history }, { dispatch }) => {
+  'auth/register', async ({
+    name, username, email, password, history
+  }, { dispatch }) => {
     const { accessToken, refreshToken } = await AuthApi.register({
       name,
       username,
@@ -66,8 +97,10 @@ export const register = createAsyncThunk(
  * it will create a guest user if user has not authenticated before.
  */
 export const initialize = createAsyncThunk(
-  'auth/init',
-  async ({ ensureAuth, history } = false, { dispatch, getState }) => {
+  'auth/init', async ({ ensureAuth, history } = false, {
+    dispatch,
+    getState
+  }) => {
     const {
       isAuthenticated,
       isGuest,
@@ -161,7 +194,8 @@ const authSlice = createSlice({
       state.isAuthenticated = true
     },
     [login.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.message)
+      toast.error(_.get(action.error, 'data', action.error.message))
+      // state.error = _.get(action.error, 'data', action.error.message)
     },
     [register.pending]: state => {
       state.error = null
@@ -170,7 +204,8 @@ const authSlice = createSlice({
       state.isAuthenticated = true
     },
     [register.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.message)
+      toast.error(_.get(action.error, 'data', action.error.message))
+      // state.error = _.get(action.error, 'data', action.error.message)
     },
     [logout.fulfilled]: state => {
       state = { ...initialState }

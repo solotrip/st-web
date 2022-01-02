@@ -9,6 +9,19 @@ export async function login({ email, password }) {
   return response.data
 }
 
+
+export async function loginWithGoogle({ token }) {
+  const url = SOLOTRIP_V1('auth/google/login')
+  const response = await axios.post(url, { token })
+  return response.data
+}
+
+export async function loginWithApple({ token }) {
+  const url = SOLOTRIP_V1('auth/apple/login')
+  const response = await axios.post(url, { token })
+  return response.data
+}
+
 export async function register({ name, username, email, password }) {
   const url = SOLOTRIP_V1('auth/register')
   const response = await authAxios.post(url, {
