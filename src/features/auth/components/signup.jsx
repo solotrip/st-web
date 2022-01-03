@@ -7,6 +7,7 @@ import styles from './common-styles.module.scss'
 import cn from 'classnames'
 import { ReactComponent as GoogleIcon } from '../../../assets/images/google.svg'
 import { ReactComponent as AppleIcon } from '../../../assets/images/apple.svg'
+import { Capacitor } from '@capacitor/core'
 
 const SignupPage = ({ registerFunc, error,loginWithApple, loginWithGoogle }) => {
   const onSubmit = ({ email, password, username }) =>
@@ -77,13 +78,15 @@ const SignupPage = ({ registerFunc, error,loginWithApple, loginWithGoogle }) => 
             <GoogleIcon/>
             <span>Sign in with Google</span>
           </button>
-          <button
-            className={cn(styles.socialLogin, styles.loginWithApple)}
-            onClick={loginWithApple}
-          >
-            <AppleIcon/>
-            <span>Sign in with Apple</span>
-          </button>
+          {Capacitor.getPlatform() !== 'android' && (
+            <button
+              className={cn(styles.socialLogin, styles.loginWithApple)}
+              onClick={loginWithApple}
+            >
+              <AppleIcon/>
+              <span>Sign in with Apple</span>
+            </button>
+          )}
         </div>
       </div>
     </div>

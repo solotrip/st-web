@@ -69,11 +69,11 @@
 
 .loginWithGoogle {
 
-  background: $white;
-  color: #757575;
+  background: #4285f4;
+  color: $white;
   @include whenDark {
-    color: white;
-    background: #4285f4;
+    color: #757575;
+    background: $white;
   }
 }
 
