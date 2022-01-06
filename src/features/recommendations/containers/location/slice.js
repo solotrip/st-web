@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import _ from 'lodash'
 import * as LocationApi from 'api/location'
 import { getGeolocation } from 'utils/geolocation'
+import { toast } from 'react-toastify'
 
 export const coordsToQuery = ({
   latitude,
@@ -102,6 +103,7 @@ const locationSlice = createSlice({
       state.fetchingCurrentLocation = false
     },
     [fillLocationData.fulfilled]: (state, action) => {
+      toast.info(JSON.stringify(action.payload))
       state.locations[action.payload.q] = action.payload.data
       state.recentLocations = _.uniq([
         action.payload.q, ...state.recentLocations
@@ -109,7 +111,8 @@ const locationSlice = createSlice({
       state.activeLocation = action.payload.q
       state.fetchingCurrentLocation = false
     },
-    [fetchCurrentLocation.rejected]: state => {
+    [fetchCurrentLocation.rejected]: (state, action) => {
+      toast.error(_.get(action.error, 'data', action.error.message))
       state.fetchingCurrentLocation = false
       state.errorCurrentLocation = true
     },
