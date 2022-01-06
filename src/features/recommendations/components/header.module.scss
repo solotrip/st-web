@@ -8,7 +8,7 @@
 }
 .expanded { 
  background-color: $bg-color;
- height: 265px;
+ height: 345px;//265
  @include md-to-xl {
   height: 130px;
 
@@ -70,10 +70,29 @@
   fill: white;
 }
 
+.actionIcon2 {
+
+  width: 24px;
+  line-height: 36px;
+  
+  fill: white;
+}
+
 
 .editSearch {
   
   width: calc(100vw - 72px);
+  max-width: 600px;
+  height: 36px;
+  margin-left: 0px;
+  margin-right: 9px;
+  background:rgba(118,118,128,0.24);
+  border-radius: 10px;
+}
+
+.editSearchwithBack {
+  
+  width: calc(100vw - 102px);
   max-width: 600px;
   height: 36px;
   margin-left: 0px;

@@ -11,9 +11,9 @@ import { querySelector } from '../../features/query/slice'
 function SideBar() {
   const location = useLocation()
   const { query } = useSelector(querySelector)
-  console.log({ location })
+
   let searcher = location.search !== '' ? location.search : query
-  console.log({ searcher })
+
   return (
     <IconContext.Provider value={{ color: '#fff' }}>
       <div className={styles.sidebar}>

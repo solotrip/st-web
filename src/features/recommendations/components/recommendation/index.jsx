@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable max-len */
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -53,14 +54,17 @@ const Recommendation = ({
     events,
     id,
     hotel_price: hotelPrice,
-    hostelPrice,
-    rentalPrice,
+    hotel_price_min,
+    hotel_price_max,
+    hostel_price_min,
+    hostel_price_max,
+    vacation_rental_price_min,
+    vacation_rental_price_max,
 
     fastestFlightCost,
     cheapestFlightCost,
     bestFlightCost,
     // eslint-disable-next-line no-unused-vars
-    top_pois: topPois,
     // eslint-disable-next-line no-unused-vars
     climate = {}
   } = recommendation
@@ -78,7 +82,11 @@ const Recommendation = ({
 
       //check visa status.
       const checkVisaFreeFor = passport => {
-        if (recommendation.country['visa_free_for'].includes(passport.value)) {
+        if (
+          recommendation.country &&
+          recommendation.country['visa_free_for'] &&
+          recommendation.country['visa_free_for'].includes(passport.value)
+        ) {
           approvedPassports.push(passport)
         }
         return recommendation.country['visa_free_for'].includes(passport.value)
@@ -86,6 +94,8 @@ const Recommendation = ({
 
       const checkVisaOnArrivalFor = passport => {
         if (
+          recommendation.country &&
+          recommendation.country['visa_on_arrival_for'] &&
           recommendation.country['visa_on_arrival_for'].includes(passport.value)
         ) {
           approvedPassports.push(passport)
@@ -113,58 +123,99 @@ const Recommendation = ({
       let restrictions = recommendation.country.restrictions
 
       //Vaccinated Test Required
-      if (restrictions['vaccinated_arrival_test_required']) {
+      if (restrictions && restrictions['vaccinated_arrival_test_required']) {
         vaccinatedTestText = 'Test Required for vaccinated.'
-      } else if (restrictions['vaccinated_arrival_test_required'] === null) {
-        vaccinatedTestText = ''
+      } else if (
+        !restrictions ||
+        (restrictions['vaccinated_arrival_test_required'] &&
+          restrictions['vaccinated_arrival_test_required'] === null)
+      ) {
+        vaccinatedTestText =
+          'No information about test procedure for vaccinated people.'
       } else {
         vaccinatedTestText = 'Test not required for vaccinated.'
       }
       //Unvaccinated Test Required
-      if (restrictions['arrival_test_required']) {
+      if (restrictions && restrictions['arrival_test_required']) {
         unvaccinatedTestText = 'Test Required for unvaccinated.'
-      } else if (restrictions['arrival_test_required'] === null) {
-        unvaccinatedTestText = ''
+      } else if (
+        !restrictions ||
+        (restrictions['arrival_test_required'] &&
+          restrictions['arrival_test_required'] === null)
+      ) {
+        unvaccinatedTestText =
+          'No information about test procedure for unvaccinated people.'
       } else {
         unvaccinatedTestText = 'Test not required for unvaccinated.'
       }
       //Vaccinated Quarantine Required
-      if (restrictions['vaccinated_arrival_quarantine_required']) {
+      if (
+        restrictions &&
+        restrictions['vaccinated_arrival_quarantine_required']
+      ) {
         vaccinatedQuarantineText = 'Quarantine Required for vaccinated.'
       } else if (
-        restrictions['vaccinated_arrival_quarantine_required'] === null
+        !restrictions ||
+        (restrictions['vaccinated_arrival_quarantine_required'] &&
+          restrictions['vaccinated_arrival_quarantine_required'] === null)
       ) {
-        vaccinatedQuarantineText = ''
+        vaccinatedQuarantineText =
+          'No information about quarantine procedure for vaccinated people.'
       } else {
         vaccinatedQuarantineText = 'Quarantine not required for vaccinated.'
       }
       //Unvaccinated Quarantine Required
-      if (restrictions['arrival_quarantine_required']) {
+      if (restrictions && restrictions['arrival_quarantine_required']) {
         unvaccinatedQuarantineText = 'Quarantine Required for unvaccinated.'
-      } else if (restrictions['arrival_quarantine_required'] === null) {
-        unvaccinatedQuarantineText = ''
+      } else if (
+        !restrictions ||
+        (restrictions['arrival_quarantine_required'] &&
+          restrictions['arrival_quarantine_required'] === null)
+      ) {
+        unvaccinatedQuarantineText =
+          'No information about quarantine procedure for unvaccinated people.'
       } else {
         unvaccinatedQuarantineText = 'Quarantine not required for unvaccinated.'
       }
 
       //restaurant status
-      if (restrictions['restaurant_status'] === 'OPEN') {
+      if (restrictions && restrictions['restaurant_status'] === 'OPEN') {
         restaurantText = 'Restaurants are open.'
-      } else if (restrictions['restaurant_status'] === null) {
-        restaurantText = ''
-      } else if (restrictions['restaurant_status'] === 'CLOSED') {
+      } else if (
+        !restrictions ||
+        (restrictions['restaurant_status'] &&
+          restrictions['restaurant_status'] === null)
+      ) {
+        restaurantText = 'No information about restaurant status.'
+      } else if (
+        restrictions &&
+        restrictions['restaurant_status'] === 'CLOSED'
+      ) {
         restaurantText = 'Restaurants are closed.'
-      } else if (restrictions['restaurant_status'] === 'RESTRICTIONS') {
+      } else if (
+        restrictions &&
+        restrictions['restaurant_status'] === 'RESTRICTIONS'
+      ) {
         restaurantText = 'Restaurants are restricted.'
       }
 
-      if (restrictions['Tourist Attractions'] === 'Open') {
+      if (restrictions && restrictions['Tourist Attractions'] === 'Open') {
         attractionsText = 'Attractions are open.'
-      } else if (restrictions['Tourist Attractions'] === null) {
-        attractionsText = ''
-      } else if (restrictions['Tourist Attractions'] === 'Closed') {
+      } else if (
+        !restrictions ||
+        (restrictions['Tourist Attractions'] &&
+          restrictions['Tourist Attractions'] === null)
+      ) {
+        attractionsText = 'No information about attraction status.'
+      } else if (
+        restrictions &&
+        restrictions['Tourist Attractions'] === 'Closed'
+      ) {
         attractionsText = 'Attractions are closed.'
-      } else if (restrictions['Tourist Attractions'] === 'Partially Open') {
+      } else if (
+        restrictions &&
+        restrictions['Tourist Attractions'] === 'Partially Open'
+      ) {
         attractionsText = 'Attractions are restricted.'
       }
 
@@ -241,19 +292,89 @@ const Recommendation = ({
             </div>
             <div className={styles.elementText}>{temperatureText}</div>
           </div>
-          {(hotelPrice || hostelPrice || rentalPrice) && (
+
+          {(hotel_price_min || hotel_price_max) &&
+          hotel_price_min !== hotel_price_max ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
                 <Acommodation />
               </div>
               <div className={styles.elementText}>
-                {hotelPrice && `Hotel: $${Math.floor(hotelPrice)}`}
-                {hostelPrice && `,Hostel: $${Math.floor(hostelPrice)}`}
-                {rentalPrice && `,Airbnb: $${Math.floor(rentalPrice)}`}
+                Hotel prices range from ${Math.floor(hotel_price_min)} to ${Math.floor(
+                hotel_price_max
+              )}.
               </div>
             </div>
-          )}
+            ) : (
+              Math.floor(hotel_price_min) !== 0 && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Acommodation />
+                </div>
+                <div className={styles.elementText}>
+                  Average Hotel price is ${Math.floor(hotel_price_min)}.
+                </div>
+              </div>
+              )
+            )}
+          {(hostel_price_min || hostel_price_max) &&
+          hostel_price_min !== hostel_price_max ? (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Acommodation />
+              </div>
+              <div className={styles.elementText}>
+                Hostel prices range from ${Math.floor(hostel_price_min)} to ${Math.floor(
+                hostel_price_max
+              )}.
+              </div>
+            </div>
+            ) : (
+              Math.floor(hostel_price_min) !== 0 && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Acommodation />
+                </div>
+                <div className={styles.elementText}>
+                  Average hostel price is ${Math.floor(hostel_price_min)}.
+                </div>
+              </div>
+              )
+            )}
+          {(vacation_rental_price_min || vacation_rental_price_max) &&
+          vacation_rental_price_min !== vacation_rental_price_max ? (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Acommodation />
+              </div>
+              <div className={styles.elementText}>
+                Airbnb prices range from ${Math.floor(
+                vacation_rental_price_min
+              )}{' '}
+                to ${Math.floor(vacation_rental_price_max)}.
+              </div>
+            </div>
+            ) : (
+              Math.floor(vacation_rental_price_min) !== 0 && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Acommodation />
+                </div>
+                <div className={styles.elementText}>
+                  Average Airbnb price is ${Math.floor(
+                  vacation_rental_price_min
+                )}.
+                </div>
+              </div>
+              )
+            )}
+
           {(fastestFlightCost || cheapestFlightCost || bestFlightCost) && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
@@ -339,10 +460,8 @@ const Recommendation = ({
                       event.images && event.images.length > 0 && event.images[0]
                     }
                     className={styles.slideImage}
-                    containerClassName={styles.slideImageContainer}
                     width={200}
                     height={120}
-                    shadowBlur={30}
                     alt={event.title}
                     key={event.eid}
                   />

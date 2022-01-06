@@ -2,9 +2,11 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { HorizontalScroll, Image } from 'components'
+import { Image } from 'components'
 
 import styles from './alter.module.scss'
+import activityImages from './activity-images.json'
+import moment from 'moment'
 
 import { ReactComponent as Passport } from 'assets/images/new-icons/passport.svg'
 import { ReactComponent as Acommodation } from 'assets/images/new-icons/acommodation.svg'
@@ -58,8 +60,6 @@ const Details = ({ activeReco }) => {
   //search recommendation among different wishlisted areas.
   const { wishlist } = useSelector(wishlistSelector)
   Object.keys(wishlist).forEach(wishlistedObject => {
-    console.log('wishlisted object: ', wishlist[wishlistedObject].data)
-
     if (wishlist[wishlistedObject].data.id === id) {
       //recommendation = wishlist[wishlistedObject].data
     }
@@ -216,6 +216,11 @@ const Details = ({ activeReco }) => {
         publicTransportText = 'Public transport is restricted.'
       }
     }
+  }
+
+  function findElement(arr, propName, propValue) {
+    for (var i = 0; i < arr.length; i++)
+      if (arr[i][propName] === propValue) return arr[i]
   }
 
   function findRecommendation(arr, propName, propValue) {
@@ -377,7 +382,7 @@ const Details = ({ activeReco }) => {
           </div>
         </div>
       </div>
-      {recommendation.events.length > 0 ? (
+      {recommendation.events && recommendation.events.length > 0 ? (
         <div
           onMouseEnter={() => {
             //activeHandler(sid)
@@ -401,50 +406,162 @@ const Details = ({ activeReco }) => {
 
             <div className={styles.content}>
               <div className={styles.events}>
-                <HorizontalScroll
-                  className={styles.slide}
-                  settings={{
-                    responsive: undefined,
-                    slidesToShow: Math.min(
-                      recommendation.events ? recommendation.events.length : 0,
-                      3
-                    ),
-                    slidesToScroll: 2
-                  }}
-                  items={recommendation.events.map(event => (
-                    <div key={`poi-${event.id}`} className={styles.slide}>
-                      <Image
-                        src={
-                          event.images &&
-                          event.images.length > 0 &&
-                          event.images[0]
-                        }
-                        className={styles.slideImage}
-                        containerClassName={styles.slideImageContainer}
-                        width={200}
-                        height={120}
-                        shadowBlur={30}
-                        alt={event.title}
-                        key={event.eid}
-                      />
-                      <div className="flex center">
-                        <div className={styles.slideText}>{event.title}</div>
-                      </div>
-                      <div className={styles.slideText2}>
-                        {formatAsMonthDay(event.start)}
-                        {event.start !== event.end
-                          ? ` - ${formatAsMonthDay(event.end)}`
-                          : ''}{' '}
-                      </div>
+                {recommendation.events.map(event => (
+                  <div key={`event-${event.eid}`} className={styles.slide}>
+                    <Image
+                      src={
+                        event.images &&
+                        event.images.length > 0 &&
+                        event.images[0]
+                      }
+                      className={styles.slideImage}
+                      width={200}
+                      height={120}
+                      alt={event.title}
+                      key={event.eid}
+                    />
+                    <div className="flex center">
+                      <div className={styles.slideText}>{event.title}</div>
                     </div>
-                  ))}
-                />
+                    <div className={styles.slideText4}>
+                      {formatAsMonthDay(event.start)}
+                      {event.start !== event.end
+                        ? ` - ${formatAsMonthDay(event.end)}`
+                        : ''}{' '}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       ) : null}
-      {recommendation.top_pois.length > 0 ? (
+      {recommendation.hotel_price_min ||
+      recommendation.hostel_price_min ||
+      recommendation.vacation_rental_price_min ||
+      recommendation.hotel_price_max ||
+      recommendation.hostel_price_max ||
+      recommendation.vacation_rental_price_max ? (
+        <div
+          onMouseEnter={() => {
+            //activeHandler(sid)
+          }}
+          className={styles.recommendationCard2}
+        >
+          {' '}
+          <div className={styles.colorStrip} />
+          <div className={styles.cardContent}>
+            <div className={styles.header}>
+              <div className={styles.headerLine}>
+                {' '}
+                <div className={styles.headerUpLine}> Costs</div>{' '}
+              </div>
+              <div className={styles.headerLine}>
+                {' '}
+                <div className={styles.headerTitle}>Acommodation</div>{' '}
+              </div>
+              <hr className={styles.hr} />
+            </div>
+
+            <div className={styles.content}>
+              {(recommendation.hotel_price_min ||
+                recommendation.hotel_price_max) &&
+              recommendation.hotel_price_min !==
+                recommendation.hotel_price_max ? (
+                <div className={styles.contentElement}>
+                  <div className={styles.elementIcon}>
+                    {' '}
+                    <Acommodation />
+                  </div>
+                  <div className={styles.elementText}>
+                    Hotel prices range from ${Math.floor(
+                    recommendation.hotel_price_min
+                  )}{' '}
+                    to ${Math.floor(recommendation.hotel_price_max)}.
+                  </div>
+                </div>
+                ) : (
+                  Math.floor(recommendation.hotel_price_min) !== 0 && (
+                  <div className={styles.contentElement}>
+                    <div className={styles.elementIcon}>
+                      {' '}
+                      <Acommodation />
+                    </div>
+                    <div className={styles.elementText}>
+                      Average Hotel price is ${Math.floor(
+                      recommendation.hotel_price_min
+                    )}.
+                    </div>
+                  </div>
+                  )
+                )}
+              {(recommendation.hostel_price_min ||
+                recommendation.hostel_price_max) &&
+              recommendation.hostel_price_min !==
+                recommendation.hostel_price_max ? (
+                <div className={styles.contentElement}>
+                  <div className={styles.elementIcon}>
+                    {' '}
+                    <Acommodation />
+                  </div>
+                  <div className={styles.elementText}>
+                    Hostel prices range from ${Math.floor(
+                    recommendation.hostel_price_min
+                  )}{' '}
+                    to ${Math.floor(recommendation.hostel_price_max)}.
+                  </div>
+                </div>
+                ) : (
+                  Math.floor(recommendation.hostel_price_min) !== 0 && (
+                  <div className={styles.contentElement}>
+                    <div className={styles.elementIcon}>
+                      {' '}
+                      <Acommodation />
+                    </div>
+                    <div className={styles.elementText}>
+                      Average hostel price is ${Math.floor(
+                      recommendation.hostel_price_min
+                    )}.
+                    </div>
+                  </div>
+                  )
+                )}
+              {(recommendation.vacation_rental_price_min ||
+                recommendation.vacation_rental_price_max) &&
+              recommendation.vacation_rental_price_min !==
+                recommendation.vacation_rental_price_max ? (
+                <div className={styles.contentElement}>
+                  <div className={styles.elementIcon}>
+                    {' '}
+                    <Acommodation />
+                  </div>
+                  <div className={styles.elementText}>
+                    Airbnb prices range from ${Math.floor(
+                    recommendation.vacation_rental_price_min
+                  )}{' '}
+                    to ${Math.floor(recommendation.vacation_rental_price_max)}.
+                  </div>
+                </div>
+                ) : (
+                  Math.floor(recommendation.vacation_rental_price_min) !== 0 && (
+                  <div className={styles.contentElement}>
+                    <div className={styles.elementIcon}>
+                      {' '}
+                      <Acommodation />
+                    </div>
+                    <div className={styles.elementText}>
+                      Average Airbnb price is ${Math.floor(
+                      recommendation.vacation_rental_price_min
+                    )}.
+                    </div>
+                  </div>
+                  )
+                )}
+            </div>
+          </div>
+        </div>
+        ) : null}
+      {recommendation.top_pois && recommendation.top_pois.length > 0 ? (
         <div
           onMouseEnter={() => {
             //activeHandler(sid)
@@ -473,10 +590,8 @@ const Details = ({ activeReco }) => {
                     <Image
                       src={poi.imageLink}
                       className={styles.slideImage2}
-                      containerClassName={styles.slideImageContainer2}
                       width={200}
                       height={120}
-                      shadowBlur={30}
                       alt={poi.name}
                       key={poi.id}
                     />
@@ -490,9 +605,7 @@ const Details = ({ activeReco }) => {
           </div>
         </div>
       ) : null}
-      {recommendation.hotel_price ||
-      recommendation.hostel_price ||
-      recommendation.rental_price ? (
+      {recommendation.activities && recommendation.activities.length > 0 ? (
         <div
           onMouseEnter={() => {
             //activeHandler(sid)
@@ -505,53 +618,59 @@ const Details = ({ activeReco }) => {
             <div className={styles.header}>
               <div className={styles.headerLine}>
                 {' '}
-                <div className={styles.headerUpLine}> Costs</div>{' '}
+                <div className={styles.headerUpLine}>Must Do</div>{' '}
               </div>
               <div className={styles.headerLine}>
                 {' '}
-                <div className={styles.headerTitle}>Acommodation</div>{' '}
+                <div className={styles.headerTitle}>Activities</div>{' '}
               </div>
               <hr className={styles.hr} />
             </div>
 
             <div className={styles.content}>
-              {recommendation.hotel_price ? (
-                <div className={styles.contentElement}>
-                  <div className={styles.elementIcon}>
-                    {' '}
-                    <Acommodation />
+              <div className={styles.events}>
+                {recommendation.activities.map(activity => (
+                  <div key={`activitiy-${activity}`} className={styles.slide2}>
+                    <Image
+                      src={
+                        findElement(activityImages, 'name', activity)
+                          ? findElement(activityImages, 'name', activity).image
+                          : null
+                      }
+                      className={styles.slideImage2}
+                      width={200}
+                      height={120}
+                      alt={activity}
+                      key={activity}
+                    />
+                    <div className="flex center">
+                      {recommendation.startDate !== recommendation.endDate ? (
+                        <div className={styles.slideText3}>
+                          {activity} from{' '}
+                          {moment(Date.parse(recommendation.startDate)).format(
+                            'MMMM'
+                          )}{' '}
+                          to{' '}
+                          {moment(Date.parse(recommendation.endDate)).format(
+                            'MMMM'
+                          )}
+                        </div>
+                      ) : (
+                        <div className={styles.slideText3}>
+                          {activity} in{' '}
+                          {moment(Date.parse(recommendation.startDate)).format(
+                            'MMMM'
+                          )}{' '}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div className={styles.elementText}>
-                    Hotel: ${Math.floor(recommendation.hotel_price)}
-                  </div>
-                </div>
-              ) : null}
-              {recommendation.hostel_price ? (
-                <div className={styles.contentElement}>
-                  <div className={styles.elementIcon}>
-                    {' '}
-                    <Acommodation />
-                  </div>
-                  <div className={styles.elementText}>
-                    Hostel: ${Math.floor(recommendation.hostel_price)}
-                  </div>
-                </div>
-              ) : null}
-              {recommendation.rental_price ? (
-                <div className={styles.contentElement}>
-                  <div className={styles.elementIcon}>
-                    {' '}
-                    <Acommodation />
-                  </div>
-                  <div className={styles.elementText}>
-                    Airbnb: ${Math.floor(recommendation.rental_price)}
-                  </div>
-                </div>
-              ) : null}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-        ) : null}
+      ) : null}
     </>
   )
 }

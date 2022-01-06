@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
+import { Link } from 'react-router-dom'
 
 import {
   fetchRecommendations,
@@ -33,7 +34,12 @@ import {
   activities,
   weather,
   featured,
-  attractions
+  attractions,
+  seasons,
+  regions,
+  costs,
+  languages,
+  destinations
 } from '../../../constants/browse'
 
 const BrowseContainer = () => {
@@ -130,7 +136,13 @@ const BrowseContainer = () => {
   return (
     <>
       <div className="flex-col">
-        <Header recommendationId={activeRecommendationId} loading={loading} />
+        <Link to={'/recommendations'}>
+          <Header
+            recommendationId={activeRecommendationId}
+            loading={loading}
+            backIsVisible={false}
+          />
+        </Link>
 
         <Content
           loading={loading}
@@ -150,6 +162,11 @@ const BrowseContainer = () => {
           weather={weather}
           featured={featured}
           attractions={attractions}
+          seasons={seasons}
+          regions={regions}
+          costs={costs}
+          languages={languages}
+          destinations={destinations}
         />
       </div>
     </>

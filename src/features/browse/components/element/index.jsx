@@ -25,7 +25,7 @@ const Element = ({ element }) => {
           className={styles.recommendationCard2}
         >
           {' '}
-          <div className={styles.colorStrip} />
+          {/*<div className={styles.colorStrip} />*/}
           <div className={styles.cardContent}>
             <div className={styles.header} />
 
@@ -34,10 +34,8 @@ const Element = ({ element }) => {
                 <Image
                   src={image && image}
                   className={styles.slideImage}
-                  containerClassName={styles.slideImageContainer}
                   width={200}
                   height={120}
-                  shadowBlur={30}
                   alt={title}
                   key={title}
                 />
@@ -84,7 +82,7 @@ const Element = ({ element }) => {
           className={styles.recommendationCard2}
         >
           {' '}
-          <div className={styles.colorStrip} />
+          {/*<div className={styles.colorStrip} />*/}
           <div className={styles.cardContent}>
             <div className={styles.header} />
 
@@ -93,10 +91,8 @@ const Element = ({ element }) => {
                 <Image
                   src={image && image}
                   className={styles.slideImage}
-                  containerClassName={styles.slideImageContainer}
                   width={200}
                   height={120}
-                  shadowBlur={30}
                   alt={title}
                   key={title}
                 />
@@ -124,7 +120,7 @@ const Element = ({ element }) => {
           className={styles.recommendationCard2}
         >
           {' '}
-          <div className={styles.colorStrip} />
+          {/*<div className={styles.colorStrip} />*/}
           <div className={styles.cardContent}>
             <div className={styles.header} />
 
@@ -133,10 +129,8 @@ const Element = ({ element }) => {
                 <Image
                   src={image && image}
                   className={styles.slideImage}
-                  containerClassName={styles.slideImageContainer}
                   width={200}
                   height={120}
-                  shadowBlur={30}
                   alt={title}
                   key={title}
                 />
@@ -164,7 +158,7 @@ const Element = ({ element }) => {
           className={styles.recommendationCard2}
         >
           {' '}
-          <div className={styles.colorStrip} />
+          {/*<div className={styles.colorStrip} />*/}
           <div className={styles.cardContent}>
             <div className={styles.header} />
 
@@ -173,10 +167,8 @@ const Element = ({ element }) => {
                 <Image
                   src={image && image}
                   className={styles.slideImage}
-                  containerClassName={styles.slideImageContainer}
                   width={200}
                   height={120}
-                  shadowBlur={30}
                   alt={title}
                   key={title}
                 />
@@ -204,7 +196,7 @@ const Element = ({ element }) => {
           className={styles.recommendationCard2}
         >
           {' '}
-          <div className={styles.colorStrip} />
+          {/*<div className={styles.colorStrip} />*/}
           <div className={styles.cardContent}>
             <div className={styles.header} />
 
@@ -213,10 +205,8 @@ const Element = ({ element }) => {
                 <Image
                   src={image && image}
                   className={styles.slideImage}
-                  containerClassName={styles.slideImageContainer}
                   width={200}
                   height={120}
-                  shadowBlur={30}
                   alt={title}
                   key={title}
                 />
@@ -244,7 +234,7 @@ const Element = ({ element }) => {
           className={styles.recommendationCard2}
         >
           {' '}
-          <div className={styles.colorStrip} />
+          {/*<div className={styles.colorStrip} />*/}
           <div className={styles.cardContent}>
             <div className={styles.header} />
 
@@ -253,10 +243,160 @@ const Element = ({ element }) => {
                 <Image
                   src={image && image}
                   className={styles.slideImage}
-                  containerClassName={styles.slideImageContainer}
                   width={200}
                   height={120}
-                  shadowBlur={30}
+                  alt={title}
+                  key={title}
+                />
+              </div>
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <EventsIcon />
+                </div>
+                <div className={styles.elementText}>{title}</div>
+              </div>
+
+              <Link to={`${query}`}>
+                <button className={styles.showDetails}>Discover </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {type === 'season' && (
+        <div
+          onMouseEnter={() => {
+            //activeHandler(sid)
+          }}
+          className={styles.recommendationCard2}
+        >
+          {' '}
+          {/*<div className={styles.colorStrip} />*/}
+          <div className={styles.cardContent}>
+            <div className={styles.header} />
+
+            <div className={styles.content}>
+              <div key={`image-${title}`} className={styles.slide}>
+                <Image
+                  src={image && image}
+                  className={styles.slideImage}
+                  width={200}
+                  height={120}
+                  alt={title}
+                  key={title}
+                />
+              </div>
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <EventsIcon />
+                </div>
+                <div className={styles.elementText}>{title}</div>
+              </div>
+
+              <Link to={`${query}`}>
+                <button className={styles.showDetails}>Discover </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {type === 'region' && (
+        <div
+          onMouseEnter={() => {
+            //activeHandler(sid)
+          }}
+          className={styles.recommendationCard2}
+        >
+          {' '}
+          {/*<div className={styles.colorStrip} />*/}
+          <div className={styles.cardContent}>
+            <div className={styles.header} />
+
+            <div className={styles.content}>
+              <div key={`image-${title}`} className={styles.slide}>
+                <Image
+                  src={image && image}
+                  className={styles.slideImage}
+                  width={200}
+                  height={120}
+                  alt={title}
+                  key={title}
+                />
+              </div>
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <EventsIcon />
+                </div>
+                <div className={styles.elementText}>{title}</div>
+              </div>
+
+              <Link to={`${query}`}>
+                <button className={styles.showDetails}>Discover </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {type === 'cost' && (
+        <div
+          onMouseEnter={() => {
+            //activeHandler(sid)
+          }}
+          className={styles.recommendationCard2}
+        >
+          {' '}
+          {/*<div className={styles.colorStrip} />*/}
+          <div className={styles.cardContent}>
+            <div className={styles.header} />
+
+            <div className={styles.content}>
+              <div key={`image-${title}`} className={styles.slide}>
+                <Image
+                  src={image && image}
+                  className={styles.slideImage}
+                  width={200}
+                  height={120}
+                  alt={title}
+                  key={title}
+                />
+              </div>
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <EventsIcon />
+                </div>
+                <div className={styles.elementText}>{title}</div>
+              </div>
+
+              <Link to={`${query}`}>
+                <button className={styles.showDetails}>Discover </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {type === 'language' && (
+        <div
+          onMouseEnter={() => {
+            //activeHandler(sid)
+          }}
+          className={styles.recommendationCard2}
+        >
+          {' '}
+          {/*<div className={styles.colorStrip} />*/}
+          <div className={styles.cardContent}>
+            <div className={styles.header} />
+
+            <div className={styles.content}>
+              <div key={`image-${title}`} className={styles.slide}>
+                <Image
+                  src={image && image}
+                  className={styles.slideImage}
+                  width={200}
+                  height={120}
                   alt={title}
                   key={title}
                 />
@@ -284,7 +424,7 @@ const Element = ({ element }) => {
           className={styles.recommendationCard2}
         >
           {' '}
-          <div className={styles.colorStrip} />
+          {/*<div className={styles.colorStrip} />*/}
           <div className={styles.cardContent}>
             <div className={styles.header} />
 
@@ -293,10 +433,8 @@ const Element = ({ element }) => {
                 <Image
                   src={image && image}
                   className={styles.slideImage}
-                  containerClassName={styles.slideImageContainer}
                   width={200}
                   height={120}
-                  shadowBlur={30}
                   alt={title}
                   key={title}
                 />
@@ -314,6 +452,44 @@ const Element = ({ element }) => {
                   <Location />
                 </div>
                 <div className={styles.elementText}>{areaString}</div>
+              </div>
+
+              <Link to={`${query}`}>
+                <button className={styles.showDetails}>Discover </button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {type === 'destination' && (
+        <div
+          onMouseEnter={() => {
+            //activeHandler(sid)
+          }}
+          className={styles.recommendationCard2}
+        >
+          {' '}
+          {/*<div className={styles.colorStrip} />*/}
+          <div className={styles.cardContent}>
+            <div className={styles.header} />
+
+            <div className={styles.content}>
+              <div key={`image-${title}`} className={styles.slide}>
+                <Image
+                  src={image && image}
+                  className={styles.slideImage}
+                  width={200}
+                  height={120}
+                  alt={title}
+                  key={title}
+                />
+              </div>
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Location />
+                </div>
+                <div className={styles.elementText}>{title}</div>
               </div>
 
               <Link to={`${query}`}>

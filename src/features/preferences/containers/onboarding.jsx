@@ -20,10 +20,10 @@ const OnboardingContainer = ({ children }) => {
 
   // If authenticating or fetching profile info, wait
   if (authLoading || profileLoading) {
-    return <Loader/>
+    return <Loader />
   }
 
-  return data && data.onboarded ? <Redirect to="/recommendations"/> : children
+  return data && data.onboarded ? <Redirect to="/browse" /> : children
 }
 
 export default OnboardingContainer

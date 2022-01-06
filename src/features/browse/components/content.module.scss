@@ -8,15 +8,19 @@
   @include xs-to-sm {
     justify-content: center;
   }
+ 
 }
 
 .title {
  
   width: calc(100%);
-  margin-top: 70px;
-  @include xs-to-sm {
-    padding-left: 10px;
-  }
+  //background: cornflowerblue;
+  font-size: 28px;
+  margin-top: auto;
+  margin-bottom: auto;
+  
+    padding-left: 18px;
+  
   margin-bottom: 0px;
 }
 
@@ -26,13 +30,18 @@
 
 .segments {
     display: flex;
-    height: 3500px; //450vh
+    height: 6200px; //450vh
     //background-color: royalblue;
 
      //584px
-    //padding-left: 30px;
+     
+     //bmargin-left: 20px;
+     //bmargin-right: -20px;
     flex-direction: column;
-    width: calc(100%);
+    width: 100%;
+
+
+    
    
     
 
@@ -40,6 +49,50 @@
 
     
 
+}
+
+.segment {
+    display: flex;
+    flex-direction: column;
+    // margin-top: 100px;
+    margin-bottom: 60px;
+}
+
+.arrow {
+     margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 12px;
+    padding: 4px;
+     
+
+   // background-color: red;
+
+
+
+}
+
+.titleRow { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    //background-color: chocolate;
+
+}
+.arrowHolder{
+display: flex;
+ //justify-content: center;
+ ////justify-content: space-between;
+ //background: crimson;
+margin-top: 0px;
+
+z-index: 2;
+   
+}
+
+.oneRow { 
+    display: flex;
+    flex-direction: row;
+    
 }
 
 .recommendations {
@@ -67,6 +120,7 @@
     //background-color: red;
     width: 100%;
     display: flex;
+   
   //584px
   
     //padding-left: 30px;
@@ -74,8 +128,9 @@
     overflow-x: scroll;
     overflow-y: hidden;
     @include xs-to-sm {
-        padding-left: 10px;
+        //padding-left: 10px;
       }
+
     
   
     

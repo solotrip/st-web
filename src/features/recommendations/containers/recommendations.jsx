@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
-import { MdEdit } from 'react-icons/md'
+
 import { fetchRecommendations, recommendationsSelector } from '../slice'
 import { profileSelector } from '../../profile/slice'
 import {
@@ -10,13 +10,12 @@ import {
   removeFromWishlist,
   wishlistSelector
 } from '../../wishlist/slice'
-import { save } from '../../query/slice'
+import { save, saveMonths, querySelector } from '../../query/slice'
 import Header from '../components/header'
 import Content from '../components/content'
-import { useHistory, useLocation, Link } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'qs'
 import { locationSelector, fillLocationData } from './location/slice'
-import styles from './recommendation.module.scss'
 
 const RecommendationsContainer = () => {
   const query = useQuery()
@@ -28,13 +27,20 @@ const RecommendationsContainer = () => {
     loadingRecommendations
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
+  const { queryMonths: stateMonths } = useSelector(querySelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
   const { activeLocation, locations } = useSelector(locationSelector)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(save(qs.stringify(query)))
-  }, [])
+  useEffect(
+    () => {
+      dispatch(save(qs.stringify(query)))
+      if (query.months) {
+        dispatch(saveMonths(query.months))
+      }
+    },
+    [query, dispatch]
+  )
 
   useEffect(
     () => {
@@ -46,7 +52,9 @@ const RecommendationsContainer = () => {
   useEffect(
     () => {
       if (location.pathname === '/recommendations') {
-        if (!query.start && !query.months) return openDateSheet(query)
+        if (!query.start && !query.months && !stateMonths)
+          return openDateSheet(query)
+        if (!query.months && stateMonths) query.months = stateMonths
         if (!query.lat || !query.lon) {
           if (activeLocation) {
             return history.replace({
@@ -69,6 +77,7 @@ const RecommendationsContainer = () => {
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [query, location, dispatch]
   )
 
@@ -96,12 +105,17 @@ const RecommendationsContainer = () => {
       search: qs.stringify(q)
     })
   }
+
   const loading =
     profileLoading || loadingRecommendations || !activeRecommendationId
   return (
     <>
       <div className="flex-col">
-        <Header recommendationId={activeRecommendationId} loading={loading} />
+        <Header
+          recommendationId={activeRecommendationId}
+          loading={loading}
+          defaultExpanded={true}
+        />
 
         <Content
           loading={loading}

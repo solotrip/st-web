@@ -201,6 +201,10 @@
   font-size: 15px;
   display: flex;
   flex-direction: row;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
   
 
 }

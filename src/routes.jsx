@@ -35,11 +35,11 @@ const MainRoutes = () => {
   return (
     <Route
       path={[
+        '/browse',
         '/recommendations',
         '/notifications',
         '/wishlist',
-        '/saved',
-        '/browse'
+        '/saved'
       ]}
     >
       <Layout sidebar={<SideBar />} bottomBar={<BottomBar />}>

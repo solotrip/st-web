@@ -11,6 +11,9 @@ import { Loader } from 'components'
 import { locationSelector } from '../containers/location/slice'
 import { useSelector } from 'react-redux'
 
+import { Link } from 'react-router-dom'
+import qs from 'qs'
+
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 })
@@ -39,8 +42,17 @@ const Content = ({
 
   const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
 
+  const [queryHolder, setQueryHolder] = useState(qs.stringify(query))
+
   const activeHandler = param => {
     setActive(param)
+  }
+
+  const resetFilters = () => {
+    console.log('query  before delete is : ', qs.stringify(query))
+    delete query.filters
+    console.log('query  after delete is : ', qs.stringify(query))
+    setQueryHolder(qs.stringify(query))
   }
 
   useEffect(
@@ -73,6 +85,16 @@ const Content = ({
   return (
     <div className={styles.page}>
       <div className={styles.recommendations}>
+        {query &&
+          query.filters && (
+            <button className={styles.resetFilters} onClick={resetFilters}>
+              <Link to={`recommendations?${queryHolder}`}>
+                {' '}
+                <div className={styles.whiteText}>Reset Filters </div>
+              </Link>
+            </button>
+        )}
+
         {title && <h1 className={styles.title}>{title}</h1>}
         {children}
         {loading && <Loader />}
@@ -80,6 +102,7 @@ const Content = ({
           recommendations.length === 0 && (
             <span className={styles.noItems}>{noItemsMessage}</span>
         )}
+
         {!loading &&
           recommendations.length > 0 &&
           recommendations.map(recommendation => {

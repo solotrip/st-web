@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { Link, useLocation } from 'react-router-dom'
+import { useHistory, Link, useLocation } from 'react-router-dom'
 import styles from './header.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -11,7 +11,6 @@ import {
   trackSelector
 } from 'features/track/slice'
 import { locationSelector } from '../containers/location/slice'
-import { filtersSelector } from '../containers/filters/slice'
 import { querySelector } from 'features/query/slice'
 import { Capacitor } from '@capacitor/core'
 
@@ -21,17 +20,22 @@ import { MdEdit } from 'react-icons/md'
 import { Icon } from '@iconify/react'
 import qs from 'qs'
 
-const Header = ({ recommendationId, loading }) => {
+const Header = ({
+  recommendationId,
+  loading,
+  defaultExpanded = false,
+  backIsVisible = true
+}) => {
   const { tracked } = useSelector(trackSelector)
   const dispatch = useDispatch()
   const location = useLocation()
+  const history = useHistory()
   const { activeLocation, locations } = useSelector(locationSelector)
   const [isExpanded, setIsExpanded] = useState(false)
   const handleExpand = () => {
     setIsExpanded(!isExpanded)
   }
   const { query } = useSelector(querySelector)
-  const { filters } = useSelector(filtersSelector)
 
   const handleScroll = () => {
     setIsExpanded(false)
@@ -70,11 +74,26 @@ const Header = ({ recommendationId, loading }) => {
     }
   }
 
+  const goBack = () => {
+    console.log('query to go back is: ', query)
+    history.replace({
+      pathname: '/browse',
+      search: query
+    })
+  }
+
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef)
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, true)
+  }, [])
+
+  useEffect(() => {
+    if (defaultExpanded) {
+      setIsExpanded(true)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -88,14 +107,39 @@ const Header = ({ recommendationId, loading }) => {
       >
         <div className={styles.actions}>
           <div className={styles.rightActions}>
-            <button className={styles.editSearch} onClick={handleExpand}>
+            {backIsVisible && (
+              <button
+                className={cx(styles.trackButton, {
+                  [styles.active]: !!tracked[recommendationId]
+                })}
+                onClick={goBack}
+                disabled={loading}
+              >
+                <Icon
+                  icon="fluent:ios-arrow-ltr-24-regular"
+                  color="#3cafeb"
+                  height="30"
+                  className={styles.bell}
+                />
+              </button>
+            )}
+            <button
+              className={
+                backIsVisible ? styles.editSearchwithBack : styles.editSearch
+              }
+              onClick={handleExpand}
+            >
               <div className={styles.queryText}>
                 From{' '}
                 {locations && activeLocation && locations[activeLocation]
                   ? locations[activeLocation].name_en
                   : // eslint-disable-next-line max-len
                   'Anywhere'}{' '}
-                to Anywhere, based on your selected dates, {filters.length}{' '}
+                to Anywhere, based on your selected dates,{' '}
+                {query &&
+                  qs.parse(query) &&
+                  qs.parse(query).filters &&
+                  Object.keys(qs.parse(query).filters).length}{' '}
                 filters applied
               </div>
             </button>
@@ -189,7 +233,13 @@ const Header = ({ recommendationId, loading }) => {
                 search: location.search
               }}
             >
-              <span>{filters.length} filters selected</span>
+              <span>
+                {query &&
+                  qs.parse(query) &&
+                  qs.parse(query).filters &&
+                  Object.keys(qs.parse(query).filters).length}{' '}
+                filters selected
+              </span>
               <FiltersIcon className={styles.actionIcon} />
             </Link>
         )}

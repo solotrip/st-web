@@ -11,7 +11,7 @@
 }
 
 .title {
-  width: 100%;
+  width: calc(100%-150px);
 }
 .subtitle {
     text-align: right;
@@ -21,6 +21,13 @@
 
 .noItems {
   width: 100%;
+}
+
+.oneRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
 }
 
 .recommendations {

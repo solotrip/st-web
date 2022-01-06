@@ -14,12 +14,6 @@ export const SidebarData = [
     icon: <List28Regular />,
     cName: 'navText'
   },
-  {
-    title: 'Recommendations',
-    path: '/recommendations',
-    icon: <Star28Regular />,
-    cName: 'navText'
-  },
 
   {
     title: 'Wishlist',

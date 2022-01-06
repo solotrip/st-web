@@ -259,6 +259,25 @@
   
 }
 
+.slideText4 {
+  @extend .textShadow;
+  z-index: 2;
+  text-align: left;
+  font-size: 14px;
+  line-height: 19px;
+  margin-top: -5px;
+  width: 100%;
+
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  margin-bottom: 30px;
+  
+}
+
 .showDetails {
   margin-top: 17px;
   background-color: #1697dc;

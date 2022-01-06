@@ -23,11 +23,6 @@ function MenuBar() {
       />
 
       <MenuItem
-        to={{ pathname: '/recommendations', search: location.search }}
-        icon={<Star28Regular />}
-      />
-
-      <MenuItem
         to={{ pathname: '/wishlist', search: location.search }}
         icon={<Heart28Regular />}
       />

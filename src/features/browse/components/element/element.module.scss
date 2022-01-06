@@ -20,15 +20,23 @@
 .recommendationCard2{
   display: flex;
   flex-direction: column;
-  background-color: $card-content;
+  border-color: $card-content;
+  border-radius: 1px;
+  border-style: solid;
+  //background-color: $card-content;
   width: 100%;
-  margin-left:0px;
-  margin-right: 90px;
-  //min-height: 650px;
-  min-width: 322px;
-  max-width: 322px;
+  margin-left:10px;
+  margin-right: 20px;
+  @include xs-to-sm {
+    margin-right: 20px;
+  }
+
+  //min-width: 322px;
+  //max-width: 322px;
+  min-width: 302px;
+  max-width: 302px;
   margin-top: 37px;
-  border-radius: 5px;
+  border-radius: 15px;
   
   
 }
@@ -46,8 +54,8 @@
   display: flex;
   flex-direction: column;
   
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .header { 
