@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
 import useThemeState from 'utils/hooks/use-theme-state'
 import { MAPBOX_TOKEN } from 'constants/index'
-import ReactMapboxGl, { Feature, Layer, Marker } from 'react-mapbox-gl'
+import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { Loader } from 'components'
 
@@ -32,6 +32,7 @@ const Content = ({
   children
 }) => {
   const [appTheme] = useThemeState()
+
   //default dark map.
   const [mapboxTheme, setMapboxTheme] = useState(
     'mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj'
@@ -44,16 +45,27 @@ const Content = ({
 
   const [queryHolder, setQueryHolder] = useState(qs.stringify(query))
 
+  const itemsRef = useRef([])
+
   const activeHandler = param => {
     setActive(param)
   }
 
+  const scrollToCard = (index, name) => {
+    itemsRef.current[index].scrollIntoView({ block: 'end', behavior: 'smooth' })
+  }
+
   const resetFilters = () => {
-    console.log('query  before delete is : ', qs.stringify(query))
     delete query.filters
-    console.log('query  after delete is : ', qs.stringify(query))
     setQueryHolder(qs.stringify(query))
   }
+
+  useEffect(
+    () => {
+      itemsRef.current = itemsRef.current.slice(0, recommendations.length)
+    },
+    [recommendations]
+  )
 
   useEffect(
     () => {
@@ -82,6 +94,7 @@ const Content = ({
     [locations]
   )
   const coordinates = loading ? [] : recommendations.map(r => [r.lon, r.lat])
+
   return (
     <div className={styles.page}>
       <div className={styles.recommendations}>
@@ -105,10 +118,11 @@ const Content = ({
 
         {!loading &&
           recommendations.length > 0 &&
-          recommendations.map(recommendation => {
+          recommendations.map((recommendation, i) => {
             return (
               <Recommendation
                 key={`rec-${recommendation.sid}`}
+                refHolder={el => (itemsRef.current[i] = el)}
                 recommendationId={recommendationId}
                 query={query}
                 recommendation={recommendation}
@@ -139,14 +153,41 @@ const Content = ({
             zoom={[10]}
             pitch={[30]}
           >
-            <Layer
-              type="symbol"
-              id="marker"
-              layout={{ 'icon-image': 'marker-1' }}
-            >
-              <Feature coordinates={coordinates} />
-              <Marker coordinates={coordinates} />
-            </Layer>
+            {!loading &&
+              recommendations.length > 0 &&
+              recommendations.map((recommendation, index) => (
+                <div key={recommendation.lon}>
+                  <Marker
+                    coordinates={{
+                      lng: recommendation.lon,
+                      lat: recommendation.lat
+                    }}
+                    className={styles.mapMarker}
+                  />
+
+                  <Popup
+                    offset={(0, 0)}
+                    coordinates={{
+                      lng: recommendation.lon,
+                      lat: recommendation.lat
+                    }}
+                  >
+                    <button
+                      onClick={() => scrollToCard(index, recommendation.name)}
+                      className={styles.popupContent}
+                    >
+                      <div className={styles.colorStrip} />
+                      <div className={styles.popupContent2}>
+                        <div className={styles.popupIndex}> {index + 1}</div>
+
+                        <div className={styles.popupInner}>
+                          {recommendation.name}
+                        </div>
+                      </div>
+                    </button>
+                  </Popup>
+                </div>
+              ))}
           </Map>
         </div>
       )}

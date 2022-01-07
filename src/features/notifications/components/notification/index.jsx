@@ -62,14 +62,6 @@ const Notification = ({ notification }) => {
               Updated {getTimeDiffString(notification.updatedAt)}
             </div>
           </div>
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              <ChangeIcon />
-            </div>
-            <div className={styles.elementText}>
-              Adjust your plans accordingly
-            </div>
-          </div>
 
           <Link to={'recommendations/recommendation/'}>
             <button className={styles.showDetails}>Show Details </button>

@@ -43,7 +43,8 @@ const Recommendation = ({
   query,
   activeHandler,
   wishlisted,
-  toggleWishlist
+  toggleWishlist,
+  refHolder
 }) => {
   const {
     sid,
@@ -236,6 +237,7 @@ const Recommendation = ({
         activeHandler(sid)
       }}
       className={styles.recommendationCard2}
+      ref={refHolder}
     >
       {' '}
       <div className={styles.colorStrip} />

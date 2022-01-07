@@ -6,11 +6,9 @@ import { fetchNotifications, notificationsSelector } from '../slice'
 import { registerDevice } from 'utils/notification'
 
 const NotificationsContainer = () => {
-
-  const {
-    notifications,
-    loading: notificationsLoading
-  } = useSelector(notificationsSelector)
+  const { notifications, loading: notificationsLoading } = useSelector(
+    notificationsSelector
+  )
   const dispatch = useDispatch()
 
   useEffect(
@@ -22,9 +20,13 @@ const NotificationsContainer = () => {
   )
 
   return (
+    <>
+      <div className="flex-col">
         <Loader loading={notificationsLoading}>
-            <Content notifications={notifications}/>
+          <Content notifications={notifications} />
         </Loader>
+      </div>
+    </>
   )
 }
 
