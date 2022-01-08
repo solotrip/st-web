@@ -5,7 +5,6 @@ import {
   Alert28Regular,
   CircleEdit24Regular,
   Heart28Regular,
-  Star28Regular,
   List28Regular
 } from '@fluentui/react-icons'
 

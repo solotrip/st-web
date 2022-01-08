@@ -6,39 +6,39 @@ import { formatAsMonthDay, getTimeDiffString } from 'utils/date'
 import { ReactComponent as Time } from 'assets/images/new-icons/time.svg'
 import { ReactComponent as Calendar } from 'assets/images/new-icons/calendar.svg'
 import { ReactComponent as EventsIcon } from 'assets/images/new-icons/events.svg'
-import { ReactComponent as ChangeIcon } from 'assets/images/new-icons/changeDates.svg'
 
 const Notification = ({ notification }) => {
-  const { content, body, data, hasSeen } = notification
+  const { content, body, data } = notification
   return (
     <div
-      onMouseEnter={() => {
-        //activeHandler(sid)
-      }}
       className={styles.recommendationCard2}
     >
-      <div className={styles.colorStrip} />
+      <div className={styles.colorStrip}/>
       <div className={styles.cardContent}>
         <div className={styles.header}>
           <div className={styles.headerLine}>
-            <div className={styles.headerUpLine}>Notification</div>{' '}
+            <div className={styles.headerUpLine}>Notification</div>
+            {' '}
           </div>
           <div className={styles.headerLine}>
-            <div className={styles.headerTitle}>{data.type} update</div>{' '}
+            <div className={styles.headerTitle}>{data.type} update</div>
+            {' '}
             <div className={styles.country}>
               <div>
-                <span role="img" aria-label="comeoon" />🇺🇸
-              </div>{' '}
-              &nbsp; <div>United States</div>
+                <span role="img" aria-label="comeoon"/>🇺🇸
+              </div>
+              {' '}
+              &nbsp;
+              <div>United States</div>
             </div>
           </div>
-          <hr className={styles.hr} />
+          <hr className={styles.hr}/>
         </div>
 
         <div className={styles.content}>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
-              <Calendar />
+              <Calendar/>
             </div>
             <div className={styles.elementText}>
               {formatAsMonthDay(content.new.startDate)}
@@ -49,14 +49,14 @@ const Notification = ({ notification }) => {
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
-              <EventsIcon />
+              <EventsIcon/>
             </div>
             <div className={styles.elementText}>{body}</div>
           </div>
 
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
-              <Time />
+              <Time/>
             </div>
             <div className={styles.elementText}>
               Updated {getTimeDiffString(notification.updatedAt)}
@@ -64,7 +64,7 @@ const Notification = ({ notification }) => {
           </div>
 
           <Link to={'recommendations/recommendation/'}>
-            <button className={styles.showDetails}>Show Details </button>
+            <button className={styles.showDetails}>Show Details</button>
           </Link>
         </div>
       </div>

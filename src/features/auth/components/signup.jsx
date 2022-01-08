@@ -9,7 +9,12 @@ import { ReactComponent as GoogleIcon } from '../../../assets/images/google.svg'
 import { ReactComponent as AppleIcon } from '../../../assets/images/apple.svg'
 import { Capacitor } from '@capacitor/core'
 
-const SignupPage = ({ registerFunc, error,loginWithApple, loginWithGoogle }) => {
+const SignupPage = ({
+  registerFunc,
+  error,
+  loginWithApple,
+  loginWithGoogle
+}) => {
   const onSubmit = ({ email, password, username }) =>
     registerFunc({
       email,

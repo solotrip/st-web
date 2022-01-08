@@ -4,7 +4,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import { persistReducer } from 'redux-persist'
 import auth from 'features/auth/slice'
-import home from 'features/home/slice'
 import preferences from 'features/preferences/slice'
 import profile from 'features/profile/slice'
 import recommendations from 'features/recommendations/slice'
@@ -36,7 +35,6 @@ const location = persistReducer(
 
 export default combineReducers({
   auth,
-  home,
   preferences,
   profile,
   recommendations,

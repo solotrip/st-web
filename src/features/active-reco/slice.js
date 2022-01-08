@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-import _ from 'lodash'
 
 const activeRecoSlice = createSlice({
   name: 'activeReco',

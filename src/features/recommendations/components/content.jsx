@@ -93,7 +93,6 @@ const Content = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [locations]
   )
-  const coordinates = loading ? [] : recommendations.map(r => [r.lon, r.lat])
 
   return (
     <div className={styles.page}>

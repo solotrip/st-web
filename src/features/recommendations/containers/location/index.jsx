@@ -17,12 +17,10 @@ const LocationContainer = () => {
   const {
     locations,
     recentLocations,
-    fetchingCurrentLocation,
     results,
     query: searchQuery,
     currentLocation,
-    errorCurrentLocation,
-    activeLocation
+    errorCurrentLocation
   } = useSelector(locationSelector)
   const dispatch = useDispatch()
   const query = useQuery()
@@ -30,19 +28,8 @@ const LocationContainer = () => {
 
   useEffect(() => {
     dispatch(fetchCurrentLocation())
-  }, [])
+  }, [dispatch])
 
-  const onSubmit = () => {
-    const activeLoc = locations[activeLocation]
-    history.replace({
-      pathname: '/recommendations',
-      search: qs.stringify({
-        ...query,
-        lat: activeLoc.lat,
-        lon: activeLoc.lon
-      })
-    })
-  }
   const handleSearch = q => {
     dispatch(searchLocation({ query: q }))
   }
@@ -59,6 +46,7 @@ const LocationContainer = () => {
         })
       })
     },
+    //eslint-disable-next-line
     [dispatch]
   )
 

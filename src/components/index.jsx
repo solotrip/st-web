@@ -1,8 +1,6 @@
 export { default as Accordion } from './accordion'
 export { default as Button } from './button'
 export { default as Card } from './card'
-export { default as CityCard } from './city-card'
-export { default as CityCardList } from './city-card-list'
 export { default as Image } from './image'
 export {
   Text as TextInput,
