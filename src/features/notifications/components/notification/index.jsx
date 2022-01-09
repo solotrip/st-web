@@ -21,7 +21,7 @@ const Notification = ({ notification }) => {
       <div>{content.new.country.name}</div>
     </>) : <></>
   return (
-    <Card type={`${_capitalize(data.type)} update`}
+    <Card type={`${_capitalize(data.type)} Update`}
           title={(data.type === NOTIFICATION_TYPES.RECOMMENDATION || data.type === NOTIFICATION_TYPES.WISHLIST) && content.new ? content.new.name : ''}
           subTitle={subTitle}
     >
