@@ -42,7 +42,7 @@ const Content = ({ notifications, mapEnabled = true, loading }) => {
         {loading && <Loader />}
         {!loading &&
           notifications.length === 0 && (
-            <span className={styles.noItems}>All clear. Come back later</span>
+            <span className={styles.noItem}>All clear. Come back later</span>
         )}
         {notifications.map(notification => {
           return (

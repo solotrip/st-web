@@ -12,9 +12,10 @@
 
 .title {
   width: 100%;
+  margin: 0;
 }
 
-.noItems {
+.noItem {
   width: 100%;
 }
 
@@ -23,8 +24,6 @@
   display: flex;
   max-width: 386px; //584px
   padding: 16px;
-  margin-top: -20px;
-  //padding-left: 30px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -45,30 +44,7 @@
   }
 }
 
-.showDetails {
-  margin-top: 17px;
-  background-color: #1697dc;
-  width: 100%;
-  height: 38.27px;
-  border-radius: 12px;
-  margin-bottom: 17px;
-  outline: none;
-  color: white;
 
-}
-
-.resetFilters {
-  margin-top: 17px;
-  background-color: #1697dc;
-  width: 100%;
-  height: 78px;
-  border-radius: 12px;
-  margin-bottom: 17px;
-  padding: 10px;
-  color: white;
-
-}
-
-.whiteText { 
+.whiteText {
   color: white;
 }
