@@ -28,11 +28,11 @@
   min-width: 322px;
   margin-top: 37px;
   border-radius: 5px;
-  
-  
+
+
 }
 
-.colorStrip { 
+.colorStrip {
   width: 100%;
   height: 10px;
   background-color: #667A8f;
@@ -41,30 +41,30 @@
   bottom: 98.17%;
 }
 
-.cardContent { 
+.cardContent {
   display: flex;
   flex-direction: column;
-  
+
   padding-left: 20px;
   padding-right: 20px;
 }
 
-.header { 
+.header {
   display: flex;
   flex-direction: column;
-  
+
 }
 
-.headerLine { 
+.headerLine {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
- 
+
   height: 40px;
   margin-top: 0px;
 }
 
-.headerUpLine { 
+.headerUpLine {
   margin-top: 8px;
   font-size: 14px;
   font-style: normal;
@@ -74,12 +74,12 @@
     /* Set the background size and repeat properties. */
     background-size: 100%;
     background-repeat: repeat;
-  
+
     /* Use the text as a mask for the background. */
     /* This will show the gradient as a text color rather than element bg. */
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+    -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
 }
@@ -111,7 +111,7 @@
   margin-top: -10px;
   font-size: 18px;
   font-weight: 600;
- 
+
 }
 
 .country {
@@ -119,21 +119,21 @@
   font-size: 15px;
   display: flex;
   flex-direction: row;
-  
+
 
 }
 
-.hr { 
+.hr {
   margin-top: -20px;
   margin-bottom: 6px;
 }
 
-.content { 
-  
+.content {
+
   margin-top: 5px;
 }
 
-.contentElement { 
+.contentElement {
   display: flex;
   flex-direction: row;
   margin-top: 6px;
@@ -143,18 +143,18 @@
 
 }
 
-.elementIcon { 
+.elementIcon {
 
   width: 20px;
   height: 20px;
 }
-.elementIconAttraction{ 
+.elementIconAttraction{
 
   margin-left: 3px;
   width: 11.67px;
   height: 16.67px;
   margin-right: 20-11.67-3px;
- 
+
 }
 
 .elementText {
@@ -173,13 +173,13 @@
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  
+
 }
 
 .slideImageContainer {
   display: flex;
   width: 100%;
-  
+
 }
 
 
@@ -200,7 +200,7 @@
   -webkit-box-orient: vertical;
   height: 38px;
   margin-bottom: -5px;
-  
+
 }
 
 .slideText2 {
@@ -218,14 +218,17 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  
+
 }
 
 .showDetails {
+  display: block;
+  text-align: center;
+  line-height: 38px;
   margin-top: 17px;
   background-color: #1697dc;
   width: 100%;
-  height: 38.27px;
+  height: 38px;
   border-radius: 12px;
   margin-bottom: 17px;
   outline: none;

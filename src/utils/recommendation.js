@@ -1,6 +1,4 @@
-
-
-export const processRecommendation = (recommendation, passports) => {
+export const processRecommendation = (recommendation, passports = []) => {
   let visaText = ''
   let visaSubText = ''
   let vaccinatedTestText = ''
@@ -10,6 +8,10 @@ export const processRecommendation = (recommendation, passports) => {
   let restaurantText = ''
   let attractionsText = ''
   let temperatureText = ''
+  let weatherText = ''
+  let maskText = ''
+  let barText = ''
+  let publicTransportText = ''
   if (recommendation !== undefined) {
 
     const {
@@ -164,16 +166,61 @@ export const processRecommendation = (recommendation, passports) => {
         climate.t_max
       }°C`
     }
+
+    //Adding the general weather.
+    if (
+      recommendation.climate.humidity &&
+      recommendation.climate.rainy_days
+    ) {
+      weatherText = `Rainy days: ${
+        recommendation.climate.rainy_days
+      }, humidity ${recommendation.climate.humidity}`
+    }
+
+    //Adding the mask status.
+    if (restrictions['mask_status'] === 'REQUIRED') {
+      maskText = 'Mask required.'
+    } else if (restrictions['mask_status'] === null) {
+      maskText = 'No information about face mask requirement.'
+    } else if (restrictions['mask_status'] === 'NOT_REQUIRED') {
+      maskText = 'Face mask not required.'
+    } else if (restrictions['mask_status'] === 'RECOMMENDED') {
+      maskText = 'Face mask  advised.'
+    }
+
+    //Adding the bar status.
+    if (restrictions['bar_status'] === 'OPEN') {
+      barText = 'Bars are open.'
+    } else if (restrictions['bar_status'] === null) {
+      barText = 'No information about Bars.'
+    } else if (restrictions['bar_status'] === 'CLOSED') {
+      barText = 'Bars are closed.'
+    } else if (restrictions['bar_status'] === 'RESTRICTIONS') {
+      barText = 'Bars are restricted.'
+    }
+
+    //Adding the public transport.
+    if (restrictions['Public Transport'] === 'Operating') {
+      publicTransportText = 'Public transportation is operational.'
+    } else if (restrictions['Public Transport'] === null) {
+      publicTransportText = 'No information about Public transportation.'
+    } else if (restrictions['Public Transport'] === 'Partial Restrictions') {
+      publicTransportText = 'Public transport is restricted.'
+    }
   }
   return {
     visaText,
     visaSubText,
     vaccinatedTestText,
     vaccinatedQuarantineText,
-    unvaccinatedTestText ,
+    unvaccinatedTestText,
     unvaccinatedQuarantineText,
     restaurantText,
     attractionsText,
-    temperatureText
+    temperatureText,
+    weatherText,
+    maskText,
+    barText,
+    publicTransportText
   }
 }

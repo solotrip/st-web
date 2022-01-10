@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styles from './recommendation.module.scss'
 import { HorizontalScroll, Image } from 'components'
@@ -42,19 +42,19 @@ import { ReactComponent as Food } from 'assets/images/new-icons/food.svg'
 
 import { formatAsMonthDay } from 'utils/date'
 
-import { save } from '../../../active-reco/slice'
 import { processRecommendation } from 'utils/recommendation'
 import { passportSelector } from '../../containers/passport-countries/slice'
 
 
 const Recommendation = ({
   recommendation,
-  recommendationId,
   query,
+  queryString,
   activeHandler,
   wishlisted,
   toggleWishlist,
-  refHolder
+  refHolder,
+  basePath
 }) => {
   const {
     sid,
@@ -77,11 +77,6 @@ const Recommendation = ({
   } = recommendation
 
   const { passports } = useSelector(passportSelector)
-  const dispatch = useDispatch()
-
-  const handleActiveReco = () => {
-    dispatch(save(recommendation))
-  }
 
 
   const {
@@ -116,8 +111,7 @@ const Recommendation = ({
               onClick={() =>
                 toggleWishlist({
                   query,
-                  recommendation,
-                  recommendationId
+                  recommendation
                 })
               }
             />
@@ -349,10 +343,14 @@ const Recommendation = ({
                 </div>
               ))}
             />
-            <Link to={`recommendations/recommendation/${id}`}>
-              <button onClick={handleActiveReco} className={styles.showDetails}>
-                Show Details{' '}
-              </button>
+            <Link to={{
+              pathname: `${basePath}/r/${id}`,
+              search: queryString
+            }}
+                  replace
+                  className={styles.showDetails}
+            >
+              Show Details
             </Link>
           </div>
         </div>

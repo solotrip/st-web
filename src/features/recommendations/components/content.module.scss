@@ -23,7 +23,23 @@
   display: flex;
   max-width: 386px; //584px
   padding: 16px;
-  margin-top: -20px;
+  //padding-left: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  height: 100%;
+  flex: 1;
+  @include xs-to-md {
+    padding-bottom: 70px;
+  }
+}
+
+.recommendationDetails {
+  @include custom-scroll;
+  display: flex;
+  max-width: 386px; //584px
+  padding: 16px;
   //padding-left: 30px;
   flex-direction: column;
   align-items: center;
@@ -69,18 +85,18 @@
 
 }
 
-.whiteText { 
+.whiteText {
   color: white;
 }
 
 
 
 
- .mapMarker { 
+ .mapMarker {
   // width: 50px;
    //height: 50px;
    //background-image: url('https://ik.imagekit.io/rfjpogvdn8p/pulfypin_IE0jmyWuLQw.svg?updatedAt=1641584403446');
-   
+
  }
 
  .popupContent{
@@ -93,7 +109,7 @@
    pointer-events:auto
   }
 
-  .colorStrip { 
+  .colorStrip {
     width: 100%;
     height: 10px;
     background-color: #667A8f;
@@ -115,12 +131,12 @@
     /* Set the background size and repeat properties. */
     background-size: 100%;
     background-repeat: repeat;
-  
+
     /* Use the text as a mask for the background. */
     /* This will show the gradient as a text color rather than element bg. */
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+    -webkit-text-fill-color: transparent;
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
   }

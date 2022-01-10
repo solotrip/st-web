@@ -3,19 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
 import { fetchRecommendations, recommendationsSelector } from '../slice'
-import { profileSelector } from '../../profile/slice'
+import { profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
   fetchWishlist,
   removeFromWishlist,
   wishlistSelector
-} from '../../wishlist/slice'
-import { save, saveMonths, querySelector } from '../../query/slice'
+} from 'features/wishlist/slice'
 import Header from '../components/header'
 import Content from '../components/content'
 import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'qs'
-import { locationSelector, fillLocationData } from './location/slice'
 
 const RecommendationsContainer = () => {
   const query = useQuery()
@@ -27,20 +25,8 @@ const RecommendationsContainer = () => {
     loadingRecommendations
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
-  const { queryMonths: stateMonths } = useSelector(querySelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
-  const { activeLocation, locations } = useSelector(locationSelector)
   const dispatch = useDispatch()
-
-  useEffect(
-    () => {
-      dispatch(save(qs.stringify(query)))
-      if (query.months) {
-        dispatch(saveMonths(query.months))
-      }
-    },
-    [query, dispatch]
-  )
 
   useEffect(
     () => {
@@ -51,38 +37,22 @@ const RecommendationsContainer = () => {
 
   useEffect(
     () => {
-      if (location.pathname === '/recommendations') {
-        if (!query.start && !query.months && !stateMonths)
+      if (location.pathname === '/recommendations'
+        || location.pathname.startsWith('/recommendations/r/')) {
+        if (!query.start && !query.months)
           return openDateSheet(query)
-        if (!query.months && stateMonths) query.months = stateMonths
         if (!query.lat || !query.lon) {
-          if (activeLocation) {
-            return history.replace({
-              pathname: '/recommendations',
-              search: qs.stringify({
-                ...query,
-                lat: locations[activeLocation].lat,
-                lon: locations[activeLocation].lon
-              })
-            })
-          }
           return openLocationSheet(query)
         }
-
-        if (query.lat && query.lon && activeLocation === '') {
-          dispatch(fillLocationData({ lat: query.lat, lon: query.lon }))
-        }
-
         dispatch(fetchRecommendations(query))
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [query, location, dispatch]
   )
 
   const toggleWishlist = useCallback(
-    ({ query, recommendationId, recommendation }) => {
+    ({ query, recommendation }) => {
       if (wishlisted[recommendation.id]) {
         dispatch(removeFromWishlist(recommendation))
       } else {
@@ -106,30 +76,40 @@ const RecommendationsContainer = () => {
     })
   }
 
+
   const loading =
     profileLoading || loadingRecommendations || !activeRecommendationId
-  return (
-    <>
-      <div className="flex-col">
-        <Header
-          recommendationId={activeRecommendationId}
-          loading={loading}
-          defaultExpanded={true}
-        />
+  const detailIndex = !loading &&
+  location.pathname.startsWith('/recommendations/r/') ?
+    recommendations[activeRecommendationId].recommendations.findIndex(
+      r => r.id === location.pathname.split('/recommendations/r/')[1]
+    ):
+    -1
 
-        <Content
-          loading={loading}
-          recommendations={
-            !loading && recommendations[activeRecommendationId].recommendations
-          }
-          recommendationId={activeRecommendationId}
-          user={user}
-          query={query}
-          wishlistedIds={wishlisted}
-          toggleWishlist={toggleWishlist}
-        />
-      </div>
-    </>
+  return (
+    <div className="flex-col">
+      <Header
+        recommendationId={activeRecommendationId}
+        loading={loading}
+        defaultExpanded={true}
+        basePath="/recommendations"
+      />
+      <Content
+        loading={loading}
+        recommendations={
+          !loading && recommendations[activeRecommendationId].recommendations
+        }
+        user={user}
+        queryFunction={() => ({
+          query,
+          queryString: location.search
+        })}
+        wishlistedIds={wishlisted}
+        toggleWishlist={toggleWishlist}
+        detailIndex={detailIndex}
+        basePath="/recommendations"
+      />
+    </div>
   )
 }
 

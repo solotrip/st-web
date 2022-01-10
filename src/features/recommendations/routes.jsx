@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import OnboardedRoutesWrapper from 'components/routes/onboarded-routes-wrapper'
 //Pages
-import RecommendationDetailsContainer from './containers/recommendation-details'
 import RecommendationsContainer from './containers/recommendations'
 import DateSelectorContainer from './containers/date-selector'
 import FiltersContainer from './containers/filters'
@@ -11,11 +10,6 @@ import PassportCountriesContainer from './containers/passport-countries'
 
 const Routes = () => (
   <Switch>
-    <Route path="/recommendations/recommendation/:rid/:start/:end">
-      <OnboardedRoutesWrapper>
-        <RecommendationDetailsContainer />
-      </OnboardedRoutesWrapper>
-    </Route>
     <Route path="/recommendations">
       <OnboardedRoutesWrapper>
         <RecommendationsContainer />

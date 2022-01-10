@@ -4,24 +4,20 @@
   flex: 1;
   display: flex;
   flex-direction: row;
-  overflow-y:scroll;
+  overflow-y: scroll;
+  width: 100%;
   @include xs-to-sm {
     justify-content: center;
   }
- 
+
 }
 
 .title {
- 
-  width: calc(100%);
-  //background: cornflowerblue;
+  width: 100%;
   font-size: 28px;
   margin-top: auto;
-  margin-bottom: auto;
-  
-    padding-left: 18px;
-  
-  margin-bottom: 0px;
+  padding-left: 18px;
+  margin-bottom: 0;
 }
 
 .noItems {
@@ -29,126 +25,52 @@
 }
 
 .segments {
-    display: flex;
-    height: 4800px; //450vh
-    //background-color: royalblue;
-
-     //584px
-     
-     //bmargin-left: 20px;
-     //bmargin-right: -20px;
-    flex-direction: column;
-    width: 100%;
-
-
-    
-   
-    
-
-
-
-    
-
+  display: flex;
+  height: 4800px;
+  flex-direction: column;
+  width: 100%;
 }
 
 .segment {
-    display: flex;
-    flex-direction: column;
-    // margin-top: 100px;
-    margin-bottom: 60px;
+  display: block;
+  flex-direction: column;
+  margin-bottom: 60px;
+  width: 100%;
 }
 
 .arrow {
-     margin-top: auto;
-    margin-bottom: auto;
-    border-radius: 12px;
-    padding: 4px;
-     
-
-   // background-color: red;
-
-
-
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 12px;
+  padding: 4px;
 }
 
-.titleRow { 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    //background-color: chocolate;
-
-}
-.arrowHolder{
-display: flex;
- //justify-content: center;
- ////justify-content: space-between;
- //background: crimson;
-margin-top: 0px;
-
-z-index: 2;
-   
-}
-
-.oneRow { 
-    display: flex;
-    flex-direction: row;
-    
-}
-
-.recommendations {
-  @include custom-scroll;
-  //background-color: red;
-  
+.titleRow {
   display: flex;
-//584px
+  flex-direction: row;
+  justify-content: space-between;
+}
 
-  //padding-left: 30px;
+.arrowHolder {
+  display: flex;
+  margin-top: 0px;
+
+  z-index: 2;
+
+}
+
+
+.notifications {
+  display: flex;
   flex-direction: row;
   overflow-x: scroll;
   overflow-y: hidden;
-  width: 100%;
-  
-  margin-bottom: 20px;
-  @include xs-to-sm {
-    padding-left: 10px;
-  }
-  
 }
 
-.notifications {
- 
-    //background-color: red;
-    width: 100%;
-    display: flex;
-   
-  //584px
-  
-    //padding-left: 30px;
-    flex-direction: row;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    @include xs-to-sm {
-        //padding-left: 10px;
-      }
-
-    
-  
-    
-  }
-
-  .notifications::-webkit-scrollbar {
-      display: none;
-  }
-
-  .recommendations::-webkit-scrollbar {
-    display: none;
+.notifications::-webkit-scrollbar {
+  display: none;
 }
 
-.mapbox {
-  background-color: $bg-color;
-  flex: 1;
-  display: flex;
-  @include xs-to-md {
-    display: none;
-  }
+.recommendations::-webkit-scrollbar {
+  display: none;
 }

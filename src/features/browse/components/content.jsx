@@ -1,36 +1,22 @@
 import React, { createRef } from 'react'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
-// eslint-disable-next-line max-len
-
 import Element from './element/index'
-
 import { Loader } from 'components'
-
 import {
   IosArrowLtr24Regular,
   IosArrowRtl24Regular
 } from '@fluentui/react-icons'
 
 const Content = ({
-  recommendations,
-  recommendationId,
-  query,
-  user,
-  mapEnabled = true,
-  toggleWishlist,
-  wishlistedIds,
-  notifications,
   loading,
   noItemsMessage,
-  title,
   children,
   events,
   restrictions,
   visas,
   activities,
   weather,
-  featured,
   attractions,
   seasons,
   regions,
@@ -53,7 +39,6 @@ const Content = ({
   const scrollToRight = container => {
     container.current.scrollBy({
       top: 0,
-      //width(302) + marginleft(10) + marginright(20)
       left: 332,
       behavior: 'smooth'
     })
@@ -61,7 +46,6 @@ const Content = ({
   const scrollToLeft = container => {
     container.current.scrollBy({
       top: 0,
-      //width(302) + marginleft(10) + marginright(20)
       left: -332,
       behavior: 'smooth'
     })

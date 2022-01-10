@@ -1,8 +1,6 @@
-/* eslint-disable max-len */
-import React, { useState, useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useRef, useState } from 'react'
 import cx from 'classnames'
-import { useHistory, Link, useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import styles from './header.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -11,20 +9,26 @@ import {
   trackSelector
 } from 'features/track/slice'
 import { locationSelector } from '../containers/location/slice'
-import { querySelector } from 'features/query/slice'
 import { Capacitor } from '@capacitor/core'
 
 import { ReactComponent as FiltersIcon } from 'assets/images/icons/filters.svg'
-import { ReactComponent as CalendarEditIcon } from 'assets/images/icons/calendar-edit.svg'
+import {
+  ReactComponent as
+  CalendarEditIcon
+} from 'assets/images/icons/calendar-edit.svg'
 import { MdEdit } from 'react-icons/md'
 import { Icon } from '@iconify/react'
 import qs from 'qs'
+import { useQuery } from 'utils/hooks/use-query'
 
 const Header = ({
   recommendationId,
   loading,
   defaultExpanded = false,
-  backIsVisible = true
+  backIsVisible = true,
+  searchIsVisible = true,
+  trackIsVisible = true,
+  basePath
 }) => {
   const { tracked } = useSelector(trackSelector)
   const dispatch = useDispatch()
@@ -35,7 +39,7 @@ const Header = ({
   const handleExpand = () => {
     setIsExpanded(!isExpanded)
   }
-  const { query } = useSelector(querySelector)
+  const query = useQuery()
 
   const handleScroll = () => {
     setIsExpanded(false)
@@ -75,11 +79,11 @@ const Header = ({
   }
 
   const goBack = () => {
-    console.log('query to go back is: ', query)
-    history.replace({
-      pathname: '/browse',
-      search: query
-    })
+    if (location.pathname.startsWith(`${basePath}/r/`)) {
+      history.replace({ pathname: basePath, search: location.search })
+    } else {
+      history.push('/browse')
+    }
   }
 
   const wrapperRef = useRef(null)
@@ -106,76 +110,79 @@ const Header = ({
         }
       >
         <div className={styles.actions}>
-          <div className={styles.rightActions}>
-            {backIsVisible && (
-              <button
-                className={cx(styles.trackButton, {
-                  [styles.active]: !!tracked[recommendationId]
-                })}
-                onClick={goBack}
-                disabled={loading}
-              >
-                <Icon
-                  icon="fluent:ios-arrow-ltr-24-regular"
-                  color="#3cafeb"
-                  height="30"
-                  className={styles.bell}
-                />
-              </button>
-            )}
-            <button
-              className={
-                backIsVisible ? styles.editSearchwithBack : styles.editSearch
-              }
-              onClick={handleExpand}
-            >
-              <div className={styles.queryText}>
-                From{' '}
-                {locations && activeLocation && locations[activeLocation]
-                  ? locations[activeLocation].name_en
-                  : // eslint-disable-next-line max-len
-                  'Anywhere'}{' '}
-                to Anywhere, based on your selected dates,{' '}
-                {query &&
-                  qs.parse(query) &&
-                  qs.parse(query).filters &&
-                  Object.keys(qs.parse(query).filters).length}{' '}
-                filters applied
-              </div>
-            </button>
 
+          {backIsVisible && (
             <button
               className={cx(styles.trackButton, {
                 [styles.active]: !!tracked[recommendationId]
               })}
-              onClick={handleTrack}
+              onClick={goBack}
               disabled={loading}
             >
-              {tracked[recommendationId] ? (
-                <Icon
-                  icon="fluent:alert-24-regular"
-                  color="#3cafeb"
-                  height="30"
-                  className={styles.bell}
-                />
-              ) : (
-                <Icon
-                  icon="fluent:alert-off-24-regular"
-                  color="#3cafeb"
-                  height="30"
-                  className={styles.bell}
-                />
-              )}
+              <Icon
+                icon="fluent:ios-arrow-ltr-24-regular"
+                color="#3cafeb"
+                height="30"
+                className={styles.bell}
+              />
             </button>
-          </div>
+          )}
+          {searchIsVisible && (<>
+              <button
+                className={
+                  backIsVisible ? styles.editSearchwithBack : styles.editSearch
+                }
+                onClick={handleExpand}
+              >
+                <div className={styles.queryText}>
+                  From{' '}
+                  {locations && activeLocation && locations[activeLocation]
+                    ? locations[activeLocation].name_en
+                    : 'Anywhere'}{' '}
+                  to Anywhere, based on your selected dates,{' '}
+                  {query &&
+                  qs.parse(query) &&
+                  qs.parse(query).filters &&
+                  Object.keys(qs.parse(query).filters).length}{' '}
+                  filters applied
+                </div>
+              </button>
+              {trackIsVisible && (
+                <button
+                  className={cx(styles.trackButton, {
+                    [styles.active]: !!tracked[recommendationId]
+                  })}
+                  onClick={handleTrack}
+                  disabled={loading}
+                >
+                  {tracked[recommendationId] ? (
+                    <Icon
+                      icon="fluent:alert-24-regular"
+                      color="#3cafeb"
+                      height="30"
+                      className={styles.bell}
+                    />
+                  ) : (
+                    <Icon
+                      icon="fluent:alert-off-24-regular"
+                      color="#3cafeb"
+                      height="30"
+                      className={styles.bell}
+                    />
+                  )}
+                </button>
+              )}
+          </>
+          )}
         </div>
       </div>
-      <div
-        className={
-          isExpanded ? styles.expandedElements : styles.expandedElementsHidden
-        }
-      >
-        {isExpanded &&
+      {searchIsVisible && (
+        <div
+          className={
+            isExpanded ? styles.expandedElements : styles.expandedElementsHidden
+          }
+        >
+          {isExpanded &&
           activeLocation !== '' && (
             <Link
               className={styles.fromLink}
@@ -187,14 +194,14 @@ const Header = ({
               <span>
                 <b>From: </b>
                 {locations &&
-                  activeLocation &&
-                  locations[activeLocation] &&
-                  locations[activeLocation].fullname_en}
+                activeLocation &&
+                locations[activeLocation] &&
+                locations[activeLocation].fullname_en}
               </span>
-              <MdEdit className={styles.actionIcon} />
+              <MdEdit className={styles.actionIcon}/>
             </Link>
-        )}
-        {isExpanded &&
+          )}
+          {isExpanded &&
           activeLocation !== '' && (
             <Link
               className={styles.fromLink}
@@ -207,10 +214,10 @@ const Header = ({
                 <b>To: </b>
                 Anywhere
               </span>
-              <MdEdit className={styles.actionIcon} />
+              <MdEdit className={styles.actionIcon}/>
             </Link>
-        )}
-        {isExpanded &&
+          )}
+          {isExpanded &&
           activeLocation !== '' && (
             <Link
               className={styles.fromLink}
@@ -220,11 +227,11 @@ const Header = ({
               }}
             >
               <span>Edit your Available Dates</span>
-              <CalendarEditIcon className={styles.actionIcon} />
+              <CalendarEditIcon className={styles.actionIcon}/>
             </Link>
-        )}
+          )}
 
-        {isExpanded &&
+          {isExpanded &&
           activeLocation !== '' && (
             <Link
               className={styles.fromLink}
@@ -235,22 +242,18 @@ const Header = ({
             >
               <span>
                 {query &&
-                  qs.parse(query) &&
-                  qs.parse(query).filters &&
-                  Object.keys(qs.parse(query).filters).length}{' '}
+                qs.parse(query) &&
+                qs.parse(query).filters &&
+                Object.keys(qs.parse(query).filters).length}{' '}
                 filters selected
               </span>
-              <FiltersIcon className={styles.actionIcon} />
+              <FiltersIcon className={styles.actionIcon}/>
             </Link>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   )
-}
-
-Header.propTypes = {
-  tracked: PropTypes.bool,
-  recommendationId: PropTypes.string
 }
 
 export default Header
