@@ -15,6 +15,10 @@ import {
   FirebaseAuthentication
 } from '@robingenz/capacitor-firebase-authentication'
 import { toast } from 'react-toastify'
+import {
+  fetchFilters,
+  filtersSelector }
+  from 'features/recommendations/containers/filters/slice'
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -106,6 +110,10 @@ export const initialize = createAsyncThunk(
       isGuest,
       username
     } = await initializeAuthentication()
+
+    if(!filtersSelector(getState()).initialized) {
+      dispatch(fetchFilters())
+    }
 
     if (!isAuthenticated && ensureAuth) {
       dispatch(createGuest())

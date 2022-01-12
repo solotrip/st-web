@@ -1,40 +1,35 @@
 import React from 'react'
 import cn from 'classnames'
-import PropTypes from 'prop-types'
-import { MdClose } from 'react-icons/md'
+import { MdEdit } from 'react-icons/md'
 import styles from './tag.module.scss'
 
 const Tag = ({
   name,
-  icon,
-  onRemove
+  icon: Icon,
+  onClick
 }) => {
   return (
     <div
-      className={cn(styles.tag, { [styles.removable]: onRemove })}
-      onClick={onRemove}
-      onKeyDown={onRemove}
+      className={cn(styles.tag, { [styles.removable]: onClick })}
+      onClick={onClick}
+      onKeyDown={onClick}
       role="button"
       tabIndex={-1}
     >
-      {icon}
-      <span className={styles.name}>{name}</span>
-      {onRemove &&
-      <MdClose
+      {!Icon && onClick &&
+      <MdEdit
         className={styles.icon}
         fontSize="inherit"
       />}
+      { Icon &&
+        <Icon
+          className={styles.icon}
+          fontSize="inherit"
+        />
+      }
+      <span className={styles.name}>{name}</span>
     </div>
   )
-}
-
-
-Tag.defaultValues = {}
-
-Tag.propTypes = {
-  name: PropTypes.string.isRequired,
-  icon: PropTypes.node,
-  onRemove: PropTypes.func
 }
 
 

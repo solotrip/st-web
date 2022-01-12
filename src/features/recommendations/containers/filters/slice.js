@@ -3,15 +3,14 @@ import _ from 'lodash'
 import * as AreaApi from 'api/area'
 
 export const fetchFilters = createAsyncThunk(
-  'filters/fetchFilters', async (_, { getState }) => {
-    // const { filters, initialized } = filtersSelector(getState())
-    // if (initialized) return filters
+  'filters/fetchFilters', async () => {
     return AreaApi.getFilters()
   })
 const filtersSlice = createSlice({
   name: 'filters',
   initialState: {
     filters: [],
+    filtersDict: {},
     loading: true,
     initialized: false
   },
@@ -24,6 +23,7 @@ const filtersSlice = createSlice({
     },
     [fetchFilters.fulfilled]: (state, action) => {
       state.filters = action.payload.filter(f => !f.hidden)
+      state.filtersDict = _.keyBy(action.payload, 'uuid')
       state.loading = false
     },
     [fetchFilters.rejected]: (state, action) => {

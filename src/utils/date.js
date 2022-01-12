@@ -55,3 +55,19 @@ export const formatAsMonthDay = date => {
 export const formatAsDate = date => {
   return dayjs(date).format('YYYY-MM-DD')
 }
+
+export const formatDuration = (days, weekendOnly) => {
+  if (weekendOnly) return 'a weekend'
+  switch (days) {
+  case 1:
+    return 'a day'
+  case 7:
+    return 'a week'
+  case 14:
+    return 'two weeks'
+  case 30:
+    return 'a month'
+  default:
+    return `${days} days`
+  }
+}

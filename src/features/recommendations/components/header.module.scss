@@ -1,25 +1,14 @@
 @import 'styles/mixins';
 
-.notExpanded {
-  width: 100%;
-  height: 58px;
-  transition: height 0.3s;
-  transition-timing-function: ease-out;
-}
-
 .expanded {
   width: 100%;
-  background-color: $bg-color;
-  height: 345px; //265
   @include md-to-xl {
     height: 130px;
 
   }
-  transition: height 0.3s;
-  transition-timing-function: ease-out;
 }
 
-.navbarFixed, .navbarFixedIos {
+.navbarFixed {
   z-index: 3;
   height: 58px;
   width: 100%;
@@ -32,25 +21,14 @@
   justify-content: center;
 }
 
-.rightActions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  align-self: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .actions {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   max-width: 584px;
-  padding: 0 16px;
+  padding: 4px 16px;
   flex: 1;
   @include md-to-lg {
     max-width: 450px;
@@ -65,44 +43,62 @@
   fill: white;
 }
 
-.actionIcon2 {
-
-  width: 24px;
-  line-height: 36px;
-
-  fill: white;
-}
-
-
 .editSearch {
-
   width: calc(100vw - 72px);
   max-width: 600px;
-  height: 36px;
-  margin-left: 0px;
-  margin-right: 9px;
-  background: rgba(118, 118, 128, 0.24);
+  max-height: 48px;
+  background: $card-bg-color;
   border-radius: 10px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  transition: all 0.3s;
+  transition-timing-function: ease-out;
+  color: $sub-text-color;
+
+  &.exp {
+    width: 100%;
+    max-height: 150px;
+    height: fit-content;
+  }
 }
 
-.editSearchwithBack {
-
+.withBack {
   width: calc(100vw - 102px);
-  max-width: 600px;
-  height: 36px;
-  margin-left: 0px;
-  margin-right: 9px;
-  background: rgba(118, 118, 128, 0.24);
-  border-radius: 10px;
 }
 
-.queryText {
-  text-align: left;
-  padding-left: 10px;
-  white-space: nowrap;
+.searchIcon, .clearIcon {
+  font-size: 24px;
+  flex: 0 0 auto;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+.clearIcon {
+  &:hover {
+    background: $highlight-bg-color;
+    border-radius: 50%;
+  }
+}
+
+.query {
+  flex-wrap: wrap;
+  height: 100%;
   overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 1;
+  &.exp {
+    flex-wrap: wrap;
+    .prefix {
+      @include xs-to-sm {
+        display: inline;
+      }
+    }
+  }
+  .prefix {
+    @include xs-to-lg {
+      display: none;
+    }
+  }
 }
 
 .bell {

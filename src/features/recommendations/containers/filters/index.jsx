@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import _zipObject from 'lodash/zipObject'
 import { SheetWrapper } from 'components'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchFilters, filtersSelector } from './slice'
+import {  useSelector } from 'react-redux'
+import { filtersSelector } from './slice'
 import qs from 'qs'
 import { useQuery } from 'utils/hooks/use-query'
 import { useHistory } from 'react-router-dom'
@@ -13,7 +13,6 @@ const FiltersContainer = () => {
     loading,
     filters
   } = useSelector(filtersSelector)
-  const dispatch = useDispatch()
   const query = useQuery()
   const history = useHistory()
   const [data, setData] = useState({
@@ -35,10 +34,6 @@ const FiltersContainer = () => {
       }
     }))
   }, [setData])
-
-  useEffect(() => {
-    dispatch(fetchFilters())
-  }, [dispatch])
 
   const onSubmit = () => {
     history.push({

@@ -50,7 +50,7 @@ const Search = ({
         tags.map(t => (
           <Tag
             key={`search-tag-${t.name}`}
-            onRemove={t.onRemove}
+            onClick={t.onRemove}
             name={t.name}
             icon={t.icon &&
             <span role="img" aria-label={t.icon}>{t.icon}</span>}

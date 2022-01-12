@@ -8,8 +8,6 @@ import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
-import { locationSelector } from '../containers/location/slice'
-import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 const Map = ReactMapboxGl({
@@ -37,17 +35,14 @@ const Content = ({
   const [mapboxTheme, setMapboxTheme] = useState(
     'mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj'
   )
-  const [active, setActive] = useState(null)
-
-  const { activeLocation, locations } = useSelector(locationSelector)
 
   const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
 
 
   const itemsRef = useRef([])
 
-  const activeHandler = param => {
-    setActive(param)
+  const activeHandler = recommendation => {
+    setFocusLocation([recommendation.lon, recommendation.lat])
   }
 
   const openDetails = recommendation => {
@@ -62,6 +57,9 @@ const Content = ({
   useEffect(
     () => {
       itemsRef.current = itemsRef.current.slice(0, recommendations.length)
+      if(recommendations.length > 0) {
+        activeHandler(recommendations[0])
+      }
     },
     [recommendations]
   )
@@ -75,22 +73,13 @@ const Content = ({
     [appTheme]
   )
 
-  useEffect(
-    () => {
-      if (
-        locations !== undefined &&
-        locations[activeLocation] !== undefined &&
-        locations[activeLocation].lon !== undefined &&
-        locations[activeLocation].lat !== undefined
-      ) {
-        setFocusLocation([
-          locations[activeLocation].lon,
-          locations[activeLocation].lat
-        ])
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [locations]
+  useEffect(    () => {
+    const { query } = queryFunction()
+    if (query && query.lon && query.lat) {
+      setFocusLocation([parseFloat(query.lon), parseFloat(query.lat)])
+    }
+  },
+  [queryFunction]
   )
 
   if (loading) return <Loader/>
@@ -148,11 +137,7 @@ const Content = ({
               width: '100%'
             }}
             center={
-              active
-                ? [active.lon, active.lat]
-                : locations && activeLocation && locations[activeLocation]
-                  ? [focusLocation[0], focusLocation[1]]
-                  : [-0.118092, 51.509865]
+              [focusLocation[0], focusLocation[1]]
             }
             zoom={[10]}
             pitch={[30]}
@@ -170,7 +155,7 @@ const Content = ({
                 />
 
                 <Popup
-                  offset={(0, 0)}
+                  offset={[0, 0]}
                   coordinates={{
                     lng: recommendation.lon,
                     lat: recommendation.lat

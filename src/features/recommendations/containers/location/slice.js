@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 export const coordsToQuery = ({
   latitude,
   longitude
-}) => `${parseFloat(longitude.toFixed(2))},${parseFloat(latitude.toFixed(2))}`
+}) => `${parseFloat(longitude).toFixed(2)},${parseFloat(latitude).toFixed(2)}`
 
 export const fetchCurrentLocation = createAsyncThunk(
   'profile/location/fetchBrowserGeolocation',

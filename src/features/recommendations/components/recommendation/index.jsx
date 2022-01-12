@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styles from './recommendation.module.scss'
 import { HorizontalScroll, Image } from 'components'
@@ -43,7 +42,6 @@ import { ReactComponent as Food } from 'assets/images/new-icons/food.svg'
 import { formatAsMonthDay } from 'utils/date'
 
 import { processRecommendation } from 'utils/recommendation'
-import { passportSelector } from '../../containers/passport-countries/slice'
 
 
 const Recommendation = ({
@@ -76,7 +74,7 @@ const Recommendation = ({
     bestFlightCost
   } = recommendation
 
-  const { passports } = useSelector(passportSelector)
+  const passports = query.passports || []
 
 
   const {

@@ -2,7 +2,6 @@
 
 .accordion {
   padding: 4px 0;
-
   hr {
     margin: 8px 0;
     border: 1px solid $border-color;
@@ -25,6 +24,8 @@
 }
 
 .icon {
+  font-size: 24px;
+  line-height: 24px;
   transform-origin: center;
   -webkit-transition: transform 0.1s ease-out;
   -moz-transition: transform 0.1s ease-out;

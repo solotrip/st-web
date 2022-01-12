@@ -1,25 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import cx from 'classnames'
-import { Link, useHistory, useLocation } from 'react-router-dom'
-import styles from './header.module.scss'
+import { useHistory, useLocation } from 'react-router-dom'
+import { Capacitor } from '@capacitor/core'
 import { useDispatch, useSelector } from 'react-redux'
+import { MdClose, MdSearch } from 'react-icons/md'
+import { Icon } from '@iconify/react'
 import {
   addToTracked,
   removeFromTracked,
   trackSelector
 } from 'features/track/slice'
+import { filtersSelector }
+  from 'features/recommendations/containers/filters/slice'
 import { locationSelector } from '../containers/location/slice'
-import { Capacitor } from '@capacitor/core'
-
-import { ReactComponent as FiltersIcon } from 'assets/images/icons/filters.svg'
-import {
-  ReactComponent as
-  CalendarEditIcon
-} from 'assets/images/icons/calendar-edit.svg'
-import { MdEdit } from 'react-icons/md'
-import { Icon } from '@iconify/react'
-import qs from 'qs'
 import { useQuery } from 'utils/hooks/use-query'
+import { Query } from 'components'
+
+import styles from './header.module.scss'
 
 const Header = ({
   recommendationId,
@@ -34,13 +31,13 @@ const Header = ({
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
-  const { activeLocation, locations } = useSelector(locationSelector)
+  const { locations } = useSelector(locationSelector)
+  const { filtersDict } = useSelector(filtersSelector)
   const [isExpanded, setIsExpanded] = useState(false)
   const handleExpand = () => {
     setIsExpanded(!isExpanded)
   }
   const query = useQuery()
-
   const handleScroll = () => {
     setIsExpanded(false)
   }
@@ -86,6 +83,10 @@ const Header = ({
     }
   }
 
+  const clearQuery = () => {
+    history.replace({ pathname: '/recommendations' })
+  }
+
   const wrapperRef = useRef(null)
   useOutsideAlerter(wrapperRef)
 
@@ -101,157 +102,92 @@ const Header = ({
   }, [])
 
   return (
-    <div className={isExpanded ? styles.expanded : styles.notExpanded}>
-      <div
-        className={
-          Capacitor.getPlatform() === 'ios'
-            ? styles.navbarFixedIos
-            : styles.navbarFixed
-        }
-      >
-        <div className={styles.actions}>
+    <div className={cx(styles.navbarFixed, {
+      [styles.expanded]: isExpanded,
+      [styles.navbarFixedIos]: Capacitor.getPlatform() === 'ios'
+    }
+    )}
+    >
+      <div className={styles.actions}>
 
-          {backIsVisible && (
+        {(backIsVisible && !isExpanded) && (
+          <button
+            className={cx(styles.trackButton, {
+              [styles.active]: !!tracked[recommendationId]
+            })}
+            onClick={goBack}
+            disabled={loading}
+          >
+            <Icon
+              icon="fluent:ios-arrow-ltr-24-regular"
+              color="#3cafeb"
+              height="30"
+              className={styles.bell}
+            />
+          </button>
+        )}
+        {searchIsVisible && (<>
             <button
-              className={cx(styles.trackButton, {
-                [styles.active]: !!tracked[recommendationId]
-              })}
-              onClick={goBack}
-              disabled={loading}
+              className={cx(styles.editSearch,
+                {
+                  [styles.withBack]: backIsVisible,
+                  [styles.exp]: isExpanded
+                })
+              }
+              onClick={handleExpand}
             >
-              <Icon
-                icon="fluent:ios-arrow-ltr-24-regular"
-                color="#3cafeb"
-                height="30"
-                className={styles.bell}
-              />
-            </button>
-          )}
-          {searchIsVisible && (<>
-              <button
-                className={
-                  backIsVisible ? styles.editSearchwithBack : styles.editSearch
-                }
-                onClick={handleExpand}
-              >
-                <div className={styles.queryText}>
-                  From{' '}
-                  {locations && activeLocation && locations[activeLocation]
-                    ? locations[activeLocation].name_en
-                    : 'Anywhere'}{' '}
-                  to Anywhere, based on your selected dates,{' '}
-                  {query &&
-                  qs.parse(query) &&
-                  qs.parse(query).filters &&
-                  Object.keys(qs.parse(query).filters).length}{' '}
-                  filters applied
-                </div>
-              </button>
-              {trackIsVisible && (
-                <button
-                  className={cx(styles.trackButton, {
-                    [styles.active]: !!tracked[recommendationId]
-                  })}
-                  onClick={handleTrack}
-                  disabled={loading}
-                >
-                  {tracked[recommendationId] ? (
-                    <Icon
-                      icon="fluent:alert-24-regular"
-                      color="#3cafeb"
-                      height="30"
-                      className={styles.bell}
-                    />
-                  ) : (
-                    <Icon
-                      icon="fluent:alert-off-24-regular"
-                      color="#3cafeb"
-                      height="30"
-                      className={styles.bell}
-                    />
+              <MdSearch className={styles.searchIcon}/>
+              {query && Object.keys(query).length > 0
+                ? <Query
+                  className={cx(
+                    styles.query,
+                    { [styles.exp]: isExpanded }
                   )}
-                </button>
-              )}
-          </>
-          )}
-        </div>
+                  history={history}
+                  location={location}
+                  prefixClassName={styles.prefix}
+                  filtersDict={filtersDict}
+                  query={query}
+                  locations={locations}
+                  maxFiltersDisplayed={2}
+                  enableClick={isExpanded}
+                />
+                : 'Search for your dream destination...'}
+              {(query && Object.keys(query).length > 0) &&
+              <MdClose
+                onClick={clearQuery}
+                role="button"
+                className={styles.clearIcon}
+              />}
+            </button>
+            {(trackIsVisible && !isExpanded) && (
+              <button
+                className={cx(styles.trackButton, {
+                  [styles.active]: !!tracked[recommendationId]
+                })}
+                onClick={handleTrack}
+                disabled={loading}
+              >
+                {tracked[recommendationId] ? (
+                  <Icon
+                    icon="fluent:alert-24-regular"
+                    color="#3cafeb"
+                    height="30"
+                    className={styles.bell}
+                  />
+                ) : (
+                  <Icon
+                    icon="fluent:alert-off-24-regular"
+                    color="#3cafeb"
+                    height="30"
+                    className={styles.bell}
+                  />
+                )}
+              </button>
+            )}
+        </>
+        )}
       </div>
-      {searchIsVisible && (
-        <div
-          className={
-            isExpanded ? styles.expandedElements : styles.expandedElementsHidden
-          }
-        >
-          {isExpanded &&
-          activeLocation !== '' && (
-            <Link
-              className={styles.fromLink}
-              to={{
-                pathname: '/recommendations/location',
-                search: qs.stringify(query)
-              }}
-            >
-              <span>
-                <b>From: </b>
-                {locations &&
-                activeLocation &&
-                locations[activeLocation] &&
-                locations[activeLocation].fullname_en}
-              </span>
-              <MdEdit className={styles.actionIcon}/>
-            </Link>
-          )}
-          {isExpanded &&
-          activeLocation !== '' && (
-            <Link
-              className={styles.fromLink}
-              to={{
-                pathname: '/recommendations/location',
-                search: qs.stringify(query)
-              }}
-            >
-              <span>
-                <b>To: </b>
-                Anywhere
-              </span>
-              <MdEdit className={styles.actionIcon}/>
-            </Link>
-          )}
-          {isExpanded &&
-          activeLocation !== '' && (
-            <Link
-              className={styles.fromLink}
-              to={{
-                pathname: '/recommendations/date',
-                search: location.search
-              }}
-            >
-              <span>Edit your Available Dates</span>
-              <CalendarEditIcon className={styles.actionIcon}/>
-            </Link>
-          )}
-
-          {isExpanded &&
-          activeLocation !== '' && (
-            <Link
-              className={styles.fromLink}
-              to={{
-                pathname: '/recommendations/filters',
-                search: location.search
-              }}
-            >
-              <span>
-                {query &&
-                qs.parse(query) &&
-                qs.parse(query).filters &&
-                Object.keys(qs.parse(query).filters).length}{' '}
-                filters selected
-              </span>
-              <FiltersIcon className={styles.actionIcon}/>
-            </Link>
-          )}
-        </div>
-      )}
     </div>
   )
 }
