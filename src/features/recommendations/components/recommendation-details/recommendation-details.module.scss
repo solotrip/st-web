@@ -132,12 +132,44 @@
 
 }
 
+.justifiedText {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 15px;
+
+}
+
+.contentElement2 { 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 6px;
+
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
 .elementIcon {
 
   width: 20px;
   height: 20px;
 }
 
+
+.elementIcon2 {
+
+  width: 20px;
+  height: 20px;
+  margin-right: 16px;
+}
+.elementIcon3 {
+  margin-left: 3px;
+  width: 20px;
+  height: 20px;
+  margin-right: 13px;
+}
 .elementIconAttraction {
 
   margin-left: 3px;
@@ -152,6 +184,15 @@
   line-height: 19px;
   font-size: 15px;
   margin-left: 18px;
+}
+
+.elementText2 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1px;
+  line-height: 19px;
+  font-size: 15px;
+
 }
 
 .slide {
