@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import _ from 'lodash'
 import * as AreaApi from 'api/area'
+import { fetchRecommendations } from 'features/recommendations/slice'
 
 export const fetchFilters = createAsyncThunk(
   'filters/fetchFilters', async () => {
@@ -12,7 +13,8 @@ const filtersSlice = createSlice({
     filters: [],
     filtersDict: {},
     loading: true,
-    initialized: false
+    initialized: false,
+    recentFilters: []
   },
   reducers: {},
   extraReducers: {
@@ -30,6 +32,14 @@ const filtersSlice = createSlice({
       state.error = _.get(action.payload, 'message', action.error.toString())
       state.loading = false
       state.initialized = false
+    },
+    [fetchRecommendations.pending]: (state, action) => {
+      const queryFilters = _.get(action.meta, 'arg.filters' , [])
+      state.recentFilters = _.uniq([
+        ...queryFilters.map(f => f.id),
+        ...state.recentFilters
+      ])
+
     }
   }
 })

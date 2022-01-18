@@ -10,7 +10,7 @@ import recommendations from 'features/recommendations/slice'
 import locationReducer from 'features/recommendations/containers/location/slice'
 import passport
   from 'features/recommendations/containers/passport-countries/slice'
-import filters from 'features/recommendations/containers/filters/slice'
+import filtersReducer from 'features/recommendations/containers/filters/slice'
 import navigation from 'components/navigation/slice'
 import wishlist from 'features/wishlist/slice'
 import track from 'features/track/slice'
@@ -31,6 +31,14 @@ const location = persistReducer(
   locationReducer
 )
 
+const filters = persistReducer(
+  {
+    ...persistConfig,
+    key: 'filters'
+  },
+  filtersReducer
+)
+
 export default combineReducers({
   auth,
   preferences,
@@ -42,5 +50,5 @@ export default combineReducers({
   notifications,
   location,
   passport,
-  filters,
+  filters
 })

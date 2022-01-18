@@ -28,3 +28,6 @@ export const FLEXIBLE_DATE_CONFIG = {
     payload: { duration: '30', weekendOnly: undefined }
   }
 }
+
+export const RECENT_FILTERS_CATEGORY = 'Recent'
+export const RECENT_FILTERS_COUNT = 10
