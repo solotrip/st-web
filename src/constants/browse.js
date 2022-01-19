@@ -1043,7 +1043,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1565881606991-789a8dff9dbb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=paris',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=paris',
     areaString: 'Paris, FR',
     type: 'attraction'
   },
@@ -1052,7 +1052,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1571822325911-c01620a65e86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=beijing',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=beijing',
     areaString: 'Beijing, PRC',
     type: 'attraction'
   },
@@ -1061,7 +1061,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1096&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=rome',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=rome',
     areaString: 'Rome, IT',
     type: 'attraction'
   },
@@ -1070,7 +1070,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1527915676329-fd5ec8a12d4b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=sydney',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=sydney',
     areaString: 'Sydney, AU',
     type: 'attraction'
   },
@@ -1079,7 +1079,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1543335785-8aadf6d8183c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=paris',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=paris',
     areaString: 'Paris, FR',
     type: 'attraction'
   },
@@ -1088,7 +1088,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1577706881850-bf7c7d8906a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=beijing',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=beijing',
     areaString: 'Beijing, PRC',
     type: 'attraction'
   },
@@ -1097,7 +1097,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=new-york-city',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=new-york-city',
     areaString: 'Newyork City, NY, US',
     type: 'attraction'
   },
@@ -1106,7 +1106,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1548510907-5b514c51aba6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=pisa',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=pisa',
     areaString: 'Pisa, IT',
     type: 'attraction'
   },
@@ -1115,7 +1115,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1526392060635-9d6019884377?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=machu-picchu',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=machu-picchu',
     areaString: 'Machu Picchu, PE',
     type: 'attraction'
   },
@@ -1124,7 +1124,7 @@ export const attractions = [
     image:
       'https://images.unsplash.com/photo-1623674587543-9c7564de99d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=giza',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=giza',
     areaString: 'Giza, EG',
     type: 'attraction'
   }
@@ -1290,7 +1290,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1520967824495-b529aeba26df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=london',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=london',
     type: 'destination'
   },
   {
@@ -1298,7 +1298,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1542820229-081e0c12af0b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=rome',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=rome',
     type: 'destination'
   },
   {
@@ -1306,7 +1306,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1584314620461-90d4239969cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1139&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=phuket-(city)',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=phuket-(city)',
     type: 'destination'
   },
   {
@@ -1314,7 +1314,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1500930287596-c1ecaa373bb2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=bora-bora',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=bora-bora',
     type: 'destination'
   },
   {
@@ -1322,7 +1322,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1583422409516-2895a77efded?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=barcelona',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=barcelona',
     type: 'destination'
   },
   {
@@ -1330,7 +1330,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1540202404-a2f29016b523?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1333&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=male',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=male',
     type: 'destination'
   },
   {
@@ -1338,7 +1338,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=bali',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=bali',
     type: 'destination'
   },
   {
@@ -1346,7 +1346,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1543788303-c15e49305bc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=new-york-city',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=new-york-city',
     type: 'destination'
   },
   {
@@ -1354,7 +1354,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1543429257-3eb0b65d9c58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=florence',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=florence',
     type: 'destination'
   },
   {
@@ -1362,7 +1362,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1138&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=santorini',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=santorini',
     type: 'destination'
   },
   {
@@ -1370,7 +1370,7 @@ export const destinations = [
     image:
       'https://images.unsplash.com/photo-1499241142330-28701ea87ff4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',
     query:
-      'recommendations?filters[0][id]=f0ede130-2065-11ec-858a-edc1994707fb&filters[0][variables][areaSids][0]=amsterdam',
+      'recommendations?filters[0][id]=a&filters[0][variables][areaSids][0]=amsterdam',
     type: 'destination'
   }
 ]

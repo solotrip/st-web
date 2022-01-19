@@ -61,15 +61,13 @@ export const processRecommendation = (recommendation, passports = []) => {
       }
     }
     //Restrictions
-    let restrictions = country.restrictions
+    let { restrictions = {} } = country
 
     //Vaccinated Test Required
     if (restrictions && restrictions['vaccinated_arrival_test_required']) {
       vaccinatedTestText = 'Test Required for vaccinated.'
     } else if (
-      !restrictions ||
-      (restrictions['vaccinated_arrival_test_required'] &&
-        restrictions['vaccinated_arrival_test_required'] === null)
+      !restrictions['vaccinated_arrival_test_required']
     ) {
       vaccinatedTestText =
         'No information about test procedure for vaccinated people.'
@@ -80,9 +78,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     if (restrictions && restrictions['arrival_test_required']) {
       unvaccinatedTestText = 'Test Required for unvaccinated.'
     } else if (
-      !restrictions ||
-      (restrictions['arrival_test_required'] &&
-        restrictions['arrival_test_required'] === null)
+      !restrictions['arrival_test_required']
     ) {
       unvaccinatedTestText =
         'No information about test procedure for unvaccinated people.'
@@ -96,9 +92,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     ) {
       vaccinatedQuarantineText = 'Quarantine Required for vaccinated.'
     } else if (
-      !restrictions ||
-      (restrictions['vaccinated_arrival_quarantine_required'] &&
-        restrictions['vaccinated_arrival_quarantine_required'] === null)
+      !restrictions['vaccinated_arrival_quarantine_required']
     ) {
       vaccinatedQuarantineText =
         'No information about quarantine procedure for vaccinated people.'
@@ -109,9 +103,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     if (restrictions && restrictions['arrival_quarantine_required']) {
       unvaccinatedQuarantineText = 'Quarantine Required for unvaccinated.'
     } else if (
-      !restrictions ||
-      (restrictions['arrival_quarantine_required'] &&
-        restrictions['arrival_quarantine_required'] === null)
+      !restrictions['arrival_quarantine_required']
     ) {
       unvaccinatedQuarantineText =
         'No information about quarantine procedure for unvaccinated people.'
@@ -123,9 +115,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     if (restrictions && restrictions['restaurant_status'] === 'OPEN') {
       restaurantText = 'Restaurants are open.'
     } else if (
-      !restrictions ||
-      (restrictions['restaurant_status'] &&
-        restrictions['restaurant_status'] === null)
+      (!restrictions['restaurant_status'])
     ) {
       restaurantText = 'No information about restaurant status.'
     } else if (
@@ -143,9 +133,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     if (restrictions && restrictions['Tourist Attractions'] === 'Open') {
       attractionsText = 'Attractions are open.'
     } else if (
-      !restrictions ||
-      (restrictions['Tourist Attractions'] &&
-        restrictions['Tourist Attractions'] === null)
+      !restrictions['Tourist Attractions']
     ) {
       attractionsText = 'No information about attraction status.'
     } else if (
