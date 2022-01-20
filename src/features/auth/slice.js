@@ -143,7 +143,7 @@ export const initialize = createAsyncThunk(
 
 const initialState = {
   error: null,
-  loading: true,
+  loading: false,
   isAuthenticated: false,
   isGuest: false,
   username: ''

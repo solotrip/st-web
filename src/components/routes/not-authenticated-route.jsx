@@ -19,7 +19,7 @@ const NotAuthenticatedRoute = ({ component: Component, ...rest }) => {
   }
 
   if(isAuthenticated && !isGuest) {
-    return <Redirect to="/recommendations"/>
+    return <Redirect to="/browse"/>
   }
   return (
     <Route

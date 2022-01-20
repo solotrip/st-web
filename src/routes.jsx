@@ -14,6 +14,7 @@ import BottomBar from './components/bottom-bar'
 import SideBar from './components/sidebar'
 // eslint-disable-next-line max-len
 import DateSelectorContainer from './features/recommendations/containers/date-selector'
+import { NotAuthenticatedRoute }  from 'components'
 
 /**
  * These routes are just for development purposes
@@ -55,7 +56,9 @@ const MainRoutes = () => {
 
 const Routes = () => (
   <Router>
-    <Route path="/" component={HomeContainer} exact />
+    <NotAuthenticatedRoute>
+      <Route path="/" component={HomeContainer} exact />
+    </NotAuthenticatedRoute>
     <OnboardingRoutes />
     <AuthRoutes />
     <MainRoutes />
