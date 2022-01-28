@@ -9,12 +9,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
 import { useHistory } from 'react-router-dom'
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile
-} from 'react-device-detect'
+import { isBrowser } from 'react-device-detect'
 
 const Content = ({
   recommendations,
@@ -127,6 +122,9 @@ const Content = ({
           />
         </div>
       )}
+      {detailIndex !== -1 &&
+        recommendations[detailIndex] &&
+        console.log('detail index:', recommendations[detailIndex])}
 
       {mapEnabled &&
         isBrowser && (
@@ -137,7 +135,14 @@ const Content = ({
                 height: '100vh',
                 width: '100%'
               }}
-              center={[focusLocation[0], focusLocation[1]]}
+              center={
+                detailIndex === -1
+                  ? [focusLocation[0], focusLocation[1]]
+                  : [
+                    recommendations[detailIndex].lon,
+                    recommendations[detailIndex].lat
+                  ]
+              }
               zoom={[10]}
               pitch={[30]}
             >

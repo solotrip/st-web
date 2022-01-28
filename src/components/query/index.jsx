@@ -70,7 +70,7 @@ const Query = ({
         onClick: () => navigate('/recommendations/filters')
       }] :
         query.filters.map(f => ({
-          value: filtersDict[f.id].name,
+          value: filtersDict && filtersDict[f.id] ? filtersDict[f.id].name:null,
           onClick: () => navigate('/recommendations/filters')
         }))
     ) :

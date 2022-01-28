@@ -685,18 +685,19 @@ const Details = ({ recommendation, passports }) => {
                       key={activity}
                     />
                     <div className="flex center">
-                      {recommendation.startDate !== recommendation.endDate ? (
+                      {moment(Date.parse(startDate)).format('MMMM') !==
+                      moment(Date.parse(endDate)).format('MMMM') ? (
                         <div className={styles.slideText3}>
                           {activity} from{' '}
                           {moment(Date.parse(startDate)).format('MMMM')} to{' '}
                           {moment(Date.parse(endDate)).format('MMMM')}
                         </div>
-                      ) : (
+                        ) : (
                         <div className={styles.slideText3}>
                           {activity} in{' '}
                           {moment(Date.parse(startDate)).format('MMMM')}{' '}
                         </div>
-                      )}
+                        )}
                     </div>
                   </div>
                 ))}
