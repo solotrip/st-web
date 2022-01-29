@@ -56,9 +56,9 @@ const MainRoutes = () => {
 
 const Routes = () => (
   <Router>
-    <NotAuthenticatedRoute>
-      <Route path="/" component={HomeContainer} exact />
-    </NotAuthenticatedRoute>
+    <Route path="/" exact>
+      <NotAuthenticatedRoute component={HomeContainer} path="/" exact/>
+    </Route>
     <OnboardingRoutes />
     <AuthRoutes />
     <MainRoutes />
