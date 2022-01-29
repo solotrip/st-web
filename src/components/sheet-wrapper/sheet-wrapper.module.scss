@@ -29,5 +29,7 @@
 .content {
   margin: 0 auto 0 auto;
   max-width: 800px;
+  max-height: calc(100% - 60px);
+  overflow-y: auto;
   position: relative;
 }

@@ -1,6 +1,8 @@
 import _uniq from 'lodash/uniq'
 import dayjs from 'dayjs'
+import IsSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(IsSameOrBefore)
 
 dayjs.extend(relativeTime)
 const months = [
@@ -60,14 +62,20 @@ export const formatDuration = (days, weekendOnly) => {
   if (weekendOnly) return 'a weekend'
   switch (days) {
   case 1:
+  case '1':
     return 'a day'
   case 7:
+  case '7':
     return 'a week'
   case 14:
+  case '14':
     return 'two weeks'
   case 30:
+  case '30':
     return 'a month'
   default:
     return `${days} days`
   }
 }
+
+export const isExpired = d => dayjs(d).isSameOrBefore(new Date(), 'day')

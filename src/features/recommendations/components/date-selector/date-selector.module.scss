@@ -10,12 +10,11 @@
 }
 
 .center {
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 100%;
 }
 
 .howLong {
@@ -44,4 +43,30 @@
 
 .field:focus {
   border: 1px solid #3cafeb;
+}
+
+.recentList {
+  @include roboto-medium;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  color: $white;
+  button {
+    text-transform: capitalize;
+    background: $primary-color;
+    border-radius: 16px;
+    padding: 8px;
+    margin: 8px;
+  }
+  @include xs-to-sm {
+    button {
+      display: none;
+    }
+    button:first-child, button:nth-child(2) {
+      display: block;
+    }
+  }
 }

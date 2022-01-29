@@ -11,6 +11,8 @@ import locationReducer from 'features/recommendations/containers/location/slice'
 import passport
   from 'features/recommendations/containers/passport-countries/slice'
 import filtersReducer from 'features/recommendations/containers/filters/slice'
+import datesReducer from
+  'features/recommendations/containers/date-selector/slice'
 import navigation from 'components/navigation/slice'
 import wishlist from 'features/wishlist/slice'
 import track from 'features/track/slice'
@@ -39,6 +41,13 @@ const filters = persistReducer(
   filtersReducer
 )
 
+const dates = persistReducer({
+  ...persistConfig,
+  key: 'dates'
+},
+datesReducer
+)
+
 export default combineReducers({
   auth,
   preferences,
@@ -50,5 +59,6 @@ export default combineReducers({
   notifications,
   location,
   passport,
-  filters
+  filters,
+  dates
 })

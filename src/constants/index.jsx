@@ -31,3 +31,6 @@ export const FLEXIBLE_DATE_CONFIG = {
 
 export const RECENT_FILTERS_CATEGORY = 'Recent'
 export const RECENT_FILTERS_COUNT = 10
+
+export const RECENT_DATE_RANGES_COUNT = 5
+export const RECENT_MONTH_RANGES_COUNT = 5

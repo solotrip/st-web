@@ -2,10 +2,12 @@ import React, { useCallback, useState } from 'react'
 import { SheetWrapper } from 'components'
 import { useQuery } from 'utils/hooks/use-query'
 import { formatAsDate } from 'utils/date'
-import DateSelector from '../components/date-selector'
+import DateSelector from '../../components/date-selector'
+import { datesSelector } from './slice'
 import { useHistory } from 'react-router-dom'
 import qs from 'qs'
 import { DATE_QUERY_TYPE } from 'constants/index'
+import { useSelector } from 'react-redux'
 
 const DateSelectorContainer = () => {
   const query = useQuery()
@@ -15,9 +17,9 @@ const DateSelectorContainer = () => {
     ...query,
     type: isFlexibleQuery ? DATE_QUERY_TYPE.flexible : DATE_QUERY_TYPE.calendar
   })
+  const { recentMonths, recentDateRanges } = useSelector(datesSelector)
   const onUpdate = useCallback(payload => {
     setData(prevData => ({ ...prevData, ...payload }))
-
   }, [setData])
   const onSubmit = () => {
     const {
@@ -37,6 +39,12 @@ const DateSelectorContainer = () => {
       start: formatAsDate(start),
       end: formatAsDate(end),
       ...rest
+    }
+    if(!weekendOnly && DATE_QUERY_TYPE.flexible) {
+      delete payload.weekendOnly
+    }
+    if(!duration && DATE_QUERY_TYPE.flexible) {
+      delete payload.duration
     }
     delete payload.type
     history.push({
@@ -61,9 +69,15 @@ const DateSelectorContainer = () => {
   }
   return (
     // TODO: Add holidays loader
-    <SheetWrapper snapPoints={[500]}>
+    <SheetWrapper snapPoints={[650]}>
       <SheetWrapper.Content>
-        <DateSelector query={query} onUpdate={onUpdate} data={data}/>
+        <DateSelector
+          query={query}
+          onUpdate={onUpdate}
+          data={data}
+          recentDateRanges={recentDateRanges}
+          recentMonths={recentMonths}
+        />
       </SheetWrapper.Content>
       {data.type !== DATE_QUERY_TYPE.recentQueries &&
       <SheetWrapper.Footer onClick={onSubmit} text="Search"

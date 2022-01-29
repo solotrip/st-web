@@ -74,7 +74,6 @@
     "reactstrap": "^8.10.0",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
-    "segmented-control": "^0.1.17",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.1",
     "use-persisted-state": "^0.3.3"

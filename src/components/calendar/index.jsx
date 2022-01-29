@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import DayPicker, { DateUtils } from 'react-day-picker'
 import { useMediaQuery } from 'react-responsive'
 import 'react-day-picker/lib/style.css'
 import styles from './calendar.module.scss'
+import { formatAsMonthDay } from 'utils/date'
 
 
 const Calendar = ({ numberOfMonths, onUpdate, data }) => {
-  const [state, setState] = useState({ from: data.start, to: data.end })
+  const [state, setState] = useState({
+    from: data.start && new Date(data.start), to: data.end && new Date(data.end)
+  })
+  useEffect(() => {
+    setState({
+      from: data.start && new Date(data.start),
+      to: data.end && new Date(data.end)
+    })
+  }, [data.start, data.end])
   const screenIsXsToSm = useMediaQuery(
     {
       query: '(max-width: 767px)'
@@ -18,27 +27,30 @@ const Calendar = ({ numberOfMonths, onUpdate, data }) => {
     }
   )
   const [xsToSm, setXsToSm] = useState(screenIsXsToSm)
+  const { from, to } = state
 
   const handleDayClick = (day, modifiers = {}) => {
     if (modifiers.disabled) {
       return
     }
-    const range = DateUtils.addDayToRange(day, state)
+    const currentState = state.to ? {} : state
+    const range = DateUtils.addDayToRange(day, currentState)
     setState(range)
     onUpdate({ start: range.from, end: range.to })
   }
-
-  const { from, to } = state
   const modifiers = { start: from, end: to }
+
   return (
     <>
       <div className={styles.wrapperPrompt}>
-        {!from && !to && 'Please select the first day.'}
-        {from && !to && 'Please select the last day.'}
+        {!from && !to && 'When do you want to travel?'}
+        {from && !to && `From ${formatAsMonthDay(from)} to ...`}
         {from &&
-        to &&
-        `Selected from ${from.toLocaleDateString()} to
-                ${to.toLocaleDateString()}`}{' '}
+        to && (
+          <>
+            From&nbsp;<b>{formatAsMonthDay(from)}&nbsp;</b>to
+            <b>&nbsp;{formatAsMonthDay(to)}</b>
+          </>)}
       </div>
       <div className={styles.wrapper}>
         <DayPicker

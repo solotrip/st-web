@@ -6,6 +6,7 @@ export {
   Text as TextInput,
   Search as SearchInput,
   Range as RangeInput,
+  Radio as RadioInput,
   Checkbox
 } from './input'
 export { default as Layout } from './layout'
