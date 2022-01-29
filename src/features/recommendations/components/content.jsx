@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
-import useThemeState from 'utils/hooks/use-theme-state'
 import { MAPBOX_TOKEN } from 'constants/index'
 import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -10,7 +9,10 @@ import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
 import { useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
-
+const Map =  isBrowser &&
+  ReactMapboxGl({
+    accessToken: MAPBOX_TOKEN
+  })
 const Content = ({
   recommendations,
   queryFunction,
@@ -26,17 +28,9 @@ const Content = ({
   basePath,
   resetFilters
 }) => {
-  const [appTheme] = useThemeState()
   const history = useHistory()
-
-  const Map =
-    isBrowser &&
-    ReactMapboxGl({
-      accessToken: MAPBOX_TOKEN
-    })
-
   const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
-  const [mapboxTheme, setMapboxTheme] = useState(
+  const [mapboxTheme] = useState(
     'mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj'
   )
 
@@ -122,9 +116,6 @@ const Content = ({
           />
         </div>
       )}
-      {detailIndex !== -1 &&
-        recommendations[detailIndex] &&
-        console.log('detail index:', recommendations[detailIndex])}
 
       {mapEnabled &&
         isBrowser && (

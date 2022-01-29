@@ -11,7 +11,7 @@ const NotAuthenticatedRoute = ({ component: Component, ...rest }) => {
     dispatch(initialize({ history, ensureAuth: false }))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
-  const { loading, isGuest, isAuthenticated } = useSelector(
+  const { loading, isAuthenticated } = useSelector(
     state => state.auth
   )
   if (loading) {
