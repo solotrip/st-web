@@ -20,8 +20,9 @@ const DateSelector = ({
   const recentRangeItems = recentDateRanges
     .filter(d => !isExpired(d.start))
     .map(d => (
-    <button onClick={() => onUpdate(d)
-    }
+    <button
+      onClick={() => onUpdate(d)}
+      key={`recent-${d.start}-${d.end}`}
     >
       {formatAsMonthDay(d.start)
       + (d.start !== d.end ? ` - ${formatAsMonthDay(d.end)}` : '')}
@@ -29,11 +30,13 @@ const DateSelector = ({
     ))
 
   const monthItems = recentMonths.map(m => (
-    <button onClick={() => onUpdate({
-      weekendOnly: undefined,
-      duration: undefined,
-      ...m
-    })}
+    <button
+      onClick={() => onUpdate({
+        weekendOnly: undefined,
+        duration: undefined,
+        ...m
+      })}
+      key={`recent-${m.duration}-${m.weekendOnly}-${m.months.join('-')}`}
     >
       <b>{formatDuration(m.duration, m.weekendOnly)}</b>{' in '}
       <b>

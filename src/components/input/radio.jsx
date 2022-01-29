@@ -17,6 +17,7 @@ const Radio = React.forwardRef(
           <input
             key={`radio-opt-label-${option.value}`}
             type="radio"
+            readOnly
             checked={value === option.value}
             disabled={option.disabled}
           />
