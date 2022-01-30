@@ -9,7 +9,8 @@ import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
 import { useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
-const Map =  isBrowser &&
+const Map =
+  isBrowser &&
   ReactMapboxGl({
     accessToken: MAPBOX_TOKEN
   })
@@ -26,7 +27,8 @@ const Content = ({
   children,
   detailIndex,
   basePath,
-  resetFilters
+  resetFilters,
+  scrollRef = null
 }) => {
   const history = useHistory()
   const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
@@ -35,6 +37,7 @@ const Content = ({
   )
 
   const itemsRef = useRef([])
+  scrollRef = useRef()
 
   const activeHandler = recommendation => {
     setFocusLocation([recommendation.lon, recommendation.lat])
@@ -49,6 +52,15 @@ const Content = ({
     setFocusLocation([recommendation.lon, recommendation.lat])
   }
 
+  const scrollToTop = () => {
+    if (scrollRef && scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: 0,
+        behavior: 'auto'
+      })
+    }
+  }
+
   useEffect(
     () => {
       itemsRef.current = itemsRef.current.slice(0, recommendations.length)
@@ -56,6 +68,15 @@ const Content = ({
         activeHandler(recommendations[0])
       }
     },
+    [recommendations]
+  )
+  useEffect(
+    () => {
+      if (recommendations.length > 0) {
+        scrollToTop()
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [recommendations]
   )
 
@@ -72,14 +93,13 @@ const Content = ({
   if (loading) return <Loader />
 
   const list = (
-    <div className={styles.recommendations}>
+    <div ref={scrollRef} className={styles.recommendations}>
       {title && <h1 className={styles.title}>{title}</h1>}
       {children}
       {!loading &&
         recommendations.length === 0 && (
           <span className={styles.noItems}>{noItemsMessage}</span>
       )}
-
       {!loading &&
         recommendations.length > 0 &&
         recommendations.map((recommendation, i) => {
@@ -107,7 +127,7 @@ const Content = ({
       {detailIndex === -1 ? (
         list
       ) : (
-        <div className={styles.recommendationDetails}>
+        <div ref={scrollRef} className={styles.recommendationDetails}>
           <RecommendationDetails
             recommendation={recommendations[detailIndex]}
             passports={
