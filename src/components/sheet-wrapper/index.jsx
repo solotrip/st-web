@@ -11,17 +11,19 @@ const SheetWrapper = ({ children, ...rest }) => {
   const history = useHistory()
   const location = useLocation()
 
-  const closeSheet = useCallback(() => {
-    if (path) {
-      history.replace({ pathname: `/${path}`, search: location.search })
-    } else {
-      history.replace({
-        pathname: location.pathname.split('/').slice(0, -1).join('/'),
-        search: location.search
-      })
-    }
-
-  }, [history, path, location])
+  const closeSheet = useCallback(
+    () => {
+      if (path) {
+        history.replace({ pathname: `/${path}`, search: location.search })
+      } else {
+        history.replace({
+          pathname: '/browse',
+          search: location.search
+        })
+      }
+    },
+    [history, path, location]
+  )
 
   return (
     <Sheet
@@ -37,22 +39,16 @@ const SheetWrapper = ({ children, ...rest }) => {
     >
       <div className={styles.container}>
         <Sheet.Container>
-          <Sheet.Header className={styles.sheetHeader}/>
-          <Sheet.Content>
-            {children}
-          </Sheet.Content>
+          <Sheet.Header className={styles.sheetHeader} />
+          <Sheet.Content>{children}</Sheet.Content>
         </Sheet.Container>
       </div>
-      <button
-        className={styles.closeSheet}
-        onClick={closeSheet}
-      >
-        <CloseIcon/>
+      <button className={styles.closeSheet} onClick={closeSheet}>
+        <CloseIcon />
       </button>
       <div className={styles.backdropWrapper}>
-        <Sheet.Backdrop/>
+        <Sheet.Backdrop />
       </div>
-
     </Sheet>
   )
 }
@@ -68,6 +64,7 @@ SheetWrapper.propTypes = {
 
 SheetWrapper.Footer = Footer
 SheetWrapper.Content = ({ children }) => (
-  <div className={styles.content}>{children}</div>)
+  <div className={styles.content}>{children}</div>
+)
 
 export default SheetWrapper
