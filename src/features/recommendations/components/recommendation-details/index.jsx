@@ -701,7 +701,11 @@ const Details = ({
                     />
                     <div className="flex center">
                       {moment(Date.parse(startDate)).format('MMMM') !==
-                      moment(Date.parse(endDate)).format('MMMM') ? (
+                        'Invalid date' &&
+                      moment(Date.parse(endDate)).format('MMMM') !==
+                        'Invalid date' &&
+                      moment(Date.parse(startDate)).format('MMMM') !==
+                        moment(Date.parse(endDate)).format('MMMM') ? (
                         <div className={styles.slideText3}>
                           {activity} from{' '}
                           {moment(Date.parse(startDate)).format('MMMM')} to{' '}
