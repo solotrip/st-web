@@ -130,6 +130,9 @@ const Content = ({
         <div ref={scrollRef} className={styles.recommendationDetails}>
           <RecommendationDetails
             recommendation={recommendations[detailIndex]}
+            toggleWishlist={toggleWishlist}
+            wishlisted={!!wishlistedIds[recommendations[detailIndex].id]}
+            query={queryFunction(recommendations[detailIndex].query)}
             passports={
               queryFunction(recommendations[detailIndex]).query.passports
             }

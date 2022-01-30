@@ -21,7 +21,13 @@ import { ReactComponent as Star } from 'assets/images/new-icons/events.svg'
 import { formatAsMonthDay } from 'utils/date'
 import { processRecommendation } from 'utils/recommendation'
 
-const Details = ({ recommendation, passports }) => {
+const Details = ({
+  recommendation,
+  passports,
+  query,
+  toggleWishlist,
+  wishlisted
+}) => {
   const { startDate, endDate } = recommendation
 
   const {
@@ -47,6 +53,15 @@ const Details = ({ recommendation, passports }) => {
             ? recommendation.name
             : 'Go back to your recommendations'}
         </h1>
+        <button
+          className={wishlisted ? styles.heartFilled : styles.heart}
+          onClick={() =>
+            toggleWishlist({
+              query,
+              recommendation
+            })
+          }
+        />
       </div>
       <div className={styles.recommendationCard}>
         {' '}
