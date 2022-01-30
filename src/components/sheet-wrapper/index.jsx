@@ -16,8 +16,13 @@ const SheetWrapper = ({ children, ...rest }) => {
       if (path) {
         history.replace({ pathname: `/${path}`, search: location.search })
       } else {
+        console.log('location here is this:', location)
+        console.log('split: ', history.pathname.split['/'][1])
         history.replace({
-          pathname: '/browse',
+          pathname: location.pathname
+            .split('/')
+            .slice(0, -1)
+            .join('/'),
           search: location.search
         })
       }
