@@ -26,7 +26,9 @@ const Details = ({
   passports,
   query,
   toggleWishlist,
-  wishlisted
+  wishlisted,
+  currencyCoefficient = 1,
+  currency = 'USD'
 }) => {
   const { startDate, endDate } = recommendation
 
@@ -302,10 +304,15 @@ const Details = ({
                     <Acommodation />
                   </div>
                   <div className={styles.elementText}>
-                    Hotel prices range from ${Math.floor(
-                    recommendation.hotel_price_min
-                  )}{' '}
-                    to ${Math.floor(recommendation.hotel_price_max)}.
+                    Hotel prices range from{' '}
+                    {Math.floor(
+                      recommendation.hotel_price_min * currencyCoefficient
+                    )}{' '}
+                    {currency} to{' '}
+                    {Math.floor(
+                      recommendation.hotel_price_max * currencyCoefficient
+                    )}{' '}
+                    {currency}.
                   </div>
                 </div>
                 ) : (
@@ -316,9 +323,11 @@ const Details = ({
                       <Acommodation />
                     </div>
                     <div className={styles.elementText}>
-                      Average Hotel price is ${Math.floor(
-                      recommendation.hotel_price_min
-                    )}.
+                      Average Hotel price is{' '}
+                      {Math.floor(
+                        recommendation.hotel_price_min * currencyCoefficient
+                      )}{' '}
+                      {currency}.
                     </div>
                   </div>
                   )
@@ -333,10 +342,11 @@ const Details = ({
                     <Acommodation />
                   </div>
                   <div className={styles.elementText}>
-                    Hostel prices range from ${Math.floor(
-                    recommendation.hostel_price_min
-                  )}{' '}
-                    to ${Math.floor(recommendation.hostel_price_max)}.
+                    Hostel prices range from{' '}
+                    {Math.floor(
+                      recommendation.hostel_price_min * currencyCoefficient
+                    )}{' '}
+                    {currency} to ${Math.floor(recommendation.hostel_price_max)}.
                   </div>
                 </div>
                 ) : (
@@ -347,9 +357,11 @@ const Details = ({
                       <Acommodation />
                     </div>
                     <div className={styles.elementText}>
-                      Average hostel price is ${Math.floor(
-                      recommendation.hostel_price_min
-                    )}.
+                      Average hostel price is{' '}
+                      {Math.floor(
+                        recommendation.hostel_price_min * currencyCoefficient
+                      )}{' '}
+                      {currency}.
                     </div>
                   </div>
                   )
@@ -364,10 +376,17 @@ const Details = ({
                     <Acommodation />
                   </div>
                   <div className={styles.elementText}>
-                    Airbnb prices range from ${Math.floor(
-                    recommendation.vacation_rental_price_min
-                  )}{' '}
-                    to ${Math.floor(recommendation.vacation_rental_price_max)}.
+                    Airbnb prices range from{' '}
+                    {Math.floor(
+                      recommendation.vacation_rental_price_min *
+                        currencyCoefficient
+                    )}{' '}
+                    {currency} to{' '}
+                    {Math.floor(
+                      recommendation.vacation_rental_price_max *
+                        currencyCoefficient
+                    )}{' '}
+                    {currency}.
                   </div>
                 </div>
                 ) : (
@@ -378,9 +397,12 @@ const Details = ({
                       <Acommodation />
                     </div>
                     <div className={styles.elementText}>
-                      Average Airbnb price is ${Math.floor(
-                      recommendation.vacation_rental_price_min
-                    )}.
+                      Average Airbnb price is{' '}
+                      {Math.floor(
+                        recommendation.vacation_rental_price_min *
+                          currencyCoefficient
+                      )}{' '}
+                      {currency}.
                     </div>
                   </div>
                   )

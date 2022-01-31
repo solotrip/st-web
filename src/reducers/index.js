@@ -8,11 +8,10 @@ import preferences from 'features/preferences/slice'
 import profile from 'features/profile/slice'
 import recommendations from 'features/recommendations/slice'
 import locationReducer from 'features/recommendations/containers/location/slice'
-import passport
-  from 'features/recommendations/containers/passport-countries/slice'
+import passport from 'features/recommendations/containers/passport-countries/slice'
 import filtersReducer from 'features/recommendations/containers/filters/slice'
-import datesReducer from
-  'features/recommendations/containers/date-selector/slice'
+import datesReducer from 'features/recommendations/containers/date-selector/slice'
+import exchangeRates from 'features/recommendations/containers/exchange-rates/slice'
 import navigation from 'components/navigation/slice'
 import wishlist from 'features/wishlist/slice'
 import track from 'features/track/slice'
@@ -41,11 +40,12 @@ const filters = persistReducer(
   filtersReducer
 )
 
-const dates = persistReducer({
-  ...persistConfig,
-  key: 'dates'
-},
-datesReducer
+const dates = persistReducer(
+  {
+    ...persistConfig,
+    key: 'dates'
+  },
+  datesReducer
 )
 
 export default combineReducers({
@@ -60,5 +60,6 @@ export default combineReducers({
   location,
   passport,
   filters,
-  dates
+  dates,
+  exchangeRates
 })

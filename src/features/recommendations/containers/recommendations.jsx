@@ -3,6 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
 import { fetchRecommendations, recommendationsSelector } from '../slice'
+import {
+  fetchExchangeRates,
+  exchangeRatesSelector
+} from '../containers/exchange-rates/slice'
 import { profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
@@ -26,6 +30,7 @@ const RecommendationsContainer = () => {
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
+  const { exchangeRates } = useSelector(exchangeRatesSelector)
   const dispatch = useDispatch()
 
   useEffect(
@@ -37,10 +42,18 @@ const RecommendationsContainer = () => {
 
   useEffect(
     () => {
-      if (location.pathname === '/recommendations'
-        || location.pathname.startsWith('/recommendations/r/')) {
-        if (!query.start && !query.months)
-          return openDateSheet(query)
+      dispatch(fetchExchangeRates())
+    },
+    [dispatch]
+  )
+
+  useEffect(
+    () => {
+      if (
+        location.pathname === '/recommendations' ||
+        location.pathname.startsWith('/recommendations/r/')
+      ) {
+        if (!query.start && !query.months) return openDateSheet(query)
         if (!query.lat || !query.lon) {
           return openLocationSheet(query)
         }
@@ -76,15 +89,14 @@ const RecommendationsContainer = () => {
     })
   }
 
-
   const loading =
     profileLoading || loadingRecommendations || !activeRecommendationId
-  const detailIndex = !loading &&
-  location.pathname.startsWith('/recommendations/r/') ?
-    recommendations[activeRecommendationId].recommendations.findIndex(
-      r => r.id === location.pathname.split('/recommendations/r/')[1]
-    ):
-    -1
+  const detailIndex =
+    !loading && location.pathname.startsWith('/recommendations/r/')
+      ? recommendations[activeRecommendationId].recommendations.findIndex(
+        r => r.id === location.pathname.split('/recommendations/r/')[1]
+      )
+      : -1
 
   return (
     <div className="flex-col">

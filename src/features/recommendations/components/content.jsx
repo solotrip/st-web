@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
@@ -9,6 +10,10 @@ import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
 import { useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
+import {
+  fetchExchangeRates,
+  exchangeRatesSelector
+} from '../containers/exchange-rates/slice'
 const Map =
   isBrowser &&
   ReactMapboxGl({
@@ -30,6 +35,24 @@ const Content = ({
   resetFilters,
   scrollRef = null
 }) => {
+  const { exchangeRates } = useSelector(exchangeRatesSelector)
+  const dispatch = useDispatch()
+  useEffect(
+    () => {
+      dispatch(fetchExchangeRates())
+    },
+    [dispatch]
+  )
+
+  const preferredCurrency = user.currency
+
+  const preferredCurrencyCoefficient =
+    exchangeRates !== null &&
+    exchangeRates !== undefined &&
+    exchangeRates[preferredCurrency] !== undefined &&
+    exchangeRates['USD'] !== undefined
+      ? exchangeRates[preferredCurrency] / exchangeRates['USD']
+      : 1
   const history = useHistory()
   const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
   const [mapboxTheme] = useState(
@@ -116,6 +139,8 @@ const Content = ({
               toggleWishlist={toggleWishlist}
               wishlisted={!!wishlistedIds[recommendation.id]}
               basePath={basePath}
+              currencyCoefficient={preferredCurrencyCoefficient}
+              currency={preferredCurrency}
             />
           )
         })}
@@ -136,6 +161,8 @@ const Content = ({
             passports={
               queryFunction(recommendations[detailIndex]).query.passports
             }
+            currencyCoefficient={preferredCurrencyCoefficient}
+            currency={preferredCurrency}
           />
         </div>
       )}
