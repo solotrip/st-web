@@ -29,7 +29,11 @@ const Recommendation = ({
   refHolder,
   basePath,
   currencyCoefficient = 1,
-  currency = 'USD'
+  currency = 'USD',
+  distanceUnit = 'km',
+  temperatureUnit = '°C',
+  distanceCoefficient = 1,
+  temperaturize
 }) => {
   const {
     sid,
@@ -61,7 +65,9 @@ const Recommendation = ({
     unvaccinatedQuarantineText,
     restaurantText,
     attractionsText,
-    temperatureText
+    temperatureText,
+    minTemp,
+    maxTemp
   } = processRecommendation(recommendation, passports)
 
   return (
@@ -126,7 +132,11 @@ const Recommendation = ({
               {' '}
               <Cloud />
             </div>
-            <div className={styles.elementText}>{temperatureText}</div>
+            <div className={styles.elementText}>
+              min {temperaturize(minTemp)}
+              {temperatureUnit}, max {temperaturize(maxTemp)}
+              {temperatureUnit}
+            </div>
           </div>
 
           {(hotelPriceMin || hotelPriceMax) &&

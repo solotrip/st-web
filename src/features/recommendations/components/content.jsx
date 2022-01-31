@@ -45,6 +45,29 @@ const Content = ({
   )
 
   const preferredCurrency = user.currency
+  const preferredTemperature = user.temperature
+  const preferredDistance = user.distance
+  let preferredDistanceCoefficient
+
+  if (preferredDistance === 'km') {
+    preferredDistanceCoefficient = 1
+  } else if (preferredDistance === 'miles') {
+    preferredDistanceCoefficient = 1 / 1.609
+  } else {
+    preferredDistanceCoefficient = 1
+  }
+
+  const temperaturize = temp => {
+    let preferredTemperatureValue
+    if (preferredTemperature === '°C') {
+      preferredTemperatureValue = temp
+    } else if (preferredTemperature === '°F') {
+      preferredTemperatureValue = 9 / 5 * temp + 32
+    } else {
+      preferredTemperatureValue = temp
+    }
+    return preferredTemperatureValue
+  }
 
   const preferredCurrencyCoefficient =
     exchangeRates !== null &&
@@ -141,6 +164,10 @@ const Content = ({
               basePath={basePath}
               currencyCoefficient={preferredCurrencyCoefficient}
               currency={preferredCurrency}
+              distanceUnit={preferredDistance}
+              temperatureUnit={preferredTemperature}
+              distanceCoefficient={preferredDistanceCoefficient}
+              temperaturize={temperaturize}
             />
           )
         })}
@@ -163,6 +190,10 @@ const Content = ({
             }
             currencyCoefficient={preferredCurrencyCoefficient}
             currency={preferredCurrency}
+            distanceUnit={preferredDistance}
+            temperatureUnit={preferredTemperature}
+            distanceCoefficient={preferredDistanceCoefficient}
+            temperaturize={temperaturize}
           />
         </div>
       )}

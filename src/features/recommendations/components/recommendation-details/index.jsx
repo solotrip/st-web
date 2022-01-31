@@ -28,7 +28,11 @@ const Details = ({
   toggleWishlist,
   wishlisted,
   currencyCoefficient = 1,
-  currency = 'USD'
+  currency = 'USD',
+  distanceUnit = 'km',
+  temperatureUnit = '°C',
+  distanceCoefficient = 1,
+  temperaturize
 }) => {
   const { startDate, endDate } = recommendation
 
@@ -44,7 +48,9 @@ const Details = ({
     weatherText,
     maskText,
     barText,
-    publicTransportText
+    publicTransportText,
+    minTemp,
+    maxTemp
   } = processRecommendation(recommendation, passports)
 
   return (
@@ -108,7 +114,12 @@ const Details = ({
                 {' '}
                 <Cloud />
               </div>
-              <div className={styles.elementText}>{temperatureText}</div>
+              <div className={styles.elementText}>
+                {' '}
+                min {temperaturize(minTemp)}
+                {temperatureUnit}, max {temperaturize(maxTemp)}
+                {temperatureUnit}
+              </div>
             </div>
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>

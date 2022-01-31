@@ -8,16 +8,14 @@ export const processRecommendation = (recommendation, passports = []) => {
   let restaurantText = ''
   let attractionsText = ''
   let temperatureText = ''
+  let minTemp = ''
+  let maxTemp = ''
   let weatherText = ''
   let maskText = ''
   let barText = ''
   let publicTransportText = ''
   if (recommendation !== undefined) {
-
-    const {
-      country,
-      climate = {}
-    } = recommendation
+    const { country, climate = {} } = recommendation
 
     let approvedPassports = []
 
@@ -41,9 +39,7 @@ export const processRecommendation = (recommendation, passports = []) => {
       ) {
         approvedPassports.push(passport)
       }
-      return country['visa_on_arrival_for'].includes(
-        passport.value
-      )
+      return country['visa_on_arrival_for'].includes(passport.value)
     }
 
     let isVisaFree = passports.some(checkVisaFreeFor)
@@ -66,9 +62,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     //Vaccinated Test Required
     if (restrictions && restrictions['vaccinated_arrival_test_required']) {
       vaccinatedTestText = 'Test Required for vaccinated.'
-    } else if (
-      !restrictions['vaccinated_arrival_test_required']
-    ) {
+    } else if (!restrictions['vaccinated_arrival_test_required']) {
       vaccinatedTestText =
         'No information about test procedure for vaccinated people.'
     } else {
@@ -77,9 +71,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     //Unvaccinated Test Required
     if (restrictions && restrictions['arrival_test_required']) {
       unvaccinatedTestText = 'Test Required for unvaccinated.'
-    } else if (
-      !restrictions['arrival_test_required']
-    ) {
+    } else if (!restrictions['arrival_test_required']) {
       unvaccinatedTestText =
         'No information about test procedure for unvaccinated people.'
     } else {
@@ -91,9 +83,7 @@ export const processRecommendation = (recommendation, passports = []) => {
       restrictions['vaccinated_arrival_quarantine_required']
     ) {
       vaccinatedQuarantineText = 'Quarantine Required for vaccinated.'
-    } else if (
-      !restrictions['vaccinated_arrival_quarantine_required']
-    ) {
+    } else if (!restrictions['vaccinated_arrival_quarantine_required']) {
       vaccinatedQuarantineText =
         'No information about quarantine procedure for vaccinated people.'
     } else {
@@ -102,9 +92,7 @@ export const processRecommendation = (recommendation, passports = []) => {
     //Unvaccinated Quarantine Required
     if (restrictions && restrictions['arrival_quarantine_required']) {
       unvaccinatedQuarantineText = 'Quarantine Required for unvaccinated.'
-    } else if (
-      !restrictions['arrival_quarantine_required']
-    ) {
+    } else if (!restrictions['arrival_quarantine_required']) {
       unvaccinatedQuarantineText =
         'No information about quarantine procedure for unvaccinated people.'
     } else {
@@ -114,14 +102,9 @@ export const processRecommendation = (recommendation, passports = []) => {
     //restaurant status
     if (restrictions && restrictions['restaurant_status'] === 'OPEN') {
       restaurantText = 'Restaurants are open.'
-    } else if (
-      (!restrictions['restaurant_status'])
-    ) {
+    } else if (!restrictions['restaurant_status']) {
       restaurantText = 'No information about restaurant status.'
-    } else if (
-      restrictions &&
-      restrictions['restaurant_status'] === 'CLOSED'
-    ) {
+    } else if (restrictions && restrictions['restaurant_status'] === 'CLOSED') {
       restaurantText = 'Restaurants are closed.'
     } else if (
       restrictions &&
@@ -132,9 +115,7 @@ export const processRecommendation = (recommendation, passports = []) => {
 
     if (restrictions && restrictions['Tourist Attractions'] === 'Open') {
       attractionsText = 'Attractions are open.'
-    } else if (
-      !restrictions['Tourist Attractions']
-    ) {
+    } else if (!restrictions['Tourist Attractions']) {
       attractionsText = 'No information about attraction status.'
     } else if (
       restrictions &&
@@ -150,19 +131,14 @@ export const processRecommendation = (recommendation, passports = []) => {
 
     //Adding the temperature.
     if (climate.t_min && climate.t_max) {
-      temperatureText = `min ${climate.t_min}°C, max ${
-        climate.t_max
-      }°C`
+      temperatureText = `min ${climate.t_min}°C, max ${climate.t_max}°C`
+      minTemp = climate.t_min
+      maxTemp = climate.t_max
     }
 
     //Adding the general weather.
-    if (
-      recommendation.climate.humidity &&
-      recommendation.climate.rainy_days
-    ) {
-      weatherText = `Rainy days: ${
-        recommendation.climate.rainy_days
-      }, humidity ${recommendation.climate.humidity}`
+    if (recommendation.climate.humidity && recommendation.climate.rainy_days) {
+      weatherText = `Rainy days: ${recommendation.climate.rainy_days}, humidity ${recommendation.climate.humidity}`
     }
 
     //Adding the mask status.
@@ -206,6 +182,8 @@ export const processRecommendation = (recommendation, passports = []) => {
     restaurantText,
     attractionsText,
     temperatureText,
+    minTemp,
+    maxTemp,
     weatherText,
     maskText,
     barText,
