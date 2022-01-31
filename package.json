@@ -118,5 +118,8 @@
     "lint-staged": "^10.5.1",
     "native-run": "^1.5.0",
     "react-is": "^17.0.1"
+  },
+  "engines": {
+    "node": "12.x"
   }
 }
