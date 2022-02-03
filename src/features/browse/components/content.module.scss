@@ -1,77 +1,87 @@
 @import 'styles/mixins';
 
 .page {
+  @include custom-scroll;
   flex: 1;
-  display: flex;
-  flex-direction: row;
   overflow-y: scroll;
+  padding: 0 2px 48px 8px;
   width: 100%;
   @include xs-to-sm {
     justify-content: center;
   }
-
 }
 
-.title {
+.queries {
+  padding: 8px;
   width: 100%;
-  font-size: 28px;
-  margin-top: auto;
-  padding-left: 18px;
-  margin-bottom: 0;
+  h2 {
+    margin: 8px;
+  }
 }
 
-.noItems {
-  width: 100%;
-}
-
-.segments {
+.query {
   display: flex;
-  height: 4800px;
-  flex-direction: column;
-  width: 100%;
+  flex-wrap: wrap;
+  padding: 8px 0 2px 0;
+  background-color: $card-bg-color;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  width: fit-content;
 }
 
-.segment {
+.queryLink {
   display: block;
+  color: unset;
+  margin: 8px 0;
+}
+
+// List Item Styles
+
+.card{
+  display: flex;
   flex-direction: column;
-  margin-bottom: 60px;
-  width: 100%;
-}
-
-.arrow {
-  margin-top: auto;
-  margin-bottom: auto;
-  border-radius: 12px;
-  padding: 4px;
-}
-
-.titleRow {
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  border-color: $card-content;
+  border-style: solid;
+  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
+  border-radius: 15px;
+  padding: 12px;
+  height: unset !important;
 }
 
-.arrowHolder {
-  display: flex;
-  margin-top: 0px;
-
-  z-index: 2;
-
-}
-
-
-.notifications {
+.info {
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  overflow: hidden;
+  margin: 12px 0;
+  font-size: 16px;
+  align-items: center;
 }
 
-.notifications::-webkit-scrollbar {
-  display: none;
+.icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 16px 0 8px;
 }
 
-.recommendations::-webkit-scrollbar {
-  display: none;
+.image {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 8px;
+  * {
+    margin: 0;
+    border-radius: 5px;
+  }
 }
+
+.showDetails {
+  margin-top: 16px;
+  background-color: $primary-color;
+  width: 100%;
+  height: 38px;
+  border-radius: 12px;
+  outline: none;
+  color: white;
+}
+

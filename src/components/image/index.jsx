@@ -10,6 +10,7 @@ const Image = ({
   width,
   alt,
   className,
+  containerClassName,
   ...props
 }) => {
   const [loaded, setLoaded] = useState(false)
@@ -26,7 +27,11 @@ const Image = ({
   }
   return (
     <div
-      className={cn([styles.container, { [styles.loaded]: loaded }])}
+      className={cn([
+        styles.container,
+        containerClassName,
+        { [styles.loaded]: loaded }
+      ])}
     >
       {!loaded &&
       <div className={styles.placeholderContainer}>{placeholder}</div>}
@@ -50,7 +55,8 @@ Image.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   blurHash: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  containerClassName: PropTypes.string
 }
 
 export default Image

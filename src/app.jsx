@@ -20,6 +20,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import 'react-image-shadow/assets/index.css'
 import 'react-toastify/dist/ReactToastify.min.css'
+import 'swiper/swiper.min.css'
 
 const App = () => {
   // Set the theme if user has changed it

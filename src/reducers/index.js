@@ -8,14 +8,19 @@ import preferences from 'features/preferences/slice'
 import profile from 'features/profile/slice'
 import recommendations from 'features/recommendations/slice'
 import locationReducer from 'features/recommendations/containers/location/slice'
-import passport from 'features/recommendations/containers/passport-countries/slice'
+import passport
+  from 'features/recommendations/containers/passport-countries/slice'
 import filtersReducer from 'features/recommendations/containers/filters/slice'
-import datesReducer from 'features/recommendations/containers/date-selector/slice'
-import exchangeRates from 'features/recommendations/containers/exchange-rates/slice'
+import datesReducer
+  from 'features/recommendations/containers/date-selector/slice'
+import recentQueriesReducer from './recentQueriesSlice'
+import exchangeRates
+  from 'features/recommendations/containers/exchange-rates/slice'
 import navigation from 'components/navigation/slice'
 import wishlist from 'features/wishlist/slice'
 import track from 'features/track/slice'
 import notifications from 'features/notifications/slice'
+import browse from 'features/browse/slice'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 import storage from 'utils/redux-persist-capacitor-storage'
 
@@ -48,6 +53,15 @@ const dates = persistReducer(
   datesReducer
 )
 
+const recentQueries = persistReducer(
+  {
+    ...persistConfig,
+    key: 'recentQueries'
+  },
+  recentQueriesReducer
+)
+
+
 export default combineReducers({
   auth,
   preferences,
@@ -61,5 +75,7 @@ export default combineReducers({
   passport,
   filters,
   dates,
-  exchangeRates
+  exchangeRates,
+  browse,
+  recentQueries
 })

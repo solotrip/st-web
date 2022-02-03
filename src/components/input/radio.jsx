@@ -10,13 +10,14 @@ const Radio = React.forwardRef(
     options,
     value,
     className
-  }) => {
+  }, ref) => {
     return (
       <div className={cn(styles.container, className)}>
         {options.map(option => (
           <input
             key={`radio-opt-label-${option.value}`}
             type="radio"
+            ref={ref}
             readOnly
             checked={value === option.value}
             disabled={option.disabled}

@@ -37,6 +37,29 @@
 }
 
 
+@mixin no-scroll {
+  scrollbar-color: rgba(0, 0, 0, 0);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0); /* color of the scroll thumb */
+    border: none; /* creates padding around scroll thumb */
+  }
+
+  &::-webkit-scrollbar {
+    height: 0; /* width of the entire scrollbar */
+    width: 0;
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0); /* color of the tracking area */
+    display: none;
+  }
+}
+
+
+
 .shadow {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
