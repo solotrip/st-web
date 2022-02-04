@@ -69,7 +69,7 @@ const Content = ({
 
   return (
     <div className={styles.page}>
-      <div className={styles.queries}>
+      {recentQueries.length > 0 && (<div className={styles.queries}>
         <h2>Recent</h2>
         {recentQueries.map((q, i) => <Link
             className={styles.queryLink}
@@ -86,7 +86,8 @@ const Content = ({
             />
           </Link>
         )}
-      </div>
+      </div>)
+      }
       {items.map(group => (
         <HorizontalList
           key={`hl-group-${group[0].category}`}
