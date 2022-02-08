@@ -39,6 +39,7 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             })}
             filled
           />
+
           <span>{error}</span>
           <div className={styles.checkBox}>
             <Checkbox
@@ -49,10 +50,7 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
               }}
             />
           </div>
-          <Button
-            text="Login"
-            icon={MdChevronRight}
-          />
+          <Button text="Login" icon={MdChevronRight} />
           <Link to="signup" className={styles.link}>
             New to Solotrip? <span>Join now!</span>
           </Link>
@@ -62,17 +60,17 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             className={cn(styles.socialLogin, styles.loginWithGoogle)}
             onClick={loginWithGoogle}
           >
-            <GoogleIcon/>
+            <GoogleIcon />
             <span>Sign in with Google</span>
           </button>
           {Capacitor.getPlatform() !== 'android' && (
-          <button
-            className={cn(styles.socialLogin, styles.loginWithApple)}
-            onClick={loginWithApple}
-          >
-            <AppleIcon/>
-            <span>Sign in with Apple</span>
-          </button>
+            <button
+              className={cn(styles.socialLogin, styles.loginWithApple)}
+              onClick={loginWithApple}
+            >
+              <AppleIcon />
+              <span>Sign in with Apple</span>
+            </button>
           )}
         </div>
       </div>

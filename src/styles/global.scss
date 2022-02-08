@@ -183,3 +183,20 @@ hr {
   align-items: center;
   justify-content: center;
 }
+
+div.mapboxgl-popup-content {
+  background:transparent;
+}
+
+div.mapboxgl-popup-tip {
+  border: 10px solid transparent;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  align-self: center;
+  border-bottom: none;
+  border-top-color: transparent
+}
+.css-26l3qy-menu {
+  color: black;
+}

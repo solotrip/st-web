@@ -3,7 +3,6 @@ import styles from './footer.module.scss'
 import { Button } from 'components'
 
 const Footer = ({ onClick, disabled, text }) => {
-
   return (
     <div className={styles.container}>
       <div className={styles.content}>

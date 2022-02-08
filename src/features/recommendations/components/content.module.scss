@@ -127,18 +127,22 @@
     display: flex;
     flex-direction: row;
     padding:10px 10px 15px;
+    
     background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
+    display: inline-block;
     /* Set the background size and repeat properties. */
     background-size: 100%;
     background-repeat: repeat;
 
     /* Use the text as a mask for the background. */
     /* This will show the gradient as a text color rather than element bg. */
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
+  
+    
   }
 
   .popupIndex{
@@ -148,3 +152,7 @@
     padding:10px 10px 15px;
     border-radius: 0px 0px 0px 5px;
   }
+
+div.mapboxgl-popup-content {
+  background:transparent;
+}
