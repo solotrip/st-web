@@ -14,6 +14,8 @@ import {
   fetchExchangeRates,
   exchangeRatesSelector
 } from '../containers/exchange-rates/slice'
+
+import { navigationSelector } from '../../../components/navigation/slice'
 const Map =
   isBrowser &&
   ReactMapboxGl({
@@ -33,9 +35,12 @@ const Content = ({
   detailIndex,
   basePath,
   resetFilters,
-  scrollRef = null
+  scrollRef = null,
+  listScrollRef = null
 }) => {
   const { exchangeRates } = useSelector(exchangeRatesSelector)
+  const { recentItemScrollId } = useSelector(navigationSelector)
+
   const dispatch = useDispatch()
   useEffect(
     () => {
@@ -84,6 +89,7 @@ const Content = ({
 
   const itemsRef = useRef([])
   scrollRef = useRef()
+  listScrollRef = useRef()
 
   const activeHandler = recommendation => {
     setFocusLocation([recommendation.lon, recommendation.lat])
@@ -104,6 +110,17 @@ const Content = ({
         top: 0,
         behavior: 'auto'
       })
+    } else {
+      if (
+        itemsRef &&
+        itemsRef.current &&
+        itemsRef.current.length > 0 &&
+        itemsRef.current.length > recentItemScrollId
+      ) {
+        if (recommendations.length > 0) {
+          itemsRef.current[recentItemScrollId].scrollIntoView()
+        }
+      }
     }
   }
 
@@ -139,7 +156,7 @@ const Content = ({
   if (loading) return <Loader />
 
   const list = (
-    <div ref={scrollRef} className={styles.recommendations}>
+    <div ref={listScrollRef} className={styles.recommendations}>
       {title && <h1 className={styles.title}>{title}</h1>}
       {children}
       {!loading &&
@@ -168,6 +185,7 @@ const Content = ({
               temperatureUnit={preferredTemperature}
               distanceCoefficient={preferredDistanceCoefficient}
               temperaturize={temperaturize}
+              index={i}
             />
           )
         })}

@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './recommendation.module.scss'
 import { HorizontalScroll, Image } from 'components'
+import { useDispatch } from 'react-redux'
 
 import { ReactComponent as Passport } from 'assets/images/new-icons/passport.svg'
 import { ReactComponent as Acommodation } from 'assets/images/new-icons/acommodation.svg'
@@ -19,6 +20,8 @@ import { formatAsMonthDay } from 'utils/date'
 
 import { processRecommendation } from 'utils/recommendation'
 
+import { saveScrollPosition } from '../../../../components/navigation/slice'
+
 const Recommendation = ({
   recommendation,
   query,
@@ -33,7 +36,8 @@ const Recommendation = ({
   distanceUnit = 'km',
   temperatureUnit = '°C',
   distanceCoefficient = 1,
-  temperaturize
+  temperaturize,
+  index
 }) => {
   const {
     sid,
@@ -55,6 +59,8 @@ const Recommendation = ({
     bestFlightCost
   } = recommendation
 
+  const dispatch = useDispatch()
+
   const passports = query.passports || []
 
   const {
@@ -69,6 +75,10 @@ const Recommendation = ({
     minTemp,
     maxTemp
   } = processRecommendation(recommendation, passports)
+
+  const setScrollPosition = () => {
+    dispatch(saveScrollPosition(index))
+  }
 
   return (
     <div
@@ -339,6 +349,7 @@ const Recommendation = ({
               }}
               replace
               className={styles.showDetails}
+              onClick={setScrollPosition}
             >
               Show Details
             </Link>
