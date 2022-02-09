@@ -96,7 +96,33 @@ const RecommendationsContainer = () => {
       ? recommendations[activeRecommendationId].recommendations.findIndex(
         r => r.id === location.pathname.split('/recommendations/r/')[1]
       )
-      : -1
+      : !loading &&
+        location.search.includes(
+          'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+        ) &&
+        location.search.split(
+          'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+        )[1] &&
+        location.search
+          .split(
+            'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+          )[1]
+          .split('&') &&
+        location.search
+          .split(
+            'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+          )[1]
+          .split('&')[0]
+        ? recommendations[activeRecommendationId].recommendations.findIndex(
+          r =>
+            r.sid ===
+              location.search
+                .split(
+                  'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+                )[1]
+                .split('&')[0]
+        )
+        : -1
 
   return (
     <div className="flex-col">
