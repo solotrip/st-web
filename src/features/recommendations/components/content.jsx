@@ -112,12 +112,17 @@ const Content = ({
       })
     } else {
       if (
+        recentItemScrollId &&
         itemsRef &&
         itemsRef.current &&
         itemsRef.current.length > 0 &&
         itemsRef.current.length > recentItemScrollId
       ) {
-        if (recommendations.length > 0) {
+        if (
+          recommendations.length > 0 &&
+          itemsRef.current[recentItemScrollId] !== null &&
+          itemsRef.current[recentItemScrollId] !== undefined
+        ) {
           itemsRef.current[recentItemScrollId].scrollIntoView()
         }
       }
