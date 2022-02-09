@@ -10,8 +10,7 @@ import {
   removeFromTracked,
   trackSelector
 } from 'features/track/slice'
-import { filtersSelector }
-  from 'features/recommendations/containers/filters/slice'
+import { filtersSelector } from 'features/recommendations/containers/filters/slice'
 import { locationSelector } from '../containers/location/slice'
 import { useQuery } from 'utils/hooks/use-query'
 import { Query } from 'components'
@@ -102,47 +101,43 @@ const Header = ({
   }, [])
 
   return (
-    <div className={cx(styles.navbarFixed, {
-      [styles.expanded]: isExpanded,
-      [styles.navbarFixedIos]: Capacitor.getPlatform() === 'ios'
-    }
-    )}
+    <div
+      className={cx(styles.navbarFixed, {
+        [styles.expanded]: isExpanded,
+        [styles.navbarFixedIos]: Capacitor.getPlatform() === 'ios'
+      })}
     >
       <div className={styles.actions}>
-
-        {(backIsVisible && !isExpanded) && (
-          <button
-            className={cx(styles.trackButton, {
-              [styles.active]: !!tracked[recommendationId]
-            })}
-            onClick={goBack}
-            disabled={loading}
-          >
-            <Icon
-              icon="fluent:ios-arrow-ltr-24-regular"
-              color="#3cafeb"
-              height="30"
-              className={styles.bell}
-            />
-          </button>
-        )}
-        {searchIsVisible && (<>
+        {backIsVisible &&
+          !isExpanded && (
             <button
-              className={cx(styles.editSearch,
-                {
-                  [styles.withBack]: backIsVisible,
-                  [styles.exp]: isExpanded
-                })
-              }
+              className={cx(styles.trackButton, {
+                [styles.active]: !!tracked[recommendationId]
+              })}
+              onClick={goBack}
+              disabled={loading}
+            >
+              <Icon
+                icon="fluent:ios-arrow-ltr-24-regular"
+                color="#3cafeb"
+                height="30"
+                className={styles.bell}
+              />
+            </button>
+        )}
+        {searchIsVisible && (
+          <>
+            <button
+              className={cx(styles.editSearch, {
+                [styles.withBack]: backIsVisible,
+                [styles.exp]: isExpanded
+              })}
               onClick={handleExpand}
             >
-              <MdSearch className={styles.searchIcon}/>
-              {query && Object.keys(query).length > 0
-                ? <Query
-                  className={cx(
-                    styles.query,
-                    { [styles.exp]: isExpanded }
-                  )}
+              <MdSearch className={styles.searchIcon} />
+              {query && Object.keys(query).length > 0 ? (
+                <Query
+                  className={cx(styles.query, { [styles.exp]: isExpanded })}
                   history={history}
                   location={location}
                   prefixClassName={styles.prefix}
@@ -152,40 +147,45 @@ const Header = ({
                   maxFiltersDisplayed={2}
                   enableClick={isExpanded}
                 />
-                : 'Search for your dream destination...'}
-              {(query && Object.keys(query).length > 0) &&
-              <MdClose
-                onClick={clearQuery}
-                role="button"
-                className={styles.clearIcon}
-              />}
+              ) : (
+                ' Start your search'
+              )}
+              {query &&
+                Object.keys(query).length > 0 && (
+                  <MdClose
+                    onClick={clearQuery}
+                    role="button"
+                    className={styles.clearIcon}
+                  />
+              )}
             </button>
-            {(trackIsVisible && !isExpanded) && (
-              <button
-                className={cx(styles.trackButton, {
-                  [styles.active]: !!tracked[recommendationId]
-                })}
-                onClick={handleTrack}
-                disabled={loading}
-              >
-                {tracked[recommendationId] ? (
-                  <Icon
-                    icon="fluent:alert-24-regular"
-                    color="#3cafeb"
-                    height="30"
-                    className={styles.bell}
-                  />
-                ) : (
-                  <Icon
-                    icon="fluent:alert-off-24-regular"
-                    color="#3cafeb"
-                    height="30"
-                    className={styles.bell}
-                  />
-                )}
-              </button>
+            {trackIsVisible &&
+              !isExpanded && (
+                <button
+                  className={cx(styles.trackButton, {
+                    [styles.active]: !!tracked[recommendationId]
+                  })}
+                  onClick={handleTrack}
+                  disabled={loading}
+                >
+                  {tracked[recommendationId] ? (
+                    <Icon
+                      icon="fluent:alert-24-regular"
+                      color="#3cafeb"
+                      height="30"
+                      className={styles.bell}
+                    />
+                  ) : (
+                    <Icon
+                      icon="fluent:alert-off-24-regular"
+                      color="#3cafeb"
+                      height="30"
+                      className={styles.bell}
+                    />
+                  )}
+                </button>
             )}
-        </>
+          </>
         )}
       </div>
     </div>
