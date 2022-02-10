@@ -26,13 +26,13 @@
   backdrop-filter: blur(100px);
   height: 58px;
   width: 100%;
-  position: fixed;
+  position: relative;
   background: $navbar-color;
   display: flex;
   top: 0;
   left: 0;
   //border-bottom: 1px solid $navbar-color-border;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #161b22;
 }
 
@@ -41,21 +41,21 @@
   backdrop-filter: blur(100px);
   height: 58px;
   width: 100%;
-  position: fixed;
+  position: relative;
   background: $navbar-color;
   display: flex;
   top: 40px;
   left: 0;
   //border-bottom: 1px solid $navbar-color-border;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #161b22;
 }
 
 .logo {
   //background-color: deeppink;
-  margin-left: 20px;
-  width: 150px;
-
+  
+  width: 120px;
+  padding-top: 90px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -64,6 +64,7 @@
 }
 
 .logoIcon {
+  
   width: 50px;
   height: 50px;
   //background-color: deepskyblue;
@@ -119,13 +120,14 @@
   //height: 300px;
   width: calc(100% - 100px);
   //background-color: cornflowerblue;
-  margin-top: 100px;
+  margin-top: 50px;
   align-items: center;
   align-self: center;
   align-content: center;
   font-family: "Cera pro", "Trebuchet MS", sans-serif;
   background-repeat: no-repeat;
   background-size: cover;
+
 }
 
 .row2 {
@@ -147,11 +149,29 @@
 .row1Title {
   //font-size: 37px;
   font-size: calc(3vw + 26px);
-  font-weight: 700;
+ font-weight: bold;
   text-align: center;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
+  background-image: linear-gradient(to right, #12c2e9, #c471ed, #f8a4aa);
+  background-image: -webkit-linear-gradient(to right, #12c2e9, #c471ed, #f8a4aa);
+
+  display: inline-block;
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  
 }
 
 .row1Subtitle {
@@ -162,8 +182,30 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  //background-color: fuchsia;
+  line-height: 32px;
   max-width: 600px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.row1Subtitle2 {
+  //margin-top: 50px;
+  font-size: 16px;
+  color: rgb(160, 170, 186);
+  font-weight: 400;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  line-height: 32px;
+  max-width: 600px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+.buttonsHolder{
+  display: flex;
+  flex-direction: column;
+  //background-color: #f8a4aa;
+  justify-content: center;
+  width: 100%;
 }
 
 .actionButton {
@@ -187,12 +229,47 @@
   font-weight: 500;
   //transition: 0.6s color2;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 
   animation: pulse 2s infinite;
   color: white;
+  
+}
+
+.actionButton2 {
+  //padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+  //width: 120px;
+  padding-right: 24px;
+  padding-left: 24px;
+  font-size: 18px;
+  line-height: 24px;
+  border-radius: 50px;
+  height: 50px;
+  z-index: 800;
+
+  color: rgb(49, 149, 255);
+
+  font-weight: 500;
+  //transition: 0.6s color2;
+  margin-top: -16px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+
+ 
+  
 }
 //0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4),
 //5px 5px 0px 0px rgba($color: #5e5ce6, $alpha: 0.4)
+
+
 @-webkit-keyframes pulse {
   0% {
     -webkit-box-shadow: 0 0 0 0 rgba($color: #3cafeb, $alpha: 0.4);
@@ -219,9 +296,11 @@
   }
 }
 
+
+
 .videoContainer {
   //background-color: goldenrod;
-  margin-top: 100px;
+  margin-top: 40px;
   width: 100%;
   height: 40vh;
   display: flex;
@@ -259,6 +338,9 @@
   align-content: center;
   justify-content: center;
   //width: 95%;
+} 
+.browseElement {
+  background-color: #5e5ce6;
 }
 
 .featuresHolder {
@@ -267,7 +349,17 @@
   //background-color: goldenrod;
   width: 100%;
   //min-height: 600px;
+  max-width: 1100px;
   margin-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: space-between;
+}
+.slideElementTitle {
+  margin-top: 40px;
+}
+.slideElementTitle2 {
+  margin-top: 40px;
 }
 
 .featuresHolder > div {
@@ -283,8 +375,8 @@
 }
 
 .featureText {
-  //background-color: greenyellow;
-  width: 50%;
+   //background-color: greenyellow;
+  
   //height: 300px;
   align-items: center;
   align-self: center;
@@ -304,6 +396,21 @@
   flex-direction: column;
   // background-color: fuchsia;
   //smax-width: 600px;
+  background-image: linear-gradient(to right, #12c2e9, #c471ed, #f8a4aa);
+  background-image: -webkit-linear-gradient(to right, #12c2e9, #c471ed, #f8a4aa);
+
+  display: inline-block;
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .featureSubtitle {
@@ -317,7 +424,8 @@
   display: flex;
   flex-direction: column;
   //background-color: fuchsia;
-  max-width: 300px;
+  max-width: 400px;
+  line-height: 28px;
 }
 .featureImage {
   //background-color: indianred;
@@ -372,7 +480,9 @@
 }
 .slideElement3 {
   // height: 160px;
-  height: 200px;
+  height: 180px;
+  border-radius: 10px;
+
   margin-right: 20px;
 }
 .slideText {

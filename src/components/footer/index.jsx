@@ -17,9 +17,9 @@ const appDownloader = () => {
   //else show error : App download is mobile-only.
 }
 
-const Footer = () => {
+const Footer = ({ isStatic = false }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={isStatic === true ? styles.staticWrapper : styles.wrapper}>
       <button onClick={appDownloader} className={styles.element}>
         Download the App
       </button>

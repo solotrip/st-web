@@ -12,49 +12,6 @@ import 'react-image-shadow/assets/index.css'
 
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
-let yourspecs = [
-  {
-    link: 'https://source.unsplash.com/5Rt5KhbUp5g/400x300',
-    title: 'Events & Festivals',
-    key: 14
-  },
-  {
-    link: 'https://source.unsplash.com/IQKuHc2lils/400x300',
-    title: 'Acommodation',
-    key: 24
-  },
-  {
-    link: 'https://source.unsplash.com/x2lS3Xl_Lzw/400x300',
-    title: 'Flights',
-    key: 34
-  },
-  {
-    link: 'https://source.unsplash.com/gMJ3tFOLvnA/400x300',
-    title: 'Visa Status',
-    key: 44
-  },
-  {
-    link: 'https://source.unsplash.com/nnzkZNYWHaU/400x300',
-    title: 'Attractions',
-    key: 54
-  },
-  {
-    link: 'https://source.unsplash.com/rnr8D3FNUNY/400x300',
-    title: 'Covid Stats',
-    key: 74
-  },
-  {
-    link: 'https://source.unsplash.com/1lfI7wkGWZ4/400x300',
-    title: 'General Status',
-    key: 84
-  },
-  {
-    link: 'https://source.unsplash.com/ZVprbBmT8QA/400x300',
-    title: 'Cost of Living',
-    key: 64
-  }
-]
-
 let bucketlist = [
   {
     link:
@@ -127,19 +84,11 @@ const HomePage = () => {
     <div className={styles.outer}>
       <div className={styles.navbar}>
         <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <img
-              src="https://ik.imagekit.io/7zlqc1cmihe/nostroke_On5RfkPz2W.png?updatedAt=1629769174155"
-              style={{ width: '150px' }}
-              alt=""
-            />
-          </div>
-          <div className={styles.logoText}/>
-        </div>
-        <div className={styles.login}>
-          <Link to="/login">
-            <button className={styles.button}>login</button>
-          </Link>
+          <img
+            src="https://ik.imagekit.io/7zlqc1cmihe/nostroke_On5RfkPz2W.png?updatedAt=1629769174155"
+            style={{ width: '120px' }}
+            alt=""
+          />
         </div>
       </div>
 
@@ -151,13 +100,18 @@ const HomePage = () => {
             <div>Recommendations</div>
           </div>
           <div className={styles.row1Subtitle}>
-            Recommendations based on events, festivals, accommodation, flights,
-            weather and much more.
-          </div>
+            Get travel updates and recommendations based on restrictions,
+            requirements, events, festivals, costs, weather and much more.
+          </div>{' '}
           <Link to="/onboarding/1">
-            <button className={styles.actionButton}>Get Recommendations</button>
+            <button className={styles.actionButton}>Get Started</button>
+          </Link>
+          <div className={styles.row1Subtitle2}>Already member? </div>
+          <Link to="/login">
+            <button className={styles.actionButton2}>Login</button>
           </Link>
         </div>
+        <div className={styles.row1Subtitle2}>Scroll down to learn more.</div>
       </div>
       {/*<div className={styles.recoDemo}>
         <Content recommendations={[recommendation]} mapEnabled={false} />
@@ -178,84 +132,36 @@ const HomePage = () => {
           your browser does not support video tag.
         </video>
       </div>
-
-      {!isMobile ? (
-        <div className={styles.featuresHolder}>
-          <div className={styles.featureImage}>
-            <div className={styles.arrowHolder}>
-              <div className={styles.arrowLeft}>
-                <FaChevronLeft/>
-              </div>
-              <div className={styles.arrowRight}>
-                <FaChevronRight/>
-              </div>
-            </div>
-            <div className={styles.slideHolder}>
-              {yourspecs.map((spec, index) => (
-                <div key={`${index}-rec`}>
-                  <ImageShadow
-                    src={spec.link}
-                    width={160}
-                    shadowBlur={10}
-                    alt="a"
-                    k
-                  />
-                  <div className={styles.slideText} key={spec.key + '34'}>
-                    {spec.title}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className={styles.featureText}>
-            <div className={styles.featureTitle}>Your Specs.</div>
-            <div className={styles.featureSubtitle}>
-              Choose what you want to see on recommendation.
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.featuresHolder}>
-          <div className={styles.featureText}>
-            <div className={styles.featureTitle}>Your Specs.</div>
-            <div className={styles.featureSubtitle}>
-              Choose what you want to see on recommendation.
-            </div>
-          </div>
-
-          <div className={styles.featureImage}>
-            <div className={styles.arrowHolder}>
-              <div className={styles.arrowLeft}>
-                <FaChevronLeft/>
-              </div>
-              <div className={styles.arrowRight}>
-                <FaChevronRight/>
-              </div>
-            </div>
-            <div className={styles.slideHolder}>
-              {yourspecs.map(spec => (
-                <div key={`${spec.link}-spec`}>
-                  <ImageShadow
-                    src={spec.link}
-                    width={160}
-                    shadowBlur={10}
-                    alt="a"
-
-                  />
-                  <div className={styles.slideText} key={spec.key + '134'}>
-                    {spec.title}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
       <div className={styles.featuresHolder}>
         <div className={styles.featureText}>
-          <div className={styles.featureTitle}>Your Time.</div>
+          <div className={styles.featureTitle}>Browse.</div>
           <div className={styles.featureSubtitle}>
-            Choose your available dates or extended periods for travel.
+            Need some inspiration? Discover when and where you want to go by
+            choosing what is really important for you.
+          </div>
+        </div>
+
+        <div className={styles.featureImage}>
+          <ImageShadow
+            className={styles.calendar}
+            src={
+              'https://ik.imagekit.io/stmedia/tags2_RlueUb_65.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1644520753861'
+            }
+            width={'100%'}
+            shadowBlur={20}
+            alt="a"
+            key="1"
+          />
+        </div>
+      </div>
+
+      <div className={styles.featuresHolder}>
+        <div className={styles.featureText}>
+          <div className={styles.featureTitle}>Select Dates.</div>
+          <div className={styles.featureSubtitle}>
+            You can select from a specific dates or you can select options like
+            'any weekend in March, June, July' or 'a whole week in February'
+            etc.
           </div>
         </div>
         <div className={styles.featureImage}>
@@ -276,31 +182,39 @@ const HomePage = () => {
             <ImageShadow
               className={styles.calendar}
               src={
-                'https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671'
+                'https://ik.imagekit.io/stmedia/Screen_Shot_2022-02-10_at_21.40.31_z2iy-SpdQ.png?ik-sdk-version=javascript-1.4.3&updatedAt=1644518516014'
               }
-              width={'60%'}
+              width={'80%'}
               shadowBlur={10}
               alt="a"
             />
           </div>
           <div className={styles.featureText}>
-            <div className={styles.featureTitle}>Your Recommendations.</div>
-            <div className={styles.featureSubtitle}>Period.</div>
+            <div className={styles.featureTitle}>Get Recommendations.</div>
+            <div className={styles.featureSubtitle}>
+              Your recommendations include information about festivals, major
+              events, visa requirements, test and quarantine status, country
+              restrictions, hotel hostel vacation rental prices etc.{' '}
+            </div>
           </div>
         </div>
       ) : (
         <div className={styles.featuresHolder}>
           <div className={styles.featureText}>
-            <div className={styles.featureTitle}>Your Recommendations.</div>
-            <div className={styles.featureSubtitle}>Period.</div>
+            <div className={styles.featureTitle}>Get Recommendations.</div>
+            <div className={styles.featureSubtitle}>
+              Your recommendations include information about festivals, major
+              events, visa requirements, test and quarantine status, country
+              restrictions, hotel hostel vacation rental prices etc.{' '}
+            </div>
           </div>
           <div className={styles.featureImage}>
             <ImageShadow
               className={styles.calendar}
               src={
-                'https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671'
+                'https://ik.imagekit.io/stmedia/Screen_Shot_2022-02-10_at_21.40.31_z2iy-SpdQ.png?ik-sdk-version=javascript-1.4.3&updatedAt=1644518516014'
               }
-              width={'60%'}
+              width={'80%'}
               shadowBlur={10}
               alt="a"
             />
@@ -309,19 +223,20 @@ const HomePage = () => {
       )}
       <div className={styles.featuresHolder}>
         <div className={styles.featureText}>
-          <div className={styles.featureTitle}>Your Bucketlist.</div>
+          <div className={styles.featureTitle}>Your Wishlist.</div>
           <div className={styles.featureSubtitle}>
-            Prioritize the recommendations from destinations you want to go.
+            Prioritize the destinations you want to go by adding them to your
+            wishlist.
           </div>
         </div>
 
         <div className={styles.featureImage}>
           <div className={styles.arrowHolder}>
             <div className={styles.arrowLeft3}>
-              <FaChevronLeft/>
+              <FaChevronLeft />
             </div>
             <div className={styles.arrowRight3}>
-              <FaChevronRight/>
+              <FaChevronRight />
             </div>
           </div>
           <div className={styles.slideHolder}>
@@ -332,11 +247,8 @@ const HomePage = () => {
                   className={styles.slideElement3}
                   shadowBlur={10}
                   alt="a"
-
                 />
-                <div>
-                  {spec.title}
-                </div>
+                <div className={styles.slideElementTitle2}>{spec.title}</div>
               </div>
             ))}
           </div>
@@ -346,117 +258,48 @@ const HomePage = () => {
       {!isMobile ? (
         <div className={styles.featuresHolder}>
           <div className={styles.featureImage}>
-            <div className={styles.arrowHolder}>
-              <div className={styles.arrowLeft2}>
-                <FaChevronLeft/>
-              </div>
-              <div className={styles.arrowRight2}>
-                <FaChevronRight/>
-              </div>
-            </div>
-            <div className={styles.slideHolder}>
-              {yourspecs.map((spec,i) => (
-                <div key={`${i}-ys`}>
-                  <ImageShadow
-                    src={
-                      'https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671'
-                    }
-                    className={styles.slideElement2}
-                    width={250}
-                    shadowBlur={8}
-                    alt="a"
-                  />
-                </div>
-              ))}
-            </div>
+            <ImageShadow
+              className={styles.calendar}
+              src={
+                'https://ik.imagekit.io/stmedia/Screen_Shot_2022-02-10_at_22.25.15_kshFhdM4b.png?ik-sdk-version=javascript-1.4.3&updatedAt=1644521145299'
+              }
+              width={'80%'}
+              shadowBlur={10}
+              alt="a"
+              key="1"
+            />
           </div>
           <div className={styles.featureText}>
-            <div className={styles.featureTitle}>Infinite Customization.</div>
+            <div className={styles.featureTitle}>Get Updates.</div>
             <div className={styles.featureSubtitle}>
-              You can customize your recommendations with different
-              combinations.
+              Updates, status changes, cancellations. All the things that matter
+              to you.
             </div>
           </div>
         </div>
       ) : (
         <div className={styles.featuresHolder}>
           <div className={styles.featureText}>
-            <div className={styles.featureTitle}>Infinite Customization.</div>
+            <div className={styles.featureTitle}>Get Updates.</div>
             <div className={styles.featureSubtitle}>
-              You can customize your recommendations with different
-              combinations.
+              Updates, status changes, cancellations. All the things that matter
+              to you.
             </div>
           </div>
           <div className={styles.featureImage}>
-            <div className={styles.arrowHolder}>
-              <div className={styles.arrowLeft2}>
-                <FaChevronLeft/>
-              </div>
-              <div className={styles.arrowRight2}>
-                <FaChevronRight/>
-              </div>
-            </div>
-            <div className={styles.slideHolder}>
-              {yourspecs.map((spec, i) => (
-                <div key={`${i}-ys3`}>
-                  <ImageShadow
-                    src={
-                      'https://ik.imagekit.io/7zlqc1cmihe/Ekran_Resmi_2021-08-24_03.43.15_CE4wOz4ST2.png?updatedAt=1629802491671'
-                    }
-                    className={styles.slideElement2}
-                    width={250}
-                    shadowBlur={10}
-                    alt="a"
-                  />
-                </div>
-              ))}
-            </div>
+            <ImageShadow
+              className={styles.calendar}
+              src={
+                'https://ik.imagekit.io/stmedia/Screen_Shot_2022-02-10_at_22.25.15_kshFhdM4b.png?ik-sdk-version=javascript-1.4.3&updatedAt=1644521145299'
+              }
+              width={'80%'}
+              shadowBlur={10}
+              alt="a"
+              key="1"
+            />
           </div>
         </div>
       )}
-      <div className={styles.featuresHolder}>
-        <div className={styles.featureText}>
-          <div className={styles.featureTitle}>Get Notifications.</div>
-          <div className={styles.featureSubtitle}>
-            Updates, status changes, cancellations of events and flights. All
-            the things that matter to you.
-          </div>
-        </div>
-        <div className={styles.featureImage}>
-          <ImageShadow
-            className={styles.calendar}
-            src={
-              'https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.36.12_Ac3kgVKY5-.png?updatedAt=1629805024074'
-            }
-            width={'60%'}
-            shadowBlur={10}
-            alt="a"
-            key="1"
-          />
-          <ImageShadow
-            className={styles.calendar}
-            src={
-              'https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.35.29_laUsGjaOK.png?updatedAt=1629805023868'
-            }
-            width={'60%'}
-            shadowBlur={10}
-            style={{ paddingTop: '20px' }}
-            alt="a"
-            key="2"
-          />
-          <ImageShadow
-            className={styles.calendar}
-            src={
-              'https://ik.imagekit.io/7zlqc1cmihe/aa/Ekran_Resmi_2021-08-24_14.35.55_79AdExil-7V.png?updatedAt=1629805024034'
-            }
-            width={'60%'}
-            shadowBlur={10}
-            style={{ paddingTop: '20px' }}
-            alt="a"
-            key="3"
-          />
-        </div>
-      </div>
 
       <div className={styles.wrapper}>
         <div className={styles.row2}>
@@ -469,7 +312,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <Footer/>
+      <Footer isStatic={true} />
     </div>
   )
 }

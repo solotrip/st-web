@@ -593,7 +593,7 @@ export const currencies = [
   },
   {
     value: 'TOP',
-    label: 'Tongan Pa\'anga, $'
+    label: "Tongan Pa'anga, $"
   },
   {
     value: 'TTD',

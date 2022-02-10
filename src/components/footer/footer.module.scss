@@ -14,6 +14,22 @@
     display: none;
   }
 }
+.staticWrapper { 
+  display: flex;
+  position: relative;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 1000px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  @include xs-to-md {
+    display: none;
+  }
+}
 
 .element {
   flex: 1;
