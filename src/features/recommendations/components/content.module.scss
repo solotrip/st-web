@@ -127,7 +127,9 @@
     display: flex;
     flex-direction: row;
     padding:10px 10px 15px;
-    
+    background-image: -webkit-linear-gradient(90deg, #aeb9ea, #3cafeb);
+    background-image: -o-linear-gradient(90deg, #aeb9ea, #3cafeb);
+    background-image: -moz-linear-gradient(90deg, #aeb9ea, #3cafeb);
     background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
     display: inline-block;
     /* Set the background size and repeat properties. */
