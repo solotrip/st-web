@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
 import { MAPBOX_TOKEN } from 'constants/index'
-import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
+import ReactMapboxGl, { Marker, Popup, Image, Source } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
@@ -238,11 +239,12 @@ const Content = ({
                     recommendations[detailIndex].lat
                   ]
               }
-              zoom={[10]}
+              zoom={detailIndex === -1 ? [10] : [12]}
               pitch={[30]}
             >
               {!loading &&
                 recommendations.length > 0 &&
+                detailIndex === -1 &&
                 recommendations.map((recommendation, index) => (
                   <div key={recommendation.lon}>
                     <Marker
@@ -276,6 +278,37 @@ const Content = ({
                     </Popup>
                   </div>
                 ))}
+              {!loading &&
+                recommendations.length > 0 &&
+                detailIndex !== -1 &&
+                recommendations[detailIndex] &&
+                recommendations[detailIndex]['top_pois'] &&
+                recommendations[detailIndex]['top_pois'].map(
+                  (poi, poi_index) => (
+                    <div key={poi.id}>
+                      <Popup
+                        offset={[0, 0]}
+                        coordinates={{
+                          lng: poi.location.lng,
+                          lat: poi.location.lat
+                        }}
+                      >
+                        <div className={styles.popupContentNoEvent}>
+                          <div className={styles.colorStrip} />
+
+                          <div className={styles.popupContent2}>
+                            <div className={styles.popupIndex}>
+                              {' '}
+                              {poi_index + 1}
+                            </div>
+
+                            <div className={styles.popupInner}>{poi.name}</div>
+                          </div>
+                        </div>
+                      </Popup>
+                    </div>
+                  )
+                )}
             </Map>
           </div>
       )}

@@ -186,10 +186,12 @@ hr {
 
 div.mapboxgl-popup-content {
   background:transparent;
+  pointer-events: none;
 }
 
 div.mapboxgl-popup-tip {
   border: 10px solid transparent;
+  pointer-events: none;
 }
 
 .mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {

@@ -109,6 +109,22 @@
    pointer-events:auto
   }
 
+  .popupContentNoEvent{
+    position:relative;
+    background: #25262c;
+    font-size: 18px;
+    border-radius:5px;
+    box-shadow:0 1px 2px rgba(0,0,0,.1);
+    //padding:10px 10px 15px;
+    pointer-events:none
+   }
+
+   .popupImage {
+     width: 60px;
+     height: 60px;
+     background-color: yellowgreen;
+   }
+
   .colorStrip {
     width: 100%;
     height: 10px;
