@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react'
 import { SheetWrapper, SearchInput } from 'components'
 import styles from './location.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
+import { uniqBy, includes } from 'lodash'
 import {
   fetchCurrentLocation,
   locationSelector,
@@ -26,9 +27,12 @@ const LocationContainer = () => {
   const query = useQuery()
   const history = useHistory()
 
-  useEffect(() => {
-    dispatch(fetchCurrentLocation())
-  }, [dispatch])
+  useEffect(
+    () => {
+      dispatch(fetchCurrentLocation())
+    },
+    [dispatch]
+  )
 
   const handleSearch = q => {
     dispatch(searchLocation({ query: q }))
@@ -71,7 +75,10 @@ const LocationContainer = () => {
           />
           <div className={styles.list}>
             {!errorCurrentLocation &&
-              searchQuery === '' && (
+              searchQuery === '' &&
+              !options.some(
+                option => option.fullname_en === currentLocOption.fullname_en
+              ) && (
                 <button
                   className={styles.item}
                   key={'loc-current'}
@@ -82,16 +89,17 @@ const LocationContainer = () => {
                 >
                   {!currentLocOption
                     ? 'Fetching current location...'
-                    : currentLocOption.fullname_en}
+                    : currentLocOption.fullname_en}{' '}
+                  bb
                 </button>
             )}
-            {options.map(o => (
+            {uniqBy(options, 'fullname_en').map(o => (
               <button
                 className={styles.item}
                 key={`loc-${o.lat}-${o.lon}`}
                 onClick={() => handleChange(o)}
               >
-                {o.fullname_en}
+                {o.fullname_en} 'aa'
               </button>
             ))}
           </div>
