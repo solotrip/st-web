@@ -90,7 +90,6 @@ const LocationContainer = () => {
                   {!currentLocOption
                     ? 'Fetching current location...'
                     : currentLocOption.fullname_en}{' '}
-                  bb
                 </button>
             )}
             {uniqBy(options, 'fullname_en').map(o => (
@@ -99,7 +98,7 @@ const LocationContainer = () => {
                 key={`loc-${o.lat}-${o.lon}`}
                 onClick={() => handleChange(o)}
               >
-                {o.fullname_en} 'aa'
+                {o.fullname_en}
               </button>
             ))}
           </div>
