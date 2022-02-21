@@ -16,7 +16,7 @@ const Footer = ({ onNext, nextEnabled }) => {
     if (indexNumber < 2) {
       history.push(`/onboarding/${indexNumber + 1}`)
     } else {
-      history.push('/recommendations')
+      history.push('/browse')
     }
   }
 
