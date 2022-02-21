@@ -61,7 +61,7 @@ const Recommendation = ({
 
   const dispatch = useDispatch()
 
-  const passports = query.passports || []
+  const passports = query && query.passports ? query.passports : []
 
   const {
     visaText,
