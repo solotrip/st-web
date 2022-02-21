@@ -34,7 +34,7 @@
 }
 
 .container {
-  height: auto;
+  height: fit-content;
   max-height: 0;
   overflow: hidden;
   -webkit-transition: all 0.1s ease-out;

@@ -75,6 +75,8 @@
 }
 
 .labelContainer {
-  display: inline-flex;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   align-items: center;
 }
