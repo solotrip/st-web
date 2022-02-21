@@ -52,7 +52,7 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
           </div>
           <Button text="Login" icon={MdChevronRight} />
           <Link to="signup" className={styles.link}>
-            New to Solotrip? <span>Join now!</span>
+            New to Pulfy? <span>Join now!</span>
           </Link>
         </form>
         <div className={styles.socialButtons}>
