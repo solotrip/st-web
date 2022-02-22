@@ -9,25 +9,39 @@ import { ReactComponent as EventsIcon } from 'assets/images/new-icons/events.svg
 import { Card } from 'components'
 import { capitalize as _capitalize } from 'lodash'
 import { NOTIFICATION_TYPES } from 'constants/index'
+import qs from 'qs'
 
 const Notification = ({ notification }) => {
   const { content, body, data } = notification
-  const subTitle = (data.type === NOTIFICATION_TYPES.RECOMMENDATION || data.type === NOTIFICATION_TYPES.WISHLIST) && content.new && content.new.country ? (
-    <>
-      <div>
-        {content.new.country.emoji_flag}
-      </div>
-      {' '}
-      <div>{content.new.country.name}</div>
-    </>) : <></>
+  const subTitle =
+    (data.type === NOTIFICATION_TYPES.RECOMMENDATION ||
+      data.type === NOTIFICATION_TYPES.WISHLIST) &&
+    content.new &&
+    content.new.country ? (
+        <>
+        <div>{content.new.country.emoji_flag}</div>{' '}
+        <div>{content.new.country.name}</div>
+        </>
+      ) : (
+        <></>
+      )
+
+  const queryString = content.query
   return (
-    <Card type={`${_capitalize(data.type)} Update`}
-          title={(data.type === NOTIFICATION_TYPES.RECOMMENDATION || data.type === NOTIFICATION_TYPES.WISHLIST) && content.new ? content.new.name : ''}
-          subTitle={subTitle}
+    <Card
+      type={`${_capitalize(data.type)} Update`}
+      title={
+        (data.type === NOTIFICATION_TYPES.RECOMMENDATION ||
+          data.type === NOTIFICATION_TYPES.WISHLIST) &&
+        content.new
+          ? content.new.name
+          : ''
+      }
+      subTitle={subTitle}
     >
       <div className={styles.contentElement}>
         <div className={styles.elementIcon}>
-          <Calendar/>
+          <Calendar />
         </div>
         <div className={styles.elementText}>
           {formatAsMonthDay(content.new.startDate)}
@@ -38,21 +52,23 @@ const Notification = ({ notification }) => {
       </div>
       <div className={styles.contentElement}>
         <div className={styles.elementIcon}>
-          <EventsIcon/>
+          <EventsIcon />
         </div>
         <div className={styles.elementText}>{body}</div>
       </div>
 
       <div className={styles.contentElement}>
         <div className={styles.elementIcon}>
-          <Time/>
+          <Time />
         </div>
         <div className={styles.elementText}>
           Updated {getTimeDiffString(notification.updatedAt)}
         </div>
       </div>
 
-      <Link to={'/recommendations/recommendation/'}>
+      <Link
+        to={{ pathname: '/recommendations', search: qs.stringify(queryString) }}
+      >
         <button className={styles.showDetails}>Show Details</button>
       </Link>
     </Card>
