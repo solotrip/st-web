@@ -13,7 +13,7 @@ export const SettingsRoute = () => (
   <Route path="/:path/preferences">
     <OnboardedRoutesWrapper>
       <PreferencesContainer page={PreferencesPage} isSettings>
-        <SettingsContainer showLogout/>
+        <SettingsContainer showLogout />
       </PreferencesContainer>
     </OnboardedRoutesWrapper>
   </Route>
@@ -25,10 +25,10 @@ export const OnboardingRoutes = () => (
       <PreferencesContainer page={OnboardingPage}>
         <Switch>
           <Route path="/onboarding/1">
-            <AreaClusterContainer/>
+            <AreaClusterContainer />
           </Route>
           <Route path="/onboarding/2">
-            <OnboardingCompleteContainer/>
+            <OnboardingCompleteContainer />
           </Route>
         </Switch>
       </PreferencesContainer>

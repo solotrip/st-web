@@ -5,23 +5,35 @@ import styles from './sheet-wrapper.module.scss'
 import Sheet from 'react-modal-sheet'
 import { FiX as CloseIcon } from 'react-icons/fi'
 import Footer from './footer'
+import qs from 'qs'
+
+import { useSelector } from 'react-redux'
+import { recentQueriesSelector } from '../../reducers/recentQueriesSlice'
 
 const SheetWrapper = ({ children, ...rest }) => {
   const { path } = useParams()
   const history = useHistory()
   const location = useLocation()
+  const recentQueries = useSelector(recentQueriesSelector)
 
   const closeSheet = useCallback(
     () => {
-      console.log(' path is: ', path)
-      if (path) {
-        console.log('option1')
+      if (
+        path &&
+        !history.location.pathname.split('/').includes('preferences')
+      ) {
         history.replace({ pathname: `/${path}`, search: location.search })
+      } else if (
+        path &&
+        history.location.pathname.split('/').includes('preferences') &&
+        recentQueries.items &&
+        recentQueries.items.length > 0
+      ) {
+        history.replace({
+          pathname: '/recommendations',
+          search: qs.stringify(recentQueries.items[0])
+        })
       } else if (history.location.pathname.split('/').includes('preferences')) {
-        console.log('option2')
-
-        console.log('location here is this:', location)
-        console.log('split: ', history.location.pathname)
         history.replace({
           pathname: location.pathname
             .split('/')
@@ -34,16 +46,11 @@ const SheetWrapper = ({ children, ...rest }) => {
         history.location.search &&
         history.location.search !== ''
       ) {
-        console.log('option3')
         history.replace({
           pathname: '/recommendations',
           search: history.location.search
         })
       } else {
-        console.log('option4')
-
-        console.log('split2: ', history.location.pathname)
-        console.log('split2 location: ', history.location.search)
         history.replace({ pathname: '/browse', search: '' })
       }
     },
