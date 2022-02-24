@@ -83,7 +83,7 @@ const Recommendation = ({
   return (
     <div
       onMouseEnter={() => {
-        activeHandler(sid)
+        //activeHandler(sid)
       }}
       className={styles.recommendationCard2}
       ref={refHolder}

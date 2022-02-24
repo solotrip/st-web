@@ -84,6 +84,9 @@ const Content = ({
       : 1
   const history = useHistory()
   const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
+  const [southWest, setSouthWest] = useState([-0.118092, 51.509865])
+  const [northEast, setNorthEast] = useState([-0.118092, 51.509865])
+
   const [mapboxTheme] = useState(
     'mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj'
   )
@@ -159,6 +162,39 @@ const Content = ({
     [queryFunction]
   )
 
+  useEffect(
+    () => {
+      if (detailIndex === -1 && recommendations.length > 0) {
+        let lats = []
+        let lons = []
+        recommendations.map(recommendation => {
+          lats.push(recommendation.lat)
+          lons.push(recommendation.lon)
+        })
+        setSouthWest([Math.min(...lons), Math.min(...lats)])
+        setNorthEast([Math.max(...lons), Math.max(...lats)])
+      }
+      if (
+        detailIndex !== -1 &&
+        recommendations.length > 0 &&
+        recommendations[detailIndex] &&
+        recommendations[detailIndex]['top_pois']
+      ) {
+        let lats = []
+        let lons = []
+
+        recommendations[detailIndex]['top_pois'].map(poi => {
+          lats.push(poi.location.lat)
+          lons.push(poi.location.lng)
+        })
+        setSouthWest([Math.min(...lons), Math.min(...lats)])
+        setNorthEast([Math.max(...lons), Math.max(...lats)])
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [recommendations]
+  )
+
   if (loading) return <Loader />
 
   const list = (
@@ -181,7 +217,7 @@ const Content = ({
               queryString={queryString}
               recommendation={recommendation}
               user={user}
-              activeHandler={() => activeHandler(recommendation)}
+              //activeHandler={() => activeHandler(recommendation)}
               toggleWishlist={toggleWishlist}
               wishlisted={!!wishlistedIds[recommendation.id]}
               basePath={basePath}
@@ -223,23 +259,17 @@ const Content = ({
       )}
 
       {mapEnabled &&
-        isBrowser && (
+        isBrowser &&
+        recommendations.length > 0 && (
           <div className={styles.mapbox}>
             <Map
               style={mapboxTheme}
               containerStyle={{
-                height: '100vh',
+                height: '100%',
                 width: '100%'
               }}
-              center={
-                detailIndex === -1
-                  ? [focusLocation[0], focusLocation[1]]
-                  : [
-                    recommendations[detailIndex].lon,
-                    recommendations[detailIndex].lat
-                  ]
-              }
-              zoom={detailIndex === -1 ? [10] : [12]}
+              fitBounds={[southWest, northEast]}
+              fitBoundsOptions={{ padding: 100 }}
               pitch={[30]}
             >
               {!loading &&

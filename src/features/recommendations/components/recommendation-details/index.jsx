@@ -65,7 +65,7 @@ const Details = ({
           className={wishlisted ? styles.heartFilled : styles.heart}
           onClick={() =>
             toggleWishlist({
-              query,
+              query: query.query,
               recommendation
             })
           }
