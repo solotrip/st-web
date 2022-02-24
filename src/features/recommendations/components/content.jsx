@@ -178,14 +178,28 @@ const Content = ({
         detailIndex !== -1 &&
         recommendations.length > 0 &&
         recommendations[detailIndex] &&
-        recommendations[detailIndex]['top_pois']
+        recommendations[detailIndex]['top_pois'] &&
+        recommendations[detailIndex]['top_pois'].length > 0
       ) {
         let lats = []
         let lons = []
 
         recommendations[detailIndex]['top_pois'].map(poi => {
-          lats.push(poi.location.lat)
-          lons.push(poi.location.lng)
+          if (
+            poi.location.lat &&
+            poi.location.lat !== null &&
+            poi.location.lat <= 90 &&
+            poi.location.lat >= -90
+          )
+            lats.push(poi.location.lat)
+
+          if (
+            poi.location.lng &&
+            poi.location.lng !== null &&
+            poi.location.lng <= 180 &&
+            poi.location.lng >= -180
+          )
+            lons.push(poi.location.lng)
         })
         setSouthWest([Math.min(...lons), Math.min(...lats)])
         setNorthEast([Math.max(...lons), Math.max(...lats)])
