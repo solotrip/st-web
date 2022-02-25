@@ -61,12 +61,13 @@
 
 .logo {
   position: absolute;
-  height: 100px;
-  width: 200px;
-  padding: 16px;
+  height: 56.5px;
+  width: 125px;
+  margin: 16px;
+  
   background-size: cover;
   background-image: $logo;
-  
-  margin-left: auto;
-  margin-right: auto;
+  @include md-to-lg {
+    margin: 16px 8px;
+  }
 }

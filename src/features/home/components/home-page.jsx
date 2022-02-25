@@ -85,7 +85,7 @@ const HomePage = () => {
       <div className={styles.navbar}>
         <div className={styles.logo}>
           <img
-            src="https://ik.imagekit.io/rfjpogvdn8p/verticalhome_YFbUeTFqP.png?ik-sdk-version=javascript-1.4.3&updatedAt=1645565010470"
+            src="https://ik.imagekit.io/7zlqc1cmihe/nostroke_On5RfkPz2W.png?updatedAt=1629769174155"
             style={{ width: '90px' }}
             alt=""
           />
