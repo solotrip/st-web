@@ -13,7 +13,7 @@ import { locationSelector }
 
 const BrowseContainer = () => {
   const { loading, browseItems } = useSelector(browseSelector)
-  const { items: recentQueries } = useSelector(recentQueriesSelector)
+  const recentQueries = useSelector(recentQueriesSelector)
   const { filtersDict } = useSelector(filtersSelector)
   const { locations } = useSelector(locationSelector)
   const dispatch = useDispatch()
