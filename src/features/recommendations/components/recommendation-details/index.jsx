@@ -6,6 +6,8 @@ import styles from './recommendation-details.module.scss'
 import activityImages from './activity-images.json'
 import moment from 'moment'
 
+import useThemeState from 'utils/hooks/use-theme-state'
+
 import { ReactComponent as Passport } from 'assets/images/new-icons/passport.svg'
 import { ReactComponent as Acommodation } from 'assets/images/new-icons/acommodation.svg'
 import { ReactComponent as Calendar } from 'assets/images/new-icons/calendar.svg'
@@ -35,6 +37,7 @@ const Details = ({
   temperaturize
 }) => {
   const { startDate, endDate } = recommendation
+  const [appTheme] = useThemeState()
 
   const {
     visaText,
@@ -251,9 +254,11 @@ const Details = ({
                   <div key={`event-${event.eid}`} className={styles.slide}>
                     <Image
                       src={
-                        event.images &&
-                        event.images.length > 0 &&
-                        event.images[0]
+                        event.images && event.images.length > 0
+                          ? event.images[0]
+                          : appTheme !== 'light'
+                            ? 'https://ik.imagekit.io/rfjpogvdn8p/darkplaceholder_oP8oGnR_A.png?ik-sdk-version=javascript-1.4.3&updatedAt=1646003262784'
+                            : 'https://ik.imagekit.io/rfjpogvdn8p/lightplaceholder_K7Q0Pfos6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1646003263016'
                       }
                       className={styles.slideImage}
                       width={200}

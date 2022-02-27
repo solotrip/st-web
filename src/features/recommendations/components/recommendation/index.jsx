@@ -4,6 +4,8 @@ import styles from './recommendation.module.scss'
 import { HorizontalScroll, Image } from 'components'
 import { useDispatch } from 'react-redux'
 
+import useThemeState from 'utils/hooks/use-theme-state'
+
 import { ReactComponent as Passport } from 'assets/images/new-icons/passport.svg'
 import { ReactComponent as Acommodation } from 'assets/images/new-icons/acommodation.svg'
 import { ReactComponent as Calendar } from 'assets/images/new-icons/calendar.svg'
@@ -79,6 +81,9 @@ const Recommendation = ({
   const setScrollPosition = () => {
     dispatch(saveScrollPosition(index))
   }
+
+  const [appTheme] = useThemeState()
+  console.log('theme state is:', appTheme)
 
   return (
     <div
@@ -322,9 +327,13 @@ const Recommendation = ({
                 <div key={`${sid}-poi-${event.id}`} className={styles.slide}>
                   <Image
                     src={
-                      event.images && event.images.length > 0 && event.images[0]
+                      event.images && event.images.length > 0
+                        ? event.images[0]
+                        : appTheme !== 'light'
+                          ? 'https://ik.imagekit.io/rfjpogvdn8p/darkplaceholder_oP8oGnR_A.png?ik-sdk-version=javascript-1.4.3&updatedAt=1646003262784'
+                          : 'https://ik.imagekit.io/rfjpogvdn8p/lightplaceholder_K7Q0Pfos6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1646003263016'
                     }
-                    className={styles.slideImage}
+                    className={styles.slideImageEve}
                     width={200}
                     height={120}
                     alt={event.title}
