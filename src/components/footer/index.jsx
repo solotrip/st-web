@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styles from './footer.module.scss'
-import { isBrowser, isIOS, isAndroid } from 'react-device-detect'
+import { isIOS, isAndroid } from 'react-device-detect'
 
 //Change it later
 const appStoreLink = 'https://apps.apple.com/us/app/slack/id618783545'

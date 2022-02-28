@@ -138,7 +138,8 @@ export const processRecommendation = (recommendation, passports = []) => {
 
     //Adding the general weather.
     if (recommendation.climate.humidity && recommendation.climate.rainy_days) {
-      weatherText = `Rainy days: ${recommendation.climate.rainy_days}, humidity ${recommendation.climate.humidity}`
+      weatherText = `Rainy days: ${recommendation.climate.rainy_days}, `+
+        `humidity ${recommendation.climate.humidity}`
     }
 
     //Adding the mask status.

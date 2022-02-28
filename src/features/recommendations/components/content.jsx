@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
 import { MAPBOX_TOKEN } from 'constants/index'
-import ReactMapboxGl, { Marker, Popup, Image, Source } from 'react-mapbox-gl'
+import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
@@ -83,7 +83,6 @@ const Content = ({
       ? exchangeRates[preferredCurrency] / exchangeRates['USD']
       : 1
   const history = useHistory()
-  const [focusLocation, setFocusLocation] = useState([-0.118092, 51.509865])
   const [southWest, setSouthWest] = useState([-0.118092, 51.509865])
   const [northEast, setNorthEast] = useState([-0.118092, 51.509865])
 
@@ -95,17 +94,12 @@ const Content = ({
   scrollRef = useRef()
   listScrollRef = useRef()
 
-  const activeHandler = recommendation => {
-    setFocusLocation([recommendation.lon, recommendation.lat])
-  }
-
   const openDetails = recommendation => {
     const { queryString } = queryFunction(recommendation)
     history.replace({
       pathname: `${basePath}/r/${recommendation.id}`,
       search: queryString
     })
-    setFocusLocation([recommendation.lon, recommendation.lat])
   }
 
   const scrollToTop = () => {
@@ -135,15 +129,6 @@ const Content = ({
 
   useEffect(
     () => {
-      itemsRef.current = itemsRef.current.slice(0, recommendations.length)
-      if (recommendations.length > 0) {
-        activeHandler(recommendations[0])
-      }
-    },
-    [recommendations]
-  )
-  useEffect(
-    () => {
       if (recommendations.length > 0) {
         scrollToTop()
       }
@@ -152,15 +137,6 @@ const Content = ({
     [recommendations]
   )
 
-  useEffect(
-    () => {
-      const { query } = queryFunction()
-      if (query && query.lon && query.lat) {
-        setFocusLocation([parseFloat(query.lon), parseFloat(query.lat)])
-      }
-    },
-    [queryFunction]
-  )
 
   useEffect(
     () => {
@@ -186,17 +162,13 @@ const Content = ({
 
         recommendations[detailIndex]['top_pois'].map(poi => {
           if (
-            poi.location.lat &&
-            poi.location.lat !== null &&
-            poi.location.lat <= 90 &&
+            poi.location.lat && poi.location.lat <= 90 &&
             poi.location.lat >= -90
           )
             lats.push(poi.location.lat)
 
           if (
-            poi.location.lng &&
-            poi.location.lng !== null &&
-            poi.location.lng <= 180 &&
+            poi.location.lng && poi.location.lng <= 180 &&
             poi.location.lng >= -180
           )
             lons.push(poi.location.lng)
@@ -328,7 +300,7 @@ const Content = ({
                 recommendations[detailIndex] &&
                 recommendations[detailIndex]['top_pois'] &&
                 recommendations[detailIndex]['top_pois'].map(
-                  (poi, poi_index) => (
+                  (poi, poiIndex) => (
                     <div key={poi.id}>
                       <Popup
                         offset={[0, 0]}
@@ -343,7 +315,7 @@ const Content = ({
                           <div className={styles.popupContent2}>
                             <div className={styles.popupIndex}>
                               {' '}
-                              {poi_index + 1}
+                              {poiIndex + 1}
                             </div>
 
                             <div className={styles.popupInner}>{poi.name}</div>

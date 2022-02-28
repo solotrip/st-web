@@ -20,7 +20,7 @@ const ListItem = ({ name, location, startDate, endDate, link, image }) => (
     {image &&
     <Image
       src={image}
-      containerClassName={styles.image}
+      className={styles.image}
       width={300}
       height={150}
       alt={name}

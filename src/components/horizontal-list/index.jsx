@@ -22,20 +22,25 @@ const HorizontalList = ({
   items,
   title,
   className,
-  itemClassName
+  itemClassName,
+  slidesPerView = 'auto'
 }) => {
 
+  const hideControls = (slidesPerView !== 'auto'
+    && items.length <= slidesPerView) || items.length <= 1
   return (
     <Swiper
       spaceBetween={16}
       className={cn(styles.container, { [className]: !!className })}
-      slidesPerView="auto"
+      slidesPerView={slidesPerView}
       rewind
     >
 
       <div className={styles.header} slot="container-start">
         <h2 className={styles.title}>{title}</h2>
-        <div className={styles.arrows}>
+        <div
+          className={cn(styles.arrows, { [styles.hidden]: hideControls })}
+        >
           <ControlButton>
             <IosArrowLtr24Regular className={styles.arrow}/>
           </ControlButton>

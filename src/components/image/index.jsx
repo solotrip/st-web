@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { BlurhashCanvas } from 'react-blurhash'
 import cn from 'classnames'
 import styles from './image.module.scss'
+import { IMAGE_BASE } from 'constants/urls'
 
 const Image = ({
   blurHash,
@@ -11,38 +12,44 @@ const Image = ({
   alt,
   className,
   containerClassName,
+  src,
   ...props
 }) => {
   const [loaded, setLoaded] = useState(false)
   const placeholder = blurHash ? <BlurhashCanvas
-      className={cn([styles.placeholder, className])}
+      className={styles.placeholder}
       hash={blurHash}
       width={Math.floor(width / height * 100)}
       height={100}
       punch={1}
   /> :
-    <div className={cn([styles.placeholder, className])}/>
+    <div className={styles.placeholder}/>
   const handleLoad = () => {
     setLoaded(true)
   }
+
+  const url = (src && src.startsWith('http')) ? src : `${IMAGE_BASE}${src}`
   return (
     <div
       className={cn([
         styles.container,
-        containerClassName,
+        className,
         { [styles.loaded]: loaded }
       ])}
     >
-      {!loaded &&
-      <div className={styles.placeholderContainer}>{placeholder}</div>}
-      <div className={styles.imageContainer}>
-        <img
-          className={cn(styles.image, className,
-            { [styles.notLoaded]: !loaded })}
-          alt={alt} {...props}
-          onLoad={handleLoad}
-        />
-      </div>
+      {
+        (!loaded || !src) &&
+        placeholder
+      }
+      {src &&
+      <img
+        className={cn(styles.image,
+          { [styles.notLoaded]: !loaded })}
+        src={url}
+        alt={alt} {...props}
+        onLoad={handleLoad}
+      />
+      }
     </div>
   )
 }

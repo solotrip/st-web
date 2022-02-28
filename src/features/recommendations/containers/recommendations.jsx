@@ -30,7 +30,6 @@ const RecommendationsContainer = () => {
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
-  const { exchangeRates } = useSelector(exchangeRatesSelector)
   const dispatch = useDispatch()
 
   useEffect(

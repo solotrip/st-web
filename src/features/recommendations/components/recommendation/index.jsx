@@ -1,22 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './recommendation.module.scss'
-import { HorizontalScroll, Image } from 'components'
+import { HorizontalList, Image } from 'components'
 import { useDispatch } from 'react-redux'
+import cn from 'classnames'
 
-import useThemeState from 'utils/hooks/use-theme-state'
+import {
+  Accommodation,
+  Attraction,
+  Calendar,
+  Cloud,
+  EventsIcon,
+  Flights,
+  Food,
+  Passport,
+  Quarantine,
+  Vaccine
+} from 'assets/images/new-icons'
 
-import { ReactComponent as Passport } from 'assets/images/new-icons/passport.svg'
-import { ReactComponent as Acommodation } from 'assets/images/new-icons/acommodation.svg'
-import { ReactComponent as Calendar } from 'assets/images/new-icons/calendar.svg'
-import { ReactComponent as Flights } from 'assets/images/new-icons/flights.svg'
-import { ReactComponent as Vaccine } from 'assets/images/new-icons/vaccine.svg'
-import { ReactComponent as Quarantine } from 'assets/images/new-icons/quarantine.svg'
-import { ReactComponent as Attraction } from 'assets/images/new-icons/attraction.svg'
-import { ReactComponent as Cloud } from 'assets/images/new-icons/cloud.svg'
-
-import { ReactComponent as EventsIcon } from 'assets/images/new-icons/events.svg'
-import { ReactComponent as Food } from 'assets/images/new-icons/food.svg'
 
 import { formatAsMonthDay } from 'utils/date'
 
@@ -73,7 +74,6 @@ const Recommendation = ({
     unvaccinatedQuarantineText,
     restaurantText,
     attractionsText,
-    temperatureText,
     minTemp,
     maxTemp
   } = processRecommendation(recommendation, passports)
@@ -81,9 +81,6 @@ const Recommendation = ({
   const setScrollPosition = () => {
     dispatch(saveScrollPosition(index))
   }
-
-  const [appTheme] = useThemeState()
-  console.log('theme state is:', appTheme)
 
   return (
     <div
@@ -94,12 +91,13 @@ const Recommendation = ({
       ref={refHolder}
     >
       {' '}
-      <div className={styles.colorStrip} />
+      <div className={styles.colorStrip}/>
       <div className={styles.cardContent}>
         <div className={styles.header}>
           <div className={styles.headerLine}>
             {' '}
-            <div className={styles.headerUpLine}> Recommendation</div>{' '}
+            <div className={styles.headerUpLine}> Recommendation</div>
+            {' '}
             <button
               className={wishlisted ? styles.heartFilled : styles.heart}
               onClick={() =>
@@ -112,21 +110,22 @@ const Recommendation = ({
           </div>
           <div className={styles.headerLine}>
             {' '}
-            <div className={styles.headerTitle}>{name}</div>{' '}
+            <div className={styles.headerTitle}>{name}</div>
+            {' '}
             <div className={styles.country}>
               <div>{country.emoji_flag}</div>
               &nbsp;
               <div>{country.name}</div>
             </div>
           </div>
-          <hr className={styles.hr} />
+          <hr className={styles.hr}/>
         </div>
 
         <div className={styles.content}>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Calendar />
+              <Calendar/>
             </div>
             <div className={styles.elementText}>
               {formatAsMonthDay(startDate)}
@@ -138,14 +137,14 @@ const Recommendation = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Passport />
+              <Passport/>
             </div>
             <div className={styles.elementText}>{visaText}</div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Cloud />
+              <Cloud/>
             </div>
             <div className={styles.elementText}>
               min {temperaturize(minTemp)}
@@ -159,11 +158,12 @@ const Recommendation = ({
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Acommodation />
+                <Accommodation/>
               </div>
               <div className={styles.elementText}>
                 Hotel prices range from{' '}
-                {Math.floor(hotelPriceMin * currencyCoefficient)} {currency} to{' '}
+                {Math.floor(hotelPriceMin * currencyCoefficient)
+                } {currency} to{' '}
                 {Math.floor(hotelPriceMax * currencyCoefficient)} {currency}.
               </div>
             </div>
@@ -172,7 +172,7 @@ const Recommendation = ({
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
-                  <Acommodation />
+                  <Accommodation/>
                 </div>
                 <div className={styles.elementText}>
                   Average Hotel price is{' '}
@@ -186,7 +186,7 @@ const Recommendation = ({
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Acommodation />
+                <Accommodation/>
               </div>
               <div className={styles.elementText}>
                 Hostel prices range from ${Math.floor(hostelPriceMin)} to{' '}
@@ -198,7 +198,7 @@ const Recommendation = ({
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
-                  <Acommodation />
+                  <Accommodation/>
                 </div>
                 <div className={styles.elementText}>
                   Average hostel price is{' '}
@@ -212,7 +212,7 @@ const Recommendation = ({
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Acommodation />
+                <Accommodation/>
               </div>
               <div className={styles.elementText}>
                 Airbnb prices range from{' '}
@@ -227,11 +227,12 @@ const Recommendation = ({
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
-                  <Acommodation />
+                  <Accommodation/>
                 </div>
                 <div className={styles.elementText}>
                   Average Airbnb price is{' '}
-                  {Math.floor(vacationRentalPriceMin * currencyCoefficient)}{' '}
+                  {Math.floor(vacationRentalPriceMin
+                    * currencyCoefficient)}{' '}
                   {currency}.
                 </div>
               </div>
@@ -242,49 +243,49 @@ const Recommendation = ({
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Flights />
+                <Flights/>
               </div>
               <div className={styles.elementText}>
                 {fastestFlightCost &&
-                  `Fastest: ${Math.floor(
-                    fastestFlightCost * currencyCoefficient
-                  )} ${currency}`}
+                `Fastest: ${Math.floor(
+                  fastestFlightCost * currencyCoefficient
+                )} ${currency}`}
                 {cheapestFlightCost &&
-                  `,Cheapest: ${Math.floor(
-                    cheapestFlightCost * currencyCoefficient
-                  )} ${currency}`}
+                `,Cheapest: ${Math.floor(
+                  cheapestFlightCost * currencyCoefficient
+                )} ${currency}`}
                 {bestFlightCost &&
-                  `,Best: ${Math.floor(
-                    bestFlightCost * currencyCoefficient
-                  )} ${currency}`}
+                `,Best: ${Math.floor(
+                  bestFlightCost * currencyCoefficient
+                )} ${currency}`}
               </div>
             </div>
           )}
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Vaccine />
+              <Vaccine/>
             </div>
             <div className={styles.elementText}>{vaccinatedTestText}</div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Vaccine />
+              <Vaccine/>
             </div>
             <div className={styles.elementText}>{unvaccinatedTestText}</div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Quarantine />
+              <Quarantine/>
             </div>
             <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Quarantine />
+              <Quarantine/>
             </div>
             <div className={styles.elementText}>
               {unvaccinatedQuarantineText}
@@ -294,60 +295,50 @@ const Recommendation = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIconAttraction}>
               {' '}
-              <Attraction />
+              <Attraction/>
             </div>
             <div className={styles.elementText}>{attractionsText}</div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Food />
+              <Food/>
             </div>
             <div className={styles.elementText}>{restaurantText}</div>
           </div>
           {events &&
-            events.length > 0 && (
-              <div className={styles.contentElement}>
-                <div className={styles.elementIcon}>
-                  {' '}
-                  <EventsIcon />
-                </div>
-                {<div className={styles.elementText}>Events & Festivals</div>}
+          events.length > 0 && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <EventsIcon/>
               </div>
+              {<div className={styles.elementText}>Events & Festivals</div>}
+            </div>
           )}
           <div className={styles.events}>
-            <HorizontalScroll
-              className={styles.slide}
-              settings={{
-                responsive: undefined,
-                slidesToShow: Math.min(events.length, 3),
-                slidesToScroll: 2
-              }}
+            <HorizontalList
+              slidesPerView={2}
+              itemClassName={styles.horizontalListItem}
               items={events.map(event => (
                 <div key={`${sid}-poi-${event.id}`} className={styles.slide}>
                   <Image
                     src={
-                      event.images && event.images.length > 0
-                        ? event.images[0]
-                        : appTheme !== 'light'
-                          ? 'https://ik.imagekit.io/rfjpogvdn8p/darkplaceholder_oP8oGnR_A.png?ik-sdk-version=javascript-1.4.3&updatedAt=1646003262784'
-                          : 'https://ik.imagekit.io/rfjpogvdn8p/lightplaceholder_K7Q0Pfos6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1646003263016'
+                      event.images && event.images.length > 0 && event.images[0]
                     }
-                    className={styles.slideImageEve}
+                    className={styles.slideImage}
                     width={200}
                     height={120}
                     alt={event.title}
                     key={event.eid}
                   />
-                  <div className="flex center">
-                    <div className={styles.slideText}>{event.title}</div>
-                  </div>
-                  <div className={styles.slideText2}>
+                  <div className={cn(styles.slideText, styles.eventDate)}>
                     {formatAsMonthDay(event.start)}
                     {event.start !== event.end
                       ? ` - ${formatAsMonthDay(event.end)}`
-                      : ''}{' '}
+                      : ''}
                   </div>
+                  <div className={styles.slideText}>{event.title}</div>
                 </div>
               ))}
             />
