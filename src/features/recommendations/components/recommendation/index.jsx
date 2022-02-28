@@ -18,10 +18,11 @@ import {
   Vaccine
 } from 'assets/images/new-icons'
 
+import useThemeState from 'utils/hooks/use-theme-state'
 
 import { formatAsMonthDay } from 'utils/date'
 
-import { processRecommendation } from 'utils/recommendation'
+import { getEventImage, processRecommendation } from 'utils/recommendation'
 
 import { saveScrollPosition } from '../../../../components/navigation/slice'
 
@@ -77,16 +78,13 @@ const Recommendation = ({
     minTemp,
     maxTemp
   } = processRecommendation(recommendation, passports)
-
+  const [appTheme] = useThemeState()
   const setScrollPosition = () => {
     dispatch(saveScrollPosition(index))
   }
 
   return (
     <div
-      onMouseEnter={() => {
-        //activeHandler(sid)
-      }}
       className={styles.recommendationCard2}
       ref={refHolder}
     >
@@ -324,7 +322,7 @@ const Recommendation = ({
                 <div key={`${sid}-poi-${event.id}`} className={styles.slide}>
                   <Image
                     src={
-                      event.images && event.images.length > 0 && event.images[0]
+                      getEventImage(event, appTheme === 'light')
                     }
                     className={styles.slideImage}
                     width={200}

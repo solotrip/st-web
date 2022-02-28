@@ -19,7 +19,8 @@ import { ReactComponent as Food } from 'assets/images/new-icons/food.svg'
 import { ReactComponent as Star } from 'assets/images/new-icons/events.svg'
 
 import { formatAsMonthDay } from 'utils/date'
-import { processRecommendation } from 'utils/recommendation'
+import { getEventImage, processRecommendation } from 'utils/recommendation'
+import useThemeState from 'utils/hooks/use-theme-state'
 
 const Details = ({
   recommendation,
@@ -34,6 +35,7 @@ const Details = ({
   distanceCoefficient = 1,
   temperaturize
 }) => {
+  const [appTheme] = useThemeState()
   const { startDate, endDate } = recommendation
 
   const {
@@ -197,9 +199,7 @@ const Details = ({
               <div key={`event-${event.eid}`} className={styles.slide}>
                 <Image
                   src={
-                    event.images &&
-                    event.images.length > 0 &&
-                    event.images[0]
+                    getEventImage(event, appTheme === 'light')
                   }
                   className={styles.slideImage}
                   width={200}

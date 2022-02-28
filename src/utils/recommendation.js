@@ -1,3 +1,6 @@
+import _get from 'lodash/get'
+import { DARK_IMG_PLACEHOLDER, LIGHT_IMG_PLACEHOLDER } from 'constants/urls'
+
 export const processRecommendation = (recommendation, passports = []) => {
   let visaText = ''
   let visaSubText = ''
@@ -138,7 +141,7 @@ export const processRecommendation = (recommendation, passports = []) => {
 
     //Adding the general weather.
     if (recommendation.climate.humidity && recommendation.climate.rainy_days) {
-      weatherText = `Rainy days: ${recommendation.climate.rainy_days}, `+
+      weatherText = `Rainy days: ${recommendation.climate.rainy_days}, ` +
         `humidity ${recommendation.climate.humidity}`
     }
 
@@ -190,4 +193,11 @@ export const processRecommendation = (recommendation, passports = []) => {
     barText,
     publicTransportText
   }
+}
+
+export const getEventImage = (event, isLightTheme) => {
+  return _get(
+    event,
+    'images[0]',
+    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER)
 }
