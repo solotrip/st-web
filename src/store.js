@@ -14,7 +14,7 @@ const errorLogger = () => next => action => {
   if (isRejectedWithValue(action)) {
     toast.warn({
       title: 'Something went wrong!',
-      message: action.error.data.message
+      message: action.error.message
     })
   }
 

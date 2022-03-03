@@ -11,16 +11,28 @@ import _ from 'lodash'
 import { registerDevice } from 'utils/notification'
 import { fetchTracked, trackSelector } from 'features/track/slice'
 import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
-import {
-  FirebaseAuthentication
-} from '@robingenz/capacitor-firebase-authentication'
-import { toast } from 'react-toastify'
+import { FirebaseAuthentication } from '@robingenz/capacitor-firebase-authentication'
 import {
   fetchFilters,
-  filtersSelector }
-  from 'features/recommendations/containers/filters/slice'
+  filtersSelector
+} from 'features/recommendations/containers/filters/slice'
+import _get from 'lodash/get'
 
-export const login = createAsyncThunk(
+const createCustomAsyncThunk = (type, payloadCreator, options) => (
+  createAsyncThunk(type, async (params, thunkAPI) => {
+    try {
+      return await payloadCreator(params, thunkAPI)
+    } catch (e) {
+      if (_get(e, 'response.data')) {
+        return thunkAPI.rejectWithValue(e.response.data)
+      } else {
+        throw e
+      }
+    }
+  }, options)
+)
+
+export const login = createCustomAsyncThunk(
   'auth/login',
   async ({ email, password, history }, { dispatch }) => {
     const { accessToken, refreshToken } = await AuthApi.login({
@@ -33,7 +45,7 @@ export const login = createAsyncThunk(
     history.replace('/browse')
   })
 
-export const loginWithGoogle = createAsyncThunk(
+export const loginWithGoogle = createCustomAsyncThunk(
   'auth/login',
   async ({ history }, { dispatch }) => {
     await FirebaseAuthentication.signInWithGoogle()
@@ -47,7 +59,7 @@ export const loginWithGoogle = createAsyncThunk(
     history.replace('/browse')
   })
 
-export const loginWithApple = createAsyncThunk(
+export const loginWithApple = createCustomAsyncThunk(
   'auth/login',
   async ({ history }, { dispatch }) => {
     await FirebaseAuthentication.signInWithApple()
@@ -79,7 +91,7 @@ export const createGuest = createAsyncThunk(
   })
 
 
-export const register = createAsyncThunk(
+export const register = createCustomAsyncThunk(
   'auth/register', async ({
     name, username, email, password, history
   }, { dispatch }) => {
@@ -111,7 +123,7 @@ export const initialize = createAsyncThunk(
       username
     } = await initializeAuthentication()
 
-    if(!filtersSelector(getState()).initialized) {
+    if (!filtersSelector(getState()).initialized) {
       dispatch(fetchFilters())
     }
 
@@ -202,8 +214,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true
     },
     [login.rejected]: (state, action) => {
-      toast.error(_.get(action.error, 'data', action.error.message))
-      // state.error = _.get(action.error, 'data', action.error.message)
+      state.error = action.payload
     },
     [register.pending]: state => {
       state.error = null
@@ -212,8 +223,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true
     },
     [register.rejected]: (state, action) => {
-      toast.error(_.get(action.error, 'data', action.error.message))
-      // state.error = _.get(action.error, 'data', action.error.message)
+      state.error = action.payload
     },
     [logout.fulfilled]: state => {
       state = { ...initialState }

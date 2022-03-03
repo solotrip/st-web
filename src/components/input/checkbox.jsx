@@ -4,6 +4,7 @@ import styles from './checkbox.module.scss'
 
 const Checkbox = React.forwardRef(
   ({
+    label,
     name,
     onChange,
     className,
@@ -14,7 +15,7 @@ const Checkbox = React.forwardRef(
       <label className={styles.container}>
         <span className={styles.labelContainer}>
           {icon && <span className={styles.icon}>{icon}</span>}
-          <span className={styles.label}>{name}</span>
+          <span className={styles.label}>{label? label : name}</span>
         </span>
         <input
           {...props}
@@ -32,6 +33,7 @@ const Checkbox = React.forwardRef(
 Checkbox.defaultValues = {}
 
 Checkbox.propTypes = {
+  label: PropTypes.string,
   name: PropTypes.string,
   icon: PropTypes.string,
   onChange: PropTypes.func,

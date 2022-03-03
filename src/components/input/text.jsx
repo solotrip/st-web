@@ -10,38 +10,45 @@ const Text = React.forwardRef(
     className,
     type,
     filled,
+    error,
     beforeComponent: BeforeComponent,
     afterComponent: AfterComponent,
     ...props
   }, ref) => {
     return (
-      <div
-        className={cn(
-          styles.inputContainer,
-          { [styles.filled]: filled },
-          className
-        )}
-      >
-        {BeforeComponent && <BeforeComponent/>}
-        <input
-          className={styles.input}
-          onChange={onChange}
-          placeholder={placeholder}
-          type={type}
-          ref={ref}
-          {...props}
-        />
-        {AfterComponent && <AfterComponent/>}
-      </div>
+      <>
+        <div
+          className={cn(
+            styles.inputContainer,
+            {
+              [styles.filled]: filled,
+              [styles.error]: !!error
+            },
+            className
+          )}
+        >
+          {BeforeComponent && <BeforeComponent/>}
+          <input
+            className={styles.input}
+            onChange={onChange}
+            placeholder={placeholder}
+            type={type}
+            ref={ref}
+            {...props}
+          />
+          {AfterComponent && <AfterComponent/>}
+        </div>
+        {error && <div className={styles.errorText}>{error}</div>}
+      </>
     )
   }
 )
 
-Text.defaultValues = {
+Text.defaultValues =  {
   type: 'text'
 }
 
-Text.propTypes = {
+Text.propTypes =  {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   className: PropTypes.string,
