@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import * as UserApi from '../../api/user'
 import _ from 'lodash'
+import { logout } from 'features/auth/slice'
 
 export const updateProfile = createAsyncThunk(
   'profile/update',
@@ -11,8 +12,15 @@ export const updateProfile = createAsyncThunk(
 
 export const fetchProfile = createAsyncThunk(
   'profile/fetch',
-  async () => {
-    return UserApi.getProfile()
+  async ({ history }, { dispatch }) => {
+    try {
+      return await UserApi.getProfile()
+    } catch (e) {
+      if(e.response.status === 401) {
+        dispatch(logout({ history }))
+      }
+      throw e
+    }
   })
 
 const initialState = {

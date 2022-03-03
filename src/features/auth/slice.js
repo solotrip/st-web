@@ -41,7 +41,7 @@ export const login = createCustomAsyncThunk(
     })
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
-    dispatch(fetchProfile())
+    dispatch(fetchProfile({ history }))
     history.replace('/browse')
   })
 
@@ -55,7 +55,7 @@ export const loginWithGoogle = createCustomAsyncThunk(
     })
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
-    dispatch(fetchProfile())
+    dispatch(fetchProfile({ history }))
     history.replace('/browse')
   })
 
@@ -69,7 +69,7 @@ export const loginWithApple = createCustomAsyncThunk(
     })
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
-    dispatch(fetchProfile())
+    dispatch(fetchProfile({ history }))
     history.replace('/browse')
   })
 
@@ -83,11 +83,11 @@ export const logout = createAsyncThunk('' +
 
 export const createGuest = createAsyncThunk(
   'auth/createGuest',
-  async (_, { dispatch }) => {
+  async ({ history }, { dispatch }) => {
     const { accessToken, refreshToken } = await AuthApi.createGuestUser()
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
-    dispatch(fetchProfile())
+    dispatch(fetchProfile({ history }))
   })
 
 
@@ -103,7 +103,7 @@ export const register = createCustomAsyncThunk(
     })
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
-    dispatch(fetchProfile())
+    dispatch(fetchProfile({ history }))
     history.replace('/browse')
   }
 )
@@ -115,7 +115,8 @@ export const register = createCustomAsyncThunk(
 export const initialize = createAsyncThunk(
   'auth/init', async ({ ensureAuth, history } = false, {
     dispatch,
-    getState
+    getState,
+    rejectWithValue
   }) => {
     const {
       isAuthenticated,
@@ -128,18 +129,23 @@ export const initialize = createAsyncThunk(
     }
 
     if (!isAuthenticated && ensureAuth) {
-      dispatch(createGuest())
+      dispatch(createGuest({ history }))
     } else {
       // Fetch profile only once to prevent unnecessary calls
       if (isAuthenticated) {
-        if (getState().profile.data === null) {
-          dispatch(fetchProfile())
-        }
-        if (!trackSelector(getState()).initialized) {
-          dispatch(fetchTracked())
-        }
-        if (!wishlistSelector(getState()).initialized) {
-          dispatch(fetchWishlist())
+        try {
+          if (getState().profile.data === null) {
+            dispatch(fetchProfile({ history }))
+          }
+          if (!trackSelector(getState()).initialized) {
+            dispatch(fetchTracked())
+          }
+          if (!wishlistSelector(getState()).initialized) {
+            dispatch(fetchWishlist())
+          }
+        } catch (e) {
+          dispatch(logout({ history }))
+          return rejectWithValue({ isAuthenticated: false, isGuest: false })
         }
         await registerDevice(history)
       }
