@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react'
 import { SheetWrapper, SearchInput } from 'components'
 import styles from './location.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { uniqBy, includes } from 'lodash'
+import { uniqBy } from 'lodash'
 import {
   fetchCurrentLocation,
   locationSelector,

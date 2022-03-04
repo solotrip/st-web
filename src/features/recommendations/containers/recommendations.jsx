@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
 import { fetchRecommendations, recommendationsSelector } from '../slice'
-import {
-  fetchExchangeRates,
-  exchangeRatesSelector
-} from '../containers/exchange-rates/slice'
+import { fetchExchangeRates } from '../containers/exchange-rates/slice'
 import { profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
@@ -96,30 +93,30 @@ const RecommendationsContainer = () => {
         r => r.id === location.pathname.split('/recommendations/r/')[1]
       )
       : !loading &&
-        location.search.includes(
+      location.search.includes(
+        'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+      ) &&
+      location.search.split(
+        'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+      )[1] &&
+      location.search
+        .split(
           'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-        ) &&
-        location.search.split(
+        )[1]
+        .split('&') &&
+      location.search
+        .split(
           'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-        )[1] &&
-        location.search
-          .split(
-            'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-          )[1]
-          .split('&') &&
-        location.search
-          .split(
-            'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-          )[1]
-          .split('&')[0]
+        )[1]
+        .split('&')[0]
         ? recommendations[activeRecommendationId].recommendations.findIndex(
           r =>
             r.sid ===
-              location.search
-                .split(
-                  'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-                )[1]
-                .split('&')[0]
+          location.search
+            .split(
+              'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
+            )[1]
+            .split('&')[0]
         )
         : -1
 

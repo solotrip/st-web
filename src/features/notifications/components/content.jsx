@@ -8,8 +8,6 @@ import { MAPBOX_TOKEN } from 'constants/index'
 import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 
-import { locationSelector } from '../../recommendations/containers/location/slice'
-import { useSelector } from 'react-redux'
 import { Loader } from 'components'
 import { useHistory, useLocation } from 'react-router-dom'
 
@@ -27,9 +25,6 @@ const Content = ({ notifications, mapEnabled = true, loading }) => {
   )
   const [southWest, setSouthWest] = useState([-0.118092, 51.509865])
   const [northEast, setNorthEast] = useState([-0.118092, 51.509865])
-  let active = false
-
-  const { activeLocation, locations } = useSelector(locationSelector)
 
   const openDetails = recommendation => {
     history.replace({
@@ -51,7 +46,7 @@ const Content = ({ notifications, mapEnabled = true, loading }) => {
       if (notifications.length > 0) {
         let lats = []
         let lons = []
-        notifications.map(notification => {
+        notifications.forEach(notification => {
           lats.push(notification.content.new.lat)
           lons.push(notification.content.new.lon)
         })

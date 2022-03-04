@@ -11,12 +11,18 @@ import _ from 'lodash'
 import { registerDevice } from 'utils/notification'
 import { fetchTracked, trackSelector } from 'features/track/slice'
 import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
-import { FirebaseAuthentication } from '@robingenz/capacitor-firebase-authentication'
+import {
+  FirebaseAuthentication
+} from '@robingenz/capacitor-firebase-authentication'
 import {
   fetchFilters,
   filtersSelector
 } from 'features/recommendations/containers/filters/slice'
 import _get from 'lodash/get'
+import {
+  fetchExchangeRates,
+  exchangeRatesSelector
+} from 'features/recommendations/containers/exchange-rates/slice'
 
 const createCustomAsyncThunk = (type, payloadCreator, options) => (
   createAsyncThunk(type, async (params, thunkAPI) => {
@@ -126,6 +132,9 @@ export const initialize = createAsyncThunk(
 
     if (!filtersSelector(getState()).initialized) {
       dispatch(fetchFilters())
+    }
+    if (!exchangeRatesSelector(getState()).initialized) {
+      dispatch(fetchExchangeRates())
     }
 
     if (!isAuthenticated && ensureAuth) {

@@ -1,22 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
 import { MAPBOX_TOKEN } from 'constants/index'
 import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { Loader } from 'components'
 import RecommendationDetails from './recommendation-details'
 import { useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
-import {
-  fetchExchangeRates,
-  exchangeRatesSelector
-} from '../containers/exchange-rates/slice'
+import { exchangeRatesSelector } from '../containers/exchange-rates/slice'
 
 import { navigationSelector } from '../../../components/navigation/slice'
+
 const Map =
   isBrowser &&
   ReactMapboxGl({
@@ -41,14 +38,6 @@ const Content = ({
 }) => {
   const { exchangeRates } = useSelector(exchangeRatesSelector)
   const { recentItemScrollId } = useSelector(navigationSelector)
-
-  const dispatch = useDispatch()
-  useEffect(
-    () => {
-      dispatch(fetchExchangeRates())
-    },
-    [dispatch]
-  )
 
   const preferredCurrency = user.currency
   const preferredTemperature = user.temperature
@@ -181,7 +170,11 @@ const Content = ({
     [recommendations]
   )
 
-  if (loading) return <Loader />
+  if (loading) return (
+    <div className={styles.recommendations}>
+      <Recommendation.Skeleton />
+    </div>
+  )
 
   const list = (
     <div ref={listScrollRef} className={styles.recommendations}>

@@ -35,7 +35,7 @@ export const fetchRecommendations = createAsyncThunk(
     ) {
       return recommendations[activeRecommendationId]
     }
-    return RecommendationsApi.getRecommendations(payload)
+    return await RecommendationsApi.getRecommendations(payload)
   }
 )
 
@@ -50,7 +50,7 @@ export const fetchHolidays = createAsyncThunk(
 const recommendationsSlice = createSlice({
   name: 'recommendations',
   initialState: {
-    loadingRecommendations: true,
+    loadingRecommendations: false,
     errorRecommendations: null,
     recommendations: {},
     holidays: [],
@@ -60,6 +60,11 @@ const recommendationsSlice = createSlice({
     loadingHolidays: true
   },
   extraReducers: {
+    [fetchRecommendations.pending]: state => {
+      state.activeRecommendationId = null
+      state.errorRecommendations = null
+      state.loadingRecommendations = true
+    },
     [fetchRecommendations.fulfilled]: (state, action) => {
       const { recommendationId } = action.payload
       state.recommendations[recommendationId] = action.payload
@@ -75,10 +80,7 @@ const recommendationsSlice = createSlice({
     )
     state.loadingRecommendations = false
   },
-  [fetchRecommendations.pending]: state => {
-    state.errorRecommendations = null
-    state.loadingRecommendations = true
-  },
+
   [fetchHolidays.fulfilled]: (state, action) => {
     state.holidays = action.payload
     state.loadingAvailableDates = false
