@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import * as ExchangeRatesApi from '../../../../api/exchangeRates'
+import * as ExchangeRatesApi from 'api/exchangeRates'
 import _ from 'lodash'
 
 export const fetchExchangeRates = createAsyncThunk(

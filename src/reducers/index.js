@@ -14,8 +14,9 @@ import filtersReducer from 'features/recommendations/containers/filters/slice'
 import datesReducer
   from 'features/recommendations/containers/date-selector/slice'
 import recentQueriesReducer from './recentQueriesSlice'
+import localPreferencesReducer from './localPreferencesSlice'
 import exchangeRates
-  from 'features/recommendations/containers/exchange-rates/slice'
+  from './exchangeRatesSlice'
 import navigation from 'components/navigation/slice'
 import wishlist from 'features/wishlist/slice'
 import track from 'features/track/slice'
@@ -61,6 +62,15 @@ const recentQueries = persistReducer(
   recentQueriesReducer
 )
 
+const localPreferences = persistReducer(
+  {
+    ...persistConfig,
+    key: 'localPreferences'
+  },
+  localPreferencesReducer
+)
+
+
 
 export default combineReducers({
   auth,
@@ -77,5 +87,6 @@ export default combineReducers({
   dates,
   exchangeRates,
   browse,
-  recentQueries
+  recentQueries,
+  localPreferences
 })

@@ -657,34 +657,33 @@ export const currencies = [
   }
 ]
 
+export const temperatureUnits = {
+  F: '°F',
+  C: '°C'
+}
+
+export const lengthUnits = {
+  KM: 'km',
+  MILES: 'miles'
+}
+
 export const distanceUnits = [
-  { value: 'km', label: 'Kilometers' },
-  { value: 'miles', label: 'Miles' }
+  { value: lengthUnits.KM, label: 'Kilometers' },
+  { value: lengthUnits.MILES, label: 'Miles' }
 ]
 export const temperatureStates = [
-  { value: '°C', label: 'Celcius °C' },
-  { value: '°F', label: 'Fahrenheit °F' }
+  { value: temperatureUnits.F, label: 'Celcius °C' },
+  { value: temperatureUnits.C, label: 'Fahrenheit °F' }
 ]
 export const vaccineStates = [
   { value: true, label: 'I have been vaccinated.' },
   { value: false, label: 'I have not been vaccinated.' }
 ]
 
-export const defaults = [
-  {
-    value: 'USD',
-    label: 'US Dollar, $'
-  },
-  {
-    value: 'km',
-    label: 'Kilometers'
-  },
-  {
-    value: '°C',
-    label: 'Celcius °C'
-  },
-  {
-    value: false,
-    label: 'I have not been vaccinated.'
-  }
-]
+export const defaultValues = {
+  currency: 'USD',
+  distance: lengthUnits.KM,
+  temperature: temperatureUnits.C,
+  vaccinated: false,
+  passportCountries: []
+}

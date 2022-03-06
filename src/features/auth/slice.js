@@ -22,7 +22,7 @@ import _get from 'lodash/get'
 import {
   fetchExchangeRates,
   exchangeRatesSelector
-} from 'features/recommendations/containers/exchange-rates/slice'
+} from 'reducers/exchangeRatesSlice'
 
 const createCustomAsyncThunk = (type, payloadCreator, options) => (
   createAsyncThunk(type, async (params, thunkAPI) => {

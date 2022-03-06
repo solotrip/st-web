@@ -35,9 +35,6 @@ const profileSlice = createSlice({
   reducers: {
     reset(state) {
       state = initialState
-    },
-    updateProfileState(state, action) {
-      state.data = action.payload
     }
   },
   extraReducers: {
@@ -68,7 +65,7 @@ const profileSlice = createSlice({
   }
 })
 
-export const { reset, updateProfileState } = profileSlice.actions
+export const { reset } = profileSlice.actions
 
 export const profileSelector = state => state.profile
 export const isGuestSelector = createSelector(profileSelector,

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { passportSelector, updatePassports } from './slice'
 import SettingsSection from 'components/settings-section'
 import Select from 'react-select'
-import styles from './passport-countries.module.scss'
 import { SheetWrapper } from 'components'
 import qs from 'qs'
 import { useHistory } from 'react-router-dom'
@@ -41,13 +40,14 @@ const PassportCountriesContainer = () => {
           title="Passports"
           description="We need this to provide you accurate visa information"
         >
-          <Select options={options}
-                  value={passports}
-                  isMulti
-                  className={styles.select}
-                  classNamePrefix="rs"
-                  onChange={handleChange}
-                  placeholder="Select countries..."
+          <Select
+            options={options}
+            value={passports}
+            isMulti
+            className="pulfy-select"
+            classNamePrefix="rs"
+            onChange={handleChange}
+            placeholder="Select countries..."
           />
         </SettingsSection>
       </SheetWrapper.Content>

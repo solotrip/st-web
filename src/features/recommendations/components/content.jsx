@@ -10,7 +10,7 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import RecommendationDetails from './recommendation-details'
 import { useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
-import { exchangeRatesSelector } from '../containers/exchange-rates/slice'
+import { exchangeRatesSelector } from 'reducers/exchangeRatesSlice'
 
 import { navigationSelector } from '../../../components/navigation/slice'
 
@@ -36,41 +36,8 @@ const Content = ({
   scrollRef = null,
   listScrollRef = null
 }) => {
-  const { exchangeRates } = useSelector(exchangeRatesSelector)
   const { recentItemScrollId } = useSelector(navigationSelector)
 
-  const preferredCurrency = user.currency
-  const preferredTemperature = user.temperature
-  const preferredDistance = user.distance
-  let preferredDistanceCoefficient
-
-  if (preferredDistance === 'km') {
-    preferredDistanceCoefficient = 1
-  } else if (preferredDistance === 'miles') {
-    preferredDistanceCoefficient = 1 / 1.609
-  } else {
-    preferredDistanceCoefficient = 1
-  }
-
-  const temperaturize = temp => {
-    let preferredTemperatureValue
-    if (preferredTemperature === '°C') {
-      preferredTemperatureValue = temp
-    } else if (preferredTemperature === '°F') {
-      preferredTemperatureValue = 9 / 5 * temp + 32
-    } else {
-      preferredTemperatureValue = temp
-    }
-    return preferredTemperatureValue
-  }
-
-  const preferredCurrencyCoefficient =
-    exchangeRates !== null &&
-    exchangeRates !== undefined &&
-    exchangeRates[preferredCurrency] !== undefined &&
-    exchangeRates['USD'] !== undefined
-      ? exchangeRates[preferredCurrency] / exchangeRates['USD']
-      : 1
   const history = useHistory()
   const [southWest, setSouthWest] = useState([-0.118092, 51.509865])
   const [northEast, setNorthEast] = useState([-0.118092, 51.509865])
@@ -132,7 +99,7 @@ const Content = ({
       if (detailIndex === -1 && recommendations.length > 0) {
         let lats = []
         let lons = []
-        recommendations.map(recommendation => {
+        recommendations.forEach(recommendation => {
           lats.push(recommendation.lat)
           lons.push(recommendation.lon)
         })
@@ -149,7 +116,7 @@ const Content = ({
         let lats = []
         let lons = []
 
-        recommendations[detailIndex]['top_pois'].map(poi => {
+        recommendations[detailIndex]['top_pois'].forEach(poi => {
           if (
             poi.location.lat && poi.location.lat <= 90 &&
             poi.location.lat >= -90
@@ -200,12 +167,6 @@ const Content = ({
               toggleWishlist={toggleWishlist}
               wishlisted={!!wishlistedIds[recommendation.id]}
               basePath={basePath}
-              currencyCoefficient={preferredCurrencyCoefficient}
-              currency={preferredCurrency}
-              distanceUnit={preferredDistance}
-              temperatureUnit={preferredTemperature}
-              distanceCoefficient={preferredDistanceCoefficient}
-              temperaturize={temperaturize}
               index={i}
             />
           )
@@ -227,12 +188,6 @@ const Content = ({
             passports={
               queryFunction(recommendations[detailIndex]).query.passports
             }
-            currencyCoefficient={preferredCurrencyCoefficient}
-            currency={preferredCurrency}
-            distanceUnit={preferredDistance}
-            temperatureUnit={preferredTemperature}
-            distanceCoefficient={preferredDistanceCoefficient}
-            temperaturize={temperaturize}
           />
         </div>
       )}

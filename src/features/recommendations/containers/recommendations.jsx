@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
 import { fetchRecommendations, recommendationsSelector } from '../slice'
-import { fetchExchangeRates } from '../containers/exchange-rates/slice'
 import { profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
@@ -32,13 +31,6 @@ const RecommendationsContainer = () => {
   useEffect(
     () => {
       dispatch(fetchWishlist())
-    },
-    [dispatch]
-  )
-
-  useEffect(
-    () => {
-      dispatch(fetchExchangeRates())
     },
     [dispatch]
   )

@@ -185,7 +185,7 @@ hr {
 }
 
 div.mapboxgl-popup-content {
-  background:transparent;
+  background: transparent;
   pointer-events: none;
 }
 
@@ -199,6 +199,53 @@ div.mapboxgl-popup-tip {
   border-bottom: none;
   border-top-color: transparent
 }
-.css-26l3qy-menu {
-  color: black;
+
+
+
+.pulfy-select {
+  .rs__control {
+    background-color: $bg-color;
+    color: $text-color;
+    border-color: $border-color;
+    border-radius: 16px;
+  }
+
+  .rs__menu {
+    @extend .shadow;
+    background-color: $bg-color;
+  }
+
+  .rs__option--is-focused, .rs__option--is-selected, .rs__option:hover {
+    background-color: $card-bg-color;
+    color: $active-text-color;
+    cursor: pointer;
+  }
+
+  .rs__option:hover {
+    background-color: $card-bg-color !important;
+  }
+
+  .rs__multi-value  {
+    background-color: $card-bg-color;
+  }
+
+  .rs__single-value {
+    color: $text-color;
+  }
+
+  .rs__menu-list {
+    @include custom-scroll;
+  }
+
+  .rs__multi-value__label {
+    color: $text-color;
+  }
+
+  .rs__input {
+    color: $text-color;
+  }
+
+  .rs__multi-value__remove:hover {
+    background-color: $warning-color;
+  }
 }
