@@ -79,3 +79,5 @@ export const formatDuration = (days, weekendOnly) => {
 }
 
 export const isExpired = d => dayjs(d).isSameOrBefore(new Date(), 'day')
+
+export const oneMonthLater = d => dayjs(d).add('29', 'days').toDate()

@@ -4,7 +4,7 @@ import DayPicker, { DateUtils } from 'react-day-picker'
 import { useMediaQuery } from 'react-responsive'
 import 'react-day-picker/lib/style.css'
 import styles from './calendar.module.scss'
-import { formatAsMonthDay } from 'utils/date'
+import { formatAsMonthDay, oneMonthLater } from 'utils/date'
 
 
 const Calendar = ({ numberOfMonths, onUpdate, data }) => {
@@ -39,7 +39,14 @@ const Calendar = ({ numberOfMonths, onUpdate, data }) => {
     onUpdate({ start: range.from, end: range.to })
   }
   const modifiers = { start: from, end: to }
-
+  const disabledDays = [{
+    before: new Date()
+  }]
+  if (state.from) {
+    disabledDays.push({
+      after: oneMonthLater(state.from)
+    })
+  }
   return (
     <>
       <div className={styles.wrapperPrompt}>
@@ -60,11 +67,7 @@ const Calendar = ({ numberOfMonths, onUpdate, data }) => {
           selectedDays={[from, { from, to }]}
           modifiers={modifiers}
           onDayClick={handleDayClick}
-          disabledDays={[
-            {
-              before: new Date()
-            }
-          ]}
+          disabledDays={disabledDays}
         />
       </div>
     </>
