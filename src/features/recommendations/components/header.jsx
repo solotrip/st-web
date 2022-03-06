@@ -10,7 +10,9 @@ import {
   removeFromTracked,
   trackSelector
 } from 'features/track/slice'
-import { filtersSelector } from 'features/recommendations/containers/filters/slice'
+import {
+  filtersSelector
+} from 'features/recommendations/containers/filters/slice'
 import { locationSelector } from '../containers/location/slice'
 import { useQuery } from 'utils/hooks/use-query'
 import { Query } from 'components'

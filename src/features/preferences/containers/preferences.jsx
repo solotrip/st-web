@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 import { isGuestSelector } from 'features/profile/slice'
 import {
@@ -15,6 +15,7 @@ const PreferencesContainer = ({
 }) => {
   const dispatch = useDispatch()
   const { index } = useParams()
+  const history = useHistory()
 
   const bucketlistHasSelected = useSelector(
     bucketlistHasSelectedSelector
@@ -25,7 +26,11 @@ const PreferencesContainer = ({
   const onNext = useCallback(
     i => {
       if (isSettings) {
-        return
+        if(history.length === 1) {
+          history.replace('/browse')
+        } else {
+          history.goBack()
+        }
       }
       switch (i) {
       case '1':
@@ -40,7 +45,7 @@ const PreferencesContainer = ({
         return
       }
     },
-    [dispatch, isSettings]
+    [dispatch, history, isSettings]
   )
 
   const getNextEnabled = () => {

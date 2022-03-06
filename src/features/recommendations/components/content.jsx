@@ -10,7 +10,6 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import RecommendationDetails from './recommendation-details'
 import { useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
-import { exchangeRatesSelector } from 'reducers/exchangeRatesSlice'
 
 import { navigationSelector } from '../../../components/navigation/slice'
 
