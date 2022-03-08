@@ -67,15 +67,13 @@ const Details = ({
   } = processRecommendation(recommendation, passports)
 
   const startMonth = dayjs(startDate).isValid() && getMonthName(startDate)
-  const endMonth =  dayjs(endDate).isValid() && getMonthName(endDate)
+  const endMonth = dayjs(endDate).isValid() && getMonthName(endDate)
 
   return (
     <>
       <div className={styles.oneRow}>
         <h1 className={styles.title}>
-          {recommendation
-            ? name
-            : 'Go back to your recommendations'}
+          {recommendation ? name : 'Go back to your recommendations'}
         </h1>
         <button
           className={wishlisted ? styles.heartFilled : styles.heart}
@@ -87,13 +85,15 @@ const Details = ({
           }
         />
       </div>
-      <Card title="Overview" type="Highlights"
-            className={styles.recommendationCard}
+      <Card
+        title="Overview"
+        type="Highlights"
+        className={styles.recommendationCard}
       >
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Calendar/>
+            <Calendar />
           </div>
           <div className={styles.elementText}>
             {formatAsMonthDay(startDate)}
@@ -106,7 +106,7 @@ const Details = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Passport/>
+              <Passport />
             </div>
             <div className={styles.elementText}>{visaText}</div>
           </div>
@@ -114,106 +114,97 @@ const Details = ({
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Cloud/>
+            <Cloud />
           </div>
           <div className={styles.elementText}>
-            min <Temperature value={minTemp} />,
-            {' '}max <Temperature value={maxTemp} />
+            min <Temperature value={minTemp} />, max{' '}
+            <Temperature value={maxTemp} />
           </div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Cloud/>
+            <Cloud />
           </div>
           <div className={styles.elementText}>{weatherText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Mask/>
+            <Mask />
           </div>
           <div className={styles.elementText}>{maskText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Vaccine/>
+            <Vaccine />
           </div>
           <div className={styles.elementText}>{vaccinatedTestText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Vaccine/>
+            <Vaccine />
           </div>
           <div className={styles.elementText}>{unvaccinatedTestText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Quarantine/>
+            <Quarantine />
           </div>
-          <div className={styles.elementText}>
-            {vaccinatedQuarantineText}
-          </div>
+          <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Quarantine/>
+            <Quarantine />
           </div>
-          <div className={styles.elementText}>
-            {unvaccinatedQuarantineText}
-          </div>
+          <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
         </div>
-
       </Card>
-      <Card title="Status" type="Overview"
-            className={styles.recommendationCard}
+      <Card
+        title="Status"
+        type="Overview"
+        className={styles.recommendationCard}
       >
-
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Attraction/>
+            <Attraction />
           </div>
           <div className={styles.elementText}>{barText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Attraction/>
+            <Attraction />
           </div>
           <div className={styles.elementText}>{restaurantText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Attraction/>
+            <Attraction />
           </div>
           <div className={styles.elementText}>{attractionsText}</div>
         </div>
         <div className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
-            <Transport/>
+            <Transport />
           </div>
           <div className={styles.elementText}>{publicTransportText}</div>
         </div>
       </Card>
       {events && events.length > 0 ? (
-        <Card title="Events" type="Major"
-              className={styles.recommendationCard}
-        >
-
+        <Card title="Events" type="Major" className={styles.recommendationCard}>
           <div className={styles.events}>
             {events.map(event => (
               <div key={`event-${event.eid}`} className={styles.slide}>
                 <Image
-                  src={
-                    getEventImage(event, appTheme === 'light')
-                  }
+                  src={getEventImage(event, appTheme === 'light')}
                   className={styles.slideImage}
                   width={200}
                   height={120}
@@ -240,46 +231,45 @@ const Details = ({
         hotelPriceMax ||
         hostelPriceMax ||
         vacationRentalPriceMax) && (
-        <Card title="Accommodation" type="Costs"
-              className={styles.recommendationCard}
+        <Card
+          title="Accommodation"
+          type="Costs"
+          className={styles.recommendationCard}
         >
-
           {(hotelPriceMin || hotelPriceMax) &&
           hotelPriceMin !== hotelPriceMax ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Accommodation/>
+                <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hotel prices range from{' '}
-                <Currency value={hotelPriceMin} /> to{' '}
+                Hotel prices range from <Currency value={hotelPriceMin} /> to{' '}
                 <Currency value={hotelPriceMax} />.
               </div>
             </div>
-            ) : ( Math.floor(hotelPriceMin) !== 0 && (
+            ) : (
+              Math.floor(hotelPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
-                  <Accommodation/>
+                  <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Hotel price is{' '}
-                  <Currency value={hotelPriceMin} />.
+                  Average Hotel price is <Currency value={hotelPriceMin} />.
                 </div>
               </div>
-            )
+              )
             )}
           {(hostelPriceMin || hostelPriceMax) &&
           hostelPriceMin !== hostelPriceMax ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Accommodation/>
+                <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hostel prices range from{' '}
-                <Currency value={hostelPriceMin} /> to{' '}
+                Hostel prices range from <Currency value={hostelPriceMin} /> to{' '}
                 <Currency value={hostelPriceMax} />.
               </div>
             </div>
@@ -288,25 +278,24 @@ const Details = ({
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
-                  <Accommodation/>
+                  <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average hostel price is{' '}
-                  <Currency value={hostelPriceMin} />.
+                  Average hostel price is <Currency value={hostelPriceMin} />.
                 </div>
               </div>
               )
             )}
           {(vacationRentalPriceMin || vacationRentalPriceMax) &&
-          vacationRentalPriceMin !== vacationRentalPriceMax ?  (
+          vacationRentalPriceMin !== vacationRentalPriceMax ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Accommodation/>
+                <Accommodation />
               </div>
               <div className={styles.elementText}>
                 Airbnb prices range from{' '}
-                <Currency value={vacationRentalPriceMin} />{' '}to{' '}
+                <Currency value={vacationRentalPriceMin} /> to{' '}
                 <Currency value={vacationRentalPriceMax} />.
               </div>
             </div>
@@ -315,7 +304,7 @@ const Details = ({
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
-                  <Accommodation/>
+                  <Accommodation />
                 </div>
                 <div className={styles.elementText}>
                   Average Airbnb price is{' '}
@@ -327,24 +316,22 @@ const Details = ({
         </Card>
       )}
       {colLabels && (
-        <Card title="Cost of Living" type="Costs"
-              className={styles.recommendationCard}
+        <Card
+          title="Cost of Living"
+          type="Costs"
+          className={styles.recommendationCard}
         >
-
-          {colLabels
-            .meal_cheap_restaurant_cost_label && (
+          {colLabels.meal_cheap_restaurant_cost_label && (
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <Food/>
+                  <Food />
                 </div>
                 Meal at Cheap Restaurant
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.meal_cheap_restaurant_cost_label
-                }
+                {colLabels.meal_cheap_restaurant_cost_label}
               </div>
             </div>
           )}
@@ -353,14 +340,12 @@ const Details = ({
               <div className={styles.elementText2}>
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <Food/>
+                  <Food />
                 </div>
                 Meal at Expensive Restaurant
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.meal_mid_range_restaurant_cost_label
-                }
+                {colLabels.meal_mid_range_restaurant_cost_label}
               </div>
             </div>
           )}
@@ -369,14 +354,12 @@ const Details = ({
               <div className={styles.elementText2}>
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <Food/>
+                  <Food />
                 </div>
                 McDonalds Menu
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.mcmeal_at_mcdonalds_cost_label
-                }
+                {colLabels.mcmeal_at_mcdonalds_cost_label}
               </div>
             </div>
           )}
@@ -386,14 +369,12 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <Food/>
+                  <Food />
                 </div>
                 Beer at Restaurant
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.beer_at_restaurant_cost_label
-                }
+                {colLabels.beer_at_restaurant_cost_label}
               </div>
             </div>
           )}
@@ -403,14 +384,12 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon3}>
                   {' '}
-                  <Transport/>
+                  <Transport />
                 </div>
                 Public Transport
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.public_transport_cost_label
-                }
+                {colLabels.public_transport_cost_label}
               </div>
             </div>
           )}
@@ -420,14 +399,12 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <Food/>
+                  <Food />
                 </div>
                 Beer from Market
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.beer_from_market_label
-                }
+                {colLabels.beer_from_market_label}
               </div>
             </div>
           )}
@@ -436,14 +413,12 @@ const Details = ({
               <div className={styles.elementText2}>
                 <div className={styles.elementIcon3}>
                   {' '}
-                  <Transport/>
+                  <Transport />
                 </div>
                 Monthly Transport Pass
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.montly_transport_pass_label
-                }
+                {colLabels.montly_transport_pass_label}
               </div>
             </div>
           )}
@@ -453,14 +428,12 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon3}>
                   {' '}
-                  <Transport/>
+                  <Transport />
                 </div>
                 Gasoline 1 Liter
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.gasoline_1_liter_cost_label
-                }
+                {colLabels.gasoline_1_liter_cost_label}
               </div>
             </div>
           )}
@@ -470,14 +443,12 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <EventsIcon/>
+                  <EventsIcon />
                 </div>
                 Prepaid Card
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.prepaid_card_cost_label
-                }
+                {colLabels.prepaid_card_cost_label}
               </div>
             </div>
           )}
@@ -487,7 +458,7 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <Star/>
+                  <Star />
                 </div>
                 Internet
               </div>
@@ -502,14 +473,12 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon2}>
                   {' '}
-                  <Star/>
+                  <Star />
                 </div>
                 Cinema Ticket
               </div>
               <div className={styles.elementText2}>
-                {
-                  colLabels.cinema_ticket_cost_label
-                }
+                {colLabels.cinema_ticket_cost_label}
               </div>
             </div>
           )}
@@ -519,7 +488,7 @@ const Details = ({
                 {' '}
                 <div className={styles.elementIcon3}>
                   {' '}
-                  <Transport/>
+                  <Transport />
                 </div>
                 Taxi 1km
               </div>
@@ -530,62 +499,67 @@ const Details = ({
           )}
         </Card>
       )}
-      {(topPois && topPois.length > 0) && (
-        <Card title="Attractions" type="Must Visit"
-              className={styles.recommendationCard}
-        >
-          <div className={styles.events}>
-            {topPois.map(poi => (
-              <div key={`poi-${poi.id}`} className={styles.centeredSlide}>
-                <Image
-                  src={poi.imageLink}
-                  className={styles.slideImage2}
-                  width={200}
-                  height={120}
-                  alt={poi.name}
-                  key={poi.id}
-                />
-                <div className={styles.slideText3}>{poi.name}</div>
-              </div>
-            ))}
-          </div>
-        </Card>
-      )}
-      {(activities && activities.length > 0) &&
-      <Card title="Activities" type="Must Do"
+      {topPois &&
+        topPois.length > 0 && (
+          <Card
+            title="Attractions"
+            type="Must Visit"
             className={styles.recommendationCard}
-      >
-        <div className={styles.events}>
-          {activities.map(activity => (
-            <div key={`activitiy-${activity}`} className={styles.centeredSlide}>
-              <Image
-                src={activityImages[activity].image}
-                className={styles.slideImage2}
-                width={200}
-                height={120}
-                alt={activity}
-                key={activity}
-              />
-              <div className="flex center">
-                { (startMonth && endMonth) &&
-                startMonth !== endMonth ? (
-                  <div className={styles.slideText3}>
-                    {activity} from{' '}
-                    {startMonth} to{' '}
-                    {endMonth}
-                  </div>
-                  ) : (
-                  <div className={styles.slideText3}>
-                    {activity} in{' '}
-                    {startMonth}{' '}
-                  </div>
-                  )}
-              </div>
+          >
+            <div className={styles.events}>
+              {topPois.map(poi => (
+                <div key={`poi-${poi.id}`} className={styles.centeredSlide}>
+                  <Image
+                    src={poi.imageLink}
+                    className={styles.slideImage2}
+                    width={200}
+                    height={120}
+                    alt={poi.name}
+                    key={poi.id}
+                  />
+                  <div className={styles.slideText3}>{poi.name}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </Card>
-      }
+          </Card>
+      )}
+      {activities &&
+        activities.length > 0 && (
+          <Card
+            title="Activities"
+            type="Must Do"
+            className={styles.recommendationCard}
+          >
+            <div className={styles.events}>
+              {activities.map(activity => (
+                <div
+                  key={`activitiy-${activity}`}
+                  className={styles.centeredSlide}
+                >
+                  <Image
+                    src={activityImages[activity].image}
+                    className={styles.slideImage2}
+                    width={278}
+                    height={180}
+                    alt={activity}
+                    key={activity}
+                  />
+                  <div className="flex center">
+                    {startMonth && endMonth && startMonth !== endMonth ? (
+                      <div className={styles.slideText3}>
+                        {activity} from {startMonth} to {endMonth}
+                      </div>
+                    ) : (
+                      <div className={styles.slideText3}>
+                        {activity} in {startMonth}{' '}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+      )}
     </>
   )
 }
