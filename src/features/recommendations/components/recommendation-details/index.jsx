@@ -537,7 +537,13 @@ const Details = ({
                   className={styles.centeredSlide}
                 >
                   <Image
-                    src={activityImages[activity].image}
+                    src={
+                      activity &&
+                      activityImages[activity] &&
+                      activityImages[activity].image
+                        ? activityImages[activity].image
+                        : ''
+                    }
                     className={styles.slideImage2}
                     width={278}
                     height={180}
