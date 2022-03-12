@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import HomeContainer from './features/home/containers/home'
 import AuthRoutes from './features/auth/routes'
 import RecommendationRoutes from './features/recommendations/routes'
 import NotificationRoutes from './features/notifications/routes'
@@ -57,9 +56,6 @@ const MainRoutes = () => {
 
 const Routes = () => (
   <Router>
-    <Route path="/" exact>
-      <NotAuthenticatedRoute component={HomeContainer} path="/" exact />
-    </Route>
     <OnboardingRoutes />
     <AuthRoutes />
     <MainRoutes />
