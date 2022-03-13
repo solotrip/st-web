@@ -3,7 +3,6 @@ import { DARK_IMG_PLACEHOLDER, LIGHT_IMG_PLACEHOLDER } from 'constants/urls'
 
 export const processRecommendation = (recommendation, passports = []) => {
   let visaText = ''
-  let visaSubText = ''
   let vaccinatedTestText = ''
   let vaccinatedQuarantineText = ''
   let unvaccinatedTestText = ''
@@ -27,36 +26,33 @@ export const processRecommendation = (recommendation, passports = []) => {
       if (
         country &&
         country['visa_free_for'] &&
-        country['visa_free_for'].includes(passport.value)
+        country['visa_free_for'].includes(passport)
       ) {
         approvedPassports.push(passport)
       }
-      return country['visa_free_for'].includes(passport.value)
+      return country['visa_free_for'].includes(passport)
     }
 
     const checkVisaOnArrivalFor = passport => {
       if (
         country &&
         country['visa_on_arrival_for'] &&
-        country['visa_on_arrival_for'].includes(passport.value)
+        country['visa_on_arrival_for'].includes(passport)
       ) {
         approvedPassports.push(passport)
       }
-      return country['visa_on_arrival_for'].includes(passport.value)
+      return country['visa_on_arrival_for'].includes(passport)
     }
 
     let isVisaFree = passports.some(checkVisaFreeFor)
     if (isVisaFree) {
       visaText = 'Visa free for you.'
-      visaSubText = `Passport of ${approvedPassports[0].label}`
     } else {
       let isVisaOnArrival = passports.some(checkVisaOnArrivalFor)
       if (isVisaOnArrival) {
         visaText = 'Visa on Arrival'
-        visaSubText = `Passport of ${approvedPassports[0].label}`
       } else {
         visaText = 'Visa required.'
-        visaSubText = `Visa requirements of ${country.name}`
       }
     }
     //Restrictions
@@ -178,7 +174,6 @@ export const processRecommendation = (recommendation, passports = []) => {
   }
   return {
     visaText,
-    visaSubText,
     vaccinatedTestText,
     vaccinatedQuarantineText,
     unvaccinatedTestText,

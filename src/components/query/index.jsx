@@ -30,8 +30,6 @@ const Query = ({
     history.push({ pathname: path, search: location.search })
   }
 
-  console.log('query filtereleri sunlar;', query.filters)
-
   const tags = [
     {
       value: _.truncate(

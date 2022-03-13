@@ -8,8 +8,6 @@ import preferences from 'features/preferences/slice'
 import profile from 'features/profile/slice'
 import recommendations from 'features/recommendations/slice'
 import locationReducer from 'features/recommendations/containers/location/slice'
-import passport
-  from 'features/recommendations/containers/passport-countries/slice'
 import filtersReducer from 'features/recommendations/containers/filters/slice'
 import datesReducer
   from 'features/recommendations/containers/date-selector/slice'
@@ -82,7 +80,6 @@ export default combineReducers({
   track,
   notifications,
   location,
-  passport,
   filters,
   dates,
   exchangeRates,

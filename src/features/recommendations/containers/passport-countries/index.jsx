@@ -1,37 +1,42 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { passportSelector, updatePassports } from './slice'
+import {
+  localPreferencesSelector,
+  updateLocalPreference
+} from 'reducers/localPreferencesSlice'
 import SettingsSection from 'components/settings-section'
 import Select from 'react-select'
 import { SheetWrapper } from 'components'
 import qs from 'qs'
 import { useHistory } from 'react-router-dom'
 import { useQuery } from 'utils/hooks/use-query'
+import countries from 'assets/data/countries.json'
+
+const options = countries.map(c => ({
+  label: `${c.flag} ${c.name}`,
+  value: c.ISO
+}))
 
 const PassportCountriesContainer = () => {
-  const {
-    passports,
-    options,
-    passportsModified
-  } = useSelector(passportSelector)
   const dispatch = useDispatch()
   const query = useQuery()
+  const { passports = [] } = useSelector(localPreferencesSelector)
   const history = useHistory()
-
-  const handleChange = values => {
-    dispatch(updatePassports(values))
-  }
+  const [data, setData] = useState({
+    ...query,
+    passports: query.passports || passports
+  })
+  const onUpdate = useCallback(payload => {
+    setData(prevData => ({ ...prevData, passports: payload.map(p => p.value) }))
+  }, [setData])
   const onSubmit = () => {
-    // dispatch(updatePassportCountries())
-
+    dispatch(updateLocalPreference({ key: 'passports', value: data.passports }))
     history.push({
       pathname: '/recommendations',
-      search: qs.stringify({
-        ...query,
-        passports: passports
-      })
+      search: qs.stringify(data)
     })
   }
+  const value = options.filter(o => data.passports.includes(o.value))
 
   return (
     <SheetWrapper snapPoints={[500]}>
@@ -42,17 +47,17 @@ const PassportCountriesContainer = () => {
         >
           <Select
             options={options}
-            value={passports}
+            value={value}
             isMulti
             className="pulfy-select"
             classNamePrefix="rs"
-            onChange={handleChange}
+            onChange={onUpdate}
             placeholder="Select countries..."
           />
         </SettingsSection>
       </SheetWrapper.Content>
       <SheetWrapper.Footer onClick={onSubmit} text="Search"
-                           disabled={!passportsModified}
+                           disabled={data.passports.length === 0}
       />
     </SheetWrapper>
   )

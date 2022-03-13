@@ -216,6 +216,8 @@ div.mapboxgl-popup-tip {
   .rs__menu {
     @extend .shadow;
     background-color: $bg-color;
+    padding: 4px 0;
+    overflow: hidden;
   }
 
   .rs__option--is-focused, .rs__option--is-selected, .rs__option:hover {
@@ -238,6 +240,7 @@ div.mapboxgl-popup-tip {
 
   .rs__menu-list {
     @include custom-scroll;
+    max-height: 250px;
   }
 
   .rs__multi-value__label {

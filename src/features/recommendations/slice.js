@@ -14,7 +14,8 @@ export const fetchRecommendations = createAsyncThunk(
     weekendOnly,
     filters,
     lat,
-    lon
+    lon,
+    passports
   }, { getState }) => {
     const payload = {
       start,
@@ -24,7 +25,8 @@ export const fetchRecommendations = createAsyncThunk(
       weekendOnly,
       filters,
       lat,
-      lon
+      lon,
+      passports
     }
     const {
       activeRecommendationId,

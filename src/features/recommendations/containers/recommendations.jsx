@@ -14,6 +14,8 @@ import Header from '../components/header'
 import Content from '../components/content'
 import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'qs'
+import _get from 'lodash/get'
+import { isVisaFilterSelector } from './filters/slice'
 
 const RecommendationsContainer = () => {
   const query = useQuery()
@@ -26,6 +28,7 @@ const RecommendationsContainer = () => {
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
+  const isVisaFilter = useSelector(isVisaFilterSelector)
   const isGuest = useSelector(isGuestSelector)
   const dispatch = useDispatch()
 
@@ -45,6 +48,10 @@ const RecommendationsContainer = () => {
         if (!query.start && !query.months) return openDateSheet(query)
         if (!query.lat || !query.lon) {
           return openLocationSheet(query)
+        }
+        if(_get(query, 'filters', [])
+          .some(f => isVisaFilter(f.id)) && !query.passports) {
+          return openPassportSheet(query)
         }
         dispatch(fetchRecommendations(query))
       }
@@ -78,6 +85,13 @@ const RecommendationsContainer = () => {
   const openLocationSheet = q => {
     history.replace({
       pathname: '/recommendations/location',
+      search: qs.stringify(q)
+    })
+  }
+
+  const openPassportSheet = q => {
+    history.replace({
+      pathname: '/recommendations/passport',
       search: qs.stringify(q)
     })
   }
