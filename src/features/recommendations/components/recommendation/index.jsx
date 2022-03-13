@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './recommendation.module.scss'
-import { HorizontalList, Image, Currency, Temperature } from 'components'
+import { Currency, HorizontalList, Image, Temperature } from 'components'
 import { useDispatch } from 'react-redux'
 import cn from 'classnames'
 import {
@@ -120,21 +120,23 @@ const Recommendation = ({
                 : ''}{' '}
             </div>
           </div>
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Passport/>
+          {visaText && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Passport/>
+              </div>
+              <div className={styles.elementText}>{visaText}</div>
             </div>
-            <div className={styles.elementText}>{visaText}</div>
-          </div>
+          )}
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
               <Cloud/>
             </div>
             <div className={styles.elementText}>
-              min <Temperature value={minTemp} />,
-              {' '}max <Temperature value={maxTemp} />
+              min <Temperature value={minTemp}/>,
+              {' '}max <Temperature value={maxTemp}/>
             </div>
           </div>
 
@@ -147,12 +149,12 @@ const Recommendation = ({
               </div>
               <div className={styles.elementText}>
                 Hotel prices range from{' '}
-                  <Currency value={hotelPriceMin} /> to{' '}
-                  <Currency value={hotelPriceMax} />.
+                <Currency value={hotelPriceMin}/> to{' '}
+                <Currency value={hotelPriceMax}/>.
               </div>
             </div>
-            ) : (
-              Math.floor(hotelPriceMin) !== 0 && (
+          ) : (
+            Math.floor(hotelPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
@@ -160,11 +162,11 @@ const Recommendation = ({
                 </div>
                 <div className={styles.elementText}>
                   Average Hotel price is{' '}
-                  <Currency value={hotelPriceMin} />.
+                  <Currency value={hotelPriceMin}/>.
                 </div>
               </div>
-              )
-            )}
+            )
+          )}
           {(hostelPriceMin || hostelPriceMax) &&
           hostelPriceMin !== hostelPriceMax ? (
             <div className={styles.contentElement}>
@@ -174,12 +176,12 @@ const Recommendation = ({
               </div>
               <div className={styles.elementText}>
                 Hostel prices range from{' '}
-                <Currency value={hostelPriceMin} /> to{' '}
-                <Currency value={hostelPriceMax} />.
+                <Currency value={hostelPriceMin}/> to{' '}
+                <Currency value={hostelPriceMax}/>.
               </div>
             </div>
-            ) : (
-              Math.floor(hostelPriceMin) !== 0 && (
+          ) : (
+            Math.floor(hostelPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
@@ -187,11 +189,11 @@ const Recommendation = ({
                 </div>
                 <div className={styles.elementText}>
                   Average hostel price is{' '}
-                  <Currency value={hostelPriceMin} />.
+                  <Currency value={hostelPriceMin}/>.
                 </div>
               </div>
-              )
-            )}
+            )
+          )}
           {(vacationRentalPriceMin || vacationRentalPriceMax) &&
           vacationRentalPriceMin !== vacationRentalPriceMax ? (
             <div className={styles.contentElement}>
@@ -201,12 +203,12 @@ const Recommendation = ({
               </div>
               <div className={styles.elementText}>
                 Airbnb prices range from{' '}
-                <Currency value={vacationRentalPriceMin} />{' '}to{' '}
-                <Currency value={vacationRentalPriceMax} />.
+                <Currency value={vacationRentalPriceMin}/>{' '}to{' '}
+                <Currency value={vacationRentalPriceMax}/>.
               </div>
             </div>
-            ) : (
-              Math.floor(vacationRentalPriceMin) !== 0 && (
+          ) : (
+            Math.floor(vacationRentalPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
@@ -214,11 +216,11 @@ const Recommendation = ({
                 </div>
                 <div className={styles.elementText}>
                   Average Airbnb price is{' '}
-                  <Currency value={vacationRentalPriceMin} />.
+                  <Currency value={vacationRentalPriceMin}/>.
                 </div>
               </div>
-              )
-            )}
+            )
+          )}
 
           {(fastestFlightCost || cheapestFlightCost || bestFlightCost) && (
             <div className={styles.contentElement}>
@@ -228,13 +230,13 @@ const Recommendation = ({
               </div>
               <div className={styles.elementText}>
                 {fastestFlightCost && <>
-                  {'Fastest: '}<Currency value={fastestFlightCost} />
+                  {'Fastest: '}<Currency value={fastestFlightCost}/>
                 </>}
                 {fastestFlightCost && <>
-                  {',Cheapest: '}<Currency value={cheapestFlightCost} />
+                  {',Cheapest: '}<Currency value={cheapestFlightCost}/>
                 </>}
                 {fastestFlightCost && <>
-                  {',Best: '}<Currency value={bestFlightCost} />
+                  {',Best: '}<Currency value={bestFlightCost}/>
                 </>}
               </div>
             </div>

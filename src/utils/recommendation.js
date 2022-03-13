@@ -43,16 +43,18 @@ export const processRecommendation = (recommendation, passports = []) => {
       }
       return country['visa_on_arrival_for'].includes(passport)
     }
+    if(passports.length > 0) {
+      let isVisaFree = passports.some(checkVisaFreeFor)
 
-    let isVisaFree = passports.some(checkVisaFreeFor)
-    if (isVisaFree) {
-      visaText = 'Visa free for you.'
-    } else {
-      let isVisaOnArrival = passports.some(checkVisaOnArrivalFor)
-      if (isVisaOnArrival) {
-        visaText = 'Visa on Arrival'
+      if (isVisaFree) {
+        visaText = 'Visa free for you.'
       } else {
-        visaText = 'Visa required.'
+        let isVisaOnArrival = passports.some(checkVisaOnArrivalFor)
+        if (isVisaOnArrival) {
+          visaText = 'Visa on Arrival'
+        } else {
+          visaText = 'Visa required.'
+        }
       }
     }
     //Restrictions
