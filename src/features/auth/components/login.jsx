@@ -68,10 +68,8 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             filled
           />
           <Button text="Login" icon={MdChevronRight}/>
-          <Link to="signup" className={styles.link}>
-            New to Pulfy? <span>Join now!</span>
-          </Link>
         </form>
+        <p className={styles.or}>Or</p>
         <div className={styles.socialButtons}>
           <button
             className={cn(styles.socialLogin, styles.loginWithGoogle)}
@@ -90,6 +88,16 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             </button>
           )}
         </div>
+        <span className={styles.terms}>
+            By continuing, you agree to Pulfy's
+            <a target="_blank" href="/#"> Terms of Service, </a>
+            <a target="_blank" href="/#"> Data Use Policy </a>
+            and
+            <a target="_blank" href="/#"> Cookie Use</a>
+        </span>
+        <Link to="/signup" className={styles.link}>
+          New to Pulfy? <span>Join now!</span>
+        </Link>
       </div>
     </div>
   )

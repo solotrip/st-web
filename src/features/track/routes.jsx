@@ -8,7 +8,7 @@ import SavedContainer from './containers/tracked-recommendations'
 const Routes = () => (
   <Switch>
     <Route path="/saved">
-      <OnboardedRoutesWrapper>
+      <OnboardedRoutesWrapper registeredOnly>
         <SavedContainer/>
       </OnboardedRoutesWrapper>
     </Route>

@@ -7,7 +7,7 @@ import NotificationsContainer from './containers/notifications'
 const Routes = () => (
   <Switch>
     <Route path="/notifications">
-      <OnboardedRoutesWrapper>
+      <OnboardedRoutesWrapper registeredOnly>
         <NotificationsContainer/>
       </OnboardedRoutesWrapper>
     </Route>

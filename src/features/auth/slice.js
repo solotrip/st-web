@@ -99,7 +99,7 @@ export const createGuest = createAsyncThunk(
 
 export const register = createCustomAsyncThunk(
   'auth/register', async ({
-    name, username, email, password, history
+    name, username, email, password, history, redirectTo
   }, { dispatch }) => {
     const { accessToken, refreshToken } = await AuthApi.register({
       name,
@@ -110,7 +110,7 @@ export const register = createCustomAsyncThunk(
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile({ history }))
-    history.replace('/browse')
+    history.replace(redirectTo)
   }
 )
 
@@ -227,6 +227,7 @@ const authSlice = createSlice({
     },
     [login.fulfilled]: state => {
       state.isAuthenticated = true
+      state.isGuest = false
     },
     [login.rejected]: (state, action) => {
       state.error = action.payload
@@ -236,6 +237,7 @@ const authSlice = createSlice({
     },
     [register.fulfilled]: state => {
       state.isAuthenticated = true
+      state.isGuest = false
     },
     [register.rejected]: (state, action) => {
       state.error = action.payload
@@ -247,5 +249,5 @@ const authSlice = createSlice({
 })
 
 export const { reset } = authSlice.actions
-
+export const authSelector = state => state.auth
 export default authSlice.reducer

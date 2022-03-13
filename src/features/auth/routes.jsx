@@ -11,7 +11,7 @@ const Routes = () => (
     }
     />
     <NotAuthenticatedRoute path="/:path/signup" children={
-      <SheetWrapper><SignupContainer/></SheetWrapper>}
+      <SheetWrapper><SignupContainer authWall/></SheetWrapper>}
     />
     <NotAuthenticatedRoute path="/login" children={
       <LoginContainer/>

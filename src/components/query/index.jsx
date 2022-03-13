@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 import Tag from '../input/tag'
 import styles from './query.module.scss'
-import { MdAdd, MdMyLocation, MdEditCalendar } from 'react-icons/md'
+import { MdAdd, MdEditCalendar, MdMyLocation } from 'react-icons/md'
 import { coordsToQuery } from 'features/recommendations/containers/location/slice'
 import {
   formatAsMonthDay,
@@ -89,12 +89,12 @@ const Query = ({
         ]
         : query.filters.map(f => ({
           value:
-              filtersDict && filtersDict[f.id]
-                ? f.id === 'a'
-                  ? f.variables.areaSids[0].charAt(0).toUpperCase() +
-                    f.variables.areaSids[0].slice(1)
-                  : filtersDict[f.id].name
-                : null,
+            filtersDict && filtersDict[f.id]
+              ? f.id === 'a'
+                ? f.variables.areaSids[0].charAt(0).toUpperCase() +
+              f.variables.areaSids[0].slice(1)
+                : filtersDict[f.id].name
+              : null,
           onClick: () => navigate('/recommendations/filters')
         }))
       : [
@@ -109,21 +109,21 @@ const Query = ({
   return (
     <div className={cn(styles.container, className)}>
       {tags &&
-        tags.filter(t => t.value).map(t => (
-          <Tag
-            key={`search-tag-${t.value}`}
-            icon={t.icon}
-            onClick={enableClick ? t.onClick : undefined}
-            name={
-              <span className={styles.text}>
+      tags.filter(t => t.value).map(t => (
+        <Tag
+          key={`search-tag-${t.value}`}
+          icon={t.icon}
+          onClick={enableClick ? t.onClick : undefined}
+          name={
+            <span className={styles.text}>
                 <b className={cn(styles.prefix, prefixClassName)}>
                   {t.prefix || ''}
                 </b>
-                {t.value}
+              {t.value}
               </span>
-            }
-          />
-        ))}
+          }
+        />
+      ))}
     </div>
   )
 }

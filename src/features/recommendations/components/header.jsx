@@ -10,12 +10,15 @@ import {
   removeFromTracked,
   trackSelector
 } from 'features/track/slice'
-import { filtersSelector } from 'features/recommendations/containers/filters/slice'
+import {
+  filtersSelector
+} from 'features/recommendations/containers/filters/slice'
 import { locationSelector } from '../containers/location/slice'
 import { useQuery } from 'utils/hooks/use-query'
 import { Query } from 'components'
 
 import styles from './header.module.scss'
+import { isGuestSelector } from 'features/profile/slice'
 
 const Header = ({
   recommendationId,
@@ -32,6 +35,8 @@ const Header = ({
   const history = useHistory()
   const { locations } = useSelector(locationSelector)
   const { filtersDict } = useSelector(filtersSelector)
+  const isGuest = useSelector(isGuestSelector)
+
   const [isExpanded, setIsExpanded] = useState(false)
   const handleExpand = () => {
     setIsExpanded(!isExpanded)
@@ -41,7 +46,7 @@ const Header = ({
     setIsExpanded(false)
   }
 
-  function useOutsideAlerter(ref) {
+  const useOutsideAlerter = ref => {
     useEffect(
       () => {
         /**
@@ -66,6 +71,13 @@ const Header = ({
   }
 
   const handleTrack = () => {
+    if (isGuest) {
+      history.replace({
+        pathname: `${location.pathname}/signup`,
+        search: location.search
+      })
+      return
+    }
     if (tracked[recommendationId]) {
       dispatch(removeFromTracked(recommendationId))
     } else {

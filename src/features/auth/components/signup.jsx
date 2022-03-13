@@ -37,7 +37,8 @@ const SignupPage = ({
   registerFunc,
   error,
   loginWithApple,
-  loginWithGoogle
+  loginWithGoogle,
+  authWall = false
 }) => {
   const onSubmit = ({ body }) => {
     const { email, password, username } = body
@@ -66,6 +67,14 @@ const SignupPage = ({
   return (
     <div className={styles.main}>
       <div className={styles.content}>
+        {authWall && (
+          <div className={styles.authWall}>
+            Looks like you're having a good time with Pulfy. Do you want to
+            take it one step further,
+            and get access to our cool features like
+            event notifications and wishlists?
+          </div>
+        )}
         <h1 className={styles.heading}>Create new account</h1>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <TextInput
@@ -109,10 +118,8 @@ const SignupPage = ({
             text="Sign Up"
             icon={MdChevronRight}
           />
-          <Link to="login" className={styles.link}>
-            Already have an account? <span>Login</span>
-          </Link>
         </form>
+        <p className={styles.or}>Or</p>
         <div className={styles.socialButtons}>
           <button
             className={cn(styles.socialLogin, styles.loginWithGoogle)}
@@ -131,6 +138,9 @@ const SignupPage = ({
             </button>
           )}
         </div>
+        <Link to="login" className={styles.link}>
+          Already have an account? <span>Login</span>
+        </Link>
       </div>
     </div>
   )

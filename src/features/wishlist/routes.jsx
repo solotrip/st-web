@@ -7,7 +7,7 @@ import WishlistContainer from './containers/wishlist'
 const Routes = () => (
   <Switch>
     <Route path="/wishlist">
-      <OnboardedRoutesWrapper>
+      <OnboardedRoutesWrapper registeredOnly>
         <WishlistContainer />
       </OnboardedRoutesWrapper>
     </Route>

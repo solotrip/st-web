@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
 import { fetchRecommendations, recommendationsSelector } from '../slice'
-import { profileSelector } from 'features/profile/slice'
+import { isGuestSelector, profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
   fetchWishlist,
@@ -26,6 +26,7 @@ const RecommendationsContainer = () => {
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
+  const isGuest = useSelector(isGuestSelector)
   const dispatch = useDispatch()
 
   useEffect(
@@ -52,16 +53,20 @@ const RecommendationsContainer = () => {
     [query, location, dispatch]
   )
 
-  const toggleWishlist = useCallback(
-    ({ query, recommendation }) => {
-      if (wishlisted[recommendation.id]) {
-        dispatch(removeFromWishlist(recommendation))
-      } else {
-        dispatch(addToWishlist({ query, recommendation }))
-      }
-    },
-    [dispatch, wishlisted]
-  )
+  const toggleWishlist = ({ query, recommendation }) => {
+    if (isGuest) {
+      history.replace({
+        pathname: `${location.pathname}/signup`,
+        search: location.search
+      })
+      return
+    }
+    if (wishlisted[recommendation.id]) {
+      dispatch(removeFromWishlist(recommendation))
+    } else {
+      dispatch(addToWishlist({ query, recommendation }))
+    }
+  }
 
   const openDateSheet = q => {
     history.replace({
@@ -79,38 +84,15 @@ const RecommendationsContainer = () => {
 
   const loading =
     profileLoading || loadingRecommendations || !activeRecommendationId
-  const detailIndex =
-    !loading && location.pathname.startsWith('/recommendations/r/')
+  const detailIndex = !loading ? (
+    location.pathname.startsWith('/recommendations/r/')
       ? recommendations[activeRecommendationId].recommendations.findIndex(
         r => r.id === location.pathname.split('/recommendations/r/')[1]
       )
-      : !loading &&
-      location.search.includes(
-        'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-      ) &&
-      location.search.split(
-        'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-      )[1] &&
-      location.search
-        .split(
-          'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-        )[1]
-        .split('&') &&
-      location.search
-        .split(
-          'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-        )[1]
-        .split('&')[0]
-        ? recommendations[activeRecommendationId].recommendations.findIndex(
-          r =>
-            r.sid ===
-          location.search
-            .split(
-              'filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D='
-            )[1]
-            .split('&')[0]
-        )
-        : -1
+      : (
+        recommendations[activeRecommendationId].recommendations.length === 1 ? 0
+          : -1
+      )) : -1
 
   return (
     <div className="flex-col">
