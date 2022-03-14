@@ -72,30 +72,24 @@ const recommendationsSlice = createSlice({
       state.recommendations[recommendationId] = action.payload
       state.activeRecommendationId = recommendationId
       state.loadingRecommendations = false
+    },
+    [fetchRecommendations.rejected]: state => {
+      state.errorRecommendations = true
+      state.loadingRecommendations = false
+    },
+    [fetchHolidays.fulfilled]: (state, action) => {
+      state.holidays = action.payload
+      state.loadingAvailableDates = false
+    },
+    [fetchHolidays.rejected]: (state, action) => {
+      state.errorRecommendations = _.get(
+        action.error,
+        'data',
+        action.error.toString()
+      )
+      state.loadingAvailableDates = false
     }
-  },
-  [fetchRecommendations.rejected]: (state, action) => {
-    state.errorRecommendations = _.get(
-      action.error,
-      'data',
-      action.error.toString()
-    )
-    state.loadingRecommendations = false
-  },
-
-  [fetchHolidays.fulfilled]: (state, action) => {
-    state.holidays = action.payload
-    state.loadingAvailableDates = false
-  },
-  [fetchHolidays.rejected]: (state, action) => {
-    state.errorRecommendations = _.get(
-      action.error,
-      'data',
-      action.error.toString()
-    )
-    state.loadingAvailableDates = false
   }
-
 })
 
 export const recommendationsSelector = state => state.recommendations

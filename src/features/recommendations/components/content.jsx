@@ -8,7 +8,7 @@ import { MAPBOX_TOKEN } from 'constants/index'
 import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import RecommendationDetails from './recommendation-details'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
 
 import { navigationSelector } from '../../../components/navigation/slice'
@@ -31,9 +31,7 @@ const Content = ({
   children,
   detailIndex,
   basePath,
-  resetFilters,
-  scrollRef = null,
-  listScrollRef = null
+  error
 }) => {
   const { recentItemScrollId } = useSelector(navigationSelector)
 
@@ -46,8 +44,8 @@ const Content = ({
   )
 
   const itemsRef = useRef([])
-  scrollRef = useRef()
-  listScrollRef = useRef()
+  const scrollRef = useRef()
+  const listScrollRef = useRef()
 
   const openDetails = recommendation => {
     const { queryString } = queryFunction(recommendation)
@@ -136,6 +134,21 @@ const Content = ({
     [recommendations]
   )
 
+  if (error) return (
+    <div className={styles.error}>
+      Ooops! Something went wrong!
+      <Link
+        to={{
+          pathname: '/recommendations'
+        }}
+        replace
+        className="primaryButton"
+      >
+        Try Again
+      </Link>
+    </div>
+  )
+
   if (loading) return (
     <div className={styles.recommendations}>
       <Recommendation.Skeleton />
@@ -162,7 +175,6 @@ const Content = ({
               queryString={queryString}
               recommendation={recommendation}
               user={user}
-              //activeHandler={() => activeHandler(recommendation)}
               toggleWishlist={toggleWishlist}
               wishlisted={!!wishlistedIds[recommendation.id]}
               basePath={basePath}

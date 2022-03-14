@@ -35,6 +35,16 @@
   }
 }
 
+.error {
+  @extend .recommendations;
+  font-size: 20px;
+  padding: 32px;
+  > * {
+    margin: 32px 0;
+  }
+}
+
+
 .recommendationDetails {
   @include custom-scroll;
   display: flex;
@@ -159,8 +169,8 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  
-    
+
+
   }
 
   .popupIndex{

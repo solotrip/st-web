@@ -24,7 +24,8 @@ const RecommendationsContainer = () => {
   const {
     recommendations,
     activeRecommendationId,
-    loadingRecommendations
+    loadingRecommendations,
+    errorRecommendations
   } = useSelector(recommendationsSelector)
   const { wishlisted } = useSelector(wishlistSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
@@ -130,6 +131,7 @@ const RecommendationsContainer = () => {
         toggleWishlist={toggleWishlist}
         detailIndex={detailIndex}
         basePath="/recommendations"
+        error={errorRecommendations}
       />
     </div>
   )

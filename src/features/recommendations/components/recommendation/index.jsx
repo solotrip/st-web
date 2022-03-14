@@ -153,8 +153,8 @@ const Recommendation = ({
                 <Currency value={hotelPriceMax}/>.
               </div>
             </div>
-          ) : (
-            Math.floor(hotelPriceMin) !== 0 && (
+            ) : (
+              Math.floor(hotelPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
@@ -165,8 +165,8 @@ const Recommendation = ({
                   <Currency value={hotelPriceMin}/>.
                 </div>
               </div>
-            )
-          )}
+              )
+            )}
           {(hostelPriceMin || hostelPriceMax) &&
           hostelPriceMin !== hostelPriceMax ? (
             <div className={styles.contentElement}>
@@ -180,8 +180,8 @@ const Recommendation = ({
                 <Currency value={hostelPriceMax}/>.
               </div>
             </div>
-          ) : (
-            Math.floor(hostelPriceMin) !== 0 && (
+            ) : (
+              Math.floor(hostelPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
@@ -192,8 +192,8 @@ const Recommendation = ({
                   <Currency value={hostelPriceMin}/>.
                 </div>
               </div>
-            )
-          )}
+              )
+            )}
           {(vacationRentalPriceMin || vacationRentalPriceMax) &&
           vacationRentalPriceMin !== vacationRentalPriceMax ? (
             <div className={styles.contentElement}>
@@ -207,8 +207,8 @@ const Recommendation = ({
                 <Currency value={vacationRentalPriceMax}/>.
               </div>
             </div>
-          ) : (
-            Math.floor(vacationRentalPriceMin) !== 0 && (
+            ) : (
+              Math.floor(vacationRentalPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
@@ -219,8 +219,8 @@ const Recommendation = ({
                   <Currency value={vacationRentalPriceMin}/>.
                 </div>
               </div>
-            )
-          )}
+              )
+            )}
 
           {(fastestFlightCost || cheapestFlightCost || bestFlightCost) && (
             <div className={styles.contentElement}>

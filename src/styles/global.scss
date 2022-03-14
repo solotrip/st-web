@@ -255,3 +255,19 @@ div.mapboxgl-popup-tip {
     background-color: $warning-color;
   }
 }
+
+.primaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 36px;
+  background: linear-gradient(180deg, $primary-color 0%, $light-primary-color 100%);
+  border-radius: 16px;
+  width: 100%;
+  color: #ffffff;
+
+  &:disabled {
+    background: $border-color;
+  }
+}
