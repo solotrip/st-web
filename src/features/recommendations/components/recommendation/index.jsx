@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './recommendation.module.scss'
 import { Currency, HorizontalList, Image, Temperature } from 'components'
-import { useDispatch } from 'react-redux'
 import cn from 'classnames'
 import {
   Accommodation,
@@ -19,7 +18,6 @@ import {
 import useThemeState from 'utils/hooks/use-theme-state'
 import { formatAsMonthDay } from 'utils/date'
 import { getEventImage, processRecommendation } from 'utils/recommendation'
-import { saveScrollPosition } from '../../../../components/navigation/slice'
 import ContentLoader from 'react-content-loader'
 
 const Recommendation = ({
@@ -28,9 +26,7 @@ const Recommendation = ({
   queryString,
   wishlisted,
   toggleWishlist,
-  refHolder,
-  basePath,
-  index
+  basePath
 }) => {
   const {
     sid,
@@ -51,8 +47,6 @@ const Recommendation = ({
     bestFlightCost
   } = recommendation
 
-  const dispatch = useDispatch()
-
   const passports = query && query.passports ? query.passports : []
 
   const {
@@ -67,14 +61,11 @@ const Recommendation = ({
     maxTemp
   } = processRecommendation(recommendation, passports)
   const [appTheme] = useThemeState()
-  const setScrollPosition = () => {
-    dispatch(saveScrollPosition(index))
-  }
+
 
   return (
     <div
-      className={styles.recommendationCard2}
-      ref={refHolder}
+      className={styles.recommendationCard}
     >
       {' '}
       <div className={styles.colorStrip}/>
@@ -329,7 +320,6 @@ const Recommendation = ({
               }}
               replace
               className={styles.showDetails}
-              onClick={setScrollPosition}
             >
               Show Details
             </Link>
@@ -342,7 +332,7 @@ const Recommendation = ({
 
 Recommendation.Skeleton = () => (
   <div
-    className={styles.recommendationCard2}
+    className={styles.recommendationCard}
   >
     <ContentLoader
       speed={2}

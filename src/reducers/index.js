@@ -13,9 +13,7 @@ import datesReducer
   from 'features/recommendations/containers/date-selector/slice'
 import recentQueriesReducer from './recentQueriesSlice'
 import localPreferencesReducer from './localPreferencesSlice'
-import exchangeRates
-  from './exchangeRatesSlice'
-import navigation from 'components/navigation/slice'
+import exchangeRates from './exchangeRatesSlice'
 import wishlist from 'features/wishlist/slice'
 import track from 'features/track/slice'
 import notifications from 'features/notifications/slice'
@@ -69,13 +67,11 @@ const localPreferences = persistReducer(
 )
 
 
-
 export default combineReducers({
   auth,
   preferences,
   profile,
   recommendations,
-  navigation,
   wishlist,
   track,
   notifications,

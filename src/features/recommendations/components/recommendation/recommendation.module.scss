@@ -1,28 +1,11 @@
 @import 'styles/mixins';
 
 .recommendationCard {
-  @extend .shadow;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  margin: 32px 0;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 16px;
-  background-color: $card-bg-color;
-  background-image: $card-bg-url;
-  padding: 16px;
-}
-
-
-.recommendationCard2{
   display: flex;
   flex-direction: column;
   background-color: $card-content-recommendation;
   width: 100%;
-  margin-left:auto;
+  margin-left: auto;
   margin-right: auto;
   //min-height: 650px;
   min-width: 322px;
@@ -35,8 +18,8 @@
   width: 100%;
   height: 10px;
   background-color: #667A8f;
-  top:0%;
-  border-radius: 5px 5px 0px 0px;
+  top: 0;
+  border-radius: 5px 5px 0 0;
   bottom: 98.17%;
 }
 
@@ -60,7 +43,7 @@
   justify-content: space-between;
 
   height: 40px;
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .headerUpLine {
@@ -73,20 +56,20 @@
   background-image: -o-linear-gradient(90deg, #aeb9ea, #3cafeb);
   background-image: -moz-linear-gradient(90deg, #aeb9ea, #3cafeb);
   background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
-    /* Set the background size and repeat properties. */
-    background-size: 100%;
-    background-repeat: repeat;
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
 
-    /* Use the text as a mask for the background. */
-    /* This will show the gradient as a text color rather than element bg. */
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
 }
 
-.sameLine{
+.sameLine {
   display: inline;
 }
 
@@ -113,7 +96,10 @@
   margin-top: -10px;
   font-size: 18px;
   font-weight: 600;
-
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
 }
 
 .country {
@@ -150,7 +136,8 @@
   width: 20px;
   height: 20px;
 }
-.elementIconAttraction{
+
+.elementIconAttraction {
 
   margin-left: 3px;
   width: 11.67px;
@@ -171,8 +158,9 @@
   padding: 2px;
 
 }
+
 .slide {
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

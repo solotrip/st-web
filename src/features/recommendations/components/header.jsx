@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cx from 'classnames'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Capacitor } from '@capacitor/core'
@@ -10,9 +10,7 @@ import {
   removeFromTracked,
   trackSelector
 } from 'features/track/slice'
-import {
-  filtersSelector
-} from 'features/recommendations/containers/filters/slice'
+import { filtersSelector } from 'features/recommendations/containers/filters/slice'
 import { locationSelector } from '../containers/location/slice'
 import { useQuery } from 'utils/hooks/use-query'
 import { Query } from 'components'
@@ -27,6 +25,7 @@ const Header = ({
   backIsVisible = true,
   searchIsVisible = true,
   trackIsVisible = true,
+  alwaysShowBack = false,
   basePath
 }) => {
   const { tracked } = useSelector(trackSelector)
@@ -37,39 +36,21 @@ const Header = ({
   const { filtersDict } = useSelector(filtersSelector)
   const isGuest = useSelector(isGuestSelector)
 
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded)
   const handleExpand = () => {
     setIsExpanded(!isExpanded)
   }
   const query = useQuery()
-  const handleScroll = () => {
-    setIsExpanded(false)
-  }
 
-  const useOutsideAlerter = ref => {
-    useEffect(
-      () => {
-        /**
-         * Alert if clicked on outside of element
-         */
-        function handleClickOutside(event) {
-          if (ref.current && !ref.current.contains(event.target)) {
-            setIsExpanded(false)
-          }
-        }
-
-        // Bind the event listener
-        document.addEventListener('mousedown', handleClickOutside)
-
-        return () => {
-          // Unbind the event listener on clean up
-          document.removeEventListener('mousedown', handleClickOutside)
-        }
-      },
-      [ref]
-    )
-  }
-
+  useEffect(() => {
+    if (!isExpanded && defaultExpanded) {
+      setIsExpanded(true)
+    }
+    if (isExpanded && !defaultExpanded) {
+      setIsExpanded(false)
+    }
+    //eslint-disable-next-line
+  }, [defaultExpanded])
   const handleTrack = () => {
     if (isGuest) {
       history.replace({
@@ -87,7 +68,7 @@ const Header = ({
   }
 
   const goBack = () => {
-    if (location.pathname.startsWith(`${basePath}/r/`)) {
+    if (location.pathname.includes('/r/')) {
       history.replace({ pathname: basePath, search: location.search })
     } else {
       history.push('/browse')
@@ -98,20 +79,6 @@ const Header = ({
     history.replace({ pathname: '/recommendations' })
   }
 
-  const wrapperRef = useRef(null)
-  useOutsideAlerter(wrapperRef)
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, true)
-  }, [])
-
-  useEffect(() => {
-    if (defaultExpanded) {
-      setIsExpanded(true)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return (
     <div
       className={cx(styles.navbarFixed, {
@@ -120,22 +87,22 @@ const Header = ({
       })}
     >
       <div className={styles.actions}>
-        {backIsVisible &&
-          !isExpanded && (
-            <button
-              className={cx(styles.trackButton, {
-                [styles.active]: !!tracked[recommendationId]
-              })}
-              onClick={goBack}
-              disabled={loading}
-            >
-              <Icon
-                icon="fluent:ios-arrow-ltr-24-regular"
-                color="#3cafeb"
-                height="30"
-                className={styles.bell}
-              />
-            </button>
+        {(alwaysShowBack || (backIsVisible &&
+          !isExpanded)) && (
+          <button
+            className={cx(styles.trackButton, {
+              [styles.active]: !!tracked[recommendationId]
+            })}
+            onClick={goBack}
+            disabled={loading}
+          >
+            <Icon
+              icon="fluent:ios-arrow-ltr-24-regular"
+              color="#3cafeb"
+              height="30"
+              className={styles.bell}
+            />
+          </button>
         )}
         {searchIsVisible && (
           <>
@@ -146,7 +113,7 @@ const Header = ({
               })}
               onClick={handleExpand}
             >
-              <MdSearch className={styles.searchIcon} />
+              <MdSearch className={styles.searchIcon}/>
               {query && Object.keys(query).length > 0 ? (
                 <Query
                   className={cx(styles.query, { [styles.exp]: isExpanded })}
@@ -156,46 +123,46 @@ const Header = ({
                   filtersDict={filtersDict}
                   query={query}
                   locations={locations}
-                  maxFiltersDisplayed={2}
+                  maxFiltersDisplayed={isExpanded ? 3 : 1}
                   enableClick={isExpanded}
                 />
               ) : (
                 ' Start your search'
               )}
               {query &&
-                Object.keys(query).length > 0 && (
-                  <MdClose
-                    onClick={clearQuery}
-                    role="button"
-                    className={styles.clearIcon}
-                  />
+              Object.keys(query).length > 0 && (
+                <MdClose
+                  onClick={clearQuery}
+                  role="button"
+                  className={styles.clearIcon}
+                />
               )}
             </button>
             {trackIsVisible &&
-              !isExpanded && (
-                <button
-                  className={cx(styles.trackButton, {
-                    [styles.active]: !!tracked[recommendationId]
-                  })}
-                  onClick={handleTrack}
-                  disabled={loading}
-                >
-                  {tracked[recommendationId] ? (
-                    <Icon
-                      icon="fluent:alert-24-regular"
-                      color="#3cafeb"
-                      height="30"
-                      className={styles.bell}
-                    />
-                  ) : (
-                    <Icon
-                      icon="fluent:alert-off-24-regular"
-                      color="#3cafeb"
-                      height="30"
-                      className={styles.bell}
-                    />
-                  )}
-                </button>
+            !isExpanded && (
+              <button
+                className={cx(styles.trackButton, {
+                  [styles.active]: !!tracked[recommendationId]
+                })}
+                onClick={handleTrack}
+                disabled={loading}
+              >
+                {tracked[recommendationId] ? (
+                  <Icon
+                    icon="fluent:alert-24-regular"
+                    color="#3cafeb"
+                    height="30"
+                    className={styles.bell}
+                  />
+                ) : (
+                  <Icon
+                    icon="fluent:alert-off-24-regular"
+                    color="#3cafeb"
+                    height="30"
+                    className={styles.bell}
+                  />
+                )}
+              </button>
             )}
           </>
         )}

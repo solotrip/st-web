@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
@@ -33,6 +33,9 @@ const RecommendationsContainer = () => {
   const isGuest = useSelector(isGuestSelector)
   const dispatch = useDispatch()
 
+  const [isHeaderExpanded, setIsHeaderExpanded] = useState(true)
+  const [lastScrollPos, setLastScrollPos] = useState(0)
+
   useEffect(
     () => {
       dispatch(fetchWishlist())
@@ -50,15 +53,16 @@ const RecommendationsContainer = () => {
         if (!query.lat || !query.lon) {
           return openLocationSheet(query)
         }
-        if(_get(query, 'filters', [])
+        if (_get(query, 'filters', [])
           .some(f => isVisaFilter(f.id)) && !query.passports) {
           return openPassportSheet(query)
         }
         dispatch(fetchRecommendations(query))
       }
+      setLastScrollPos(0)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [query, location, dispatch]
+    [query, dispatch]
   )
 
   const toggleWishlist = ({ query, recommendation }) => {
@@ -97,6 +101,13 @@ const RecommendationsContainer = () => {
     })
   }
 
+  const handleScroll = e => {
+    setIsHeaderExpanded(e.target.scrollTop === 0)
+    if (detailIndex === -1 && activeRecommendationId) {
+      setLastScrollPos(e.target.scrollTop)
+    }
+  }
+
   const loading =
     profileLoading || loadingRecommendations || !activeRecommendationId
   const detailIndex = !loading ? (
@@ -114,7 +125,8 @@ const RecommendationsContainer = () => {
       <Header
         recommendationId={activeRecommendationId}
         loading={loading}
-        defaultExpanded={true}
+        defaultExpanded={isHeaderExpanded}
+        alwaysShowBack={detailIndex !== -1}
         basePath="/recommendations"
       />
       <Content
@@ -132,6 +144,8 @@ const RecommendationsContainer = () => {
         detailIndex={detailIndex}
         basePath="/recommendations"
         error={errorRecommendations}
+        handleScroll={handleScroll}
+        initialScrollPos={detailIndex === -1 ? lastScrollPos : 0}
       />
     </div>
   )
