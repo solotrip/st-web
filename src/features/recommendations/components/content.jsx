@@ -65,7 +65,6 @@ const Content = ({
       var lats = []
       var lons = []
       if (detailIndex === -1 && recommendations.length > 0) {
-        console.log('case 1')
         recommendations.forEach(recommendation => {
           lats.push(recommendation.lat)
           lons.push(recommendation.lon)
@@ -78,16 +77,19 @@ const Content = ({
         recommendations.length > 0 &&
         recommendations[detailIndex] &&
         recommendations[detailIndex]['top_pois'] &&
-        recommendations[detailIndex]['top_pois'].length > 0
+        recommendations[detailIndex]['top_pois'].filter(poi => poi.poi_has_image === true) &&
+        recommendations[detailIndex]['top_pois'].filter(poi => poi.poi_has_image === true).length >
+          0
       ) {
-        console.log('case 2')
-        recommendations[detailIndex]['top_pois'].forEach(poi => {
-          if (poi.location.lat && poi.location.lat <= 90 && poi.location.lat >= -90)
-            lats.push(poi.location.lat)
+        recommendations[detailIndex]['top_pois']
+          .filter(poi => poi.poi_has_image === true)
+          .forEach(poi => {
+            if (poi.location.lat && poi.location.lat <= 90 && poi.location.lat >= -90)
+              lats.push(poi.location.lat)
 
-          if (poi.location.lng && poi.location.lng <= 180 && poi.location.lng >= -180)
-            lons.push(poi.location.lng)
-        })
+            if (poi.location.lng && poi.location.lng <= 180 && poi.location.lng >= -180)
+              lons.push(poi.location.lng)
+          })
         setSouthWest([Math.min(...lons), Math.min(...lats)])
         setNorthEast([Math.max(...lons), Math.max(...lats)])
       } else if (
@@ -97,7 +99,6 @@ const Content = ({
         recommendations[detailIndex]['bbox'] &&
         recommendations[detailIndex]['bbox'].length === 4
       ) {
-        console.log('case 3')
         setSouthWest([
           recommendations[detailIndex]['bbox'][0],
           recommendations[detailIndex]['bbox'][1]
@@ -232,27 +233,32 @@ const Content = ({
                 detailIndex !== -1 &&
                 recommendations[detailIndex] &&
                 recommendations[detailIndex]['top_pois'] &&
-                recommendations[detailIndex]['top_pois'].map((poi, poiIndex) => (
-                  <div key={poi.id}>
-                    <Popup
-                      offset={[0, 0]}
-                      coordinates={{
-                        lng: poi.location.lng,
-                        lat: poi.location.lat
-                      }}
-                    >
-                      <div className={styles.popupContentNoEvent}>
-                        <div className={styles.colorStrip} />
+                recommendations[detailIndex]['top_pois'].filter(
+                  poi => poi.poi_has_image === true
+                ) &&
+                recommendations[detailIndex]['top_pois']
+                  .filter(poi => poi.poi_has_image === true)
+                  .map((poi, poiIndex) => (
+                    <div key={poi.id}>
+                      <Popup
+                        offset={[0, 0]}
+                        coordinates={{
+                          lng: poi.location.lng,
+                          lat: poi.location.lat
+                        }}
+                      >
+                        <div className={styles.popupContentNoEvent}>
+                          <div className={styles.colorStrip} />
 
-                        <div className={styles.popupContent2}>
-                          <div className={styles.popupIndex}> {poiIndex + 1}</div>
+                          <div className={styles.popupContent2}>
+                            <div className={styles.popupIndex}> {poiIndex + 1}</div>
 
-                          <div className={styles.popupInner}>{poi.name}</div>
+                            <div className={styles.popupInner}>{poi.name}</div>
+                          </div>
                         </div>
-                      </div>
-                    </Popup>
-                  </div>
-                ))}
+                      </Popup>
+                    </div>
+                  ))}
             </Map>
           </div>
       )}
