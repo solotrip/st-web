@@ -253,10 +253,15 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <div className="flex center">
                   <div className={styles.slideText}>{event.title}</div>
                 </div>
-                <div className={styles.slideText4}>
+                <div className={styles.slideText7}>
                   {formatAsMonthDay(event.start)}
                   {event.start !== event.end ? ` - ${formatAsMonthDay(event.end)}` : ''}{' '}
                 </div>
+                {event.url && (
+                  <a href={event.url} className={styles.slideText7}>
+                    Visit Official Website
+                  </a>
+                )}
               </div>
             ))}
           </div>
