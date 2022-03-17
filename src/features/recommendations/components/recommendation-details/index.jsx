@@ -35,6 +35,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
 
   const {
     name,
+    sid,
     startDate,
     endDate,
     events,
@@ -48,6 +49,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     top_pois: topPois,
     activities,
     tripdays,
+    area_has_image: areaHasImage,
     area_perex: description
   } = recommendation
 
@@ -73,23 +75,51 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
 
   return (
     <>
-      <div className={styles.headerImage}>
-        <div className={styles.oneRow}>
-          <h1 className={styles.title}>
-            {recommendation ? name : 'Go back to your recommendations'}
-          </h1>
-          <button
-            className={wishlisted ? styles.heartFilled : styles.heart}
-            onClick={() =>
-              toggleWishlist({
-                query: query.query,
-                recommendation
-              })
-            }
-          />
+      {areaHasImage && (
+        <Image
+          width={'100%'}
+          src={`https://pulfy-images.s3.eu-central-1.amazonaws.com/areas/${sid}`}
+          className={styles.headerImage}
+          isRounded={false}
+        />
+      )}
+      {areaHasImage ? (
+        <div className={styles.headerHolder}>
+          <div className={styles.oneRow}>
+            <h1 className={styles.title}>
+              {recommendation ? name : 'Go back to your recommendations'}
+            </h1>
+            <button
+              className={wishlisted ? styles.heartFilled : styles.heart}
+              onClick={() =>
+                toggleWishlist({
+                  query: query.query,
+                  recommendation
+                })
+              }
+            />
+          </div>
+          <div className={styles.description}>{description}</div>
         </div>
-        <div className={styles.description}>{description}</div>
-      </div>
+      ) : (
+        <div className={styles.headerHolderCoverless}>
+          <div className={styles.oneRow}>
+            <h1 className={styles.title}>
+              {recommendation ? name : 'Go back to your recommendations'}
+            </h1>
+            <button
+              className={wishlisted ? styles.heartFilled : styles.heart}
+              onClick={() =>
+                toggleWishlist({
+                  query: query.query,
+                  recommendation
+                })
+              }
+            />
+          </div>
+          <div className={styles.description}>{description}</div>
+        </div>
+      )}
 
       <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
         <div className={styles.contentElement}>
@@ -475,7 +505,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         </Card>
       )}
       {topPois &&
-        topPois.length > 0 && (
+        topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
           <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
             <div className={styles.events}>
               {topPois.filter(poi => poi.poi_has_image === true).map(poi => (

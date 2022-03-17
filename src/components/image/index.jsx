@@ -13,43 +13,40 @@ const Image = ({
   className,
   containerClassName,
   src,
+  isRounded = true,
   ...props
 }) => {
   const [loaded, setLoaded] = useState(false)
-  const placeholder = blurHash ? <BlurhashCanvas
+  const placeholder = blurHash ? (
+    <BlurhashCanvas
       className={styles.placeholder}
       hash={blurHash}
       width={Math.floor(width / height * 100)}
       height={100}
       punch={1}
-  /> :
-    <div className={styles.placeholder}/>
+    />
+  ) : (
+    <div className={styles.placeholder} />
+  )
   const handleLoad = () => {
     setLoaded(true)
   }
 
-  const url = (src && src.startsWith('http')) ? src : `${IMAGE_BASE}${src}`
+  const url = src && src.startsWith('http') ? src : `${IMAGE_BASE}${src}`
   return (
-    <div
-      className={cn([
-        styles.container,
-        className,
-        { [styles.loaded]: loaded }
-      ])}
-    >
-      {
-        (!loaded || !src) &&
-        placeholder
-      }
-      {src &&
-      <img
-        className={cn(styles.image,
-          { [styles.notLoaded]: !loaded })}
-        src={url}
-        alt={alt} {...props}
-        onLoad={handleLoad}
-      />
-      }
+    <div className={cn([styles.container, className, { [styles.loaded]: loaded }])}>
+      {(!loaded || !src) && placeholder}
+      {src && (
+        <img
+          className={cn(isRounded ? styles.imageRounded : styles.image, {
+            [styles.notLoaded]: !loaded
+          })}
+          src={url}
+          alt={alt}
+          {...props}
+          onLoad={handleLoad}
+        />
+      )}
     </div>
   )
 }
