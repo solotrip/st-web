@@ -43,7 +43,7 @@ export const processRecommendation = (recommendation, passports = []) => {
       }
       return country['visa_on_arrival_for'].includes(passport)
     }
-    if(passports.length > 0) {
+    if (passports.length > 0) {
       let isVisaFree = passports.some(checkVisaFreeFor)
 
       if (isVisaFree) {
@@ -139,7 +139,8 @@ export const processRecommendation = (recommendation, passports = []) => {
 
     //Adding the general weather.
     if (recommendation.climate.humidity && recommendation.climate.rainy_days) {
-      weatherText = `Rainy days: ${recommendation.climate.rainy_days}, ` +
+      weatherText =
+        `Rainy days: ${recommendation.climate.rainy_days}, ` +
         `humidity ${recommendation.climate.humidity}`
     }
 
@@ -196,5 +197,21 @@ export const getEventImage = (event, isLightTheme) => {
   return _get(
     event,
     'images[0]',
-    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER)
+    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
+  )
+}
+
+export const getPoiImage = (poi, isLightTheme) => {
+  return _get(
+    poi,
+    'poi_image_hash',
+    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
+  )
+}
+export const getDefaultImage = (poi, isLightTheme) => {
+  return _get(
+    poi,
+    '',
+    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
+  )
 }
