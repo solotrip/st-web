@@ -47,6 +47,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     cost_of_living_labels: colLabels,
     top_pois: topPois,
     activities,
+    tripdays,
     area_perex: description
   } = recommendation
 
@@ -68,6 +69,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
 
   const startMonth = dayjs(startDate).isValid() && getMonthName(startDate)
   const endMonth = dayjs(endDate).isValid() && getMonthName(endDate)
+  const uniqueEvents = [...new Map(events.map(event => [event['eid'], event])).values()]
 
   return (
     <>
@@ -160,6 +162,20 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           </div>
           <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
         </div>
+        {tripdays &&
+          ((tripdays.min_days && tripdays.max_days) || tripdays.ideal_days) && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Calendar />
+              </div>
+              <div className={styles.elementText}>
+                {tripdays.min_days && tripdays.max_days
+                  ? `Most travelers spend ${tripdays.min_days} - ${tripdays.max_days} days. `
+                  : tripdays.ideal_days ? `Most travelers spend ${tripdays.ideal_days} days. ` : ''}
+              </div>
+            </div>
+        )}
       </Card>
       <Card title="Status" type="Overview" className={styles.recommendationCard}>
         <div className={styles.contentElement}>
@@ -191,10 +207,10 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           <div className={styles.elementText}>{publicTransportText}</div>
         </div>
       </Card>
-      {events && events.length > 0 ? (
+      {uniqueEvents && uniqueEvents.length > 0 ? (
         <Card title="Events" type="Major" className={styles.recommendationCard}>
           <div className={styles.events}>
-            {events.map(event => (
+            {uniqueEvents.map(event => (
               <div key={`event-${event.eid}`} className={styles.slide}>
                 <Image
                   src={getEventImage(event, appTheme === 'light')}
@@ -462,35 +478,32 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         topPois.length > 0 && (
           <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
             <div className={styles.events}>
-              {topPois.map(
-                poi =>
-                  poi.poi_has_image && (
-                    <div key={`poi-${poi.id}`} className={styles.centeredSlide}>
-                      <Image
-                        src={
-                          poi.poi_has_image
-                            ? 'https://pulfy-images.s3.eu-central-1.amazonaws.com/pois/' +
-                              getPoiImage(poi, appTheme === 'light')
-                            : getDefaultImage(poi, appTheme === 'light')
-                        }
-                        className={styles.slideImage2}
-                        width={200}
-                        height={120}
-                        alt={poi.name}
-                        key={poi.id}
-                      />
-                      <div className={styles.slideText5}>{poi.name}</div>
-                      <div className={styles.slideText6}>{poi.perex}</div>
-                      <div className={styles.slideText7Holder}>
-                        {poi.references.map(r => (
-                          <a href={r.url} className={styles.slideText7}>
-                            Visit {r.title}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )
-              )}
+              {topPois.filter(poi => poi.poi_has_image === true).map(poi => (
+                <div key={`poi-${poi.id}`} className={styles.centeredSlide}>
+                  <Image
+                    src={
+                      poi.poi_has_image
+                        ? 'https://pulfy-images.s3.eu-central-1.amazonaws.com/pois/' +
+                          getPoiImage(poi, appTheme === 'light')
+                        : getDefaultImage(poi, appTheme === 'light')
+                    }
+                    className={styles.slideImage2}
+                    width={200}
+                    height={120}
+                    alt={poi.name}
+                    key={poi.id}
+                  />
+                  <div className={styles.slideText5}>{poi.name}</div>
+                  <div className={styles.slideText6}>{poi.perex}</div>
+                  <div className={styles.slideText7Holder}>
+                    {poi.references.map(r => (
+                      <a href={r.url} className={styles.slideText7}>
+                        Visit {r.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </Card>
       )}
