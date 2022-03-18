@@ -42,6 +42,7 @@ const Image = ({
             [styles.notLoaded]: !loaded
           })}
           src={url}
+          style={!isRounded ? { width: width, height: height } : { width: '100%', height: '100%' }}
           alt={alt}
           {...props}
           onLoad={handleLoad}

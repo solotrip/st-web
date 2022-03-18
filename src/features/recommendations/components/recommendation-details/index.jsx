@@ -78,6 +78,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
       {areaHasImage && (
         <Image
           width={'100%'}
+          height={225}
           src={`https://pulfy-images.s3.eu-central-1.amazonaws.com/areas/${sid}`}
           className={styles.headerImage}
           isRounded={false}
