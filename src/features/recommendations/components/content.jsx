@@ -8,11 +8,13 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import RecommendationDetails from './recommendation-details'
 import { Link, useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
+import _get from 'lodash/get'
 
 const Map =
   isBrowser &&
   ReactMapboxGl({
-    accessToken: MAPBOX_TOKEN
+    accessToken: MAPBOX_TOKEN,
+    minZoom: 1
   })
 const Content = ({
   recommendations,
@@ -79,17 +81,17 @@ const Content = ({
         recommendations[detailIndex]['top_pois'] &&
         recommendations[detailIndex]['top_pois'].filter(poi => poi.poi_has_image === true) &&
         recommendations[detailIndex]['top_pois'].filter(poi => poi.poi_has_image === true).length >
-          0
+        0
       ) {
         recommendations[detailIndex]['top_pois']
-          .filter(poi => poi.poi_has_image === true)
-          .forEach(poi => {
-            if (poi.location.lat && poi.location.lat <= 90 && poi.location.lat >= -90)
-              lats.push(poi.location.lat)
+        .filter(poi => poi.poi_has_image === true)
+        .forEach(poi => {
+          if (poi.location.lat && poi.location.lat <= 90 && poi.location.lat >= -90)
+            lats.push(poi.location.lat)
 
-            if (poi.location.lng && poi.location.lng <= 180 && poi.location.lng >= -180)
-              lons.push(poi.location.lng)
-          })
+          if (poi.location.lng && poi.location.lng <= 180 && poi.location.lng >= -180)
+            lons.push(poi.location.lng)
+        })
         setSouthWest([Math.min(...lons), Math.min(...lats)])
         setNorthEast([Math.max(...lons), Math.max(...lats)])
       } else if (
@@ -133,34 +135,37 @@ const Content = ({
   if (loading)
     return (
       <div className={styles.recommendations}>
-        <Recommendation.Skeleton />
+        <Recommendation.Skeleton/>
       </div>
     )
 
   const list = (
-    <div ref={scrollRef} className={styles.recommendations} onScroll={handleScroll}>
+    <div ref={scrollRef} className={styles.recommendations}
+         onScroll={handleScroll}
+    >
       {title && <h1 className={styles.title}>{title}</h1>}
       {children}
       {!loading &&
-        recommendations.length === 0 && <span className={styles.noItems}>{noItemsMessage}</span>}
+      recommendations.length === 0 &&
+      <span className={styles.noItems}>{noItemsMessage}</span>}
       {!loading &&
-        recommendations.length > 0 &&
-        recommendations.map((recommendation, i) => {
-          const { query, queryString } = queryFunction(recommendation)
-          return (
-            <Recommendation
-              key={`rec-${recommendation.sid}`}
-              query={query}
-              queryString={queryString}
-              recommendation={recommendation}
-              user={user}
-              toggleWishlist={toggleWishlist}
-              wishlisted={!!wishlistedIds[recommendation.id]}
-              basePath={basePath}
-              index={i}
-            />
-          )
-        })}
+      recommendations.length > 0 &&
+      recommendations.map((recommendation, i) => {
+        const { query, queryString } = queryFunction(recommendation)
+        return (
+          <Recommendation
+            key={`rec-${recommendation.sid}`}
+            query={query}
+            queryString={queryString}
+            recommendation={recommendation}
+            user={user}
+            toggleWishlist={toggleWishlist}
+            wishlisted={!!wishlistedIds[recommendation.id]}
+            basePath={basePath}
+            index={i}
+          />
+        )
+      })}
     </div>
   )
 
@@ -169,98 +174,101 @@ const Content = ({
       {detailIndex === -1 ? (
         list
       ) : (
-        <div ref={scrollRef} onScroll={handleScroll} className={styles.recommendationDetails}>
+        <div ref={scrollRef} onScroll={handleScroll}
+             className={styles.recommendationDetails}
+        >
           <RecommendationDetails
             recommendation={recommendations[detailIndex]}
             toggleWishlist={toggleWishlist}
             wishlisted={!!wishlistedIds[recommendations[detailIndex].id]}
             query={queryFunction(recommendations[detailIndex].query)}
-            passports={queryFunction(recommendations[detailIndex]).query.passports}
+            passports={
+              _get(queryFunction(recommendations[detailIndex])
+                , 'query.passports', [])
+            }
           />
         </div>
       )}
 
       {mapEnabled &&
-        isBrowser &&
-        recommendations.length > 0 && (
-          <div className={styles.mapbox}>
-            <Map
-              style={mapboxTheme}
-              containerStyle={{
-                height: '100%',
-                width: '100%'
-              }}
-              fitBounds={[southWest, northEast]}
-              fitBoundsOptions={{ padding: 100 }}
-              pitch={[30]}
-            >
-              {!loading &&
-                recommendations.length > 0 &&
-                detailIndex === -1 &&
-                recommendations.map((recommendation, index) => (
-                  <div key={recommendation.lon}>
-                    <Marker
-                      coordinates={{
-                        lng: recommendation.lon,
-                        lat: recommendation.lat
-                      }}
-                      className={styles.mapMarker}
-                    />
+      isBrowser &&
+      recommendations.length > 0 && (
+        <Map
+          className={styles.mapbox}
+          style={mapboxTheme}
+          fitBounds={[southWest, northEast]}
+          fitBoundsOptions={{ padding: 100, linear: false, maxZoom: 20 }}
+          pitch={[30]}
+          maxBounds={[[-180, -80], [180, 80]]}
+        >
+          {!loading &&
+          recommendations.length > 0 &&
+          detailIndex === -1 &&
+          recommendations.map((recommendation, index) => (
+            <div key={recommendation.lon}>
+              <Marker
+                coordinates={{
+                  lng: recommendation.lon,
+                  lat: recommendation.lat
+                }}
+                className={styles.mapMarker}
+              />
 
-                    <Popup
-                      offset={[0, 0]}
-                      coordinates={{
-                        lng: recommendation.lon,
-                        lat: recommendation.lat
-                      }}
-                    >
-                      <button
-                        onClick={() => openDetails(recommendation)}
-                        className={styles.popupContent}
-                      >
-                        <div className={styles.colorStrip} />
-                        <div className={styles.popupContent2}>
-                          <div className={styles.popupIndex}> {index + 1}</div>
+              <Popup
+                offset={[0, 0]}
+                coordinates={{
+                  lng: recommendation.lon,
+                  lat: recommendation.lat
+                }}
+              >
+                <button
+                  onClick={() => openDetails(recommendation)}
+                  className={styles.popupContent}
+                >
+                  <div className={styles.colorStrip}/>
+                  <div className={styles.popupContent2}>
+                    <div className={styles.popupIndex}> {index + 1}</div>
 
-                          <div className={styles.popupInner}>{recommendation.name}</div>
-                        </div>
-                      </button>
-                    </Popup>
+                    <div
+                      className={styles.popupInner}
+                    >{recommendation.name}</div>
                   </div>
-                ))}
-              {!loading &&
-                recommendations.length > 0 &&
-                detailIndex !== -1 &&
-                recommendations[detailIndex] &&
-                recommendations[detailIndex]['top_pois'] &&
-                recommendations[detailIndex]['top_pois'].filter(
-                  poi => poi.poi_has_image === true
-                ) &&
-                recommendations[detailIndex]['top_pois']
-                  .filter(poi => poi.poi_has_image === true)
-                  .map((poi, poiIndex) => (
-                    <div key={poi.id}>
-                      <Popup
-                        offset={[0, 0]}
-                        coordinates={{
-                          lng: poi.location.lng,
-                          lat: poi.location.lat
-                        }}
-                      >
-                        <div className={styles.popupContentNoEvent}>
-                          <div className={styles.colorStrip} />
+                </button>
+              </Popup>
+            </div>
+          ))}
+          {!loading &&
+          recommendations.length > 0 &&
+          detailIndex !== -1 &&
+          recommendations[detailIndex] &&
+          recommendations[detailIndex]['top_pois'] &&
+          recommendations[detailIndex]['top_pois'].filter(
+            poi => poi.poi_has_image === true
+          ) &&
+          recommendations[detailIndex]['top_pois']
+          .filter(poi => poi.poi_has_image === true)
+          .map((poi, poiIndex) => (
+            <div key={poi.id}>
+              <Popup
+                offset={[0, 0]}
+                coordinates={{
+                  lng: poi.location.lng,
+                  lat: poi.location.lat
+                }}
+              >
+                <div className={styles.popupContentNoEvent}>
+                  <div className={styles.colorStrip}/>
 
-                          <div className={styles.popupContent2}>
-                            <div className={styles.popupIndex}> {poiIndex + 1}</div>
+                  <div className={styles.popupContent2}>
+                    <div className={styles.popupIndex}> {poiIndex + 1}</div>
 
-                            <div className={styles.popupInner}>{poi.name}</div>
-                          </div>
-                        </div>
-                      </Popup>
-                    </div>
-                  ))}
-            </Map>
-          </div>
+                    <div className={styles.popupInner}>{poi.name}</div>
+                  </div>
+                </div>
+              </Popup>
+            </div>
+          ))}
+        </Map>
       )}
     </div>
   )
