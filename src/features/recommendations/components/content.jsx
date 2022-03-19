@@ -2,19 +2,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
-import { MAPBOX_TOKEN } from 'constants/index'
+import { MAPBOX_THEME, MAPBOX_TOKEN } from 'constants/index'
 import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
+import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import RecommendationDetails from './recommendation-details'
 import { Link, useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
 import _get from 'lodash/get'
 
+if (isBrowser) {
+  mapboxgl.prewarm()
+}
 const Map =
   isBrowser &&
   ReactMapboxGl({
-    accessToken: MAPBOX_TOKEN,
-    minZoom: 1
+    accessToken: MAPBOX_TOKEN
   })
 const Content = ({
   recommendations,
@@ -34,10 +37,7 @@ const Content = ({
   initialScrollPos = 0
 }) => {
   const history = useHistory()
-  const [southWest, setSouthWest] = useState([-0.118092, 51.509865])
-  const [northEast, setNorthEast] = useState([-0.118092, 51.509865])
-
-  const [mapboxTheme] = useState('mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj')
+  const [map, setMap] = useState(null)
 
   const scrollRef = useRef()
 
@@ -47,6 +47,10 @@ const Content = ({
       pathname: `${basePath}/r/${recommendation.id}`,
       search: queryString
     })
+  }
+
+  const onMapLoad = instance => {
+    setMap(instance)
   }
 
   useEffect(
@@ -71,8 +75,15 @@ const Content = ({
           lats.push(recommendation.lat)
           lons.push(recommendation.lon)
         })
-        setSouthWest([Math.min(...lons), Math.min(...lats)])
-        setNorthEast([Math.max(...lons), Math.max(...lats)])
+        if (map) {
+          map.fitBounds([
+            [Math.min(...lons), Math.min(...lats)],
+            [Math.max(...lons), Math.max(...lats)]
+          ],
+          {
+            padding: 10
+          })
+        }
       }
       if (
         detailIndex !== -1 &&
@@ -84,16 +95,23 @@ const Content = ({
         0
       ) {
         recommendations[detailIndex]['top_pois']
-        .filter(poi => poi.poi_has_image === true)
-        .forEach(poi => {
-          if (poi.location.lat && poi.location.lat <= 90 && poi.location.lat >= -90)
-            lats.push(poi.location.lat)
+          .filter(poi => poi.poi_has_image === true)
+          .forEach(poi => {
+            if (poi.location.lat && poi.location.lat <= 90 && poi.location.lat >= -90)
+              lats.push(poi.location.lat)
 
-          if (poi.location.lng && poi.location.lng <= 180 && poi.location.lng >= -180)
-            lons.push(poi.location.lng)
-        })
-        setSouthWest([Math.min(...lons), Math.min(...lats)])
-        setNorthEast([Math.max(...lons), Math.max(...lats)])
+            if (poi.location.lng && poi.location.lng <= 180 && poi.location.lng >= -180)
+              lons.push(poi.location.lng)
+          })
+        if (map) {
+          map.fitBounds([
+            [Math.min(...lons), Math.min(...lats)],
+            [Math.max(...lons), Math.max(...lats)]
+          ],
+          {
+            padding: 10
+          })
+        }
       } else if (
         detailIndex !== -1 &&
         recommendations.length > 0 &&
@@ -101,19 +119,24 @@ const Content = ({
         recommendations[detailIndex]['bbox'] &&
         recommendations[detailIndex]['bbox'].length === 4
       ) {
-        setSouthWest([
-          recommendations[detailIndex]['bbox'][0],
-          recommendations[detailIndex]['bbox'][1]
-        ])
-        setNorthEast([
-          recommendations[detailIndex]['bbox'][2],
-          recommendations[detailIndex]['bbox'][3]
-        ])
+        if (map) {
+          map.fitBounds([
+            [
+              recommendations[detailIndex]['bbox'][0],
+              recommendations[detailIndex]['bbox'][1]
+            ],
+            [
+              recommendations[detailIndex]['bbox'][2],
+              recommendations[detailIndex]['bbox'][3]
+            ]], {
+            padding: 10
+          })
+        }
       }
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [recommendations, detailIndex]
+    [recommendations, detailIndex, map]
   )
 
   if (error)
@@ -195,8 +218,8 @@ const Content = ({
       recommendations.length > 0 && (
         <Map
           className={styles.mapbox}
-          style={mapboxTheme}
-          fitBounds={[southWest, northEast]}
+          style={MAPBOX_THEME}
+          onStyleLoad={onMapLoad}
           fitBoundsOptions={{ padding: 100, linear: false, maxZoom: 20 }}
           pitch={[30]}
           maxBounds={[[-180, -80], [180, 80]]}
@@ -246,8 +269,8 @@ const Content = ({
             poi => poi.poi_has_image === true
           ) &&
           recommendations[detailIndex]['top_pois']
-          .filter(poi => poi.poi_has_image === true)
-          .map((poi, poiIndex) => (
+            .filter(poi => poi.poi_has_image === true)
+            .map((poi, poiIndex) => (
             <div key={poi.id}>
               <Popup
                 offset={[0, 0]}
@@ -267,7 +290,7 @@ const Content = ({
                 </div>
               </Popup>
             </div>
-          ))}
+            ))}
         </Map>
       )}
     </div>
