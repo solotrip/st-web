@@ -202,7 +202,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               </div>
               <div className={styles.elementText}>
                 {tripdays.min_days && tripdays.max_days
-                  ? `Most travelers spend ${tripdays.min_days} - ${tripdays.max_days} days. `
+                  ? tripdays.min_days !== tripdays.max_days
+                    ? `Most travelers spend ${tripdays.min_days} - ${tripdays.max_days} days. `
+                    : `Most travelers spend ${tripdays.min_days} days. `
                   : tripdays.ideal_days ? `Most travelers spend ${tripdays.ideal_days} days. ` : ''}
               </div>
             </div>
