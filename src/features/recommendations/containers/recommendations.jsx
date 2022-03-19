@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
-import { fetchRecommendations, recommendationsSelector } from '../slice'
+import {
+  fetchRecommendations,
+  recommendationsSelector,
+  resetActiveRecommendation
+} from '../slice'
 import { isGuestSelector, profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
@@ -49,6 +53,7 @@ const RecommendationsContainer = () => {
         location.pathname === '/recommendations' ||
         location.pathname.startsWith('/recommendations/r/')
       ) {
+        dispatch(resetActiveRecommendation())
         if (!query.start && !query.months) return openDateSheet(query)
         if (!query.lat || !query.lon) {
           return openLocationSheet(query)

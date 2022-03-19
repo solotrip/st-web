@@ -61,8 +61,8 @@ const Content = ({
           behavior: 'auto'
         })
       }
-      //eslint-disable-next-line
     },
+    //eslint-disable-next-line
     [detailIndex]
   )
 
@@ -79,11 +79,9 @@ const Content = ({
           map.fitBounds([
             [Math.min(...lons), Math.min(...lats)],
             [Math.max(...lons), Math.max(...lats)]
-          ],
-          {
-            padding: 10
-          })
+          ])
         }
+        return
       }
       if (
         detailIndex !== -1 &&
@@ -107,12 +105,11 @@ const Content = ({
           map.fitBounds([
             [Math.min(...lons), Math.min(...lats)],
             [Math.max(...lons), Math.max(...lats)]
-          ],
-          {
-            padding: 10
-          })
+          ])
         }
-      } else if (
+        return
+      }
+      if (
         detailIndex !== -1 &&
         recommendations.length > 0 &&
         recommendations[detailIndex] &&
@@ -128,10 +125,12 @@ const Content = ({
             [
               recommendations[detailIndex]['bbox'][2],
               recommendations[detailIndex]['bbox'][3]
-            ]], {
-            padding: 10
-          })
+            ]])
         }
+        return
+      }
+      if(map) {
+        map.easeTo({ center: [0, 0], zoom: 2, duration: 1000 })
       }
     },
 
@@ -155,14 +154,7 @@ const Content = ({
       </div>
     )
 
-  if (loading)
-    return (
-      <div className={styles.recommendations}>
-        <Recommendation.Skeleton/>
-      </div>
-    )
-
-  const list = (
+  const list = !loading && (
     <div ref={scrollRef} className={styles.recommendations}
          onScroll={handleScroll}
     >
@@ -194,7 +186,12 @@ const Content = ({
 
   return (
     <div className={styles.page}>
-      {detailIndex === -1 ? (
+      {loading && (
+        <div className={styles.recommendations}>
+        <Recommendation.Skeleton/>
+      </div>
+      )}
+      {!loading && (detailIndex === -1 ? (
         list
       ) : (
         <div ref={scrollRef} onScroll={handleScroll}
@@ -211,17 +208,17 @@ const Content = ({
             }
           />
         </div>
-      )}
+      ))}
 
-      {mapEnabled &&
-      isBrowser &&
-      recommendations.length > 0 && (
+      {(mapEnabled &&
+      isBrowser) && (
         <Map
           className={styles.mapbox}
           style={MAPBOX_THEME}
           onStyleLoad={onMapLoad}
           fitBoundsOptions={{ padding: 100, linear: false, maxZoom: 20 }}
           pitch={[30]}
+          zoom={[2]}
           maxBounds={[[-180, -80], [180, 80]]}
         >
           {!loading &&

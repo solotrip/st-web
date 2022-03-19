@@ -61,6 +61,12 @@ const recommendationsSlice = createSlice({
     activeRecommendationId: null,
     loadingHolidays: true
   },
+  reducers: {
+    resetActiveRecommendation: state => {
+      state.activeRecommendationId = null
+      state.loadingRecommendations = true
+    }
+  },
   extraReducers: {
     [fetchRecommendations.pending]: state => {
       state.activeRecommendationId = null
@@ -93,5 +99,5 @@ const recommendationsSlice = createSlice({
 })
 
 export const recommendationsSelector = state => state.recommendations
-
+export const { resetActiveRecommendation } = recommendationsSlice.actions
 export default recommendationsSlice.reducer
