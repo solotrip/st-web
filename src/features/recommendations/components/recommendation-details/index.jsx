@@ -81,9 +81,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           height={225}
           srcsetProvided={true}
           src={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-350,h-225`}
-          srcset={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-350,h-225,
-                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-700,h-550 2x,
-                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1050,h-775 3x`}
+          srcset={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-700,h-550,
+                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1400,h-1100 2x,
+                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-2100,h-1650 3x`}
           className={styles.headerImage}
           isRounded={false}
         />
