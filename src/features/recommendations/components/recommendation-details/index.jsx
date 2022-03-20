@@ -531,17 +531,18 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                         : getDefaultImage(poi, appTheme === 'light')
                     }
                     srcsetProvided={true}
-                    srcset={
-                      'https://ik.imagekit.io/stmedia/pois/' +
-                      getPoiImage(poi, appTheme === 'light') +
-                      `?tr=w-278,h-180,
-                             https://ik.imagekit.io/stmedia/pois/ ` +
-                      getPoiImage(poi, appTheme === 'light') +
-                      `?tr=w-556,h-360 2x,
-                             https://ik.imagekit.io/stmedia/pois/ ` +
-                      getPoiImage(poi, appTheme === 'light') +
-                      '?tr=w-834,h-540 3x'
-                    }
+                    srcset={`https://ik.imagekit.io/stmedia/pois/${getPoiImage(
+                      poi,
+                      appTheme === 'light'
+                    )}?tr=w-278,h-180,
+                             https://ik.imagekit.io/stmedia/pois/${getPoiImage(
+                      poi,
+                      appTheme === 'light'
+                    )}?tr=w-556,h-360 2x,
+                             https://ik.imagekit.io/stmedia/pois/${getPoiImage(
+                      poi,
+                      appTheme === 'light'
+                    )}?tr=w-834,h-540 3x`}
                     className={styles.slideImage2}
                     width={200}
                     height={120}
