@@ -13,6 +13,8 @@ const Image = ({
   className,
   containerClassName,
   src,
+  srcsetProvided = false,
+  srcset,
   isRounded = true,
   ...props
 }) => {
@@ -36,7 +38,19 @@ const Image = ({
   return (
     <div className={cn([styles.container, className, { [styles.loaded]: loaded }])}>
       {(!loaded || !src) && placeholder}
-      {src && (
+      {src && srcsetProvided ? (
+        <img
+          className={cn(isRounded ? styles.imageRounded : styles.image, {
+            [styles.notLoaded]: !loaded
+          })}
+          src={url}
+          srcSet={srcset}
+          style={!isRounded ? { width: width, height: height } : { width: '100%', height: '100%' }}
+          alt={alt}
+          {...props}
+          onLoad={handleLoad}
+        />
+      ) : (
         <img
           className={cn(isRounded ? styles.imageRounded : styles.image, {
             [styles.notLoaded]: !loaded

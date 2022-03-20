@@ -2,92 +2,87 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import { HorizontalList, Image, Query } from 'components'
-import {
-  ReactComponent as EventsIcon
-} from 'assets/images/new-icons/events.svg'
-import {
-  ReactComponent as Calendar
-} from 'assets/images/new-icons/calendar.svg'
+import { ReactComponent as EventsIcon } from 'assets/images/new-icons/events.svg'
+import { ReactComponent as Calendar } from 'assets/images/new-icons/calendar.svg'
 import { formatAsMonthDay } from '../../../utils/date'
-import {
-  ReactComponent as Location
-} from 'assets/images/new-icons/location.svg'
+import { ReactComponent as Location } from 'assets/images/new-icons/location.svg'
 import { Link } from 'react-router-dom'
 import qs from 'qs'
 
-const ListItem = ({ name, location, startDate, endDate, link, image }) => (
+const ListItem = ({ name, location, startDate, endDate, link, image, image_hash }) => (
   <>
-    {image &&
-    <Image
-      src={image}
-      className={styles.image}
-      width={300}
-      height={150}
-      alt={name}
-    />
-    }
+    {image_hash && (
+      <Image
+        src={'https://ik.imagekit.io/stmedia/browse/' + image_hash + '?tr=w-270,h-150'}
+        srcsetProvided={true}
+        srcset={`https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-270,h-150,
+                             https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-340,h-300 2x,
+                             https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-810,h-450 3x`}
+        className={styles.image}
+        width={300}
+        height={150}
+        alt={name}
+      />
+    )}
     {name && (
       <div className={styles.info}>
         <div className={styles.icon}>
-          <EventsIcon/>
+          <EventsIcon />
         </div>
         <div>{name}</div>
-      </div>)
-    }
-    {(startDate || endDate) &&
-    <div className={styles.info}>
-      <div className={styles.icon}>
-        {' '}
-        <Calendar/>
       </div>
-      <div>
-        {formatAsMonthDay(startDate)}
-        {startDate !== endDate
-          ? ` - ${formatAsMonthDay(endDate)}`
-          : ''}
+    )}
+    {(startDate || endDate) && (
+      <div className={styles.info}>
+        <div className={styles.icon}>
+          {' '}
+          <Calendar />
+        </div>
+        <div>
+          {formatAsMonthDay(startDate)}
+          {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}
+        </div>
       </div>
-    </div>}
-    {location && <div className={styles.info}>
-      <div className={styles.icon}>
-        <Location/>
+    )}
+    {location && (
+      <div className={styles.info}>
+        <div className={styles.icon}>
+          <Location />
+        </div>
+        <div>{location}</div>
       </div>
-      <div>{location}</div>
-    </div>}
+    )}
 
     <Link to={link}>
       <button className={styles.showDetails}>Discover</button>
     </Link>
-  </>)
+  </>
+)
 
-
-const Content = ({
-  items,
-  recentQueries,
-  filtersDict,
-  locations
-}) => {
-
+const Content = ({ items, recentQueries, filtersDict, locations }) => {
   return (
     <div className={styles.page}>
-      {recentQueries.length > 0 && (<div className={styles.queries}>
-        <h2>Recent</h2>
-        {recentQueries.map((q, i) => <Link
-            className={styles.queryLink}
-            key={`rec-q-${i}`}
-            to={`recommendations?${qs.stringify(q)}`}
-        >
-            <Query
-              className={styles.query}
-              enableClick={false}
-              maxFiltersDisplayed={4}
-              query={q}
-              filtersDict={filtersDict}
-              locations={locations}
-            />
-          </Link>
-        )}
-      </div>)
-      }
+      {recentQueries.length > 0 && (
+        <div className={styles.queries}>
+          <h2>Recent</h2>
+          {recentQueries.map((q, i) => (
+            <Link
+              className={styles.queryLink}
+              key={`rec-q-${i}`}
+              to={`recommendations?${qs.stringify(q)}`}
+            >
+              <Query
+                className={styles.query}
+                enableClick={false}
+                maxFiltersDisplayed={4}
+                query={q}
+                filtersDict={filtersDict}
+                locations={locations}
+              />
+            </Link>
+          ))}
+        </div>
+      )}
       {items.map(group => (
         <HorizontalList
           key={`hl-group-${group[0].category}`}

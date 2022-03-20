@@ -79,7 +79,11 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         <Image
           width={'100%'}
           height={225}
-          src={`https://pulfy-images.s3.eu-central-1.amazonaws.com/areas/${sid}`}
+          srcsetProvided={true}
+          src={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-350,h-225`}
+          srcset={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-350,h-225,
+                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-700,h-550 2x,
+                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1050,h-775 3x`}
           className={styles.headerImage}
           isRounded={false}
         />
@@ -521,9 +525,22 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   <Image
                     src={
                       poi.poi_has_image
-                        ? 'https://pulfy-images.s3.eu-central-1.amazonaws.com/pois/' +
-                          getPoiImage(poi, appTheme === 'light')
+                        ? 'https://ik.imagekit.io/stmedia/pois/' +
+                          getPoiImage(poi, appTheme === 'light') +
+                          '?tr=w-278,h-180'
                         : getDefaultImage(poi, appTheme === 'light')
+                    }
+                    srcsetProvided={true}
+                    srcset={
+                      'https://ik.imagekit.io/stmedia/pois/' +
+                      getPoiImage(poi, appTheme === 'light') +
+                      `?tr=w-278,h-180,
+                             https://ik.imagekit.io/stmedia/pois/ ` +
+                      getPoiImage(poi, appTheme === 'light') +
+                      `?tr=w-556,h-360 2x,
+                             https://ik.imagekit.io/stmedia/pois/ ` +
+                      getPoiImage(poi, appTheme === 'light') +
+                      '?tr=w-834,h-540 3x'
                     }
                     className={styles.slideImage2}
                     width={200}
@@ -553,10 +570,22 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <div key={`activitiy-${activity}`} className={styles.centeredSlide}>
                   <Image
                     src={
-                      activity && activityImages[activity] && activityImages[activity].image
-                        ? activityImages[activity].image
+                      activity && activityImages[activity] && activityImages[activity].image_hash
+                        ? 'https://ik.imagekit.io/stmedia/activities/' +
+                          activityImages[activity].image_hash +
+                          '?tr=w-278,h-180'
                         : ''
                     }
+                    srcsetProvided={true}
+                    srcset={`https://ik.imagekit.io/stmedia/activities/${
+                      activityImages[activity].image_hash
+                    }?tr=w-278,h-180,
+                             https://ik.imagekit.io/stmedia/activities/${
+                               activityImages[activity].image_hash
+                             }?tr=w-556,h-360 2x,
+                             https://ik.imagekit.io/stmedia/activities/${
+                               activityImages[activity].image_hash
+                             }?tr=w-834,h-540 3x`}
                     className={styles.slideImage2}
                     width={278}
                     height={180}
