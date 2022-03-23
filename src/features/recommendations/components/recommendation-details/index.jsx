@@ -361,11 +361,11 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           {colLabels.meal_cheap_restaurant_cost_label && (
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Food className={styles.food} />
                 </div>
-                Meal at Cheap Restaurant
+                <div>Meal at Cheap Restaurant</div>
               </div>
               <div className={styles.elementText2}>
                 {colLabels.meal_cheap_restaurant_cost_label}
@@ -375,11 +375,11 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           {colLabels.meal_mid_range_restaurant_cost_label && (
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Food />
                 </div>
-                Meal at Expensive Restaurant
+                Meal at Luxury Restaurant
               </div>
               <div className={styles.elementText2}>
                 {colLabels.meal_mid_range_restaurant_cost_label}
@@ -389,7 +389,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           {colLabels.mcmeal_at_mcdonalds_cost_label && (
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Food />
                 </div>
@@ -402,7 +402,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Food />
                 </div>
@@ -415,7 +415,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon3}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Transport />
                 </div>
@@ -428,7 +428,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Food />
                 </div>
@@ -440,7 +440,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           {colLabels.montly_transport_pass_label && (
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
-                <div className={styles.elementIcon3}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Transport />
                 </div>
@@ -453,7 +453,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon3}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Transport />
                 </div>
@@ -466,7 +466,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <EventsIcon />
                 </div>
@@ -479,7 +479,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Star />
                 </div>
@@ -492,7 +492,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon2}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Star />
                 </div>
@@ -505,7 +505,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.contentElement2}>
               <div className={styles.elementText2}>
                 {' '}
-                <div className={styles.elementIcon3}>
+                <div className={styles.elementIcon5}>
                   {' '}
                   <Transport />
                 </div>
