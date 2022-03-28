@@ -11,9 +11,7 @@ import _ from 'lodash'
 import { registerDevice } from 'utils/notification'
 import { fetchTracked, trackSelector } from 'features/track/slice'
 import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
-import {
-  FirebaseAuthentication
-} from '@robingenz/capacitor-firebase-authentication'
+import { FirebaseAuthentication } from '@robingenz/capacitor-firebase-authentication'
 import {
   fetchFilters,
   filtersSelector
@@ -24,19 +22,24 @@ import {
   exchangeRatesSelector
 } from 'reducers/exchangeRatesSlice'
 
-const createCustomAsyncThunk = (type, payloadCreator, options) => (
-  createAsyncThunk(type, async (params, thunkAPI) => {
-    try {
-      return await payloadCreator(params, thunkAPI)
-    } catch (e) {
-      if (_get(e, 'response.data')) {
-        return thunkAPI.rejectWithValue(e.response.data)
-      } else {
-        throw e
+import { Mixpanel } from 'analytics/mixpanel'
+
+const createCustomAsyncThunk = (type, payloadCreator, options) =>
+  createAsyncThunk(
+    type,
+    async (params, thunkAPI) => {
+      try {
+        return await payloadCreator(params, thunkAPI)
+      } catch (e) {
+        if (_get(e, 'response.data')) {
+          return thunkAPI.rejectWithValue(e.response.data)
+        } else {
+          throw e
+        }
       }
-    }
-  }, options)
-)
+    },
+    options
+  )
 
 export const login = createCustomAsyncThunk(
   'auth/login',
@@ -48,8 +51,16 @@ export const login = createCustomAsyncThunk(
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile({ history }))
+
+    Mixpanel.identify(email)
+    Mixpanel.track('Successful login')
+    Mixpanel.people.set({
+      $email: email
+    })
+
     history.replace('/browse')
-  })
+  }
+)
 
 export const loginWithGoogle = createCustomAsyncThunk(
   'auth/login',
@@ -63,7 +74,8 @@ export const loginWithGoogle = createCustomAsyncThunk(
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile({ history }))
     history.replace('/browse')
-  })
+  }
+)
 
 export const loginWithApple = createCustomAsyncThunk(
   'auth/login',
@@ -77,15 +89,18 @@ export const loginWithApple = createCustomAsyncThunk(
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile({ history }))
     history.replace('/browse')
-  })
+  }
+)
 
-export const logout = createAsyncThunk('' +
-  'auth/logout', async ({ history }, { dispatch }) => {
-  await clearTokens()
-  await FirebaseAuthentication.signOut()
-  dispatch({ type: 'store/reset' })
-  history.replace('/')
-})
+export const logout = createAsyncThunk(
+  '' + 'auth/logout',
+  async ({ history }, { dispatch }) => {
+    await clearTokens()
+    await FirebaseAuthentication.signOut()
+    dispatch({ type: 'store/reset' })
+    history.replace('/')
+  }
+)
 
 export const createGuest = createAsyncThunk(
   'auth/createGuest',
@@ -94,13 +109,15 @@ export const createGuest = createAsyncThunk(
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile({ history }))
-  })
-
+  }
+)
 
 export const register = createCustomAsyncThunk(
-  'auth/register', async ({
-    name, username, email, password, history, redirectTo
-  }, { dispatch }) => {
+  'auth/register',
+  async (
+    { name, username, email, password, history, redirectTo },
+    { dispatch }
+  ) => {
     const { accessToken, refreshToken } = await AuthApi.register({
       name,
       username,
@@ -110,6 +127,12 @@ export const register = createCustomAsyncThunk(
     await updateAccessToken(accessToken)
     await updateRefreshToken(refreshToken)
     dispatch(fetchProfile({ history }))
+
+    Mixpanel.identify(email)
+    Mixpanel.track('Successful register')
+    Mixpanel.people.set({
+      $email: email
+    })
     history.replace(redirectTo)
   }
 )
@@ -119,11 +142,11 @@ export const register = createCustomAsyncThunk(
  * it will create a guest user if user has not authenticated before.
  */
 export const initialize = createAsyncThunk(
-  'auth/init', async ({ ensureAuth, history } = false, {
-    dispatch,
-    getState,
-    rejectWithValue
-  }) => {
+  'auth/init',
+  async (
+    { ensureAuth, history } = false,
+    { dispatch, getState, rejectWithValue }
+  ) => {
     const {
       isAuthenticated,
       isGuest,
@@ -180,7 +203,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    reset(state) {
+    reset (state) {
       state = { ...initialState }
     }
   },
