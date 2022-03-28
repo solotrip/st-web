@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as NotificationApi from '../../api/notification'
-import _ from 'lodash'
+import _get from 'lodash/get'
 
 export const fetchNotifications = createAsyncThunk('notifications/fetch',
   async () => {
@@ -25,7 +25,7 @@ const notificationsSlice = createSlice({
       state.loading = false
     },
     [fetchNotifications.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.toString())
+      state.error = _get(action.error, 'data', action.error.toString())
       state.loading = false
     }
   }

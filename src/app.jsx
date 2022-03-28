@@ -16,8 +16,6 @@ import { persistStore } from 'redux-persist'
 import 'utils/firebase'
 
 // Import css files
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import 'react-image-shadow/assets/index.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'swiper/swiper.min.css'

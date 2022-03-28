@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as BrowseApi from '../../api/browse'
-import _ from 'lodash'
+import _get from 'lodash/get'
 
 export const fetchBrowseItems = createAsyncThunk('browse/fetch',
   async () => {
@@ -25,7 +25,7 @@ const browseSlice = createSlice({
       state.loading = false
     },
     [fetchBrowseItems.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.toString())
+      state.error = _get(action.error, 'data', action.error.toString())
       state.loading = false
     }
   }

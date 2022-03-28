@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
-import _ from 'lodash'
+import _debounce from 'lodash/debounce'
 import Tag from './tag'
 import styles from './search.module.scss'
 import { MdClose, MdSearch } from 'react-icons/md'
@@ -19,7 +19,7 @@ const Search = ({
   const [value, setValue] = useState(defaultValue)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedChangeHandler = useCallback(
-    _.debounce(
+    _debounce(
       value => {
         onChange(value)
       },

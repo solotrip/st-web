@@ -4,7 +4,7 @@ import cn from 'classnames'
 import styles from './month-picker.module.scss'
 import { getMonthsStartingFromToday } from 'utils/date'
 import { MdDateRange } from 'react-icons/md'
-import { HorizontalScroll } from 'components'
+import { HorizontalList } from 'components'
 
 const MonthPicker = ({ onSelect, selected }) => {
   const monthOptions = getMonthsStartingFromToday()
@@ -37,7 +37,7 @@ const MonthPicker = ({ onSelect, selected }) => {
   ))
   return (
     <div className={styles.monthPicker}>
-      <HorizontalScroll items={months}/>
+      <HorizontalList items={months} itemClassName={styles.monthSlide}/>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as ExchangeRatesApi from 'api/exchangeRates'
-import _ from 'lodash'
+import _get from 'lodash/get'
 
 export const fetchExchangeRates = createAsyncThunk(
   'exchangeRates/fetch',
@@ -29,7 +29,7 @@ const exchangeRatesSlice = createSlice({
       state.loading = false
     },
     [fetchExchangeRates.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.toString())
+      state.error = _get(action.error, 'data', action.error.toString())
       state.loading = false
       state.initialized = false
     }

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import * as UserApi from '../../api/user'
-import _ from 'lodash'
+import _get from 'lodash/get'
 import { logout } from 'features/auth/slice'
 
 export const updateProfile = createAsyncThunk(
@@ -48,7 +48,7 @@ const profileSlice = createSlice({
     },
     [fetchProfile.error]: (state, action) => {
       state.loading = true
-      state.error = _.get(action.error, 'data', action.error.message)
+      state.error = _get(action.error, 'data', action.error.message)
     },
     [updateProfile.pending]: state => {
       state.error = null
@@ -60,7 +60,7 @@ const profileSlice = createSlice({
     },
     [updateProfile.error]: (state, action) => {
       state.loading = true
-      state.error = _.get(action.error, 'data', action.error.message)
+      state.error = _get(action.error, 'data', action.error.message)
     }
   }
 })

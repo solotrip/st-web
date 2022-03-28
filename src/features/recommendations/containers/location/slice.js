@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import _ from 'lodash'
+import _get from 'lodash/get'
+import _uniq from 'lodash/uniq'
 import * as LocationApi from 'api/location'
 import { getGeolocation } from 'utils/geolocation'
 import { toast } from 'react-toastify'
@@ -86,7 +87,7 @@ const locationSlice = createSlice({
         longitude: action.payload.lon
       })
       state.activeLocation = key
-      state.recentLocations = _.uniq([key, ...state.recentLocations])
+      state.recentLocations = _uniq([key, ...state.recentLocations])
       state.locations[key] = action.payload
       state.query = ''
       state.results = []
@@ -105,14 +106,14 @@ const locationSlice = createSlice({
     [fillLocationData.fulfilled]: (state, action) => {
       toast.info(JSON.stringify(action.payload))
       state.locations[action.payload.q] = action.payload.data
-      state.recentLocations = _.uniq([
+      state.recentLocations = _uniq([
         action.payload.q, ...state.recentLocations
       ])
       state.activeLocation = action.payload.q
       state.fetchingCurrentLocation = false
     },
     [fetchCurrentLocation.rejected]: (state, action) => {
-      toast.error(_.get(action.error, 'data', action.error.message))
+      toast.error(_get(action.error, 'data', action.error.message))
       state.fetchingCurrentLocation = false
       state.errorCurrentLocation = true
     },

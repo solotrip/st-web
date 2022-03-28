@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react'
-import _ from 'lodash'
+import _groupBy from 'lodash/groupBy'
 import Filter from './filter'
 import { Accordion } from 'components'
 import styles from './filters.module.scss'
 import { RECENT_FILTERS_CATEGORY } from 'constants/index'
 
 const Filters = ({ filters, filterValues, error, loading, updateFilter }) => {
-  const filtersByCategory = useMemo(() => _.groupBy(filters, 'category'), [
+  const filtersByCategory = useMemo(() => _groupBy(filters, 'category'), [
     filters
   ])
   return (

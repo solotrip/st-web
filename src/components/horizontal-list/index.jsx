@@ -23,7 +23,8 @@ const HorizontalList = ({
   title,
   className,
   itemClassName,
-  slidesPerView = 'auto'
+  slidesPerView = 'auto',
+  ...rest
 }) => {
 
   const hideControls = (slidesPerView !== 'auto'
@@ -34,6 +35,7 @@ const HorizontalList = ({
       className={cn(styles.container, { [className]: !!className })}
       slidesPerView={slidesPerView}
       rewind
+      {...rest}
     >
 
       <div className={styles.header} slot="container-start">
