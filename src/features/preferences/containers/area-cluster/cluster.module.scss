@@ -1,10 +1,17 @@
 @import 'styles/mixins';
 
 .areaCluster {
-  padding: 32px;
+  padding: 16px 32px;
+
+  :global(.swiper-wrapper){
+    @include xl {
+      justify-content: center;
+    }
+  }
 }
 
-.slideHolder {
+.slideWrapper {
+  width: 250px !important;
 }
 
 .title {

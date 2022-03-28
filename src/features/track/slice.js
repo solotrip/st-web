@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as RecommendationApi from 'api/recommendation'
-import _ from 'lodash'
+import _get from 'lodash/get'
+import _keyBy from 'lodash/keyBy'
 import { toast } from 'react-toastify'
 
 
@@ -49,7 +50,7 @@ export const trackSlice = createSlice({
       state.loading = false
     },
     [addToTracked.rejected]: (state, action) => {
-      state.error = _.get(
+      state.error = _get(
         action.error,
         'data',
         action.error.toString()
@@ -66,7 +67,7 @@ export const trackSlice = createSlice({
       state.loading = false
     },
     [removeFromTracked.rejected]: (state, action) => {
-      state.error = _.get(
+      state.error = _get(
         action.error,
         'data',
         action.error.toString()
@@ -80,12 +81,12 @@ export const trackSlice = createSlice({
       state.error = null
     },
     [fetchTracked.fulfilled]: (state, action) => {
-      state.tracked = _.keyBy(action.payload, 'recommendationId')
+      state.tracked = _keyBy(action.payload, 'recommendationId')
       state.loading = false
       state.initialized = true
     },
     [fetchTracked.rejected]: (state, action) => {
-      state.error = _.get(
+      state.error = _get(
         action.error,
         'data',
         action.error.toString()

@@ -7,13 +7,13 @@ import Footer from './footer'
 
 const OnboardingPage = ({ children, onNext, nextEnabled }) => {
   return (
-    <div>
+    <>
       <div className={cn(styles.container)}>
         <Header/>
         <div className={styles.content}>{children}</div>
       </div>
       <Footer onNext={onNext} nextEnabled={nextEnabled}/>
-    </div>
+    </>
   )
 }
 

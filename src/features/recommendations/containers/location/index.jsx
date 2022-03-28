@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react'
 import { SheetWrapper, SearchInput } from 'components'
 import styles from './location.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { uniqBy } from 'lodash'
+import _uniqBy from 'lodash/uniqBy'
 import {
   fetchCurrentLocation,
   locationSelector,
@@ -92,7 +92,7 @@ const LocationContainer = () => {
                     : currentLocOption.fullname_en}{' '}
                 </button>
             )}
-            {uniqBy(options, 'fullname_en').map(o => (
+            {_uniqBy(options, 'fullname_en').map(o => (
               <button
                 className={styles.item}
                 key={`loc-${o.lat}-${o.lon}`}

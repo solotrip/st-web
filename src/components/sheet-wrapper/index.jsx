@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styles from './sheet-wrapper.module.scss'
 import Sheet from 'react-modal-sheet'
-import { FiX as CloseIcon } from 'react-icons/fi'
+import { MdClose as CloseIcon } from 'react-icons/md'
 import Footer from './footer'
 
 const SheetWrapper = ({ children, ...rest }) => {

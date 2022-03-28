@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as RecommendationsApi from 'api/recommendation'
-import _ from 'lodash'
+import _get from 'lodash/get'
 import qs from 'qs'
 
 
@@ -88,7 +88,7 @@ const recommendationsSlice = createSlice({
       state.loadingAvailableDates = false
     },
     [fetchHolidays.rejected]: (state, action) => {
-      state.errorRecommendations = _.get(
+      state.errorRecommendations = _get(
         action.error,
         'data',
         action.error.toString()

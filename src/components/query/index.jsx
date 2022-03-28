@@ -10,7 +10,8 @@ import {
   formatDuration,
   getMonthAbbreviation
 } from 'utils/date'
-import _ from 'lodash'
+import _get from 'lodash/get'
+import _truncate from 'lodash/truncate'
 
 const Query = ({
   query,
@@ -32,8 +33,8 @@ const Query = ({
 
   const tags = [
     {
-      value: _.truncate(
-        _.get(
+      value: _truncate(
+        _get(
           locations[
             coordsToQuery({
               latitude: query.lat,

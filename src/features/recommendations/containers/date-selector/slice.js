@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import _ from 'lodash'
+import _uniqBy from 'lodash/uniqBy'
 import { fetchRecommendations } from 'features/recommendations/slice'
 import {
   RECENT_DATE_RANGES_COUNT,
@@ -24,7 +24,7 @@ const datesSlice = createSlice({
         weekendOnly
       } = arg
       if(start && end) {
-        state.recentDateRanges = _.uniqBy([
+        state.recentDateRanges = _uniqBy([
           {
             start,
             end
@@ -33,7 +33,7 @@ const datesSlice = createSlice({
         ], d => `${d.start}-${d.end}`).slice(0, RECENT_DATE_RANGES_COUNT)
       }
       if(months) {
-        state.recentMonths = _.uniqBy([
+        state.recentMonths = _uniqBy([
           {
             months,
             duration,

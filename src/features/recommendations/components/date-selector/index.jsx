@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './date-selector.module.scss'
-import _ from 'lodash'
+import _find from 'lodash/find'
 import { Calendar, MonthPicker, RadioInput } from 'components'
 import {
   formatAsMonthDay,
@@ -105,7 +105,7 @@ const DateSelector = ({
                 label: c.label,
                 value: c.value
               }))}
-              value={(_.find(
+              value={(_find(
                 Object.values(FLEXIBLE_DATE_CONFIG)
                 , o => (o.payload.duration
                   && o.payload.duration === data.duration) ||

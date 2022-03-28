@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-import _ from 'lodash'
+import _uniqBy from 'lodash/uniqBy'
 import { fetchRecommendations } from 'features/recommendations/slice'
 import { RECENT_QUERIES_COUNT } from 'constants/index'
-import objectHash from 'object-hash'
+import { deepSort }  from 'tiny-object-hash'
 import { isExpired } from 'utils/date'
 
 const filterOldQueries = queries => queries.filter(q =>
@@ -17,10 +17,10 @@ const recentQueriesSlice = createSlice({
   extraReducers: {
     [fetchRecommendations.pending]: (state, action) => {
       const { arg = {} } = action.meta
-      state.items = filterOldQueries(_.uniqBy([
+      state.items = filterOldQueries(_uniqBy([
         arg,
         ...state.items
-      ], objectHash)).slice(0, RECENT_QUERIES_COUNT)
+      ], a => JSON.stringify(deepSort(a)))).slice(0, RECENT_QUERIES_COUNT)
 
     }
   }

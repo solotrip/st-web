@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as RecommendationApi from 'api/recommendation'
-import _ from 'lodash'
+import _get from 'lodash/get'
+import _zipObject from 'lodash/zipObject'
+import _keyBy from 'lodash/keyBy'
 
 
 export const addToWishlist = createAsyncThunk(
@@ -41,7 +43,7 @@ export const fetchWishlist = createAsyncThunk(
     const { wishlist, initialized, loading } = wishlistSelector(getState())
     if (!initialized && loading) {
       const response = await RecommendationApi.getWishlist()
-      return _.keyBy(response, 'wishlistId')
+      return _keyBy(response, 'wishlistId')
     }
     if (initialized) {
       return wishlist
@@ -63,32 +65,32 @@ export const wishlistSlice = createSlice({
   extraReducers: {
     [addToWishlist.fulfilled]: (state, action) => {
       state.wishlist[action.payload.wishlistId] = action.payload
-      state.wishlisted[_.get(action.meta.arg, 'recommendation.id')]
+      state.wishlisted[_get(action.meta.arg, 'recommendation.id')]
         = action.payload.wishlistId
-      state.ridToWishlistId[_.get(action.meta.arg, 'recommendation.id')]
+      state.ridToWishlistId[_get(action.meta.arg, 'recommendation.id')]
         = action.payload.wishlistId
 
       state.loading = false
     },
     [addToWishlist.rejected]: (state, action) => {
-      state.error = _.get(
+      state.error = _get(
         action.error,
         'response.data',
         action.error.toString()
       )
       state.loading = false
       state.wishlisted
-        [_.get(
+        [_get(
           state.wishlist[action.meta.arg], 'recommendation.id')
         ] = false
     },
     [addToWishlist.pending]: (state, action) => {
       state.loading = true
       state.error = null
-      state.wishlisted[_.get(action.meta.arg, 'recommendation.id')] = true
+      state.wishlisted[_get(action.meta.arg, 'recommendation.id')] = true
     },
     [removeFromWishlist.pending]: (state, action) => {
-      const rid = _.get(action.meta.arg, 'id')
+      const rid = _get(action.meta.arg, 'id')
       if (rid) {
         state.wishlisted[rid] = false
       }
@@ -103,9 +105,9 @@ export const wishlistSlice = createSlice({
       delete state.wishlist[action.payload.wishlistId]
     },
     [removeFromWishlist.rejected]: (state, action) => {
-      const rid = _.get(action.meta.arg, 'id')
+      const rid = _get(action.meta.arg, 'id')
       state.wishlisted[rid] = true
-      state.error = _.get(
+      state.error = _get(
         action.error,
         'response.data',
         action.error.toString()
@@ -116,17 +118,17 @@ export const wishlistSlice = createSlice({
     [fetchWishlist.fulfilled]: (state, action) => {
       if (action.payload === null) return
       state.wishlist = action.payload
-      state.wishlisted = _.zipObject(
+      state.wishlisted = _zipObject(
         Object.values(action.payload).map(r => r.data.id),
         Object.values(action.payload).map(r => true))
-      state.ridToWishlistId = _.zipObject(
+      state.ridToWishlistId = _zipObject(
         Object.values(action.payload).map(r => r.data.id),
         Object.values(action.payload).map(r => r.wishlistId))
       state.loading = false
       state.initialized = true
     },
     [fetchWishlist.rejected]: (state, action) => {
-      state.error = _.get(
+      state.error = _get(
         action.error,
         'response.data',
         action.error.toString()

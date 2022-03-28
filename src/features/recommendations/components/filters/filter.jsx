@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
+import _get from 'lodash/get'
 import { Checkbox, RangeInput } from 'components'
 import styles from './filter.module.scss'
 
 const Filter = ({ filter, value, updateFilter }) => {
-  const allowedVariables = _.get(filter,
+  const allowedVariables = _get(filter,
     'allowedVariables', []).filter(v => !v.key.startsWith('$'))
   const rangeFields = allowedVariables.filter(a => [
     'lt', 'gt', 'gte', 'lte'

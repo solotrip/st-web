@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as FlightCostsApi from '../../../../api/flightCosts'
-import _ from 'lodash'
+import _get from 'lodash/get'
 
 export const fetchFlightCosts = createAsyncThunk(
   'flightCosts/fetch',
@@ -28,7 +28,7 @@ const flightCostsSlice = createSlice({
       state.loading = false
     },
     [fetchFlightCosts.rejected]: (state, action) => {
-      state.error = _.get(action.error, 'data', action.error.toString())
+      state.error = _get(action.error, 'data', action.error.toString())
       state.loading = false
     }
   }

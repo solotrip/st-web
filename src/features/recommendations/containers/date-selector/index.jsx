@@ -69,7 +69,7 @@ const DateSelectorContainer = () => {
   }
   return (
     // TODO: Add holidays loader
-    <SheetWrapper snapPoints={[650]}>
+    <SheetWrapper snapPoints={[700]}>
       <SheetWrapper.Content>
         <DateSelector
           query={query}

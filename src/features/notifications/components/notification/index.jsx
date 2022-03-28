@@ -7,7 +7,7 @@ import { ReactComponent as Time } from 'assets/images/new-icons/time.svg'
 import { ReactComponent as Calendar } from 'assets/images/new-icons/calendar.svg'
 import { ReactComponent as EventsIcon } from 'assets/images/new-icons/events.svg'
 import { Card } from 'components'
-import { capitalize as _capitalize } from 'lodash'
+import _capitalize from 'lodash/capitalize'
 import { NOTIFICATION_TYPES } from 'constants/index'
 import qs from 'qs'
 

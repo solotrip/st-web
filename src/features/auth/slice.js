@@ -7,7 +7,6 @@ import {
 } from 'utils/auth'
 import { fetchProfile } from 'features/profile/slice'
 import * as AuthApi from 'api/auth'
-import _ from 'lodash'
 import { registerDevice } from 'utils/notification'
 import { fetchTracked, trackSelector } from 'features/track/slice'
 import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
@@ -204,7 +203,7 @@ const authSlice = createSlice({
     [initialize.error]: (state, action) => {
       state.isAuthenticated = false
       state.loading = true
-      state.error = _.get(action.error, 'data', JSON.stringify(action.error))
+      state.error = _get(action.error, 'data', JSON.stringify(action.error))
     },
     [createGuest.pending]: state => {
       state.error = null
@@ -220,7 +219,7 @@ const authSlice = createSlice({
     [createGuest.error]: (state, action) => {
       state.isAuthenticated = false
       state.loading = true
-      state.error = _.get(action.error, 'data', action.error.message)
+      state.error = _get(action.error, 'data', action.error.message)
     },
     [login.pending]: state => {
       state.error = null
