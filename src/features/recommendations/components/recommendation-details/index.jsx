@@ -146,57 +146,72 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.elementText}>{visaText}</div>
           </div>
         )}
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Cloud />
+        {minTemp &&
+          maxTemp && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Cloud />
+              </div>
+              <div className={styles.elementText}>
+                min <Temperature value={minTemp} />, max <Temperature value={maxTemp} />
+              </div>
+            </div>
+        )}
+        {weatherText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Cloud />
+            </div>
+            <div className={styles.elementText}>{weatherText}</div>
           </div>
-          <div className={styles.elementText}>
-            min <Temperature value={minTemp} />, max <Temperature value={maxTemp} />
+        )}
+        {maskText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Mask />
+            </div>
+            <div className={styles.elementText}>{maskText}</div>
           </div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Cloud />
+        )}
+        {vaccinatedTestText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Vaccine />
+            </div>
+            <div className={styles.elementText}>{vaccinatedTestText}</div>
           </div>
-          <div className={styles.elementText}>{weatherText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Mask />
+        )}
+        {unvaccinatedTestText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Vaccine />
+            </div>
+            <div className={styles.elementText}>{unvaccinatedTestText}</div>
           </div>
-          <div className={styles.elementText}>{maskText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Vaccine />
+        )}
+        {vaccinatedQuarantineText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Quarantine />
+            </div>
+            <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
           </div>
-          <div className={styles.elementText}>{vaccinatedTestText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Vaccine />
+        )}
+        {unvaccinatedQuarantineText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Quarantine />
+            </div>
+            <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
           </div>
-          <div className={styles.elementText}>{unvaccinatedTestText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Quarantine />
-          </div>
-          <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Quarantine />
-          </div>
-          <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
-        </div>
+        )}
         {tripdays &&
           ((tripdays.min_days && tripdays.max_days) || tripdays.ideal_days) && (
             <div className={styles.contentElement}>
@@ -215,34 +230,42 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         )}
       </Card>
       <Card title="Status" type="Overview" className={styles.recommendationCard}>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Attraction />
+        {barText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Attraction />
+            </div>
+            <div className={styles.elementText}>{barText}</div>
           </div>
-          <div className={styles.elementText}>{barText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Attraction />
+        )}
+        {restaurantText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Attraction />
+            </div>
+            <div className={styles.elementText}>{restaurantText}</div>
           </div>
-          <div className={styles.elementText}>{restaurantText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Attraction />
+        )}
+        {attractionsText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Attraction />
+            </div>
+            <div className={styles.elementText}>{attractionsText}</div>
           </div>
-          <div className={styles.elementText}>{attractionsText}</div>
-        </div>
-        <div className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Transport />
+        )}
+        {publicTransportText && (
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Transport />
+            </div>
+            <div className={styles.elementText}>{publicTransportText}</div>
           </div>
-          <div className={styles.elementText}>{publicTransportText}</div>
-        </div>
+        )}
       </Card>
       {uniqueEvents && uniqueEvents.length > 0 ? (
         <Card title="Events" type="Major" className={styles.recommendationCard}>
