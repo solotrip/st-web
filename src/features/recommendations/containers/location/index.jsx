@@ -3,12 +3,7 @@ import { SheetWrapper, SearchInput } from 'components'
 import styles from './location.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import _uniqBy from 'lodash/uniqBy'
-import {
-  fetchCurrentLocation,
-  locationSelector,
-  searchLocation,
-  updateLocation
-} from './slice'
+import { fetchCurrentLocation, locationSelector, searchLocation, updateLocation } from './slice'
 import SettingsSection from 'components/settings-section'
 import qs from 'qs'
 import { useQuery } from 'utils/hooks/use-query'
@@ -56,9 +51,7 @@ const LocationContainer = () => {
 
   const options =
     searchQuery === ''
-      ? recentLocations
-        .filter(l => l !== currentLocation)
-        .map(l => locations[l])
+      ? recentLocations.filter(l => l !== currentLocation).map(l => locations[l])
       : results
   const currentLocOption = locations[currentLocation]
 
@@ -76,8 +69,11 @@ const LocationContainer = () => {
           <div className={styles.list}>
             {!errorCurrentLocation &&
               searchQuery === '' &&
+              options &&
               !options.some(
-                option => option.fullname_en === currentLocOption.fullname_en
+                // eslint-disable-next-line max-len
+                option =>
+                  option && currentLocOption && option.fullname_en === currentLocOption.fullname_en
               ) && (
                 <button
                   className={styles.item}
