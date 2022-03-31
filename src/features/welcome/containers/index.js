@@ -1,20 +1,46 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Welcome.module.scss'
-import { ReactComponent as Logo } from 'assets/images/logo.svg'
+import { ReactComponent as Logo } from 'assets/images/logowithtext2.svg'
 
 const WelcomeContainer = () => {
-
   return (
     <div className={styles.container}>
-      <Logo/>
-      <h1>Welcome to Pulfy</h1>
-      <Link className="primaryButton" to="/signup">Sign Up</Link>
-      <Link className={styles.login} to="/login">
-        <span>Do you have an account?</span> Login
-      </Link>
-      <Link className={styles.continue} to="/onboarding/1">Continue as
-        Guest </Link>
+      <div className={styles.videoContainer}>
+        <video
+          autoPlay
+          src={
+            'https://res.cloudinary.com/dtp5yitjt/video/upload/v1629817028/combined2_pqra8s.mp4'
+          }
+          playsInline
+          loop='loop'
+          muted
+          preload='auto'
+          id='myVideo'
+          className={styles.videoContainer}
+        >
+          your browser does not support video tag.
+        </video>
+      </div>
+      <div className={styles.upperContainer}>
+        {' '}
+        <Logo className={styles.logo} />
+        <div className={styles.lowerContainer}>
+          <div className={styles.motto}>
+            Get personalized travel recommendations, updates, restrictions and
+            much more.
+          </div>
+          <Link className={styles.actionButton} to='/signup'>
+            Signup
+          </Link>
+          <Link className={styles.actionButton2} to='/onboarding/1'>
+            Continue as Guest{' '}
+          </Link>
+          <Link className={styles.login2} to='/login'>
+            <span>Do you have an account?</span> Login
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

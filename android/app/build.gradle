@@ -4,7 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         debug {
-            storeFile file('I:\\My Drive\\secrets\\keystores\\pulfy.jks')
+            storeFile file('pulfy.jks')
             keyAlias 'pulfy'
             storePassword 'pTr9SRxj64pMnNuP'
             keyPassword 'pTr9SRxj64pMnNuP'
