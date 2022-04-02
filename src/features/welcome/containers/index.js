@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Welcome.module.scss'
@@ -26,10 +27,10 @@ const WelcomeContainer = () => {
         {' '}
         <Logo className={styles.logo} />
         <div className={styles.lowerContainer}>
-          <div className={styles.motto}>
+          <h1 className={styles.motto}>
             Get personalized travel recommendations, updates, restrictions and
             much more.
-          </div>
+          </h1>
           <Link className={styles.actionButton} to='/signup'>
             Signup
           </Link>
