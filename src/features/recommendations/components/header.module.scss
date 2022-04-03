@@ -4,14 +4,19 @@
   width: 100%;
   @include md-to-xl {
     height: 130px;
-
   }
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .navbarFixed {
   z-index: 3;
   height: 58px;
   width: 100%;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .navbarFixedIos {
@@ -19,6 +24,9 @@
   display: flex;
   padding-top: 40px;
   justify-content: center;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .actions {
@@ -33,6 +41,9 @@
   @include md-to-lg {
     max-width: 450px;
   }
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .actionIcon {
@@ -56,6 +67,9 @@
   transition: all 0.3s;
   transition-timing-function: ease-out;
   color: $sub-text-color;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 
   &.exp {
     width: 100%;
@@ -86,6 +100,9 @@
   flex-wrap: wrap;
   height: 100%;
   overflow: hidden;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
   &.exp {
     flex-wrap: wrap;
     .prefix {
@@ -117,6 +134,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 
   svg {
     font-size: 24px;
@@ -133,6 +153,9 @@
   flex-direction: column;
   position: absolute;
   transition-timing-function: ease-in;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
   @include md-to-xl {
     flex-direction: row;
   }
@@ -144,6 +167,9 @@
   position: absolute;
   display: flex;
   transition-timing-function: ease-out;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
   @include md-to-xl {
     flex-direction: row;
   }

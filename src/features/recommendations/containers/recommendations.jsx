@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
-
-import {
-  fetchRecommendations,
-  recommendationsSelector,
-  resetActiveRecommendation
-} from '../slice'
+import styles from './recommendations.module.scss'
+import { fetchRecommendations, recommendationsSelector, resetActiveRecommendation } from '../slice'
 import { isGuestSelector, profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
@@ -58,8 +54,7 @@ const RecommendationsContainer = () => {
         if (!query.lat || !query.lon) {
           return openLocationSheet(query)
         }
-        if (_get(query, 'filters', [])
-          .some(f => isVisaFilter(f.id)) && !query.passports) {
+        if (_get(query, 'filters', []).some(f => isVisaFilter(f.id)) && !query.passports) {
           return openPassportSheet(query)
         }
         dispatch(fetchRecommendations(query))
@@ -113,20 +108,17 @@ const RecommendationsContainer = () => {
     }
   }
 
-  const loading =
-    profileLoading || loadingRecommendations || !activeRecommendationId
-  const detailIndex = !loading ? (
-    location.pathname.startsWith('/recommendations/r/')
+  const loading = profileLoading || loadingRecommendations || !activeRecommendationId
+  const detailIndex = !loading
+    ? location.pathname.startsWith('/recommendations/r/')
       ? recommendations[activeRecommendationId].recommendations.findIndex(
         r => r.id === location.pathname.split('/recommendations/r/')[1]
       )
-      : (
-        recommendations[activeRecommendationId].recommendations.length === 1 ? 0
-          : -1
-      )) : -1
+      : recommendations[activeRecommendationId].recommendations.length === 1 ? 0 : -1
+    : -1
 
   return (
-    <div className="flex-col">
+    <div className={styles.wrapper}>
       <Header
         recommendationId={activeRecommendationId}
         loading={loading}
@@ -136,9 +128,7 @@ const RecommendationsContainer = () => {
       />
       <Content
         loading={loading}
-        recommendations={
-          !loading && recommendations[activeRecommendationId].recommendations
-        }
+        recommendations={!loading && recommendations[activeRecommendationId].recommendations}
         user={user}
         queryFunction={() => ({
           query,
