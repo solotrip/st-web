@@ -192,7 +192,7 @@ export const initialize = createAsyncThunk(
 
 const initialState = {
   error: null,
-  loading: true,
+  loading: false,
   isAuthenticated: false,
   isGuest: false,
   username: ''
@@ -265,7 +265,8 @@ const authSlice = createSlice({
       state.error = action.payload
     },
     [logout.fulfilled]: state => {
-      state = { ...initialState }
+      state = { ...initialState, loading: false }
+      state.loading = false
     }
   }
 })
