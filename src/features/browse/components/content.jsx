@@ -53,7 +53,7 @@ const ListItem = ({ name, location, startDate, endDate, link, image, image_hash 
       </div>
     )}
 
-    <Link to={link}>
+    <Link className={styles.link} to={link}>
       <button className={styles.showDetails}>Discover</button>
     </Link>
   </>

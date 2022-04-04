@@ -6,6 +6,9 @@
   background-color: transparent;
   border-radius: 20px;
   color: $white;
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
 
   span {
     border-radius: 50%;

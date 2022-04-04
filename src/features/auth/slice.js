@@ -265,8 +265,7 @@ const authSlice = createSlice({
       state.error = action.payload
     },
     [logout.fulfilled]: state => {
-      state = { ...initialState, loading: false }
-      state.loading = false
+      state = { ...initialState }
     }
   }
 })

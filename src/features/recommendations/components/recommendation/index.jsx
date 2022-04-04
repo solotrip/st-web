@@ -305,6 +305,7 @@ const Recommendation = ({
                 pathname: `${basePath}/r/${id}`,
                 search: queryString
               }}
+              className={styles.link}
               replace
               className={styles.showDetails}
             >

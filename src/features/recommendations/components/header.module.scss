@@ -6,12 +6,18 @@
     height: 130px;
 
   }
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
 }
 
 .navbarFixed {
   z-index: 3;
   height: 58px;
   width: 100%;
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
 }
 
 .navbarFixedIos {
@@ -19,6 +25,9 @@
   display: flex;
   margin-top: 40px;
   justify-content: center;
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
 }
 
 .actions {
@@ -33,6 +42,9 @@
   @include md-to-lg {
     max-width: 450px;
   }
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
 }
 
 .actionIcon {
