@@ -1,6 +1,7 @@
 @import "styles/mixins";
 
 .container {
+  z-index: 999;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -38,6 +39,7 @@
 }
 
 .next {
+  z-index: 999;
   margin-left: auto;
   width: 100px;
   span {
