@@ -9,6 +9,19 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+
+}
+
+.containerIos {
+  @include custom-scroll;
+  overflow-y: scroll;
+  height: 100%;
+  padding-top: 10px;
+  padding-bottom: 60px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
 }
 
 .content {

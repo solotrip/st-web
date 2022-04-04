@@ -12,6 +12,11 @@
   width: 300px;
 }
 
+.contentIos {
+  width: 300px;
+  margin-top: 40px;
+}
+
 .heading {
   @include roboto-medium;
   font-size: 32px;

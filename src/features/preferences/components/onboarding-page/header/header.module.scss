@@ -1,5 +1,23 @@
 @import "styles/mixins";
 
+.containerIos {
+  position: absolute;
+  top: 5px;
+  margin: auto 0;
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  @include xs-to-sm {
+    margin-bottom: 5px;
+    height: 75px;
+    width: 100%;
+  }
+  margin-top: 40px;
+}
+
 .container {
   position: absolute;
   top: 5px;

@@ -14,17 +14,25 @@ import _get from 'lodash/get'
 
 const schema = Joi.object({
   body: Joi.object({
-    email: Joi.string().email({ tlds: { allow: false } })
-      .trim().lowercase().required().messages({
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .trim()
+      .lowercase()
+      .required()
+      .messages({
         'string.email': 'This is not a valid email',
         'any.required': 'You should fill the password field'
       }),
-    password: Joi.string().min(6).max(32).required().messages({
-      'string.min': 'Password should be longer than 6 characters',
-      'string.max': 'Password should be shorter than 32 character',
-      'string.empty': 'You should fill the password field',
-      'any.required': 'You should fill the password field'
-    })
+    password: Joi.string()
+      .min(6)
+      .max(32)
+      .required()
+      .messages({
+        'string.min': 'Password should be longer than 6 characters',
+        'string.max': 'Password should be shorter than 32 character',
+        'string.empty': 'You should fill the password field',
+        'any.required': 'You should fill the password field'
+      })
   }).required()
 })
 
@@ -37,19 +45,20 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
     resolver: joiResolver(schema)
   })
 
-  useEffect(() => {
-    _get(error, 'details', []).forEach(e => {
-      if (_get(e, 'context.key')) {
-        setError(_get(e, 'context.key'),
-          { type: 'manual', message: e.message })
-      }
-    })
-
-  }, [error, setError])
+  useEffect(
+    () => {
+      _get(error, 'details', []).forEach(e => {
+        if (_get(e, 'context.key')) {
+          setError(_get(e, 'context.key'), { type: 'manual', message: e.message })
+        }
+      })
+    },
+    [error, setError]
+  )
 
   return (
     <div className={styles.main}>
-      <div className={styles.content}>
+      <div className={Capacitor.getPlatform() === 'ios' ? styles.contentIos : styles.content}>
         <h1 className={styles.heading}>Login</h1>
         <form onSubmit={handleSubmit(onLogin)} className={styles.form}>
           <TextInput
@@ -67,7 +76,7 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             error={_get(errors, 'body.password.message')}
             filled
           />
-          <Button text="Login" icon={MdChevronRight}/>
+          <Button text="Login" icon={MdChevronRight} />
         </form>
         <p className={styles.or}>Or</p>
         <div className={styles.socialButtons}>
@@ -75,7 +84,7 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             className={cn(styles.socialLogin, styles.loginWithGoogle)}
             onClick={loginWithGoogle}
           >
-            <GoogleIcon/>
+            <GoogleIcon />
             <span>Sign in with Google</span>
           </button>
           {Capacitor.getPlatform() !== 'android' && (
@@ -83,17 +92,26 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
               className={cn(styles.socialLogin, styles.loginWithApple)}
               onClick={loginWithApple}
             >
-              <AppleIcon/>
+              <AppleIcon />
               <span>Sign in with Apple</span>
             </button>
           )}
         </div>
         <span className={styles.terms}>
-            By continuing, you agree to Pulfy's
-            <a target="_blank" href="/#"> Terms of Service, </a>
-            <a target="_blank" href="/#"> Data Use Policy </a>
-            and
-            <a target="_blank" href="/#"> Cookie Use</a>
+          By continuing, you agree to Pulfy's
+          <a target="_blank" href="/#">
+            {' '}
+            Terms of Service,{' '}
+          </a>
+          <a target="_blank" href="/#">
+            {' '}
+            Data Use Policy{' '}
+          </a>
+          and
+          <a target="_blank" href="/#">
+            {' '}
+            Cookie Use
+          </a>
         </span>
         <Link to="/signup" className={styles.link}>
           New to Pulfy? <span>Join now!</span>

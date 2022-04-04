@@ -14,32 +14,38 @@ import { joiResolver } from '@hookform/resolvers/joi'
 
 const schema = Joi.object({
   body: Joi.object({
-    username: Joi.string().min(3).max(32).required().messages({
-      'string.min': 'Username should be longer than 3 characters',
-      'string.max': 'Username should be shorter than 32 character',
-      'any.required': 'You should fill the username field'
-    }),
-    email: Joi.string().email({ tlds: { allow: false } })
-      .trim().lowercase().required().messages({
+    username: Joi.string()
+      .min(3)
+      .max(32)
+      .required()
+      .messages({
+        'string.min': 'Username should be longer than 3 characters',
+        'string.max': 'Username should be shorter than 32 character',
+        'any.required': 'You should fill the username field'
+      }),
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .trim()
+      .lowercase()
+      .required()
+      .messages({
         'string.email': 'This is not a valid email',
         'any.required': 'You should fill the password field'
       }),
-    password: Joi.string().min(6).max(32).required().messages({
-      'string.min': 'Password should be longer than 6 characters',
-      'string.max': 'Password should be shorter than 32 character',
-      'string.empty': 'You should fill the password field',
-      'any.required': 'You should fill the password field'
-    })
+    password: Joi.string()
+      .min(6)
+      .max(32)
+      .required()
+      .messages({
+        'string.min': 'Password should be longer than 6 characters',
+        'string.max': 'Password should be shorter than 32 character',
+        'string.empty': 'You should fill the password field',
+        'any.required': 'You should fill the password field'
+      })
   }).required()
 })
 
-const SignupPage = ({
-  registerFunc,
-  error,
-  loginWithApple,
-  loginWithGoogle,
-  authWall = false
-}) => {
+const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, authWall = false }) => {
   const onSubmit = ({ body }) => {
     const { email, password, username } = body
     registerFunc({
@@ -53,26 +59,24 @@ const SignupPage = ({
     resolver: joiResolver(schema)
   })
 
-  useEffect(() => {
-    _get(error, 'details', []).forEach(e => {
-      if (_get(e, 'context.key')) {
-        setError(_get(e, 'context.key'),
-          { type: 'manual', message: e.message })
-      }
-    })
-
-  }, [error, setError])
-
+  useEffect(
+    () => {
+      _get(error, 'details', []).forEach(e => {
+        if (_get(e, 'context.key')) {
+          setError(_get(e, 'context.key'), { type: 'manual', message: e.message })
+        }
+      })
+    },
+    [error, setError]
+  )
 
   return (
     <div className={styles.main}>
-      <div className={styles.content}>
+      <div className={Capacitor.getPlatform() === 'ios' ? styles.contentIos : styles.content}>
         {authWall && (
           <div className={styles.authWall}>
-            Looks like you're having a good time with Pulfy. Do you want to
-            take it one step further,
-            and get access to our cool features like
-            event notifications and wishlists?
+            Looks like you're having a good time with Pulfy. Do you want to take it one step
+            further, and get access to our cool features like event notifications and wishlists?
           </div>
         )}
         <h1 className={styles.heading}>Create new account</h1>
@@ -106,18 +110,23 @@ const SignupPage = ({
             filled
           />
           <span className={styles.terms}>
-            By clicking Sign Up or signing up with a social account,
-            you agree to our
-            <a target="_blank" href="/#"> Terms of Service </a>
+            By clicking Sign Up or signing up with a social account, you agree to our
+            <a target="_blank" href="/#">
+              {' '}
+              Terms of Service{' '}
+            </a>
             and that you have read our
-            <a target="_blank" href="/#"> Data Use Policy </a>
+            <a target="_blank" href="/#">
+              {' '}
+              Data Use Policy{' '}
+            </a>
             including our
-            <a target="_blank" href="/#"> Cookie Use</a>.
+            <a target="_blank" href="/#">
+              {' '}
+              Cookie Use
+            </a>.
           </span>
-          <Button
-            text="Sign Up"
-            icon={MdChevronRight}
-          />
+          <Button text="Sign Up" icon={MdChevronRight} />
         </form>
         <p className={styles.or}>Or</p>
         <div className={styles.socialButtons}>
@@ -125,7 +134,7 @@ const SignupPage = ({
             className={cn(styles.socialLogin, styles.loginWithGoogle)}
             onClick={loginWithGoogle}
           >
-            <GoogleIcon/>
+            <GoogleIcon />
             <span>Sign up with Google</span>
           </button>
           {Capacitor.getPlatform() !== 'android' && (
@@ -133,7 +142,7 @@ const SignupPage = ({
               className={cn(styles.socialLogin, styles.loginWithApple)}
               onClick={loginWithApple}
             >
-              <AppleIcon/>
+              <AppleIcon />
               <span>Sign up with Apple</span>
             </button>
           )}

@@ -4,15 +4,18 @@ import cn from 'classnames'
 import styles from './onboarding-page.module.scss'
 import Header from './header'
 import Footer from './footer'
+import { Capacitor } from '@capacitor/core'
 
 const OnboardingPage = ({ children, onNext, nextEnabled }) => {
   return (
     <>
-      <div className={cn(styles.container)}>
-        <Header/>
+      <div
+        className={cn(Capacitor.getPlatform() === 'ios' ? styles.containerIos : styles.container)}
+      >
+        <Header />
         <div className={styles.content}>{children}</div>
       </div>
-      <Footer onNext={onNext} nextEnabled={nextEnabled}/>
+      <Footer onNext={onNext} nextEnabled={nextEnabled} />
     </>
   )
 }
