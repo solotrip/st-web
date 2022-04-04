@@ -4,8 +4,13 @@ import styles from './menu-item.module.scss'
 
 function MenuItem({ to, icon }) {
   return (
-    <NavLink to={to} className={styles.menuItem} activeClassName={styles.active}>
-      {icon}
+    <NavLink to={to}
+             className={styles.menuItem}
+             activeClassName={styles.active}
+    >
+      {
+        icon
+      }
     </NavLink>
   )
 }

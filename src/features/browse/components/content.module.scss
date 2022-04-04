@@ -33,9 +33,6 @@
   display: block;
   color: unset;
   margin: 8px 0;
-  outline: none;
-  box-shadow: none;
-  -webkit-tap-highlight-color: transparent;
 }
 
 // List Item Styles
@@ -85,15 +82,7 @@
   width: 100%;
   height: 38px;
   border-radius: 12px;
+  outline: none;
   color: white;
-  outline: none;
-  box-shadow: none;
-  -webkit-tap-highlight-color: transparent;
 }
 
-
-.link{
-  outline: none;
-  box-shadow: none;
-  -webkit-tap-highlight-color: transparent;
-}
