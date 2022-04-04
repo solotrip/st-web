@@ -14,18 +14,16 @@ const NotAuthenticatedRoute = ({ component: Component, ...rest }) => {
   const { loading, isAuthenticated, isGuest } = useSelector(
     state => state.auth
   )
-  if (loading) {
-    return <Loader/>
-  }
-
-  if(isAuthenticated && !isGuest) {
-    return <Redirect to="/browse"/>
-  }
   return (
     <Route
       {...rest}
-      render={props =>
-          <Component {...props} />
+      render={props => (
+        loading ? <Loader/> : (
+          isAuthenticated && !isGuest ?
+            <Redirect to="/browse"/>
+            : <Component {...props} />
+        )
+      )
       }
     />
   )

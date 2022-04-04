@@ -109,14 +109,15 @@ const Routes = () => (
         content="https://ik.imagekit.io/stmedia/logo_o3TcRoTaq.png?ik-sdk-version=javascript-1.4.3&updatedAt=1648556830533"
       />
     </Helmet>
-    <NotAuthenticatedRoute path="/" exact>
-      <WelcomeContainer />
-    </NotAuthenticatedRoute>
+
     <OnboardingRoutes />
     <AuthRoutes />
     <MainRoutes />
     <SettingsRoute />
     <Route path="/404">404</Route>
+    <NotAuthenticatedRoute path="/" exact>
+      <WelcomeContainer />
+    </NotAuthenticatedRoute>
     {process.env.NODE_ENV === 'development' && <DevRoutes />}
   </Router>
 )
