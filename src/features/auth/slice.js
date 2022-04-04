@@ -96,8 +96,8 @@ export const logout = createAsyncThunk(
   async ({ history }, { dispatch }) => {
     await clearTokens()
     await FirebaseAuthentication.signOut()
-    dispatch({ type: 'store/reset' })
     history.replace('/')
+    history.go(0)
   }
 )
 
@@ -192,7 +192,7 @@ export const initialize = createAsyncThunk(
 
 const initialState = {
   error: null,
-  loading: false,
+  loading: true,
   isAuthenticated: false,
   isGuest: false,
   username: ''
@@ -265,7 +265,7 @@ const authSlice = createSlice({
       state.error = action.payload
     },
     [logout.fulfilled]: state => {
-      state = { ...initialState }
+      state = { ...initialState, loading: false }
     }
   }
 })
