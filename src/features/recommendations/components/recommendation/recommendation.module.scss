@@ -152,6 +152,31 @@
   line-height: 19px;
   font-size: 15px;
   margin-left: 18px;
+  display: inline-block;
+  
+  
+}
+
+.elementHighlight{
+  font-weight: bold;
+  display: inline-block;
+}
+
+.elementRed{
+  
+  display: inline-block;
+  color:red;
+}
+.elementYellow{
+
+  display: inline-block;
+  color:yellow;
+}
+
+.elementGreen {
+
+  display: inline-block;
+  color: #1efc5a;
 }
 
 .horizontalListItem {

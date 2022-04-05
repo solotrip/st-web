@@ -119,7 +119,16 @@ const Recommendation = ({
               <Cloud />
             </div>
             <div className={styles.elementText}>
-              min <Temperature value={minTemp} />, max <Temperature value={maxTemp} />
+              min{' '}
+              <div className={styles.elementHighlight}>
+                &nbsp;
+                <Temperature value={minTemp} />{' '}
+              </div>, max{' '}
+              <div className={styles.elementHighlight}>
+                {' '}
+                &nbsp;
+                <Temperature value={maxTemp} />
+              </div>
             </div>
           </div>
 
@@ -130,8 +139,14 @@ const Recommendation = ({
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hotel prices range from <Currency value={hotelPriceMin} /> to{' '}
-                <Currency value={hotelPriceMax} />.
+                Hotel prices range from{' '}
+                <div className={styles.elementHighlight}>
+                  &nbsp; <Currency value={hotelPriceMin} />{' '}
+                </div>{' '}
+                to{' '}
+                <div className={styles.elementHighlight}>
+                  &nbsp; <Currency value={hotelPriceMax} />{' '}
+                </div>.
               </div>
             </div>
           ) : (
@@ -142,7 +157,10 @@ const Recommendation = ({
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Hotel price is <Currency value={hotelPriceMin} />.
+                  Average Hotel price is{' '}
+                  <div className={styles.elementHighlight}>
+                    &nbsp; <Currency value={hotelPriceMin} />
+                  </div>.
                 </div>
               </div>
             )
@@ -154,8 +172,15 @@ const Recommendation = ({
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hostel prices range from <Currency value={hostelPriceMin} /> to{' '}
-                <Currency value={hostelPriceMax} />.
+                Hostel prices range from{' '}
+                <div className={styles.elementHighlight}>
+                  &nbsp; <Currency value={hostelPriceMin} />{' '}
+                </div>{' '}
+                to{' '}
+                <div className={styles.elementHighlight}>
+                  &nbsp;
+                  <Currency value={hostelPriceMax} />{' '}
+                </div>.
               </div>
             </div>
           ) : (
@@ -166,7 +191,10 @@ const Recommendation = ({
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average hostel price is <Currency value={hostelPriceMin} />.
+                  Average hostel price is{' '}
+                  <div className={styles.elementHighlight}>
+                    &nbsp; <Currency value={hostelPriceMin} />{' '}
+                  </div>.
                 </div>
               </div>
             )
@@ -179,8 +207,14 @@ const Recommendation = ({
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Airbnb prices range from <Currency value={vacationRentalPriceMin} /> to{' '}
-                <Currency value={vacationRentalPriceMax} />.
+                Airbnb prices range from{' '}
+                <div className={styles.elementHighlight}>
+                  &nbsp; <Currency value={vacationRentalPriceMin} />{' '}
+                </div>{' '}
+                to{' '}
+                <div className={styles.elementHighlight}>
+                  &nbsp;<Currency value={vacationRentalPriceMax} />{' '}
+                </div>.
               </div>
             </div>
             ) : (
@@ -191,7 +225,10 @@ const Recommendation = ({
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Airbnb price is <Currency value={vacationRentalPriceMin} />.
+                  Average Airbnb price is{' '}
+                  <div className={styles.elementHighlight}>
+                    &nbsp; <Currency value={vacationRentalPriceMin} />{' '}
+                  </div>.
                 </div>
               </div>
               )
@@ -207,19 +244,25 @@ const Recommendation = ({
                 {fastestFlightCost && (
                   <>
                     {'Fastest: '}
-                    <Currency value={fastestFlightCost} />
+                    <div className={styles.elementHighlight}>
+                      &nbsp; <Currency value={fastestFlightCost} />{' '}
+                    </div>
                   </>
                 )}
                 {fastestFlightCost && (
                   <>
                     {',Cheapest: '}
-                    <Currency value={cheapestFlightCost} />
+                    <div className={styles.elementHighlight}>
+                      &nbsp; <Currency value={cheapestFlightCost} />{' '}
+                    </div>
                   </>
                 )}
                 {fastestFlightCost && (
                   <>
                     {',Best: '}
-                    <Currency value={bestFlightCost} />
+                    <div className={styles.elementHighlight}>
+                      &nbsp; <Currency value={bestFlightCost} />{' '}
+                    </div>
                   </>
                 )}
               </div>
@@ -230,28 +273,72 @@ const Recommendation = ({
               {' '}
               <Vaccine />
             </div>
-            <div className={styles.elementText}>{vaccinatedTestText}</div>
+            <div className={styles.elementText}>
+              {' '}
+              <div
+                className={
+                  vaccinatedTestText.includes('Test Required')
+                    ? styles.elementRed
+                    : vaccinatedTestText.includes('Test not required') && styles.elementGreen
+                }
+              >
+                {vaccinatedTestText}
+              </div>
+            </div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
               <Vaccine />
             </div>
-            <div className={styles.elementText}>{unvaccinatedTestText}</div>
+            <div className={styles.elementText}>
+              {' '}
+              <div
+                className={
+                  unvaccinatedTestText.includes('Test Required')
+                    ? styles.elementRed
+                    : unvaccinatedTestText.includes('Test not required') && styles.elementGreen
+                }
+              >
+                {unvaccinatedTestText}{' '}
+              </div>{' '}
+            </div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
               <Quarantine />
             </div>
-            <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
+            <div className={styles.elementText}>
+              <div
+                className={
+                  vaccinatedQuarantineText.includes('Quarantine Required')
+                    ? styles.elementRed
+                    : vaccinatedQuarantineText.includes('Quarantine not required') &&
+                      styles.elementGreen
+                }
+              >
+                {vaccinatedQuarantineText}
+              </div>
+            </div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
               <Quarantine />
             </div>
-            <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
+            <div className={styles.elementText}>
+              <div
+                className={
+                  unvaccinatedQuarantineText.includes('Quarantine Required')
+                    ? styles.elementRed
+                    : unvaccinatedQuarantineText.includes('Quarantine not required') &&
+                      styles.elementGreen
+                }
+              >
+                {unvaccinatedQuarantineText}
+              </div>
+            </div>
           </div>
 
           <div className={styles.contentElement}>
@@ -259,14 +346,38 @@ const Recommendation = ({
               {' '}
               <Attraction />
             </div>
-            <div className={styles.elementText}>{attractionsText}</div>
+            <div className={styles.elementText}>
+              <div
+                className={
+                  attractionsText.includes('Attractions are closed')
+                    ? styles.elementRed
+                    : attractionsText.includes('Attractions are open')
+                      ? styles.elementGreen
+                      : 'Attractions are restricted' && styles.elementYellow
+                }
+              >
+                {attractionsText}
+              </div>
+            </div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
               <Food />
             </div>
-            <div className={styles.elementText}>{restaurantText}</div>
+            <div className={styles.elementText}>
+              <div
+                className={
+                  restaurantText.includes('Restaurants are closed')
+                    ? styles.elementRed
+                    : restaurantText.includes('Restaurants are open')
+                      ? styles.elementGreen
+                      : 'Restaurants are restricted' && styles.elementYellow
+                }
+              >
+                {restaurantText}
+              </div>
+            </div>
           </div>
           {events &&
             events.length > 0 && (
