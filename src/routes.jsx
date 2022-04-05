@@ -8,6 +8,8 @@ import BrowseRoutes from './features/browse/routes'
 import SavedRoutes from './features/track/routes'
 import { OnboardingRoutes, SettingsRoute } from './features/preferences/routes'
 import { Helmet } from 'react-helmet'
+import { helmetJsonLdProp } from 'react-schemaorg'
+import { Organization } from 'schema-dts'
 
 import { BottomBar, Layout, Loader, MonthPicker, NotAuthenticatedRoute, SideBar } from 'components'
 import DateSelectorContainer from 'features/recommendations/containers/date-selector'
@@ -54,7 +56,41 @@ const MainRoutes = () => {
 
 const Routes = () => (
   <Router>
-    <Helmet>
+    <Helmet
+      script={[
+        helmetJsonLdProp <
+          Organization >
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Pulfy',
+            legalName: 'Pulfy Technology Llc',
+            url: 'http://www.pulfy.com',
+            logo: 'https://ik.imagekit.io/stmedia/pulfy-black-logo_9H7xEWSC3.png',
+            foundingDate: '2022',
+            founders: [
+              {
+                '@type': 'Person',
+                name: 'Fatih Tas'
+              },
+              {
+                '@type': 'Person',
+                name: 'Berk Durmus'
+              }
+            ],
+            contactPoint: {
+              '@type': 'ContactPoint',
+              contactType: 'customer support',
+              email: 'support@pulfy.com'
+            },
+            sameAs: [
+              'http://instagram.com/pulfycom',
+              'http://www.twitter.com/pulfycom',
+              'https://www.tiktok.com/@pulfy.com'
+            ]
+          }
+      ]}
+    >
       <title>
         Pulfy - Get personalized travel recommendations, updates, restrictions and much more.
       </title>
