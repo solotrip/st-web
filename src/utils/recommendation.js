@@ -63,20 +63,23 @@ export const processRecommendation = (recommendation, passports = []) => {
     //Vaccinated Test Required
     if (restrictions && restrictions['vaccinated_arrival_test_required']) {
       vaccinatedTestText = 'Test Required for vaccinated.'
-    } else if (!restrictions['vaccinated_arrival_test_required']) {
+    } else if (
+      restrictions &&
+      !restrictions['vaccinated_arrival_test_required']
+    ) {
+      vaccinatedTestText = 'Test not required for vaccinated.'
+    } else {
       vaccinatedTestText =
         'No information about test procedure for vaccinated people.'
-    } else {
-      vaccinatedTestText = 'Test not required for vaccinated.'
     }
     //Unvaccinated Test Required
     if (restrictions && restrictions['arrival_test_required']) {
       unvaccinatedTestText = 'Test Required for unvaccinated.'
-    } else if (!restrictions['arrival_test_required']) {
+    } else if (restrictions && !restrictions['arrival_test_required']) {
+      unvaccinatedTestText = 'Test not required for unvaccinated.'
+    } else {
       unvaccinatedTestText =
         'No information about test procedure for unvaccinated people.'
-    } else {
-      unvaccinatedTestText = 'Test not required for unvaccinated.'
     }
     //Vaccinated Quarantine Required
     if (
@@ -84,20 +87,23 @@ export const processRecommendation = (recommendation, passports = []) => {
       restrictions['vaccinated_arrival_quarantine_required']
     ) {
       vaccinatedQuarantineText = 'Quarantine Required for vaccinated.'
-    } else if (!restrictions['vaccinated_arrival_quarantine_required']) {
+    } else if (
+      restrictions &&
+      !restrictions['vaccinated_arrival_quarantine_required']
+    ) {
+      vaccinatedQuarantineText = 'Quarantine not required for vaccinated.'
+    } else {
       vaccinatedQuarantineText =
         'No information about quarantine procedure for vaccinated people.'
-    } else {
-      vaccinatedQuarantineText = 'Quarantine not required for vaccinated.'
     }
     //Unvaccinated Quarantine Required
     if (restrictions && restrictions['arrival_quarantine_required']) {
       unvaccinatedQuarantineText = 'Quarantine Required for unvaccinated.'
-    } else if (!restrictions['arrival_quarantine_required']) {
+    } else if (restrictions && !restrictions['arrival_quarantine_required']) {
+      unvaccinatedQuarantineText = 'Quarantine not required for unvaccinated.'
+    } else {
       unvaccinatedQuarantineText =
         'No information about quarantine procedure for unvaccinated people.'
-    } else {
-      unvaccinatedQuarantineText = 'Quarantine not required for unvaccinated.'
     }
 
     //restaurant status
