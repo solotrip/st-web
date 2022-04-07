@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.24",
+    "@amcharts/amcharts5": "^5.1.11",
+    "@amcharts/amcharts5-geodata": "^5.0.3",
     "@capacitor/android": "^3.2.2",
     "@capacitor/cli": "^3.2.2",
     "@capacitor/core": "^3.2.2",

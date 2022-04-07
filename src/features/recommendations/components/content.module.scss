@@ -72,6 +72,14 @@
   }
 }
 
+.sidePanel {
+ 
+  
+  @include xs-to-md {
+    display: none;
+  }
+}
+
 .showDetails {
   margin-top: 17px;
   background-color: #1697dc;

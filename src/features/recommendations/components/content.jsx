@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
+import SidePanel from './sidePanel'
 import { MAPBOX_THEME, MAPBOX_TOKEN } from 'constants/index'
 import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
 import mapboxgl from 'mapbox-gl'
@@ -90,7 +91,7 @@ const Content = ({
         recommendations[detailIndex]['top_pois'] &&
         recommendations[detailIndex]['top_pois'].filter(poi => poi.poi_has_image === true) &&
         recommendations[detailIndex]['top_pois'].filter(poi => poi.poi_has_image === true).length >
-        0
+          0
       ) {
         recommendations[detailIndex]['top_pois']
           .filter(poi => poi.poi_has_image === true)
@@ -118,18 +119,13 @@ const Content = ({
       ) {
         if (map) {
           map.fitBounds([
-            [
-              recommendations[detailIndex]['bbox'][0],
-              recommendations[detailIndex]['bbox'][1]
-            ],
-            [
-              recommendations[detailIndex]['bbox'][2],
-              recommendations[detailIndex]['bbox'][3]
-            ]])
+            [recommendations[detailIndex]['bbox'][0], recommendations[detailIndex]['bbox'][1]],
+            [recommendations[detailIndex]['bbox'][2], recommendations[detailIndex]['bbox'][3]]
+          ])
         }
         return
       }
-      if(map) {
+      if (map) {
         map.easeTo({ center: [0, 0], zoom: 2, duration: 1000 })
       }
     },
@@ -155,32 +151,29 @@ const Content = ({
     )
 
   const list = !loading && (
-    <div ref={scrollRef} className={styles.recommendations}
-         onScroll={handleScroll}
-    >
+    <div ref={scrollRef} className={styles.recommendations} onScroll={handleScroll}>
       {title && <h1 className={styles.title}>{title}</h1>}
       {children}
       {!loading &&
-      recommendations.length === 0 &&
-      <span className={styles.noItems}>{noItemsMessage}</span>}
+        recommendations.length === 0 && <span className={styles.noItems}>{noItemsMessage}</span>}
       {!loading &&
-      recommendations.length > 0 &&
-      recommendations.map((recommendation, i) => {
-        const { query, queryString } = queryFunction(recommendation)
-        return (
-          <Recommendation
-            key={`rec-${recommendation.sid}`}
-            query={query}
-            queryString={queryString}
-            recommendation={recommendation}
-            user={user}
-            toggleWishlist={toggleWishlist}
-            wishlisted={!!wishlistedIds[recommendation.id]}
-            basePath={basePath}
-            index={i}
-          />
-        )
-      })}
+        recommendations.length > 0 &&
+        recommendations.map((recommendation, i) => {
+          const { query, queryString } = queryFunction(recommendation)
+          return (
+            <Recommendation
+              key={`rec-${recommendation.sid}`}
+              query={query}
+              queryString={queryString}
+              recommendation={recommendation}
+              user={user}
+              toggleWishlist={toggleWishlist}
+              wishlisted={!!wishlistedIds[recommendation.id]}
+              basePath={basePath}
+              index={i}
+            />
+          )
+        })}
     </div>
   )
 
@@ -188,29 +181,38 @@ const Content = ({
     <div className={styles.page}>
       {loading && (
         <div className={styles.recommendations}>
-        <Recommendation.Skeleton/>
-      </div>
-      )}
-      {!loading && (detailIndex === -1 ? (
-        list
-      ) : (
-        <div ref={scrollRef} onScroll={handleScroll}
-             className={styles.recommendationDetails}
-        >
-          <RecommendationDetails
-            recommendation={recommendations[detailIndex]}
-            toggleWishlist={toggleWishlist}
-            wishlisted={!!wishlistedIds[recommendations[detailIndex].id]}
-            query={queryFunction(recommendations[detailIndex].query)}
-            passports={
-              _get(queryFunction(recommendations[detailIndex])
-                , 'query.passports', [])
-            }
-          />
+          <Recommendation.Skeleton />
         </div>
-      ))}
+      )}
+      {!loading &&
+        (detailIndex === -1 ? (
+          list
+        ) : (
+          <div ref={scrollRef} onScroll={handleScroll} className={styles.recommendationDetails}>
+            <RecommendationDetails
+              recommendation={recommendations[detailIndex]}
+              toggleWishlist={toggleWishlist}
+              wishlisted={!!wishlistedIds[recommendations[detailIndex].id]}
+              query={queryFunction(recommendations[detailIndex].query)}
+              passports={_get(queryFunction(recommendations[detailIndex]), 'query.passports', [])}
+            />
+          </div>
+        ))}
+      {mapEnabled &&
+        isBrowser &&
+        !loading &&
+        recommendations.length > 0 && (
+          <SidePanel
+            className={styles.sidePanel}
+            loading={loading}
+            recommendations={recommendations}
+            query={queryFunction(recommendations)}
+            queryFunction={queryFunction}
+            basePath={basePath}
+          />
+      )}
 
-      {(mapEnabled &&
+      {/*(mapEnabled &&
       isBrowser) && (
         <Map
           className={styles.mapbox}
@@ -289,7 +291,7 @@ const Content = ({
             </div>
             ))}
         </Map>
-      )}
+      )*/}
     </div>
   )
 }
