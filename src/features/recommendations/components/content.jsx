@@ -3,23 +3,12 @@ import PropTypes from 'prop-types'
 import styles from './content.module.scss'
 import Recommendation from './recommendation/index'
 import SidePanel from './sidePanel'
-import { MAPBOX_THEME, MAPBOX_TOKEN } from 'constants/index'
-import ReactMapboxGl, { Marker, Popup } from 'react-mapbox-gl'
-import mapboxgl from 'mapbox-gl'
-import 'mapbox-gl/dist/mapbox-gl.css'
 import RecommendationDetails from './recommendation-details'
 import { Link, useHistory } from 'react-router-dom'
 import { isBrowser } from 'react-device-detect'
 import _get from 'lodash/get'
 
-if (isBrowser) {
-  mapboxgl.prewarm()
-}
-const Map =
-  isBrowser &&
-  ReactMapboxGl({
-    accessToken: MAPBOX_TOKEN
-  })
+
 const Content = ({
   recommendations,
   queryFunction,
