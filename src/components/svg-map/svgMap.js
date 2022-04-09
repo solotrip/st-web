@@ -7,6 +7,7 @@ import * as am5map from '@amcharts/amcharts5/map'
 import * as am5themes_Animated from '@amcharts/amcharts5/themes/Frozen'
 import am5geodata_world from '@amcharts/amcharts5-geodata/worldLow'
 
+var imageSize = 34
 const SvgMap = ({ originCities, destinationCities, queryString, basePath }) => {
   const history = useHistory()
   const chartRef = useRef(null)
@@ -73,24 +74,104 @@ const SvgMap = ({ originCities, destinationCities, queryString, basePath }) => {
       am5map.MapPointSeries.new(root, {})
     )
 
-    destinationSeries.bullets.push(function () {
-      var circle = am5.Circle.new(root, {
-        radius: 5,
-        tooltipText: '{title}',
-        tooltipY: 0,
-        fill: am5.color(0x657a8f),
-        stroke: root.interfaceColors.get('background'),
-        strokeWidth: 0
+    var circleTemplate = am5.Template.new({})
+    destinationSeries.bullets.push(function (root, series, dataItem) {
+      var bulletContainer = am5.Container.new(root, {})
+      var circle = bulletContainer.children.push(
+        am5.Circle.new(
+          root,
+          {
+            radius: am5.p50,
+            tooltipText: '{title}',
+            tooltipY: 0
+          },
+          circleTemplate
+        )
+      )
+
+      circle.states.create('hover', {
+        scale: 2,
+        stateAnimationDuration: 10
       })
 
-      circle.events.on('click', function (e) {
+      circle.states.create('default', {
+        showTooltipOn: 'always',
+        tooltipText: '{title}',
+        tooltipY: 0
+      })
+
+      var maskCircle = bulletContainer.children.push(
+        am5.Circle.new(root, {
+          radius: 20,
+          tooltipText: '{title}',
+          tooltipY: 0,
+          fill: am5.color(0x657a8f),
+          stroke: am5.color(0x12c2e9),
+          strokeGradient: am5.LinearGradient.new(root, {
+            stops: [
+              {
+                color: am5.color(0x12c2e9)
+              },
+              {
+                color: am5.color(0xc471ed)
+              },
+              {
+                color: am5.color(0xf8a4aa)
+              }
+            ]
+          }),
+          strokeWidth: 2
+        })
+      )
+      circle.states.create('default', {
+        showTooltipOn: 'always',
+        tooltipText: '{title}',
+        tooltipY: 0
+      })
+
+      // only containers can be masked, so we add image to another container
+      var imageContainer = bulletContainer.children.push(
+        am5.Container.new(root, {
+          mask: maskCircle,
+          tooltipText: '{title}',
+          tooltipY: 0,
+          fill: am5.color(0x657a8f)
+        })
+      )
+      imageContainer.states.create('hover', {
+        scale: 2.5,
+        stateAnimationDuration: 10
+      })
+
+      var image = imageContainer.children.push(
+        am5.Picture.new(root, {
+          templateField: 'pictureSettings',
+          centerX: am5.p50,
+          centerY: am5.p50,
+          width: 60,
+          height: 60
+        })
+      )
+
+      maskCircle.events.on('click', function (e) {
+        history.push(
+          basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
+        )
+      })
+      image.events.on('click', function (e) {
+        history.push(
+          basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
+        )
+      })
+      imageContainer.events.on('click', function (e) {
         history.push(
           basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
         )
       })
 
       return am5.Bullet.new(root, {
-        sprite: circle
+        locationY: 0,
+        sprite: bulletContainer
       })
     })
 

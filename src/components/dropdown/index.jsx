@@ -1,16 +1,16 @@
 import React from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
-const DropDown = ({ options, value, onSelect, className }) => {
-
+const DropDown = ({ options, value, onSelect, className, placeholder = null }) => {
   return (
-      <Select
-        className='pulfy-select'
-        value={options.find(o => o.value === value)}
-        classNamePrefix="rs"
-        options={options}
-        onChange={onSelect}
-      />
+    <Select
+      className="pulfy-select"
+      value={options.find(o => o.value === value)}
+      classNamePrefix="rs"
+      options={options}
+      onChange={onSelect}
+      placeholder={placeholder}
+    />
   )
 }
 

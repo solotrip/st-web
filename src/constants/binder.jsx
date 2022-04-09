@@ -6,6 +6,26 @@ export const MAIN_OPTIONS = [
 ]
 
 export const OPTIONS = [
+  { value: 'hotel-prices', label: 'Hotel Prices' },
+  { value: 'hostel-prices', label: 'Hostel Prices' },
+  { value: 'airbnb-prices', label: 'Airbnb Prices' },
+  { value: 'temperature', label: 'Temperature' },
+  { value: 'trip-days', label: 'Tripdays' },
+  { value: 'cost-of-living', label: 'Cost of Living' }
+]
+
+export const TABLE_CATEGORIES = [
+  { category: 'Meal at Cheap Restaurant' },
+  { category: 'Meal at Luxury Restaurant' },
+  { category: 'McDonalds Menu' },
+  { category: 'Public Transport' },
+  { category: 'Beer at Restaurant' },
+  { category: 'Prepaid Card' },
+  { category: 'Cinema Ticket' },
+  { category: 'Taxi 1km' }
+]
+
+export const SUB_OPTIONS = [
   {
     option: 'cost-of-living',
     suboptions: [
