@@ -1,6 +1,6 @@
-@import 'styles/mixins';
 @use 'sass:color';
 
+@import 'styles/mixins';
 .sheetHeader {
   background-color: $navbar-color;
 }
