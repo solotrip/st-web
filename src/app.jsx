@@ -10,7 +10,7 @@ import useThemeState, {
 import { ToastContainer } from 'react-toastify'
 import { Loader } from 'components'
 import './styles/global.scss'
-import './i18n/i18n'
+// import './i18n/i18n'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import 'utils/firebase'
