@@ -116,7 +116,7 @@
     "react-is": "^17.0.1"
   },
   "engines": {
-    "node": "16.x"
+    "node": "12.x"
   },
   "homepage": "/app/"
 }
