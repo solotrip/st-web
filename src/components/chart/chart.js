@@ -4,7 +4,7 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 
-const Chart = ({ data }) => {
+const Chart = ({ data, type }) => {
   const chartRef = useRef(null)
   useLayoutEffect(() => {
     var root = am5.Root.new('chartdiv3')
@@ -90,7 +90,7 @@ const Chart = ({ data }) => {
     return () => {
       root.dispose()
     }
-  }, [data])
+  }, [type])
 
   return (
     <div>

@@ -75,14 +75,94 @@ const SidePanel = ({ recommendations, loading, query, queryFunction, basePath })
   })
 
   var colors = {
-    critical: am5.color(0xca0101),
-    bad: am5.color(0xe17a2d),
-    medium: am5.color(0xe1d92d),
-    good: am5.color(0x5dbe24),
-    verygood: am5.color(0x0b7d03)
+    critical: am5.color(0xee77a2),
+    bad: am5.color(0xfcbb86),
+    medium: am5.color(0xdae085),
+    good: am5.color(0x9ae4a7),
+    verygood: am5.color(0x69f084)
   }
 
   function prepare() {
+    recommendationProc = recommendations.map(recommendation => {
+      if (selectedOption.value === 'hotel-prices') {
+        min = recommendation.hotel_price_min
+        max = recommendation.hotel_price_max
+      } else if (selectedOption.value === 'hostel-prices') {
+        min = recommendation.hostel_price_min
+        max = recommendation.hostel_price_max
+      } else if (selectedOption.value === 'airbnb-prices') {
+        min = recommendation.vacation_rental_price_min
+        max = recommendation.vacation_rental_price_max
+      } else if (selectedOption.value === 'temperature' && recommendation.climate) {
+        min = recommendation.climate.t_min
+        max = recommendation.climate.t_max
+      } else if (selectedOption.value === 'trip-days' && recommendation.tripdays) {
+        min = recommendation.tripdays.min_days
+        max = recommendation.tripdays.min_days
+      }
+
+      const recoImage = recommendation.area_has_image
+        ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
+        : recommendation.events &&
+          recommendation.events[0] &&
+          recommendation.events[0].images &&
+          recommendation.events[0].images[0]
+          ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
+          : null
+
+      return {
+        name: recommendation.name,
+        category: selectedOption.label,
+        min: min,
+        max: max,
+        bulletSettings: {
+          src: recoImage
+        }
+      }
+    })
+
+    //Process Cost of living with colors.
+  }
+
+  useEffect(() => {
+    recommendationProc = recommendations.map(recommendation => {
+      if (selectedOption.value === 'hotel-prices') {
+        min = recommendation.hotel_price_min
+        max = recommendation.hotel_price_max
+      } else if (selectedOption.value === 'hostel-prices') {
+        min = recommendation.hostel_price_min
+        max = recommendation.hostel_price_max
+      } else if (selectedOption.value === 'airbnb-prices') {
+        min = recommendation.vacation_rental_price_min
+        max = recommendation.vacation_rental_price_max
+      } else if (selectedOption.value === 'temperature' && recommendation.climate) {
+        min = recommendation.climate.t_min
+        max = recommendation.climate.t_max
+      } else if (selectedOption.value === 'trip-days' && recommendation.tripdays) {
+        min = recommendation.tripdays.min_days
+        max = recommendation.tripdays.min_days
+      }
+
+      const recoImage = recommendation.area_has_image
+        ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
+        : recommendation.events &&
+          recommendation.events[0] &&
+          recommendation.events[0].images &&
+          recommendation.events[0].images[0]
+          ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
+          : null
+
+      return {
+        name: recommendation.name,
+        category: selectedOption.label,
+        min: min,
+        max: max,
+        bulletSettings: {
+          src: recoImage
+        }
+      }
+    })
+
     const td = recommendations.map(recommendation => {
       if (recommendation['cost_of_living_labels']) {
         Object.keys(recommendation['cost_of_living_labels']).forEach((key, i) => {
@@ -270,90 +350,7 @@ const SidePanel = ({ recommendations, loading, query, queryFunction, basePath })
         })
       }
     })
-
-    recommendationProc = recommendations.map(recommendation => {
-      if (selectedOption.value === 'hotel-prices') {
-        min = recommendation.hotel_price_min
-        max = recommendation.hotel_price_max
-      } else if (selectedOption.value === 'hostel-prices') {
-        min = recommendation.hostel_price_min
-        max = recommendation.hostel_price_max
-      } else if (selectedOption.value === 'airbnb-prices') {
-        min = recommendation.vacation_rental_price_min
-        max = recommendation.vacation_rental_price_max
-      } else if (selectedOption.value === 'temperature' && recommendation.climate) {
-        min = recommendation.climate.t_min
-        max = recommendation.climate.t_max
-      } else if (selectedOption.value === 'trip-days' && recommendation.tripdays) {
-        min = recommendation.tripdays.min_days
-        max = recommendation.tripdays.min_days
-      }
-
-      const recoImage = recommendation.area_has_image
-        ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
-        : recommendation.events &&
-          recommendation.events[0] &&
-          recommendation.events[0].images &&
-          recommendation.events[0].images[0]
-          ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
-          : null
-
-      return {
-        name: recommendation.name,
-        category: selectedOption.label,
-        min: min,
-        max: max,
-        bulletSettings: {
-          src: recoImage
-        }
-      }
-    })
-
-    //Process Cost of living with colors.
-  }
-
-  useEffect(
-    () => {
-      recommendationProc = recommendations.map(recommendation => {
-        if (selectedOption.value === 'hotel-prices') {
-          min = recommendation.hotel_price_min
-          max = recommendation.hotel_price_max
-        } else if (selectedOption.value === 'hostel-prices') {
-          min = recommendation.hostel_price_min
-          max = recommendation.hostel_price_max
-        } else if (selectedOption.value === 'airbnb-prices') {
-          min = recommendation.vacation_rental_price_min
-          max = recommendation.vacation_rental_price_max
-        } else if (selectedOption.value === 'temperature' && recommendation.climate) {
-          min = recommendation.climate.t_min
-          max = recommendation.climate.t_max
-        } else if (selectedOption.value === 'trip-days' && recommendation.tripdays) {
-          min = recommendation.tripdays.min_days
-          max = recommendation.tripdays.min_days
-        }
-
-        const recoImage = recommendation.area_has_image
-          ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
-          : recommendation.events &&
-            recommendation.events[0] &&
-            recommendation.events[0].images &&
-            recommendation.events[0].images[0]
-            ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
-            : null
-
-        return {
-          name: recommendation.name,
-          category: selectedOption.label,
-          min: min,
-          max: max,
-          bulletSettings: {
-            src: recoImage
-          }
-        }
-      })
-    },
-    [selectedOption, optionChange]
-  )
+  }, [])
 
   console.log('sidepanel:', recommendationProc)
 
@@ -379,12 +376,20 @@ const SidePanel = ({ recommendations, loading, query, queryFunction, basePath })
           {!loading &&
             recommendations &&
             recommendations.length > 0 &&
-            selectedOption.value !== 'cost-of-living' && <Chart data={recommendationProc} />}
+            selectedOption.value !== 'cost-of-living' && (
+              <Chart data={recommendationProc} type={selectedOption.value} />
+          )}
           {!loading &&
             recommendations &&
             recommendations.length > 0 &&
             selectedOption.value === 'cost-of-living' && (
-              <Table data={tableData} valuesY={valuesY} valuesX={valuesX} colors={colors} />
+              <Table
+                data={tableData}
+                valuesY={valuesY}
+                valuesX={valuesX}
+                colors={colors}
+                type={selectedOption.value}
+              />
           )}
         </div>
       </div>

@@ -80,7 +80,8 @@ const Table = ({
         yAxis: yAxis,
         categoryXField: 'x',
         categoryYField: 'y',
-        valueField: 'value'
+        valueField: 'value',
+        oversizedBehavior: 'truncate'
       })
     )
 
@@ -130,7 +131,9 @@ const Table = ({
           populateText: true,
           centerX: am5.p50,
           centerY: am5.p50,
-          text: '{value}'
+          text: '{value}',
+          fill: am5.color(0xffffff),
+          oversizedBehavior: 'fit'
         })
       })
     })
