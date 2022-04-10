@@ -7,14 +7,13 @@
 }
 
 .heart {
- 
   margin-top: 7%;
   margin-right: 2px;
   width: 24px;
   height: 24px;
   background-image: $heart-not-selected;
   background-repeat: no-repeat;
-  display: inline-block;
+  display: flex;
 }
 
 .heartFilled {
@@ -62,6 +61,7 @@
 
   width: 20px;
   height: 20px;
+  margin-top: -6px;
 }
 
 .elementIcon5 {
@@ -323,8 +323,6 @@
   flex-direction: column;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-
-
 }
 
 .oneRow {
@@ -346,7 +344,7 @@
   
   padding-left: 16px;
   padding-right: 16px;
- 
+ margin-bottom: 20px;
 }
 
 .headerHolderCoverless{
@@ -358,6 +356,6 @@
 }
 
 .title {
-  
   @extend .textShadow;
+  width: calc(100% - 20px);
 }
