@@ -23,7 +23,8 @@ const Content = ({
   basePath,
   error,
   handleScroll,
-  initialScrollPos = 0
+  initialScrollPos = 0,
+  contentType = 'recommendations'
 }) => {
   const history = useHistory()
 
@@ -114,9 +115,10 @@ const Content = ({
             className={styles.sidePanel}
             loading={loading}
             recommendations={recommendations}
-            query={queryFunction(recommendations)}
+            query={contentType === 'recommendations' && queryFunction(recommendations)}
             queryFunction={queryFunction}
             basePath={basePath}
+            contentType={contentType}
           />
       )}
     </div>

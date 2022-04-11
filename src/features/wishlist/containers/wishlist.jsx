@@ -12,25 +12,28 @@ const WishlistContainer = () => {
   const location = useLocation()
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchWishlist())
-  }, [dispatch])
+  useEffect(
+    () => {
+      dispatch(fetchWishlist())
+    },
+    [dispatch]
+  )
 
+  const removeFromWishlistHandler = useCallback(
+    ({ recommendation }) => {
+      dispatch(removeFromWishlist(recommendation))
+    },
+    [dispatch]
+  )
+  const recommendations = Object.values(wishlist).map(w => ({
+    ...w.data,
+    recommendationId: w.wishlistId
+  }))
 
-  const removeFromWishlistHandler = useCallback(({
-    recommendation
-  }) => {
-    dispatch(removeFromWishlist(recommendation))
-  }, [dispatch])
-  const recommendations = Object.values(wishlist)
-    .map(w => ({ ...w.data, recommendationId: w.wishlistId }))
-
-  const detailIndex = !loading &&
-  location.pathname.startsWith('/wishlist/r/') ?
-    recommendations.findIndex(
-      r => r.id === location.pathname.split('/wishlist/r/')[1]
-    ) :
-    -1
+  const detailIndex =
+    !loading && location.pathname.startsWith('/wishlist/r/')
+      ? recommendations.findIndex(r => r.id === location.pathname.split('/wishlist/r/')[1])
+      : -1
   return (
     <div className="flex-col">
       {detailIndex !== -1 && (
@@ -48,10 +51,9 @@ const WishlistContainer = () => {
         recommendations={recommendations}
         user={user}
         queryFunction={recommendation => ({
-          query: recommendation &&
-            wishlist[recommendation.recommendationId].query,
-          queryString: recommendation &&
-            qs.stringify(wishlist[recommendation.recommendationId].query)
+          query: recommendation && wishlist[recommendation.recommendationId].query,
+          queryString:
+            recommendation && qs.stringify(wishlist[recommendation.recommendationId].query)
         })}
         mapEnabled
         wishlist={wishlist}
@@ -61,6 +63,7 @@ const WishlistContainer = () => {
         noItemsMessage="There is nothing here. Not yet"
         title="Wishlist"
         basePath="/wishlist"
+        contentType="wishlist"
       />
     </div>
   )

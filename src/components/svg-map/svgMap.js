@@ -8,7 +8,13 @@ import * as am5themes_Animated from '@amcharts/amcharts5/themes/Frozen'
 import am5geodata_world from '@amcharts/amcharts5-geodata/worldLow'
 
 var imageSize = 34
-const SvgMap = ({ originCities, destinationCities, queryString, basePath }) => {
+const SvgMap = ({
+  originCities,
+  destinationCities,
+  queryString,
+  basePath,
+  contentType = 'recommendations'
+}) => {
   const history = useHistory()
   const chartRef = useRef(null)
 
@@ -221,11 +227,18 @@ const SvgMap = ({ originCities, destinationCities, queryString, basePath }) => {
     return () => {
       root.dispose()
     }
-  }, [])
+  }, [contentType])
 
   return (
     <div>
-      <div id='chartdiv' style={{ height: `calc(50vh)` }}></div>
+      <div
+        id='chartdiv'
+        style={
+          contentType === 'recommendations'
+            ? { height: `calc(50vh)` }
+            : { height: `calc(100vh)` }
+        }
+      ></div>
     </div>
   )
 }

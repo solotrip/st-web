@@ -4,11 +4,13 @@ import { Loader } from 'components'
 import Content from '../components/content'
 import { fetchNotifications, notificationsSelector } from '../slice'
 import { registerDevice } from 'utils/notification'
+import { useHistory, useLocation } from 'react-router-dom'
+import { useQuery } from 'utils/hooks/use-query'
 
 const NotificationsContainer = () => {
-  const { notifications, loading: notificationsLoading } = useSelector(
-    notificationsSelector
-  )
+  const query = useQuery()
+  const location = useLocation()
+  const { notifications, loading: notificationsLoading } = useSelector(notificationsSelector)
   const dispatch = useDispatch()
 
   useEffect(
@@ -23,7 +25,13 @@ const NotificationsContainer = () => {
     <>
       <div className="flex-col">
         <Loader loading={notificationsLoading}>
-          <Content notifications={notifications} />
+          <Content
+            notifications={notifications}
+            queryFunction={() => ({
+              query,
+              queryString: location.search
+            })}
+          />
         </Loader>
       </div>
     </>
