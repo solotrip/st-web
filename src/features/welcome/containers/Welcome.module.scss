@@ -33,7 +33,7 @@
   
 
   .upperContainer{
-    margin-top: -100%;
+    margin-top: max(-100%,-700px);
     z-index: 999;
     
     width: 100%;
