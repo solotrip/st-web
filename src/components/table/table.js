@@ -16,13 +16,14 @@ const Table = ({
   originCities,
   destinationCities,
   queryString,
-  basePath
+  basePath,
+  DOMroot = 'chartdiv4'
 }) => {
   const history = useHistory()
   const chartRef = useRef(null)
 
   useLayoutEffect(() => {
-    var root = am5.Root.new('chartdiv4')
+    var root = am5.Root.new(DOMroot)
     var chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panX: false,
@@ -154,7 +155,7 @@ const Table = ({
 
   return (
     <div>
-      <div id='chartdiv4' style={{ height: `calc(40vh)` }}></div>
+      <div id={DOMroot} style={{ height: `calc(40vh)` }}></div>
     </div>
   )
 }

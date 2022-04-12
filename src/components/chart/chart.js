@@ -4,10 +4,10 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 
-const Chart = ({ data, type }) => {
+const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
   const chartRef = useRef(null)
   useLayoutEffect(() => {
-    var root = am5.Root.new('chartdiv3')
+    var root = am5.Root.new(DOMroot)
     let chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         panX: false,
@@ -95,7 +95,7 @@ const Chart = ({ data, type }) => {
   return (
     <div>
       <div
-        id='chartdiv3'
+        id={DOMroot}
         style={{
           height: `calc(40vh)`,
           paddingBottom: '50px'

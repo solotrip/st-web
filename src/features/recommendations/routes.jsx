@@ -8,6 +8,7 @@ import FiltersContainer from './containers/filters'
 import LocationContainer from './containers/location'
 import PassportCountriesContainer from './containers/passport-countries'
 import MapContainer from './containers/map'
+import AnalyticsContainer from './containers/analytics'
 
 const Routes = () => (
   <Switch>
@@ -28,7 +29,7 @@ const Routes = () => (
             <FiltersContainer />
           </Route>
           <Route path="/recommendations/analytics">
-            <FiltersContainer />
+            <AnalyticsContainer />
           </Route>
           <Route path="/recommendations/map">
             <MapContainer />

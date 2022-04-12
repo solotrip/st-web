@@ -73,8 +73,6 @@
 }
 
 .sidePanel {
- 
-  
   @include xs-to-md {
     display: none;
   }
