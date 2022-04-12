@@ -4,9 +4,11 @@ import { useHistory } from 'react-router'
 
 import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
-import * as am5themes_Animated from '@amcharts/amcharts5/themes/Frozen'
+import * as am5themes_Animated from '@amcharts/amcharts5/themes/Responsive'
 import am5geodata_world from '@amcharts/amcharts5-geodata/worldLow'
 
+import useThemeState from 'utils/hooks/use-theme-state'
+import styles from './svgmap.module.scss'
 var imageSize = 34
 const SvgMap = ({
   originCities,
@@ -19,18 +21,54 @@ const SvgMap = ({
 }) => {
   const history = useHistory()
   const chartRef = useRef(null)
+  const [appTheme] = useThemeState()
+  const mapPolygonColor =
+    appTheme === 'no-preference'
+      ? am5.color(0x181d26)
+      : appTheme === 'light'
+      ? am5.color(0xf3f3f4)
+      : am5.color(0x181d26)
+
+  const maskColor =
+    appTheme === 'no-preference'
+      ? am5.color(0x657a8f)
+      : appTheme === 'light'
+      ? am5.color(0x9fc1e0)
+      : am5.color(0x657a8f)
+
+  const bgColor =
+    appTheme === 'no-preference'
+      ? am5.color(0x000000)
+      : appTheme === 'light'
+      ? am5.color(0xffffff)
+      : am5.color(0x000000)
 
   useLayoutEffect(() => {
     var root = am5.Root.new(DOMroot)
+    root.setThemes(am5themes_Animated)
     let chart = root.container.children.push(
       am5map.MapChart.new(root, {
         projection: am5map.geoMercator()
       })
     )
+
     var polygonSeries = chart.series.push(
       am5map.MapPolygonSeries.new(root, { geoJSON: am5geodata_world })
     )
-    polygonSeries.mapPolygons.template.setAll({ fill: am5.color(0x181d26) })
+
+    var backgroundSeries = chart.series.unshift(
+      am5map.MapPolygonSeries.new(root, {})
+    )
+
+    backgroundSeries.mapPolygons.template.setAll({
+      fill: bgColor,
+      stroke: bgColor
+    })
+
+    backgroundSeries.data.push({
+      geometry: am5map.getGeoRectangle(180, 360, -180, -360)
+    })
+    polygonSeries.mapPolygons.template.setAll({ fill: mapPolygonColor })
 
     var lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}))
     lineSeries.mapLines.template.setAll({
@@ -113,7 +151,7 @@ const SvgMap = ({
           radius: 20,
           tooltipText: '{title}',
           tooltipY: 0,
-          fill: am5.color(0x657a8f),
+          fill: maskColor,
           stroke: am5.color(0x12c2e9),
           strokeGradient: am5.LinearGradient.new(root, {
             stops: [
@@ -242,6 +280,7 @@ const SvgMap = ({
             ? { height: `calc(50vh)` }
             : { height: `calc(100vh)` }
         }
+        className={styles.content}
       ></div>
     </div>
   )

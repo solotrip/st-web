@@ -7,6 +7,8 @@ import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5themes_Animated from '@amcharts/amcharts5/themes/Frozen'
 import am5geodata_world from '@amcharts/amcharts5-geodata/worldLow'
 
+import useThemeState from 'utils/hooks/use-theme-state'
+
 var imageSize = 34
 const Table = ({
   valuesX,
@@ -21,7 +23,20 @@ const Table = ({
 }) => {
   const history = useHistory()
   const chartRef = useRef(null)
+  const [appTheme] = useThemeState()
+  const labelColor =
+    appTheme === 'no-preference'
+      ? am5.color(0xffffff)
+      : appTheme === 'light'
+      ? am5.color(0x000000)
+      : am5.color(0xffffff)
 
+  const strokeColor =
+    appTheme === 'no-preference'
+      ? am5.color(0x000000)
+      : appTheme === 'light'
+      ? am5.color(0xffffff)
+      : am5.color(0x000000)
   useLayoutEffect(() => {
     var root = am5.Root.new(DOMroot)
     var chart = root.container.children.push(
@@ -63,9 +78,9 @@ const Table = ({
       })
     )
 
-    yAxis.get('renderer').labels.template.setAll({ fill: am5.color(0xffffff) })
+    yAxis.get('renderer').labels.template.setAll({ fill: labelColor })
     xAxis.get('renderer').labels.template.setAll({
-      fill: am5.color(0xffffff),
+      fill: labelColor,
       oversizedBehavior: 'truncate',
       maxWidth: 100
     })
@@ -75,7 +90,7 @@ const Table = ({
     var series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
         calculateAggregates: false,
-        stroke: am5.color(0x000000),
+        stroke: strokeColor,
         clustered: false,
         xAxis: xAxis,
         yAxis: yAxis,

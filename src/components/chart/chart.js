@@ -3,9 +3,18 @@ import React, { Component, useState, useLayoutEffect, useRef } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
+import useThemeState from 'utils/hooks/use-theme-state'
 
 const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
   const chartRef = useRef(null)
+  const [appTheme] = useThemeState()
+  const labelColor =
+    appTheme === 'no-preference'
+      ? am5.color(0xffffff)
+      : appTheme === 'light'
+      ? am5.color(0x000000)
+      : am5.color(0xffffff)
+
   useLayoutEffect(() => {
     var root = am5.Root.new(DOMroot)
     let chart = root.container.children.push(
@@ -36,12 +45,12 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
     )
 
     xAxis.get('renderer').labels.template.setAll({
-      fill: am5.color(0xffffff),
+      fill: labelColor,
       oversizedBehavior: 'truncate',
       maxWidth: 120
     })
 
-    yAxis.get('renderer').labels.template.setAll({ fill: am5.color(0xffffff) })
+    yAxis.get('renderer').labels.template.setAll({ fill: labelColor })
 
     let series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
