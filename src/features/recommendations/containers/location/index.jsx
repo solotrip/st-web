@@ -58,7 +58,7 @@ const LocationContainer = () => {
   return (
     <SheetWrapper snapPoints={[500]}>
       <SheetWrapper.Content>
-        <SettingsSection title="Location" description=" ">
+        <SettingsSection title="From" description="Where are you travelling from?">
           <SearchInput
             onChange={handleSearch}
             onReset={() => {
