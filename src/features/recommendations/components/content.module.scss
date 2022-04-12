@@ -80,6 +80,111 @@
   }
 }
 
+.analyticsTab{
+  display: none;
+  @include xs-to-md {
+    display: flex;
+  }
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;  
+  padding: 4px 16px;
+  
+}
+
+.analyticsTabRecommendations{
+  margin-top: 50px;
+  display: none;
+  @include xs-to-md {
+    display: flex;
+  }
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;  
+  padding: 4px 16px;
+}
+
+
+
+
+.tabItem {
+  background: transparent;
+  font-size: 16px;
+  padding: 8px 4px;
+  max-height: 50px;
+  text-align: center;
+  border-radius: 16px;
+  margin: 4px 4px 4px 4px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: 0 0 auto;
+  
+}
+.tabItemActive {
+  background: $card-content-recommendation;
+  font-size: 16px;
+  padding: 8px 4px;
+  max-height: 50px;
+  text-align: center;
+  
+  margin: 4px 4px 4px 4px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db,#df6967);
+  background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db,#df6967);
+  background-image: -moz-linear-gradient(90deg, #62b7dc, #ca67db,#df6967);
+  background-image: linear-gradient(90deg, #62b7dc, #ca67db,#df6967);
+  
+}
+
+
+
+
+.tabName {
+  margin: 2px 2px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  color: #31afea;
+  
+
+}
+.tabNameActive {
+  margin: 2px 2px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  color:white;
+
+
+}
+
+.tabIcon {
+  color: #31afea;
+  pointer-events: none;
+}
+
+.tabIconActive {
+  color: #f3f3f4;
+  pointer-events: none;
+
+}
+
+
+
+
 .showDetails {
   margin-top: 17px;
   background-color: #1697dc;

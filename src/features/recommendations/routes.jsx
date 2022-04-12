@@ -7,6 +7,7 @@ import DateSelectorContainer from './containers/date-selector'
 import FiltersContainer from './containers/filters'
 import LocationContainer from './containers/location'
 import PassportCountriesContainer from './containers/passport-countries'
+import MapContainer from './containers/map'
 
 const Routes = () => (
   <Switch>
@@ -25,6 +26,12 @@ const Routes = () => (
           </Route>
           <Route path="/recommendations/filters">
             <FiltersContainer />
+          </Route>
+          <Route path="/recommendations/analytics">
+            <FiltersContainer />
+          </Route>
+          <Route path="/recommendations/map">
+            <MapContainer />
           </Route>
         </Switch>
       </OnboardedRoutesWrapper>

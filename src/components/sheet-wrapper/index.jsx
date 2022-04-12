@@ -6,15 +6,17 @@ import Sheet from 'react-modal-sheet'
 import { MdClose as CloseIcon } from 'react-icons/md'
 import Footer from './footer'
 
-const SheetWrapper = ({ children, ...rest }) => {
+const SheetWrapper = ({ children, disableDrag = false, closable = true, ...rest }) => {
   const history = useHistory()
 
   const closeSheet = useCallback(
     () => {
-      if(history.length === 1) {
-        history.replace('/browse')
-      } else {
-        history.goBack()
+      if (closable) {
+        if (history.length === 1) {
+          history.replace('/browse')
+        } else {
+          history.goBack()
+        }
       }
     },
     [history]
@@ -23,6 +25,7 @@ const SheetWrapper = ({ children, ...rest }) => {
   return (
     <Sheet
       rootId="root"
+      disableDrag={disableDrag}
       isOpen={true}
       onClose={closeSheet}
       springConfig={{
@@ -34,15 +37,17 @@ const SheetWrapper = ({ children, ...rest }) => {
     >
       <div className={styles.container}>
         <Sheet.Container>
-          <Sheet.Header className={styles.sheetHeader}/>
+          <Sheet.Header className={styles.sheetHeader} />
           <Sheet.Content>{children}</Sheet.Content>
         </Sheet.Container>
       </div>
+
       <button className={styles.closeSheet} onClick={closeSheet}>
-        <CloseIcon/>
+        {closable ? <CloseIcon /> : <div />}
       </button>
+
       <div className={styles.backdropWrapper}>
-        <Sheet.Backdrop/>
+        <Sheet.Backdrop />
       </div>
     </Sheet>
   )
@@ -58,8 +63,6 @@ SheetWrapper.propTypes = {
 }
 
 SheetWrapper.Footer = Footer
-SheetWrapper.Content = ({ children }) => (
-  <div className={styles.content}>{children}</div>
-)
+SheetWrapper.Content = ({ children }) => <div className={styles.content}>{children}</div>
 
 export default SheetWrapper

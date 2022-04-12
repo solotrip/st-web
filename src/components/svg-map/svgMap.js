@@ -13,13 +13,15 @@ const SvgMap = ({
   destinationCities,
   queryString,
   basePath,
-  contentType = 'recommendations'
+  contentType = 'recommendations',
+  DOMroot = 'chartdiv',
+  detailsOpenable = true
 }) => {
   const history = useHistory()
   const chartRef = useRef(null)
 
   useLayoutEffect(() => {
-    var root = am5.Root.new('chartdiv')
+    var root = am5.Root.new(DOMroot)
     let chart = root.container.children.push(
       am5map.MapChart.new(root, {
         projection: am5map.geoMercator()
@@ -159,21 +161,23 @@ const SvgMap = ({
         })
       )
 
-      maskCircle.events.on('click', function (e) {
-        history.push(
-          basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
-        )
-      })
-      image.events.on('click', function (e) {
-        history.push(
-          basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
-        )
-      })
-      imageContainer.events.on('click', function (e) {
-        history.push(
-          basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
-        )
-      })
+      if (detailsOpenable) {
+        maskCircle.events.on('click', function (e) {
+          history.push(
+            basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
+          )
+        })
+        image.events.on('click', function (e) {
+          history.push(
+            basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
+          )
+        })
+        imageContainer.events.on('click', function (e) {
+          history.push(
+            basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
+          )
+        })
+      }
 
       return am5.Bullet.new(root, {
         locationY: 0,
@@ -232,7 +236,7 @@ const SvgMap = ({
   return (
     <div>
       <div
-        id='chartdiv'
+        id={DOMroot}
         style={
           contentType === 'recommendations'
             ? { height: `calc(50vh)` }

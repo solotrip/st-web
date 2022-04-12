@@ -134,6 +134,7 @@ const RecommendationsContainer = () => {
           query,
           queryString: location.search
         })}
+        query={query}
         wishlistedIds={wishlisted}
         toggleWishlist={toggleWishlist}
         detailIndex={detailIndex}
