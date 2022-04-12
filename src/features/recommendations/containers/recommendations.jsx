@@ -47,7 +47,7 @@ const RecommendationsContainer = () => {
     () => {
       if (
         location.pathname === '/recommendations' ||
-        location.pathname.startsWith('/recommendations/r/')
+        location.pathname.includes('/recommendations/r/')
       ) {
         dispatch(resetActiveRecommendation())
         if (!query.start && !query.months) return openDateSheet(query)
@@ -110,7 +110,7 @@ const RecommendationsContainer = () => {
 
   const loading = profileLoading || loadingRecommendations || !activeRecommendationId
   const detailIndex = !loading
-    ? location.pathname.startsWith('/recommendations/r/')
+    ? location.pathname.includes('/recommendations/r/')
       ? recommendations[activeRecommendationId].recommendations.findIndex(
         r => r.id === location.pathname.split('/recommendations/r/')[1]
       )

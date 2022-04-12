@@ -31,7 +31,7 @@ const WishlistContainer = () => {
   }))
 
   const detailIndex =
-    !loading && location.pathname.startsWith('/wishlist/r/')
+    !loading && location.pathname.includes('/wishlist/r/')
       ? recommendations.findIndex(r => r.id === location.pathname.split('/wishlist/r/')[1])
       : -1
   return (

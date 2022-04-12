@@ -39,7 +39,7 @@ const HorizontalList = ({
     >
 
       <div className={styles.header} slot="container-start">
-        <h2 className={styles.title}>{title}</h2>
+        {title && <h2 className={styles.title}>{title}</h2>}
         <div
           className={cn(styles.arrows, { [styles.hidden]: hideControls })}
         >
@@ -56,7 +56,7 @@ const HorizontalList = ({
       {items.map(item => (
         <SwiperSlide
           className={itemClassName}
-          key={`swiper-${title}-${item.props.name}`}
+          key={item.props['data-key'] || `swiper-${title || 'list'}-${item.props.name}`}
         >
           {item}
         </SwiperSlide>))}

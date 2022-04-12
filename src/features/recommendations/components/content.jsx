@@ -157,7 +157,7 @@ const Content = ({
           const { query, queryString } = queryFunction(recommendation)
           return (
             <Recommendation
-              key={`rec-${recommendation.sid}`}
+              key={`rec-${recommendation.id || recommendation.sid}`}
               query={query}
               queryString={queryString}
               recommendation={recommendation}

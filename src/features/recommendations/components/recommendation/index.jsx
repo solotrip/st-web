@@ -394,7 +394,7 @@ const Recommendation = ({
               slidesPerView={2}
               itemClassName={styles.horizontalListItem}
               items={events.map(event => (
-                <div key={`${sid}-poi-${event.id}`} className={styles.slide}>
+                <div data-key={`${sid}-poi-${event.eid}`} className={styles.slide}>
                   <Image
                     src={getEventImage(event, appTheme === 'light')}
                     className={styles.slideImage}
