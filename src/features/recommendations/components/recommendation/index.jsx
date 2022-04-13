@@ -115,18 +115,14 @@ const Recommendation = ({
           )}
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
-              {' '}
               <Cloud />
             </div>
             <div className={styles.elementText}>
-              min{' '}
+              min &nbsp;
               <div className={styles.elementHighlight}>
-                &nbsp;
                 <Temperature value={minTemp} />{' '}
-              </div>, max{' '}
+              </div>, max &nbsp;
               <div className={styles.elementHighlight}>
-                {' '}
-                &nbsp;
                 <Temperature value={maxTemp} />
               </div>
             </div>
@@ -139,13 +135,13 @@ const Recommendation = ({
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hotel prices range from{' '}
+                Hotel prices range from &nbsp;
                 <div className={styles.elementHighlight}>
-                  &nbsp; <Currency value={hotelPriceMin} />{' '}
-                </div>{' '}
-                to{' '}
+                  <Currency value={hotelPriceMin} />{' '}
+                </div>
+                &nbsp;to&nbsp;
                 <div className={styles.elementHighlight}>
-                  &nbsp; <Currency value={hotelPriceMax} />{' '}
+                  <Currency value={hotelPriceMax} />
                 </div>.
               </div>
             </div>
@@ -157,9 +153,9 @@ const Recommendation = ({
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Hotel price is{' '}
+                  Average Hotel price is&nbsp;
                   <div className={styles.elementHighlight}>
-                    &nbsp; <Currency value={hotelPriceMin} />
+                    <Currency value={hotelPriceMin} />
                   </div>.
                 </div>
               </div>
@@ -168,17 +164,15 @@ const Recommendation = ({
           {(hostelPriceMin || hostelPriceMax) && hostelPriceMin !== hostelPriceMax ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
-                {' '}
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hostel prices range from{' '}
+                Hostel prices range from&nbsp;
                 <div className={styles.elementHighlight}>
-                  &nbsp; <Currency value={hostelPriceMin} />{' '}
-                </div>{' '}
-                to{' '}
+                  <Currency value={hostelPriceMin} />
+                </div>
+                &nbsp;to&nbsp;
                 <div className={styles.elementHighlight}>
-                  &nbsp;
                   <Currency value={hostelPriceMax} />{' '}
                 </div>.
               </div>
@@ -187,13 +181,12 @@ const Recommendation = ({
             Math.floor(hostelPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
-                  {' '}
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average hostel price is{' '}
+                  Average hostel price is&nbsp;
                   <div className={styles.elementHighlight}>
-                    &nbsp; <Currency value={hostelPriceMin} />{' '}
+                    <Currency value={hostelPriceMin} />
                   </div>.
                 </div>
               </div>
@@ -203,17 +196,16 @@ const Recommendation = ({
           vacationRentalPriceMin !== vacationRentalPriceMax ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
-                {' '}
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Airbnb prices range from{' '}
+                Vacation rental prices range from&nbsp;
                 <div className={styles.elementHighlight}>
-                  &nbsp; <Currency value={vacationRentalPriceMin} />{' '}
-                </div>{' '}
-                to{' '}
+                  <Currency value={vacationRentalPriceMin} />
+                </div>
+                &nbsp;to &nbsp;
                 <div className={styles.elementHighlight}>
-                  &nbsp;<Currency value={vacationRentalPriceMax} />{' '}
+                  <Currency value={vacationRentalPriceMax} />
                 </div>.
               </div>
             </div>
@@ -221,13 +213,12 @@ const Recommendation = ({
               Math.floor(vacationRentalPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
-                  {' '}
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Airbnb price is{' '}
+                  Average vacation rental price is &nbsp;
                   <div className={styles.elementHighlight}>
-                    &nbsp; <Currency value={vacationRentalPriceMin} />{' '}
+                    <Currency value={vacationRentalPriceMin} />
                   </div>.
                 </div>
               </div>
@@ -245,7 +236,7 @@ const Recommendation = ({
                   <>
                     {'Fastest: '}
                     <div className={styles.elementHighlight}>
-                      &nbsp; <Currency value={fastestFlightCost} />{' '}
+                      <Currency value={fastestFlightCost} /> &nbsp;
                     </div>
                   </>
                 )}
@@ -253,7 +244,7 @@ const Recommendation = ({
                   <>
                     {',Cheapest: '}
                     <div className={styles.elementHighlight}>
-                      &nbsp; <Currency value={cheapestFlightCost} />{' '}
+                      &nbsp; <Currency value={cheapestFlightCost} /> &nbsp;
                     </div>
                   </>
                 )}
@@ -261,7 +252,7 @@ const Recommendation = ({
                   <>
                     {',Best: '}
                     <div className={styles.elementHighlight}>
-                      &nbsp; <Currency value={bestFlightCost} />{' '}
+                      &nbsp; <Currency value={bestFlightCost} /> &nbsp;
                     </div>
                   </>
                 )}
