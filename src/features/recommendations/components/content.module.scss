@@ -83,15 +83,17 @@
   @include xs-to-md {
     display: flex;
   }
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: nowrap;  
-  padding: 4px 16px;
+  
   
 }
 
 .analyticsTabRecommendations{
   margin-top: 50px;
+  width: 100%;
   display: none;
   @include xs-to-md {
     display: flex;
@@ -99,7 +101,7 @@
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: nowrap;  
-  padding: 4px 16px;
+  
 }
 
 
