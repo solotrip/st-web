@@ -1,0 +1,239 @@
+@import 'styles/mixins';
+
+.recommendationCard {
+  display: flex;
+  flex-direction: column;
+  background-color: $card-content-recommendation;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  //min-height: 650px;
+  min-width: 322px;
+  margin-top: 37px;
+  border-radius: 5px;
+
+}
+
+.colorStrip {
+  width: 100%;
+  height: 10px;
+  background-color: #667A8f;
+  top: 0;
+  border-radius: 5px 5px 0 0;
+  bottom: 98.17%;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.headerLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  height: 40px;
+  margin-top: 0;
+}
+
+.headerUpLine {
+  margin-top: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  background-image: -webkit-linear-gradient(90deg, #aeb9ea, #3cafeb);
+  background-image: -o-linear-gradient(90deg, #aeb9ea, #3cafeb);
+  background-image: -moz-linear-gradient(90deg, #aeb9ea, #3cafeb);
+  background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.sameLine {
+  display: inline;
+}
+
+.heart {
+
+  margin-top: 5px;
+  margin-right: 2px;
+  width: 24px;
+  height: auto;
+  background-image: $heart-not-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.heartFilled {
+  width: 30px;
+  height: auto;
+  background-image: $heart-selected;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.headerTitle {
+  margin-top: -10px;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.country {
+  margin-top: -7px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+
+
+}
+
+.hr {
+  margin-top: -20px;
+  margin-bottom: 6px;
+}
+
+.content {
+
+  margin-top: 5px;
+}
+
+.contentElement {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6px;
+
+  margin-bottom: 12px;
+  font-size: 15px;
+
+}
+
+.elementIcon {
+
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+}
+
+.elementIconAttraction {
+
+  margin-left: 3px;
+  width: 11.67px;
+  height: 16.67px;
+  margin-right: 20-11.67-3px;
+
+}
+
+.elementText {
+  margin-top: 1px;
+  line-height: 19px;
+  font-size: 15px;
+  margin-left: 18px;
+  display: inline-block;
+  
+  
+}
+
+.elementHighlight{
+  font-weight: bold;
+  display: inline-block;
+}
+
+.elementRed{
+  
+  display: inline-block;
+  //@at-root: #d15454;
+}
+.elementYellow{
+
+  display: inline-block;
+  //color:#c5d154;
+}
+
+.elementGreen {
+
+  display: inline-block;
+  //color: #54d182;
+}
+
+.horizontalListItem {
+  max-width: 200px;
+  padding: 2px;
+
+}
+
+.slide {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.slideImage {
+  max-width: 200px;
+  height: 120px;
+  border-radius: 5px;
+}
+
+
+.slideText {
+  @extend .textShadow;
+  z-index: 2;
+  text-align: left;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.eventDate {
+  @include roboto-light;
+  font-size: 15px;
+  padding: 8px 0;
+}
+
+
+.showDetails {
+  display: block;
+  text-align: center;
+  line-height: 38px;
+  margin-top: 17px;
+  background-color: #1697dc;
+  width: 100%;
+  height: 38px;
+  border-radius: 12px;
+  margin-bottom: 17px;
+  outline: none;
+  color: white;
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
+
+}
+
+.link {
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
+}

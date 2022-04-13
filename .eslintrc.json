@@ -1,0 +1,51 @@
+{
+  "extends": [
+    "react-app", "plugin:jsx-a11y/recommended", "plugin:react-hooks/recommended"
+  ],
+  "plugins": [
+    "jsx-a11y", "react-hooks"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "max-len": [
+      "warn", {
+        "code": 100
+      }
+    ],
+    "indent": [
+      "warn", 2, {
+        "ignoredNodes": [
+          "JSXElement", "JSXElement > *", "JSXAttribute", "JSXIdentifier", "JSXNamespacedName", "JSXMemberExpression",
+          "JSXSpreadAttribute", "JSXExpressionContainer", "JSXOpeningElement", "JSXClosingElement", "JSXText",
+          "JSXEmptyExpression", "JSXSpreadChild"
+        ]
+      }
+    ],
+    "semi": [
+      "warn", "never"
+    ],
+    "quotes": [
+      "warn", "single"
+    ],
+    "comma-dangle": [
+      "warn", "never"
+    ],
+    "camelcase": [
+      "warn"
+    ],
+    "object-curly-spacing": [
+      "warn", "always"
+    ],
+    "react/jsx-closing-bracket-location": [
+      1, "line-aligned"
+    ],
+    "arrow-parens": [
+      "warn", "as-needed"
+    ],
+    "linebreak-style": 0
+  }
+}

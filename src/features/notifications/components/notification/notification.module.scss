@@ -1,0 +1,33 @@
+@import "styles/mixins";
+
+
+.contentElement {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.elementIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.elementText {
+  margin-top: 1px;
+  line-height: 19px;
+  font-size: 15px;
+  margin-left: 18px;
+}
+
+.showDetails {
+  margin-top: 17px;
+  background-color: $primary-color;
+  width: 100%;
+  height: 38px;
+  border-radius: 12px;
+  margin-bottom: 17px;
+  outline: none;
+  color: $white;
+}

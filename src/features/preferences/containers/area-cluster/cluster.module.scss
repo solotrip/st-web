@@ -1,0 +1,59 @@
+@import 'styles/mixins';
+
+.areaCluster {
+  padding: 16px 32px;
+
+  :global(.swiper-wrapper){
+    @include xl {
+      justify-content: center;
+    }
+  }
+}
+
+.slideWrapper {
+  width: 250px !important;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+}
+
+.image {
+  height: 150px;
+  border-radius: 16px;
+}
+
+.slide {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.card {
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.selected {
+  @extend .shadow;
+  background: $light-primary-color;
+
+}
+
+.areaName {
+  padding: 4px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  color: $text-color;
+  font-size: 18px;
+  margin-top: 5px;
+
+  :hover {
+    color: #3cafeb;
+    text-decoration-color: #3cafeb;
+  }
+}
+

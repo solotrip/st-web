@@ -1,0 +1,322 @@
+{
+  "Hiking": {
+    "name": "Hiking",
+    "image_hash": "37419adb20c4576c6f2ca906646d2397"
+  },
+  "Backcountry Skiing": {
+    "name": "Backcountry Skiing",
+    "image_hash": "f69fb53d9a8bf6c58b5ac42c04aca5d0"
+  },
+  "Road Bike": {
+    "name": "Road Bike",
+    "image_hash": "81361d7d75c8f1364d304800df7d88ba"
+  },
+  "Mountain Bike": {
+    "name": "Mountain Bike",
+    "image_hash": "aaf80b4f13f739f1dcbb111c785d900b"
+  },
+  "Dog Sledding": {
+    "name": "Dog Sledding",
+    "image_hash": "d761033cc8161ce1356d61a2a2dcccef"
+  },
+  "Alpine Ski": {
+    "name": "Alpine Ski",
+    "image_hash": "566c18911d7eccbbef16907d2c0c9a1e"
+  },
+  "Cross Country Skiing": {
+    "name": "Cross Country Skiing",
+    "image_hash": "a30e55d3cdd8ae9f4ec08b8f7bb9394f"
+  },
+  "Snowmobile": {
+    "name": "Snowmobile",
+    "image_hash": "2570339a20f47d095c325a5c105e8f27"
+  },
+  "Alpine Climbing": {
+    "name": "Alpine Climbing",
+    "image_hash": "253b8268812b36acd31818d407f10c3b"
+  },
+  "Off Road": {
+    "name": "Off Road",
+    "image_hash": "0fb5fa96084f642195bd32fe8b705e19"
+  },
+  "Walking": {
+    "name": "Walking",
+    "image_hash": "a1c139fba07bdbcc0a6006b2e541a114"
+  },
+  "Motorboat": {
+    "name": "Motorboat",
+    "image_hash": "ec852d9761564194fbe76b684d47ca90"
+  },
+  "Car": {
+    "name": "Car",
+    "image_hash": "e4adb04a5a03349db570c6baec2819d3"
+  },
+  "Quad": {
+    "name": "Quad",
+    "image_hash": "df0cd96051bb95fd0dc6205805131b25"
+  },
+  "Kayak/ Canoe": {
+    "name": "Kayak/ Canoe",
+    "image_hash": "4241095b8f70556bc6379419712ca210"
+  },
+  "Plane": {
+    "name": "Plane",
+    "image_hash": "67ce8c2bdae31589e2c91780aa3ef44a"
+  },
+  "Longboard/ Skateboard": {
+    "name": "Longboard/ Skateboard",
+    "image_hash": "95fb5332615abea6185d92ea2c61bf2c"
+  },
+  "Running": {
+    "name": "Running",
+    "image_hash": "6e28c6f8b1629005ef131c927f5968b1"
+  },
+  "Trail Running": {
+    "name": "Trail Running",
+    "image_hash": "8c45b3c46afd735ab600e4af76a17ed4"
+  },
+  "Rowing": {
+    "name": "Rowing",
+    "image_hash": "bc0762f122da648beffa34dc7a7d399d"
+  },
+  "Bicycle Touring": {
+    "name": "Bicycle Touring",
+    "image_hash": "36fa9132c429d5dc7997fef1baee433e"
+  },
+  "Multisport": {
+    "name": "Multisport",
+    "image_hash": "a7897cffad28263b6bc88b85b1e4de92"
+  },
+  "Road Motorbike": {
+    "name": "Road Motorbike",
+    "image_hash": "d54f12f5137954baeb248d792dc9d777"
+  },
+  "Horseback Riding": {
+    "name": "Horseback Riding",
+    "image_hash": "bccf52b57a22beb1eaaca921e553b53f"
+  },
+  "Canicross": {
+    "name": "Canicross",
+    "image_hash": "0f0e5986a9f756fdfeac05796ab74d39"
+  },
+  "Spelunking": {
+    "name": "Spelunking",
+    "image_hash": "83a93a347f70d5209392dfaa90ac49eb"
+  },
+  "Dual-sport Motorcycle": {
+    "name": "Dual-sport Motorcycle",
+    "image_hash": "6b4b45e399897fdd252b98364571f46c"
+  },
+  "Enduro Motorcycle": {
+    "name": "Enduro Motorcycle",
+    "image_hash": "6011a07f824cdfa8706549b882ff65af"
+  },
+  "Motorhome": {
+    "name": "Motorhome",
+    "image_hash": "d582d6b2c6d3d7fe1b981ac080d91190"
+  },
+  "Sail Boat": {
+    "name": "Sail Boat",
+    "image_hash": "7d6ad7935df90861baeee9517252a961"
+  },
+  "Barefoot": {
+    "name": "Barefoot",
+    "image_hash": "5dffa5adc3e074cfddae5b3bd69e2de8"
+  },
+  "Air Balloon": {
+    "name": "Air Balloon",
+    "image_hash": "0d1b425654135f649f280e93d329c414"
+  },
+  "Snowshoe": {
+    "name": "Snowshoe",
+    "image_hash": "bc3eeef4fcf3edf3aad8b0da3e99d8a4"
+  },
+  "EBike": {
+    "name": "EBike",
+    "image_hash": "be78cffac1c06ccda818175716b81ebe"
+  },
+  "Downhill MTB": {
+    "name": "Downhill MTB",
+    "image_hash": "7360ac3f2b6f507baef66db523017e2b"
+  },
+  "Rafting": {
+    "name": "Rafting",
+    "image_hash": "5075d0850dfb1022ffcb0c2a1b67f698"
+  },
+  "Train": {
+    "name": "Train",
+    "image_hash": "06583f0e9b1c0c5fb9dddf4e5f990344"
+  },
+  "BASE Jumping": {
+    "name": "BASE Jumping",
+    "image_hash": "d341ea8d81a9e467f89ef1a5c4f65bbc"
+  },
+  "Paragliding": {
+    "name": "Paragliding",
+    "image_hash": "029a9ccc3503550fc88f613c3f48fea5"
+  },
+  "Reduced Mobility": {
+    "name": "Reduced Mobility",
+    "image_hash": "80611683de250b54787fd49c27667f2b"
+  },
+  "Via Ferrata": {
+    "name": "Via Ferrata",
+    "image_hash": "11b8bcb498cdd4ea96d55621ec15fd8d"
+  },
+  "Orienteering": {
+    "name": "Orienteering",
+    "image_hash": "00fba547e2451e058b12f9101078402d"
+  },
+  "Skating": {
+    "name": "Skating",
+    "image_hash": "e1970381c027b3a38e4a9f9b8dfed01a"
+  },
+  "Jet Ski": {
+    "name": "Jet Ski",
+    "image_hash": "b0232333e074df2ad8443fdc632137c8"
+  },
+  "Stand up Paddle": {
+    "name": "Stand up Paddle",
+    "image_hash": "b8cb0ffbd3030741b1db45f7475d96db"
+  },
+  "Trials Motorcycle": {
+    "name": "Trials Motorcycle",
+    "image_hash": "69e16ea930b571afc4ef93d1bb49fce2"
+  },
+  "Golf": {
+    "name": "Golf",
+    "image_hash": "dbb152c5579a3a5f61d3db8a8dad1bf2"
+  },
+  "Airboat": {
+    "name": "Airboat",
+    "image_hash": "97c93d0a6dc72305bc99758cab2139ff"
+  },
+  "Inline Skate": {
+    "name": "Inline Skate",
+    "image_hash": "835731d979c259507007385b8ca7c365"
+  },
+  "Birdwatching": {
+    "name": "Birdwatching",
+    "image_hash": "eb06e2ad52152727919f54b5075ed863"
+  },
+  "Nordic Walking": {
+    "name": "Nordic Walking",
+    "image_hash": "16b7abf626432de067a6969b431ce55b"
+  },
+  "Wildlife Watching": {
+    "name": "Wildlife Watching",
+    "image_hash": "66b06775cb757a6e3157e208eb30c38b"
+  },
+  "Gravel Bike": {
+    "name": "Gravel Bike",
+    "image_hash": "9d8e3738ba5b22b1e9e7fe7cb067c33c"
+  },
+  "Canyoneering": {
+    "name": "Canyoneering",
+    "image_hash": "802be367650965cb1c5a395ca6e440fb"
+  },
+  "Drone": {
+    "name": "Drone",
+    "image_hash": "3e8ecafb936a28353dc0ad53e0366419"
+  },
+  "Bikepacking": {
+    "name": "Bikepacking",
+    "image_hash": "344734c1dbec7e3e5421a6603e763b14"
+  },
+  "Diving": {
+    "name": "Diving",
+    "image_hash": "510d02595a8c6970e09cb9776ced5cef"
+  },
+  "Snowboarding": {
+    "name": "Snowboarding",
+    "image_hash": "9ac16daf1f056f043257d36cca045bbb"
+  },
+  "Handbike": {
+    "name": "Handbike",
+    "image_hash": "c34fd2e5eee58ad336e06e7c123eebc9"
+  },
+  "Rock Climbing": {
+    "name": "Rock Climbing",
+    "image_hash": "5b14b83cd1898c2ae596af4a36747710"
+  },
+  "Baby Stroller": {
+    "name": "Baby Stroller",
+    "image_hash": "9948406f4f46012c710a6596ac0679a0"
+  },
+  "Kitesurfing": {
+    "name": "Kitesurfing",
+    "image_hash": "c509bb4cddbdf51db0490e19d8e50e35"
+  },
+  "Kickbike": {
+    "name": "Kickbike",
+    "image_hash": "54c53d0cb252bbae7a2f4e00da85d384"
+  },
+  "Camel": {
+    "name": "Camel",
+    "image_hash": "c31eaeed8d6e3540bb075da35b249124"
+  },
+  "Mountain Unicycle": {
+    "name": "Mountain Unicycle",
+    "image_hash": "93a00af8ecc80d3b7042d4c736d9c985"
+  },
+  "Splitboard": {
+    "name": "Splitboard",
+    "image_hash": "9f030e91fe2366cc7696d84987725105"
+  },
+  "Segway": {
+    "name": "Segway",
+    "image_hash": "7b7867332279ed32e6c7e216289823ec"
+  },
+  "Flora Observation": {
+    "name": "Flora Observation",
+    "image_hash": "52860a6857ea463a5dc7f1b2fe7abb84"
+  },
+  "Trailer Bike": {
+    "name": "Trailer Bike",
+    "image_hash": "3b45c391fc3041f5308a09d63d4463cd"
+  },
+  "Kite Ski": {
+    "name": "Kite Ski",
+    "image_hash": "1932f11e5ec13b905a3f9ce6de6dffed"
+  },
+  "Ice Climbing": {
+    "name": "Ice Climbing",
+    "image_hash": "d6c66002a357884d4245e3e8396eeea4"
+  },
+  "Joëlette": {
+    "name": "Joëlette",
+    "image_hash": "a858b7f93fc22009f50b133d9ae73508"
+  },
+  "Freeride Ski": {
+    "name": "Freeride Ski",
+    "image_hash": "cf894184d2251cb526efdb7ff94806e7"
+  },
+  "Plogging": {
+    "name": "Plogging",
+    "image_hash": "879b46471c297ee0d2ec8062c2aaeac1"
+  },
+  "Roller Ski": {
+    "name": "Roller Ski",
+    "image_hash": "daa2534d31ab5b3a06ceb9466b00b126"
+  },
+  "Hang Gliding": {
+    "name": "Hang Gliding",
+    "image_hash": "cbe079327be2d70312328088ae351b1e"
+  },
+  "Scooter": {
+    "name": "Scooter",
+    "image_hash": "71b6bd303af8e2022cc5d7c9be79586d"
+  },
+  "Camping": {
+    "name": "Camping",
+    "image_hash": "4b75fcd493af7374436c26fb9c76faba"
+  },
+  "Geocache": {
+    "name": "Geocache",
+    "image_hash": "466ef6eb2dec94e2b6afd436ebf6d3ce"
+  },
+  "Swimming": {
+    "name": "Swimming",
+    "image_hash": "29ade3888eccf1294d5aa07c067f525b"
+  }
+}

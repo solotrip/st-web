@@ -1,0 +1,295 @@
+@import-normalize;
+@import '_global/fonts';
+@import 'mixins';
+@import '_theme/dark';
+@import '_theme/light';
+
+html {
+  @include light-theme;
+
+  // Prevent scroll appearing jump
+  overflow-y: scroll;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    @include dark-theme;
+  }
+}
+
+html.dark {
+  @include dark-theme;
+}
+
+html,
+body {
+  background-color: $bg-color !important;
+  text-rendering: geometricPrecision;
+  margin: 0;
+  overflow: hidden;
+}
+
+#root {
+  overflow-y: auto;
+  height: 100vh;
+  // Prevent scroll appear/ disappear jump
+  margin-left: calc(100vw - 100%);
+}
+
+* {
+  @include roboto-regular;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // TODO: Change it with something non intrusive
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: $active-text-color;
+}
+
+button {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-appearance: none; /* for input */
+  -webkit-user-select: none; /* for button */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+   -webkit-touch-callout: none;
+   -khtml-user-select: none; 
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+   outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+a {
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  color: $text-color;
+}
+
+.card {
+  padding: 16px;
+  border-radius: 16px;
+  background: $card-bg-color;
+  @extend .shadow;
+
+  &.no-padding {
+    padding: 0;
+  }
+}
+
+hr {
+  color: $border-color;
+}
+
+.glow-on-hover {
+  position: relative;
+
+  &:before {
+    content: '';
+    background: linear-gradient(
+                    45deg,
+                    #ff0000,
+                    #ff7300,
+                    #fffb00,
+                    #48ff00,
+                    #00ffd5,
+                    #002bff,
+                    #7a00ff,
+                    #ff00c8,
+                    #ff0000
+    );
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 16px;
+  }
+
+  &:active {
+    color: transparent;
+
+    &:after {
+      background: transparent;
+    }
+  }
+
+  &:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+  }
+
+  &:hover:before {
+    opacity: 1;
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.relative-container {
+  position: relative;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+.text-center {
+  text-align: center;
+}
+
+div.mapboxgl-popup-content {
+  background: transparent;
+  pointer-events: none;
+}
+
+div.mapboxgl-popup-tip {
+  border: 10px solid transparent;
+  pointer-events: none;
+}
+
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+  align-self: center;
+  border-bottom: none;
+  border-top-color: transparent
+}
+
+
+
+.pulfy-select {
+  .rs__control {
+    background-color: $bg-color;
+    color: $text-color;
+    border-color: $border-color;
+    border-radius: 16px;
+  }
+
+  .rs__menu {
+    @extend .shadow;
+    background-color: $bg-color;
+    padding: 4px 0;
+    overflow: hidden;
+  }
+
+  .rs__option--is-focused, .rs__option--is-selected, .rs__option:hover {
+    background-color: $card-bg-color;
+    color: $active-text-color;
+    cursor: pointer;
+  }
+
+  .rs__option:hover {
+    background-color: $card-bg-color !important;
+  }
+
+  .rs__multi-value  {
+    background-color: $card-bg-color;
+  }
+
+  .rs__single-value {
+    color: $text-color;
+  }
+
+  .rs__menu-list {
+    @include custom-scroll;
+    max-height: 250px;
+  }
+
+  .rs__multi-value__label {
+    color: $text-color;
+  }
+
+  .rs__input {
+    color: $text-color;
+  }
+
+  .rs__multi-value__remove:hover {
+    background-color: $warning-color;
+  }
+}
+
+.primaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 36px;
+  background: linear-gradient(180deg, $primary-color 0%, $light-primary-color 100%);
+  border-radius: 16px;
+  width: 100%;
+  color: #ffffff;
+
+  &:disabled {
+    background: $border-color;
+  }
+}
+
+.largeText {
+  font-size: 18px;
+}

@@ -1,0 +1,36 @@
+@import "styles/mixins";
+
+.coordinate {
+  margin: 5px;
+  display: block;
+}
+
+.button {
+  width: unset;
+  padding: 5px 20px;
+  min-width: 280px;
+  margin: 10px 0;
+  @include xs-to-md {
+    padding: 5px 8px;
+    min-width: 165px;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.item {
+  width: 100%;
+  text-align: start;
+  padding: 16px;
+  &:hover {
+    background: $primary-color;
+    color: $white;
+  }
+}

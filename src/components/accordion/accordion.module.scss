@@ -1,0 +1,67 @@
+@import 'styles/mixins';
+
+.accordion {
+  padding: 4px 0;
+  hr {
+    margin: 8px 0;
+    border: 1px solid $border-color;
+  }
+}
+
+.header {
+  width: 100%;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 0;
+  outline: none;
+}
+
+.name {
+  color: $sub-text-color;
+}
+
+.icon {
+  font-size: 24px;
+  line-height: 24px;
+  transform-origin: center;
+  -webkit-transition: transform 0.1s ease-out;
+  -moz-transition: transform 0.1s ease-out;
+  -o-transition: transform 0.1s ease-out;
+  transition: transform 0.1s ease-out;
+}
+
+.container {
+
+  height: 100%;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+}
+
+.expanded {
+  .name {
+    @include roboto-medium;
+    color: $text-color;
+  }
+
+  .icon {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+
+  .container {
+
+    height: auto;
+    max-height: 100%;
+  }
+
+  display: block;
+}

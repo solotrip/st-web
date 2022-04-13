@@ -1,0 +1,7 @@
+{
+  "name": "pulfy-frontend",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

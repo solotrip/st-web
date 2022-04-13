@@ -1,0 +1,76 @@
+@import "styles/mixins";
+
+.sidebar {
+  height: 100vh;
+  width: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  //background-color: $card-bg-color;
+  //box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.10);
+
+
+  @include md-to-lg {
+    width: 200px;
+  }
+
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.navMenu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex: 1;
+  @include xs-to-md {
+    display: none;
+  }
+  transition: 350ms;
+}
+
+.item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 0 8px 16px;
+  list-style: none;
+  height: 60px;
+  @include md-to-lg {
+    padding: 4px 0 4px 8px;
+
+  }
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.active {
+  color: $text-color;
+  background-color: $primary-color;
+  font-size: 18px;
+  @include md-to-lg {
+    font-size: 16px;
+
+  }
+}
+
+.title {
+  margin-left: 16px;
+
+}
+
+.logo {
+  position: absolute;
+  height: 70px;
+  width: 210px;
+  margin: 16px;
+  
+  background-size: cover;
+  background-image: $logo;
+  @include md-to-lg {
+    margin: 16px 8px;
+  }
+}

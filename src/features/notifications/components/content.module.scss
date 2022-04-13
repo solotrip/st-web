@@ -1,0 +1,225 @@
+@import 'styles/mixins';
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  @include xs-to-sm {
+    justify-content: center;
+  }
+}
+
+.title {
+  width: 100%;
+  margin: 0;
+}
+
+.noItem {
+  width: 100%;
+}
+
+.notifications {
+  @include custom-scroll;
+  display: flex;
+  max-width: 386px; //584px
+  padding: 16px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  height: 100%;
+  flex: 1;
+  @include xs-to-md {
+    padding-bottom: 70px;
+  }
+}
+
+.mapbox {
+  background-color: $bg-color;
+  flex: 1;
+  display: flex;
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+
+.whiteText {
+  color: white;
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  @include xs-to-sm {
+    justify-content: center;
+  }
+}
+
+.title {
+  width: 100%;
+}
+
+.noItems {
+  width: 100%;
+}
+
+.recommendations {
+  @include custom-scroll;
+  display: flex;
+  max-width: 386px; //584px
+  padding: 16px;
+  //padding-left: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  height: 100%;
+  flex: 1;
+  @include xs-to-md {
+    padding-bottom: 70px;
+  }
+}
+
+.recommendationDetails {
+  @include custom-scroll;
+  display: flex;
+  max-width: 386px; //584px
+  padding: 16px;
+  //padding-left: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  height: 100%;
+  flex: 1;
+  @include xs-to-md {
+    padding-bottom: 70px;
+  }
+}
+
+.mapbox {
+  background-color: $bg-color;
+  flex: 1;
+  display: flex;
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.showDetails {
+  margin-top: 17px;
+  background-color: #1697dc;
+  width: 100%;
+  height: 38.27px;
+  border-radius: 12px;
+  margin-bottom: 17px;
+  outline: none;
+  color: white;
+
+}
+
+.resetFilters {
+  margin-top: 17px;
+  background-color: #1697dc;
+  width: 100%;
+  height: 78px;
+  border-radius: 12px;
+  margin-bottom: 17px;
+  padding: 10px;
+  color: white;
+
+}
+
+.whiteText {
+  color: white;
+}
+
+
+
+
+ .mapMarker {
+  // width: 50px;
+   //height: 50px;
+   //background-image: url('https://ik.imagekit.io/rfjpogvdn8p/pulfypin_IE0jmyWuLQw.svg?updatedAt=1641584403446');
+
+ }
+
+ .popupContent{
+   position:relative;
+   background: #25262c;
+   font-size: 18px;
+   border-radius:5px;
+   box-shadow:0 1px 2px rgba(0,0,0,.1);
+   //padding:10px 10px 15px;
+   pointer-events:auto
+  }
+
+  .popupContentNoEvent{
+    position:relative;
+    background: #25262c;
+    font-size: 18px;
+    border-radius:5px;
+    box-shadow:0 1px 2px rgba(0,0,0,.1);
+    //padding:10px 10px 15px;
+    pointer-events:none
+   }
+
+   .popupImage {
+     width: 60px;
+     height: 60px;
+     background-color: yellowgreen;
+   }
+
+  .colorStrip {
+    width: 100%;
+    height: 10px;
+    background-color: #667A8f;
+    top:0%;
+    border-radius: 5px 5px 0px 0px;
+    bottom: 98.17%;
+  }
+
+  .popupContent2 {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .popupInner{
+    display: flex;
+    flex-direction: row;
+    padding:10px 10px 15px;
+    background-image: -webkit-linear-gradient(90deg, #aeb9ea, #3cafeb);
+    background-image: -o-linear-gradient(90deg, #aeb9ea, #3cafeb);
+    background-image: -moz-linear-gradient(90deg, #aeb9ea, #3cafeb);
+    background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
+    display: inline-block;
+    /* Set the background size and repeat properties. */
+    background-size: 100%;
+    background-repeat: repeat;
+
+    /* Use the text as a mask for the background. */
+    /* This will show the gradient as a text color rather than element bg. */
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+    
+  }
+
+  .popupIndex{
+    color: white;
+    margin-right: 5px;
+    background:  #3cafeb;
+    padding:10px 10px 15px;
+    border-radius: 0px 0px 0px 5px;
+  }
+
+div.mapboxgl-popup-content {
+  background:transparent;
+}

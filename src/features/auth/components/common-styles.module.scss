@@ -1,0 +1,135 @@
+@import "styles/mixins";
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  width: 300px;
+}
+
+.contentIos {
+  width: 300px;
+  margin-top: 40px;
+}
+
+.heading {
+  @include roboto-medium;
+  font-size: 32px;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  @include roboto-light;
+  color: $text-color;
+  text-align: center;
+
+  span {
+    color: $active-text-color;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 30px;
+  > * {
+    margin: 8px 0;
+  }
+}
+
+.socialButtons {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0;
+}
+
+.socialLogin {
+  display: flex;
+  align-items: center;
+  margin: 4px;
+  border-radius: 4px;
+  height: 48px;
+  padding: 0;
+  svg {
+    height: 100%;
+    width: auto;
+    padding: 0;
+    margin-right: 24px;
+  }
+  span {
+    @include roboto-medium;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+}
+
+.loginWithGoogle {
+
+  background: #4285f4;
+  color: $white;
+
+  @include whenDark {
+    color: #757575;
+    background: $white;
+  }
+}
+
+.loginWithApple {
+  background: $black;
+  color: white;
+  svg {
+    fill: $white;
+  }
+  @include whenDark {
+    background: $white;
+    color: $black;
+    svg {
+      fill: $black;
+    }
+  }
+}
+
+.terms {
+  @include roboto-light;
+  margin-top: 32px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.authWall {
+  @include roboto-light;
+  font-size: 20px;
+}
+
+.or {
+  text-align: center;
+  position: relative;
+  padding: 8px;
+  &:before {
+    content: '';
+    border-top: 1px solid $text-color;
+    display: block;
+    position: absolute;
+    bottom: 50%;
+    width: 40%;
+    left: 0;
+  }
+
+  &:after {
+    content: '';
+    border-top: 1px solid $text-color;
+    display: block;
+    position: absolute;
+    bottom: 50%;
+    width: 40%;
+    right: 0;
+  }
+}

@@ -1,0 +1,99 @@
+@import "styles/mixins";
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: $card-content-recommendation;
+  width: 100%;
+  max-width: 322px;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 322px;
+  margin-top: 37px;
+  border-radius: 5px;
+}
+
+.colorStrip {
+  width: 100%;
+  height: 10px;
+  background-color: #667A8f;
+  top: 0;
+  border-radius: 5px 5px 0 0;
+  bottom: 98.17%;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0;
+}
+
+.type {
+  margin: 8px 0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
+  /* Set the background size and repeat properties. */
+  background-size: 100%;
+  background-repeat: repeat;
+
+  /* Use the text as a mask for the background. */
+  /* This will show the gradient as a text color rather than element bg. */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.headerTitle {
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  -webkit-line-clamp: 1;
+  width: 100%;
+}
+
+.subTitle {
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.hr {
+  margin: 6px 0;
+}
+
+.content {
+  margin-top: 5px;
+}

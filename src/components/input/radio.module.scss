@@ -1,0 +1,663 @@
+@import 'styles/mixins';
+
+.container {
+  width: 100%;
+  color: $primary-color;
+  position: relative;
+  display: inline-block;
+  border: 1px solid currentColor;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  overflow: hidden;
+  margin: 0.8em auto;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-user-select: -moz-none;
+  -ms-user-select:      none;
+  -webkit-user-select:      none;
+  user-select:      none;
+  -moz-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  -webkit-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+  -moz-transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  -o-transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  -webkit-transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  transition-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  -webkit-tap-highlight-color: transparent;
+}
+.container > input {
+  position: absolute;
+  left: -10000px;
+  opacity: 0;
+}
+
+
+
+
+
+/*
+this section controls the division of the slider
+if you have 2 options = 50%, 3 options = 33% and so on
+but also the selected input matters. (input-1)*percentage
+you'll also need to add a new entry for the new option
+to do so just copy the last entry and change the numbers to [new highest]
+and also make sure to set left: xx% correctly
+*/
+.container > input:disabled:nth-child(1) ~ button:nth-of-type(1) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(1):checked ~ button:nth-of-type(1):after,
+.container > input:nth-child(1):checked ~ button:nth-of-type(1):before {
+  opacity: 1;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(1):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(1):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(1) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(1) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(2):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(2):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(2) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(2) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(3):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(3):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(3) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(3) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(4):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(4):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(5):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(5):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(6):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(6):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(7):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(7):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 0;
+}
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(1):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 0;
+}
+
+
+/* entry #2 */
+.container > input:disabled:nth-child(2) ~ button:nth-of-type(2) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(2):checked ~ button:nth-of-type(2):after,
+.container > input:nth-child(2):checked ~ button:nth-of-type(2):before {
+  opacity: 1;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(2):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(2):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(2) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(2) ~ button:before {
+  left: 50%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(3):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(3):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(3) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(3) ~ button:before {
+  left: 33.33333%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(4):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(4):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:before {
+  left: 25%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(5):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(5):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:before {
+  left: 20%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(6):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(6):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:before {
+  left: 16.66%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(7):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(7):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:before {
+  left: 14.28%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 12.5%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 11.1111%;
+}
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(2):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 10%;
+}
+
+/* entry #3 */
+.container > input:disabled:nth-child(3) ~ button:nth-of-type(3) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(3):checked ~ button:nth-of-type(3):after,
+.container > input:nth-child(3):checked ~ button:nth-of-type(3):before {
+  opacity: 1;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(3):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(3):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(3) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(3) ~ button:before {
+  left: 66.66667%;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(4):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(4):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:before {
+  left: 50%;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(5):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(5):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:before {
+  left: 40%;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(6):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(6):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:before {
+  left: 33.3333%;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(7):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(7):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:before {
+  left: 28.57%;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 25%;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 22.2222%;
+}
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(3):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 20%;
+}
+
+/* entry #4 */
+.container > input:disabled:nth-child(4) ~ button:nth-of-type(4) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(4):checked ~ button:nth-of-type(4):after,
+.container > input:nth-child(4):checked ~ button:nth-of-type(4):before {
+  opacity: 1;
+}
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(4):after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(4):before,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(4) ~ button:before {
+  left: 75%;
+}
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(5):after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(5):before,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:before {
+  left: 60%;
+}
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(6):after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(6):before,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:before {
+  left: 50%;
+}
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(7):after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(7):before,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:before {
+  left: 42.86%;
+}
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 37.5%;
+}
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 33.333%;
+}
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(4):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 30%;
+}
+
+/* entry #5 */
+.container > input:disabled:nth-child(5) ~ button:nth-of-type(5) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(5):checked ~ button:nth-of-type(5):after,
+.container > input:nth-child(5):checked ~ button:nth-of-type(5):before {
+  opacity: 1;
+}
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(5):after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(5):before,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(5) ~ button:before {
+  left: 80%;
+}
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(6):after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(6):before,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:before {
+  left: 66.6667%;
+}
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(7):after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(7):before,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:before {
+  left: 57.14%;
+}
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 50%;
+}
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 44.4444%;
+}
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(5):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 40%;
+}
+
+/* entry #6 */
+.container > input:disabled:nth-child(6) ~ button:nth-of-type(6) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(6):checked ~ button:nth-of-type(6):after,
+.container > input:nth-child(6):checked ~ button:nth-of-type(6):before {
+  opacity: 1;
+}
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(6):after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(6):before,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(6) ~ button:before {
+  left: 83.3333%;
+}
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(7):after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(7):before,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:before {
+  left: 71.43%;
+}
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 62.5%;
+}
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 55.56%;
+}
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(6):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 50%;
+}
+
+/* entry #7 */
+.container > input:disabled:nth-child(7) ~ button:nth-of-type(7) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(7):checked ~ button:nth-of-type(7):after,
+.container > input:nth-child(7):checked ~ button:nth-of-type(7):before {
+  opacity: 1;
+}
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(7):after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(7):before,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(7) ~ button:before {
+  left: 85.71%;
+}
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 75%;
+}
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 66.6667%;
+}
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(7):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 60%;
+}
+
+/* entry #8 */
+.container > input:disabled:nth-child(8) ~ button:nth-of-type(8) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(8):checked ~ button:nth-of-type(8):after,
+.container > input:nth-child(8):checked ~ button:nth-of-type(8):before {
+  opacity: 1;
+}
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(8):after,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(8):before,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(8) ~ button:before {
+  left: 87.5%;
+}
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 77.7778%;
+}
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(8):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 70%;
+}
+
+/* entry #9 */
+.container > input:disabled:nth-child(9) ~ button:nth-of-type(9) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(9):checked ~ button:nth-of-type(9):after,
+.container > input:nth-child(9):checked ~ button:nth-of-type(9):before {
+  opacity: 1;
+}
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(9):after,
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(9):before,
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(9) ~ button:before {
+  left: 88.8889%;
+}
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(9):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 80%;
+}
+
+/* entry #10 */
+.container > input:disabled:nth-child(10) ~ button:nth-of-type(10) {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.container > input:nth-child(10):checked ~ button:nth-of-type(10):after,
+.container > input:nth-child(10):checked ~ button:nth-of-type(10):before {
+  opacity: 1;
+}
+.container > input:nth-child(10):checked ~ button:first-of-type:nth-last-of-type(10):after,
+.container > input:nth-child(10):checked ~ button:first-of-type:nth-last-of-type(10):before,
+.container > input:nth-child(10):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > input:nth-child(10):checked ~ button:first-of-type:nth-last-of-type(10) ~ button:before {
+  left: 90%;
+}
+
+/* this section controls the size of the options for each number of total options */
+.container > button:first-of-type:nth-last-of-type(1),
+.container > button:first-of-type:nth-last-of-type(1):after,
+.container > button:first-of-type:nth-last-of-type(1):before,
+.container > button:first-of-type:nth-last-of-type(1) ~ button,
+.container > button:first-of-type:nth-last-of-type(1) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(1) ~ button:before {
+  width: 100%;
+}
+.container > button:first-of-type:nth-last-of-type(2),
+.container > button:first-of-type:nth-last-of-type(2):after,
+.container > button:first-of-type:nth-last-of-type(2):before,
+.container > button:first-of-type:nth-last-of-type(2) ~ button,
+.container > button:first-of-type:nth-last-of-type(2) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(2) ~ button:before {
+  width: 50%;
+}
+.container > button:first-of-type:nth-last-of-type(3),
+.container > button:first-of-type:nth-last-of-type(3):after,
+.container > button:first-of-type:nth-last-of-type(3):before,
+.container > button:first-of-type:nth-last-of-type(3) ~ button,
+.container > button:first-of-type:nth-last-of-type(3) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(3) ~ button:before {
+  width: 33.33333%;
+}
+.container > button:first-of-type:nth-last-of-type(4),
+.container > button:first-of-type:nth-last-of-type(4):after,
+.container > button:first-of-type:nth-last-of-type(4):before,
+.container > button:first-of-type:nth-last-of-type(4) ~ button,
+.container > button:first-of-type:nth-last-of-type(4) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(4) ~ button:before {
+  width: 25%;
+}
+.container > button:first-of-type:nth-last-of-type(5),
+.container > button:first-of-type:nth-last-of-type(5):after,
+.container > button:first-of-type:nth-last-of-type(5):before,
+.container > button:first-of-type:nth-last-of-type(5) ~ button,
+.container > button:first-of-type:nth-last-of-type(5) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(5) ~ button:before {
+  width: 20%;
+}
+.container > button:first-of-type:nth-last-of-type(6),
+.container > button:first-of-type:nth-last-of-type(6):after,
+.container > button:first-of-type:nth-last-of-type(6):before,
+.container > button:first-of-type:nth-last-of-type(6) ~ button,
+.container > button:first-of-type:nth-last-of-type(6) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(6) ~ button:before {
+  width: 16.6667%;
+}
+.container > button:first-of-type:nth-last-of-type(7),
+.container > button:first-of-type:nth-last-of-type(7):after,
+.container > button:first-of-type:nth-last-of-type(7):before,
+.container > button:first-of-type:nth-last-of-type(7) ~ button,
+.container > button:first-of-type:nth-last-of-type(7) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(7) ~ button:before {
+  width: 14.2857%;
+}
+.container > button:first-of-type:nth-last-of-type(8),
+.container > button:first-of-type:nth-last-of-type(8):after,
+.container > button:first-of-type:nth-last-of-type(8):before,
+.container > button:first-of-type:nth-last-of-type(8) ~ button,
+.container > button:first-of-type:nth-last-of-type(8) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(8) ~ button:before {
+  width: 12.5%;
+}
+.container > button:first-of-type:nth-last-of-type(9),
+.container > button:first-of-type:nth-last-of-type(9):after,
+.container > button:first-of-type:nth-last-of-type(9):before,
+.container > button:first-of-type:nth-last-of-type(9) ~ button,
+.container > button:first-of-type:nth-last-of-type(9) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(9) ~ button:before {
+  width: 11.1111%;
+}
+.container > button:first-of-type:nth-last-of-type(10),
+.container > button:first-of-type:nth-last-of-type(10):after,
+.container > button:first-of-type:nth-last-of-type(10):before,
+.container > button:first-of-type:nth-last-of-type(10) ~ button,
+.container > button:first-of-type:nth-last-of-type(10) ~ button:after,
+.container > button:first-of-type:nth-last-of-type(10) ~ button:before {
+  width: 10%;
+}
+
+.container > button {
+  display: inline-block;
+  padding: 0 0.71em;
+  cursor: pointer;
+  float: left;
+  line-height: 3em;
+  font-style: inherit;
+  font-weight: inherit;
+  text-decoration: inherit;
+  -moz-transition-property: none;
+  -o-transition-property: none;
+  -webkit-transition-property: none;
+  transition-property: none;
+  -moz-transition-duration: inherit;
+  -o-transition-duration: inherit;
+  -webkit-transition-duration: inherit;
+  transition-duration: inherit;
+  -moz-transition-timing-function: inherit;
+  -o-transition-timing-function: inherit;
+  -webkit-transition-timing-function: inherit;
+  transition-timing-function: inherit;
+}
+.container > button:before,
+.container > button:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.container > button:after {
+  @include roboto-medium;
+  color: white;
+  content: attr(data-value);
+  text-align: center;
+  padding: inherit;
+  z-index: 10;
+  font-style: inherit;
+  text-decoration: inherit;
+  font-weight: inherit;
+  opacity: 0;
+  -moz-transition-property: opacity, left;
+  -o-transition-property: opacity, left;
+  -webkit-transition-property: opacity, left;
+  transition-property: opacity, left;
+  -moz-transition-duration: inherit;
+  -o-transition-duration: inherit;
+  -webkit-transition-duration: inherit;
+  transition-duration: inherit;
+  -moz-transition-timing-function: inherit;
+  -o-transition-timing-function: inherit;
+  -webkit-transition-timing-function: inherit;
+  transition-timing-function: inherit;
+}
+.container > button:after,
+.container > button {
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.container > button:before {
+  content: "";
+  color: inherit;
+  background: currentColor;
+  -moz-transition-property: left;
+  -o-transition-property: left;
+  -webkit-transition-property: left;
+  transition-property: left;
+  -moz-transition-duration: inherit;
+  -o-transition-duration: inherit;
+  -webkit-transition-duration: inherit;
+  transition-duration: inherit;
+  -moz-transition-timing-function: inherit;
+  -o-transition-timing-function: inherit;
+  -webkit-transition-timing-function: inherit;
+  transition-timing-function: inherit;
+}
+
+.container.italic,
+.container .italic {
+  font-style: italic;
+}
+.container.bold,
+.container .bold {
+  font-weight: bold;
+}
+.container.underline,
+.container .underline {
+  text-decoration: underline;
+}
+.container.line-through,
+.container .line-through {
+  text-decoration: line-through;
+}
+

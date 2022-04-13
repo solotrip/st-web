@@ -1,0 +1,16 @@
+@import 'styles/mixins';
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: white;
+}
+
+.resetButton {
+  cursor: pointer;
+}

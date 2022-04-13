@@ -1,0 +1,35 @@
+@import 'styles/mixins';
+
+
+.listItem {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.itemName {
+  font-size: 16px;
+  margin: 8px;
+}
+
+.addButton {
+  background-color: transparent;
+  color: $primary-color;
+  border-radius: 16px;
+  width: 70px;
+  height: 28px;
+  border: 1px solid $primary-color;
+  margin: 8px;
+}
+
+.removeButton {
+  background-color: $primary-color;
+  color: $white;
+  border-radius: 16px;
+  width: 70px;
+  height: 28px;
+  border: 1px solid $primary-color;
+  margin: 8px;
+}

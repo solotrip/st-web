@@ -1,0 +1,43 @@
+@import 'styles/mixins';
+
+.wrapper {
+  display: flex;
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  @include xs-to-md {
+    display: none;
+  }
+}
+.staticWrapper { 
+  display: flex;
+  position: relative;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 1000px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  @include xs-to-md {
+    display: none;
+  }
+}
+
+.element {
+  flex: 1;
+  margin: 2px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.element:hover {
+  color: #3cafeb;
+}

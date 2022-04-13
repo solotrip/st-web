@@ -1,0 +1,162 @@
+@import 'styles/mixins';
+
+.expanded {
+  width: 100%;
+  @include md-to-xl {
+    height: 130px;
+
+  }
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
+}
+
+.navbarFixed {
+  z-index: 3;
+  height: 58px;
+  width: 100%;
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
+}
+
+.navbarFixedIos {
+  height: 58px;
+  display: flex;
+  margin-top: 40px;
+  justify-content: center;
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
+}
+
+.actions {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 584px;
+  padding: 4px 16px;
+  flex: 1;
+  @include md-to-lg {
+    max-width: 450px;
+  }
+  outline: none;
+   box-shadow: none;
+   -webkit-tap-highlight-color: transparent;
+}
+
+.actionIcon {
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  margin: 0 8px;
+  fill: white;
+}
+
+.editSearch {
+  width: calc(100vw - 72px);
+  max-width: 600px;
+  max-height: 48px;
+  background: $card-bg-color;
+  border-radius: 10px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  transition: all 0.3s;
+  transition-timing-function: ease-out;
+  color: $sub-text-color;
+
+  &.exp {
+    width: 100%;
+    max-height: 150px;
+    height: fit-content;
+  }
+}
+
+.withBack {
+  width: calc(100vw - 102px);
+}
+
+.searchIcon, .clearIcon {
+  font-size: 24px;
+  flex: 0 0 auto;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+.clearIcon {
+  &:hover {
+    background: $highlight-bg-color;
+    border-radius: 50%;
+  }
+}
+
+.query {
+  flex-wrap: wrap;
+  height: 100%;
+  overflow: hidden;
+  &.exp {
+    flex-wrap: wrap;
+    .prefix {
+      @include xs-to-sm {
+        display: inline;
+      }
+    }
+  }
+  .prefix {
+    @include xs-to-lg {
+      display: none;
+    }
+  }
+}
+
+.bell {
+  margin-top: 3px;
+}
+
+.fromLink {
+  margin: 5px;
+  padding: 16px;
+
+  font-size: 18px;
+  text-align: start;
+  background: $primary-color;
+  color: $text-color;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    font-size: 24px;
+  }
+
+  transition: height 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.expandedElements {
+  margin-left: 12px;
+  display: flex;
+  z-index: 3;
+  flex-direction: column;
+  position: absolute;
+  transition-timing-function: ease-in;
+  @include md-to-xl {
+    flex-direction: row;
+  }
+
+}
+
+.expandedElementsHidden {
+  margin-left: 12px;
+  position: absolute;
+  display: flex;
+  transition-timing-function: ease-out;
+  @include md-to-xl {
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,57 @@
+@import 'styles/mixins';
+
+.input {
+  flex: 1;
+  color: $text-color;
+  height: 100%;
+  padding: 10px 8px 10px 8px;
+  min-width: 40%;
+  font-size: 16px;
+  background: none;
+  border: none;
+  line-height: 100%;
+}
+
+.filled {
+  background: $highlight-bg-color;
+  border-radius: 16px;
+  border: none;
+
+  > .input {
+    padding: 10px 12px 10px 12px;
+  }
+
+  &.error {
+    border: 1px solid $warning-color;
+    animation: shake 0.2s ease-in-out 0s 2;
+    > .input {
+      color: $warning-color;
+    }
+  }
+}
+
+.errorText {
+  @include roboto-light;
+  font-size: 16px;
+  color: $warning-color;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: none;
+  margin: 4px 0;
+
+  &:not(.filled) {
+    border-bottom: 1px solid $border-color;
+  }
+}
+
+
+@keyframes shake {
+  0% { margin-left: 0; }
+  25% { margin-left: 0.5rem; }
+  75% { margin-left: -0.5rem; }
+  100% { margin-left: 0; }
+}
