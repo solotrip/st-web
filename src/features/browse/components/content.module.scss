@@ -9,6 +9,7 @@
   @include xs-to-sm {
     justify-content: center;
   }
+
 }
 
 .queries {
@@ -40,27 +41,71 @@
 
 // List Item Styles
 
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  background-color: $border-color;
+  width: 312px;
+  height: 338px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
 .card{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-color: $card-content;
+
   background-color: $card-content-browse;
-  border-style: solid;
-  width: 300px;
-  min-width: 300px;
-  max-width: 300px;
-  border-radius: 15px;
-  padding: 12px;
-  height: unset !important;
+  width: 306px;
+  min-width: 306px;
+  max-width: 306px;
+  border-radius: 10px;
+  height: 332px;
+
+}
+
+.lower {
+  @extend .textShadow;
+  margin-top: -204px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 80%);
+  display: flex;
+  flex-direction: column;
+  height: 204px;
+  width: 306px;
+z-index: 999;
+//background-color: deeppink;
+border-radius: 10px;
+justify-content: flex-end;
+padding-bottom: 10px;
+line-height: 30px;
+
+
 }
 
 .info {
+  @include roboto-medium;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: row;
-  margin: 12px 0;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 400;
   align-items: center;
+  padding-bottom: 20px;
+  padding-left: 10px;
+} 
+
+.infoDates{
+  @include roboto-medium;
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+
+  align-items: center;
+  padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 .icon {
@@ -71,13 +116,8 @@
 }
 
 .image {
-  width: 100%;
-  height: 150px;
-  margin-bottom: 8px;
-  * {
-    margin: 0;
-    border-radius: 5px;
-  }
+  width: 306px;
+  height: 332px;
 }
 
 .showDetails {
@@ -94,7 +134,8 @@
 }
 
 .link{
-  outline: none;
-  box-shadow: none;
-  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  z-index: 999;
+  flex-direction: column;
+  
 }

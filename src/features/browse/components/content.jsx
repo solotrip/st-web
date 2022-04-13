@@ -10,53 +10,29 @@ import { Link } from 'react-router-dom'
 import qs from 'qs'
 
 const ListItem = ({ name, location, startDate, endDate, link, image, image_hash }) => (
-  <>
+  <Link className={styles.wrapper} to={link}>
     {image_hash && (
       <Image
-        src={'https://ik.imagekit.io/stmedia/browse/' + image_hash + '?tr=w-270,h-150'}
+        src={'https://ik.imagekit.io/stmedia/browse/' + image_hash + '?tr=w-612,h-664'}
         srcsetProvided={true}
-        srcset={`https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-270,h-150,
-                             https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-340,h-300 2x,
-                             https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-810,h-450 3x`}
+        srcset={`https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-612,h-664,
+                             https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-1224,h-1328 2x,
+                             https://ik.imagekit.io/stmedia/browse/${image_hash}?tr=w-1836,h-1992 3x`}
         className={styles.image}
-        width={300}
-        height={150}
+        width={306}
+        height={332}
         alt={name}
+        alwaysRounded={true}
       />
     )}
-    {name && (
-      <div className={styles.info}>
-        <div className={styles.icon}>
-          <EventsIcon />
+    <div className={styles.lower}>
+      {name && (
+        <div className={styles.info}>
+          <div>{name}</div>
         </div>
-        <div>{name}</div>
-      </div>
-    )}
-    {(startDate || endDate) && (
-      <div className={styles.info}>
-        <div className={styles.icon}>
-          {' '}
-          <Calendar />
-        </div>
-        <div>
-          {formatAsMonthDay(startDate)}
-          {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}
-        </div>
-      </div>
-    )}
-    {location && (
-      <div className={styles.info}>
-        <div className={styles.icon}>
-          <Location />
-        </div>
-        <div>{location}</div>
-      </div>
-    )}
-
-    <Link className={styles.link} to={link}>
-      <button className={styles.showDetails}>Discover</button>
-    </Link>
-  </>
+      )}
+    </div>
+  </Link>
 )
 
 const Content = ({ items, recentQueries, filtersDict, locations }) => {
@@ -88,7 +64,7 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
           key={`hl-group-${group[0].category}`}
           title={group[0].category}
           items={group.map(g => <ListItem {...g} />)}
-          itemClassName={styles.card}
+          itemClassName={styles.wrapper}
         />
       ))}
     </div>

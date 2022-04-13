@@ -13,6 +13,7 @@
   left: 0;
   object-fit: cover;
   object-position: center center;
+  
 
 }
 .imageRounded {
@@ -56,4 +57,5 @@
   width: 100%;
   overflow: hidden;
   background-color: $highlight-bg-color;
+  border-radius: 10px;
 }
