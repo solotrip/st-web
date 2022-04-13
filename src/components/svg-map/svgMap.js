@@ -57,12 +57,17 @@ const SvgMap = ({
     )
 
     var backgroundSeries = chart.series.unshift(
-      am5map.MapPolygonSeries.new(root, {})
+      am5map.MapPolygonSeries.new(root, {
+        width: am5.p100,
+        height: am5.p100
+      })
     )
 
     backgroundSeries.mapPolygons.template.setAll({
       fill: bgColor,
-      stroke: bgColor
+      stroke: bgColor,
+      width: am5.p100,
+      height: am5.p100
     })
 
     backgroundSeries.data.push({
