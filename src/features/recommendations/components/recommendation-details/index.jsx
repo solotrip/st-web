@@ -167,6 +167,22 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.elementText}>{weatherText}</div>
           </div>
         )}
+        {tripdays &&
+          ((tripdays.min_days && tripdays.max_days) || tripdays.ideal_days) && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Calendar />
+              </div>
+              <div className={styles.elementText}>
+                {tripdays.min_days && tripdays.max_days
+                  ? tripdays.min_days !== tripdays.max_days
+                    ? `Most travelers spend ${tripdays.min_days} - ${tripdays.max_days} days. `
+                    : `Most travelers spend ${tripdays.min_days} days. `
+                  : tripdays.ideal_days ? `Most travelers spend ${tripdays.ideal_days} days. ` : ''}
+              </div>
+            </div>
+        )}
         {maskText && (
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
@@ -212,19 +228,30 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
           </div>
         )}
-        {tripdays &&
-          ((tripdays.min_days && tripdays.max_days) || tripdays.ideal_days) && (
+
+        {recommendation['country'] &&
+          recommendation['country']['restrictions'] &&
+          recommendation['country']['restrictions']['Health Check Up on Arrival'] && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Calendar />
+                <Quarantine />
               </div>
               <div className={styles.elementText}>
-                {tripdays.min_days && tripdays.max_days
-                  ? tripdays.min_days !== tripdays.max_days
-                    ? `Most travelers spend ${tripdays.min_days} - ${tripdays.max_days} days. `
-                    : `Most travelers spend ${tripdays.min_days} days. `
-                  : tripdays.ideal_days ? `Most travelers spend ${tripdays.ideal_days} days. ` : ''}
+                {recommendation['country']['restrictions']['Health Check Up on Arrival']}
+              </div>
+            </div>
+        )}
+        {recommendation['country'] &&
+          recommendation['country']['restrictions'] &&
+          recommendation['country']['restrictions']['Covid 19 negative certificate'] && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Vaccine />
+              </div>
+              <div className={styles.elementText}>
+                {recommendation['country']['restrictions']['Covid 19 negative certificate']}
               </div>
             </div>
         )}
