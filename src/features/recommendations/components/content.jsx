@@ -5,7 +5,7 @@ import Recommendation from './recommendation/index'
 import SidePanel from './sidePanel'
 import RecommendationDetails from './recommendation-details'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { isBrowser } from 'react-device-detect'
+import { isBrowser, isTablet } from 'react-device-detect'
 import _get from 'lodash/get'
 import qs from 'qs'
 
@@ -194,7 +194,7 @@ const Content = ({
           </div>
         ))}
       {mapEnabled &&
-        isBrowser &&
+        (isBrowser || isTablet) &&
         !loading &&
         recommendations.length > 0 && (
           <SidePanel

@@ -45,10 +45,10 @@ const WishlistContainer = () => {
         />
       )}
       <Content
-        loading={loading || profileLoading}
+        loading={loading}
         // Put wishlist id in recommendation data
         // so that we can use it to get query and add to wishlist actions
-        recommendations={recommendations}
+        recommendations={!loading && recommendations}
         user={user}
         queryFunction={recommendation => ({
           query: recommendation && wishlist[recommendation.recommendationId].query,
