@@ -19,7 +19,8 @@ const Table = ({
   destinationCities,
   queryString,
   basePath,
-  DOMroot = 'chartdiv4'
+  DOMroot = 'chartdiv4',
+  showContent = true
 }) => {
   const history = useHistory()
   const chartRef = useRef(null)
@@ -141,18 +142,20 @@ const Table = ({
       })
     })
 
-    series.bullets.push(function () {
-      return am5.Bullet.new(root, {
-        sprite: am5.Label.new(root, {
-          populateText: true,
-          centerX: am5.p50,
-          centerY: am5.p50,
-          text: '{value}',
-          fill: am5.color(0xffffff),
-          oversizedBehavior: 'fit'
+    if (showContent) {
+      series.bullets.push(function () {
+        return am5.Bullet.new(root, {
+          sprite: am5.Label.new(root, {
+            populateText: true,
+            centerX: am5.p50,
+            centerY: am5.p50,
+            text: '{value}',
+            fill: am5.color(0xffffff),
+            oversizedBehavior: 'fit'
+          })
         })
       })
-    })
+    }
 
     series.data.setAll(data)
 

@@ -2,7 +2,11 @@ import React, { useCallback, useMemo, useState, useEffect } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import { SheetWrapper } from 'components'
 import { useSelector } from 'react-redux'
-import { OPTIONS as options, TABLE_CATEGORIES as valuesY } from 'constants/binder'
+import {
+  OPTIONS as options,
+  TABLE_CATEGORIES as valuesY,
+  RESTRICTION_CATEGORIES
+} from 'constants/binder'
 import { recommendationsSelector } from '../../slice'
 import qs from 'qs'
 import { useQuery } from 'utils/hooks/use-query'
@@ -24,6 +28,7 @@ let recommendationProc = []
 let min = null
 let max = null
 let tableData = []
+let restrictionData = []
 let valuesX = []
 
 const AnalyticsContainer = () => {
@@ -160,6 +165,12 @@ const AnalyticsContainer = () => {
     verygood: am5.color(0x69f084)
   }
 
+  var restrictionColors = {
+    closed: am5.color(0xee77a2),
+    restricted: am5.color(0xdae085),
+    open: am5.color(0x69f084)
+  }
+
   useEffect(() => {
     recommendationProc = recommendations.map(recommendation => {
       if (selectedOption.value === 'hotel-prices') {
@@ -196,6 +207,180 @@ const AnalyticsContainer = () => {
         bulletSettings: {
           src: recoImage
         }
+      }
+    })
+
+    const rd = recommendations.map(recommendation => {
+      if (recommendation['country'] && recommendation['country']['restrictions']) {
+        Object.keys(recommendation['country']['restrictions']).forEach((key, i) => {
+          let x = recommendation.name
+          let y = null
+          let columnSettings = {}
+          let value = null
+
+          let restriction = Object.values(recommendation['country']['restrictions'])[i]
+
+          value = restriction
+
+          if (key === 'restaurant_status') {
+            y = 'Restaurant Status'
+            if (restriction === 'RESTRICTIONS') {
+              columnSettings = {
+                fill: restrictionColors.restricted
+              }
+            } else if (restriction === 'OPEN') {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === 'CLOSED') {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'bar_status') {
+            y = 'Bar Status'
+            if (restriction === 'RESTRICTIONS') {
+              columnSettings = {
+                fill: restrictionColors.restricted
+              }
+            } else if (restriction === 'OPEN') {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === 'CLOSED') {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'mask_status') {
+            y = 'Mask Status'
+            if (restriction === 'RECOMMENDED') {
+              columnSettings = {
+                fill: restrictionColors.restricted
+              }
+            } else if (restriction === 'NOT REQUIRED') {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === 'REQUIRED') {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'arrival_quarantine_status') {
+            y = 'Arrival Quarantine'
+            if (restriction === false) {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === true) {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'open_for_vaccinated') {
+            y = 'Open for Vaccinated'
+            if (restriction === false) {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            } else if (restriction === true) {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            }
+          } else if (key === 'vaccinated_arrival_test_required') {
+            y = 'Test for Vaccinated'
+            if (restriction === false) {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === true) {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'vaccinated_arrival_quarantine_required') {
+            y = 'Quarantine for Vaccinated'
+            if (restriction === false) {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === true) {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'arrival_test_required') {
+            y = 'Required Test'
+            if (restriction === false) {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === true) {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'arrival_quarantine_required') {
+            y = 'Required Quarantine'
+            if (restriction === false) {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === true) {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'Public Transport') {
+            y = 'Public Transport'
+            if (restriction === 'Partial Restrictions') {
+              columnSettings = {
+                fill: restrictionColors.restricted
+              }
+            } else if (restriction === 'Operating') {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === 'Closed') {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'Dining and Bars') {
+            y = 'Dining and Bars'
+            if (restriction === 'Partially Open') {
+              columnSettings = {
+                fill: restrictionColors.restricted
+              }
+            } else if (restriction === 'Open') {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === 'Closed') {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          } else if (key === 'Tourist Attractions') {
+            y = 'Tourist Attractions'
+            if (restriction === 'Partially Open') {
+              columnSettings = {
+                fill: restrictionColors.restricted
+              }
+            } else if (restriction === 'Open') {
+              columnSettings = {
+                fill: restrictionColors.open
+              }
+            } else if (restriction === 'Closed') {
+              columnSettings = {
+                fill: restrictionColors.closed
+              }
+            }
+          }
+          restrictionData.push({ x: x, y: y, columnSettings: columnSettings, value: value })
+        })
       }
     })
 
@@ -407,7 +592,8 @@ const AnalyticsContainer = () => {
                   recommendations &&
                   recommendations.length > 0 &&
                   activeRecommendationId !== null &&
-                  selectedOption.value !== 'cost-of-living' && (
+                  selectedOption.value !== 'cost-of-living' &&
+                  selectedOption.value !== 'restrictions' && (
                     <Chart
                       data={recommendationProc}
                       type={selectedOption.value}
@@ -425,6 +611,20 @@ const AnalyticsContainer = () => {
                       colors={colors}
                       type={selectedOption.value}
                       DOMroot="chartdiv11"
+                    />
+                )}
+                {!loadingRecommendations &&
+                  recommendations &&
+                  recommendations.length > 0 &&
+                  selectedOption.value === 'restrictions' && (
+                    <Table
+                      data={restrictionData}
+                      valuesY={RESTRICTION_CATEGORIES}
+                      valuesX={valuesX}
+                      colors={restrictionColors}
+                      type={selectedOption.value}
+                      showContent={false}
+                      DOMroot="chartdiv24"
                     />
                 )}
               </div>

@@ -2,10 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import styles from './horizontal-list.module.scss'
-import {
-  IosArrowLtr24Regular,
-  IosArrowRtl24Regular
-} from '@fluentui/react-icons'
+import { IosArrowLtr24Regular, IosArrowRtl24Regular } from '@fluentui/react-icons'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react/swiper-react'
 
 const ControlButton = ({ children, isNext }) => {
@@ -13,9 +10,7 @@ const ControlButton = ({ children, isNext }) => {
   const onClick = () => {
     isNext ? swiper.slideNext(1000) : swiper.slidePrev(1000)
   }
-  return <button onClick={onClick}>
-    {children}
-  </button>
+  return <button onClick={onClick}>{children}</button>
 }
 
 const HorizontalList = ({
@@ -24,11 +19,11 @@ const HorizontalList = ({
   className,
   itemClassName,
   slidesPerView = 'auto',
+  isBrowse = false,
   ...rest
 }) => {
-
-  const hideControls = (slidesPerView !== 'auto'
-    && items.length <= slidesPerView) || items.length <= 1
+  const hideControls =
+    (slidesPerView !== 'auto' && items.length <= slidesPerView) || items.length <= 1
   return (
     <Swiper
       spaceBetween={16}
@@ -37,21 +32,17 @@ const HorizontalList = ({
       rewind
       {...rest}
     >
-
-      <div className={styles.header} slot="container-start">
+      <div className={isBrowse ? styles.headerBrowse : styles.header} slot="container-start">
         {title && <h2 className={styles.title}>{title}</h2>}
-        <div
-          className={cn(styles.arrows, { [styles.hidden]: hideControls })}
-        >
+        <div className={cn(styles.arrows, { [styles.hidden]: hideControls })}>
           <ControlButton>
-            <IosArrowLtr24Regular className={styles.arrow}/>
+            <IosArrowLtr24Regular className={styles.arrow} />
           </ControlButton>
           <ControlButton isNext>
-            <IosArrowRtl24Regular className={styles.arrow}/>
+            <IosArrowRtl24Regular className={styles.arrow} />
           </ControlButton>
         </div>
       </div>
-
 
       {items.map(item => (
         <SwiperSlide
@@ -59,9 +50,9 @@ const HorizontalList = ({
           key={item.props['data-key'] || `swiper-${title || 'list'}-${item.props.name}`}
         >
           {item}
-        </SwiperSlide>))}
+        </SwiperSlide>
+      ))}
     </Swiper>
-
   )
 }
 
@@ -73,6 +64,5 @@ HorizontalList.propTypes = {
   className: PropTypes.string,
   itemClassName: PropTypes.string
 }
-
 
 export default HorizontalList

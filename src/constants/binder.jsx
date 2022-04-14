@@ -11,7 +11,8 @@ export const OPTIONS = [
   { value: 'airbnb-prices', label: 'Airbnb Prices' },
   { value: 'temperature', label: 'Temperature' },
   { value: 'trip-days', label: 'Tripdays' },
-  { value: 'cost-of-living', label: 'Cost of Living' }
+  { value: 'cost-of-living', label: 'Cost of Living' },
+  { value: 'restrictions', label: 'Restrictions' }
 ]
 
 export const TABLE_CATEGORIES = [
@@ -23,6 +24,21 @@ export const TABLE_CATEGORIES = [
   { category: 'Prepaid Card' },
   { category: 'Cinema Ticket' },
   { category: 'Taxi 1km' }
+]
+
+export const RESTRICTION_CATEGORIES = [
+  { category: 'Restaurant Status' },
+  { category: 'Bar Status' },
+  { category: 'Mask Status' },
+  { category: 'Arrival Quarantine' },
+  { category: 'Open for Vaccinated' },
+  { category: 'Test for Vaccinated' },
+  { category: 'Quarantine for Vaccinated' },
+  { category: 'Required Test' },
+  { category: 'Required Quarantine' },
+  { category: 'Public Transport' },
+  { category: 'Dining and Bars' },
+  { category: 'Tourist Attractions' }
 ]
 
 export const SUB_OPTIONS = [

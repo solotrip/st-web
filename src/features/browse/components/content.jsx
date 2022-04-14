@@ -22,7 +22,6 @@ const ListItem = ({ name, location, startDate, endDate, link, image, image_hash 
         width={306}
         height={332}
         alt={name}
-        alwaysRounded={true}
       />
     )}
     <div className={styles.lower}>
@@ -64,7 +63,8 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
           key={`hl-group-${group[0].category}`}
           title={group[0].category}
           items={group.map(g => <ListItem {...g} />)}
-          itemClassName={styles.wrapper}
+          itemClassName={styles.card}
+          isBrowse={true}
         />
       ))}
     </div>
