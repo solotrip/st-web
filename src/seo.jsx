@@ -54,7 +54,7 @@ const SEO = () => {
         name: 'Pulfy',
         legalName: 'Pulfy Technology Llc',
         url: 'http://www.pulfy.com',
-        logo: 'https://www.pulfy.com/app/image.png',
+        logo: 'https://www.pulfy.com/image.png',
         foundingDate: '2022',
         founders: [
       {
