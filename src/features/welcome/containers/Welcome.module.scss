@@ -42,9 +42,15 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, $bg-color 55%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, $bg-color 50%);
+    padding-bottom:20px;
     
     animation: fadeIn 2s ease-out;
+    @include sm-to-xl {
+      margin-bottom: -25px;
+    }
+    
+
 
   }
 
