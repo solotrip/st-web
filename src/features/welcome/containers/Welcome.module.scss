@@ -63,7 +63,15 @@
   }
 
   .logo { 
-    width: 150px;
+  height: 90px;
+  width: 270px;
+  margin: 16px;
+  
+  background-size: cover;
+  background-image: $logo-highlighted;
+  @include md-to-lg {
+    margin: 16px 8px;
+  }
   }
 
   .motto {

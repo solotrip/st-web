@@ -25,7 +25,7 @@ const WelcomeContainer = () => {
       </div>
       <div className={styles.upperContainer}>
         {' '}
-        <Logo className={styles.logo} />
+        <div className={styles.logo} />
         <div className={styles.lowerContainer}>
           <h1 className={styles.motto}>
             Get personalized travel recommendations, updates, restrictions and

@@ -13,9 +13,9 @@
   justify-content: center;
 
   svg {
-    width: 52px;
-    height: 60px;
-    animation: up-and-down 2s ease-in-out infinite;
+    width: 81px;
+    height: 61px;
+    animation: up-and-down 1s ease-in-out infinite;
     fill: $primary-color;
   }
 }
@@ -41,7 +41,7 @@
 
 @keyframes up-and-down {
   0% {
-    transform: translateY(-25px);
+    transform: translateY(-25px); 
   }
 
   50% {
@@ -50,5 +50,4 @@
   100% {
     transform: translateY(-25px);
   }
-
 }

@@ -73,6 +73,11 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
   const endMonth = dayjs(endDate).isValid() && getMonthName(endDate)
   const uniqueEvents = [...new Map(events.map(event => [event['eid'], event])).values()]
 
+  const openInNewTab = url => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
   return (
     <>
       {areaHasImage && (
@@ -254,6 +259,18 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 {recommendation['country']['restrictions']['Covid 19 negative certificate']}
               </div>
             </div>
+        )}
+        {recommendation['country']['restrictions']['Official links'] &&
+          recommendation['country']['restrictions']['Official links'].length > 0 &&
+          recommendation['country']['restrictions']['Official links'][0].link && (
+            <button
+              className={styles.slideText8}
+              onClick={() =>
+                openInNewTab(recommendation['country']['restrictions']['Official links'][0].link)
+              }
+            >
+              Check Information on Official Website
+            </button>
         )}
       </Card>
       <Card title="Status" type="Overview" className={styles.recommendationCard}>

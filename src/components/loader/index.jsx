@@ -6,8 +6,8 @@ const Loader = ({ loading = true, children }) => {
   return loading ? (
     <div className={styles.loader}>
       <div className={styles.logo}>
-        <Logo/>
-        <span className={styles.logoShadow}/>
+        <Logo />
+        <span className={styles.logoShadow} />
       </div>
     </div>
   ) : (
