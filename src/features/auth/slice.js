@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { isBrowser } from 'react-device-detect'
 import {
   clearTokens,
   initializeAuthentication,
@@ -96,8 +97,12 @@ export const logout = createAsyncThunk(
   async ({ history }, { dispatch }) => {
     await clearTokens()
     await FirebaseAuthentication.signOut()
-    history.replace('/')
-    history.go(0)
+    if (isBrowser) {
+      history.push('/login')
+    } else {
+      history.replace('/')
+      history.go(0)
+    }
   }
 )
 

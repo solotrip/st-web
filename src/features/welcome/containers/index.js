@@ -2,11 +2,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Welcome.module.scss'
-import { ReactComponent as Logo } from 'assets/images/logowithtext2.svg'
+import { isBrowser } from 'react-device-detect'
+import { useHistory } from 'react-router-dom'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { authSelector } from 'features/auth/slice'
 
 const WelcomeContainer = () => {
+  const history = useHistory()
+
+  const { error, isAuthenticated, isGuest, loading } = useSelector(authSelector)
+  console.log('state here:', { isGuest, isAuthenticated, loading })
+
+  function autoRedirect () {
+    if (isBrowser && !loading && isAuthenticated && !error) {
+      history.push('/browse')
+    } else if (isBrowser && !loading) {
+      history.push('/login')
+    }
+  }
   return (
     <div className={styles.container}>
+      {autoRedirect()}
       <div className={styles.videoContainer}>
         <video
           autoPlay
