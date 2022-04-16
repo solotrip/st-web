@@ -650,22 +650,32 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <div key={`activitiy-${activity}`} className={styles.centeredSlide}>
                   <Image
                     src={
-                      activity && activityImages[activity] && activityImages[activity].image_hash
+                      activity &&
+                      activityImages &&
+                      activityImages[activity] &&
+                      activityImages[activity].image_hash
                         ? 'https://ik.imagekit.io/stmedia/activities/' +
                           activityImages[activity].image_hash +
                           '?tr=w-278,h-180'
                         : ''
                     }
                     srcsetProvided={true}
-                    srcset={`https://ik.imagekit.io/stmedia/activities/${
+                    srcset={
+                      activity &&
+                      activityImages &&
+                      activityImages[activity] &&
                       activityImages[activity].image_hash
-                    }?tr=w-278,h-180,
+                        ? `https://ik.imagekit.io/stmedia/activities/${
+                          activityImages[activity].image_hash
+                        }?tr=w-278,h-180,
                              https://ik.imagekit.io/stmedia/activities/${
                                activityImages[activity].image_hash
                              }?tr=w-556,h-360 2x,
                              https://ik.imagekit.io/stmedia/activities/${
                                activityImages[activity].image_hash
-                             }?tr=w-834,h-540 3x`}
+                             }?tr=w-834,h-540 3x`
+                        : ''
+                    }
                     className={styles.slideImage2}
                     width={278}
                     height={180}
