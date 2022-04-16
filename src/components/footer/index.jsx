@@ -5,8 +5,7 @@ import { isIOS, isAndroid } from 'react-device-detect'
 
 //Change it later
 const appStoreLink = 'https://apps.apple.com/us/app/slack/id618783545'
-const playStoreLink =
-  'https://play.google.com/store/apps/details?id=com.Slack&hl=en&gl=US'
+const playStoreLink = 'https://play.google.com/store/apps/details?id=com.Slack&hl=en&gl=US'
 
 const appLink = isIOS ? appStoreLink : isAndroid ? playStoreLink : null
 
@@ -23,9 +22,13 @@ const Footer = ({ isStatic = false }) => {
       <button onClick={appDownloader} className={styles.element}>
         Download the App
       </button>
-      <button className={styles.element}>Pulfy for Business</button>
+      <a href="https://www.pulfy.com/pulfy-for-business/" className={styles.element}>
+        Pulfy for Business
+      </a>
       <button className={styles.element}>About Pulfy</button>
-      <button className={styles.element}>Privacy & Terms</button>
+      <a href=" https://www.pulfy.com/privacy-and-terms" className={styles.element}>
+        Privacy & Terms
+      </a>
     </div>
   )
 }
