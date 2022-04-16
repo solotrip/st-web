@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Card, Currency, Image, Temperature } from 'components'
 
 import styles from './recommendation-details.module.scss'
@@ -8,6 +9,7 @@ import dayjs from 'dayjs'
 
 import { MdIosShare, mdlik } from 'react-icons/md'
 import { BsHeart, BsHeartFill } from 'react-icons/bs'
+import qs from 'qs'
 
 import {
   Accommodation,
@@ -35,7 +37,7 @@ import useThemeState from 'utils/hooks/use-theme-state'
 
 const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted }) => {
   const [appTheme] = useThemeState()
-
+  const history = useHistory()
   const {
     name,
     sid,
@@ -81,6 +83,14 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     if (newWindow) newWindow.opener = null
   }
 
+  const openShare = () => {
+    console.log({ id: recommendation.id, query })
+    history.push({
+      pathname: '/recommendations/share/' + recommendation.id,
+      search: query.queryString
+    })
+  }
+
   return (
     <>
       {areaHasImage && (
@@ -117,7 +127,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <BsHeartFill className={styles.likeIcon} />
               )}
             </button>
-            <button className={styles.share}>
+            <button onClick={openShare} className={styles.share}>
               <MdIosShare className={styles.shareIcon} />
             </button>
           </div>
