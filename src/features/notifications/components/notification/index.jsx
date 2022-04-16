@@ -13,20 +13,21 @@ import qs from 'qs'
 
 const Notification = ({ notification }) => {
   const { content, body, data } = notification
+
   const subTitle =
     (data.type === NOTIFICATION_TYPES.RECOMMENDATION ||
       data.type === NOTIFICATION_TYPES.WISHLIST) &&
     content.new &&
     content.new.country ? (
         <>
-        <div>{content.new.country.emoji_flag}</div>{' '}
-        <div>{content.new.country.name}</div>
+        <div>{content.new.country.emoji_flag}</div> <div>{content.new.country.name}</div>
         </>
       ) : (
         <></>
       )
 
   const queryString = content.query
+
   return (
     <Card
       type={`${_capitalize(data.type)} Update`}
@@ -67,7 +68,14 @@ const Notification = ({ notification }) => {
       </div>
 
       <Link
-        to={{ pathname: '/recommendations', search: qs.stringify(queryString) }}
+        to={{
+          pathname: '/recommendations',
+          search:
+            qs.stringify(queryString) +
+            `&filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D=${
+              content.new.sid
+            }`
+        }}
       >
         <button className={styles.showDetails}>Show Details</button>
       </Link>

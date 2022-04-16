@@ -29,8 +29,6 @@ const SettingsContainer = ({ showLogout }) => {
   const isGuest = useSelector(isGuestSelector)
   const { data: user, loading: profileLoading } = useSelector(profileSelector)
 
-  console.log('settings:', { isGuest, user, profileLoading })
-
   const onPreferenceChanged = key => ({ value }) => {
     dispatch(updateLocalPreference({ key, value }))
   }
