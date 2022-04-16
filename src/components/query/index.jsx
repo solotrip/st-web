@@ -3,15 +3,12 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 import Tag from '../input/tag'
 import styles from './query.module.scss'
-import { MdAdd, MdEditCalendar, MdMyLocation } from 'react-icons/md'
+import { MdAdd, MdEditCalendar, MdMyLocation, MdFactCheck } from 'react-icons/md'
 import { coordsToQuery } from 'features/recommendations/containers/location/slice'
-import {
-  formatAsMonthDay,
-  formatDuration,
-  getMonthAbbreviation
-} from 'utils/date'
+import { formatAsMonthDay, formatDuration, getMonthAbbreviation } from 'utils/date'
 import _get from 'lodash/get'
 import _truncate from 'lodash/truncate'
+import countries from 'assets/data/countries.json'
 
 const Query = ({
   query,
@@ -25,34 +22,52 @@ const Query = ({
   prefixClassName,
   maxFiltersDisplayed = 2,
   maxMonths = 2,
-  locationNameMaxLength = 10
+  locationNameMaxLength = 15
 }) => {
   const navigate = path => {
     history.push({ pathname: path, search: location.search })
   }
 
+  function extractCountry(ISO) {
+    const country = countries.find(country => country.ISO === ISO)
+    console.log(country)
+    return country
+  }
+
+  const passes =
+    query.passports && query.passports.length > 0
+      ? query.passports.map(pass => {
+        const country = extractCountry(pass)
+        return {
+          value: 'passport: ' + country.flag + ' ' + country.name,
+          onClick: () => navigate('/recommendations/passport')
+        }
+      })
+      : []
+
   const tags = [
     {
-      value: _truncate(
-        _get(
-          locations[
-            coordsToQuery({
-              latitude: query.lat,
-              longitude: query.lon
-            })
-          ],
-          'name_en'
+      value:
+        'from:' +
+        _truncate(
+          _get(
+            locations[
+              coordsToQuery({
+                latitude: query.lat,
+                longitude: query.lon
+              })
+            ],
+            'name_en'
+          ),
+          { length: locationNameMaxLength }
         ),
-        { length: locationNameMaxLength }
-      ),
       onClick: () => navigate('/recommendations/location'),
       icon: MdMyLocation
     },
     {
       // prefix: 'For ',
       value:
-        (query.duration || query.weekendOnly) &&
-        formatDuration(query.duration, query.weekendOnly),
+        (query.duration || query.weekendOnly) && formatDuration(query.duration, query.weekendOnly),
       onClick: () => navigate('/recommendations/date'),
       icon: MdEditCalendar
     },
@@ -71,12 +86,11 @@ const Query = ({
         query.start &&
         (query.start === query.end
           ? formatAsMonthDay(query.start)
-          : `${formatAsMonthDay(query.start)} - ${formatAsMonthDay(
-            query.end
-          )}`),
+          : `${formatAsMonthDay(query.start)} - ${formatAsMonthDay(query.end)}`),
       onClick: () => navigate('/recommendations/date'),
       icon: MdEditCalendar
     },
+    ...passes,
 
     ...(query.filters
       ? query.filters.length > maxFiltersDisplayed
@@ -88,12 +102,12 @@ const Query = ({
         ]
         : query.filters.map(f => ({
           value:
-            filtersDict && filtersDict[f.id]
-              ? f.id === 'a'
-                ? f.variables.areaSids[0].charAt(0).toUpperCase() +
-              f.variables.areaSids[0].slice(1)
-                : filtersDict[f.id].name
-              : null,
+              filtersDict && filtersDict[f.id]
+                ? f.id === 'a'
+                  ? f.variables.areaSids[0].charAt(0).toUpperCase() +
+                    f.variables.areaSids[0].slice(1)
+                  : filtersDict[f.id].name
+                : null,
           onClick: () => navigate('/recommendations/filters')
         }))
       : [
@@ -108,21 +122,19 @@ const Query = ({
   return (
     <div className={cn(styles.container, className)}>
       {tags &&
-      tags.filter(t => t.value).map(t => (
-        <Tag
-          key={`search-tag-${t.value}`}
-          icon={t.icon}
-          onClick={enableClick ? t.onClick : undefined}
-          name={
-            <span className={styles.text}>
-                <b className={cn(styles.prefix, prefixClassName)}>
-                  {t.prefix || ''}
-                </b>
-              {t.value}
+        tags.filter(t => t.value).map(t => (
+          <Tag
+            key={`search-tag-${t.value}`}
+            icon={t.icon}
+            onClick={enableClick ? t.onClick : undefined}
+            name={
+              <span className={styles.text}>
+                <b className={cn(styles.prefix, prefixClassName)}>{t.prefix || ''}</b>
+                {t.value}
               </span>
-          }
-        />
-      ))}
+            }
+          />
+        ))}
     </div>
   )
 }
