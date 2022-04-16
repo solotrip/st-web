@@ -8,23 +8,74 @@
 
 .heart {
   margin-top: 7%;
-  margin-right: 2px;
-  width: 24px;
-  height: 24px;
-  background-image: $heart-not-selected;
+  margin-right: 3px;
+  padding: 2px;
+  width: 40px;
+  height: 40px;
+ // background-image: $heart-not-selected;
   background-repeat: no-repeat;
   display: flex;
+  background-color: $card-content-recommendation;
+  border-radius: 20px;
+  justify-content: center;
+  background-position: center;
+  box-shadow: $text-shadow;
+}
+
+.share {
+  margin-top: 7%;
+  
+  padding: 2px;
+  width: 40px;
+  height: 40px;
+
+  background-repeat: no-repeat;
+  display: flex;
+  background-color: $card-content-recommendation;
+  border-radius: 30px;
+  justify-content: center;
+  background-position: center;
+  box-shadow: $text-shadow;
+}
+
+.shareIcon{
+  
+  margin: auto;
+  width: 40px;
+  font-size: 23px;
+}
+
+.likeIconFilled{
+  
+  margin: auto;
+  width: 40px;
+  font-size: 23px;
+  color: rgb(240,119,162);
+}
+.likeIcon{
+  
+  margin: auto;
+  width: 40px;
+  font-size: 23px;
+  color: #667A8f;
 }
 
 .heartFilled {
-
-  margin-top: 6%;
-  
-  width: 30px;
-  height: 30px;
-  background-image: $heart-selected;
+  margin-right: 3px;
+  margin-top: 7%;
+  padding: 2px;
+  width: 40px;
+  height: 40px;
+ // background-image: $heart-selected;
   background-repeat: no-repeat;
   display: inline-block;
+  background-color: $card-content-recommendation;
+  border-radius: 20px;
+  justify-content: center;
+  background-position: center;
+  box-shadow: $text-shadow;
+  color: rgb(240,119,162);
+  align-content: center;
 }
 
 

@@ -6,6 +6,9 @@ import styles from './recommendation-details.module.scss'
 import activityImages from './activity-images.json'
 import dayjs from 'dayjs'
 
+import { MdIosShare, mdlik } from 'react-icons/md'
+import { BsHeart, BsHeartFill } from 'react-icons/bs'
+
 import {
   Accommodation,
   Attraction,
@@ -100,14 +103,23 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               {recommendation ? name : 'Go back to your recommendations'}
             </h1>
             <button
-              className={wishlisted ? styles.heartFilled : styles.heart}
+              className={styles.heart}
               onClick={() =>
                 toggleWishlist({
                   query: query.query,
                   recommendation
                 })
               }
-            />
+            >
+              {wishlisted ? (
+                <BsHeartFill className={styles.likeIconFilled} />
+              ) : (
+                <BsHeartFill className={styles.likeIcon} />
+              )}
+            </button>
+            <button className={styles.share}>
+              <MdIosShare className={styles.shareIcon} />
+            </button>
           </div>
           <div className={styles.description}>{description}</div>
         </div>
