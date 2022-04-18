@@ -42,15 +42,14 @@ const ShareContainer = () => {
     recommendationsObject &&
     activeRecommendationId &&
     recommendationsObject[activeRecommendationId] &&
-    recommendationsObject[activeRecommendationId].rcommendations
+    recommendationsObject[activeRecommendationId].recommendations
   ) {
     const recommendations = recommendationsObject[activeRecommendationId].recommendations
     console.log(recommendations)
-    const recommendationFound = recommendations.find(
-      r => '/recommendations/share/' + r.id === location.pathname
-    )
-    console.log(recommendationFound)
+    const recommendationFound = recommendations.find(r => location.pathname.includes(r.id))
+    console.log(' found:', recommendationFound)
     if (recommendationFound && recommendationFound.name) {
+      console.log('found: ', recommendationFound)
       areaName = recommendationFound.name
     }
   }
