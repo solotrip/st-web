@@ -34,8 +34,26 @@ const ShareContainer = () => {
   const query = useQuery()
   const history = useHistory()
   const location = useLocation()
+  let areaName = ''
 
-  console.log(' location is:', location)
+  console.log({ activeRecommendationId, recommendationsObject, location })
+
+  if (
+    recommendationsObject &&
+    activeRecommendationId &&
+    recommendationsObject[activeRecommendationId] &&
+    recommendationsObject[activeRecommendationId].rcommendations
+  ) {
+    const recommendations = recommendationsObject[activeRecommendationId].recommendations
+    console.log(recommendations)
+    const recommendationFound = recommendations.find(
+      r => '/recommendations/share/' + r.id === location.pathname
+    )
+    console.log(recommendationFound)
+    if (recommendationFound && recommendationFound.name) {
+      areaName = recommendationFound.name
+    }
+  }
 
   const onSubmit = () => {
     history.push({
@@ -57,13 +75,13 @@ const ShareContainer = () => {
       .trim()
       .replace(/\/share\//g, '/r/')
     if (option === 'mail') {
-      const body = `Here is the area\'s travel requirements, restrictions and events on Pulfy.%0DSee detailed recommendation on: ${encodedQuery}`
+      const body = `Here is the ${areaName}'s travel requirements, restrictions,activities and events on Pulfy.%0D .%0DSee detailed recommendation on: ${encodedQuery}`
       return body
     } else if (option === 'telegram' || option === 'facebook') {
-      const text = 'Here is the travel recommendation for you on Pulfy.'
+      const text = `Here is the ${areaName}'s travel requirements, restrictions,activities and events on Pulfy.`
       return { url: encodedQuery, text }
     } else if (option === 'reddit' || option === 'twitter') {
-      const text = 'Here is the area\'s travel requirements, restrictions and events on Pulfy.'
+      const text = `${areaName}'s travel requirements, restrictions,activities and events on Pulfy.`
       return { url: encodedQuery, text }
     } else if (option === 'linkedin') {
       return { url: encodedQuery }
@@ -79,7 +97,7 @@ const ShareContainer = () => {
       .replace(/(\r\n|\n|\r)/gm, '')
       .trim()
       .replace(/\/share\//g, '/r/')
-    const body = `Here is the events,restrictions, travel requirements of areax for you: https://www.pulfy.com${encodedQuery}`
+    const body = `Here is the events,activities, restrictions and travel requirements of ${areaName} for you: https://www.pulfy.com${encodedQuery}`
     return body
   }
 
