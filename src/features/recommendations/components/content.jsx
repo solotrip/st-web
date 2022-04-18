@@ -9,14 +9,7 @@ import { isBrowser, isTablet } from 'react-device-detect'
 import _get from 'lodash/get'
 import qs from 'qs'
 
-import {
-  MdAdd,
-  MdEditCalendar,
-  MdMyLocation,
-  MdBarChart,
-  MdMap,
-  MdOutlineStar
-} from 'react-icons/md'
+import { MdBarChart, MdMap, MdOutlineStar } from 'react-icons/md'
 
 const Content = ({
   recommendations,

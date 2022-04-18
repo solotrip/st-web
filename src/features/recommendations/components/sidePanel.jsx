@@ -12,6 +12,7 @@ import {
   RESTRICTION_CATEGORIES
 } from 'constants/binder'
 import { useSelector } from 'react-redux'
+import useThemeState from 'utils/hooks/use-theme-state'
 import { locationSelector } from '../containers/location/slice'
 
 let value = null
@@ -38,6 +39,8 @@ const SidePanel = ({
   contentType = 'recommendations'
 }) => {
   const { activeLocation, locations } = useSelector(locationSelector)
+
+  const [appTheme] = useThemeState()
 
   const locationDetails = locations[activeLocation]
 
@@ -97,7 +100,9 @@ const SidePanel = ({
         recommendation.events[0].images &&
         recommendation.events[0].images[0]
         ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
-        : null
+        : appTheme === 'light'
+          ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
+          : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
     return {
       qid: recommendation.id,
       id: recommendation.sid,
@@ -138,7 +143,9 @@ const SidePanel = ({
         ? `https://ik.imagekit.io/stmedia/areas/${inner.sid}?tr=w-700,h-550`
         : inner.events && inner.events[0] && inner.events[0].images && inner.events[0].images[0]
           ? `https://ik.imagekit.io/stmedia/${inner.events[0].images[0]}`
-          : null
+          : appTheme === 'light'
+            ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
+            : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
 
       return {
         qid: inner.id,
@@ -192,7 +199,9 @@ const SidePanel = ({
           recommendation.events[0].images &&
           recommendation.events[0].images[0]
           ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
-          : null
+          : appTheme === 'light'
+            ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
+            : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
 
       return {
         name: recommendation.name,
@@ -235,7 +244,9 @@ const SidePanel = ({
             recommendation.events[0].images &&
             recommendation.events[0].images[0]
             ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
-            : null
+            : appTheme === 'light'
+              ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
+              : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
 
         return {
           name: recommendation.name,
@@ -617,6 +628,11 @@ const SidePanel = ({
       {contentType === 'recommendations' && prepare()}
 
       <div className={styles.upperContainer}>
+        {loading && (
+          <div className={styles.skeleton}>
+            <SvgMap.Skeleton />
+          </div>
+        )}
         {!loading &&
           recommendations &&
           recommendations.length > 0 && (
