@@ -181,9 +181,7 @@ const ShareContainer = () => {
 
               <a
                 href={`https://www.facebook.com/dialog/share?
-                app_id=1042368969717573&display=popup&href=${
-                  createDynamicURL('facebook').url
-                }&redirect_uri=${createDynamicURL('facebook').url}`}
+                app_id=1042368969717573&display=popup&href=https://www.pulfy.com&redirect_uri=https://www.pulfy.com`}
                 target="_blank"
                 className={styles.shareButton}
               >
