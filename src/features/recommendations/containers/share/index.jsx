@@ -6,7 +6,6 @@ import { recommendationsSelector } from '../../slice'
 import qs from 'qs'
 import { useQuery } from 'utils/hooks/use-query'
 import { useHistory, useLocation } from 'react-router-dom'
-import formurlencoded from 'form-urlencoded'
 
 import {
   TwitterIcon,

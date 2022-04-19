@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app'
 export const app = initializeApp({
   apiKey: 'AIzaSyD9bmmPSXbSXkTkOxuVFvW59Tk9VVVuYfc',
 
-  authDomain: 'pulfy-2021.firebaseapp.com',
+  authDomain: 'auth.pulfy.com',
 
   projectId: 'pulfy-2021',
 
