@@ -150,6 +150,9 @@ const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, auth
         <Link to="login" className={styles.link}>
           Already have an account? <span>Login</span>
         </Link>
+        <Link className={styles.link} to="/onboarding/1">
+          or <span>Continue as Guest </span>
+        </Link>
       </div>
     </div>
   )
