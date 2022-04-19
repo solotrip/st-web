@@ -89,9 +89,9 @@ const SidePanel = ({
       }
     ]
 
-    valuesX = recommendations.map(recommendation => {
+    valuesX = recommendations.map((recommendation, k) => {
       return {
-        category: recommendation.name
+        category: '#' + (k + 1) + ' ' + recommendation.name
       }
     })
 
@@ -134,9 +134,9 @@ const SidePanel = ({
         }
       ]
 
-      valuesX = notifications.map(notification => {
+      valuesX = notifications.map((notification, k) => {
         return {
-          category: notification.content.new.name
+          category: '#' + (k + 1) + ' ' + notification.content.new.name
         }
       })
 
@@ -266,10 +266,10 @@ const SidePanel = ({
           }
         })
 
-        const rd = recommendations.map(recommendation => {
+        const rd = recommendations.map((recommendation, k) => {
           if (recommendation['country'] && recommendation['country']['restrictions']) {
             Object.keys(recommendation['country']['restrictions']).forEach((key, i) => {
-              let x = recommendation.name
+              let x = '#' + (k + 1) + ' ' + recommendation.name
               let y = null
               let columnSettings = {}
               let value = null
@@ -440,10 +440,10 @@ const SidePanel = ({
           }
         })
 
-        const td = recommendations.map(recommendation => {
+        const td = recommendations.map((recommendation, k) => {
           if (recommendation['cost_of_living_labels']) {
             Object.keys(recommendation['cost_of_living_labels']).forEach((key, i) => {
-              let x = recommendation.name
+              let x = '#' + (k + 1) + ' ' + recommendation.name
               let y = null
               let columnSettings = {}
               let value = null
