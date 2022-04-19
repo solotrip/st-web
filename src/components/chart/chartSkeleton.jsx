@@ -13,6 +13,7 @@ const ChartSkeleton = ({}) => {
         backgroundColor="var(--color-card-bg)"
         foregroundColor="var(--color-highlight-bg)"
       >
+        <rect x="10" y="0" rx="16" ry="16" width="calc(50%)" height="38" />
         <rect x="5" y="160" rx="5" ry="5" width="calc(9%)" height="40" />
         <rect x="calc(9% + 10px)" y="145" rx="5" ry="5" width="calc(9% - 1px)" height="55" />
         <rect x="calc(19%  + 10px)" y="126" rx="5" ry="5" width="calc(9% - 1px)" height="74" />
