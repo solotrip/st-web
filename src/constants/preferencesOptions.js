@@ -593,7 +593,7 @@ export const currencies = [
   },
   {
     value: 'TOP',
-    label: 'Tongan Pa\'anga, $'
+    label: "Tongan Pa'anga, $"
   },
   {
     value: 'TTD',
@@ -672,8 +672,8 @@ export const distanceUnits = [
   { value: lengthUnits.MILES, label: 'Miles' }
 ]
 export const temperatureStates = [
-  { value: temperatureUnits.F, label: 'Celcius °C' },
-  { value: temperatureUnits.C, label: 'Fahrenheit °F' }
+  { value: temperatureUnits.C, label: 'Celcius °C' },
+  { value: temperatureUnits.F, label: 'Fahrenheit °F' }
 ]
 export const vaccineStates = [
   { value: true, label: 'I have been vaccinated.' },
