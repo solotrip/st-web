@@ -187,9 +187,7 @@ const Content = ({
           </div>
         ))}
       {mapEnabled &&
-        (isBrowser || isTablet) &&
-        !loading &&
-        recommendations.length > 0 && (
+        (isBrowser || isTablet) && (
           <SidePanel
             className={styles.sidePanel}
             loading={loading}

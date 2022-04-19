@@ -6,7 +6,6 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
 import * as am5themes_Animated from '@amcharts/amcharts5/themes/Responsive'
 import am5geodata_world from '@amcharts/amcharts5-geodata/worldLow'
-import ContentLoader from 'react-content-loader'
 
 import useThemeState from 'utils/hooks/use-theme-state'
 import styles from './svgmap.module.scss'
@@ -291,47 +290,5 @@ const SvgMap = ({
     </div>
   )
 }
-
-SvgMap.Skeleton = () => (
-  <div className={styles.content2}>
-    <ContentLoader
-      speed={2}
-      width='100%'
-      height={565}
-      viewBox='0 0 321 565'
-      backgroundColor='var(--color-card-bg)'
-      foregroundColor='var(--color-highlight-bg)'
-    >
-      <rect x='4' y='8' rx='4' ry='4' width='40%' height='16' />
-      <rect x='4' y='32' rx='3' ry='3' width='60%' height='32' />
-      <rect x='80%' y='48' rx='3' ry='3' width='20%' height='16' />
-      <rect x='4' y='80' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='84' rx='3' ry='3' width='80%' height='16' />
-      <rect x='4' y='80' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='84' rx='3' ry='3' width='50%' height='16' />
-      <rect x='4' y='112' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='116' rx='3' ry='3' width='70%' height='16' />
-      <rect x='4' y='144' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='148' rx='3' ry='3' width='60%' height='16' />
-      <rect x='4' y='176' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='180' rx='3' ry='3' width='80%' height='16' />
-      <rect x='4' y='208' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='212' rx='3' ry='3' width='40%' height='16' />
-      <rect x='4' y='240' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='244' rx='3' ry='3' width='75%' height='16' />
-      <rect x='4' y='272' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='276' rx='3' ry='3' width='65%' height='16' />
-      <rect x='4' y='304' rx='3' ry='3' width='24' height='24' />
-      <rect x='10%' y='308' rx='3' ry='3' width='80%' height='16' />
-      <rect x='2%' y='340' rx='3' ry='3' width='30%' height='120' />
-      <rect x='2%' y='468' rx='3' ry='3' width='30%' height='16' />
-      <rect x='34%' y='340' rx='3' ry='3' width='30%' height='120' />
-      <rect x='34%' y='468' rx='3' ry='3' width='30%' height='16' />
-      <rect x='66%' y='340' rx='3' ry='3' width='30%' height='120' />
-      <rect x='66%' y='468' rx='3' ry='3' width='30%' height='16' />
-      <rect x='5%' y='510' rx='16' ry='16' width='90%' height='38' />
-    </ContentLoader>
-  </div>
-)
 
 export default SvgMap
