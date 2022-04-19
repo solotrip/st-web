@@ -1,5 +1,5 @@
 [[redirects]]
     from = "/*"
-    to = "https://pulfy.com/app"
+    to = "/index.html"
     status = 200
-    force = true
+    force = false
