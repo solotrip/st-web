@@ -179,7 +179,7 @@ const SidePanel = ({
 
   function prepare() {
     if (recommendations && recommendations.length > 0) {
-      recommendationProc = recommendations.map(recommendation => {
+      recommendationProc = recommendations.map((recommendation, k) => {
         if (selectedOption.value === 'hotel-prices') {
           min = recommendation.hotel_price_min
           max = recommendation.hotel_price_max
@@ -209,7 +209,7 @@ const SidePanel = ({
               : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
 
         return {
-          name: recommendation.name,
+          name: '#' + (k + 1) + ' ' + recommendation.name,
           category: selectedOption.label,
           min: min,
           max: max,
@@ -226,7 +226,7 @@ const SidePanel = ({
   useEffect(() => {
     if (recommendations && recommendations.length > 0) {
       if (contentType === 'recommendations') {
-        recommendationProc = recommendations.map(recommendation => {
+        recommendationProc = recommendations.map((recommendation, k) => {
           if (selectedOption.value === 'hotel-prices') {
             min = recommendation.hotel_price_min
             max = recommendation.hotel_price_max
@@ -256,7 +256,7 @@ const SidePanel = ({
                 : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
 
           return {
-            name: recommendation.name,
+            name: '#' + (k + 1) + ' ' + recommendation.name,
             category: selectedOption.label,
             min: min,
             max: max,

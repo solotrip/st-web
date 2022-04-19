@@ -26,7 +26,8 @@ const Recommendation = ({
   queryString,
   wishlisted,
   toggleWishlist,
-  basePath
+  basePath,
+  index
 }) => {
   const {
     sid,
@@ -70,7 +71,7 @@ const Recommendation = ({
         <div className={styles.header}>
           <div className={styles.headerLine}>
             {' '}
-            <div className={styles.headerUpLine}> Recommendation</div>{' '}
+            <div className={styles.headerUpLine}> Recommendation #{index + 1}</div>{' '}
             <button
               className={wishlisted ? styles.heartFilled : styles.heart}
               onClick={() =>
