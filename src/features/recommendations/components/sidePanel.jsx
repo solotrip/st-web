@@ -686,7 +686,7 @@ const SidePanel = ({
                 <Table
                   data={tableData}
                   valuesY={valuesY}
-                  valuesX={valuesX}
+                  valuesX={valuesX.reverse()}
                   colors={colors}
                   type={selectedOption.value}
                   showContent={true}
@@ -699,7 +699,7 @@ const SidePanel = ({
                 <Table
                   data={restrictionData}
                   valuesY={RESTRICTION_CATEGORIES}
-                  valuesX={valuesX}
+                  valuesX={valuesX.reverse()}
                   colors={restrictionColors}
                   type={selectedOption.value}
                   showContent={false}
