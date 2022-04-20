@@ -64,7 +64,7 @@ const ShareContainer = () => {
   }
 
   function createDynamicURL(option) {
-    const url = 'https://www.pulfy.com' + location.pathname + location.search
+    const url = 'https://www.pulfy.com/app' + location.pathname + location.search
     const encodedQuery = url
       .toString()
       .replace(/&/g, '%26')
@@ -95,7 +95,7 @@ const ShareContainer = () => {
       .replace(/(\r\n|\n|\r)/gm, '')
       .trim()
       .replace(/\/share\//g, '/r/')
-    const body = `Here is the events,activities, restrictions and travel requirements of ${areaName} for you: https://www.pulfy.com${encodedQuery}`
+    const body = `Here is the events,activities, restrictions and travel requirements of ${areaName} for you: https://www.pulfy.com/app${encodedQuery}`
     return body
   }
 

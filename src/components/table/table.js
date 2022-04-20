@@ -22,6 +22,7 @@ const Table = ({
   DOMroot = 'chartdiv4',
   showContent = true
 }) => {
+  console.log({ valuesX, valuesY, data })
   const history = useHistory()
   const chartRef = useRef(null)
   const [appTheme] = useThemeState()
