@@ -89,9 +89,9 @@ const SidePanel = ({
       }
     ]
 
-    valuesX = recommendations.map(recommendation => {
+    valuesX = recommendations.map((recommendation, k) => {
       return {
-        category: recommendation.name
+        category: '#' + (k + 1) + ' ' + recommendation.name
       }
     })
 
@@ -134,9 +134,9 @@ const SidePanel = ({
         }
       ]
 
-      valuesX = notifications.map(notification => {
+      valuesX = notifications.map((notification, k) => {
         return {
-          category: notification.content.new.name
+          category: '#' + (k + 1) + ' ' + notification.content.new.name
         }
       })
 
@@ -223,413 +223,422 @@ const SidePanel = ({
     }
   }
 
-  useEffect(() => {
-    if (recommendations && recommendations.length > 0) {
-      if (contentType === 'recommendations') {
-        recommendationProc = recommendations.map((recommendation, k) => {
-          if (selectedOption.value === 'hotel-prices') {
-            min = recommendation.hotel_price_min
-            max = recommendation.hotel_price_max
-          } else if (selectedOption.value === 'hostel-prices') {
-            min = recommendation.hostel_price_min
-            max = recommendation.hostel_price_max
-          } else if (selectedOption.value === 'airbnb-prices') {
-            min = recommendation.vacation_rental_price_min
-            max = recommendation.vacation_rental_price_max
-          } else if (selectedOption.value === 'temperature' && recommendation.climate) {
-            min = recommendation.climate.t_min
-            max = recommendation.climate.t_max
-          } else if (selectedOption.value === 'trip-days' && recommendation.tripdays) {
-            min = recommendation.tripdays.min_days
-            max = recommendation.tripdays.min_days
-          }
-
-          const recoImage = recommendation.area_has_image
-            ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
-            : recommendation.events &&
-              recommendation.events[0] &&
-              recommendation.events[0].images &&
-              recommendation.events[0].images[0]
-              ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
-              : appTheme === 'light'
-                ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
-                : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
-
-          return {
-            name: '#' + (k + 1) + ' ' + recommendation.name,
-            category: selectedOption.label,
-            min: min,
-            max: max,
-            bulletSettings: {
-              src: recoImage
+  useEffect(
+    () => {
+      if (recommendations && recommendations.length > 0) {
+        if (contentType === 'recommendations') {
+          recommendationProc = recommendations.map((recommendation, k) => {
+            if (selectedOption.value === 'hotel-prices') {
+              min = recommendation.hotel_price_min
+              max = recommendation.hotel_price_max
+            } else if (selectedOption.value === 'hostel-prices') {
+              min = recommendation.hostel_price_min
+              max = recommendation.hostel_price_max
+            } else if (selectedOption.value === 'airbnb-prices') {
+              min = recommendation.vacation_rental_price_min
+              max = recommendation.vacation_rental_price_max
+            } else if (selectedOption.value === 'temperature' && recommendation.climate) {
+              min = recommendation.climate.t_min
+              max = recommendation.climate.t_max
+            } else if (selectedOption.value === 'trip-days' && recommendation.tripdays) {
+              min = recommendation.tripdays.min_days
+              max = recommendation.tripdays.min_days
             }
-          }
-        })
 
-        const rd = recommendations.map(recommendation => {
-          if (recommendation['country'] && recommendation['country']['restrictions']) {
-            Object.keys(recommendation['country']['restrictions']).forEach((key, i) => {
-              let x = recommendation.name
-              let y = null
-              let columnSettings = {}
-              let value = null
+            const recoImage = recommendation.area_has_image
+              ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
+              : recommendation.events &&
+                recommendation.events[0] &&
+                recommendation.events[0].images &&
+                recommendation.events[0].images[0]
+                ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
+                : appTheme === 'light'
+                  ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
+                  : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
 
-              let restriction = Object.values(recommendation['country']['restrictions'])[i]
-
-              value = restriction
-
-              if (key === 'restaurant_status') {
-                y = 'Restaurant Status'
-                if (restriction === 'RESTRICTIONS') {
-                  columnSettings = {
-                    fill: restrictionColors.restricted
-                  }
-                } else if (restriction === 'OPEN') {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === 'CLOSED') {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'bar_status') {
-                y = 'Bar Status'
-                if (restriction === 'RESTRICTIONS') {
-                  columnSettings = {
-                    fill: restrictionColors.restricted
-                  }
-                } else if (restriction === 'OPEN') {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === 'CLOSED') {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'mask_status') {
-                y = 'Mask Status'
-                if (restriction === 'RECOMMENDED') {
-                  columnSettings = {
-                    fill: restrictionColors.restricted
-                  }
-                } else if (restriction === 'NOT REQUIRED') {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === 'REQUIRED') {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'arrival_quarantine_status') {
-                y = 'Arrival Quarantine'
-                if (restriction === false) {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === true) {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'open_for_vaccinated') {
-                y = 'Open for Vaccinated'
-                if (restriction === false) {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                } else if (restriction === true) {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                }
-              } else if (key === 'vaccinated_arrival_test_required') {
-                y = 'Test for Vaccinated'
-                if (restriction === false) {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === true) {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'vaccinated_arrival_quarantine_required') {
-                y = 'Quarantine for Vaccinated'
-                if (restriction === false) {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === true) {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'arrival_test_required') {
-                y = 'Required Test'
-                if (restriction === false) {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === true) {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'arrival_quarantine_required') {
-                y = 'Required Quarantine'
-                if (restriction === false) {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === true) {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'Public Transport') {
-                y = 'Public Transport'
-                if (restriction === 'Partial Restrictions') {
-                  columnSettings = {
-                    fill: restrictionColors.restricted
-                  }
-                } else if (restriction === 'Operating') {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === 'Closed') {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'Dining and Bars') {
-                y = 'Dining and Bars'
-                if (restriction === 'Partially Open') {
-                  columnSettings = {
-                    fill: restrictionColors.restricted
-                  }
-                } else if (restriction === 'Open') {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === 'Closed') {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
-              } else if (key === 'Tourist Attractions') {
-                y = 'Tourist Attractions'
-                if (restriction === 'Partially Open') {
-                  columnSettings = {
-                    fill: restrictionColors.restricted
-                  }
-                } else if (restriction === 'Open') {
-                  columnSettings = {
-                    fill: restrictionColors.open
-                  }
-                } else if (restriction === 'Closed') {
-                  columnSettings = {
-                    fill: restrictionColors.closed
-                  }
-                }
+            return {
+              name: '#' + (k + 1) + ' ' + recommendation.name,
+              category: selectedOption.label,
+              min: min,
+              max: max,
+              bulletSettings: {
+                src: recoImage
               }
-              restrictionData.push({ x: x, y: y, columnSettings: columnSettings, value: value })
-            })
-          }
-        })
+            }
+          })
 
-        const td = recommendations.map(recommendation => {
-          if (recommendation['cost_of_living_labels']) {
-            Object.keys(recommendation['cost_of_living_labels']).forEach((key, i) => {
-              let x = recommendation.name
-              let y = null
-              let columnSettings = {}
-              let value = null
+          const rd = recommendations.map((recommendation, k) => {
+            if (recommendation['country'] && recommendation['country']['restrictions']) {
+              Object.keys(recommendation['country']['restrictions']).forEach((key, i) => {
+                let x = '#' + (k + 1) + ' ' + recommendation.name
+                let y = null
+                let columnSettings = {}
+                let value = null
 
-              let cost = Object.values(recommendation['cost_of_living_labels'])[i]
-              value = cost
-              if (key === 'meal_cheap_restaurant_cost_label') {
-                y = 'Meal at Cheap Restaurant'
-                if (cost === '$0 - $5') {
-                  columnSettings = {
-                    fill: colors.verygood
+                let restriction = Object.values(recommendation['country']['restrictions'])[i]
+
+                value = restriction
+
+                if (key === 'restaurant_status') {
+                  y = 'Restaurant Status'
+                  if (restriction === 'RESTRICTIONS') {
+                    columnSettings = {
+                      fill: restrictionColors.restricted
+                    }
+                  } else if (restriction === 'OPEN') {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === 'CLOSED') {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$5 - $10') {
-                  columnSettings = {
-                    fill: colors.good
+                } else if (key === 'bar_status') {
+                  y = 'Bar Status'
+                  if (restriction === 'RESTRICTIONS') {
+                    columnSettings = {
+                      fill: restrictionColors.restricted
+                    }
+                  } else if (restriction === 'OPEN') {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === 'CLOSED') {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$10 - $15') {
-                  columnSettings = {
-                    fill: colors.medium
+                } else if (key === 'mask_status') {
+                  y = 'Mask Status'
+                  if (restriction === 'RECOMMENDED') {
+                    columnSettings = {
+                      fill: restrictionColors.restricted
+                    }
+                  } else if (restriction === 'NOT REQUIRED') {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === 'REQUIRED') {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$15 - $20') {
-                  columnSettings = {
-                    fill: colors.bad
+                } else if (key === 'arrival_quarantine_status') {
+                  y = 'Arrival Quarantine'
+                  if (restriction === false) {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === true) {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$25 +') {
-                  columnSettings = {
-                    fill: colors.critical
+                } else if (key === 'open_for_vaccinated') {
+                  y = 'Open for Vaccinated'
+                  if (restriction === false) {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
+                  } else if (restriction === true) {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
                   }
-                }
-              } else if (key === 'meal_mid_range_restaurant_cost_label') {
-                y = 'Meal at Luxury Restaurant'
-                if (cost === '$10 - $20' || cost === '$20 - $30') {
-                  columnSettings = {
-                    fill: colors.verygood
+                } else if (key === 'vaccinated_arrival_test_required') {
+                  y = 'Test for Vaccinated'
+                  if (restriction === false) {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === true) {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$30 - $40' || cost === '$40 - $50') {
-                  columnSettings = {
-                    fill: colors.good
+                } else if (key === 'vaccinated_arrival_quarantine_required') {
+                  y = 'Quarantine for Vaccinated'
+                  if (restriction === false) {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === true) {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$50 - $60') {
-                  columnSettings = {
-                    fill: colors.medium
+                } else if (key === 'arrival_test_required') {
+                  y = 'Required Test'
+                  if (restriction === false) {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === true) {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$60 - $70') {
-                  columnSettings = {
-                    fill: colors.bad
+                } else if (key === 'arrival_quarantine_required') {
+                  y = 'Required Quarantine'
+                  if (restriction === false) {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === true) {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$80 +' || cost === '$70 - $80') {
-                  columnSettings = {
-                    fill: colors.critical
+                } else if (key === 'Public Transport') {
+                  y = 'Public Transport'
+                  if (restriction === 'Partial Restrictions') {
+                    columnSettings = {
+                      fill: restrictionColors.restricted
+                    }
+                  } else if (restriction === 'Operating') {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === 'Closed') {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                }
-              } else if (key === 'mcmeal_at_mcdonalds_cost_label') {
-                y = 'McDonalds Menu'
-                if (cost === '$0 - $5') {
-                  columnSettings = {
-                    fill: colors.verygood
+                } else if (key === 'Dining and Bars') {
+                  y = 'Dining and Bars'
+                  if (restriction === 'Partially Open') {
+                    columnSettings = {
+                      fill: restrictionColors.restricted
+                    }
+                  } else if (restriction === 'Open') {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === 'Closed') {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
-                } else if (cost === '$5 - $10') {
-                  columnSettings = {
-                    fill: colors.medium
-                  }
-                } else if (cost === '$10 - $15') {
-                  columnSettings = {
-                    fill: colors.bad
-                  }
-                } else if (cost === '$15 +') {
-                  columnSettings = {
-                    fill: colors.critical
-                  }
-                }
-              } else if (key === 'public_transport_cost_label') {
-                y = 'Public Transport'
-                if (cost === '$0 - $0.5') {
-                  columnSettings = {
-                    fill: colors.verygood
-                  }
-                } else if (cost === '$$0.5 - $1' || cost === '$1 - $1.5') {
-                  columnSettings = {
-                    fill: colors.good
-                  }
-                } else if (cost === '$1.5 - $2.5') {
-                  columnSettings = {
-                    fill: colors.medium
-                  }
-                } else if (cost === '$$2.5 - $3.0') {
-                  columnSettings = {
-                    fill: colors.bad
-                  }
-                } else if (cost === '$3.0 - $3.5') {
-                  columnSettings = {
-                    fill: colors.critical
-                  }
-                }
-              } else if (key === 'beer_at_restaurant_cost_label') {
-                y = 'Beer at Restaurant'
-                if (cost === '$0 - $2.5') {
-                  columnSettings = {
-                    fill: colors.verygood
-                  }
-                } else if (cost === '$2.5 - $4') {
-                  columnSettings = {
-                    fill: colors.good
-                  }
-                } else if (cost === '$4 - $5') {
-                  columnSettings = {
-                    fill: colors.medium
-                  }
-                } else if (cost === '$5 - $6') {
-                  columnSettings = {
-                    fill: colors.bad
-                  }
-                } else if (cost === '$6 - $7' || cost === '$7 +') {
-                  columnSettings = {
-                    fill: colors.critical
-                  }
-                }
-              } else if (key === 'prepaid_card_cost_label') {
-                y = 'Prepaid Card'
-                if (cost === '$0 - $0.2') {
-                  columnSettings = {
-                    fill: colors.verygood
-                  }
-                } else if (cost === '$0.3 - $0.4') {
-                  columnSettings = {
-                    fill: colors.critical
-                  }
-                } else if (cost === '$0.2 - $0.3') {
-                  columnSettings = {
-                    fill: colors.medium
-                  }
-                }
-              } else if (key === 'cinema_ticket_cost_label') {
-                y = 'Cinema Ticket'
-                if (cost === '$0 - $5') {
-                  columnSettings = {
-                    fill: colors.verygood
-                  }
-                } else if (cost === '$5 - $7') {
-                  columnSettings = {
-                    fill: colors.good
-                  }
-                } else if (cost === '$7 - $10') {
-                  columnSettings = {
-                    fill: colors.medium
-                  }
-                } else if (cost === '$10 - $15') {
-                  columnSettings = {
-                    fill: colors.bad
-                  }
-                } else if (cost === '$6 - $7' || cost === '$15 +') {
-                  columnSettings = {
-                    fill: colors.critical
-                  }
-                }
-              } else if (key === 'taxi_1km_cost_label') {
-                y = 'Taxi 1km'
-                if (cost === '$0 - $0.5') {
-                  columnSettings = {
-                    fill: colors.verygood
-                  }
-                } else if (cost === '$0.5 - $1') {
-                  columnSettings = {
-                    fill: colors.good
-                  }
-                } else if (cost === '$1 - $1.5') {
-                  columnSettings = {
-                    fill: colors.medium
-                  }
-                } else if (cost === '$1.5 - $2') {
-                  columnSettings = {
-                    fill: colors.bad
-                  }
-                } else if (cost === '$2.5 +' || cost === '$2 - $2.5') {
-                  columnSettings = {
-                    fill: colors.critical
+                } else if (key === 'Tourist Attractions') {
+                  y = 'Tourist Attractions'
+                  if (restriction === 'Partially Open') {
+                    columnSettings = {
+                      fill: restrictionColors.restricted
+                    }
+                  } else if (restriction === 'Open') {
+                    columnSettings = {
+                      fill: restrictionColors.open
+                    }
+                  } else if (restriction === 'Closed') {
+                    columnSettings = {
+                      fill: restrictionColors.closed
+                    }
                   }
                 }
-              }
-              tableData.push({ x: x, y: y, columnSettings: columnSettings, value: value })
-            })
-          }
-        })
+                restrictionData.push({
+                  x: x,
+                  y: y,
+                  k,
+                  columnSettings: columnSettings,
+                  value: value
+                })
+              })
+            }
+          })
+
+          const td = recommendations.map((recommendation, k) => {
+            if (recommendation['cost_of_living_labels']) {
+              Object.keys(recommendation['cost_of_living_labels']).forEach((key, i) => {
+                let x = '#' + (k + 1) + ' ' + recommendation.name
+                let y = null
+                let columnSettings = {}
+                let value = null
+
+                let cost = Object.values(recommendation['cost_of_living_labels'])[i]
+                value = cost
+                if (key === 'meal_cheap_restaurant_cost_label') {
+                  y = 'Meal at Cheap Restaurant'
+                  if (cost === '$0 - $5') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$5 - $10') {
+                    columnSettings = {
+                      fill: colors.good
+                    }
+                  } else if (cost === '$10 - $15') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  } else if (cost === '$15 - $20') {
+                    columnSettings = {
+                      fill: colors.bad
+                    }
+                  } else if (cost === '$25 +') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  }
+                } else if (key === 'meal_mid_range_restaurant_cost_label') {
+                  y = 'Meal at Luxury Restaurant'
+                  if (cost === '$10 - $20' || cost === '$20 - $30') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$30 - $40' || cost === '$40 - $50') {
+                    columnSettings = {
+                      fill: colors.good
+                    }
+                  } else if (cost === '$50 - $60') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  } else if (cost === '$60 - $70') {
+                    columnSettings = {
+                      fill: colors.bad
+                    }
+                  } else if (cost === '$80 +' || cost === '$70 - $80') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  }
+                } else if (key === 'mcmeal_at_mcdonalds_cost_label') {
+                  y = 'McDonalds Menu'
+                  if (cost === '$0 - $5') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$5 - $10') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  } else if (cost === '$10 - $15') {
+                    columnSettings = {
+                      fill: colors.bad
+                    }
+                  } else if (cost === '$15 +') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  }
+                } else if (key === 'public_transport_cost_label') {
+                  y = 'Public Transport'
+                  if (cost === '$0 - $0.5') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$$0.5 - $1' || cost === '$1 - $1.5') {
+                    columnSettings = {
+                      fill: colors.good
+                    }
+                  } else if (cost === '$1.5 - $2.5') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  } else if (cost === '$$2.5 - $3.0') {
+                    columnSettings = {
+                      fill: colors.bad
+                    }
+                  } else if (cost === '$3.0 - $3.5') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  }
+                } else if (key === 'beer_at_restaurant_cost_label') {
+                  y = 'Beer at Restaurant'
+                  if (cost === '$0 - $2.5') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$2.5 - $4') {
+                    columnSettings = {
+                      fill: colors.good
+                    }
+                  } else if (cost === '$4 - $5') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  } else if (cost === '$5 - $6') {
+                    columnSettings = {
+                      fill: colors.bad
+                    }
+                  } else if (cost === '$6 - $7' || cost === '$7 +') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  }
+                } else if (key === 'prepaid_card_cost_label') {
+                  y = 'Prepaid Card'
+                  if (cost === '$0 - $0.2') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$0.3 - $0.4') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  } else if (cost === '$0.2 - $0.3') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  }
+                } else if (key === 'cinema_ticket_cost_label') {
+                  y = 'Cinema Ticket'
+                  if (cost === '$0 - $5') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$5 - $7') {
+                    columnSettings = {
+                      fill: colors.good
+                    }
+                  } else if (cost === '$7 - $10') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  } else if (cost === '$10 - $15') {
+                    columnSettings = {
+                      fill: colors.bad
+                    }
+                  } else if (cost === '$6 - $7' || cost === '$15 +') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  }
+                } else if (key === 'taxi_1km_cost_label') {
+                  y = 'Taxi 1km'
+                  if (cost === '$0 - $0.5') {
+                    columnSettings = {
+                      fill: colors.verygood
+                    }
+                  } else if (cost === '$0.5 - $1') {
+                    columnSettings = {
+                      fill: colors.good
+                    }
+                  } else if (cost === '$1 - $1.5') {
+                    columnSettings = {
+                      fill: colors.medium
+                    }
+                  } else if (cost === '$1.5 - $2') {
+                    columnSettings = {
+                      fill: colors.bad
+                    }
+                  } else if (cost === '$2.5 +' || cost === '$2 - $2.5') {
+                    columnSettings = {
+                      fill: colors.critical
+                    }
+                  }
+                }
+                tableData.push({ x: x, y: y, k, columnSettings: columnSettings, value: value })
+              })
+            }
+          })
+        }
       }
-    }
-  }, [])
+    },
+    [recommendations]
+  )
 
   return (
     <div className={styles.container}>
@@ -677,7 +686,7 @@ const SidePanel = ({
                 <Table
                   data={tableData}
                   valuesY={valuesY}
-                  valuesX={valuesX}
+                  valuesX={valuesX.reverse()}
                   colors={colors}
                   type={selectedOption.value}
                   showContent={true}
@@ -690,7 +699,7 @@ const SidePanel = ({
                 <Table
                   data={restrictionData}
                   valuesY={RESTRICTION_CATEGORIES}
-                  valuesX={valuesX}
+                  valuesX={valuesX.reverse()}
                   colors={restrictionColors}
                   type={selectedOption.value}
                   showContent={false}
