@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import { SheetWrapper } from 'components'
 import { useSelector } from 'react-redux'
@@ -16,7 +16,6 @@ import Dropdown from 'components/dropdown'
 import Table from 'components/table/table'
 import Chart from 'components/chart/chart'
 
-import SvgMap from '../../../../components/svg-map/svgMap'
 import styles from './analytics.module.scss'
 let qlat = 0
 let qlon = 0

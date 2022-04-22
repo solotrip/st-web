@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 import { Loader, SheetWrapper } from 'components'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SettingsSection from 'components/settings-section'
 import { recommendationsSelector } from 'features/recommendations/slice'
 import { fetchRecommendation, shareRecommendationSelector } from './slice'
@@ -34,7 +34,7 @@ const ShareContainer = () => {
     recommendation,
     error
   } = useSelector(shareRecommendationSelector)
-
+  const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
 
@@ -60,8 +60,22 @@ const ShareContainer = () => {
   } = detailRecommendation
 
   useEffect(() => {
-    fetchRecommendation({ start, end, areaSid })
-  }, [start, end, areaSid])
+    if (start && end && areaSid) {
+      const {
+        lat,
+        lon,
+        passports
+      } = recommendationsObject[activeRecommendationId].query
+      dispatch(fetchRecommendation({
+        start,
+        end,
+        areaSid,
+        lat,
+        lon,
+        passports
+      }))
+    }
+  }, [start, end, areaSid, dispatch, recommendationsObject, activeRecommendationId])
 
   const onBack = () => {
     history.goBack()
@@ -100,13 +114,13 @@ const ShareContainer = () => {
       <SheetWrapper disableDrag={false} closable={true}>
         {' '}
         <SheetWrapper.Content>
-          <Loader loading={loading || error}>
+          <Loader loading={loading || !url || error}>
             <SettingsSection title="Share"
                              description="Share this recommendation via"
             >
               <div className={styles.shareHolder}>
                 <button className={styles.copyButton} onClick={copyToClipboard}>
-                  {url} <MdContentCopy />
+                  {url} <MdContentCopy/>
                 </button>
                 <a
                   href={`mailto:?subject=Travel recommendation for you on Pulfy&body=${

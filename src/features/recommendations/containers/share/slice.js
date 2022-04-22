@@ -4,15 +4,13 @@ import { AREA_SID_FILTER_ID } from 'constants/index'
 
 
 export const fetchRecommendation = createAsyncThunk(
-  'recommendations/fetchRecommendations',
+  'shareRecommendation/fetchRecommendation',
   async ({
-    start,
-    end,
-    areaSid
+    areaSid,
+    ...rest
   }) => {
     const payload = {
-      start,
-      end,
+      ...rest,
       filters: [{ id: AREA_SID_FILTER_ID, variables: { areaSids: [areaSid] } }]
     }
     return await RecommendationsApi.getRecommendations(payload)
