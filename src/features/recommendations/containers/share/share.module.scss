@@ -1,29 +1,37 @@
 @import "styles/mixins";
+
 .shareHolder {
-    //background-color: red;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .shareButton {
-   // background-color: $card-content-recommendation;
-    display: flex;
-    flex-direction: row;
-    margin: 10px 10px 10px 0px;
-
-    border-radius: 16px;
-    background-color: $card-bg-color;
+  display: flex;
+  flex-direction: row;
+  margin: 10px 10px 10px 0;
+  border-radius: 16px;
+  background-color: $card-bg-color;
   border: 1px solid $border-color;
-   // width: 100%;
 }
 
-.shareText{
-    font-size: 20px;
-   // background-color: rebeccapurple;
-    justify-content: center;
-    align-content: center;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
-    color: $text-color;
+.shareText {
+  font-size: 20px;
+  justify-content: center;
+  align-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  color: $text-color;
+}
+
+.copyButton {
+  user-select: text;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    margin-left: 8px;
+  }
 }

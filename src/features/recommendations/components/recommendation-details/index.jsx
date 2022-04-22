@@ -1,15 +1,14 @@
 /* eslint-disable max-len */
 import React from 'react'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Card, Currency, Image, Temperature } from 'components'
 
 import styles from './recommendation-details.module.scss'
 import activityImages from './activity-images.json'
 import dayjs from 'dayjs'
 
-import { MdIosShare, mdlik } from 'react-icons/md'
-import { BsHeart, BsHeartFill } from 'react-icons/bs'
-import qs from 'qs'
+import { MdIosShare } from 'react-icons/md'
+import {  BsHeartFill } from 'react-icons/bs'
 
 import {
   Accommodation,
@@ -38,6 +37,7 @@ import useThemeState from 'utils/hooks/use-theme-state'
 const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted }) => {
   const [appTheme] = useThemeState()
   const history = useHistory()
+  const location = useLocation()
   const {
     name,
     sid,
@@ -84,9 +84,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
   }
 
   const openShare = () => {
-    console.log({ id: recommendation.id, query })
     history.push({
-      pathname: '/recommendations/share/' + recommendation.id,
+      pathname: location.pathname + '/share',
       search: query.queryString
     })
   }
@@ -95,7 +94,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     <>
       {areaHasImage && (
         <Image
-          width={'100%'}
+          alt={name}
           height={225}
           srcsetProvided={true}
           src={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-350,h-225`}
@@ -609,8 +608,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
           <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
             <div className={styles.events}>
-              {topPois.filter(poi => poi.poi_has_image === true).map(poi => (
-                <div key={`poi-${poi.id}`} className={styles.centeredSlide}>
+              {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
+                <div key={`poi-${i}-${poi.id}`} className={styles.centeredSlide}>
                   <Image
                     src={
                       poi.poi_has_image
@@ -642,7 +641,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   <div className={styles.slideText6}>{poi.perex}</div>
                   <div className={styles.slideText7Holder}>
                     {poi.references.map(r => (
-                      <a href={r.url} className={styles.slideText7}>
+                      <a key={`poi-${poi.id}-${r.url}`} href={r.url} className={styles.slideText7}>
                         Visit {r.title}
                       </a>
                     ))}

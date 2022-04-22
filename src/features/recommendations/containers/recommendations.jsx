@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useQuery } from 'utils/hooks/use-query'
 
-import { fetchRecommendations, recommendationsSelector, resetActiveRecommendation } from '../slice'
+import {
+  fetchRecommendations,
+  fetchRecommendationsWithShash,
+  recommendationsSelector,
+  resetActiveRecommendation
+} from '../slice'
 import { isGuestSelector, profileSelector } from 'features/profile/slice'
 import {
   addToWishlist,
@@ -58,6 +63,11 @@ const RecommendationsContainer = () => {
           return openPassportSheet(query)
         }
         dispatch(fetchRecommendations(query))
+      }
+      const r = /\/recommendations\/([^/]{6})/
+      const matches = location.pathname.match(r)
+      if (matches) {
+        dispatch(fetchRecommendationsWithShash({ history, shash: matches[1] }))
       }
       setLastScrollPos(0)
     },

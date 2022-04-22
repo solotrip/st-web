@@ -221,3 +221,11 @@ export const getDefaultImage = (poi, isLightTheme) => {
     isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
   )
 }
+
+export const reformatQuery = query => {
+  const newQuery = { ...query }
+  if(query.months) {
+    newQuery.months = query.months.map(month => parseInt(month.split('-')[1]))
+  }
+  return newQuery
+}

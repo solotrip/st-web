@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as RecommendationsApi from 'api/recommendation'
 import _get from 'lodash/get'
 import qs from 'qs'
+import { reformatQuery } from 'utils/recommendation'
 
 
 export const fetchRecommendations = createAsyncThunk(
@@ -33,11 +34,32 @@ export const fetchRecommendations = createAsyncThunk(
       recommendations
     } = getState().recommendations
     if (activeRecommendationId && qs.stringify(
-      recommendations[activeRecommendationId].query) === qs.stringify(payload)
+      reformatQuery(recommendations[activeRecommendationId].query)) === qs.stringify(payload)
     ) {
       return recommendations[activeRecommendationId]
     }
     return await RecommendationsApi.getRecommendations(payload)
+  }
+)
+
+export const fetchRecommendationsWithShash = createAsyncThunk(
+  'recommendations/fetchWShash',
+  async ({ shash, history }, { getState, dispatch }) => {
+    const {
+      activeRecommendationId,
+      recommendations
+    } = getState().recommendations
+    if (activeRecommendationId &&
+      recommendations[activeRecommendationId].shash === shash) {
+      return recommendations[activeRecommendationId]
+    }
+    dispatch(resetActiveRecommendation())
+    const res = await RecommendationsApi.getRecommendationsWithShash(shash)
+    history.replace({
+      pathname:  `/recommendations/${shash}`,
+      search: qs.stringify(reformatQuery(res.query))
+    })
+    return res
   }
 )
 
@@ -80,6 +102,21 @@ const recommendationsSlice = createSlice({
       state.loadingRecommendations = false
     },
     [fetchRecommendations.rejected]: state => {
+      state.errorRecommendations = true
+      state.loadingRecommendations = false
+    },
+    [fetchRecommendationsWithShash.pending]: state => {
+      state.activeRecommendationId = null
+      state.errorRecommendations = null
+      state.loadingRecommendations = true
+    },
+    [fetchRecommendationsWithShash.fulfilled]: (state, action) => {
+      const { recommendationId } = action.payload
+      state.recommendations[recommendationId] = action.payload
+      state.activeRecommendationId = recommendationId
+      state.loadingRecommendations = false
+    },
+    [fetchRecommendationsWithShash.rejected]: state => {
       state.errorRecommendations = true
       state.loadingRecommendations = false
     },

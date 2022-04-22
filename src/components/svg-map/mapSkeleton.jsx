@@ -1,9 +1,9 @@
+/* eslint-disable max-len */
 import React from 'react'
-import { ReactComponent as Logo } from 'assets/images/logo.svg'
 import styles from './svgmap.module.scss'
 import ContentLoader from 'react-content-loader'
 
-const MapSkeleton = ({}) => {
+const MapSkeleton = () => {
   return (
     <div className={styles.content2}>
       <ContentLoader

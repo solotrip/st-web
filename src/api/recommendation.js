@@ -9,6 +9,12 @@ export async function getRecommendations (query) {
   return response.data
 }
 
+export async function getRecommendationsWithShash (shash) {
+  const url = SOLOTRIP_V1(`profile/recommendations/${shash}`)
+  const response = await axios.get(url)
+  return response.data
+}
+
 export async function getWishlist () {
   const url = SOLOTRIP_V1('profile/wishlist')
   const response = await axios.get(url)

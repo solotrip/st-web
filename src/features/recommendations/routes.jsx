@@ -17,6 +17,12 @@ const Routes = () => (
       <OnboardedRoutesWrapper>
         <RecommendationsContainer />
         <Switch>
+          {/*
+            DO NOT ADD ANY PATH THAT HAS 6 LENGTH e.g.
+            /recommendations/6chars
+            BECAUSE SHORT HASHES HAVE 6 CHARS
+            AND WE CHECK IF WE USE SHORT HASH BY PATH LENGTH
+          */}
           <Route path="/recommendations/date">
             <DateSelectorContainer />
           </Route>
@@ -35,7 +41,7 @@ const Routes = () => (
           <Route path="/recommendations/map">
             <MapContainer />
           </Route>
-          <Route path="/recommendations/share">
+          <Route path="/recommendations/r/:sid/:start/:end/share">
             <ShareContainer />
           </Route>
         </Switch>

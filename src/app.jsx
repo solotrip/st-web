@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import Routes from './routes'
 import store from './store'
@@ -42,9 +43,10 @@ const App = () => {
         <Provider store={store}>
           <PersistGate loading={null} persistor={ persistStore(store)}>
             <Routes/>
-            <ToastContainer position={'bottom-right'}
-                            theme={appTheme === LIGHT_CLASS ? 'light' : 'dark'}
-            />
+            {ReactDOM.createPortal(<ToastContainer
+              position={'bottom-right'}
+              theme={appTheme === LIGHT_CLASS ? 'light' : 'dark'}
+            />, document.body)}
           </PersistGate>
         </Provider>
       </Suspense>

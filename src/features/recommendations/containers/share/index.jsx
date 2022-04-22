@@ -1,102 +1,98 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { SheetWrapper } from 'components'
+import React, { useEffect, useMemo } from 'react'
+import { Loader, SheetWrapper } from 'components'
 import { useSelector } from 'react-redux'
 import SettingsSection from 'components/settings-section'
-import { recommendationsSelector } from '../../slice'
-import qs from 'qs'
-import { useQuery } from 'utils/hooks/use-query'
+import { recommendationsSelector } from 'features/recommendations/slice'
+import { fetchRecommendation, shareRecommendationSelector } from './slice'
 import { useHistory, useLocation } from 'react-router-dom'
-
+import { MdContentCopy } from 'react-icons/md'
 import {
-  TwitterIcon,
-  FacebookIcon,
-  WhatsappIcon,
   EmailIcon,
-  TelegramIcon,
-  RedditIcon,
-  LinkedinIcon,
+  FacebookIcon,
   FacebookMessengerIcon,
   LineIcon,
+  LinkedinIcon,
   PinterestIcon,
-  ViberIcon
+  RedditIcon,
+  TelegramIcon,
+  TwitterIcon,
+  WhatsappIcon
 } from 'react-share'
 
 import styles from './share.module.scss'
+import { SHORT_URL_BASE } from 'constants/urls'
+import { toast } from 'react-toastify'
 
 const ShareContainer = () => {
   const {
-    loadingRecommendations,
     recommendations: recommendationsObject,
     activeRecommendationId
   } = useSelector(recommendationsSelector)
 
-  const query = useQuery()
+  const {
+    loading,
+    recommendation,
+    error
+  } = useSelector(shareRecommendationSelector)
+
   const history = useHistory()
   const location = useLocation()
-  let areaName = ''
 
-  console.log({ activeRecommendationId, recommendationsObject, location })
 
-  if (
-    recommendationsObject &&
-    activeRecommendationId &&
-    recommendationsObject[activeRecommendationId] &&
-    recommendationsObject[activeRecommendationId].recommendations
-  ) {
-    const recommendations = recommendationsObject[activeRecommendationId].recommendations
-    console.log(recommendations)
-    const recommendationFound = recommendations.find(r => location.pathname.includes(r.id))
-    console.log(' found:', recommendationFound)
-    if (recommendationFound && recommendationFound.name) {
-      console.log('found: ', recommendationFound)
-      areaName = recommendationFound.name
+  const detailRecommendation = useMemo(() => {
+    if (
+      recommendationsObject &&
+      activeRecommendationId &&
+      recommendationsObject[activeRecommendationId] &&
+      recommendationsObject[activeRecommendationId].recommendations
+    ) {
+      const recommendations = recommendationsObject[activeRecommendationId].recommendations
+      return recommendations.find(r => location.pathname.includes(r.id))
     }
-  }
+    return {}
+  }, [recommendationsObject, activeRecommendationId, location.pathname])
 
-  const onSubmit = () => {
-    history.push({
-      pathname: '/recommendations',
-      search: qs.stringify(query)
-    })
-  }
+  const {
+    startDate: start,
+    endDate: end,
+    sid: areaSid,
+    name: areaName
+  } = detailRecommendation
+
+  useEffect(() => {
+    fetchRecommendation({ start, end, areaSid })
+  }, [start, end, areaSid])
+
   const onBack = () => {
     history.goBack()
   }
 
+  const url = recommendation && (SHORT_URL_BASE + recommendation.shash)
+
   function createDynamicURL(option) {
-    const url = 'https://www.pulfy.com/app' + location.pathname + location.search
-    const encodedQuery = url
-      .toString()
-      .replace(/&/g, '%26')
-      .replace(/ /g, '')
-      .replace(/(\r\n|\n|\r)/gm, '')
-      .trim()
-      .replace(/\/share\//g, '/r/')
+    if (loading) return {}
     if (option === 'mail') {
-      const body = `Here is the ${areaName}'s travel requirements, restrictions,activities and events on Pulfy.%0D .%0DSee detailed recommendation on: ${encodedQuery}`
-      return body
+      return `Here is the ${areaName}'s travel requirements, restrictions,
+      activities and events on Pulfy.%0D .%0DSee detailed recommendation on: ${url}`
     } else if (option === 'telegram' || option === 'facebook') {
-      const text = `Here is the ${areaName}'s travel requirements, restrictions,activities and events on Pulfy.`
-      return { url: encodedQuery, text }
+      const text = `Here is the ${areaName}'s travel requirements,
+       restrictions,activities and events on Pulfy.`
+      return { url, text }
     } else if (option === 'reddit' || option === 'twitter') {
       const text = `${areaName}'s travel requirements, restrictions,activities and events on Pulfy.`
-      return { url: encodedQuery, text }
+      return { url, text }
     } else if (option === 'linkedin') {
-      return { url: encodedQuery }
+      return { url }
     }
   }
 
-  function createShortDynamicURL() {
-    const url = location.pathname + location.search
-    const encodedQuery = url
-      .toString()
-      .replace(/&/g, '%26')
-      .replace(/ /g, '')
-      .replace(/(\r\n|\n|\r)/gm, '')
-      .trim()
-      .replace(/\/share\//g, '/r/')
-    const body = `Here is the events,activities, restrictions and travel requirements of ${areaName} for you: https://www.pulfy.com/app${encodedQuery}`
-    return body
+  const shortUrl = `Here is the events,activities,
+     restrictions and travel requirements of ${areaName} for you: https://www.pulfy.com/app${url}`
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(url)
+    toast.info('Copied to clipboard')
+
   }
 
   return (
@@ -104,120 +100,125 @@ const ShareContainer = () => {
       <SheetWrapper disableDrag={false} closable={true}>
         {' '}
         <SheetWrapper.Content>
-          <SettingsSection title="Share" description="Share this recommendation via">
-            <div className={styles.shareHolder}>
-              <a
-                /* href="mailto:?subject=Travel recommendation for you on Pulfy &amp;body=Here is the travel recommendation for you.%0DSee detailed recommendation on http://www.pulfy.com/"
-               */
+          <Loader loading={loading || error}>
+            <SettingsSection title="Share"
+                             description="Share this recommendation via"
+            >
+              <div className={styles.shareHolder}>
+                <button className={styles.copyButton} onClick={copyToClipboard}>
+                  {url} <MdContentCopy />
+                </button>
+                <a
+                  href={`mailto:?subject=Travel recommendation for you on Pulfy&body=${
+                    createDynamicURL('mail')}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <EmailIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Email</div>
+                </a>
+                <a
+                  href={`https://wa.me/?text=${shortUrl}`}
+                  className={styles.shareButton}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <WhatsappIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Whatsapp</div>
+                </a>
+                <a
+                  href={`https://t.me/share/url?url=${createDynamicURL('telegram').url}&text=${
+                    createDynamicURL('telegram').text
+                  }`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <TelegramIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Telegram</div>
+                </a>
+                <a
+                  href={`fb-messenger://share/?link=${createDynamicURL('facebook').url}&app_id=${
+                    process.env.REACT_APP_FACEBOOK_APP_ID
+                  }`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <FacebookMessengerIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Messenger</div>
+                </a>
 
-                /*
+                <a
+                  href={`https://www.reddit.com/r/travel/submit?url=${
+                    createDynamicURL('reddit').url
+                  }&title=${createDynamicURL('reddit').text}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <RedditIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Reddit r/travel</div>
+                </a>
 
-                 href={`mailto:${qs.stringify(
-                  query
-                )}}?subject=Quote&body=I%20would%20like%20to%20accept%20this%20quote`}
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${
+                    createDynamicURL('twitter').text
+                  }&url=${createDynamicURL('twitter').url}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <TwitterIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Twitter</div>
+                </a>
 
-                */
+                <a
+                  href={`https://www.facebook.com/dialog/share?
+                app_id=1042368969717573&display=popup&href=${url}&redirect_uri=${url}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <FacebookIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Facebook</div>
+                </a>
 
-                href={`mailto:?subject=Travel recommendation for you on Pulfy&body=${createDynamicURL(
-                  'mail'
-                )}`}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <EmailIcon size={60} round={false} />
-                <div className={styles.shareText}>Email</div>
-              </a>
-              <a
-                href={`https://wa.me/?text=${createShortDynamicURL()}`}
-                className={styles.shareButton}
-                target="_blank"
-              >
-                <WhatsappIcon size={60} round={false} />
-                <div className={styles.shareText}>Whatsapp</div>
-              </a>
-              <a
-                href={`https://t.me/share/url?url=${createDynamicURL('telegram').url}&text=${
-                  createDynamicURL('telegram').text
-                }`}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <TelegramIcon size={60} round={false} />
-                <div className={styles.shareText}>Telegram</div>
-              </a>
-              <a
-                href={`fb-messenger://share/?link=${createDynamicURL('facebook').url}&app_id=${
-                  process.env.REACT_APP_FACEBOOK_APP_ID
-                }`}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <FacebookMessengerIcon size={60} round={false} />
-                <div className={styles.shareText}>Messenger</div>
-              </a>
+                <a
+                  href={`http://pinterest.com/pin/create/link/?url=${url}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <PinterestIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Pinterest</div>
+                </a>
 
-              <a
-                href={`https://www.reddit.com/r/travel/submit?url=${
-                  createDynamicURL('reddit').url
-                }&title=${createDynamicURL('reddit').text}`}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <RedditIcon size={60} round={false} />
-                <div className={styles.shareText}>Reddit r/travel</div>
-              </a>
+                <a
+                  href={`https://line.me/R/msg/text/?${shortUrl}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <LineIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Line</div>
+                </a>
 
-              <a
-                href={`https://twitter.com/intent/tweet?text=${
-                  createDynamicURL('twitter').text
-                }&url=${createDynamicURL('twitter').url}`}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <TwitterIcon size={60} round={false} />
-                <div className={styles.shareText}>Twitter</div>
-              </a>
-
-              <a
-                href={`https://www.facebook.com/dialog/share?
-                app_id=1042368969717573&display=popup&href=https://www.pulfy.com&redirect_uri=https://www.pulfy.com`}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <FacebookIcon size={60} round={false} />
-                <div className={styles.shareText}>Facebook</div>
-              </a>
-
-              <a
-                href="http://pinterest.com/pin/create/link/?url=pulfy.com"
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <PinterestIcon size={60} round={false} />
-                <div className={styles.shareText}>Pinterest</div>
-              </a>
-
-              <a
-                href={`https://line.me/R/msg/text/?${createShortDynamicURL()}`}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <LineIcon size={60} round={false} />
-                <div className={styles.shareText}>Line</div>
-              </a>
-
-              <a
-                href={'https://www.linkedin.com/sharing/share-offsite/?url=pulfy.com'}
-                target="_blank"
-                className={styles.shareButton}
-              >
-                <LinkedinIcon size={60} round={false} />
-                <div className={styles.shareText}>Linkedin</div>
-              </a>
-            </div>
-          </SettingsSection>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.shareButton}
+                >
+                  <LinkedinIcon size={60} round={false}/>
+                  <div className={styles.shareText}>Linkedin</div>
+                </a>
+              </div>
+            </SettingsSection>
+          </Loader>
         </SheetWrapper.Content>
-        <SheetWrapper.Footer onClick={onBack} text="Close" disabled={false} />
+        <SheetWrapper.Footer onClick={onBack} text="Close" disabled={false}/>
       </SheetWrapper>
     </div>
   )

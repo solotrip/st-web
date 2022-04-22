@@ -9,6 +9,7 @@ import profile from 'features/profile/slice'
 import recommendations from 'features/recommendations/slice'
 import locationReducer from 'features/recommendations/containers/location/slice'
 import filtersReducer from 'features/recommendations/containers/filters/slice'
+import shareRecommendation from 'features/recommendations/containers/share/slice'
 import datesReducer
   from 'features/recommendations/containers/date-selector/slice'
 import recentQueriesReducer from './recentQueriesSlice'
@@ -81,5 +82,6 @@ export default combineReducers({
   exchangeRates,
   browse,
   recentQueries,
-  localPreferences
+  localPreferences,
+  shareRecommendation
 })
