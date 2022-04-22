@@ -47,6 +47,7 @@ const ShareContainer = () => {
       recommendationsObject[activeRecommendationId].recommendations
     ) {
       const recommendations = recommendationsObject[activeRecommendationId].recommendations
+      if (recommendations.length === 1) return recommendations[0]
       return recommendations.find(r => location.pathname.includes(r.id))
     }
     return {}
@@ -60,12 +61,12 @@ const ShareContainer = () => {
   } = detailRecommendation
 
   useEffect(() => {
-    if (start && end && areaSid) {
+    if (start && end && areaSid && activeRecommendationId && recommendationsObject) {
       const {
         lat,
         lon,
         passports
-      } = recommendationsObject[activeRecommendationId].query
+      } = recommendationsObject[activeRecommendationId].query || {}
       dispatch(fetchRecommendation({
         start,
         end,
