@@ -23,7 +23,21 @@ const ListItem = ({ name, location, startDate, endDate, link, image, image_hash 
         height={332}
         alt={name}
       />
-    )}
+    )} {
+      !image_hash && image &&  (
+        <Image
+          src={  image + '?tr=w-612,h-664'}
+          srcsetProvided={true}
+          srcset={`${image}?tr=w-612,h-664,
+                               ${image}?tr=w-1224,h-1328 2x,
+                               ${image}?tr=w-1836,h-1992 3x`}
+          className={styles.image}
+          width={306}
+          height={332}
+          alt={name}
+        />
+      )
+    }
     <div className={styles.lower}>
       {name && (
         <div className={styles.info}>
