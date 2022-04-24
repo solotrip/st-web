@@ -16,7 +16,7 @@ const WishlistContainer = () => {
     () => {
       dispatch(fetchWishlist())
     },
-    [dispatch]
+    [dispatch, wishlist]
   )
 
   const removeFromWishlistHandler = useCallback(
@@ -48,7 +48,7 @@ const WishlistContainer = () => {
         loading={loading}
         // Put wishlist id in recommendation data
         // so that we can use it to get query and add to wishlist actions
-        recommendations={!loading && recommendations}
+        recommendations={recommendations.reverse()}
         user={user}
         queryFunction={recommendation => ({
           query: recommendation && wishlist[recommendation.recommendationId].query,
