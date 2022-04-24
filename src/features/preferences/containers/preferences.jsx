@@ -3,30 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 
 import { isGuestSelector } from 'features/profile/slice'
-import {
-  bucketlistHasSelectedSelector,
-  updateBucketlist
-} from './area-cluster/slice'
+import { bucketlistHasSelectedSelector, updateBucketlist } from './area-cluster/slice'
 
-const PreferencesContainer = ({
-  children,
-  page: Page,
-  isSettings
-}) => {
+const PreferencesContainer = ({ children, page: Page, isSettings }) => {
   const dispatch = useDispatch()
   const { index } = useParams()
   const history = useHistory()
 
-  const bucketlistHasSelected = useSelector(
-    bucketlistHasSelectedSelector
-  )
+  const bucketlistHasSelected = useSelector(bucketlistHasSelectedSelector)
 
   const isGuest = useSelector(isGuestSelector)
 
   const onNext = useCallback(
     i => {
       if (isSettings) {
-        if(history.length === 1) {
+        if (history.length === 1) {
           history.replace('/browse')
         } else {
           history.goBack()
@@ -39,7 +30,6 @@ const PreferencesContainer = ({
       case '2':
         break
       case '4':
-
         break
       default:
         return
@@ -51,7 +41,7 @@ const PreferencesContainer = ({
   const getNextEnabled = () => {
     switch (index) {
     case '1':
-      return bucketlistHasSelected
+      return true
     case '2':
       return true
     default:
@@ -62,12 +52,7 @@ const PreferencesContainer = ({
   const nextEnabled = getNextEnabled()
 
   return (
-    <Page
-      onNext={onNext}
-      nextEnabled={nextEnabled}
-      isGuest={isGuest}
-      isSettings={isSettings}
-    >
+    <Page onNext={onNext} nextEnabled={nextEnabled} isGuest={isGuest} isSettings={isSettings}>
       {children}
     </Page>
   )

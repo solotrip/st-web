@@ -13,7 +13,7 @@ const Footer = ({ onNext, nextEnabled }) => {
     if (onNext) {
       onNext(index)
     }
-    if (indexNumber < 2) {
+    if (indexNumber < 1) {
       history.push(`/onboarding/${indexNumber + 1}`)
     } else {
       history.push('/browse')
@@ -29,12 +29,7 @@ const Footer = ({ onNext, nextEnabled }) => {
         >
           Back
         </Link>
-        <Button
-          className={styles.next}
-          onClick={handleNext}
-          disabled={!nextEnabled}
-          text="Next"
-        />
+        <Button className={styles.next} onClick={handleNext} disabled={!nextEnabled} text="Next" />
       </div>
     </div>
   )

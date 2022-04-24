@@ -24,10 +24,10 @@ export const OnboardingRoutes = () => (
     <OnboardingContainer>
       <PreferencesContainer page={OnboardingPage}>
         <Switch>
-          <Route path="/onboarding/1">
+          {/*<Route path="/onboarding/1">
             <AreaClusterContainer />
-          </Route>
-          <Route path="/onboarding/2">
+</Route>*/}
+          <Route path="/onboarding/1">
             <OnboardingCompleteContainer />
           </Route>
         </Switch>
