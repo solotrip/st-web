@@ -1,16 +1,18 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { SidebarData } from './SidebarData'
 import styles from './Sidebar.module.scss'
 import { IconContext } from 'react-icons'
 import { Footer } from 'components'
 
 function SideBar() {
-
   return (
     <IconContext.Provider value={{ color: '#fff' }}>
       <div className={styles.sidebar}>
-        <div className={styles.logo} />
+        <Link to="/browse">
+          {' '}
+          <div className={styles.logo} />
+        </Link>
 
         <nav className={styles.navMenu}>
           {SidebarData.map((item, index) => {
