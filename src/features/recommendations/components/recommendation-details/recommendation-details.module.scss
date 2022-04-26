@@ -148,6 +148,25 @@
   line-height: 19px;
   font-size: 15px;
   margin-left: 18px;
+ 
+  width: 100%;
+  max-width: 250px;
+
+  .ul{
+    display: inline
+  }
+  .li{
+    display: inline;
+  }
+}
+
+.dang {
+  .ul{
+    display: inline
+  }
+  .li{
+    display: inline;
+  }
 }
 
 .elementText2 {

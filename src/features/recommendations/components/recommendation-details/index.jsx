@@ -313,10 +313,13 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 {' '}
                 <Attraction />
               </div>
-              <div
-                className={styles.elementText}
-                dangerouslySetInnerHTML={{ __html: country.safety.description }}
-              />
+              <div className={styles.elementText}>
+                {' '}
+                <div
+                  className={styles.dang}
+                  dangerouslySetInnerHTML={{ __html: country.safety.description }}
+                />
+              </div>
             </div>
         )}
       </Card>
