@@ -26,8 +26,6 @@ const Notification = ({ notification }) => {
         <></>
       )
 
-  const queryString = content.query
-
   return (
     <Card
       type={`${_capitalize(data.type)} Update`}
@@ -70,11 +68,7 @@ const Notification = ({ notification }) => {
       <Link
         to={{
           pathname: '/recommendations',
-          search:
-            qs.stringify(queryString) +
-            `&filters%5B0%5D%5Bid%5D=a&filters%5B0%5D%5Bvariables%5D%5BareaSids%5D%5B0%5D=${
-              content.new.sid
-            }`
+          search: qs.stringify(content.query)
         }}
       >
         <button className={styles.showDetails}>Show Details</button>

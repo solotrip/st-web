@@ -1,5 +1,4 @@
-/* eslint-disable max-len */
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './content.module.scss'
 import Notification from './notification'
 import { isBrowser } from 'react-device-detect'

@@ -1,14 +1,8 @@
 @import 'styles/mixins';
 
-.content {
-    display: flex;
-}
-
 .container {
-
-    height: 400px;
-    padding: 8px 8px 50px 8px;
-    max-height: 40vh;
+    padding: 8px;
+    height: 500px;
     @include xs-to-sm {
         padding: 0;
         max-height: unset;

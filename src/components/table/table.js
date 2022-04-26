@@ -1,49 +1,37 @@
-import React, { Component, useState, useRef, useLayoutEffect } from 'react'
-
-import { useHistory } from 'react-router'
-
+import React, { useLayoutEffect } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
-import * as am5themes_Animated from '@amcharts/amcharts5/themes/Frozen'
-import am5geodata_world from '@amcharts/amcharts5-geodata/worldLow'
+import  am5Responsive from '@amcharts/amcharts5/themes/Responsive'
 
 import useThemeState from 'utils/hooks/use-theme-state'
-
-var imageSize = 34
+import styles from './table.module.scss'
 const Table = ({
   valuesX,
   valuesY,
-  colors,
   data,
-  originCities,
-  destinationCities,
-  queryString,
-  basePath,
   DOMroot = 'chartdiv4',
   showContent = true
 }) => {
-  console.log({ valuesX, valuesY, data })
-  const history = useHistory()
-  const chartRef = useRef(null)
   const [appTheme] = useThemeState()
   const labelColor =
     appTheme === 'no-preference'
       ? am5.color(0xffffff)
       : appTheme === 'light'
-      ? am5.color(0x000000)
-      : am5.color(0xffffff)
+        ? am5.color(0x000000)
+        : am5.color(0xffffff)
 
   const strokeColor =
     appTheme === 'no-preference'
       ? am5.color(0x000000)
       : appTheme === 'light'
-      ? am5.color(0xffffff)
-      : am5.color(0x000000)
+        ? am5.color(0xffffff)
+        : am5.color(0x000000)
   useLayoutEffect(() => {
     var root = am5.Root.new(DOMroot)
+
     var chart = root.container.children.push(
       am5xy.XYChart.new(root, {
-        panX: false,
+        panX: true,
         panY: false,
         wheelX: 'none',
         wheelY: 'none',
@@ -53,7 +41,7 @@ const Table = ({
 
     var yRenderer = am5xy.AxisRendererY.new(root, {
       visible: false,
-      minGridDistance: 20,
+      minGridDistance: 4,
       inversed: true
     })
 
@@ -68,8 +56,7 @@ const Table = ({
 
     var xRenderer = am5xy.AxisRendererX.new(root, {
       visible: false,
-      minGridDistance: 10,
-      inversed: true
+      minGridDistance: 4
     })
 
     xRenderer.grid.template.set('visible', false)
@@ -80,71 +67,83 @@ const Table = ({
       })
     )
 
-    yAxis.get('renderer').labels.template.setAll({ fill: labelColor })
+    yAxis.get('renderer').labels.template.setAll({
+      fill: labelColor,
+      maxWidth: 120,
+      oversizedBehavior: 'wrap',
+      textAlign: 'right'
+    })
     xAxis.get('renderer').labels.template.setAll({
       fill: labelColor,
       oversizedBehavior: 'truncate',
-      maxWidth: 100
+      maxWidth: 90,
+      rotation: -90,
+      valign: 'middle',
+      dx: -12
     })
 
     // Create series
     // https://www.amcharts.com/docs/v5/charts/xy-chart/#Adding_series
     var series = chart.series.push(
       am5xy.ColumnSeries.new(root, {
-        calculateAggregates: false,
         stroke: strokeColor,
-        clustered: false,
         xAxis: xAxis,
         yAxis: yAxis,
         categoryXField: 'x',
         categoryYField: 'y',
         valueField: 'value',
-        oversizedBehavior: 'truncate'
+        panX: true,
+        panY: false
       })
     )
 
     series.columns.template.setAll({
-      tooltipText: '{y} in {x}\n{value}',
+      tooltipText: '[bold]{y} in\n{x}\n{rawValue}[/]',
       strokeOpacity: 1,
       strokeWidth: 2,
       cornerRadiusTL: 5,
       cornerRadiusTR: 5,
       cornerRadiusBL: 5,
       cornerRadiusBR: 5,
-      width: am5.percent(100),
-      height: am5.percent(100),
+      width: 50,
+      height: 40,
       templateField: 'columnSettings'
     })
 
-    var circleTemplate = am5.Template.new({})
-
-    // Add heat rule
-    // https://www.amcharts.com/docs/v5/concepts/settings/heat-rules/
-    series.set('heatRules', [
-      {
-        target: circleTemplate,
-        min: 0,
-        max: 10,
-        dataField: 'value',
-        key: 'radius'
-      }
-    ])
-
-    series.bullets.push(function () {
-      return am5.Bullet.new(root, {
-        sprite: am5.Circle.new(
-          root,
-          {
-            fillOpacity: 0.5,
-            strokeOpacity: 0
-          },
-          circleTemplate
-        )
-      })
+    const tooltip = am5.Tooltip.new(root, {
+      autoTextColor: false
     })
 
+    series.columns.template.setup = function(target) {
+      target.set('tooltip', tooltip)
+    }
+
+    const responsive =am5Responsive.newEmpty(root)
+    responsive.addRule({
+      relevant: am5Responsive.widthL,
+      applying: function() {
+        xAxis.zoomToIndexes(0, 3)
+        xAxis.events.once('datavalidated', function(ev) {
+          ev.target.zoomToIndexes(0, 3)
+        })
+      },
+      removing: function() {
+        xAxis.zoomToIndexes(0, 10)
+        xAxis.events.once('datavalidated', function(ev) {
+          ev.target.zoomToIndexes(0, 10)
+        })
+      }
+    })
+
+    root.setThemes([
+      responsive
+    ])
+
+    chart.zoomOutButton.set('forceHidden', true)
+
+    // Add scrollbar
     if (showContent) {
-      series.bullets.push(function () {
+      series.bullets.push(function() {
         return am5.Bullet.new(root, {
           sprite: am5.Label.new(root, {
             populateText: true,
@@ -152,7 +151,9 @@ const Table = ({
             centerY: am5.p50,
             text: '{value}',
             fill: am5.color(0xffffff),
-            oversizedBehavior: 'fit'
+            fontSize: 16,
+            textAlign: 'center',
+            fontWeight: 700
           })
         })
       })
@@ -163,19 +164,16 @@ const Table = ({
     yAxis.data.setAll(valuesY)
 
     xAxis.data.setAll(valuesX)
-
     // Make stuff animate on load
     chart.appear(1000, 100)
-    chartRef.current = chart
     return () => {
       root.dispose()
     }
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [DOMroot])
 
   return (
-    <div>
-      <div id={DOMroot} style={{ height: `calc(40vh)` }}></div>
-    </div>
+    <div id={DOMroot} className={styles.container}/>
   )
 }
 

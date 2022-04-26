@@ -19,7 +19,7 @@ const SheetWrapper = ({ children, disableDrag = false, closable = true, ...rest 
         }
       }
     },
-    [history]
+    [history, closable]
   )
 
   return (

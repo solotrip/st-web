@@ -4,7 +4,7 @@ import { Loader } from 'components'
 import Content from '../components/content'
 import { fetchNotifications, notificationsSelector } from '../slice'
 import { registerDevice } from 'utils/notification'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useQuery } from 'utils/hooks/use-query'
 
 const NotificationsContainer = () => {

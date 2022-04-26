@@ -1,9 +1,8 @@
 import React from 'react'
-import { ReactComponent as Logo } from 'assets/images/logo.svg'
 import styles from './chart.module.scss'
 import ContentLoader from 'react-content-loader'
 
-const ChartSkeleton = ({}) => {
+const ChartSkeleton = () => {
   return (
     <div className={styles.content}>
       <ContentLoader

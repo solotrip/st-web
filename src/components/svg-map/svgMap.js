@@ -1,62 +1,63 @@
-import React, { Component, useState, useRef, useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { useHistory } from 'react-router'
 
 import * as am5 from '@amcharts/amcharts5'
 import * as am5map from '@amcharts/amcharts5/map'
-import * as am5themes_Animated from '@amcharts/amcharts5/themes/Responsive'
-import am5geodata_world from '@amcharts/amcharts5-geodata/worldLow'
+import * as am5Theme from '@amcharts/amcharts5/themes/Responsive'
+import worldGeodata from '@amcharts/amcharts5-geodata/worldLow'
 
 import useThemeState from 'utils/hooks/use-theme-state'
 import styles from './svgmap.module.scss'
-var imageSize = 60
+import MapSkeleton from './mapSkeleton'
+
 const SvgMap = ({
   originCities,
   destinationCities,
-  queryString,
-  basePath,
-  contentType = 'recommendations',
+  halfHeight,
   DOMroot = 'chartdiv',
-  detailsOpenable = true
+  detailsOpenable = true,
+  loading
 }) => {
   const history = useHistory()
-  const chartRef = useRef(null)
   const [appTheme] = useThemeState()
+
   const mapPolygonColor =
     appTheme === 'no-preference'
       ? am5.color(0x181d26)
       : appTheme === 'light'
-      ? am5.color(0xf3f3f4)
-      : am5.color(0x181d26)
+        ? am5.color(0xf3f3f4)
+        : am5.color(0x181d26)
 
   const maskColor =
     appTheme === 'no-preference'
       ? am5.color(0x657a8f)
       : appTheme === 'light'
-      ? am5.color(0x9fc1e0)
-      : am5.color(0x657a8f)
+        ? am5.color(0x9fc1e0)
+        : am5.color(0x657a8f)
 
   const bgColor =
     appTheme === 'no-preference'
       ? am5.color(0x000000)
       : appTheme === 'light'
-      ? am5.color(0xffffff)
-      : am5.color(0x000000)
+        ? am5.color(0xffffff)
+        : am5.color(0x000000)
 
-  useLayoutEffect(() => {
-    var root = am5.Root.new(DOMroot)
-    root.setThemes(am5themes_Animated)
+  useEffect(() => {
+    if (loading) return
+    let root = am5.Root.new(DOMroot)
+    root.setThemes(am5Theme)
     let chart = root.container.children.push(
       am5map.MapChart.new(root, {
         projection: am5map.geoMercator()
       })
     )
 
-    var polygonSeries = chart.series.push(
-      am5map.MapPolygonSeries.new(root, { geoJSON: am5geodata_world })
+    let polygonSeries = chart.series.push(
+      am5map.MapPolygonSeries.new(root, { geoJSON: worldGeodata })
     )
 
-    var backgroundSeries = chart.series.unshift(
+    let backgroundSeries = chart.series.unshift(
       am5map.MapPolygonSeries.new(root, {
         width: am5.p100,
         height: am5.p100
@@ -75,7 +76,7 @@ const SvgMap = ({
     })
     polygonSeries.mapPolygons.template.setAll({ fill: mapPolygonColor })
 
-    var lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}))
+    let lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}))
     lineSeries.mapLines.template.setAll({
       strokeWidth: 2,
       strokeOpacity: 0.5
@@ -97,12 +98,12 @@ const SvgMap = ({
       })
     )
 
-    var originSeries = chart.series.push(
+    let originSeries = chart.series.push(
       am5map.MapPointSeries.new(root, { idField: 'id' })
     )
 
-    originSeries.bullets.push(function () {
-      var circle = am5.Circle.new(root, {
+    originSeries.bullets.push(function() {
+      let circle = am5.Circle.new(root, {
         radius: 5,
         tooltipText: 'From: {title}',
         cursorOverStyle: 'pointer',
@@ -112,7 +113,7 @@ const SvgMap = ({
         strokeWidth: 0
       })
 
-      circle.events.on('click', function (e) {
+      circle.events.on('click', function(e) {
         selectOrigin(e.target.dataItem.get('id'))
       })
 
@@ -121,14 +122,14 @@ const SvgMap = ({
       })
     })
 
-    var destinationSeries = chart.series.push(
+    let destinationSeries = chart.series.push(
       am5map.MapPointSeries.new(root, {})
     )
 
-    var circleTemplate = am5.Template.new({})
-    destinationSeries.bullets.push(function (root, series, dataItem) {
-      var bulletContainer = am5.Container.new(root, {})
-      var circle = bulletContainer.children.push(
+    let circleTemplate = am5.Template.new({})
+    destinationSeries.bullets.push(function(root) {
+      let bulletContainer = am5.Container.new(root, {})
+      let circle = bulletContainer.children.push(
         am5.Circle.new(
           root,
           {
@@ -151,7 +152,7 @@ const SvgMap = ({
         tooltipY: 0
       })
 
-      var maskCircle = bulletContainer.children.push(
+      let maskCircle = bulletContainer.children.push(
         am5.Circle.new(root, {
           radius: 20,
           tooltipText: '{title}',
@@ -181,7 +182,7 @@ const SvgMap = ({
       })
 
       // only containers can be masked, so we add image to another container
-      var imageContainer = bulletContainer.children.push(
+      let imageContainer = bulletContainer.children.push(
         am5.Container.new(root, {
           mask: maskCircle,
           tooltipText: '{title}',
@@ -194,7 +195,7 @@ const SvgMap = ({
         stateAnimationDuration: 10
       })
 
-      var image = imageContainer.children.push(
+      let image = imageContainer.children.push(
         am5.Picture.new(root, {
           templateField: 'pictureSettings',
           centerX: am5.p50,
@@ -204,22 +205,14 @@ const SvgMap = ({
         })
       )
 
+      const openLink = e => {
+        history.push(e.target.dataItem.dataContext.link)
+      }
+
       if (detailsOpenable) {
-        maskCircle.events.on('click', function (e) {
-          history.push(
-            basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
-          )
-        })
-        image.events.on('click', function (e) {
-          history.push(
-            basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
-          )
-        })
-        imageContainer.events.on('click', function (e) {
-          history.push(
-            basePath + '/r/' + e.target.dataItem.dataContext.qid + queryString
-          )
-        })
+        maskCircle.events.on('click', openLink)
+        image.events.on('click', openLink)
+        imageContainer.events.on('click', openLink)
       }
 
       return am5.Bullet.new(root, {
@@ -231,23 +224,21 @@ const SvgMap = ({
     originSeries.data.setAll(originCities)
     destinationSeries.data.setAll(destinationCities)
 
-    function selectOrigin (id) {
+    function selectOrigin(id) {
       currentId = id
-      var dataItem = originSeries.getDataItemById(id)
-      var dataContext = dataItem.dataContext
+      let dataItem = originSeries.getDataItemById(id)
+      let dataContext = dataItem.dataContext
       chart.zoomToGeoPoint(dataContext.zoomPoint, dataContext.zoomLevel, true)
 
-      var destinations = dataContext.destinations
-      var lineSeriesData = []
-      var originLongitude = dataItem.get('longitude')
-      var originLatitude = dataItem.get('latitude')
+      let destinations = dataContext.destinations
 
-      am5.array.each(destinations, function (did) {
-        var destinationDataItem = destinationSeries.getDataItemById(did)
-        if (!destinationDataItem) {
-          destinationDataItem = originSeries.getDataItemById(did)
-        }
-        lineSeriesData.push({
+      let originLongitude = dataItem.get('longitude')
+      let originLatitude = dataItem.get('latitude')
+
+      const lineSeriesData = am5.array.map(destinations, did => {
+        const destinationDataItem = destinationSeries.getDataItemById(did) ||
+          originSeries.getDataItemById(did)
+        return{
           geometry: {
             type: 'LineString',
             coordinates: [
@@ -258,36 +249,35 @@ const SvgMap = ({
               ]
             ]
           }
-        })
+        }
       })
       lineSeries.data.setAll(lineSeriesData)
     }
-    var currentId = originCities[0].id
 
-    destinationSeries.events.on('datavalidated', function () {
+    let currentId = originCities[0].id
+
+    destinationSeries.events.on('datavalidated', function() {
       selectOrigin(currentId)
     })
 
     // Make stuff animate on load
     chart.appear(1000, 100)
-    chartRef.current = chart
     return () => {
       root.dispose()
     }
-  }, [contentType])
+  },
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  [DOMroot]
+  )
+
+  if (loading) return <MapSkeleton/>
 
   return (
-    <div>
-      <div
-        id={DOMroot}
-        style={
-          contentType === 'recommendations'
-            ? { height: `calc(50vh)` }
-            : { height: `calc(100vh)` }
-        }
-        className={styles.content}
-      ></div>
-    </div>
+    <div
+      id={DOMroot}
+
+      className={styles.content}
+    />
   )
 }
 

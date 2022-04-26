@@ -7,8 +7,6 @@ import DateSelectorContainer from './containers/date-selector'
 import FiltersContainer from './containers/filters'
 import LocationContainer from './containers/location'
 import PassportCountriesContainer from './containers/passport-countries'
-import MapContainer from './containers/map'
-import AnalyticsContainer from './containers/analytics'
 import ShareContainer from './containers/share'
 
 const Routes = () => (
@@ -34,12 +32,6 @@ const Routes = () => (
           </Route>
           <Route path="/recommendations/filters">
             <FiltersContainer />
-          </Route>
-          <Route path="/recommendations/analytics">
-            <AnalyticsContainer />
-          </Route>
-          <Route path="/recommendations/map">
-            <MapContainer />
           </Route>
           <Route path="/recommendations/r/:sid/:start/:end/share">
             <ShareContainer />

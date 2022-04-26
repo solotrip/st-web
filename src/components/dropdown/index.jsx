@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
-const DropDown = ({ options, value, onSelect, className, placeholder = null }) => {
+const DropDown = ({ options, value, onSelect, className, placeholder = null, ...rest }) => {
   return (
     <Select
       className="pulfy-select"
@@ -10,6 +10,7 @@ const DropDown = ({ options, value, onSelect, className, placeholder = null }) =
       options={options}
       onChange={onSelect}
       placeholder={placeholder}
+      {...rest}
     />
   )
 }

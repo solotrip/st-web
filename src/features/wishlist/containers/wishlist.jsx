@@ -10,7 +10,7 @@ import Header from '../../recommendations/components/header'
 const WishlistContainer = () => {
   const { wishlist, loading, wishlisted } = useSelector(wishlistSelector)
   const location = useLocation()
-  const { data: user, loading: profileLoading } = useSelector(profileSelector)
+  const { data: user } = useSelector(profileSelector)
   const dispatch = useDispatch()
   useEffect(
     () => {
