@@ -7,12 +7,24 @@ import useThemeState from 'utils/hooks/use-theme-state'
 import styles from '../sidePanel.module.scss'
 import MapSkeleton from 'components/svg-map/mapSkeleton'
 
-const AnalyticsMap = ({ recommendations = [], query, loading, halfHeight, id='map' }) => {
+const AnalyticsMap = ({
+  recommendations = [],
+  query,
+  loading,
+  halfHeight,
+  id = 'map'
+}) => {
   const { activeLocation, locations } = useSelector(locationSelector)
   const locationDetails = locations[activeLocation]
   const [appTheme] = useThemeState()
-  const qlat = _get(query, 'lat', locationDetails.lat )
-  const qlon = _get(query, 'lon', locationDetails.lat )
+  const qlat =
+    locationDetails && locationDetails.lat
+      ? _get(query, 'lat', locationDetails.lat)
+      : 41.013
+  const qlon =
+    locationDetails && locationDetails.lon
+      ? _get(query, 'lon', locationDetails.lat)
+      : 28.94
   const qname = _get(locationDetails, 'name', '')
 
   const origin = [
@@ -29,37 +41,39 @@ const AnalyticsMap = ({ recommendations = [], query, loading, halfHeight, id='ma
   const destinations = recommendations.map(recommendation => {
     const image = recommendation.area_has_image
       ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
-      : (_get(recommendation, 'events[0].images[0]') ?
-        `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}` :
-        appTheme === 'light'
-          ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
-          : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png')
+      : _get(recommendation, 'events[0].images[0]')
+      ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
+      : appTheme === 'light'
+      ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
+      : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
     return {
       qid: recommendation.id,
       id: recommendation.sid,
       link: recommendation.link,
       title: recommendation.name,
-      geometry: { type: 'Point', coordinates: [recommendation.lon, recommendation.lat] },
+      geometry: {
+        type: 'Point',
+        coordinates: [recommendation.lon, recommendation.lat]
+      },
       pictureSettings: {
         src: image
       }
     }
   })
 
-
-  return  <div className={styles.upperContainer}>
-    {loading && <MapSkeleton />}
-    {!loading && (
-      <SvgMap
-        DOMroot={id}
-        originCities={origin}
-        destinationCities={destinations}
-        halfHeight={halfHeight}
-      />
-    )}
-  </div>
-
+  return (
+    <div className={styles.upperContainer}>
+      {loading && <MapSkeleton />}
+      {!loading && (
+        <SvgMap
+          DOMroot={id}
+          originCities={origin}
+          destinationCities={destinations}
+          halfHeight={halfHeight}
+        />
+      )}
+    </div>
+  )
 }
-
 
 export default AnalyticsMap

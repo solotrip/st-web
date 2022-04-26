@@ -100,17 +100,7 @@ const Recommendation = ({
               {' '}
               <Calendar />
             </div>
-            {country &&
-              country.safety &&
-              country.safety.riskLevel && (
-                <div className={styles.contentElement}>
-                  <div className={styles.elementIcon}>
-                    {' '}
-                    <Passport />
-                  </div>
-                  <div className={styles.elementText}>Safety: ${country.safety.riskLevel}</div>
-                </div>
-            )}
+
             <div className={styles.elementText}>
               {formatAsMonthDay(startDate)}
               {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
@@ -124,6 +114,17 @@ const Recommendation = ({
               </div>
               <div className={styles.elementText}>{visaText}</div>
             </div>
+          )}
+          {country &&
+            country.safety &&
+            country.safety.riskLevel && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Passport />
+                </div>
+                <div className={styles.elementText}>Safety: {country.safety.riskLevel}</div>
+              </div>
           )}
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>

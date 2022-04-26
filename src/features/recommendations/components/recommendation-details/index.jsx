@@ -313,7 +313,10 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 {' '}
                 <Attraction />
               </div>
-              <div className={styles.elementText}>{country.safety.description}</div>
+              <div
+                className={styles.elementText}
+                dangerouslySetInnerHTML={{ __html: country.safety.description }}
+              />
             </div>
         )}
       </Card>
