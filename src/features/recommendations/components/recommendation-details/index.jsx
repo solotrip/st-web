@@ -55,7 +55,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     activities,
     tripdays,
     area_has_image: areaHasImage,
-    area_perex: description
+    area_perex: description,
+    country
   } = recommendation
 
   const {
@@ -301,6 +302,19 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             >
               Check Information on Official Website
             </button>
+        )}
+      </Card>
+      <Card title="Safety" type="Highlights" className={styles.recommendationCard}>
+        {country &&
+          country.safety &&
+          country.safety.description && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Attraction />
+              </div>
+              <div className={styles.elementText}>{country.safety.description}</div>
+            </div>
         )}
       </Card>
       <Card title="Status" type="Overview" className={styles.recommendationCard}>
