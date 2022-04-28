@@ -304,25 +304,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             </button>
         )}
       </Card>
-      <Card title="Safety" type="Highlights" className={styles.recommendationCard}>
-        {country &&
-          country.safety &&
-          country.safety.description && (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <Attraction />
-              </div>
-              <div className={styles.elementText}>
-                {' '}
-                <div
-                  className={styles.dang}
-                  dangerouslySetInnerHTML={{ __html: country.safety.description }}
-                />
-              </div>
-            </div>
-        )}
-      </Card>
+
       <Card title="Status" type="Overview" className={styles.recommendationCard}>
         {barText && (
           <div className={styles.contentElement}>
@@ -632,6 +614,27 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             </div>
           )}
         </Card>
+      )}
+      {country &&
+        country.safety &&
+        country.safety.description && (
+          <Card title="Safety" type="Country" className={styles.recommendationCard}>
+            {
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Attraction />
+                </div>
+                <div className={styles.elementText}>
+                  {' '}
+                  <div
+                    className={styles.dang}
+                    dangerouslySetInnerHTML={{ __html: country.safety.description }}
+                  />
+                </div>
+              </div>
+            }
+          </Card>
       )}
       {topPois &&
         topPois.filter(poi => poi.poi_has_image === true).length > 0 && (

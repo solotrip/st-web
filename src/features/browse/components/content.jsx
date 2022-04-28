@@ -23,10 +23,11 @@ const ListItem = ({ name, location, startDate, endDate, link, image, image_hash 
         height={332}
         alt={name}
       />
-    )} {
-      !image_hash && image &&  (
+    )}{' '}
+    {!image_hash &&
+      image && (
         <Image
-          src={  image + '?tr=w-612,h-664'}
+          src={image + '?tr=w-612,h-664'}
           srcsetProvided={true}
           srcset={`${image}?tr=w-612,h-664,
                                ${image}?tr=w-1224,h-1328 2x,
@@ -36,8 +37,7 @@ const ListItem = ({ name, location, startDate, endDate, link, image, image_hash 
           height={332}
           alt={name}
         />
-      )
-    }
+    )}
     <div className={styles.lower}>
       {name && (
         <div className={styles.info}>
@@ -72,7 +72,35 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
           ))}
         </div>
       )}
-      {items.map(group => (
+      {console.log('flatted:', items.flat())}
+      <ul className={styles.browseCards}>
+        {items.flat().map(item => (
+          <li className={styles.browseCards__item}>
+            <Link className={styles.browseCard} to={item.link}>
+              {' '}
+              <div
+                className={styles.browseCard__image}
+                style={
+                  item.image_hash
+                    ? {
+                      backgroundImage: `url(https://ik.imagekit.io/stmedia/browse/${
+                        item.image_hash
+                      }?tr=w-1360,h-1360)`
+                    }
+                    : {
+                      backgroundImage: `url(${item.image}?tr=w-1360,h-1360s`
+                    }
+                }
+              />
+              <div className={styles.browseCard__content}>
+                <div className={styles.browseCard_title}>{item.name}</div>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+
+      {/*items.map(group => (
         <HorizontalList
           key={`hl-group-${group[0].category}`}
           title={group[0].category}
@@ -80,7 +108,7 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
           itemClassName={styles.card}
           isBrowse={true}
         />
-      ))}
+      ))*/}
     </div>
   )
 }

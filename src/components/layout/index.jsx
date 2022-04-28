@@ -4,17 +4,12 @@ import cn from 'classnames'
 import styles from './layout.module.scss'
 
 const Layout = ({ children, header, bottomBar, sidebar }) => {
-
   return (
     <div className={styles.layout}>
-      {header && <div className={styles.header}>
-        {header}
-      </div>}
+      {header && <div className={styles.header}>{header}</div>}
       <div className={cn(styles.main, { noHeader: !header })}>
-        {sidebar}
-        <div className={cn(styles.content)}>
-          {children}
-        </div>
+        {/*sidebar*/}
+        <div className={cn(styles.content)}>{children}</div>
         {bottomBar}
       </div>
     </div>

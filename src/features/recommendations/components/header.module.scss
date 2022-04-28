@@ -2,6 +2,7 @@
 
 .expanded {
   width: 100%;
+  
   @include md-to-xl {
     height: 130px;
 
@@ -9,6 +10,8 @@
   outline: none;
    box-shadow: none;
    -webkit-tap-highlight-color: transparent;
+   display: flex;
+   flex-direction: row;
 }
 
 .navbarFixed {
@@ -18,6 +21,8 @@
   outline: none;
    box-shadow: none;
    -webkit-tap-highlight-color: transparent;
+   display: flex;
+   flex-direction: row;
 }
 
 .navbarFixedIos {
@@ -28,6 +33,8 @@
   outline: none;
    box-shadow: none;
    -webkit-tap-highlight-color: transparent;
+   display: flex;
+   flex-direction: row;
 }
 
 .actions {
@@ -36,11 +43,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 584px;
+  max-width: 784px;
   padding: 4px 16px;
   flex: 1;
   @include md-to-lg {
-    max-width: 450px;
+    max-width: 650px;
   }
   outline: none;
    box-shadow: none;
@@ -57,6 +64,31 @@
 
 .editSearch {
   width: calc(100vw - 72px);
+ 
+  max-width: 600px;
+  max-height: 48px;
+  background: $card-bg-color;
+  border-radius: 10px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  transition: all 0.3s;
+  transition-timing-function: ease-out;
+  color: $sub-text-color;
+
+  &.exp {
+    width: 100%;
+    max-height: 150px;
+    height: fit-content;
+  }
+}
+
+.editSearchTrackless {
+  width: calc(100vw - 72px);
+  @include xs-to-sm {
+    width: calc(100vw - 16px);
+  }
   max-width: 600px;
   max-height: 48px;
   background: $card-bg-color;
@@ -159,4 +191,60 @@
   @include md-to-xl {
     flex-direction: row;
   }
+}
+
+
+.headerLogo{
+  
+  height: 100%;
+ 
+  height: 50px;
+  width: 150px;
+ 
+  
+  background-size: cover;
+  background-image: $logo;
+  @include xs-to-sm {
+    display: none;
+  }
+}
+
+.headerLink {
+  @include xs-to-sm {
+    display: none;
+  }
+}
+
+.upperHeader{
+  background-color: pink;
+  display: none;
+  @include xs-to-sm {
+    display: block;
+    display: none;
+  }
+}
+
+
+.navigator {
+  //background-color: pink;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 50px;
+  @include xs-to-sm {
+   
+    display: none;
+  }
+
+}
+
+.navigatorItem{
+  font-size: 18px;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #3cafeb;
+  padding-right: 15px;
+  padding-left: 15px;
+ // background-color: aquamarine;
 }

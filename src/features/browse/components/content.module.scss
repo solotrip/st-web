@@ -139,3 +139,119 @@ line-height: 30px;
   flex-direction: column;
   
 }
+
+
+.browseCards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  //background-color: red;
+}
+
+.browseCards__item {
+  display: flex;
+  padding: 1rem;
+  @media(min-width: 40rem) {
+    width: 50%;
+  }
+  @media(min-width: 56rem) {
+    width: 33.3333%;
+  }
+  @media(min-width: 84rem) {
+    width: 20%;
+  }
+}
+
+.browseCard {
+  //background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  @include xs-to-sm {
+    min-width: calc(100vw - 50px);
+  }
+  border: 1px solid $border-color;
+  
+  
+}
+
+.browseCard__image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  //filter: saturate(180%);
+  overflow: hidden;
+  position: relative;
+  ;
+  &::before {
+    content: "";
+	  display: block;
+    padding-top: 100.25%; // 16:9 aspect ratio
+  }
+  @media(min-width: 40rem) {
+    &::before {
+      padding-top: 66.6%; // 3:2 aspect ratio
+    }
+  }
+  
+ 
+}
+
+.browseCard__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: end;
+  justify-items: flex-end;
+  
+  padding: 1rem;
+  width: 100%;
+  background-color: transparent;
+  
+  margin-top: -100px;
+
+
+  z-index: 3;
+  //background-color: aqua;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%);
+  @include xs-to-sm {
+    margin-top: -300px;
+padding-bottom: 200px;
+background: linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,1) 100%);
+}
+
+}
+
+.browseCard_title {
+  @include roboto-medium;
+  //@extend .textShadow;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-size: min(max(20px, calc(40px - 3.5vw)),25px);
+  font-weight: 400;
+  color: white;
+  //background-color: green;
+  height: 100%;
+  @include xs-to-sm {
+   margin-top: 150px;
+   margin-bottom: -150px;
+}
+ 
+
+}
+
+.browseCard__text {
+  flex: 1 1 auto;
+  //font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+
+}
