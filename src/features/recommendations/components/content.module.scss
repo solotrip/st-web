@@ -21,7 +21,8 @@
 .recommendations {
   @include custom-scroll;
   display: flex;
-  max-width: 386px;
+  //max-width: 386px;586px;
+  max-width: 686px;
   width: 100%;
   padding: 16px;
   flex-direction: column;
@@ -54,7 +55,7 @@
 .recommendationDetails {
   @include custom-scroll;
   display: flex;
-  max-width: 586px; //584px
+  max-width: 686px; //586px
   padding: 0px;
   //padding-left: 30px;
   flex-direction: column;

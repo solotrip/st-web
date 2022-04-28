@@ -3,15 +3,21 @@
 .recommendationCard {
   display: flex;
   flex-direction: column;
-  background-color: $card-content-recommendation;
+  
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  max-width: 386px;
+  //max-width: 386px;
   //min-height: 650px;
-  min-width: 322px;
+  //min-width: 322px;
   margin-top: 37px;
   border-radius: 5px;
+  
+  //background: url('https://ik.imagekit.io/stmedia/areas/albuquerque?tr=w-1600,h-1300'),linear-gradient(to left,rgba(0,0,0,0.0) -100%,$card-content-recommendation 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,$card-content-recommendation 100%);
+  background-color: $card-content-recommendation;
+  //background-color: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 80%);
+  background-blend-mode: overlay;
+ 
 
 }
 

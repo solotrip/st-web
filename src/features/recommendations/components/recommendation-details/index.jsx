@@ -641,29 +641,29 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
             <div className={styles.events}>
               {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
-                <div key={`poi-${i}-${poi.id}`} className={styles.centeredSlide}>
+                <div key={`poi-${i}-${poi.id}`} className={styles.slide}>
                   <Image
                     src={
                       poi.poi_has_image
                         ? 'https://ik.imagekit.io/stmedia/pois/' +
                           getPoiImage(poi, appTheme === 'light') +
-                          '?tr=w-278,h-180'
+                          '?tr=w-600,h-388'
                         : getDefaultImage(poi, appTheme === 'light')
                     }
                     srcsetProvided={true}
                     srcset={`https://ik.imagekit.io/stmedia/pois/${getPoiImage(
                       poi,
                       appTheme === 'light'
-                    )}?tr=w-278,h-180,
+                    )}?tr=w-600,h-388,
                              https://ik.imagekit.io/stmedia/pois/${getPoiImage(
                       poi,
                       appTheme === 'light'
-                    )}?tr=w-556,h-360 2x,
+                    )}?tr=w-1200,h-776 2x,
                              https://ik.imagekit.io/stmedia/pois/${getPoiImage(
                       poi,
                       appTheme === 'light'
-                    )}?tr=w-834,h-540 3x`}
-                    className={styles.slideImage2}
+                    )}?tr=w-1800,h-1164 3x`}
+                    className={styles.slideImage}
                     width={200}
                     height={120}
                     alt={poi.name}
@@ -697,7 +697,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                       activityImages[activity].image_hash
                         ? 'https://ik.imagekit.io/stmedia/activities/' +
                           activityImages[activity].image_hash +
-                          '?tr=w-278,h-180'
+                          '?tr=w-600,h-388'
                         : ''
                     }
                     srcsetProvided={true}
@@ -708,16 +708,16 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                       activityImages[activity].image_hash
                         ? `https://ik.imagekit.io/stmedia/activities/${
                           activityImages[activity].image_hash
-                        }?tr=w-278,h-180,
+                        }?tr=w-600,h-388,
                              https://ik.imagekit.io/stmedia/activities/${
                                activityImages[activity].image_hash
-                             }?tr=w-556,h-360 2x,
+                             }?tr=w-1200,h-776 2x,
                              https://ik.imagekit.io/stmedia/activities/${
                                activityImages[activity].image_hash
-                             }?tr=w-834,h-540 3x`
+                             }?tr=w-1800,h-1164 3x`
                         : ''
                     }
-                    className={styles.slideImage2}
+                    className={styles.slideImage}
                     width={278}
                     height={180}
                     alt={activity}

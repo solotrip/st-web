@@ -63,8 +63,21 @@ const Recommendation = ({
   } = processRecommendation(recommendation, passports)
   const [appTheme] = useThemeState()
 
+  console.log('apptheme is:', appTheme)
+
   return (
-    <div className={styles.recommendationCard}>
+    <div
+      className={styles.recommendationCard}
+      style={
+        appTheme === 'light'
+          ? {
+            background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1300,h-1480),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#f3f3f4 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#f3f3f4 50%)`
+          }
+          : {
+            background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1300,h-1480),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#181d26 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#181d26 50%)`
+          }
+      }
+    >
       {' '}
       <div className={styles.colorStrip} />
       <div className={styles.cardContent}>
