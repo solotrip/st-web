@@ -12,7 +12,7 @@ const OnboardingPage = ({ children, onNext, nextEnabled }) => {
       <div
         className={cn(Capacitor.getPlatform() === 'ios' ? styles.containerIos : styles.container)}
       >
-        <Header />
+        {/*<Header />*/}
         <div className={styles.content}>{children}</div>
       </div>
       <Footer onNext={onNext} nextEnabled={nextEnabled} />

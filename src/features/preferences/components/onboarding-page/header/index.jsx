@@ -15,6 +15,7 @@ const Header = () => {
       link: '/onboarding/2'
     }
   ]
+
   const { index } = useParams()
   const indexNumber = parseInt(index)
 
