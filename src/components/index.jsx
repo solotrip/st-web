@@ -11,9 +11,7 @@ export {
 } from './input'
 export { default as Layout } from './layout'
 export { default as Loader } from './loader'
-export {
-  default as NotAuthenticatedRoute
-} from './routes/not-authenticated-route'
+export { default as NotAuthenticatedRoute } from './routes/not-authenticated-route'
 export { default as SheetWrapper } from './sheet-wrapper'
 export { default as ThemeSwitch } from './theme-switch'
 export { default as Footer } from './footer'
@@ -29,3 +27,4 @@ export { default as Distance } from './distance'
 export { default as SideBar } from './sidebar'
 export { default as BottomBar } from './bottom-bar'
 export { default as OnBoardedRoutesWrapper } from './routes/onboarded-routes-wrapper'
+export { default as BrowseLayout } from './browse-layout'

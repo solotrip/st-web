@@ -8,6 +8,7 @@ import BrowseRoutes from './features/browse/routes'
 import SavedRoutes from './features/track/routes'
 import { OnboardingRoutes, SettingsRoute } from './features/preferences/routes'
 import { BottomBar, Layout, Loader, MonthPicker, NotAuthenticatedRoute, SideBar } from 'components'
+import { BrowseLayout } from 'components'
 import DateSelectorContainer from 'features/recommendations/containers/date-selector'
 import WelcomeContainer from 'features/welcome/containers'
 import SEO from './seo'
@@ -30,24 +31,21 @@ const DevRoutes = () => (
 
 const MainRoutes = () => {
   return (
-    <Route
-      path={[
-        '/browse',
-        '/recommendations',
-        '/notifications',
-        '/wishlist',
-        '/saved',
-        '/preferences'
-      ]}
-    >
-      <Layout sidebar={<SideBar />} bottomBar={<BottomBar />}>
-        <BrowseRoutes />
-        <RecommendationRoutes />
-        <NotificationRoutes />
-        <WishlistRoutes />
-        <SavedRoutes />
-      </Layout>
-    </Route>
+    <>
+      <Route path={['/recommendations', '/notifications', '/wishlist', '/saved', '/preferences']}>
+        <Layout sidebar={<SideBar />} bottomBar={<BottomBar />}>
+          <RecommendationRoutes />
+          <NotificationRoutes />
+          <WishlistRoutes />
+          <SavedRoutes />
+        </Layout>
+      </Route>
+      <Route path={['/browse']}>
+        <BrowseLayout sidebar={<SideBar />} bottomBar={<BottomBar />}>
+          <BrowseRoutes />
+        </BrowseLayout>
+      </Route>
+    </>
   )
 }
 
