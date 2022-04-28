@@ -8,6 +8,7 @@ import { formatAsMonthDay } from '../../../utils/date'
 import { ReactComponent as Location } from 'assets/images/new-icons/location.svg'
 import { Link } from 'react-router-dom'
 import qs from 'qs'
+import countries from 'assets/data/countries.json'
 
 const ListItem = ({ name, location, startDate, endDate, link, image, image_hash }) => (
   <Link className={styles.wrapper} to={link}>
@@ -51,7 +52,8 @@ const ListItem = ({ name, location, startDate, endDate, link, image, image_hash 
 const Content = ({ items, recentQueries, filtersDict, locations }) => {
   return (
     <div className={styles.page}>
-      {recentQueries.length > 0 && (
+      {console.log('recentq:', recentQueries)}
+      {/*recentQueries.length > 0 && (
         <div className={styles.queries}>
           <h2>Recent</h2>
           {recentQueries.map((q, i) => (
@@ -71,8 +73,46 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
             </Link>
           ))}
         </div>
+          )*/}
+
+      {recentQueries.length > 0 && (
+        <ul className={styles.browseCards}>
+          {recentQueries.map((q, i) => (
+            <li className={styles.browseCards__item}>
+              <Link className={styles.browseCard} to={`recommendations?${qs.stringify(q)}`}>
+                {' '}
+                <div
+                  className={styles.browseCard__image}
+                  style={{
+                    backgroundImage:
+                      'url(https://ik.imagekit.io/stmedia/browse/54458236879c6d99974df7145403075b?tr=w-1360,h-1360)'
+                  }}
+                />
+                <div className={styles.browseCard__content}>
+                  <div className={styles.browseCard_title}>
+                    Recent Search
+                    <Link
+                      className={styles.queryLink}
+                      key={`rec-q-${i}`}
+                      to={`recommendations?${qs.stringify(q)}`}
+                    >
+                      <Query
+                        className={styles.queryBrowse}
+                        enableClick={false}
+                        maxFiltersDisplayed={4}
+                        query={q}
+                        filtersDict={filtersDict}
+                        locations={locations}
+                        browseQuery={true}
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
-      {console.log('flatted:', items.flat())}
       <ul className={styles.browseCards}>
         {items.flat().map(item => (
           <li className={styles.browseCards__item}>

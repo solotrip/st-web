@@ -22,7 +22,8 @@ const Query = ({
   prefixClassName,
   maxFiltersDisplayed = 2,
   maxMonths = 2,
-  locationNameMaxLength = 15
+  locationNameMaxLength = 15,
+  browseQuery = false
 }) => {
   const navigate = path => {
     history.push({ pathname: path, search: location.search })
