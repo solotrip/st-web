@@ -96,12 +96,12 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
       {areaHasImage && (
         <Image
           alt={name}
-          height={225}
+          height={325}
           srcsetProvided={true}
-          src={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-350,h-225`}
-          srcset={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-700,h-550,
-                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1400,h-1100 2x,
-                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-2100,h-1650 3x`}
+          src={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-800,h-650`}
+          srcset={`https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-800,h-650,
+                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1600,h-1300 2x,
+                   https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-2400,h-1950 3x`}
           className={styles.headerImage}
           isRounded={false}
         />

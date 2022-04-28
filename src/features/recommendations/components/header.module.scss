@@ -2,7 +2,7 @@
 
 .expanded {
   width: 100%;
-  
+
   @include md-to-xl {
     height: 130px;
 
@@ -17,6 +17,7 @@
 .navbarFixed {
   z-index: 3;
   height: 58px;
+  
   width: 100%;
   outline: none;
    box-shadow: none;
