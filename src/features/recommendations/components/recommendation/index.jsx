@@ -63,8 +63,6 @@ const Recommendation = ({
   } = processRecommendation(recommendation, passports)
   const [appTheme] = useThemeState()
 
-  console.log('apptheme is:', appTheme)
-
   return (
     <div
       className={styles.recommendationCard}

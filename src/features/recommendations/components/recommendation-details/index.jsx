@@ -8,7 +8,7 @@ import activityImages from './activity-images.json'
 import dayjs from 'dayjs'
 
 import { MdIosShare } from 'react-icons/md'
-import { BsHeartFill, BsInfoLg } from 'react-icons/bs'
+import { BsHeartFill, BsInfoLg, BsExclamationLg } from 'react-icons/bs'
 
 import {
   Accommodation,
@@ -346,6 +346,18 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           </div>
         )}
       </Card>
+
+      <div className={styles.disclaimer}>
+        {' '}
+        <BsExclamationLg className={styles.disclaimerIcon} />{' '}
+        <div className={styles.report}>
+          Did you find any inaccuracy or misinformation?{' '}
+          <a href={'mailto:support@pulfy.com?subject=Pulfy Inaccuracy or Misinformation&body='}>
+            {' '}
+            Report to us
+          </a>
+        </div>
+      </div>
       {uniqueEvents && uniqueEvents.length > 0 ? (
         <Card title="Events" type="Major" className={styles.recommendationCard}>
           <div className={styles.events}>

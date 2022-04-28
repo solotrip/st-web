@@ -83,8 +83,11 @@
   width: 40px;
   font-size: 30px;
   //color: #3cafeb;
+  color: white;
   margin-right: 10px;
 background-color: #3cafeb;
+border-radius: 5px;
+padding: 3px;
 
   
 }
@@ -485,4 +488,10 @@ background-color: #3cafeb;
 .title {
   @extend .textShadow;
   width: calc(100% - 20px);
+  text-shadow: $text-shadow;
+}
+
+.report {
+  display: flex;
+  flex-direction: column;
 }
