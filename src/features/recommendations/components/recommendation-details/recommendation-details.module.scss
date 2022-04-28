@@ -59,6 +59,34 @@
   width: 40px;
   font-size: 23px;
   color: #667A8f;
+  
+}
+
+.disclaimer{
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  //background-color:$card-content-recommendation;
+  border-radius: 5px;
+  width: 90%;
+   
+
+  height: 130px;
+  
+  line-height: 20px;
+  
+}
+
+.disclaimerIcon{
+  display: flex;
+ height:40px;
+  width: 40px;
+  font-size: 30px;
+  //color: #3cafeb;
+  margin-right: 10px;
+background-color: #3cafeb;
+
+  
 }
 
 .heartFilled {
