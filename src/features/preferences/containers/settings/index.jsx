@@ -56,13 +56,7 @@ const SettingsContainer = ({ showLogout }) => {
           value={distance}
         />
       </SettingsSection>
-      <SettingsSection title="Vaccination">
-        <DropDown
-          options={vaccineStates}
-          onSelect={onPreferenceChanged('vaccinated')}
-          value={vaccinated}
-        />
-      </SettingsSection>
+
       <SettingsSection title="Theme" description=" ">
         <ThemeSwitch />
       </SettingsSection>
