@@ -349,7 +349,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
 
       <div className={styles.disclaimer}>
         {' '}
-        <BsExclamationLg className={styles.disclaimerIcon} />{' '}
+        <BsExclamationLg className={styles.disclaimerIcon2} />{' '}
         <div className={styles.report}>
           Did you find any inaccuracy or misinformation?{' '}
           <a href={'mailto:support@pulfy.com?subject=Pulfy Inaccuracy or Misinformation&body='}>

@@ -102,23 +102,22 @@ const Header = ({
         <Link to="/browse" className={styles.headerLink}>
           <div className={styles.headerLogo} />
         </Link>
-        {alwaysShowBack ||
-          (backIsVisible && (
-            <button
-              className={cx(styles.trackButton, {
-                [styles.active]: !!tracked[recommendationId]
-              })}
-              onClick={goBack}
-              disabled={loading}
-            >
-              <Icon
-                icon="fluent:ios-arrow-ltr-24-regular"
-                color="#3cafeb"
-                height="30"
-                className={styles.bell}
-              />
-            </button>
-          ))}
+        {(alwaysShowBack || backIsVisible) && (
+          <button
+            className={cx(styles.trackButton, {
+              [styles.active]: !!tracked[recommendationId]
+            })}
+            onClick={goBack}
+            disabled={loading}
+          >
+            <Icon
+              icon="fluent:ios-arrow-ltr-24-regular"
+              color="#3cafeb"
+              height="30"
+              className={styles.bell}
+            />
+          </button>
+        )}
         {searchIsVisible && (
           <>
             {trackIsVisible ? (
