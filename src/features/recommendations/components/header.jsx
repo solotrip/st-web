@@ -3,13 +3,14 @@ import cx from 'classnames'
 import { useHistory, useLocation, Link } from 'react-router-dom'
 import { Capacitor } from '@capacitor/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { MdClose, MdSearch } from 'react-icons/md'
+import { MdClose, MdSearch, MdEdit, MdIosShare } from 'react-icons/md'
 import { Icon } from '@iconify/react'
 import { addToTracked, removeFromTracked, trackSelector } from 'features/track/slice'
 import { filtersSelector } from 'features/recommendations/containers/filters/slice'
 import { locationSelector } from '../containers/location/slice'
 import { useQuery } from 'utils/hooks/use-query'
 import { Query } from 'components'
+import Tag from 'components/input/tag'
 
 import styles from './header.module.scss'
 import { isGuestSelector } from 'features/profile/slice'
@@ -78,6 +79,17 @@ const Header = ({
     history.replace({ pathname: '/recommendations' })
   }
 
+  const navigate = path => {
+    history.push({ pathname: path, search: location.search })
+  }
+
+  const openShare = () => {
+    history.push({
+      //pathname: `/recommendations/r/${id}/share`,
+      //search: query.queryString
+    })
+  }
+
   return (
     <div
       className={cx(styles.navbarFixed, {
@@ -90,22 +102,23 @@ const Header = ({
         <Link to="/browse" className={styles.headerLink}>
           <div className={styles.headerLogo} />
         </Link>
-        {(alwaysShowBack || (backIsVisible && !isExpanded)) && (
-          <button
-            className={cx(styles.trackButton, {
-              [styles.active]: !!tracked[recommendationId]
-            })}
-            onClick={goBack}
-            disabled={loading}
-          >
-            <Icon
-              icon="fluent:ios-arrow-ltr-24-regular"
-              color="#3cafeb"
-              height="30"
-              className={styles.bell}
-            />
-          </button>
-        )}
+        {alwaysShowBack ||
+          (backIsVisible && (
+            <button
+              className={cx(styles.trackButton, {
+                [styles.active]: !!tracked[recommendationId]
+              })}
+              onClick={goBack}
+              disabled={loading}
+            >
+              <Icon
+                icon="fluent:ios-arrow-ltr-24-regular"
+                color="#3cafeb"
+                height="30"
+                className={styles.bell}
+              />
+            </button>
+          ))}
         {searchIsVisible && (
           <>
             {trackIsVisible ? (
@@ -118,16 +131,11 @@ const Header = ({
               >
                 <MdSearch className={styles.searchIcon} />
                 {query && Object.keys(query).length > 0 ? (
-                  <Query
-                    className={cx(styles.query, { [styles.exp]: isExpanded })}
-                    history={history}
-                    location={location}
-                    prefixClassName={styles.prefix}
-                    filtersDict={filtersDict}
-                    query={query}
-                    locations={locations}
-                    maxFiltersDisplayed={isExpanded ? 3 : 1}
-                    enableClick={isExpanded}
+                  <Tag
+                    key={'search-tag-'}
+                    icon={MdEdit}
+                    onClick={() => navigate('/recommendations/passport')}
+                    name={<span className={styles.text}>Edit your search</span>}
                   />
                 ) : (
                   ' Start your search'
@@ -167,8 +175,8 @@ const Header = ({
                 )}
               </button>
             )}
-            {trackIsVisible &&
-              !isExpanded && (
+            <div className={styles.sideHolder}>
+              {
                 <button
                   className={cx(styles.trackButton, {
                     [styles.active]: !!tracked[recommendationId]
@@ -192,7 +200,26 @@ const Header = ({
                     />
                   )}
                 </button>
-            )}
+              }
+              {
+                <button
+                  className={cx(styles.trackButton, {
+                    [styles.active]: !!tracked[recommendationId]
+                  })}
+                  onClick={openShare}
+                  disabled={loading}
+                >
+                  {
+                    <Icon
+                      icon="fluent:share-ios-24-filled"
+                      color="#3cafeb"
+                      height="30"
+                      className={styles.bell}
+                    />
+                  }
+                </button>
+              }
+            </div>
           </>
         )}
       </div>
