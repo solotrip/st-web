@@ -8,6 +8,7 @@ import FiltersContainer from './containers/filters'
 import LocationContainer from './containers/location'
 import PassportCountriesContainer from './containers/passport-countries'
 import ShareContainer from './containers/share'
+import ShareListContainer from './containers/share/list'
 
 const Routes = () => (
   <Switch>
@@ -35,6 +36,9 @@ const Routes = () => (
           </Route>
           <Route path="/recommendations/r/:sid/:start/:end/share">
             <ShareContainer />
+          </Route>
+          <Route path="/recommendations/share">
+            <ShareListContainer />
           </Route>
         </Switch>
       </OnboardedRoutesWrapper>

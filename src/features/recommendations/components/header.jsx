@@ -85,8 +85,8 @@ const Header = ({
 
   const openShare = () => {
     history.push({
-      //pathname: `/recommendations/r/${id}/share`,
-      //search: query.queryString
+      pathname: '/recommendations/share',
+      search: location.search
     })
   }
 

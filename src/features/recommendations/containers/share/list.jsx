@@ -3,7 +3,7 @@ import { Loader, SheetWrapper } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import SettingsSection from 'components/settings-section'
 import { recommendationsSelector } from 'features/recommendations/slice'
-import { fetchRecommendation, shareRecommendationSelector } from './slice'
+import { fetchRecommendations, shareRecommendationSelector } from './slice'
 import { useHistory, useLocation } from 'react-router-dom'
 import { MdContentCopy } from 'react-icons/md'
 import {
@@ -23,17 +23,31 @@ import styles from './share.module.scss'
 import { SHORT_URL_BASE } from 'constants/urls'
 import { toast } from 'react-toastify'
 
-const ShareContainer = () => {
+const ShareListContainer = () => {
   const { recommendations: recommendationsObject, activeRecommendationId } = useSelector(
     recommendationsSelector
   )
 
-  const { loading, recommendation, error } = useSelector(shareRecommendationSelector)
+  console.log('inside  list share:', { activeRecommendationId, recommendationsObject })
+  let recommendations = []
+  var recommendations_shash
+  console.log('inside list share recommendations: ', recommendations)
+
+  const {
+    loading,
+    recommendation,
+    error,
+    recommendations: recommendationList,
+    recommendations_loading,
+    recommendations_error
+  } = useSelector(shareRecommendationSelector)
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
 
-  const detailRecommendation = useMemo(
+  var queryReturned
+
+  const detailRecommendations = useMemo(
     () => {
       if (
         recommendationsObject &&
@@ -41,53 +55,65 @@ const ShareContainer = () => {
         recommendationsObject[activeRecommendationId] &&
         recommendationsObject[activeRecommendationId].recommendations
       ) {
-        const recommendations = recommendationsObject[activeRecommendationId].recommendations
-        if (recommendations.length === 1) return recommendations[0]
-        return recommendations.find(r => location.pathname.includes(r.id))
+        recommendations = recommendationsObject[activeRecommendationId].recommendations
+
+        queryReturned = recommendationsObject[activeRecommendationId].query
+
+        recommendations_shash = recommendationsObject[activeRecommendationId].shash
+
+        return recommendations
       }
-      return {}
+      return []
     },
     [recommendationsObject, activeRecommendationId, location.pathname]
   )
 
-  const { startDate: start, endDate: end, sid: areaSid, name: areaName } = detailRecommendation
+  console.log('detailrecommendations:', detailRecommendations)
+
+  //const { startDate: start, endDate: end, sid: areaSid, name: areaName } = detailRecommendation
+
+  const { start, end, months, duration, weekendOnly, filters, lat, lon, passports } =
+    queryReturned || {}
 
   useEffect(
     () => {
-      if (start && end && areaSid && activeRecommendationId && recommendationsObject) {
-        const { lat, lon, passports } = recommendationsObject[activeRecommendationId].query || {}
-        dispatch(
-          fetchRecommendation({
-            start,
-            end,
-            areaSid,
-            lat,
-            lon,
-            passports
-          })
-        )
+      if (activeRecommendationId && recommendationsObject) {
       }
     },
-    [start, end, areaSid, dispatch, recommendationsObject, activeRecommendationId]
+    [
+      start,
+      end,
+      months,
+      duration,
+      weekendOnly,
+      filters,
+      lat,
+      lon,
+      passports,
+      dispatch,
+      recommendationsObject,
+      activeRecommendationId
+    ]
   )
 
   const onBack = () => {
     history.goBack()
   }
 
-  const url = recommendation && SHORT_URL_BASE + recommendation.shash
+  const url = recommendations && SHORT_URL_BASE + recommendations_shash
 
   function createDynamicURL(option) {
-    if (loading) return {}
+    if (recommendations_loading) return {}
     if (option === 'mail') {
-      return `Here is the ${areaName}'s travel requirements, restrictions,
-      activities and events on Pulfy.%0D .%0DSee detailed recommendation on: ${url}`
+      return `Here is the recommendation list including travel requirements,
+      restrictions,activities and events on Pulfy.%0D${url}`
     } else if (option === 'telegram' || option === 'facebook') {
-      const text = `Here is the ${areaName}'s travel requirements,
+      const text = `Here is the recommendation list including travel requirements,
        restrictions,activities and events on Pulfy.`
       return { url, text }
     } else if (option === 'reddit' || option === 'twitter') {
-      const text = `${areaName}'s travel requirements, restrictions,activities and events on Pulfy.`
+      const text =
+        'Here is the recommendation list including travel requirements, restrictions,activities and events on Pulfy.'
       return { url, text }
     } else if (option === 'linkedin') {
       return { url }
@@ -95,7 +121,7 @@ const ShareContainer = () => {
   }
 
   const shortUrl = `Here is the events,activities,
-     restrictions and travel requirements of ${areaName} for you: https://www.pulfy.com/app${url}`
+     restrictions and travel requirements of recommended destinations for you: https://www.pulfy.com/app${url}`
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(url)
@@ -107,7 +133,7 @@ const ShareContainer = () => {
       <SheetWrapper disableDrag={false} closable={true}>
         {' '}
         <SheetWrapper.Content>
-          <Loader loading={loading || !url || error}>
+          <Loader loading={recommendations_loading || !url || recommendations_error}>
             <SettingsSection title="Share" description="Share this recommendation via">
               <div className={styles.shareHolder}>
                 <button className={styles.copyButton} onClick={copyToClipboard}>
@@ -230,4 +256,4 @@ const ShareContainer = () => {
   )
 }
 
-export default ShareContainer
+export default ShareListContainer
