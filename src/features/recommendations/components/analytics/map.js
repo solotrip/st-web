@@ -12,7 +12,8 @@ const AnalyticsMap = ({
   query,
   loading,
   halfHeight,
-  id = 'map'
+  id = 'map',
+  ignoreBoundaries = false
 }) => {
   const { activeLocation, locations } = useSelector(locationSelector)
   const locationDetails = locations[activeLocation]
@@ -70,6 +71,7 @@ const AnalyticsMap = ({
           originCities={origin}
           destinationCities={destinations}
           halfHeight={halfHeight}
+          ignoreBoundaries={ignoreBoundaries}
         />
       )}
     </div>

@@ -121,29 +121,37 @@ const Header = ({
         {searchIsVisible && (
           <>
             {trackIsVisible ? (
-              <button
-                className={cx(styles.editSearch, {
-                  [styles.withBack]: backIsVisible,
-                  [styles.exp]: isExpanded
-                })}
-                onClick={handleExpand}
-              >
-                <MdSearch className={styles.searchIcon} />
-                {query && Object.keys(query).length > 0 ? (
-                  <Tag
-                    key={'search-tag-'}
-                    icon={MdEdit}
-                    onClick={() => navigate('/recommendations/passport')}
-                    name={<span className={styles.text}>Edit your search</span>}
+              query && Object.keys(query).length > 0 ? (
+                <button
+                  className={cx(styles.editSearchBlue, {
+                    [styles.withBack]: backIsVisible,
+                    [styles.exp]: isExpanded
+                  })}
+                  onClick={handleExpand}
+                >
+                  <Icon
+                    icon="fluent:calendar-edit-24-regular"
+                    height="30"
+                    className={styles.tabIcon}
                   />
-                ) : (
-                  ' Start your search'
-                )}
-                {query &&
-                  Object.keys(query).length > 0 && (
-                    <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
-                )}
-              </button>
+                  <div className={styles.editSearchBlueText}>Edit your Search</div>
+                </button>
+              ) : (
+                <button
+                  className={cx(styles.editSearch, {
+                    [styles.withBack]: backIsVisible,
+                    [styles.exp]: isExpanded
+                  })}
+                  onClick={handleExpand}
+                >
+                  <MdSearch className={styles.searchIcon} />
+                  {'Start your search'}
+                  {query &&
+                    Object.keys(query).length > 0 && (
+                      <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
+                  )}
+                </button>
+              )
             ) : (
               <button
                 className={cx(styles.editSearchTrackless, {

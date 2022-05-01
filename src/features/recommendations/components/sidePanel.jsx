@@ -12,34 +12,39 @@ const SidePanel = ({
   contentType = 'recommendations',
   hideMap,
   hideCharts,
-  onlyOnDesktop
+  onlyOnDesktop,
+  ignoreBoundaries = false
 }) => {
   return (
     <div className={cn(styles.container, { [styles.onlyDesktop]: onlyOnDesktop })}>
-      {!hideMap && <AnalyticsMap
-        recommendations={contentType === 'notifications' ?
-          recommendations.map(r => ({
-            ...r.content.new,
-            link: {
-              pathname: `/recommendations/r/${r.id}`,
-              search: qs.stringify(r.content.query)
-            }
-          })) :
-          recommendations.map(r => ({
-            ...r, link: {
-              pathname: `/recommendations/r/${r.id}`,
-              search: qs.stringify(query)
-            }
-          }))}
-        loading={loading}
-        query={query}
-        halfHeight={contentType === 'recommendations' && !hideCharts}
-      />}
-      {(!hideCharts && contentType === 'recommendations') && (
-        <Analytics
+      {!hideMap && (
+        <AnalyticsMap
+          recommendations={
+            contentType === 'notifications'
+              ? recommendations.map(r => ({
+                ...r.content.new,
+                link: {
+                  pathname: `/recommendations/r/${r.id}`,
+                  search: qs.stringify(r.content.query)
+                }
+              }))
+              : recommendations.map(r => ({
+                ...r,
+                link: {
+                  pathname: `/recommendations/r/${r.id}`,
+                  search: qs.stringify(query)
+                }
+              }))
+          }
           loading={loading}
-          recommendations={recommendations}
+          query={query}
+          halfHeight={contentType === 'recommendations' && !hideCharts}
+          ignoreBoundaries={ignoreBoundaries}
         />
+      )}
+      {!hideCharts &&
+        contentType === 'recommendations' && (
+          <Analytics loading={loading} recommendations={recommendations} />
       )}
     </div>
   )

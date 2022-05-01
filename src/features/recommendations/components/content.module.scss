@@ -70,12 +70,12 @@
 }
 
 .tabs {
-  margin-top: 50px;
+  margin-top: 0px;
   margin-bottom: 8px;
   width: 100%;
   display: none;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 
   @include xs-to-sm {
     display: flex;
@@ -106,14 +106,16 @@
   }
 
   &.active {
-    background: $card-content-recommendation;
-    background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
-    background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
-    background-image: -moz-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
-    background-image: linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background: $card-content-recommendation;
+    //background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -moz-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+   // background-image: linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
 
     .tabIcon {
-      color: #f3f3f4;
+      //color: #f3f3f4;
+      color: rgb(64,176,233);
+      pointer-events: none;
     }
 
     .tabName {
@@ -130,11 +132,14 @@
   font-size: 16px;
   line-height: 20px;
   color: #31afea;
+  display: none;
 }
 
 .tabIcon {
-  color: #31afea;
+  //color: #31afea;
+  color: rgb(146,147,175);
   font-size: 24px;
+  pointer-events: none;
   @include xs {
     display: none;
   }
