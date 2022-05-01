@@ -122,13 +122,7 @@ const Header = ({
           <>
             {trackIsVisible ? (
               query && Object.keys(query).length > 0 ? (
-                <button
-                  className={cx(styles.editSearchBlue, {
-                    [styles.withBack]: backIsVisible,
-                    [styles.exp]: isExpanded
-                  })}
-                  onClick={handleExpand}
-                >
+                <button className={styles.editSearchBlue} onClick={handleExpand}>
                   <Icon
                     icon="fluent:calendar-edit-24-regular"
                     height="30"
