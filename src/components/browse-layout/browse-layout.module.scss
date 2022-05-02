@@ -53,9 +53,19 @@
 }
 
 .content {
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  //background-color: goldenrod;
+  max-width: 1800px;
+
+}
+
+
+.contentHolder{
+  //background-color: red;
   height: 100vh;
+  width: 100vw;
   overflow-y: auto;
   flex: 1;
-  //max-width: 1800px;
-
 }

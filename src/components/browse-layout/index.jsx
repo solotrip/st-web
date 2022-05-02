@@ -9,7 +9,8 @@ const BrowseLayout = ({ children, header, bottomBar, sidebar }) => {
       {header && <div className={styles.header}>{header}</div>}
       <div className={cn(styles.main, { noHeader: !header })}>
         {/*sidebar*/}
-        <div className={cn(styles.content)}>{children}</div>
+        <div className={cn(styles.contentHolder)}> <div className={cn(styles.content)}>{children}</div></div>
+       
         {bottomBar}
       </div>
     </div>

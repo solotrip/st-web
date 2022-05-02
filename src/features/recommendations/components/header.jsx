@@ -90,6 +90,10 @@ const Header = ({
     })
   }
 
+  const openFilters = () => {
+    history.push({ pathname: '/recommendations/filters', search: location.search })
+  }
+
   return (
     <div
       className={cx(styles.navbarFixed, {
@@ -122,7 +126,7 @@ const Header = ({
           <>
             {trackIsVisible ? (
               query && Object.keys(query).length > 0 ? (
-                <button className={styles.editSearchBlue} onClick={handleExpand}>
+                <button className={styles.editSearchBlue} onClick={openFilters}>
                   <Icon
                     icon="fluent:calendar-edit-24-regular"
                     height="30"
