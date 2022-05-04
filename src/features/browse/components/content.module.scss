@@ -163,18 +163,15 @@ line-height: 30px;
 .browseCards__item {
   display: flex;
   padding: 1rem;
-  @media(min-width: 45rem) {
+
+  @media(min-width: 48rem) {
     width: 50%;
   }
-  @media(min-width: 56rem) {
-    width: 33.3333%;
+  @media(min-width: 86rem) {
+    width: 33.3%;
   }
-  @media(min-width: 70rem) {
-    width: 25%;
-  }
-  @media(min-width: 84rem) {
-    width: 20%;
-  }
+  
+
 }
 
 .browseCard {
