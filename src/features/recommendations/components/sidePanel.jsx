@@ -50,8 +50,8 @@ const SidePanel = ({
     }
   } else {
     defaultSelectedOption = {
-      value: 'hostel-prices',
-      label: 'Hostel Prices'
+      value: 'hotel-prices',
+      label: 'Hotel Prices'
     }
   }
   return (
