@@ -47,6 +47,7 @@ const Query = ({
       : []
 
   const tags = [
+    /*
     {
       value:
         'from:' +
@@ -65,6 +66,7 @@ const Query = ({
       onClick: () => navigate('/recommendations/location'),
       icon: MdMyLocation
     },
+    */
     {
       // prefix: 'For ',
       value:
