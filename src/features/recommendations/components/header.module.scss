@@ -123,7 +123,7 @@
   @include xs-to-sm {
     width: calc(100vw - 16px);
   }
-  max-width: 600px;
+  //max-width: 600px;
   max-height: 48px;
   background: $card-bg-color;
   border-radius: 10px;
@@ -136,7 +136,6 @@
   transition: all 0.3s;
   transition-timing-function: ease-out;
   color: $sub-text-color;
-
   &.exp {
     width: 100%;
     max-height: 150px;
@@ -252,7 +251,7 @@
 }
 
 .upperHeader{
-  background-color: pink;
+
   display: none;
   @include xs-to-sm {
     display: block;
@@ -287,7 +286,6 @@
 
 
 .sideHolder{
-  
   display: flex;
   flex-direction: row;
   width: 120px;

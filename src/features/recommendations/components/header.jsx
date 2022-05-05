@@ -143,7 +143,7 @@ const Header = ({
                   onClick={handleExpand}
                 >
                   <MdSearch className={styles.searchIcon} />
-                  {'Start your search'}
+                  {'Start your searcho'}
                   {query &&
                     Object.keys(query).length > 0 && (
                       <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
@@ -180,8 +180,8 @@ const Header = ({
                 )}
               </button>
             )}
-            <div className={styles.sideHolder}>
-              {
+            <div className={trackIsVisible ? styles.sideHolder : styles.sideHolderHidden}>
+              {trackIsVisible && (
                 <button
                   className={cx(styles.trackButton, {
                     [styles.active]: !!tracked[recommendationId]
@@ -205,8 +205,8 @@ const Header = ({
                     />
                   )}
                 </button>
-              }
-              {
+              )}
+              {trackIsVisible && (
                 <button
                   className={cx(styles.trackButton, {
                     [styles.active]: !!tracked[recommendationId]
@@ -223,7 +223,7 @@ const Header = ({
                     />
                   }
                 </button>
-              }
+              )}
             </div>
           </>
         )}
