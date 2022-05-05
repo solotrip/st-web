@@ -83,10 +83,21 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
                 {' '}
                 <div
                   className={styles.browseCard__image}
-                  style={{
-                    backgroundImage:
-                      'url(https://ik.imagekit.io/stmedia/browse/54458236879c6d99974df7145403075b?tr=w-1360,h-1360)'
-                  }}
+                  style={
+                    i % 3 === 0
+                      ? {
+                        background: 'linear-gradient(to right , #FF5F6D 0%, #FFC371 100%)'
+                      }
+                      : i % 3 === 1
+                        ? {
+                          background:
+                              'linear-gradient(to right , #FEAC5E 0%, #C779D0 50%,#4BC0C8 100%)'
+                        }
+                        : {
+                          background:
+                              'linear-gradient(to right , rgba(99,193,176,1) 0%,rgba(78,125,214,1) 50%,#4BC0C8 100%)'
+                        }
+                  }
                 />
                 <div className={styles.browseCard__content}>
                   <div className={styles.browseCard_title}>
@@ -115,7 +126,7 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
         </ul>
       )}
       <ul className={styles.browseCards}>
-        {items.flat().map(item => (
+        {items.flat().map((item, ind) => (
           <li className={styles.browseCards__item}>
             <Link className={styles.browseCard} to={item.link}>
               {' '}
@@ -128,9 +139,23 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
                         item.image_hash
                       }?tr=w-1360,h-1360)`
                     }
-                    : {
-                      backgroundImage: `url(${item.image}?tr=w-1360,h-1360s`
-                    }
+                    : item.image
+                      ? {
+                        backgroundImage: `url(${item.image}?tr=w-1360,h-1360s`
+                      }
+                      : ind % 3 === 2
+                        ? {
+                          background: 'linear-gradient(to right , #FF5F6D 0%, #FFC371 100%)'
+                        }
+                        : ind % 3 === 1
+                          ? {
+                            background:
+                                'linear-gradient(to right , #FEAC5E 0%, #C779D0 50%,#4BC0C8 100%)'
+                          }
+                          : {
+                            background:
+                                'linear-gradient(to right , rgba(99,193,176,1) 0%,rgba(78,125,214,1) 50%,#4BC0C8 100%)'
+                          }
                 }
               />
               <div className={styles.browseCard__content}>
