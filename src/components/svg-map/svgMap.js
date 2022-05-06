@@ -46,6 +46,8 @@ const SvgMap = ({
 
   const borderColor = am5.color(0x3cafeb)
 
+  console.log('theme from svgMap.js is:', appTheme)
+
   const landColor =
     appTheme === 'dark'
       ? am5.color(0x181d26)
