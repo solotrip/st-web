@@ -19,6 +19,7 @@ import useThemeState from 'utils/hooks/use-theme-state'
 import { formatAsMonthDay } from 'utils/date'
 import { getEventImage, processRecommendation } from 'utils/recommendation'
 import ContentLoader from 'react-content-loader'
+import { isDesktop, isMobile } from 'react-device-detect'
 
 const Recommendation = ({
   recommendation,
@@ -66,15 +67,31 @@ const Recommendation = ({
   return (
     <div
       className={styles.recommendationCard}
-      style={
-        appTheme === 'light'
-          ? {
-            background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1300,h-1480),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#f3f3f4 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#f3f3f4 50%)`
-          }
-          : {
-            background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-1300,h-1480),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#181d26 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#181d26 50%)`
-          }
-      }
+      /*style={
+        isDesktop
+          ? appTheme === 'light'
+            ? {
+              background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-650,h-750),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#f3f3f4 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#f3f3f4 50%)`
+            }
+            : {
+              background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-650,h-750),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#181d26 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#181d26 50%)`
+            }
+          : isMobile
+            ? appTheme === 'light'
+              ? {
+                background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-364,h-750),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#f3f3f4 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#f3f3f4 50%)`
+              }
+              : {
+                background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-364,h-750),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#181d26 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#181d26 50%)`
+              }
+            : appTheme === 'light'
+              ? {
+                background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-364,h-750),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#f3f3f4 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#f3f3f4 50%)`
+              }
+              : {
+                background: `url(https://ik.imagekit.io/stmedia/areas/${sid}?tr=w-364,h-750),linear-gradient(to left,rgba(0,0,0,0.0) -100%,#181d26 50%),linear-gradient(to top,rgba(0,0,0,0.0) 0%,#181d26 50%)`
+              }
+      }*/
     >
       {' '}
       <div className={styles.colorStrip} />
