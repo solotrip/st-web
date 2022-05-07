@@ -26,7 +26,7 @@ const Accordion = ({ children, name, expandedDefault }) => {
       <div className={styles.container} aria-expanded={expanded}>
         {children}
       </div>
-      <hr className={styles.sepator}/>
+      <hr className={styles.sepator} />
     </div>
   )
 }

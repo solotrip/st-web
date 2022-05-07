@@ -6,9 +6,7 @@ import styles from './filters.module.scss'
 import { RECENT_FILTERS_CATEGORY } from 'constants/index'
 
 const Filters = ({ filters, filterValues, error, loading, updateFilter }) => {
-  const filtersByCategory = useMemo(() => _groupBy(filters, 'category'), [
-    filters
-  ])
+  const filtersByCategory = useMemo(() => _groupBy(filters, 'category'), [filters])
   return (
     <div className={styles.filters}>
       {Object.keys(filtersByCategory).map(category => (
@@ -18,14 +16,19 @@ const Filters = ({ filters, filterValues, error, loading, updateFilter }) => {
           key={`category-${category}`}
           expandedDefault={category === RECENT_FILTERS_CATEGORY}
         >
-          {filtersByCategory[category].map(filter => (
-            <Filter
-              filter={filter}
-              value={filterValues[filter.uuid]}
-              key={`f-${filter.uuid}`}
-              updateFilter={updateFilter}
-            />
-          ))}
+          <div className={styles.inside}>
+            {filtersByCategory[category].map(filter => (
+              <div className={styles.insideElement}>
+                <Filter
+                  filter={filter}
+                  value={filterValues[filter.uuid]}
+                  key={`f-${filter.uuid}`}
+                  updateFilter={updateFilter}
+                  className={styles.filter}
+                />
+              </div>
+            ))}
+          </div>
         </Accordion>
       ))}
     </div>

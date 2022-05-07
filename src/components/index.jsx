@@ -7,7 +7,8 @@ export {
   Search as SearchInput,
   Range as RangeInput,
   Radio as RadioInput,
-  Checkbox
+  Checkbox,
+  CheckboxFilter
 } from './input'
 export { default as Layout } from './layout'
 export { default as Loader } from './loader'

@@ -10,7 +10,7 @@
 
 .header {
   width: 100%;
-  font-size: 18px;
+  font-size: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,7 +47,7 @@
 .expanded {
   .name {
     @include roboto-medium;
-    color: $text-color;
+    color: #3cafeb;
   }
 
   .icon {
@@ -55,6 +55,7 @@
     -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
+    color: #3cafeb;
   }
 
   .container {

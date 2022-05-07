@@ -2,8 +2,32 @@
 
 .filters {
   padding-bottom: 60px;
+ 
 }
 
 .accordionHolder {
   background-color: blueviolet;
+  
+}
+
+.filter {
+background-color: darkgoldenrod;
+}
+
+.inside{
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+}
+
+.insideElement{
+  flex: 1 1 30%;
+  margin: 0px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
