@@ -47,7 +47,7 @@
 .expanded {
   .name {
     @include roboto-medium;
-    color: #3cafeb;
+    color: $text-color;
   }
 
   .icon {
@@ -55,7 +55,6 @@
     -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
-    color: #3cafeb;
   }
 
   .container {
