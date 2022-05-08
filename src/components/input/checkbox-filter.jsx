@@ -3,9 +3,22 @@ import PropTypes from 'prop-types'
 import styles from './checkbox-filter.module.scss'
 
 const CheckboxFilter = React.forwardRef(
-  ({ label, name, onChange, className, icon, checked, ...props }, ref) => {
+  ({ label, name, onChange, className, icon, checked, bgImage, ...props }, ref) => {
     return (
-      <label className={checked ? styles.containerChecked : styles.container}>
+      <label
+        className={checked ? styles.containerChecked : styles.container}
+        style={
+          !checked
+            ? {
+              background:
+                  'linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)),url(' + bgImage + ')'
+            }
+            : {
+              background:
+                  'linear-gradient(rgba(0, 0, 0, 0), rgba(60, 175, 235, 0.9)),url(' + bgImage + ')'
+            }
+        }
+      >
         <span className={styles.labelContainer}>
           {icon && <span className={styles.icon}>{icon}</span>}
           <span className={styles.label}>{label ? label : name}</span>

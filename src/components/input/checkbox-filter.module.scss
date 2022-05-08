@@ -12,15 +12,15 @@
   -ms-user-select: none;
   user-select: none;
   background-color: transparent;
-  height: 90px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   border-radius: 16px;
-  margin: 10px;
-  border: 1px solid #4BC0C8;
-  color: #4BC0C8;
+  margin: 6px;
+  border: 1px solid $alternative-border-color;
+  color: white;
 }
 
 .containerChecked {
@@ -35,14 +35,15 @@
   -ms-user-select: none;
   user-select: none;
   background:linear-gradient(to right , #FEAC5E 0%, #C779D0 50%,#4BC0C8 100%);
-  height: 90px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   border-radius: 16px;
-  margin: 10px;
-  color:white;
+  margin: 6px;
+  color: white;
+  border: 1px solid #4BC0C8;
 
 }
 
