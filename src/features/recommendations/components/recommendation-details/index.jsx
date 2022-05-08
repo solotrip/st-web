@@ -105,11 +105,15 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           block: 'nearest',
           inline: 'center'
         })
-      } else if (e.target.textContent === 'Events') {
+      } else if (e.target.textContent === 'Events' && eventsRef && eventsRef.current) {
         eventsRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
-      } else if (e.target.textContent === 'Costs') {
+      } else if (e.target.textContent === 'Costs' && costsRef && costsRef.current) {
         costsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
-      } else if (e.target.textContent === 'Attractions') {
+      } else if (
+        e.target.textContent === 'Attractions' &&
+        attractionsRef &&
+        attractionsRef.current
+      ) {
         attractionsRef.current.scrollIntoView({
           behavior: 'smooth',
           block: 'nearest',
@@ -125,18 +129,26 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         <Icon icon="fluent:apps-list-24-regular" height="30" className={styles.tabIcon} />
         <span className={styles.tabName}>Overview</span>
       </button>
-      <button className={styles.tabItem} onClick={tabSelect}>
-        <Icon icon="fluent:star-emphasis-24-regular" height="30" className={styles.tabIcon} />
-        <span className={styles.tabName}>Events</span>
-      </button>
-      <button className={styles.tabItem} onClick={tabSelect}>
-        <Icon icon="fluent:money-hand-24-regular" height="30" className={styles.tabIcon} />
-        <span className={styles.tabName}>Costs</span>
-      </button>
-      <button className={styles.tabItem} onClick={tabSelect}>
-        <Icon icon="fluent:location-24-regular" height="30" className={styles.tabIcon} />
-        <span className={styles.tabName}>Attractions</span>
-      </button>
+      {uniqueEvents &&
+        uniqueEvents.length > 0 && (
+          <button className={styles.tabItem} onClick={tabSelect}>
+            <Icon icon="fluent:star-emphasis-24-regular" height="30" className={styles.tabIcon} />
+            <span className={styles.tabName}>Events</span>
+          </button>
+      )}
+      {colLabels && (
+        <button className={styles.tabItem} onClick={tabSelect}>
+          <Icon icon="fluent:money-hand-24-regular" height="30" className={styles.tabIcon} />
+          <span className={styles.tabName}>Costs</span>
+        </button>
+      )}
+      {topPois &&
+        topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
+          <button className={styles.tabItem} onClick={tabSelect}>
+            <Icon icon="fluent:location-24-regular" height="30" className={styles.tabIcon} />
+            <span className={styles.tabName}>Attractions</span>
+          </button>
+      )}
     </div>
   )
 
