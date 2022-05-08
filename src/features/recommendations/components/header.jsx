@@ -143,7 +143,7 @@ const Header = ({
                   onClick={handleExpand}
                 >
                   <MdSearch className={styles.searchIcon} />
-                  {'Start your searcho'}
+                  {'Edit your Search'}
                   {query &&
                     Object.keys(query).length > 0 && (
                       <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
