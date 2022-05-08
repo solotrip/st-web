@@ -23,7 +23,7 @@ import _get from 'lodash/get'
 import { isVisaFilterSelector } from './filters/slice'
 
 const RecommendationsContainer = () => {
-  const query = useQuery()
+  let query = useQuery()
   const location = useLocation()
   const history = useHistory()
   const {
@@ -56,9 +56,10 @@ const RecommendationsContainer = () => {
       ) {
         dispatch(resetActiveRecommendation())
         if (!query.start && !query.months) return openDateSheet(query)
-        if (!query.lat || !query.lon) {
-          return openLocationSheet(query)
-        }
+        //if (!query.lat || !query.lon) {
+        //return openLocationSheet(query)
+        //dispatch(fetchRecommendations(query))
+        //}
         if (_get(query, 'filters', []).some(f => isVisaFilter(f.id)) && !query.passports) {
           return openPassportSheet(query)
         }

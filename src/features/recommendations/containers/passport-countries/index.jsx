@@ -1,9 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  localPreferencesSelector,
-  updateLocalPreference
-} from 'reducers/localPreferencesSlice'
+import { localPreferencesSelector, updateLocalPreference } from 'reducers/localPreferencesSlice'
 import SettingsSection from 'components/settings-section'
 import Select from 'react-select'
 import { SheetWrapper } from 'components'
@@ -26,13 +23,16 @@ const PassportCountriesContainer = () => {
     ...query,
     passports: query.passports || passports
   })
-  const onUpdate = useCallback(payload => {
-    setData(prevData => ({ ...prevData, passports: payload.map(p => p.value) }))
-  }, [setData])
+  const onUpdate = useCallback(
+    payload => {
+      setData(prevData => ({ ...prevData, passports: payload.map(p => p.value) }))
+    },
+    [setData]
+  )
   const onSubmit = () => {
     dispatch(updateLocalPreference({ key: 'passports', value: data.passports }))
     history.push({
-      pathname: '/recommendations',
+      pathname: '/recommendations/filters',
       search: qs.stringify(data)
     })
   }
@@ -56,8 +56,10 @@ const PassportCountriesContainer = () => {
           />
         </SettingsSection>
       </SheetWrapper.Content>
-      <SheetWrapper.Footer onClick={onSubmit} text="Search"
-                           disabled={data.passports.length === 0}
+      <SheetWrapper.Footer
+        onClick={onSubmit}
+        text="Search"
+        disabled={data.passports.length === 0}
       />
     </SheetWrapper>
   )
