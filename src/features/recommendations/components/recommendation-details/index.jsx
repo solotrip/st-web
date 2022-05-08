@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React from 'react'
+import React, { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Card, Currency, Image, Temperature } from 'components'
 
@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 
 import { MdIosShare } from 'react-icons/md'
 import { BsHeartFill, BsInfoLg, BsExclamationLg } from 'react-icons/bs'
+import { Icon } from '@iconify/react'
 
 import {
   Accommodation,
@@ -91,6 +92,54 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     })
   }
 
+  const overviewRef = useRef(null)
+  const eventsRef = useRef(null)
+  const costsRef = useRef(null)
+  const attractionsRef = useRef(null)
+
+  function tabSelect(e) {
+    if (e && e.target && e.target.textContent) {
+      if (e.target.textContent === 'Overview') {
+        overviewRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        })
+      } else if (e.target.textContent === 'Events') {
+        eventsRef.current.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' })
+      } else if (e.target.textContent === 'Costs') {
+        costsRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
+      } else if (e.target.textContent === 'Attractions') {
+        attractionsRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'nearest'
+        })
+      }
+    }
+  }
+
+  const tabs = (
+    <div className={styles.tabs}>
+      <button className={styles.tabItem} onClick={tabSelect}>
+        <Icon icon="fluent:apps-list-24-regular" height="30" className={styles.tabIcon} />
+        <span className={styles.tabName}>Overview</span>
+      </button>
+      <button className={styles.tabItem} onClick={tabSelect}>
+        <Icon icon="fluent:star-emphasis-24-regular" height="30" className={styles.tabIcon} />
+        <span className={styles.tabName}>Events</span>
+      </button>
+      <button className={styles.tabItem} onClick={tabSelect}>
+        <Icon icon="fluent:money-hand-24-regular" height="30" className={styles.tabIcon} />
+        <span className={styles.tabName}>Costs</span>
+      </button>
+      <button className={styles.tabItem} onClick={tabSelect}>
+        <Icon icon="fluent:location-24-regular" height="30" className={styles.tabIcon} />
+        <span className={styles.tabName}>Attractions</span>
+      </button>
+    </div>
+  )
+
   return (
     <>
       {areaHasImage && (
@@ -161,13 +210,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           <div className={styles.description}>{description}</div>
         </div>
       )}
-      <div className={styles.disclaimer}>
-        {' '}
-        <BsInfoLg className={styles.disclaimerIcon} /> Always double check information provided by
-        Pulfy with official websites before your trip.
-      </div>
+      {tabs}
       <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
-        <div className={styles.contentElement}>
+        <div ref={overviewRef} className={styles.contentElement}>
           <div className={styles.elementIcon}>
             {' '}
             <Calendar />
@@ -308,6 +353,11 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             </button>
         )}
       </Card>
+      <div className={styles.disclaimer}>
+        {' '}
+        <BsInfoLg className={styles.disclaimerIcon} /> Always double check information provided by
+        Pulfy with official websites before your trip.
+      </div>
       <Card title="Status" type="Overview" className={styles.recommendationCard}>
         {barText && (
           <div className={styles.contentElement}>
@@ -360,7 +410,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
       </div>
       {uniqueEvents && uniqueEvents.length > 0 ? (
         <Card title="Events" type="Major" className={styles.recommendationCard}>
-          <div className={styles.events}>
+          <div ref={eventsRef} className={styles.events}>
             {uniqueEvents.map(event => (
               <div key={`event-${event.eid}`} className={styles.slide}>
                 <Image
@@ -471,164 +521,168 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         </Card>
       )}
       {colLabels && (
-        <Card title="Cost of Living" type="Costs" className={styles.recommendationCard}>
-          {colLabels.meal_cheap_restaurant_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                <div className={styles.elementIcon5}>
-                  {' '}
-                  <Food className={styles.food} />
+        <div ref={costsRef}>
+          <Card title="Cost of Living" type="Costs" className={styles.recommendationCard}>
+            {colLabels.meal_cheap_restaurant_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Food className={styles.food} />
+                  </div>
+                  <div>Meal at Cheap Restaurant</div>
                 </div>
-                <div>Meal at Cheap Restaurant</div>
-              </div>
-              <div className={styles.elementText2}>
-                {colLabels.meal_cheap_restaurant_cost_label}
-              </div>
-            </div>
-          )}
-          {colLabels.meal_mid_range_restaurant_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                <div className={styles.elementIcon5}>
-                  {' '}
-                  <Food />
+                <div className={styles.elementText2}>
+                  {colLabels.meal_cheap_restaurant_cost_label}
                 </div>
-                Meal at Luxury Restaurant
               </div>
-              <div className={styles.elementText2}>
-                {colLabels.meal_mid_range_restaurant_cost_label}
-              </div>
-            </div>
-          )}
-          {colLabels.mcmeal_at_mcdonalds_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                <div className={styles.elementIcon5}>
-                  {' '}
-                  <Food />
+            )}
+            {colLabels.meal_mid_range_restaurant_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Food />
+                  </div>
+                  Meal at Luxury Restaurant
                 </div>
-                McDonalds Menu
-              </div>
-              <div className={styles.elementText2}>{colLabels.mcmeal_at_mcdonalds_cost_label}</div>
-            </div>
-          )}
-          {colLabels.beer_at_restaurant_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
-                  {' '}
-                  <Food />
+                <div className={styles.elementText2}>
+                  {colLabels.meal_mid_range_restaurant_cost_label}
                 </div>
-                Beer at Restaurant
               </div>
-              <div className={styles.elementText2}>{colLabels.beer_at_restaurant_cost_label}</div>
-            </div>
-          )}
-          {colLabels.public_transport_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
-                  {' '}
-                  <Transport />
+            )}
+            {colLabels.mcmeal_at_mcdonalds_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Food />
+                  </div>
+                  McDonalds Menu
                 </div>
-                Public Transport
-              </div>
-              <div className={styles.elementText2}>{colLabels.public_transport_cost_label}</div>
-            </div>
-          )}
-          {colLabels.beer_from_market_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
-                  {' '}
-                  <Food />
+                <div className={styles.elementText2}>
+                  {colLabels.mcmeal_at_mcdonalds_cost_label}
                 </div>
-                Beer from Market
               </div>
-              <div className={styles.elementText2}>{colLabels.beer_from_market_label}</div>
-            </div>
-          )}
-          {colLabels.montly_transport_pass_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                <div className={styles.elementIcon5}>
+            )}
+            {colLabels.beer_at_restaurant_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
                   {' '}
-                  <Transport />
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Food />
+                  </div>
+                  Beer at Restaurant
                 </div>
-                Monthly Transport Pass
+                <div className={styles.elementText2}>{colLabels.beer_at_restaurant_cost_label}</div>
               </div>
-              <div className={styles.elementText2}>{colLabels.montly_transport_pass_label}</div>
-            </div>
-          )}
-          {colLabels.gasoline_1_liter_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
+            )}
+            {colLabels.public_transport_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
                   {' '}
-                  <Transport />
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Transport />
+                  </div>
+                  Public Transport
                 </div>
-                Gasoline 1 Liter
+                <div className={styles.elementText2}>{colLabels.public_transport_cost_label}</div>
               </div>
-              <div className={styles.elementText2}>{colLabels.gasoline_1_liter_cost_label}</div>
-            </div>
-          )}
-          {colLabels.prepaid_card_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
+            )}
+            {colLabels.beer_from_market_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
                   {' '}
-                  <EventsIcon />
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Food />
+                  </div>
+                  Beer from Market
                 </div>
-                Prepaid Card
+                <div className={styles.elementText2}>{colLabels.beer_from_market_label}</div>
               </div>
-              <div className={styles.elementText2}>{colLabels.prepaid_card_cost_label}</div>
-            </div>
-          )}
-          {colLabels.internet_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
+            )}
+            {colLabels.montly_transport_pass_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Transport />
+                  </div>
+                  Monthly Transport Pass
+                </div>
+                <div className={styles.elementText2}>{colLabels.montly_transport_pass_label}</div>
+              </div>
+            )}
+            {colLabels.gasoline_1_liter_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
                   {' '}
-                  <Star />
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Transport />
+                  </div>
+                  Gasoline 1 Liter
                 </div>
-                Internet
+                <div className={styles.elementText2}>{colLabels.gasoline_1_liter_cost_label}</div>
               </div>
-              <div className={styles.elementText2}>{colLabels.internet_cost_label}</div>
-            </div>
-          )}
-          {colLabels.cinema_ticket_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
+            )}
+            {colLabels.prepaid_card_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
                   {' '}
-                  <Star />
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <EventsIcon />
+                  </div>
+                  Prepaid Card
                 </div>
-                Cinema Ticket
+                <div className={styles.elementText2}>{colLabels.prepaid_card_cost_label}</div>
               </div>
-              <div className={styles.elementText2}>{colLabels.cinema_ticket_cost_label}</div>
-            </div>
-          )}
-          {colLabels.taxi_1km_cost_label && (
-            <div className={styles.contentElement2}>
-              <div className={styles.elementText2}>
-                {' '}
-                <div className={styles.elementIcon5}>
+            )}
+            {colLabels.internet_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
                   {' '}
-                  <Transport />
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Star />
+                  </div>
+                  Internet
                 </div>
-                Taxi 1km
+                <div className={styles.elementText2}>{colLabels.internet_cost_label}</div>
               </div>
-              <div className={styles.elementText2}>{colLabels.taxi_1km_cost_label}</div>
-            </div>
-          )}
-        </Card>
+            )}
+            {colLabels.cinema_ticket_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
+                  {' '}
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Star />
+                  </div>
+                  Cinema Ticket
+                </div>
+                <div className={styles.elementText2}>{colLabels.cinema_ticket_cost_label}</div>
+              </div>
+            )}
+            {colLabels.taxi_1km_cost_label && (
+              <div className={styles.contentElement2}>
+                <div className={styles.elementText2}>
+                  {' '}
+                  <div className={styles.elementIcon5}>
+                    {' '}
+                    <Transport />
+                  </div>
+                  Taxi 1km
+                </div>
+                <div className={styles.elementText2}>{colLabels.taxi_1km_cost_label}</div>
+              </div>
+            )}
+          </Card>
+        </div>
       )}
       {country &&
         country.safety &&
@@ -654,7 +708,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
       {topPois &&
         topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
           <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
-            <div className={styles.events}>
+            <div ref={attractionsRef} className={styles.events}>
               {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
                 <div key={`poi-${i}-${poi.id}`} className={styles.slide}>
                   <Image

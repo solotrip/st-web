@@ -510,3 +510,80 @@ padding: 4px;
   display: flex;
   flex-direction: column;
 }
+
+
+.tabs {
+  margin-top: 0px;
+  margin-bottom: 8px;
+  width: 100%;
+  display: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  @include xs-to-sm {
+    display: flex;
+  }
+}
+
+.tabItem {
+  @include roboto-medium;
+  background: transparent;
+  font-size: 14px;
+  padding: 4px 2px;
+  max-height: 50px;
+  text-align: center;
+  border-radius: 16px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: 0 0 auto;
+
+  @include xs {
+    font-size: 14px;
+    margin: 2px;
+    padding: 4px 2px;
+    flex-wrap: wrap;
+  }
+
+  &.active {
+    //background: $card-content-recommendation;
+    //background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -moz-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+   // background-image: linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+
+    .tabIcon {
+      //color: #f3f3f4;
+      color: rgb(64,176,233);
+      pointer-events: none;
+    }
+
+    .tabName {
+      color: white;
+    }
+
+  }
+
+}
+
+.tabName {
+  @include roboto-regular;
+  margin: 2px 2px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #31afea;
+  display: none;
+}
+
+.tabIcon {
+  //color: #31afea;
+  color: rgb(146,147,175);
+  font-size: 24px;
+  pointer-events: none;
+  @include xs {
+    display: none;
+  }
+}
