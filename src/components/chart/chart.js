@@ -58,9 +58,10 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
     xAxis.get('renderer').labels.template.setAll({
       fill: labelColor,
       oversizedBehavior: 'truncate',
-      maxWidth: 120,
+      maxWidth: 200,
       rotation: -90,
-      dx: -12
+      dx: -12,
+      paddingRight: 30
     })
 
     yAxis.get('renderer').labels.template.setAll({ fill: labelColor })
@@ -71,7 +72,8 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
         yAxis: yAxis,
         valueYField: 'max',
         openValueYField: 'min',
-        categoryXField: 'name'
+        categoryXField: 'name',
+        maskBullets: false
       })
     )
 
@@ -118,7 +120,7 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
         sprite: am5.Label.new(root, {
           populateText: true,
           centerX: am5.p50,
-          centerY: am5.p50,
+          centerY: am5.p0,
           text: '{min}',
           fill: bulletColor,
           fontSize: 14,
