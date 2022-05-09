@@ -101,7 +101,6 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
                 <div className={styles.browseCard__content}>
                   <div className={styles.browseCard_title}>
                     Recent Search
-                    {console.log('recent search query:', q)}
                     <Link
                       className={styles.queryLink}
                       key={`rec-q-${i}`}
@@ -160,10 +159,15 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
               <div className={styles.browseCard__content}>
                 <div className={styles.browseCard_title}>
                   {item.name}
+                  {console.log({
+                    item: item.name,
+                    query: qs.parse(item.link),
+                    queryfilters: qs.parse(item.link).filters
+                  })}
                   <Query
                     className={styles.queryBrowse2}
                     enableClick={false}
-                    maxFiltersDisplayed={4}
+                    maxFiltersDisplayed={10}
                     query={qs.parse(item.link)}
                     filtersDict={filtersDict}
                     locations={locations}

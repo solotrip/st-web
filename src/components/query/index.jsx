@@ -20,8 +20,8 @@ const Query = ({
   enableClick = true,
   className,
   prefixClassName,
-  maxFiltersDisplayed = 2,
-  maxMonths = 2,
+  maxFiltersDisplayed = 4,
+  maxMonths = 3,
   locationNameMaxLength = 15,
   browseQuery = false
 }) => {
@@ -114,7 +114,13 @@ const Query = ({
                 ? f.id === 'a'
                   ? f.variables.areaSids[0].charAt(0).toUpperCase() +
                     f.variables.areaSids[0].slice(1)
-                  : filtersDict[f.id].name
+                  : f.id === 't'
+                    ? f.variables.tags[0].charAt(0).toUpperCase() + f.variables.tags[0].slice(1)
+                    : f.id === 'c'
+                      ? f.variables.countryCodes.map(
+                        code => extractCountry(code).flag + '  ' + extractCountry(code).name + ' '
+                      )
+                      : filtersDict[f.id].name
                 : null,
           onClick: () => navigate('/recommendations/filters')
         }))
