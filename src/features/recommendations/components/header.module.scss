@@ -24,6 +24,9 @@
    -webkit-tap-highlight-color: transparent;
    display: flex;
    flex-direction: row;
+   //background-color: darkcyan;
+   justify-content: space-between;
+   
 }
 
 .navbarFixedIos {
@@ -53,6 +56,7 @@
   outline: none;
    box-shadow: none;
    -webkit-tap-highlight-color: transparent;
+   //background-color: yellowgreen;
 
 }
 
@@ -263,13 +267,18 @@
 
 .navigator {
   
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-right: 0px;
   @include xs-to-sm {
    
+    display: none;
+  }
+  //background-color: pink;
+  max-width: 400px;
+  @include xs-to-md {
     display: none;
   }
 
@@ -280,8 +289,8 @@
   margin-top: auto;
   margin-bottom: auto;
   color: #3cafeb;
-  padding-right: 15px;
-  padding-left: 15px;
+  
+
  // background-color: aquamarine;
 }
 
