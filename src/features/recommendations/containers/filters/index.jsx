@@ -10,35 +10,41 @@ import Filters from '../../components/filters'
 import { RECENT_FILTERS_CATEGORY, RECENT_FILTERS_COUNT } from 'constants/index'
 
 const FiltersContainer = () => {
-  const {
-    loading,
-    filters,
-    recentFilters,
-    filtersDict
-  } = useSelector(filtersSelector)
+  const { loading, filters, recentFilters, filtersDict } = useSelector(filtersSelector)
   const query = useQuery()
   const history = useHistory()
   const [data, setData] = useState({
     ...query,
-    filters: query.filters ?
-      _zipObject(
-        query.filters.map(q => q.id),
-        query.filters.map(q => q.variables || true)
-      ) :
-      {}
+    filters: query.filters
+      ? _zipObject(query.filters.map(q => q.id), query.filters.map(q => q.variables || true))
+      : {}
   })
 
-  const onUpdate = useCallback((filterId, value) => {
-    setData(prevData => ({
-      ...prevData,
-      filters: {
-        ...prevData.filters,
-        [filterId]: value === false ? undefined : value
-      }
-    }))
-  }, [setData])
+  const onUpdate = useCallback(
+    (filterId, value) => {
+      setData(prevData => ({
+        ...prevData,
+        filters: {
+          ...prevData.filters,
+          [filterId]: value === false ? undefined : value
+        }
+      }))
+    },
+    [setData]
+  )
 
   const onSubmit = () => {
+    console.log(Object.keys(data.filters))
+
+    console.log(
+      'aha:',
+      Object.keys(data.filters)
+        .filter(k => data.filters[k] !== undefined)
+        .map(k => ({
+          id: k,
+          variables: data.filters[k] === true ? undefined : data.filters[k]
+        }))
+    )
     history.push({
       pathname: '/recommendations',
       search: qs.stringify({
@@ -51,6 +57,9 @@ const FiltersContainer = () => {
           }))
       })
     })
+    if (Object.keys(data.filters) === [] || Object.keys(data.filters).length === 0) {
+      history.go(0)
+    }
   }
   const filtersWithRecent = useMemo(
     () => [
@@ -60,7 +69,8 @@ const FiltersContainer = () => {
       })),
       ...filters
     ],
-    [recentFilters, filtersDict, filters])
+    [recentFilters, filtersDict, filters]
+  )
   return (
     <SheetWrapper>
       <SheetWrapper.Content>
@@ -71,9 +81,7 @@ const FiltersContainer = () => {
           filterValues={data.filters}
         />
       </SheetWrapper.Content>
-      <SheetWrapper.Footer onClick={onSubmit} text="Search"
-                           disabled={false}
-      />
+      <SheetWrapper.Footer onClick={onSubmit} text="Search" disabled={false} />
     </SheetWrapper>
   )
 }
