@@ -118,7 +118,7 @@ const Query = ({
                     ? f.variables.tags[0].charAt(0).toUpperCase() + f.variables.tags[0].slice(1)
                     : f.id === 'c' && f.variables && f.variables.countryCodes
                       ? f.variables.countryCodes.map(
-                        code => extractCountry(code).flag + '  ' + extractCountry(code).name + ' '
+                        code => '   ' + extractCountry(code).flag + '   '
                       )
                       : filtersDict[f.id].name
                 : null,
