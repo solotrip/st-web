@@ -12,8 +12,17 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
     appTheme === 'no-preference'
       ? am5.color(0xffffff)
       : appTheme === 'light'
-        ? am5.color(0x000000)
-        : am5.color(0xffffff)
+      ? am5.color(0x000000)
+      : am5.color(0xffffff)
+
+  const bulletColor =
+    appTheme === 'dark'
+      ? am5.color(0xffffff)
+      : appTheme === 'light'
+      ? am5.color(0x000000)
+      : appTheme === 'no-preference'
+      ? am5.color(0xffffff)
+      : am5.color(0x000000)
 
   useLayoutEffect(() => {
     var root = am5.Root.new(DOMroot)
@@ -86,7 +95,7 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
       templateField: 'columnConfig'
     })
 
-    series.columns.template.setup = function(target) {
+    series.columns.template.setup = function (target) {
       target.set('tooltip', tooltip)
     }
 
@@ -103,15 +112,15 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
       return chart.get('colors').getIndex(series.columns.indexOf(target))
     })
 
-    series.bullets.push(function() {
+    series.bullets.push(function () {
       return am5.Bullet.new(root, {
         locationY: 0,
         sprite: am5.Label.new(root, {
           populateText: true,
           centerX: am5.p50,
-          centerY: am5.p0,
+          centerY: am5.p50,
           text: '{min}',
-          fill: am5.color(0xffffff),
+          fill: bulletColor,
           fontSize: 14,
           textAlign: 'center',
           fontWeight: 700
@@ -119,7 +128,7 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
       })
     })
 
-    series.bullets.push(function() {
+    series.bullets.push(function () {
       return am5.Bullet.new(root, {
         locationY: 1,
         sprite: am5.Label.new(root, {
@@ -127,32 +136,30 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
           centerX: am5.p50,
           centerY: am5.p100,
           text: '{max}',
-          fill: am5.color(0xffffff),
+          fill: bulletColor,
           fontSize: 14,
           textAlign: 'center',
           fontWeight: 700
         })
       })
     })
-    const responsive =am5Responsive.newEmpty(root)
+    const responsive = am5Responsive.newEmpty(root)
     responsive.addRule({
       relevant: am5Responsive.widthL,
-      applying: function() {
+      applying: function () {
         xAxis.zoomToIndexes(0, 3)
-        xAxis.events.once('datavalidated', function(ev) {
+        xAxis.events.once('datavalidated', function (ev) {
           ev.target.zoomToIndexes(0, 3)
         })
       },
-      removing: function() {
+      removing: function () {
         xAxis.zoomToIndexes(0, 10)
-        xAxis.events.once('datavalidated', function(ev) {
+        xAxis.events.once('datavalidated', function (ev) {
           ev.target.zoomToIndexes(0, 10)
         })
       }
     })
-    root.setThemes([
-      responsive
-    ])
+    root.setThemes([responsive])
 
     chart.zoomOutButton.set('forceHidden', true)
     xAxis.data.setAll(data)
@@ -171,12 +178,7 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [DOMroot])
 
-  return (
-      <div
-        id={DOMroot}
-        className={styles.container}
-      />
-  )
+  return <div id={DOMroot} className={styles.container} />
 }
 
 export default Chart

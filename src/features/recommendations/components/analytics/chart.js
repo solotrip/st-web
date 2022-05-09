@@ -30,7 +30,6 @@ const AnalyticsChart = ({ recommendations, type, title }) => {
 
   return (
     <div className={styles.container}>
-      {console.log('chart data is here:', filteredChartData)}
       <Chart data={filteredChartData} type={type} DOMroot={type} />
     </div>
   )
