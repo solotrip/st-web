@@ -17,6 +17,7 @@ const options = countries.map(c => ({
 const PassportCountriesContainer = () => {
   const dispatch = useDispatch()
   const query = useQuery()
+  const queryComplete = query && query.complete ? true : false
   const { passports = [] } = useSelector(localPreferencesSelector)
   const history = useHistory()
   const [data, setData] = useState({
@@ -31,10 +32,17 @@ const PassportCountriesContainer = () => {
   )
   const onSubmit = () => {
     dispatch(updateLocalPreference({ key: 'passports', value: data.passports }))
-    history.push({
-      pathname: '/recommendations/filters',
-      search: qs.stringify(data)
-    })
+    if (queryComplete) {
+      history.push({
+        pathname: '/recommendations',
+        search: qs.stringify(data)
+      })
+    } else {
+      history.push({
+        pathname: '/recommendations/filters',
+        search: qs.stringify(data)
+      })
+    }
   }
 
   const onBack = () => {
