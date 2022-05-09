@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 import Tag from '../input/tag'
 import styles from './query.module.scss'
-import { MdAdd, MdEditCalendar, MdMyLocation, MdFactCheck } from 'react-icons/md'
+import { MdAdd, MdEditCalendar, MdMyLocation, MdFactCheck, MdCompareArrows } from 'react-icons/md'
 import { coordsToQuery } from 'features/recommendations/containers/location/slice'
 import { formatAsMonthDay, formatDuration, getMonthAbbreviation } from 'utils/date'
 import _get from 'lodash/get'
@@ -66,7 +66,12 @@ const Query = ({
       onClick: () => navigate('/recommendations/location'),
       icon: MdMyLocation
     },
-    */
+    */ {
+      // prefix: 'For ',
+      value: query.show && `Compare ${query.show}`,
+      onClick: () => navigate('/recommendations/date'),
+      icon: MdCompareArrows
+    },
     {
       // prefix: 'For ',
       value:

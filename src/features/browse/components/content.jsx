@@ -52,7 +52,6 @@ const ListItem = ({ name, location, startDate, endDate, link, image, image_hash 
 const Content = ({ items, recentQueries, filtersDict, locations }) => {
   return (
     <div className={styles.page}>
-      {console.log('recentq:', recentQueries)}
       {/*recentQueries.length > 0 && (
         <div className={styles.queries}>
           <h2>Recent</h2>
