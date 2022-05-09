@@ -144,10 +144,21 @@ export const processRecommendation = (recommendation, passports = []) => {
     }
 
     //Adding the general weather.
-    if (recommendation.climate.humidity && recommendation.climate.rainy_days) {
+    if (
+      recommendation.climate.humidity &&
+      recommendation.climate.rainy_days &&
+      recommendation.climate.rainy_days !== 1
+    ) {
       weatherText =
-        `Rainy days: ${recommendation.climate.rainy_days}, ` +
-        `humidity ${recommendation.climate.humidity}`
+        `Rainy days: ${recommendation.climate.rainy_days} days/month, ` +
+        `humidity: ${recommendation.climate.humidity}%`
+    } else if (
+      recommendation.climate.humidity &&
+      recommendation.climate.rainy_days
+    ) {
+      weatherText =
+        `Rainy days: ${recommendation.climate.rainy_days} day/month, ` +
+        `humidity: ${recommendation.climate.humidity}%`
     }
 
     //Adding the mask status.
@@ -224,7 +235,7 @@ export const getDefaultImage = (poi, isLightTheme) => {
 
 export const reformatQuery = query => {
   const newQuery = { ...query }
-  if(query.months) {
+  if (query.months) {
     newQuery.months = query.months.map(month => parseInt(month.split('-')[1]))
   }
   return newQuery
