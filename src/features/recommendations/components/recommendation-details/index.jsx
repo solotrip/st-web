@@ -192,6 +192,16 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               <MdIosShare className={styles.shareIcon} />
             </button>
           </div>
+          <div ref={overviewRef} className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Calendar />
+            </div>
+            <div className={styles.elementText3}>
+              {formatAsMonthDay(startDate)}
+              {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
+            </div>
+          </div>
           <div className={styles.description}>{description}</div>
         </div>
       ) : (
@@ -224,16 +234,6 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
       )}
       {tabs}
       <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
-        <div ref={overviewRef} className={styles.contentElement}>
-          <div className={styles.elementIcon}>
-            {' '}
-            <Calendar />
-          </div>
-          <div className={styles.elementText}>
-            {formatAsMonthDay(startDate)}
-            {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
-          </div>
-        </div>
         {visaText && (
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>

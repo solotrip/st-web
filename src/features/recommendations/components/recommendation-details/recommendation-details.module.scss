@@ -209,6 +209,23 @@ padding: 4px;
   }
 }
 
+.elementText3 {
+  margin-top: 1px;
+  line-height: 23px;
+  font-size: 20px;
+  margin-left: 18px;
+ 
+  width: 100%;
+ // max-width: 250px;
+
+  .ul{
+    display: inline
+  }
+  .li{
+    display: inline;
+  }
+}
+
 .dang {
   .ul{
     display: inline
@@ -513,7 +530,7 @@ padding: 4px;
 
 
 .tabs {
-  margin-top: 0px;
+  margin-top: 20px;
   margin-bottom: 8px;
   width: 100%;
   display: none;
