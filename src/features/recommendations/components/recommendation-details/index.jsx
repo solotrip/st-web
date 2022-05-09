@@ -533,8 +533,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         </Card>
       )}
       {colLabels && (
-        <div ref={costsRef}>
-          <Card title="Cost of Living" type="Costs" className={styles.recommendationCard}>
+        <Card title="Cost of Living" type="Costs" className={styles.recommendationCard}>
+          <div ref={costsRef}>
             {colLabels.meal_cheap_restaurant_cost_label && (
               <div className={styles.contentElement2}>
                 <div className={styles.elementText2}>
@@ -693,8 +693,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <div className={styles.elementText2}>{colLabels.taxi_1km_cost_label}</div>
               </div>
             )}
-          </Card>
-        </div>
+          </div>
+        </Card>
       )}
       {country &&
         country.safety &&
