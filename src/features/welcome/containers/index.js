@@ -51,7 +51,8 @@ const WelcomeContainer = () => {
           <Link className={styles.actionButton} to='/signup'>
             Signup
           </Link>
-          <Link className={styles.actionButton2} to='/onboarding/1'>
+          {/* <Link className={styles.actionButton2} to='/onboarding/1'> */}
+          <Link className={styles.actionButton2} to='/browse'>
             Continue as Guest{' '}
           </Link>
           <Link className={styles.login2} to='/login'>
