@@ -101,7 +101,6 @@ const Header = ({
         [styles.navbarFixedIos]: Capacitor.getPlatform() === 'ios'
       })}
     >
-      <div className={styles.upperHeader}>upperlogo</div>
       <div className={styles.actions}>
         <Link to="/browse" className={styles.headerLink}>
           <div className={styles.headerLogo} />
@@ -143,7 +142,7 @@ const Header = ({
                   onClick={handleExpand}
                 >
                   <MdSearch className={styles.searchIcon} />
-                  {'Edit your Search'}
+                  {'Start your search'}
                   {query &&
                     Object.keys(query).length > 0 && (
                       <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />

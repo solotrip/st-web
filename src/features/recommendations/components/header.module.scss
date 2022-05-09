@@ -53,6 +53,7 @@
   outline: none;
    box-shadow: none;
    -webkit-tap-highlight-color: transparent;
+
 }
 
 .actionIcon {
@@ -261,12 +262,12 @@
 
 
 .navigator {
-  //background-color: pink;
+  
   width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-right: 50px;
+  margin-right: 0px;
   @include xs-to-sm {
    
     display: none;

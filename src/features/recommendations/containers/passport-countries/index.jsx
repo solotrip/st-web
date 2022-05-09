@@ -43,7 +43,7 @@ const PassportCountriesContainer = () => {
       <SheetWrapper.Content>
         <SettingsSection
           title="Passports"
-          description="We need this to provide you accurate visa information"
+          description="We need your passport/passports to provide you with accurate visa information and to show visa free destinations for you. You can skip this step if you want."
         >
           <Select
             options={options}
@@ -56,11 +56,7 @@ const PassportCountriesContainer = () => {
           />
         </SettingsSection>
       </SheetWrapper.Content>
-      <SheetWrapper.Footer
-        onClick={onSubmit}
-        text="Search"
-        disabled={data.passports.length === 0}
-      />
+      <SheetWrapper.Footer onClick={onSubmit} text="Next" disabled={data.passports.length === -1} />
     </SheetWrapper>
   )
 }

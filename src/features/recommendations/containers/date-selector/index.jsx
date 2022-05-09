@@ -79,7 +79,7 @@ const DateSelectorContainer = () => {
         </SettingsSection>
       </SheetWrapper.Content>
       {data.type !== DATE_QUERY_TYPE.recentQueries && (
-        <SheetWrapper.Footer onClick={onSubmit} text="Search" disabled={!isEnabled()} />
+        <SheetWrapper.Footer onClick={onSubmit} text="Next" disabled={!isEnabled()} />
       )}
     </SheetWrapper>
   )

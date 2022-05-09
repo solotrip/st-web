@@ -8,6 +8,7 @@ import { useQuery } from 'utils/hooks/use-query'
 import { useHistory } from 'react-router-dom'
 import Filters from '../../components/filters'
 import { RECENT_FILTERS_CATEGORY, RECENT_FILTERS_COUNT } from 'constants/index'
+import SettingsSection from 'components/settings-section'
 
 const FiltersContainer = () => {
   const { loading, filters, recentFilters, filtersDict } = useSelector(filtersSelector)
@@ -72,14 +73,20 @@ const FiltersContainer = () => {
     [recentFilters, filtersDict, filters]
   )
   return (
-    <SheetWrapper>
+    <SheetWrapper snapPoints={[700]}>
       <SheetWrapper.Content>
-        <Filters
-          filters={filtersWithRecent}
-          loading={loading}
-          updateFilter={onUpdate}
-          filterValues={data.filters}
-        />
+        <SettingsSection
+          title="Filters"
+          // eslint-disable-next-line max-len
+          description="You could add some filters to specify your search. Activities, Regions, Restrictions, you name it. You can select multiple filters."
+        >
+          <Filters
+            filters={filtersWithRecent}
+            loading={loading}
+            updateFilter={onUpdate}
+            filterValues={data.filters}
+          />
+        </SettingsSection>
       </SheetWrapper.Content>
       <SheetWrapper.Footer onClick={onSubmit} text="Search" disabled={false} />
     </SheetWrapper>
