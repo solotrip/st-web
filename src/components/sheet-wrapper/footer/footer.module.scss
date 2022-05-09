@@ -19,6 +19,15 @@
 .content {
   display: flex;
   align-items: flex-end;
+  justify-content: space-between;
+  max-width: 800px;
+  width: 100%;
+  padding: 0 16px;
+}
+
+.contentEnd {
+  display: flex;
+  align-items: flex-end;
   justify-content: flex-end;
   max-width: 800px;
   width: 100%;
@@ -26,8 +35,12 @@
 }
 
 
+
 .next {
   width: 100px;
 }
 
 
+.prev{
+  width: 100px;
+}

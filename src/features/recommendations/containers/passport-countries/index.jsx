@@ -36,6 +36,13 @@ const PassportCountriesContainer = () => {
       search: qs.stringify(data)
     })
   }
+
+  const onBack = () => {
+    history.push({
+      pathname: '/recommendations/date',
+      search: qs.stringify(data)
+    })
+  }
   const value = options.filter(o => data.passports.includes(o.value))
 
   return (
@@ -43,6 +50,7 @@ const PassportCountriesContainer = () => {
       <SheetWrapper.Content>
         <SettingsSection
           title="Passports"
+          // eslint-disable-next-line max-len
           description="We need your passport/passports to provide you with accurate visa information and to show visa free destinations for you. You can skip this step if you want."
         >
           <Select
@@ -56,7 +64,14 @@ const PassportCountriesContainer = () => {
           />
         </SettingsSection>
       </SheetWrapper.Content>
-      <SheetWrapper.Footer onClick={onSubmit} text="Next" disabled={data.passports.length === -1} />
+      <SheetWrapper.Footer
+        onClick={onSubmit}
+        text="Next"
+        disabled={data.passports.length === -1}
+        previousEnabled={true}
+        previousOnClick={onBack}
+        previousText="< Dates"
+      />
     </SheetWrapper>
   )
 }
