@@ -13,6 +13,7 @@ import SettingsSection from 'components/settings-section'
 const DateSelectorContainer = () => {
   const query = useQuery()
   const history = useHistory()
+  const queryComplete = query && query.complete ? true : false
   const isFlexibleQuery = query && query.months && query.months.length > 0
   const [data, setData] = useState({
     ...query,
@@ -47,10 +48,17 @@ const DateSelectorContainer = () => {
       delete payload.duration
     }
     delete payload.type
-    history.push({
-      pathname: '/recommendations/passport',
-      search: qs.stringify(payload)
-    })
+    if (queryComplete) {
+      history.push({
+        pathname: '/recommendations',
+        search: qs.stringify(payload)
+      })
+    } else {
+      history.push({
+        pathname: '/recommendations/passport',
+        search: qs.stringify(payload)
+      })
+    }
   }
 
   const isEnabled = () => {

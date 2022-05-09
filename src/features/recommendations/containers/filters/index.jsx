@@ -38,7 +38,7 @@ const FiltersContainer = () => {
 
   const onSubmit = () => {
     console.log(Object.keys(data.filters))
-
+    dispatch(fetchRecommendations(query))
     history.push({
       pathname: '/recommendations',
       search: qs.stringify({
@@ -53,7 +53,6 @@ const FiltersContainer = () => {
     })
     if (Object.keys(data.filters) === [] || Object.keys(data.filters).length === 0) {
       //history.go(0)
-      dispatch(fetchRecommendations(query))
     }
   }
 
