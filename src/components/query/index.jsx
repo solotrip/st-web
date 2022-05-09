@@ -114,9 +114,9 @@ const Query = ({
                 ? f.id === 'a'
                   ? f.variables.areaSids[0].charAt(0).toUpperCase() +
                     f.variables.areaSids[0].slice(1)
-                  : f.id === 't'
+                  : f.id === 't' && f.variables && f.variables.tags && f.variables.tags[0]
                     ? f.variables.tags[0].charAt(0).toUpperCase() + f.variables.tags[0].slice(1)
-                    : f.id === 'c'
+                    : f.id === 'c' && f.variables && f.variables.countryCodes
                       ? f.variables.countryCodes.map(
                         code => extractCountry(code).flag + '  ' + extractCountry(code).name + ' '
                       )
