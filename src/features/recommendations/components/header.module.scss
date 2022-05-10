@@ -16,7 +16,7 @@
 
 .navbarFixed {
   z-index: 3;
-  height: 58px;
+  height: 72px;
   
   width: 100%;
   outline: none;
@@ -26,7 +26,7 @@
    flex-direction: row;
    //background-color: darkcyan;
    justify-content: space-between;
-   
+align-content: center;
 }
 
 .navbarFixedIos {
@@ -47,6 +47,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  align-content: center;
   max-width: 784px;
   padding: 4px 16px;
   flex: 1;
@@ -56,7 +58,6 @@
   outline: none;
    box-shadow: none;
    -webkit-tap-highlight-color: transparent;
-   //background-color: yellowgreen;
 
 }
 
@@ -155,8 +156,10 @@
 .searchIcon, .clearIcon {
   font-size: 24px;
   flex: 0 0 auto;
-  margin-top: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   align-self: flex-start;
+  color: #3cafeb;
 }
 
 .clearIcon {
@@ -305,4 +308,8 @@
 
 .text{
   color: white;
+}
+
+.startText {
+  padding-left: 10px;
 }

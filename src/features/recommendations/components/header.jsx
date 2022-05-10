@@ -146,7 +146,7 @@ const Header = ({
                   onClick={openDates}
                 >
                   <MdSearch className={styles.searchIcon} />
-                  {'Start your search'}
+                  <div className={styles.startText}>Start your search</div>
                   {query &&
                     Object.keys(query).length > 0 && (
                       <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
@@ -175,7 +175,7 @@ const Header = ({
                     enableClick={isExpanded}
                   />
                 ) : (
-                  ' Start your search'
+                  <div className={styles.startText}>Start your search</div>
                 )}
                 {query &&
                   Object.keys(query).length > 0 && (
