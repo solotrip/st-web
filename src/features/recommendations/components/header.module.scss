@@ -49,15 +49,18 @@ align-content: center;
   justify-content: space-between;
   align-items: center;
   align-content: center;
-  max-width: 784px;
   padding: 4px 16px;
   flex: 1;
   @include md-to-lg {
     max-width: 650px;
   }
+  @include lg-to-xl {
+    max-width: 650px;
+  }
   outline: none;
    box-shadow: none;
    -webkit-tap-highlight-color: transparent;
+  // background-color: darkcyan;
 
 }
 
@@ -95,7 +98,6 @@ align-content: center;
 .editSearchBlue {
   width: calc(100vw - 102px);
  //font-size: 24px;
-  max-width: 600px;
   max-height: 48px;
   background: #3cafeb;
   border-radius: 10px;
@@ -275,6 +277,7 @@ align-content: center;
   flex-direction: row;
   justify-content: space-between;
   margin-right: 0px;
+  padding-right: 20px;
   @include xs-to-sm {
    
     display: none;
@@ -301,8 +304,18 @@ align-content: center;
 .sideHolder{
   display: flex;
   flex-direction: row;
-  width: 120px;
+  width: 200px;
   justify-content: space-around;
+
+  @include md-to-lg {
+    //background-color: greenyellow;
+    width: 400px;
+  }
+  @include lg-to-xl {
+    //background-color: aquamarine;
+    width: 800px;
+  }
+
 }
 
 
