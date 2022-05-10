@@ -94,6 +94,10 @@ const Header = ({
     history.push({ pathname: '/recommendations/filters', search: location.search })
   }
 
+  const openDates = () => {
+    history.push({ pathname: '/recommendations', search: location.search })
+  }
+
   return (
     <div
       className={cx(styles.navbarFixed, {
@@ -135,11 +139,11 @@ const Header = ({
                 </button>
               ) : (
                 <button
-                  className={cx(styles.editSearch, {
+                  className={cx(styles.editSearchTrackless, {
                     [styles.withBack]: backIsVisible,
                     [styles.exp]: isExpanded
                   })}
-                  onClick={handleExpand}
+                  onClick={openDates}
                 >
                   <MdSearch className={styles.searchIcon} />
                   {'Start your search'}

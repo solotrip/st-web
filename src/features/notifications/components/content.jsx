@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './content.module.scss'
 import Notification from './notification'
-import { isBrowser } from 'react-device-detect'
+import { isBrowser, isTablet } from 'react-device-detect'
 import { Loader } from 'components'
 import SidePanel from '../../recommendations/components/sidePanel'
+import Recommendation from 'features/recommendations/components/recommendation'
 
 const Content = ({
   notifications,
@@ -16,7 +17,11 @@ const Content = ({
     <div className={styles.page}>
       <div className={styles.notifications}>
         <h1 className={styles.title}>Notifications</h1>
-        {loading && <Loader />}
+        {loading && (
+          <div className={styles.recommendations}>
+            <Recommendation.Skeleton />
+          </div>
+        )}
         {!loading &&
           notifications.length === 0 && (
             <span className={styles.noItem}>All clear. Come back later</span>
@@ -26,17 +31,15 @@ const Content = ({
         })}
       </div>
       {mapEnabled &&
-        isBrowser &&
-        !loading &&
-        notifications.length > 0 && (
+        (isBrowser || isTablet) && (
           <SidePanel
-            className={styles.sidePanel}
             loading={loading}
-            recommendations={notifications}
-            query={queryFunction(notifications)}
+            recommendations={notifications || []}
+            contentType="notifications"
+            onlyOnDesktop
             queryFunction={queryFunction}
             basePath={basePath}
-            contentType="notifications"
+            query={queryFunction(notifications)}
           />
       )}
     </div>

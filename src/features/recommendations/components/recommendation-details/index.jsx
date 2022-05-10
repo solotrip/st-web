@@ -817,7 +817,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   <div className="flex center">
                     {startMonth && endMonth && startMonth !== endMonth ? (
                       <div className={styles.slideText3}>
-                        {activity} from {startMonth} to {endMonth}
+                        {activity === 'Car' ? 'Scenic Drive' : activity} from {startMonth} to{' '}
+                        {endMonth}
                       </div>
                     ) : (
                       <div className={styles.slideText3}>

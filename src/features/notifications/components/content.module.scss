@@ -22,7 +22,9 @@
 .notifications {
   @include custom-scroll;
   display: flex;
-  max-width: 386px; //584px
+  //max-width: 386px;586px;
+  max-width: 686px;
+  width: 100%;
   padding: 16px;
   flex-direction: column;
   align-items: center;
@@ -32,6 +34,21 @@
   flex: 1;
   @include xs-to-md {
     padding-bottom: 70px;
+    max-width: unset;
+  }
+
+  @include xs {
+    padding: 4px;
+  }
+}
+
+.error {
+  @extend .recommendations;
+  font-size: 20px;
+  padding: 32px;
+
+  > * {
+    margin: 32px 0;
   }
 }
 
@@ -70,9 +87,10 @@
 .recommendations {
   @include custom-scroll;
   display: flex;
-  max-width: 386px; //584px
+  //max-width: 386px;586px;
+  max-width: 686px;
+  width: 100%;
   padding: 16px;
-  //padding-left: 30px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
@@ -81,14 +99,30 @@
   flex: 1;
   @include xs-to-md {
     padding-bottom: 70px;
+    max-width: unset;
+  }
+
+  @include xs {
+    padding: 4px;
   }
 }
+
+.error {
+  @extend .recommendations;
+  font-size: 20px;
+  padding: 32px;
+
+  > * {
+    margin: 32px 0;
+  }
+}
+
 
 .recommendationDetails {
   @include custom-scroll;
   display: flex;
-  max-width: 386px; //584px
-  padding: 16px;
+  max-width: 686px; //586px
+  padding: 0px;
   //padding-left: 30px;
   flex-direction: column;
   align-items: center;
@@ -101,125 +135,78 @@
   }
 }
 
-.mapbox {
-  background-color: $bg-color;
-  flex: 1;
+.tabs {
+  margin-top: 0px;
+  margin-bottom: 8px;
+  width: 100%;
+  display: none;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  @include xs-to-sm {
+    display: flex;
+  }
+}
+
+.tabItem {
+  @include roboto-medium;
+  background: transparent;
+  font-size: 14px;
+  padding: 4px 2px;
+  max-height: 50px;
+  text-align: center;
+  border-radius: 16px;
+  margin: 2px;
   display: flex;
-  @include xs-to-md {
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: 0 0 auto;
+
+  @include xs {
+    font-size: 14px;
+    margin: 2px;
+    padding: 4px 2px;
+    flex-wrap: wrap;
+  }
+
+  &.active {
+    //background: $card-content-recommendation;
+    //background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -moz-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+   // background-image: linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+
+    .tabIcon {
+      //color: #f3f3f4;
+      color: rgb(64,176,233);
+      pointer-events: none;
+    }
+
+    .tabName {
+      color: white;
+    }
+
+  }
+
+}
+
+.tabName {
+  @include roboto-regular;
+  margin: 2px 2px;
+  font-size: 16px;
+  line-height: 20px;
+  color: #31afea;
+  display: none;
+}
+
+.tabIcon {
+  //color: #31afea;
+  color: rgb(146,147,175);
+  font-size: 24px;
+  pointer-events: none;
+  @include xs {
     display: none;
   }
-}
-
-.showDetails {
-  margin-top: 17px;
-  background-color: #1697dc;
-  width: 100%;
-  height: 38.27px;
-  border-radius: 12px;
-  margin-bottom: 17px;
-  outline: none;
-  color: white;
-
-}
-
-.resetFilters {
-  margin-top: 17px;
-  background-color: #1697dc;
-  width: 100%;
-  height: 78px;
-  border-radius: 12px;
-  margin-bottom: 17px;
-  padding: 10px;
-  color: white;
-
-}
-
-.whiteText {
-  color: white;
-}
-
-
-
-
- .mapMarker {
-  // width: 50px;
-   //height: 50px;
-   //background-image: url('https://ik.imagekit.io/rfjpogvdn8p/pulfypin_IE0jmyWuLQw.svg?updatedAt=1641584403446');
-
- }
-
- .popupContent{
-   position:relative;
-   background: #25262c;
-   font-size: 18px;
-   border-radius:5px;
-   box-shadow:0 1px 2px rgba(0,0,0,.1);
-   //padding:10px 10px 15px;
-   pointer-events:auto
-  }
-
-  .popupContentNoEvent{
-    position:relative;
-    background: #25262c;
-    font-size: 18px;
-    border-radius:5px;
-    box-shadow:0 1px 2px rgba(0,0,0,.1);
-    //padding:10px 10px 15px;
-    pointer-events:none
-   }
-
-   .popupImage {
-     width: 60px;
-     height: 60px;
-     background-color: yellowgreen;
-   }
-
-  .colorStrip {
-    width: 100%;
-    height: 10px;
-    background-color: #667A8f;
-    top:0%;
-    border-radius: 5px 5px 0px 0px;
-    bottom: 98.17%;
-  }
-
-  .popupContent2 {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .popupInner{
-    display: flex;
-    flex-direction: row;
-    padding:10px 10px 15px;
-    background-image: -webkit-linear-gradient(90deg, #aeb9ea, #3cafeb);
-    background-image: -o-linear-gradient(90deg, #aeb9ea, #3cafeb);
-    background-image: -moz-linear-gradient(90deg, #aeb9ea, #3cafeb);
-    background-image: linear-gradient(90deg, #aeb9ea, #3cafeb);
-    display: inline-block;
-    /* Set the background size and repeat properties. */
-    background-size: 100%;
-    background-repeat: repeat;
-
-    /* Use the text as a mask for the background. */
-    /* This will show the gradient as a text color rather than element bg. */
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  
-    
-  }
-
-  .popupIndex{
-    color: white;
-    margin-right: 5px;
-    background:  #3cafeb;
-    padding:10px 10px 15px;
-    border-radius: 0px 0px 0px 5px;
-  }
-
-div.mapboxgl-popup-content {
-  background:transparent;
 }

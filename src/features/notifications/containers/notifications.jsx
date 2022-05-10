@@ -6,6 +6,7 @@ import { fetchNotifications, notificationsSelector } from '../slice'
 import { registerDevice } from 'utils/notification'
 import { useLocation } from 'react-router-dom'
 import { useQuery } from 'utils/hooks/use-query'
+import Header from 'features/recommendations/components/header'
 
 const NotificationsContainer = () => {
   const query = useQuery()
@@ -24,15 +25,15 @@ const NotificationsContainer = () => {
   return (
     <>
       <div className="flex-col">
-        <Loader loading={notificationsLoading}>
-          <Content
-            notifications={notifications}
-            queryFunction={() => ({
-              query,
-              queryString: location.search
-            })}
-          />
-        </Loader>
+        <Header loading={notificationsLoading} basePath="/recommendations" />
+        <Content
+          loading={notificationsLoading}
+          notifications={notifications}
+          queryFunction={() => ({
+            query,
+            queryString: location.search
+          })}
+        />
       </div>
     </>
   )
