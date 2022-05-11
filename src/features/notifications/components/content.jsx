@@ -45,18 +45,37 @@ const Content = ({
       <div className={styles.notifications}>
         <h1 className={styles.title}>Notifications</h1>
         {tabs}
-        {loading && (
-          <div className={styles.recommendations}>
-            <Recommendation.Skeleton />
-          </div>
+        {loading &&
+          activeTab === 'Notifications' && (
+            <div className={styles.recommendations}>
+              <Recommendation.Skeleton />
+            </div>
         )}
         {!loading &&
-          notifications.length === 0 && (
+          notifications.length === 0 &&
+          activeTab === 'Notifications' && (
             <span className={styles.noItem}>All clear. Come back later</span>
         )}
-        {notifications.map(notification => {
-          return <Notification key={`not-${notification.sid}`} notification={notification} />
-        })}
+        {!loading &&
+          activeTab === 'Notifications' &&
+          notifications.map(notification => {
+            return <Notification key={`not-${notification.sid}`} notification={notification} />
+          })}
+        {!loading &&
+          activeTab === 'Map' && (
+            <SidePanel
+              loading={loading}
+              recommendations={notifications || []}
+              contentType="notifications"
+              onlyOnDesktop={false}
+              queryFunction={queryFunction}
+              basePath={basePath}
+              query={queryFunction(notifications)}
+              ignoreBoundaries={true}
+              hideCharts={false}
+              showMapOnNotifications={true}
+            />
+        )}
       </div>
       {mapEnabled &&
         (isBrowser || isTablet) && (

@@ -21,7 +21,8 @@ const SidePanel = ({
   hideMap,
   hideCharts,
   onlyOnDesktop,
-  ignoreBoundaries = false
+  ignoreBoundaries = false,
+  showMapOnNotifications = false
 }) => {
   const { search } = useLocation()
   const queryOptions = qs.parse(search)
@@ -88,6 +89,8 @@ const SidePanel = ({
             recommendations={recommendations}
             defaultSelectedOption={defaultSelectedOption}
             contentType={contentType}
+            ignoreBoundaries={ignoreBoundaries}
+            halfHeight={contentType === 'recommendations' && !hideCharts}
           />
       )}
     </div>
