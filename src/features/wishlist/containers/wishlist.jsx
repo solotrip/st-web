@@ -9,6 +9,7 @@ import Header from '../../recommendations/components/header'
 
 const WishlistContainer = () => {
   const { wishlist, loading, wishlisted } = useSelector(wishlistSelector)
+
   const location = useLocation()
   const { data: user } = useSelector(profileSelector)
   const dispatch = useDispatch()
@@ -30,9 +31,11 @@ const WishlistContainer = () => {
     recommendationId: w.wishlistId
   }))
 
+  const reverseRecommendations = recommendations.reverse()
+
   const detailIndex =
     !loading && location.pathname.includes('/wishlist/r/')
-      ? recommendations.findIndex(r => r.id === location.pathname.split('/wishlist/r/')[1])
+      ? reverseRecommendations.findIndex(r => r.id === location.pathname.split('/wishlist/r/')[1])
       : -1
   return (
     <div className="flex-col">
@@ -41,7 +44,7 @@ const WishlistContainer = () => {
         loading={loading}
         // Put wishlist id in recommendation data
         // so that we can use it to get query and add to wishlist actions
-        recommendations={recommendations.reverse()}
+        recommendations={recommendations}
         user={user}
         queryFunction={recommendation => ({
           query: recommendation && wishlist[recommendation.recommendationId].query,

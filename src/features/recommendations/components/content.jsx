@@ -37,6 +37,8 @@ const Content = ({
     setActiveTab(e.target.textContent)
   }
 
+  let reverseRecommendations = !loading && recommendations.length > 0 && recommendations.reverse()
+
   useEffect(
     () => {
       if (scrollRef.current) {
@@ -120,6 +122,27 @@ const Content = ({
       {!loading &&
         recommendations.length > 0 &&
         activeTab === 'Recommendations' &&
+        contentType === 'recommendations' &&
+        recommendations.map((recommendation, i) => {
+          const { query, queryString } = queryFunction(recommendation)
+          return (
+            <Recommendation
+              key={`rec-${recommendation.id || recommendation.sid}`}
+              query={query}
+              queryString={queryString}
+              recommendation={recommendation}
+              user={user}
+              toggleWishlist={toggleWishlist}
+              wishlisted={!!wishlistedIds[recommendation.id]}
+              basePath={basePath}
+              index={i}
+            />
+          )
+        })}
+      {!loading &&
+        recommendations.length > 0 &&
+        activeTab === 'Recommendations' &&
+        contentType === 'wishlist' &&
         recommendations.map((recommendation, i) => {
           const { query, queryString } = queryFunction(recommendation)
           return (
