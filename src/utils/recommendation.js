@@ -12,6 +12,8 @@ export const processRecommendation = (recommendation, passports = []) => {
   let temperatureText = ''
   let minTemp = ''
   let maxTemp = ''
+  let humidity = ''
+  let rainyDays = ''
   let weatherText = ''
   let maskText = ''
   let barText = ''
@@ -161,6 +163,9 @@ export const processRecommendation = (recommendation, passports = []) => {
         `humidity: ${recommendation.climate.humidity}%`
     }
 
+    humidity = recommendation.climate.humidity
+    rainyDays = recommendation.climate.rainy_days
+
     //Adding the mask status.
     if (restrictions['mask_status'] === 'REQUIRED') {
       maskText = 'Mask required.'
@@ -204,6 +209,8 @@ export const processRecommendation = (recommendation, passports = []) => {
     minTemp,
     maxTemp,
     weatherText,
+    humidity,
+    rainyDays,
     maskText,
     barText,
     publicTransportText

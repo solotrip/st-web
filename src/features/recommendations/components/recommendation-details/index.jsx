@@ -73,7 +73,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     barText,
     publicTransportText,
     minTemp,
-    maxTemp
+    maxTemp,
+    humidity,
+    rainyDays
   } = processRecommendation(recommendation, passports)
 
   const startMonth = dayjs(startDate).isValid() && getMonthName(startDate)
@@ -261,32 +263,58 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <Cloud />
               </div>
               <div className={styles.elementText}>
-                min <Temperature value={minTemp} />, max <Temperature value={maxTemp} />
+                min &nbsp;
+                <div className={styles.elementHighlight}>
+                  <Temperature value={minTemp} />{' '}
+                </div>, max &nbsp;
+                <div className={styles.elementHighlight}>
+                  <Temperature value={maxTemp} />
+                </div>
               </div>
             </div>
         )}
-        {weatherText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Cloud />
+        {humidity &&
+          rainyDays && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Cloud />
+              </div>
+              <div className={styles.elementText}>
+                Humidity &nbsp;
+                <div className={styles.elementHighlight}>{humidity}%</div>, Rainy days: &nbsp;
+                <div className={styles.elementHighlight}>{rainyDays} </div>{' '}
+                {rainyDays === '1' ? 'day/month' : 'days/month'}
+              </div>
             </div>
-            <div className={styles.elementText}>{weatherText}</div>
-          </div>
         )}
+
         {tripdays &&
-          ((tripdays.min_days && tripdays.max_days) || tripdays.ideal_days) && (
+          (tripdays.min_days && tripdays.max_days) && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
                 <Calendar />
               </div>
               <div className={styles.elementText}>
-                {tripdays.min_days && tripdays.max_days
-                  ? tripdays.min_days !== tripdays.max_days
-                    ? `Most travelers spend ${tripdays.min_days} - ${tripdays.max_days} days. `
-                    : `Most travelers spend ${tripdays.min_days} days. `
-                  : tripdays.ideal_days ? `Most travelers spend ${tripdays.ideal_days} days. ` : ''}
+                Most travelers spend &nbsp;
+                <div className={styles.elementHighlight}>{tripdays.min_days}</div>
+                &nbsp;-&nbsp;
+                <div className={styles.elementHighlight}>{tripdays.max_days}</div> days.
+              </div>
+            </div>
+        )}
+        {tripdays &&
+          ((!tripdays.min_days || !tripdays.max_days) && tripdays.ideal_days) && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Calendar />
+              </div>
+              <div className={styles.elementText}>
+                Most travelers spend &nbsp;
+                <div className={styles.elementHighlight}>{tripdays.ideal_days}</div>
+                &nbsp;-&nbsp; days.
               </div>
             </div>
         )}
@@ -474,8 +502,14 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hotel prices range from <Currency value={hotelPriceMin} /> to{' '}
-                <Currency value={hotelPriceMax} />.
+                Hotel prices range from &nbsp;
+                <div className={styles.elementHighlight}>
+                  <Currency value={hotelPriceMin} />{' '}
+                </div>
+                &nbsp;to&nbsp;
+                <div className={styles.elementHighlight}>
+                  <Currency value={hotelPriceMax} />
+                </div>.
               </div>
             </div>
           ) : (
@@ -486,7 +520,10 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Hotel price is <Currency value={hotelPriceMin} />.
+                  Average Hotel price is&nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Currency value={hotelPriceMin} />
+                  </div>.
                 </div>
               </div>
             )
@@ -498,8 +535,14 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hostel prices range from <Currency value={hostelPriceMin} /> to{' '}
-                <Currency value={hostelPriceMax} />.
+                Hostel prices range from&nbsp;
+                <div className={styles.elementHighlight}>
+                  <Currency value={hostelPriceMin} />
+                </div>
+                &nbsp;to&nbsp;
+                <div className={styles.elementHighlight}>
+                  <Currency value={hostelPriceMax} />{' '}
+                </div>.
               </div>
             </div>
           ) : (
@@ -510,7 +553,10 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average hostel price is <Currency value={hostelPriceMin} />.
+                  Average hostel price is&nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Currency value={hostelPriceMin} />
+                  </div>.
                 </div>
               </div>
             )
@@ -523,8 +569,14 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Airbnb prices range from <Currency value={vacationRentalPriceMin} /> to{' '}
-                <Currency value={vacationRentalPriceMax} />.
+                Vacation rental prices range from&nbsp;
+                <div className={styles.elementHighlight}>
+                  <Currency value={vacationRentalPriceMin} />
+                </div>
+                &nbsp;to &nbsp;
+                <div className={styles.elementHighlight}>
+                  <Currency value={vacationRentalPriceMax} />
+                </div>.
               </div>
             </div>
             ) : (
@@ -535,7 +587,10 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Airbnb price is <Currency value={vacationRentalPriceMin} />.
+                  Average vacation rental price is &nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Currency value={vacationRentalPriceMin} />
+                  </div>.
                 </div>
               </div>
               )
@@ -554,7 +609,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   <div>Meal at Cheap Restaurant</div>
                 </div>
-                <div className={styles.elementText2}>
+                <div className={styles.elementHighlight2}>
                   {colLabels.meal_cheap_restaurant_cost_label}
                 </div>
               </div>
@@ -568,7 +623,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Meal at Luxury Restaurant
                 </div>
-                <div className={styles.elementText2}>
+                <div className={styles.elementHighlight2}>
                   {colLabels.meal_mid_range_restaurant_cost_label}
                 </div>
               </div>
@@ -582,7 +637,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   McDonalds Menu
                 </div>
-                <div className={styles.elementText2}>
+                <div className={styles.elementHighlight2}>
                   {colLabels.mcmeal_at_mcdonalds_cost_label}
                 </div>
               </div>
@@ -597,7 +652,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Beer at Restaurant
                 </div>
-                <div className={styles.elementText2}>{colLabels.beer_at_restaurant_cost_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {colLabels.beer_at_restaurant_cost_label}
+                </div>
               </div>
             )}
             {colLabels.public_transport_cost_label && (
@@ -610,7 +667,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Public Transport
                 </div>
-                <div className={styles.elementText2}>{colLabels.public_transport_cost_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {colLabels.public_transport_cost_label}
+                </div>
               </div>
             )}
             {colLabels.beer_from_market_label && (
@@ -623,7 +682,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Beer from Market
                 </div>
-                <div className={styles.elementText2}>{colLabels.beer_from_market_label}</div>
+                <div className={styles.elementHighlight2}>{colLabels.beer_from_market_label}</div>
               </div>
             )}
             {colLabels.montly_transport_pass_label && (
@@ -635,7 +694,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Monthly Transport Pass
                 </div>
-                <div className={styles.elementText2}>{colLabels.montly_transport_pass_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {colLabels.montly_transport_pass_label}
+                </div>
               </div>
             )}
             {colLabels.gasoline_1_liter_cost_label && (
@@ -648,7 +709,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Gasoline 1 Liter
                 </div>
-                <div className={styles.elementText2}>{colLabels.gasoline_1_liter_cost_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {colLabels.gasoline_1_liter_cost_label}
+                </div>
               </div>
             )}
             {colLabels.prepaid_card_cost_label && (
@@ -661,7 +724,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Prepaid Card
                 </div>
-                <div className={styles.elementText2}>{colLabels.prepaid_card_cost_label}</div>
+                <div className={styles.elementHighlight2}>{colLabels.prepaid_card_cost_label}</div>
               </div>
             )}
             {colLabels.internet_cost_label && (
@@ -674,7 +737,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Internet
                 </div>
-                <div className={styles.elementText2}>{colLabels.internet_cost_label}</div>
+                <div className={styles.elementHighlight2}>{colLabels.internet_cost_label}</div>
               </div>
             )}
             {colLabels.cinema_ticket_cost_label && (
@@ -687,7 +750,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Cinema Ticket
                 </div>
-                <div className={styles.elementText2}>{colLabels.cinema_ticket_cost_label}</div>
+                <div className={styles.elementHighlight2}>{colLabels.cinema_ticket_cost_label}</div>
               </div>
             )}
             {colLabels.taxi_1km_cost_label && (
@@ -700,7 +763,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Taxi 1km
                 </div>
-                <div className={styles.elementText2}>{colLabels.taxi_1km_cost_label}</div>
+                <div className={styles.elementHighlight2}>{colLabels.taxi_1km_cost_label}</div>
               </div>
             )}
           </div>
