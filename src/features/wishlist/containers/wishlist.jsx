@@ -36,12 +36,7 @@ const WishlistContainer = () => {
       : -1
   return (
     <div className="flex-col">
-      <Header
-        loading={loading}
-        defaultExpanded={true}
-        alwaysShowBack={detailIndex !== -1}
-        basePath="/recommendations"
-      />
+      <Header loading={loading} basePath="/recommendations" />
       <Content
         loading={loading}
         // Put wishlist id in recommendation data
