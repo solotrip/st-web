@@ -6,7 +6,18 @@ import useThemeState from 'utils/hooks/use-theme-state'
 import styles from './chart.module.scss'
 import am5Responsive from '@amcharts/amcharts5/themes/Responsive'
 
-const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
+const Chart = ({
+  data,
+  type,
+  DOMroot = 'chartdiv3',
+  contentType = 'recommendations'
+}) => {
+  const responsiveBreakpoint =
+    contentType === 'wishlist'
+      ? am5Responsive.widthXXL
+      : contentType === 'notifications'
+      ? am5Responsive.widthXXL
+      : am5Responsive.widthL
   const chartRef = useRef(null)
   const [appTheme] = useThemeState()
   const labelColor =
@@ -148,7 +159,7 @@ const Chart = ({ data, type, DOMroot = 'chartdiv3' }) => {
     })
     const responsive = am5Responsive.newEmpty(root)
     responsive.addRule({
-      relevant: am5Responsive.widthL,
+      relevant: responsiveBreakpoint,
       applying: function () {
         xAxis.zoomToIndexes(0, 3)
         xAxis.events.once('datavalidated', function (ev) {

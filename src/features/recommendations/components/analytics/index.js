@@ -13,7 +13,8 @@ import { temperatureUnits } from '../../../../constants/preferencesOptions'
 const Analytics = ({
   recommendations,
   loading,
-  defaultSelectedOption = { value: 'hotel-prices', label: 'Hotel Prices' }
+  defaultSelectedOption = { value: 'hotel-prices', label: 'Hotel Prices' },
+  contentType
 }) => {
   const [selectedOption, setSelectedOption] = useState(defaultSelectedOption)
 
@@ -63,6 +64,7 @@ const Analytics = ({
             title={selectedOption.label}
             type={selectedOption.value}
             unit={temperature}
+            contentType={contentType}
           />
         )
       case 'cost-of-living':

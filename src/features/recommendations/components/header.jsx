@@ -162,25 +162,7 @@ const Header = ({
                 onClick={handleExpand}
               >
                 <MdSearch className={styles.searchIcon} />
-                {query && Object.keys(query).length > 0 ? (
-                  <Query
-                    className={cx(styles.query, { [styles.exp]: isExpanded })}
-                    history={history}
-                    location={location}
-                    prefixClassName={styles.prefix}
-                    filtersDict={filtersDict}
-                    query={query}
-                    locations={locations}
-                    maxFiltersDisplayed={isExpanded ? 3 : 1}
-                    enableClick={isExpanded}
-                  />
-                ) : (
-                  <div className={styles.startText}>Start your search</div>
-                )}
-                {query &&
-                  Object.keys(query).length > 0 && (
-                    <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
-                )}
+                {<div className={styles.startText}>Start your search</div>}
               </button>
             )}
             <div className={trackIsVisible ? styles.sideHolder : styles.sideHolderHidden}>

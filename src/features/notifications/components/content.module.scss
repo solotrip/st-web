@@ -13,6 +13,7 @@
 .title {
   width: 100%;
   margin: 0;
+  margin-bottom: 20px;
 }
 
 .noItem {
@@ -137,11 +138,11 @@
 
 .tabs {
   margin-top: 0px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   width: 100%;
   display: none;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
 
   @include xs-to-sm {
     display: flex;
@@ -152,17 +153,20 @@
   @include roboto-medium;
   background: transparent;
   font-size: 14px;
-  padding: 4px 2px;
+  padding: 0px 2px;
   max-height: 50px;
   text-align: center;
   border-radius: 16px;
   margin: 2px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   word-break: keep-all;
   flex: 0 0 auto;
+
+  
 
   @include xs {
     font-size: 14px;
@@ -172,6 +176,7 @@
   }
 
   &.active {
+    color: rgb(64,176,233);
     //background: $card-content-recommendation;
     //background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
     //background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
@@ -182,10 +187,12 @@
       //color: #f3f3f4;
       color: rgb(64,176,233);
       pointer-events: none;
+      
     }
 
     .tabName {
-      color: white;
+      color: rgb(64,176,233);
+      transition: all 0.5s ease-out;
     }
 
   }
@@ -195,10 +202,12 @@
 .tabName {
   @include roboto-regular;
   margin: 2px 2px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
-  color: #31afea;
-  display: none;
+  color: rgb(146,147,175);
+  transition: all 0.5s ease-out;
+  //color: #31afea;
+  //display: none;
 }
 
 .tabIcon {
@@ -210,3 +219,5 @@
     display: none;
   }
 }
+
+

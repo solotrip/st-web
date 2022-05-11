@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import { chartConfig } from './config'
 import Chart from 'components/chart/chart'
 import styles from './chart.module.scss'
-const AnalyticsChart = ({ recommendations, type, title }) => {
+const AnalyticsChart = ({ recommendations, type, title, contentType }) => {
   const chartData = recommendations.map((recommendation, k) => {
     const min = _get(recommendation, chartConfig[type].min)
     const max = _get(recommendation, chartConfig[type].max)
@@ -30,7 +30,12 @@ const AnalyticsChart = ({ recommendations, type, title }) => {
 
   return (
     <div className={styles.container}>
-      <Chart data={filteredChartData} type={type} DOMroot={type} />
+      <Chart
+        data={filteredChartData}
+        type={type}
+        DOMroot={type}
+        contentType={contentType}
+      />
     </div>
   )
 }

@@ -37,8 +37,6 @@ const Content = ({
     setActiveTab(e.target.textContent)
   }
 
-  let reverseRecommendations = !loading && recommendations.length > 0 && recommendations.reverse()
-
   useEffect(
     () => {
       if (scrollRef.current) {
@@ -98,7 +96,7 @@ const Content = ({
     <div ref={scrollRef} className={styles.recommendations} onScroll={handleScroll}>
       {title && <h1 className={styles.title}>{title}</h1>}
       {children}
-      {contentType === 'recommendations' && tabs}
+      {tabs}
       {activeTab === 'Map' && (
         <SidePanel
           recommendations={recommendations || []}

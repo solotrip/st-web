@@ -82,11 +82,12 @@ const SidePanel = ({
         />
       )}
       {!hideCharts &&
-        contentType === 'recommendations' && (
+        contentType !== 'notifications' && (
           <Analytics
             loading={loading}
             recommendations={recommendations}
             defaultSelectedOption={defaultSelectedOption}
+            contentType={contentType}
           />
       )}
     </div>
