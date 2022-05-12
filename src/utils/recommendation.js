@@ -1,5 +1,6 @@
 import _get from 'lodash/get'
 import { DARK_IMG_PLACEHOLDER, LIGHT_IMG_PLACEHOLDER } from 'constants/urls'
+import { getImagePath, getSourceSet, SUPPORTED_SIZES } from './image'
 
 export const processRecommendation = (recommendation, passports = []) => {
   let visaText = ''
@@ -217,12 +218,26 @@ export const processRecommendation = (recommendation, passports = []) => {
   }
 }
 
-export const getEventImage = (event, isLightTheme) => {
-  return _get(
+export const getEventImage = (event, isLightTheme, size= SUPPORTED_SIZES['1080']) => {
+  const img = _get(
     event,
-    'images[0]',
-    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
+    'images[0]'
   )
+  if(!img) {
+    return isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
+  }
+  return getImagePath(img, size)
+}
+
+export const getEventSourceSet = (event, isLightTheme, size= SUPPORTED_SIZES['1080']) => {
+  const img = _get(
+    event,
+    'images[0]'
+  )
+  if(!img) {
+    return isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
+  }
+  return getSourceSet(img, [SUPPORTED_SIZES['720'], SUPPORTED_SIZES['1080'], SUPPORTED_SIZES['1920']])
 }
 
 export const getPoiImage = (poi, isLightTheme) => {

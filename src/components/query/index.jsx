@@ -30,9 +30,7 @@ const Query = ({
   }
 
   function extractCountry(ISO) {
-    const country = countries.find(country => country.ISO === ISO)
-    console.log(country)
-    return country
+    return countries.find(country => country.ISO === ISO)
   }
 
   const passes =
@@ -67,13 +65,12 @@ const Query = ({
       icon: MdMyLocation
     },
     */ {
-      // prefix: 'For ',
-      value: query.show && `Compare ${query.show}`,
+      prefix: 'Compare ',
+      value: query.show && query.show.replaceAll('-', ' '),
       onClick: () => navigate('/recommendations/date'),
       icon: MdCompareArrows
     },
     {
-      // prefix: 'For ',
       value:
         (query.duration || query.weekendOnly) && formatDuration(query.duration, query.weekendOnly),
       onClick: () => navigate('/recommendations/date'),
@@ -135,20 +132,19 @@ const Query = ({
 
   return (
     <div className={cn(styles.container, className)}>
-      {tags &&
-        tags.filter(t => t.value).map(t => (
+      {tags.filter(t => t.value).map(t => (
           <Tag
             key={`search-tag-${t.value}`}
             icon={t.icon}
             onClick={enableClick ? t.onClick : undefined}
             name={
               <span className={styles.text}>
-                <b className={cn(styles.prefix, prefixClassName)}>{t.prefix || ''}</b>
+                <span className={cn(styles.prefix, prefixClassName)}>{t.prefix || ''}</span>
                 {t.value}
               </span>
             }
           />
-        ))}
+      ))}
     </div>
   )
 }

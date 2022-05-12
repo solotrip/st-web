@@ -4,7 +4,7 @@
   width: 100%;
   min-width: 322px;
   margin-top: 37px;
- 
+
 }
 
 .heart {
@@ -25,7 +25,7 @@
 
 .share {
   margin-top: 7%;
-  
+
   padding: 2px;
   width: 40px;
   height: 40px;
@@ -40,26 +40,26 @@
 }
 
 .shareIcon{
-  
+
   margin: auto;
   width: 40px;
   font-size: 23px;
 }
 
 .likeIconFilled{
-  
+
   margin: auto;
   width: 40px;
   font-size: 23px;
   color: rgb(240,119,162);
 }
 .likeIcon{
-  
+
   margin: auto;
   width: 40px;
   font-size: 23px;
   color: #667A8f;
-  
+
 }
 
 .disclaimer{
@@ -69,12 +69,12 @@
   //background-color:$card-content-recommendation;
   border-radius: 5px;
   width: 90%;
-   
+
 
   height: 130px;
-  
+
   line-height: 20px;
-  
+
 }
 
 .disclaimerIcon{
@@ -89,7 +89,7 @@ background-color: #3cafeb;
 border-radius: 5px;
 padding: 3px;
 
-  
+
 }
 
 .disclaimerIcon2{
@@ -104,7 +104,7 @@ background-color: #3cafeb;
 border-radius: 5px;
 padding: 4px;
 
-  
+
 }
 
 .heartFilled {
@@ -197,7 +197,7 @@ padding: 4px;
   line-height: 19px;
   font-size: 15px;
   margin-left: 18px;
- 
+
   width: 100%;
  // max-width: 250px;
 
@@ -226,7 +226,7 @@ padding: 4px;
   line-height: 23px;
   font-size: 20px;
   margin-left: 18px;
- 
+
   width: 100%;
  // max-width: 250px;
 
@@ -248,7 +248,7 @@ padding: 4px;
 }
 
 .elementText2 {
-  
+
   display: flex;
   flex-direction: row;
   margin-top: 1px;
@@ -256,8 +256,6 @@ padding: 4px;
   font-size: 15px;
 
 }
-
-
 
 .slide {
   padding: 2px;
@@ -315,7 +313,7 @@ padding: 4px;
   -webkit-box-orient: vertical;
   height: auto;
   margin-bottom: 0px;
-  
+
 
 }
 
@@ -374,7 +372,7 @@ padding: 4px;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   margin-bottom: 30px;
- 
+
 }
 
 .showDetails {
@@ -470,7 +468,7 @@ padding: 4px;
 }
 .slideText7Holder {
   width: 100%;
- 
+
  margin-bottom: 20px;
 
 }
@@ -483,12 +481,13 @@ padding: 4px;
   height: 550px;
   display: flex;
   flex-direction: column;
-
+  object-fit: cover;
+  object-position: center;
 
 }
 
 .description{
-  
+
   text-align: left;
   word-wrap: break-word;
   overflow: hidden;
@@ -503,20 +502,20 @@ padding: 4px;
 .oneRow {
   display: flex;
   flex-direction: row;
-  
+
   width: 100%;
   justify-content: space-between;
-  
+
 }
 
 .headerHolder{
   z-index: 2;
   margin-top: -130px;
-  
+
   background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, $bg-color 55%);
   width: 100%;
   min-height: 130px;
-  
+
   padding-left: 16px;
   padding-right: 16px;
  margin-bottom: 20px;
@@ -525,9 +524,9 @@ padding: 4px;
 .headerHolderCoverless{
   z-index: 2;
   margin-top: 0px;
- 
+
   width: 100%;
- 
+
 }
 
 .title {

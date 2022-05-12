@@ -6,6 +6,7 @@ import { locationSelector } from '../../containers/location/slice'
 import useThemeState from 'utils/hooks/use-theme-state'
 import styles from '../sidePanel.module.scss'
 import MapSkeleton from 'components/svg-map/mapSkeleton'
+import { getImagePath, SUPPORTED_SIZES } from '../../../../utils/image'
 
 const AnalyticsMap = ({
   recommendations = [],
@@ -41,12 +42,12 @@ const AnalyticsMap = ({
 
   const destinations = recommendations.map(recommendation => {
     const image = recommendation.area_has_image
-      ? `https://ik.imagekit.io/stmedia/areas/${recommendation.sid}?tr=w-700,h-550`
+      ? getImagePath(recommendation.sid, SUPPORTED_SIZES['720'], 'areas/')
       : _get(recommendation, 'events[0].images[0]')
-      ? `https://ik.imagekit.io/stmedia/${recommendation.events[0].images[0]}`
-      : appTheme === 'light'
-      ? 'https://ik.imagekit.io/stmedia/map-pin2-light_LQDrupJW3.png'
-      : 'https://ik.imagekit.io/stmedia/map-pin2-dark_r8Jt8Y_ZDV.png'
+        ? getImagePath(recommendation.events[0].images[0], SUPPORTED_SIZES['720'])
+        : appTheme === 'light'
+          ? getImagePath('map-pin-light')
+          : getImagePath('map-pin-dark')
     return {
       qid: recommendation.id,
       id: recommendation.sid,
@@ -64,7 +65,7 @@ const AnalyticsMap = ({
 
   return (
     <div className={styles.upperContainer}>
-      {loading && <MapSkeleton />}
+      {loading && <MapSkeleton/>}
       {!loading && (
         <SvgMap
           DOMroot={id}

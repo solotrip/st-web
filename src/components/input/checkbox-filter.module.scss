@@ -2,14 +2,11 @@
 
 .container {
   @include roboto-medium;
-  
+
   position: relative;
 
   cursor: pointer;
   font-size: 20px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   background-color: transparent;
   height: 180px;
@@ -21,30 +18,14 @@
   margin: 6px;
   border: 1px solid $alternative-border-color;
   color: white;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
-.containerChecked {
-  @include roboto-medium;
-  
-  position: relative;
-
-  cursor: pointer;
-  font-size: 20px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background:linear-gradient(to right , #FEAC5E 0%, #C779D0 50%,#4BC0C8 100%);
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border-radius: 16px;
-  margin: 6px;
-  color: white;
+.checked {
+  background: linear-gradient(to right, #FEAC5E 0%, #C779D0 50%, #4BC0C8 100%);
   border: 1px solid #4BC0C8;
-
 }
 
 .input {
@@ -68,48 +49,9 @@
 
 }
 
-.container:hover .input ~ .checkmark {
-  background-color: transparent;
-}
-
-.container .input:checked ~ .checkmark {
-  background-color: $primary-color;
-  border-color: $primary-color
-}
-
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.container .input:checked ~ .checkmark:after {
-  display: block;
-}
-
-.container .checkmark:after {
-  left: 6px;
-  top: 2px;
-  width: 3px;
-  height: 7px;
-  border: solid $white;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.name {
-
-}
-
-.icon {
-
-}
-
 .labelContainer {
   display: inline-block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  white-space: break-spaces;
+  text-align: center;
   align-items: center;
 }

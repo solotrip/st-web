@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { BlurhashCanvas } from 'react-blurhash'
 import cn from 'classnames'
 import styles from './image.module.scss'
-import { IMAGE_BASE } from 'constants/urls'
+import { getImagePath } from 'utils/image'
 
 const Image = ({
   blurHash,
@@ -34,7 +34,7 @@ const Image = ({
     setLoaded(true)
   }
 
-  const url = src && src.startsWith('http') ? src : `${IMAGE_BASE}${src}`
+  const url = src && src.startsWith('http') ? src : getImagePath(src)
   return (
     <div className={cn([styles.container, className, { [styles.loaded]: loaded }])}>
       {(!loaded || !src) && placeholder}

@@ -9,7 +9,6 @@ import { isBrowser, isTablet } from 'react-device-detect'
 import _get from 'lodash/get'
 import cn from 'classnames'
 
-import { MdBarChart, MdMap, MdOutlineStar } from 'react-icons/md'
 import { Icon } from '@iconify/react'
 
 const Content = ({

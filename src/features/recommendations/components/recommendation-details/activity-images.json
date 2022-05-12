@@ -48,7 +48,7 @@
     "image_hash": "ec852d9761564194fbe76b684d47ca90"
   },
   "Car": {
-    "name": "Car",
+    "name": "Scenic Drive",
     "image_hash": "e4adb04a5a03349db570c6baec2819d3"
   },
   "Quad": {
@@ -56,7 +56,7 @@
     "image_hash": "df0cd96051bb95fd0dc6205805131b25"
   },
   "Kayak/ Canoe": {
-    "name": "Kayak/ Canoe",
+    "name": "Kayak / Canoe",
     "image_hash": "4241095b8f70556bc6379419712ca210"
   },
   "Plane": {
@@ -64,7 +64,7 @@
     "image_hash": "67ce8c2bdae31589e2c91780aa3ef44a"
   },
   "Longboard/ Skateboard": {
-    "name": "Longboard/ Skateboard",
+    "name": "Longboard / Skateboard",
     "image_hash": "95fb5332615abea6185d92ea2c61bf2c"
   },
   "Running": {
@@ -144,7 +144,7 @@
     "image_hash": "5075d0850dfb1022ffcb0c2a1b67f698"
   },
   "Train": {
-    "name": "Train",
+    "name": "Scenic Train",
     "image_hash": "06583f0e9b1c0c5fb9dddf4e5f990344"
   },
   "BASE Jumping": {
