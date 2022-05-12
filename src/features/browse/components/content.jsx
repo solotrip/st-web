@@ -8,7 +8,6 @@ import { getImagePath, SUPPORTED_SIZES } from 'utils/image'
 import cn from 'classnames'
 
 const Content = ({ items, recentQueries, filtersDict, locations }) => {
-
   const bgs = [
     'linear-gradient(to right , #59C173 0%, #A17fE0 50%, #5D26C1 100%)',
     'linear-gradient(to right , #FF5F6D 0%, #FFC371 100%)',
@@ -21,9 +20,7 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
       {recentQueries.length > 0 && (
         <div className={cn(styles.list, styles.recent)}>
           {recentQueries.map((q, i) => (
-            <Link className={styles.card}
-                  to={`recommendations?${qs.stringify(q)}`}
-            >
+            <Link className={styles.card} to={`recommendations?${qs.stringify(q)}`}>
               <div
                 className={styles.image}
                 style={{
@@ -58,8 +55,8 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
                   ? {
                     backgroundImage: `url(${getImagePath(
                       item.image_hash,
-                      SUPPORTED_SIZES['1080'])
-                    })`
+                      SUPPORTED_SIZES['1080']
+                    )})`
                   }
                   : {
                     background: bgs[i % bgs.length]
