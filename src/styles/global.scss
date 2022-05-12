@@ -205,24 +205,6 @@ hr {
   text-align: center;
 }
 
-div.mapboxgl-popup-content {
-  background: transparent;
-  pointer-events: none;
-}
-
-div.mapboxgl-popup-tip {
-  border: 10px solid transparent;
-  pointer-events: none;
-}
-
-.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
-  align-self: center;
-  border-bottom: none;
-  border-top-color: transparent
-}
-
-
-
 .pulfy-select {
   .rs__control {
     background-color: $bg-color;

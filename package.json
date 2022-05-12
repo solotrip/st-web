@@ -36,7 +36,6 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "mapbox-gl": "^2.8.0",
     "mixpanel-browser": "^2.45.0",
     "prettier": "^1.9.1",
     "prettier-eslint": "^10.1.0",
@@ -73,7 +72,8 @@
     "styled-components": "^5.3.1",
     "swiper": "^8.0.3",
     "tiny-object-hash": "^1.0.1",
-    "use-persisted-state": "^0.3.3"
+    "use-persisted-state": "^0.3.3",
+    "webp-hero": "^0.0.2"
   },
   "scripts": {
     "start": "craco start",
@@ -105,6 +105,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@iconify/react": "^3.1.1",
     "@ionic/cli": "^6.18.1",
     "babel-loader": "^8.1.0",

@@ -1,6 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { WebpMachine } from 'webp-hero'
 import App from './app'
+const webpMachine = new WebpMachine()
+webpMachine.polyfillDocument()
 
 if (module.hot) {
   module.hot.accept('./app', () => {

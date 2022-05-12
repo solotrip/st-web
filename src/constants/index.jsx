@@ -3,9 +3,6 @@ export const NOTIFICATION_TYPES = {
   RECOMMENDATION: 'recommendation',
   WISHLIST: 'wishlist'
 }
-export const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
-export const MAPBOX_THEME = process.env.REACT_APP_MAPBOX_THEME ||
-  'mapbox://styles/naberk/ckxnlqnws136z14qrjz7upcaj'
 
 export const DATE_QUERY_TYPE = {
   calendar: 'calendar',
