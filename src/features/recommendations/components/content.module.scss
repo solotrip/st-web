@@ -71,8 +71,8 @@
 }
 
 .tabs {
-  margin-top: 0px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: -10px;
   width: 100%;
   display: none;
   flex-direction: row;
@@ -126,7 +126,7 @@
 
     .tabName {
       color: rgb(64,176,233);
-      transition: all 0.5s ease-out;
+      
     }
 
   }
@@ -139,7 +139,7 @@
   font-size: 14px;
   line-height: 20px;
   color: rgb(146,147,175);
-  transition: all 0.5s ease-out;
+  
   //color: #31afea;
   //display: none;
 }
@@ -152,4 +152,10 @@
   @include xs {
     display: none;
   }
+}
+
+.safetyMargin{
+  display: flex;
+  background-color: transparent;
+  height: 30px;
 }

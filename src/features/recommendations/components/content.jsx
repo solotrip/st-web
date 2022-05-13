@@ -106,12 +106,15 @@ const Content = ({
         />
       )}
       {activeTab === 'Analytics' && (
-        <SidePanel
-          recommendations={recommendations || []}
-          query={contentType === 'recommendations' && queryFunction(recommendations).query}
-          contentType={contentType}
-          hideMap
-        />
+        <>
+          <div className={styles.safetyMargin} />
+          <SidePanel
+            recommendations={recommendations || []}
+            query={contentType === 'recommendations' && queryFunction(recommendations).query}
+            contentType={contentType}
+            hideMap
+          />
+        </>
       )}
       {!loading &&
         activeTab === 'Recommendations' &&

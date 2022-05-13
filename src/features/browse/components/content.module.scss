@@ -19,17 +19,33 @@ $title-size: 80px;
   justify-content: space-between;
   background-color: $card-content-browse;
   width: 100%;
-  max-width: 332px;
+  //max-width: 332px;
   border-radius: 16px;
-  height: 332px;
+  height: 362px;
 }
 
 .list {
   width: 100%;
   margin: 0;
   display: grid;
-  gap: 16px;
-  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+  gap: 26px;
+  @include xs {
+    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+  }
+  @include xs-to-sm {
+    grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+  }
+  @include md {
+    grid-template-columns: repeat( 2, 1fr );
+  }
+  @include md-to-xl {
+    grid-template-columns: repeat( 2, 1fr );
+  }
+
+  @include xl{
+    grid-template-columns: repeat( 3, 1fr )
+  }
+
   padding: 8px 0;
   justify-items: center;
   align-items: center;
@@ -38,19 +54,6 @@ $title-size: 80px;
 
 .recent {
  
-  width: 100%;
-  margin: 0;
-  display: grid;
-  gap: 16px;
-  @include xs-to-sm {
-    grid-template-columns: repeat( auto-fit, minmax(332px, 100%));
-  }
-  grid-template-columns: repeat( auto-fit, 342px);
-  padding: 8px 0;
-  justify-items: center;
-  align-items: center;
-  
-  
 
 }
 

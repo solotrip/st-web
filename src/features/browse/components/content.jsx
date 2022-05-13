@@ -9,10 +9,11 @@ import cn from 'classnames'
 
 const Content = ({ items, recentQueries, filtersDict, locations }) => {
   const bgs = [
-    'linear-gradient(to right , #59C173 0%, #A17fE0 50%, #5D26C1 100%)',
-    'linear-gradient(to right , #FF5F6D 0%, #FFC371 100%)',
+    'linear-gradient(to right , rgba(99,193,176,1) 0%,rgba(78,125,214,1) 50%,#4BC0C8 100%)',
     'linear-gradient(to right , #FEAC5E 0%, #C779D0 50%,#4BC0C8 100%)',
-    'linear-gradient(to right , rgba(99,193,176,1) 0%,rgba(78,125,214,1) 50%,#4BC0C8 100%)'
+    'linear-gradient(to right , #FF5F6D 0%, #FFC371 100%)',
+
+    'linear-gradient(to right , #59C173 0%, #A17fE0 50%, #5D26C1 100%)'
   ]
 
   return (
