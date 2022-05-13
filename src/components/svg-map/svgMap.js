@@ -44,18 +44,25 @@ const SvgMap = ({
       ? am5.color(0xffffff)
       : am5.color(0x000000)
 
-  const borderColor = am5.color(0x3cafeb)
+  //const borderColor = am5.color(0x3cafeb)
 
-  console.log('theme from svgMap.js is:', appTheme)
+  const borderColor =
+    appTheme === 'dark'
+      ? am5.color(0x181d26)
+      : appTheme === 'light'
+      ? am5.color(0xf3f3f4)
+      : appTheme === 'no-preference'
+      ? am5.color(0x181d26)
+      : am5.color(0xf3f3f4)
 
   const landColor =
     appTheme === 'dark'
       ? am5.color(0x181d26)
       : appTheme === 'light'
-      ? am5.color(0x667a8e)
+      ? am5.color(0xf3f3f4)
       : appTheme === 'no-preference'
       ? am5.color(0x181d26)
-      : am5.color(0x667a8e)
+      : am5.color(0xf3f3f4)
 
   useEffect(
     () => {
@@ -90,12 +97,13 @@ const SvgMap = ({
         geometry: am5map.getGeoRectangle(180, 360, -180, -360)
       })
       polygonSeries.mapPolygons.template.setAll({
-        fill: landColor
+        fill: landColor,
+        stroke: borderColor
       })
 
       let lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}))
       lineSeries.mapLines.template.setAll({
-        strokeWidth: 2,
+        strokeWidth: 3,
         strokeOpacity: 0.5
       })
       lineSeries.mapLines.template.set(
