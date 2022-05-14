@@ -43,7 +43,6 @@ const Content = ({
   return (
     <div className={styles.page}>
       <div className={styles.notifications}>
-        <h1 className={styles.title}>Notifications</h1>
         {tabs}
         {loading &&
           activeTab === 'Notifications' && (

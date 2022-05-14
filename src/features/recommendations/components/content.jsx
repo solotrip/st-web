@@ -68,11 +68,16 @@ const Content = ({
   const tabs = (
     <div className={styles.tabs}>
       <button
-        className={cn(styles.tabItem, { [styles.active]: activeTab === 'Recommendations' })}
+        className={cn(styles.tabItem, {
+          [styles.active]: activeTab === 'Recommendations' || activeTab === 'Wishlist'
+        })}
         onClick={tabSelect}
       >
         <Icon icon="fluent:beach-24-regular" height="30" className={styles.tabIcon} />
-        <span className={styles.tabName}>Recommendations</span>
+        {contentType === 'recommendations' && (
+          <span className={styles.tabName}>Recommendations</span>
+        )}
+        {contentType === 'wishlist' && <span className={styles.tabName}>Wishlist</span>}
       </button>
       <button
         className={cn(styles.tabItem, { [styles.active]: activeTab === 'Analytics' })}
@@ -93,7 +98,6 @@ const Content = ({
 
   const list = !loading && (
     <div ref={scrollRef} className={styles.recommendations} onScroll={handleScroll}>
-      {title && <h1 className={styles.title}>{title}</h1>}
       {children}
       {tabs}
       {activeTab === 'Map' && (
@@ -141,7 +145,7 @@ const Content = ({
         })}
       {!loading &&
         recommendations.length > 0 &&
-        activeTab === 'Recommendations' &&
+        (activeTab === 'Recommendations' || activeTab === 'Wishlist') &&
         contentType === 'wishlist' &&
         recommendations.map((recommendation, i) => {
           const { query, queryString } = queryFunction(recommendation)

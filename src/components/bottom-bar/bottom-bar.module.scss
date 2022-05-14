@@ -11,6 +11,9 @@
   @include xs-to-md {
     display: flex;
   }
+  -webkit-box-shadow: -1px 0 8px $header-shadow;
+  -moz-box-shadow: -1px 0 8px $header-shadow;
+  box-shadow: -1px 0 8px $header-shadow;
 }
 
 .element {
