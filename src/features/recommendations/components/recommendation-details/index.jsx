@@ -34,6 +34,7 @@ import {
   processRecommendation
 } from 'utils/recommendation'
 import useThemeState from 'utils/hooks/use-theme-state'
+import CostOfLiving from '../analytics/cost-of-living'
 
 const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted }) => {
   const [appTheme] = useThemeState()
@@ -130,6 +131,23 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           inline: 'nearest'
         })
       }
+    }
+  }
+
+  const costOfLivingReturner = value => {
+    if (value.split('-').length > 0 && value.split('-')[0] && value.split('-')[1]) {
+      return (
+        <div className={styles.elementHighlight2}>
+          <Currency value={parseInt(value.split('-')[0].split('$')[1])} /> -{' '}
+          <Currency value={parseInt(value.split('-')[1].split('$')[1])} />
+        </div>
+      )
+    } else if (value.split('+').length > 0) {
+      return (
+        <div className={styles.elementHighlight2}>
+          <Currency value={parseInt(value.split('+')[0].split('$')[1])} /> +
+        </div>
+      )
     }
   }
 
@@ -629,7 +647,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   <div>Meal at Cheap Restaurant</div>
                 </div>
                 <div className={styles.elementHighlight2}>
-                  {colLabels.meal_cheap_restaurant_cost_label}
+                  {costOfLivingReturner(colLabels.meal_cheap_restaurant_cost_label)}
                 </div>
               </div>
             )}
@@ -643,7 +661,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   Meal at Luxury Restaurant
                 </div>
                 <div className={styles.elementHighlight2}>
-                  {colLabels.meal_mid_range_restaurant_cost_label}
+                  {costOfLivingReturner(colLabels.meal_mid_range_restaurant_cost_label)}
                 </div>
               </div>
             )}
@@ -657,7 +675,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   McDonalds Menu
                 </div>
                 <div className={styles.elementHighlight2}>
-                  {colLabels.mcmeal_at_mcdonalds_cost_label}
+                  {costOfLivingReturner(colLabels.mcmeal_at_mcdonalds_cost_label)}
                 </div>
               </div>
             )}
@@ -672,7 +690,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   Beer at Restaurant
                 </div>
                 <div className={styles.elementHighlight2}>
-                  {colLabels.beer_at_restaurant_cost_label}
+                  {costOfLivingReturner(colLabels.beer_at_restaurant_cost_label)}
                 </div>
               </div>
             )}
@@ -687,7 +705,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   Public Transport
                 </div>
                 <div className={styles.elementHighlight2}>
-                  {colLabels.public_transport_cost_label}
+                  {costOfLivingReturner(colLabels.public_transport_cost_label)}
                 </div>
               </div>
             )}
@@ -701,7 +719,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Beer from Market
                 </div>
-                <div className={styles.elementHighlight2}>{colLabels.beer_from_market_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {costOfLivingReturner(colLabels.beer_from_market_label)}
+                </div>
               </div>
             )}
             {colLabels.montly_transport_pass_label && (
@@ -714,7 +734,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   Monthly Transport Pass
                 </div>
                 <div className={styles.elementHighlight2}>
-                  {colLabels.montly_transport_pass_label}
+                  {costOfLivingReturner(colLabels.montly_transport_pass_label)}
                 </div>
               </div>
             )}
@@ -729,7 +749,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   Gasoline 1 Liter
                 </div>
                 <div className={styles.elementHighlight2}>
-                  {colLabels.gasoline_1_liter_cost_label}
+                  {costOfLivingReturner(colLabels.gasoline_1_liter_cost_label)}
                 </div>
               </div>
             )}
@@ -743,7 +763,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Prepaid Card
                 </div>
-                <div className={styles.elementHighlight2}>{colLabels.prepaid_card_cost_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {costOfLivingReturner(colLabels.prepaid_card_cost_label)}
+                </div>
               </div>
             )}
             {colLabels.internet_cost_label && (
@@ -756,7 +778,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Internet
                 </div>
-                <div className={styles.elementHighlight2}>{colLabels.internet_cost_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {costOfLivingReturner(colLabels.internet_cost_label)}
+                </div>
               </div>
             )}
             {colLabels.cinema_ticket_cost_label && (
@@ -769,7 +793,10 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Cinema Ticket
                 </div>
-                <div className={styles.elementHighlight2}>{colLabels.cinema_ticket_cost_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {' '}
+                  {costOfLivingReturner(colLabels.cinema_ticket_cost_label)}
+                </div>
               </div>
             )}
             {colLabels.taxi_1km_cost_label && (
@@ -782,7 +809,10 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   </div>
                   Taxi 1km
                 </div>
-                <div className={styles.elementHighlight2}>{colLabels.taxi_1km_cost_label}</div>
+                <div className={styles.elementHighlight2}>
+                  {' '}
+                  {costOfLivingReturner(colLabels.taxi_1km_cost_label)}
+                </div>
               </div>
             )}
           </div>
