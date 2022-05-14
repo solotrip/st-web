@@ -80,6 +80,11 @@ Styles applied with this mixin will only apply on dark theme
       @content;
     }
   }
+  @media (prefers-color-scheme: no-preference) {
+    & {
+      @content;
+    }
+  }
 }
 
 /**
@@ -96,9 +101,5 @@ Styles applied with this mixin will only apply on light theme
     }
   }
 
-  @media (prefers-color-scheme: no-preference) {
-    & {
-      @content;
-    }
-  }
+  
 }
