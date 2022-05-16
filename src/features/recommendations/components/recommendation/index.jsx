@@ -73,7 +73,12 @@ const Recommendation = ({
         <div className={styles.header}>
           <div className={styles.headerLine}>
             {' '}
-            <div className={styles.headerUpLine}> Recommendation #{index + 1}</div>{' '}
+            <div className={styles.country}>
+              {' '}
+              <div className={styles.countryElement}>{country.emoji_flag}</div>
+              &nbsp;
+              <div>{country.name}</div>
+            </div>{' '}
             <button
               className={styles.heart}
               onClick={() =>
@@ -93,11 +98,6 @@ const Recommendation = ({
           <div className={styles.headerLine}>
             {' '}
             <div className={styles.headerTitle}>{name}</div>{' '}
-            <div className={styles.country}>
-              <div>{country.emoji_flag}</div>
-              &nbsp;
-              <div>{country.name}</div>
-            </div>
           </div>
           <hr className={styles.hr} />
         </div>

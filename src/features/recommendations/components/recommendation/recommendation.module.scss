@@ -77,11 +77,11 @@
 }
 
 .heart {
-  margin-top: 7%;
-  margin-right: 3px;
-  padding: 2px;
-  width: 40px;
-  height: 40px;
+  margin-top: 0%;
+  margin-right: 0px;
+  padding: 0px;
+  width: 30px;
+  height: 30px;
  // background-image: $heart-not-selected;
   background-repeat: no-repeat;
   display: flex;
@@ -93,6 +93,7 @@
 
   margin-top: auto;
   margin-bottom: auto;
+ // background-color: rebeccapurple;
 }
 
 .likeIconFilled{
@@ -121,7 +122,7 @@
 
 .headerTitle {
   margin-top: -10px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -130,12 +131,21 @@
 }
 
 .country {
+
   margin-top: -7px;
   font-size: 15px;
   display: flex;
   flex-direction: row;
+margin-top: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
 
+}
 
+.countryElement {
+  margin-right: 5px;
 }
 
 .hr {
