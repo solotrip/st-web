@@ -17,13 +17,10 @@ import {
 } from 'assets/images/new-icons'
 import useThemeState from 'utils/hooks/use-theme-state'
 import { formatAsMonthDay } from 'utils/date'
-import {
-  getEventImage,
-  getEventSourceSet,
-  processRecommendation
-} from 'utils/recommendation'
+import { getEventImage, getEventSourceSet, processRecommendation } from 'utils/recommendation'
 import ContentLoader from 'react-content-loader'
 import { getSourceSet, SUPPORTED_SIZES } from '../../../../utils/image'
+import { BsHeartFill } from 'react-icons/bs'
 
 const Recommendation = ({
   recommendation,
@@ -69,46 +66,47 @@ const Recommendation = ({
   const [appTheme] = useThemeState()
 
   return (
-    <div
-      className={styles.recommendationCard}
-    >
+    <div className={styles.recommendationCard}>
       {' '}
-      <div className={styles.colorStrip}/>
+      <div className={styles.colorStrip} />
       <div className={styles.cardContent}>
         <div className={styles.header}>
           <div className={styles.headerLine}>
             {' '}
-            <div className={styles.headerUpLine}> Recommendation
-              #{index + 1}</div>
-            {' '}
+            <div className={styles.headerUpLine}> Recommendation #{index + 1}</div>{' '}
             <button
-              className={wishlisted ? styles.heartFilled : styles.heart}
+              className={styles.heart}
               onClick={() =>
                 toggleWishlist({
                   query,
                   recommendation
                 })
               }
-            />
+            >
+              {wishlisted ? (
+                <BsHeartFill className={styles.likeIconFilled} />
+              ) : (
+                <BsHeartFill className={styles.likeIcon} />
+              )}
+            </button>
           </div>
           <div className={styles.headerLine}>
             {' '}
-            <div className={styles.headerTitle}>{name}</div>
-            {' '}
+            <div className={styles.headerTitle}>{name}</div>{' '}
             <div className={styles.country}>
               <div>{country.emoji_flag}</div>
               &nbsp;
               <div>{country.name}</div>
             </div>
           </div>
-          <hr className={styles.hr}/>
+          <hr className={styles.hr} />
         </div>
 
         <div className={styles.content}>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Calendar/>
+              <Calendar />
             </div>
 
             <div className={styles.elementText}>
@@ -120,35 +118,34 @@ const Recommendation = ({
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Passport/>
+                <Passport />
               </div>
               <div className={styles.elementText}>{visaText}</div>
             </div>
           )}
           {country &&
-          country.safety &&
-          country.safety.riskLevel && (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <Passport/>
+            country.safety &&
+            country.safety.riskLevel && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Passport />
+                </div>
+                <div className={styles.elementText}>Safety: {country.safety.riskLevel}</div>
               </div>
-              <div
-                className={styles.elementText}>Safety: {country.safety.riskLevel}</div>
-            </div>
           )}
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
-              <Cloud/>
+              <Cloud />
             </div>
             <div className={styles.elementText}>
               min &nbsp;
               <div className={styles.elementHighlight}>
-                <Temperature value={minTemp}/>{' '}
+                <Temperature value={minTemp} />{' '}
               </div>
               , max &nbsp;
               <div className={styles.elementHighlight}>
-                <Temperature value={maxTemp}/>
+                <Temperature value={maxTemp} />
               </div>
             </div>
           </div>
@@ -157,16 +154,16 @@ const Recommendation = ({
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Accommodation/>
+                <Accommodation />
               </div>
               <div className={styles.elementText}>
                 Hotel prices range from &nbsp;
                 <div className={styles.elementHighlight}>
-                  <Currency value={hotelPriceMin}/>{' '}
+                  <Currency value={hotelPriceMin} />{' '}
                 </div>
                 &nbsp;to&nbsp;
                 <div className={styles.elementHighlight}>
-                  <Currency value={hotelPriceMax}/>
+                  <Currency value={hotelPriceMax} />
                 </div>
                 .
               </div>
@@ -176,12 +173,12 @@ const Recommendation = ({
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
-                  <Accommodation/>
+                  <Accommodation />
                 </div>
                 <div className={styles.elementText}>
                   Average Hotel price is&nbsp;
                   <div className={styles.elementHighlight}>
-                    <Currency value={hotelPriceMin}/>
+                    <Currency value={hotelPriceMin} />
                   </div>
                   .
                 </div>
@@ -191,16 +188,16 @@ const Recommendation = ({
           {(hostelPriceMin || hostelPriceMax) && hostelPriceMin !== hostelPriceMax ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
-                <Accommodation/>
+                <Accommodation />
               </div>
               <div className={styles.elementText}>
                 Hostel prices range from&nbsp;
                 <div className={styles.elementHighlight}>
-                  <Currency value={hostelPriceMin}/>
+                  <Currency value={hostelPriceMin} />
                 </div>
                 &nbsp;to&nbsp;
                 <div className={styles.elementHighlight}>
-                  <Currency value={hostelPriceMax}/>{' '}
+                  <Currency value={hostelPriceMax} />{' '}
                 </div>
                 .
               </div>
@@ -209,12 +206,12 @@ const Recommendation = ({
             Math.floor(hostelPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
-                  <Accommodation/>
+                  <Accommodation />
                 </div>
                 <div className={styles.elementText}>
                   Average hostel price is&nbsp;
                   <div className={styles.elementHighlight}>
-                    <Currency value={hostelPriceMin}/>
+                    <Currency value={hostelPriceMin} />
                   </div>
                   .
                 </div>
@@ -225,49 +222,49 @@ const Recommendation = ({
           vacationRentalPriceMin !== vacationRentalPriceMax ? (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
-                <Accommodation/>
+                <Accommodation />
               </div>
               <div className={styles.elementText}>
                 Vacation rental prices range from&nbsp;
                 <div className={styles.elementHighlight}>
-                  <Currency value={vacationRentalPriceMin}/>
+                  <Currency value={vacationRentalPriceMin} />
                 </div>
                 &nbsp;to &nbsp;
                 <div className={styles.elementHighlight}>
-                  <Currency value={vacationRentalPriceMax}/>
+                  <Currency value={vacationRentalPriceMax} />
                 </div>
                 .
               </div>
             </div>
-          ) : (
-            Math.floor(vacationRentalPriceMin) !== 0 && (
+            ) : (
+              Math.floor(vacationRentalPriceMin) !== 0 && (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
-                  <Accommodation/>
+                  <Accommodation />
                 </div>
                 <div className={styles.elementText}>
                   Average vacation rental price is &nbsp;
                   <div className={styles.elementHighlight}>
-                    <Currency value={vacationRentalPriceMin}/>
+                    <Currency value={vacationRentalPriceMin} />
                   </div>
                   .
                 </div>
               </div>
-            )
-          )}
+              )
+            )}
 
           {(fastestFlightCost || cheapestFlightCost || bestFlightCost) && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Flights/>
+                <Flights />
               </div>
               <div className={styles.elementText}>
                 {fastestFlightCost && (
                   <>
                     {'Fastest: '}
                     <div className={styles.elementHighlight}>
-                      <Currency value={fastestFlightCost}/> &nbsp;
+                      <Currency value={fastestFlightCost} /> &nbsp;
                     </div>
                   </>
                 )}
@@ -275,7 +272,7 @@ const Recommendation = ({
                   <>
                     {',Cheapest: '}
                     <div className={styles.elementHighlight}>
-                      &nbsp; <Currency value={cheapestFlightCost}/> &nbsp;
+                      &nbsp; <Currency value={cheapestFlightCost} /> &nbsp;
                     </div>
                   </>
                 )}
@@ -283,7 +280,7 @@ const Recommendation = ({
                   <>
                     {',Best: '}
                     <div className={styles.elementHighlight}>
-                      &nbsp; <Currency value={bestFlightCost}/> &nbsp;
+                      &nbsp; <Currency value={bestFlightCost} /> &nbsp;
                     </div>
                   </>
                 )}
@@ -293,7 +290,7 @@ const Recommendation = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Vaccine/>
+              <Vaccine />
             </div>
             <div className={styles.elementText}>
               {' '}
@@ -311,7 +308,7 @@ const Recommendation = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Vaccine/>
+              <Vaccine />
             </div>
             <div className={styles.elementText}>
               {' '}
@@ -323,14 +320,13 @@ const Recommendation = ({
                 }
               >
                 {unvaccinatedTestText}{' '}
-              </div>
-              {' '}
+              </div>{' '}
             </div>
           </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Quarantine/>
+              <Quarantine />
             </div>
             <div className={styles.elementText}>
               <div
@@ -338,7 +334,7 @@ const Recommendation = ({
                   vaccinatedQuarantineText.includes('Quarantine Required')
                     ? styles.elementRed
                     : vaccinatedQuarantineText.includes('Quarantine not required') &&
-                    styles.elementGreen
+                      styles.elementGreen
                 }
               >
                 {vaccinatedQuarantineText}
@@ -348,7 +344,7 @@ const Recommendation = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Quarantine/>
+              <Quarantine />
             </div>
             <div className={styles.elementText}>
               <div
@@ -356,7 +352,7 @@ const Recommendation = ({
                   unvaccinatedQuarantineText.includes('Quarantine Required')
                     ? styles.elementRed
                     : unvaccinatedQuarantineText.includes('Quarantine not required') &&
-                    styles.elementGreen
+                      styles.elementGreen
                 }
               >
                 {unvaccinatedQuarantineText}
@@ -367,7 +363,7 @@ const Recommendation = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Attraction/>
+              <Attraction />
             </div>
             <div className={styles.elementText}>
               <div
@@ -375,8 +371,8 @@ const Recommendation = ({
                   attractionsText.includes('Attractions are closed')
                     ? styles.elementRed
                     : attractionsText.includes('Attractions are open')
-                    ? styles.elementGreen
-                    : 'Attractions are restricted' && styles.elementYellow
+                      ? styles.elementGreen
+                      : 'Attractions are restricted' && styles.elementYellow
                 }
               >
                 {attractionsText}
@@ -386,7 +382,7 @@ const Recommendation = ({
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
-              <Food/>
+              <Food />
             </div>
             <div className={styles.elementText}>
               <div
@@ -394,8 +390,8 @@ const Recommendation = ({
                   restaurantText.includes('Restaurants are closed')
                     ? styles.elementRed
                     : restaurantText.includes('Restaurants are open')
-                    ? styles.elementGreen
-                    : 'Restaurants are restricted' && styles.elementYellow
+                      ? styles.elementGreen
+                      : 'Restaurants are restricted' && styles.elementYellow
                 }
               >
                 {restaurantText}
@@ -403,22 +399,21 @@ const Recommendation = ({
             </div>
           </div>
           {events &&
-          events.length > 0 && (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <EventsIcon/>
+            events.length > 0 && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <EventsIcon />
+                </div>
+                {<div className={styles.elementText}>Events & Festivals</div>}
               </div>
-              {<div className={styles.elementText}>Events & Festivals</div>}
-            </div>
           )}
           <div className={styles.events}>
             <HorizontalList
               slidesPerView={2}
               itemClassName={styles.horizontalListItem}
               items={events.map(event => (
-                <div data-key={`${sid}-poi-${event.eid}`}
-                     className={styles.slide}>
+                <div data-key={`${sid}-poi-${event.eid}`} className={styles.slide}>
                   <Image
                     src={getEventImage(event, appTheme === 'light', SUPPORTED_SIZES['1080'])}
                     srcsetProvided
@@ -464,34 +459,34 @@ Recommendation.Skeleton = () => (
       backgroundColor="var(--color-card-bg)"
       foregroundColor="var(--color-highlight-bg)"
     >
-      <rect x="4" y="8" rx="4" ry="4" width="40%" height="16"/>
-      <rect x="4" y="32" rx="3" ry="3" width="60%" height="32"/>
-      <rect x="80%" y="48" rx="3" ry="3" width="20%" height="16"/>
-      <rect x="4" y="80" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="84" rx="3" ry="3" width="80%" height="16"/>
-      <rect x="4" y="80" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="84" rx="3" ry="3" width="50%" height="16"/>
-      <rect x="4" y="112" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="116" rx="3" ry="3" width="70%" height="16"/>
-      <rect x="4" y="144" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="148" rx="3" ry="3" width="60%" height="16"/>
-      <rect x="4" y="176" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="180" rx="3" ry="3" width="80%" height="16"/>
-      <rect x="4" y="208" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="212" rx="3" ry="3" width="40%" height="16"/>
-      <rect x="4" y="240" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="244" rx="3" ry="3" width="75%" height="16"/>
-      <rect x="4" y="272" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="276" rx="3" ry="3" width="65%" height="16"/>
-      <rect x="4" y="304" rx="3" ry="3" width="24" height="24"/>
-      <rect x="10%" y="308" rx="3" ry="3" width="80%" height="16"/>
-      <rect x="2%" y="340" rx="3" ry="3" width="30%" height="120"/>
-      <rect x="2%" y="468" rx="3" ry="3" width="30%" height="16"/>
-      <rect x="34%" y="340" rx="3" ry="3" width="30%" height="120"/>
-      <rect x="34%" y="468" rx="3" ry="3" width="30%" height="16"/>
-      <rect x="66%" y="340" rx="3" ry="3" width="30%" height="120"/>
-      <rect x="66%" y="468" rx="3" ry="3" width="30%" height="16"/>
-      <rect x="5%" y="510" rx="16" ry="16" width="90%" height="38"/>
+      <rect x="4" y="8" rx="4" ry="4" width="40%" height="16" />
+      <rect x="4" y="32" rx="3" ry="3" width="60%" height="32" />
+      <rect x="80%" y="48" rx="3" ry="3" width="20%" height="16" />
+      <rect x="4" y="80" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="84" rx="3" ry="3" width="80%" height="16" />
+      <rect x="4" y="80" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="84" rx="3" ry="3" width="50%" height="16" />
+      <rect x="4" y="112" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="116" rx="3" ry="3" width="70%" height="16" />
+      <rect x="4" y="144" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="148" rx="3" ry="3" width="60%" height="16" />
+      <rect x="4" y="176" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="180" rx="3" ry="3" width="80%" height="16" />
+      <rect x="4" y="208" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="212" rx="3" ry="3" width="40%" height="16" />
+      <rect x="4" y="240" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="244" rx="3" ry="3" width="75%" height="16" />
+      <rect x="4" y="272" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="276" rx="3" ry="3" width="65%" height="16" />
+      <rect x="4" y="304" rx="3" ry="3" width="24" height="24" />
+      <rect x="10%" y="308" rx="3" ry="3" width="80%" height="16" />
+      <rect x="2%" y="340" rx="3" ry="3" width="30%" height="120" />
+      <rect x="2%" y="468" rx="3" ry="3" width="30%" height="16" />
+      <rect x="34%" y="340" rx="3" ry="3" width="30%" height="120" />
+      <rect x="34%" y="468" rx="3" ry="3" width="30%" height="16" />
+      <rect x="66%" y="340" rx="3" ry="3" width="30%" height="120" />
+      <rect x="66%" y="468" rx="3" ry="3" width="30%" height="16" />
+      <rect x="5%" y="510" rx="16" ry="16" width="90%" height="38" />
     </ContentLoader>
   </div>
 )

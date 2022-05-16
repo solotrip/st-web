@@ -1,7 +1,7 @@
 @mixin light-theme {
   --header-sub: url('https://ik.imagekit.io/7zlqc1cmihe/headersub.png?updatedAt=1636304207203');
   --hamburger: url("https://ik.imagekit.io/7zlqc1cmihe/navigatelight_osrUek7cGCs.svg?updatedAt=1631366480076");
-  --logo: url("https://ik.imagekit.io/stmedia/new-style-light_RFp3_EHky.png?ik-sdk-version=javascript-1.4.3&updatedAt=1649815361549s");
+  --logo: url("../../assets/images/logo-colored-dark.svg");
   --logo-highlighted: url("https://ik.imagekit.io/stmedia/new-style-dark-highlighted_JkYLr5Fh7.png?ik-sdk-version=javascript-1.4.3&updatedAt=1649974038033");
   --filter: url("https://ik.imagekit.io/7zlqc1cmihe/Vector-1_nOHA36teX.svg?updatedAt=1631228520701");
   --saved: url("https://ik.imagekit.io/7zlqc1cmihe/Group-2_D0zCOL25i.svg?updatedAt=1631228520746");
@@ -10,9 +10,7 @@
   --backpack: url("https://ik.imagekit.io/7zlqc1cmihe/backpack_WhntvpOxYc.svg?updatedAt=1629412156833");
   --calendar: url("https://ik.imagekit.io/7zlqc1cmihe/calendaredit_FkubfbVH4.svg?updatedAt=1629286595546");
   --calendar-white: url("https://ik.imagekit.io/7zlqc1cmihe/whitecalendar_H-aSRT9SjH6.svg?updatedAt=1631486504468");
-  --heart-selected: url("https://ik.imagekit.io/rfjpogvdn8p/fluent_heart-24-regular_7irE6G4Ff.png?updatedAt=1640467934810");
-  --heart-not-selected: url("https://ik.imagekit.io/rfjpogvdn8p/heart_not_selected_light_theme_6_QwOkVA9H.png?updatedAt=1640559807845");
-  --card-bg-url: url("https://ik.imagekit.io/7zlqc1cmihe/lightestbg_dfEKSQu9CD.svg?updatedAt=1629668445797");
+ 
   --color-logo-text: #0e2c49;
   --color-navbar-border: #ecf3f5;
   --color-navbar: #ffffff;
@@ -37,7 +35,6 @@
   --color-tabbar: #ffffff;
   --shadow-text: 0px 4px 10px #bdbdbd;
   --cell-highlighter: 0px 2px 2px 5px rgba($color: #3cafeb, $alpha: 0.4);
-  --cell-bg-image: url("https://wallpaperaccess.com/full/340618.png");
   --color-warning: #c04444;
   --card-content: #ffffff;
   --card-content-recommendation: #f3f3f4;
