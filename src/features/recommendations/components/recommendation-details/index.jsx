@@ -272,7 +272,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           <div className={styles.description}>{description}</div>
         </div>
       )}
-      {tabs}
+      {/*tabs*/}
       <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
         {visaText && (
           <div className={styles.contentElement}>
@@ -434,11 +434,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             </button>
         )}
       </Card>
-      <div className={styles.disclaimer}>
-        {' '}
-        <BsInfoLg className={styles.disclaimerIcon} /> Always double check information provided by
-        Pulfy with official websites before your trip.
-      </div>
+
       <Card title="Status" type="Overview" className={styles.recommendationCard}>
         {barText && (
           <div className={styles.contentElement}>
@@ -478,17 +474,6 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         )}
       </Card>
 
-      <div className={styles.disclaimer}>
-        {' '}
-        <BsExclamationLg className={styles.disclaimerIcon2} />{' '}
-        <div className={styles.report}>
-          Did you find any inaccuracy or misinformation?{' '}
-          <a href={'mailto:support@pulfy.com?subject=Pulfy Inaccuracy or Misinformation&body='}>
-            {' '}
-            Report to us
-          </a>
-        </div>
-      </div>
       {uniqueEvents && uniqueEvents.length > 0 ? (
         <Card title="Events" type="Major" className={styles.recommendationCard}>
           <div ref={eventsRef} className={styles.events}>
@@ -947,6 +932,24 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             </div>
           </Card>
       )}
+
+      <div className={styles.disclaimer}>
+        {' '}
+        <BsInfoLg className={styles.disclaimerIcon} /> Always double check information provided by
+        Pulfy with official websites before your trip.
+      </div>
+
+      <div className={styles.disclaimer}>
+        {' '}
+        <BsExclamationLg className={styles.disclaimerIcon2} />{' '}
+        <div className={styles.report}>
+          Did you find any inaccuracy or misinformation?{' '}
+          <a href={'mailto:support@pulfy.com?subject=Pulfy Inaccuracy or Misinformation&body='}>
+            {' '}
+            Report to us
+          </a>
+        </div>
+      </div>
     </>
   )
 }

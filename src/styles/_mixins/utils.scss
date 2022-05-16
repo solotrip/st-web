@@ -6,7 +6,7 @@
   &::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.1); /* color of the scroll thumb */
     border-radius: 4px; /* roundness of the scroll thumb */
-    border: 2px solid rgba(0, 0, 0, 0.05); /* creates padding around scroll thumb */
+    border: 2px solid rgba(0, 0, 0, 0); /* creates padding around scroll thumb */
   }
 
   &::-webkit-scrollbar {
@@ -14,7 +14,7 @@
   }
 
   &::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05); /* color of the tracking area */
+    background: rgba(0, 0, 0, 0); /* color of the tracking area */
   }
 }
 
