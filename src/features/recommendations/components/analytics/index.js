@@ -78,7 +78,6 @@ const Analytics = ({
 
   return (
     <div className={styles.middleContainer}>
-      {console.log('here reco:', recommendations)}
       <div className={styles.select}>
         <div className={styles.selectItem}>
           {!loading && recommendations && recommendations.length > 0 && (

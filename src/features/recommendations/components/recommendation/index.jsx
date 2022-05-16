@@ -20,7 +20,7 @@ import { formatAsMonthDay } from 'utils/date'
 import { getEventImage, getEventSourceSet, processRecommendation } from 'utils/recommendation'
 import ContentLoader from 'react-content-loader'
 import { getSourceSet, SUPPORTED_SIZES } from '../../../../utils/image'
-import { BsHeartFill } from 'react-icons/bs'
+import { BsHeartFill, BsHeart } from 'react-icons/bs'
 
 const Recommendation = ({
   recommendation,
@@ -91,7 +91,7 @@ const Recommendation = ({
               {wishlisted ? (
                 <BsHeartFill className={styles.likeIconFilled} />
               ) : (
-                <BsHeartFill className={styles.likeIcon} />
+                <BsHeart className={styles.likeIcon} />
               )}
             </button>
           </div>
@@ -99,7 +99,6 @@ const Recommendation = ({
             {' '}
             <div className={styles.headerTitle}>{name}</div>{' '}
           </div>
-          <hr className={styles.hr} />
         </div>
 
         <div className={styles.content}>
@@ -110,8 +109,10 @@ const Recommendation = ({
             </div>
 
             <div className={styles.elementText}>
-              {formatAsMonthDay(startDate)}
-              {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
+              <div className={styles.elementHighlight}>
+                {formatAsMonthDay(startDate)}
+                {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
+              </div>
             </div>
           </div>
           {visaText && (

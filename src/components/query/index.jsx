@@ -66,7 +66,7 @@ const Query = ({
     },
     */ {
       prefix: 'Compare ',
-      value: query.show && query.show.replaceAll('-', ' '),
+      value: query.show && query.show.replace(/-/g, ' '),
       onClick: () => navigate('/recommendations/date'),
       icon: MdCompareArrows
     },
@@ -97,7 +97,7 @@ const Query = ({
     },
     ...passes,
 
-    ...(query.filters
+    ...(query.filters && query.filters.length > 0
       ? query.filters.length > maxFiltersDisplayed
         ? [
           {
@@ -133,17 +133,17 @@ const Query = ({
   return (
     <div className={cn(styles.container, className)}>
       {tags.filter(t => t.value).map(t => (
-          <Tag
-            key={`search-tag-${t.value}`}
-            icon={t.icon}
-            onClick={enableClick ? t.onClick : undefined}
-            name={
-              <span className={styles.text}>
-                <span className={cn(styles.prefix, prefixClassName)}>{t.prefix || ''}</span>
-                {t.value}
-              </span>
-            }
-          />
+        <Tag
+          key={`search-tag-${t.value}`}
+          icon={t.icon}
+          onClick={enableClick ? t.onClick : undefined}
+          name={
+            <span className={styles.text}>
+              <span className={cn(styles.prefix, prefixClassName)}>{t.prefix || ''}</span>
+              {t.value}
+            </span>
+          }
+        />
       ))}
     </div>
   )
