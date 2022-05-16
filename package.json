@@ -78,6 +78,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "ionic:build": "craco build",
+    "ionic:serve": "craco start",
     "test": "craco test",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
