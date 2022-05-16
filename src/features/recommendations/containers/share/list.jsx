@@ -28,10 +28,8 @@ const ShareListContainer = () => {
     recommendationsSelector
   )
 
-  console.log('inside  list share:', { activeRecommendationId, recommendationsObject })
   let recommendations = []
   var recommendations_shash
-  console.log('inside list share recommendations: ', recommendations)
 
   const {
     loading,
@@ -67,8 +65,6 @@ const ShareListContainer = () => {
     },
     [recommendationsObject, activeRecommendationId, location.pathname]
   )
-
-  console.log('detailrecommendations:', detailRecommendations)
 
   //const { startDate: start, endDate: end, sid: areaSid, name: areaName } = detailRecommendation
 

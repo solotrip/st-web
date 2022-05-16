@@ -26,11 +26,7 @@ export const processRecommendation = (recommendation, passports = []) => {
 
     //check visa status.
     const checkVisaFreeFor = passport => {
-      if (
-        country &&
-        country['visa_free_for'] &&
-        country['visa_free_for'].includes(passport)
-      ) {
+      if (country && country['visa_free_for'] && country['visa_free_for'].includes(passport)) {
         approvedPassports.push(passport)
       }
       return country['visa_free_for'].includes(passport)
@@ -66,14 +62,10 @@ export const processRecommendation = (recommendation, passports = []) => {
     //Vaccinated Test Required
     if (restrictions && restrictions['vaccinated_arrival_test_required']) {
       vaccinatedTestText = 'Test Required for vaccinated.'
-    } else if (
-      restrictions &&
-      !restrictions['vaccinated_arrival_test_required']
-    ) {
+    } else if (restrictions && !restrictions['vaccinated_arrival_test_required']) {
       vaccinatedTestText = 'Test not required for vaccinated.'
     } else {
-      vaccinatedTestText =
-        'No information about test procedure for vaccinated people.'
+      vaccinatedTestText = 'No information about test procedure for vaccinated people.'
     }
     //Unvaccinated Test Required
     if (restrictions && restrictions['arrival_test_required']) {
@@ -81,23 +73,15 @@ export const processRecommendation = (recommendation, passports = []) => {
     } else if (restrictions && !restrictions['arrival_test_required']) {
       unvaccinatedTestText = 'Test not required for unvaccinated.'
     } else {
-      unvaccinatedTestText =
-        'No information about test procedure for unvaccinated people.'
+      unvaccinatedTestText = 'No information about test procedure for unvaccinated people.'
     }
     //Vaccinated Quarantine Required
-    if (
-      restrictions &&
-      restrictions['vaccinated_arrival_quarantine_required']
-    ) {
+    if (restrictions && restrictions['vaccinated_arrival_quarantine_required']) {
       vaccinatedQuarantineText = 'Quarantine Required for vaccinated.'
-    } else if (
-      restrictions &&
-      !restrictions['vaccinated_arrival_quarantine_required']
-    ) {
+    } else if (restrictions && !restrictions['vaccinated_arrival_quarantine_required']) {
       vaccinatedQuarantineText = 'Quarantine not required for vaccinated.'
     } else {
-      vaccinatedQuarantineText =
-        'No information about quarantine procedure for vaccinated people.'
+      vaccinatedQuarantineText = 'No information about quarantine procedure for vaccinated people.'
     }
     //Unvaccinated Quarantine Required
     if (restrictions && restrictions['arrival_quarantine_required']) {
@@ -116,10 +100,7 @@ export const processRecommendation = (recommendation, passports = []) => {
       restaurantText = 'No information about restaurant status.'
     } else if (restrictions && restrictions['restaurant_status'] === 'CLOSED') {
       restaurantText = 'Restaurants are closed.'
-    } else if (
-      restrictions &&
-      restrictions['restaurant_status'] === 'RESTRICTIONS'
-    ) {
+    } else if (restrictions && restrictions['restaurant_status'] === 'RESTRICTIONS') {
       restaurantText = 'Restaurants are restricted.'
     }
 
@@ -127,15 +108,9 @@ export const processRecommendation = (recommendation, passports = []) => {
       attractionsText = 'Attractions are open.'
     } else if (!restrictions['Tourist Attractions']) {
       attractionsText = 'No information about attraction status.'
-    } else if (
-      restrictions &&
-      restrictions['Tourist Attractions'] === 'Closed'
-    ) {
+    } else if (restrictions && restrictions['Tourist Attractions'] === 'Closed') {
       attractionsText = 'Attractions are closed.'
-    } else if (
-      restrictions &&
-      restrictions['Tourist Attractions'] === 'Partially Open'
-    ) {
+    } else if (restrictions && restrictions['Tourist Attractions'] === 'Partially Open') {
       attractionsText = 'Attractions are restricted.'
     }
 
@@ -155,10 +130,7 @@ export const processRecommendation = (recommendation, passports = []) => {
       weatherText =
         `Rainy days: ${recommendation.climate.rainy_days} days/month, ` +
         `humidity: ${recommendation.climate.humidity}%`
-    } else if (
-      recommendation.climate.humidity &&
-      recommendation.climate.rainy_days
-    ) {
+    } else if (recommendation.climate.humidity && recommendation.climate.rainy_days) {
       weatherText =
         `Rainy days: ${recommendation.climate.rainy_days} day/month, ` +
         `humidity: ${recommendation.climate.humidity}%`
@@ -218,41 +190,32 @@ export const processRecommendation = (recommendation, passports = []) => {
   }
 }
 
-export const getEventImage = (event, isLightTheme, size= SUPPORTED_SIZES['1080']) => {
-  const img = _get(
-    event,
-    'images[0]'
-  )
-  if(!img) {
+export const getEventImage = (event, isLightTheme, size = SUPPORTED_SIZES['1080']) => {
+  const img = _get(event, 'images[0]')
+  if (!img) {
     return isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
   }
   return getImagePath(img, size)
 }
 
-export const getEventSourceSet = (event, isLightTheme, size= SUPPORTED_SIZES['1080']) => {
-  const img = _get(
-    event,
-    'images[0]'
-  )
-  if(!img) {
+export const getEventSourceSet = (event, isLightTheme, size = SUPPORTED_SIZES['1080']) => {
+  const img = _get(event, 'images[0]')
+  if (!img) {
     return isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
   }
-  return getSourceSet(img, [SUPPORTED_SIZES['720'], SUPPORTED_SIZES['1080'], SUPPORTED_SIZES['1920']])
+  // eslint-disable-next-line max-len
+  return getSourceSet(img, [
+    SUPPORTED_SIZES['720'],
+    SUPPORTED_SIZES['1080'],
+    SUPPORTED_SIZES['1920']
+  ])
 }
 
 export const getPoiImage = (poi, isLightTheme) => {
-  return _get(
-    poi,
-    'poi_image_hash',
-    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
-  )
+  return _get(poi, 'poi_image_hash', isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER)
 }
 export const getDefaultImage = (poi, isLightTheme) => {
-  return _get(
-    poi,
-    '',
-    isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER
-  )
+  return _get(poi, '', isLightTheme ? LIGHT_IMG_PLACEHOLDER : DARK_IMG_PLACEHOLDER)
 }
 
 export const reformatQuery = query => {

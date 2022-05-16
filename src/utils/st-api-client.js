@@ -25,11 +25,13 @@ axios.interceptors.request.use(async function(config) {
 })
 
 // Add a response interceptor
-axios.interceptors.response.use(function(response) {
-  return response
-}, function(error) {
-  return Promise.reject(error)
-})
-
+axios.interceptors.response.use(
+  function(response) {
+    return response
+  },
+  function(error) {
+    return Promise.reject(error)
+  }
+)
 
 export { axios }

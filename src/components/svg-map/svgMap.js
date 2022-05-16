@@ -23,26 +23,21 @@ const SvgMap = ({
   const history = useHistory()
   const [appTheme] = useThemeState()
 
+  // eslint-disable-next-line no-unused-vars
   const mapPolygonColor =
     appTheme === 'no-preference'
       ? am5.color(0x181d26)
-      : appTheme === 'light'
-      ? am5.color(0xf3f3f4)
-      : am5.color(0x181d26)
+      : appTheme === 'light' ? am5.color(0xf3f3f4) : am5.color(0x181d26)
 
   const maskColor =
     appTheme === 'no-preference'
       ? am5.color(0x657a8f)
-      : appTheme === 'light'
-      ? am5.color(0x9fc1e0)
-      : am5.color(0x657a8f)
+      : appTheme === 'light' ? am5.color(0x9fc1e0) : am5.color(0x657a8f)
 
   const bgColor =
     appTheme === 'no-preference'
       ? am5.color(0x000000)
-      : appTheme === 'light'
-      ? am5.color(0xffffff)
-      : am5.color(0x000000)
+      : appTheme === 'light' ? am5.color(0xffffff) : am5.color(0x000000)
 
   //const borderColor = am5.color(0x3cafeb)
 
@@ -50,19 +45,15 @@ const SvgMap = ({
     appTheme === 'dark'
       ? am5.color(0x181d26)
       : appTheme === 'light'
-      ? am5.color(0xf3f3f4)
-      : appTheme === 'no-preference'
-      ? am5.color(0x181d26)
-      : am5.color(0xf3f3f4)
+        ? am5.color(0xf3f3f4)
+        : appTheme === 'no-preference' ? am5.color(0x181d26) : am5.color(0xf3f3f4)
 
   const landColor =
     appTheme === 'dark'
       ? am5.color(0x181d26)
       : appTheme === 'light'
-      ? am5.color(0xf3f3f4)
-      : appTheme === 'no-preference'
-      ? am5.color(0x181d26)
-      : am5.color(0xf3f3f4)
+        ? am5.color(0xf3f3f4)
+        : appTheme === 'no-preference' ? am5.color(0x181d26) : am5.color(0xf3f3f4)
 
   useEffect(
     () => {
@@ -123,11 +114,9 @@ const SvgMap = ({
         })
       )
 
-      let originSeries = chart.series.push(
-        am5map.MapPointSeries.new(root, { idField: 'id' })
-      )
+      let originSeries = chart.series.push(am5map.MapPointSeries.new(root, { idField: 'id' }))
 
-      originSeries.bullets.push(function () {
+      originSeries.bullets.push(function() {
         let circle = am5.Circle.new(root, {
           radius: 5,
           tooltipText: 'From: {title}',
@@ -138,7 +127,7 @@ const SvgMap = ({
           strokeWidth: 0
         })
 
-        circle.events.on('click', function (e) {
+        circle.events.on('click', function(e) {
           selectOrigin(e.target.dataItem.get('id'))
         })
 
@@ -147,12 +136,10 @@ const SvgMap = ({
         })
       })
 
-      let destinationSeries = chart.series.push(
-        am5map.MapPointSeries.new(root, {})
-      )
+      let destinationSeries = chart.series.push(am5map.MapPointSeries.new(root, {}))
 
       let circleTemplate = am5.Template.new({})
-      destinationSeries.bullets.push(function (root) {
+      destinationSeries.bullets.push(function(root) {
         let bulletContainer = am5.Container.new(root, {})
         let circle = bulletContainer.children.push(
           am5.Circle.new(
@@ -249,7 +236,7 @@ const SvgMap = ({
       originSeries.data.setAll(originCities)
       destinationSeries.data.setAll(destinationCities)
 
-      function selectOrigin (id) {
+      function selectOrigin(id) {
         currentId = id
         let dataItem = originSeries.getDataItemById(id)
         let dataContext = dataItem.dataContext
@@ -262,17 +249,13 @@ const SvgMap = ({
 
         const lineSeriesData = am5.array.map(destinations, did => {
           const destinationDataItem =
-            destinationSeries.getDataItemById(did) ||
-            originSeries.getDataItemById(did)
+            destinationSeries.getDataItemById(did) || originSeries.getDataItemById(did)
           return {
             geometry: {
               type: 'LineString',
               coordinates: [
                 [originLongitude, originLatitude],
-                [
-                  destinationDataItem.get('longitude'),
-                  destinationDataItem.get('latitude')
-                ]
+                [destinationDataItem.get('longitude'), destinationDataItem.get('latitude')]
               ]
             }
           }
@@ -282,7 +265,7 @@ const SvgMap = ({
 
       let currentId = originCities[0].id
 
-      destinationSeries.events.on('datavalidated', function () {
+      destinationSeries.events.on('datavalidated', function() {
         selectOrigin(currentId)
       })
 

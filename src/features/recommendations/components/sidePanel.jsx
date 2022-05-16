@@ -4,12 +4,7 @@ import AnalyticsMap from './analytics/map'
 import Analytics from './analytics'
 import qs from 'qs'
 import cn from 'classnames'
-import { useHistory, useLocation, Link } from 'react-router-dom'
-
-const defaultSelectedOptionA = {
-  value: 'hotel-prices',
-  label: 'Hotel Prices'
-}
+import { useLocation } from 'react-router-dom'
 
 var defaultSelectedOption
 

@@ -37,7 +37,6 @@ const FiltersContainer = () => {
   )
 
   const onSubmit = () => {
-    console.log(Object.keys(data.filters))
     dispatch(fetchRecommendations(query))
     history.push({
       pathname: '/recommendations',

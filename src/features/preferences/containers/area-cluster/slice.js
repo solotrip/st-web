@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import * as UserApi from 'api/user'
 
-
-export const updateBucketlist = createAsyncThunk('bucketlist/update',
+export const updateBucketlist = createAsyncThunk(
+  'bucketlist/update',
   async (_, { getState }) => {
     const { sids } = bucketlistSelector(getState())
     return await UserApi.updateBucketlist(
       Object.keys(sids).filter(sid => !!sids[sid])
     )
-  })
+  }
+)
 
 export const bucketlistSlice = createSlice({
   name: 'bucketlist',
@@ -18,7 +19,6 @@ export const bucketlistSlice = createSlice({
   },
   reducers: {
     toggleSelected: (state, { payload }) => {
-      console.log(payload)
       state.sids[payload] = !state.sids[payload]
     }
   },
@@ -41,8 +41,6 @@ export const bucketlistHasSelectedSelector = createSelector(
   state => Object.keys(state.sids).length > 0
 )
 
-export const {
-  toggleSelected
-} = bucketlistSlice.actions
+export const { toggleSelected } = bucketlistSlice.actions
 
 export default bucketlistSlice.reducer

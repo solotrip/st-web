@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 import Tag from '../input/tag'
 import styles from './query.module.scss'
-import { MdAdd, MdEditCalendar, MdMyLocation, MdFactCheck, MdCompareArrows } from 'react-icons/md'
-import { coordsToQuery } from 'features/recommendations/containers/location/slice'
+import { MdAdd, MdEditCalendar, MdCompareArrows } from 'react-icons/md'
+
 import { formatAsMonthDay, formatDuration, getMonthAbbreviation } from 'utils/date'
-import _get from 'lodash/get'
-import _truncate from 'lodash/truncate'
+
 import countries from 'assets/data/countries.json'
 
 const Query = ({

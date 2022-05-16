@@ -13,6 +13,7 @@ const OnboardedRoutesWrapper = ({ children, registeredOnly = false }) => {
       dispatch(initialize({ history, ensureAuth: false }))
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [dispatch]
   )
   const { loading: authLoading, isAuthenticated, isGuest } = useSelector(authSelector)
@@ -33,9 +34,6 @@ const OnboardedRoutesWrapper = ({ children, registeredOnly = false }) => {
   ) : (
     <Redirect to="/onboarding/1" />
   )
-  {
-    /* : <Redirect to="/onboarding/1"/> */
-  }
 }
 
 export default OnboardedRoutesWrapper

@@ -5,14 +5,13 @@ import styles from './Welcome.module.scss'
 import { isBrowser } from 'react-device-detect'
 import { useHistory } from 'react-router-dom'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { authSelector } from 'features/auth/slice'
 
 const WelcomeContainer = () => {
   const history = useHistory()
 
-  const { error, isAuthenticated, isGuest, loading } = useSelector(authSelector)
-  console.log('state here:', { isGuest, isAuthenticated, loading })
+  const { error, isAuthenticated, loading } = useSelector(authSelector)
 
   function autoRedirect () {
     if (isBrowser && !loading && isAuthenticated && !error) {

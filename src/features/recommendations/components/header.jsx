@@ -3,14 +3,11 @@ import cx from 'classnames'
 import { useHistory, useLocation, Link } from 'react-router-dom'
 import { Capacitor } from '@capacitor/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { MdClose, MdSearch, MdEdit, MdIosShare } from 'react-icons/md'
+import { MdClose, MdSearch } from 'react-icons/md'
 import { Icon } from '@iconify/react'
 import { addToTracked, removeFromTracked, trackSelector } from 'features/track/slice'
-import { filtersSelector } from 'features/recommendations/containers/filters/slice'
-import { locationSelector } from '../containers/location/slice'
+
 import { useQuery } from 'utils/hooks/use-query'
-import { Query } from 'components'
-import Tag from 'components/input/tag'
 
 import styles from './header.module.scss'
 import { isGuestSelector } from 'features/profile/slice'
@@ -29,8 +26,7 @@ const Header = ({
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
-  const { locations } = useSelector(locationSelector)
-  const { filtersDict } = useSelector(filtersSelector)
+
   const isGuest = useSelector(isGuestSelector)
 
   const [isExpanded, setIsExpanded] = useState(defaultExpanded)
@@ -49,6 +45,7 @@ const Header = ({
       }
       //eslint-disable-next-line
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [defaultExpanded]
   )
   const handleTrack = () => {
@@ -77,10 +74,6 @@ const Header = ({
 
   const clearQuery = () => {
     history.replace({ pathname: '/recommendations' })
-  }
-
-  const navigate = path => {
-    history.push({ pathname: path, search: location.search })
   }
 
   const openShare = () => {
