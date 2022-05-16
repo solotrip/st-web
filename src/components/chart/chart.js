@@ -1,17 +1,69 @@
 import React, { useLayoutEffect, useRef } from 'react'
-
+import { useSelector } from 'react-redux'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import useThemeState from 'utils/hooks/use-theme-state'
 import styles from './chart.module.scss'
 import am5Responsive from '@amcharts/amcharts5/themes/Responsive'
 
+import { localPreferencesSelector } from 'reducers/localPreferencesSlice'
+
+import { exchangeRatesSelector } from 'reducers/exchangeRatesSlice'
+
+import { temperatureUnits } from '../../constants/preferencesOptions'
+import { root } from '@fluentui/react-icons/lib/esm/utils/BundledIcon.scss'
 const Chart = ({
-  data,
+  data: comingData,
   type,
   DOMroot = 'chartdiv3',
   contentType = 'recommendations'
 }) => {
+  let data = []
+  const { temperature, currency } = useSelector(localPreferencesSelector)
+  const { exchangeRates, loading } = useSelector(exchangeRatesSelector)
+
+  function convertTemp (temperature, value) {
+    const converted =
+      temperature === temperatureUnits.F
+        ? (9 / 5) * Number(value) + 32
+        : Number(value).toFixed(1)
+    return converted
+  }
+
+  function convertCurrency (value) {
+    return !loading ? exchangeRates[currency] * value : 0
+  }
+
+  if (type === 'temperature') {
+    comingData.forEach(element => {
+      let newElem = {}
+
+      newElem = {
+        ...element,
+        min: parseInt(convertTemp(temperature, element.min)),
+        max: parseInt(convertTemp(temperature, element.max))
+      }
+      data.push(newElem)
+    })
+  } else if (
+    type === 'hotel-prices' ||
+    type === 'hostel-prices' ||
+    type === 'airbnb-prices'
+  ) {
+    comingData.forEach(element => {
+      let newElem = {}
+
+      newElem = {
+        ...element,
+        min: parseInt(convertCurrency(element.min)),
+        max: parseInt(convertCurrency(element.max))
+      }
+      data.push(newElem)
+    })
+  } else {
+    data = comingData
+  }
+
   const responsiveBreakpoint =
     contentType === 'wishlist'
       ? am5Responsive.widthXXL
@@ -186,13 +238,25 @@ const Chart = ({
     ////
 
     chartRef.current = chart
+    root.autoResize = true
     return () => {
       root.dispose()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [DOMroot])
+  }, [DOMroot, type, data, comingData, root])
 
-  return <div id={DOMroot} className={styles.container} />
+  return (
+    <div id={DOMroot} className={styles.container}>
+      {type === 'temperature' && (
+        <div className={styles.valueHolder}>{temperature} </div>
+      )}
+      {(type === 'hotel-prices' ||
+        type === 'hostel-prices' ||
+        type === 'airbnb-prices') && (
+        <div className={styles.valueHolder}>{currency} </div>
+      )}
+    </div>
+  )
 }
 
 export default Chart

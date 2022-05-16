@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import _get from 'lodash/get'
 import { chartConfig } from './config'
 import Chart from 'components/chart/chart'
@@ -13,7 +13,10 @@ const AnalyticsChart = ({ recommendations, type, title, contentType }) => {
     const image = recommendation.area_has_image
       ? getImagePath(`${recommendation.sid}`, SUPPORTED_SIZES['720'], 'areas/')
       : _get(recommendation, 'events[0].images[0]') &&
-      getImagePath(`${recommendation.events[0].images[0]}`, SUPPORTED_SIZES['720'])
+        getImagePath(
+          `${recommendation.events[0].images[0]}`,
+          SUPPORTED_SIZES['720']
+        )
 
     return {
       name: '#' + (k + 1) + ' ' + recommendation.name,
@@ -30,16 +33,19 @@ const AnalyticsChart = ({ recommendations, type, title, contentType }) => {
     d => d.min !== null && d.max !== null
   )
 
-  return (
-    <div className={styles.container}>
+  const activeChart = useMemo(
+    () => (
       <Chart
         data={filteredChartData}
         type={type}
         DOMroot={type}
         contentType={contentType}
       />
-    </div>
+    ),
+    [recommendations, chartData, filteredChartData]
   )
+
+  return <div className={styles.container}>{activeChart}</div>
 }
 
 export default AnalyticsChart
