@@ -218,7 +218,13 @@ const SvgMap = ({
         )
 
         const openLink = e => {
-          history.push(e.target.dataItem.dataContext.link)
+          let link = String(e.target.dataItem.dataContext.link.pathname).split('/recommendations/')
+
+          let part = link.length > 1 ? '/wishlist/' + link[1] : '/wishlist'
+
+          let search = String(e.target.dataItem.dataContext.link.search)
+
+          history.push(part)
         }
 
         if (detailsOpenable) {

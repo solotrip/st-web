@@ -31,8 +31,6 @@ const AnalyticsChart = ({ recommendations, type, title, contentType, tabbed }) =
       d !== null && d.min !== null && d.max !== null && d.min !== undefined && d.max !== undefined
   )
 
-  console.log('filteredChartData:', filteredChartData)
-
   const activeChart = useMemo(
     () => (
       <Chart
