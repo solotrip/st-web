@@ -75,6 +75,8 @@ align-content: center;
   align-content: center;
   padding: 4px 16px;
   flex: 1;
+  transition: all 0.3s;
+  transition-timing-function: ease-out;
   @include md-to-lg {
     max-width: 650px;
   }
@@ -252,7 +254,8 @@ align-content: center;
   z-index: 3;
   flex-direction: column;
   position: absolute;
-  transition-timing-function: ease-in;
+  transition: all 0.3s;
+  transition-timing-function: ease-out;
   @include md-to-xl {
     flex-direction: row;
   }
@@ -263,6 +266,7 @@ align-content: center;
   margin-left: 12px;
   position: absolute;
   display: flex;
+  transition: all 0.3s;
   transition-timing-function: ease-out;
   @include md-to-xl {
     flex-direction: row;
@@ -312,12 +316,14 @@ align-content: center;
   margin-right: 0px;
   padding-right: 20px;
   height: 100%;
+  transition: all 0.3s;
+  transition-timing-function: ease-out;
   @include xs-to-sm {
    
     display: none;
   }
 
-  max-width: 400px;
+  max-width: 500px;
   @include xs-to-md {
     display: none;
   }
@@ -330,6 +336,27 @@ align-content: center;
   margin-bottom: auto;
   color: $disabled-primary-color;
   font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  &.active {
+    color:#3cafeb;
+    text-shadow:0px 0px 5px rgba(60,175,235,0.2);
+    span {
+      //background-color: $light-primary-color;
+      //fill: #3cafeb;
+
+      svg {
+        //fill: $white;
+        fill: #3cafeb;
+        filter: drop-shadow(0px 0px 5px #3cafeb);
+        -webkit-filter: drop-shadow(0px 0px 5px #3cafeb);
+
+      }
+    }
+  }
   
 
  // background-color: aquamarine;
@@ -341,6 +368,8 @@ align-content: center;
   flex-direction: row;
   width: 200px;
   justify-content: space-around;
+  transition: all 0.3s;
+  transition-timing-function: ease-out;
 
   @include md-to-lg {
     //background-color: greenyellow;

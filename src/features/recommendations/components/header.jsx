@@ -13,6 +13,13 @@ import { NavLink } from 'react-router-dom'
 import styles from './header.module.scss'
 import { isGuestSelector } from 'features/profile/slice'
 
+import {
+  Alert28Regular,
+  CircleEdit24Regular,
+  Heart28Regular,
+  List28Regular
+} from '@fluentui/react-icons'
+
 const Header = ({
   recommendationId,
   loading,
@@ -209,23 +216,36 @@ const Header = ({
       </div>
       <div className={styles.navigator}>
         {' '}
-        <Link to="/browse" className={styles.navigatorItem}>
-          Browse
-        </Link>
-        <Link to="/wishlist" className={styles.navigatorItem}>
-          Wishlist
-        </Link>
-        <Link to="/notifications" className={styles.navigatorItem}>
-          Notifications
-        </Link>
+        <NavLink
+          to={{ pathname: '/browse', search: location.search }}
+          className={styles.navigatorItem}
+          activeClassName={styles.active}
+        >
+          <List28Regular />Browse
+        </NavLink>
+        <NavLink
+          to={{ pathname: '/wishlist', search: location.search }}
+          className={styles.navigatorItem}
+          activeClassName={styles.active}
+        >
+          <Heart28Regular />Wishlist
+        </NavLink>
+        <NavLink
+          to={{ pathname: '/notifications', search: location.search }}
+          className={styles.navigatorItem}
+          activeClassName={styles.active}
+        >
+          <Alert28Regular /> Notifications
+        </NavLink>
         <NavLink
           to={{
             pathname: '/recommendations/preferences',
             search: location.search
           }}
           className={styles.navigatorItem}
+          activeClassName={styles.active}
         >
-          Preferences
+          <CircleEdit24Regular />Preferences
         </NavLink>
       </div>
     </div>
