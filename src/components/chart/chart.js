@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
@@ -19,6 +20,7 @@ const Chart = ({
   contentType = 'recommendations'
 }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
+  const location = useLocation()
   let data = []
   const { temperature, currency } = useSelector(localPreferencesSelector)
   const { exchangeRates, loading } = useSelector(exchangeRatesSelector)
@@ -239,9 +241,37 @@ const Chart = ({
 
   return (
     <div id={DOMroot} className={styles.container}>
-      {type === 'temperature' && <div className={styles.valueHolder}>{temperature} </div>}
+      {type === 'temperature' && (
+        <div id={DOMroot + '27'} className={styles.valueContainer}>
+          <div id={DOMroot + '34'} className={styles.valueHolder}>
+            {temperature}{' '}
+          </div>{' '}
+          <NavLink
+            to={{
+              pathname: '/recommendations/preferences',
+              search: location.search
+            }}
+          >
+            {' '}
+            Change Unit
+          </NavLink>
+        </div>
+      )}
       {(type === 'hotel-prices' || type === 'hostel-prices' || type === 'airbnb-prices') && (
-        <div className={styles.valueHolder}>{currency} </div>
+        <div id={DOMroot + '0'} className={styles.valueContainer}>
+          <div id={DOMroot + '9'} className={styles.valueHolder}>
+            {currency}{' '}
+          </div>{' '}
+          <NavLink
+            to={{
+              pathname: '/recommendations/preferences',
+              search: location.search
+            }}
+          >
+            {' '}
+            Change Unit
+          </NavLink>
+        </div>
       )}
     </div>
   )
