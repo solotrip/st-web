@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react'
 import { addToTracked, removeFromTracked, trackSelector } from 'features/track/slice'
 
 import { useQuery } from 'utils/hooks/use-query'
+import { NavLink } from 'react-router-dom'
 
 import styles from './header.module.scss'
 import { isGuestSelector } from 'features/profile/slice'
@@ -152,7 +153,7 @@ const Header = ({
                   [styles.withBack]: backIsVisible,
                   [styles.exp]: isExpanded
                 })}
-                onClick={handleExpand}
+                onClick={openDates}
               >
                 <MdSearch className={styles.searchIcon} />
                 {<div className={styles.startText}>Start your search</div>}
@@ -217,9 +218,15 @@ const Header = ({
         <Link to="/notifications" className={styles.navigatorItem}>
           Notifications
         </Link>
-        <Link to="/recommendations/preferences" className={styles.navigatorItem}>
+        <NavLink
+          to={{
+            pathname: '/recommendations/preferences',
+            search: location.search
+          }}
+          className={styles.navigatorItem}
+        >
           Preferences
-        </Link>
+        </NavLink>
       </div>
     </div>
   )

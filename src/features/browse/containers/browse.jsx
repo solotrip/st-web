@@ -25,9 +25,7 @@ const BrowseContainer = () => {
   return (
     <>
       <div className="flex-col">
-        <Link to="/recommendations">
-          <Header backIsVisible={false} trackIsVisible={false} />
-        </Link>
+        <Header backIsVisible={false} trackIsVisible={false} />
 
         <Loader loading={loading}>
           <Content
