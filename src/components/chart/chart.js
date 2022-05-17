@@ -257,6 +257,14 @@ const Chart = ({
           </NavLink>
         </div>
       )}
+
+      {type === 'trip-days' && (
+        <div id={DOMroot + '2711'} className={styles.valueContainer}>
+          <div id={DOMroot + '34123'} className={styles.valueHolder}>
+            days
+          </div>{' '}
+        </div>
+      )}
       {(type === 'hotel-prices' || type === 'hostel-prices' || type === 'airbnb-prices') && (
         <div id={DOMroot + '11'} className={styles.valueContainer}>
           <div id={DOMroot + '9'} className={styles.valueHolder}>
