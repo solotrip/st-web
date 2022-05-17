@@ -19,9 +19,10 @@ const Notification = ({ notification }) => {
       data.type === NOTIFICATION_TYPES.WISHLIST) &&
     content.new &&
     content.new.country ? (
-        <>
-        <div>{content.new.country.emoji_flag}</div> <div>{content.new.country.name}</div>
-        </>
+      <div className={styles.countryHolder}>
+        <div className={styles.countryEmoji}>{content.new.country.emoji_flag}</div>{' '}
+        <div>{content.new.country.name}</div>
+      </div>
       ) : (
         <></>
       )

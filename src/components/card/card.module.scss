@@ -73,11 +73,14 @@
 }
 
 .headerTitle {
-  font-size: 18px;
+  margin-top: 5px;
+  font-size: 20px;
   font-weight: 600;
-  flex: 1;
-  -webkit-line-clamp: 1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   width: 100%;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
 
 .subTitle {
@@ -97,4 +100,12 @@
 
 .content {
   margin-top: 5px;
+}
+
+
+.country {
+
+  width: 100%;
+  display: flex;
+  font-size: 14px;
 }

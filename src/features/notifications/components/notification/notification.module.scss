@@ -31,3 +31,17 @@
   outline: none;
   color: $white;
 }
+
+
+.countryHolder {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6px;
+  margin-bottom: 2px;
+ 
+}
+
+.countryEmoji{
+  margin-right: 10px;
+}
+
