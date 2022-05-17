@@ -30,6 +30,7 @@
   align-items: center;
   justify-content: flex-start;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   height: 100%;
   flex: 1;
   @include xs-to-md {

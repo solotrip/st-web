@@ -51,6 +51,7 @@ const MainRoutes = () => {
 
 const Routes = () => (
   <Router basename={process.env.PUBLIC_URL}>
+    {window.scrollTo(0, 1)}
     <SEO />
     <OnboardingRoutes />
     <AuthRoutes />
