@@ -253,12 +253,12 @@ const Chart = ({
             }}
           >
             {' '}
-            Change Unit
+            <div id={DOMroot + '796'}>Change Unit</div>
           </NavLink>
         </div>
       )}
       {(type === 'hotel-prices' || type === 'hostel-prices' || type === 'airbnb-prices') && (
-        <div id={DOMroot + '0'} className={styles.valueContainer}>
+        <div id={DOMroot + '11'} className={styles.valueContainer}>
           <div id={DOMroot + '9'} className={styles.valueHolder}>
             {currency}{' '}
           </div>{' '}
@@ -269,7 +269,7 @@ const Chart = ({
             }}
           >
             {' '}
-            Change Unit
+            <div id={DOMroot + '153'}>Change Unit</div>
           </NavLink>
         </div>
       )}

@@ -107,6 +107,7 @@ const Content = ({
           contentType={contentType}
           ignoreBoundaries={true}
           hideCharts
+          tabbed={true}
         />
       )}
       {activeTab === 'Analytics' && (
@@ -117,6 +118,7 @@ const Content = ({
             query={contentType === 'recommendations' && queryFunction(recommendations).query}
             contentType={contentType}
             hideMap
+            tabbed={true}
           />
         </>
       )}

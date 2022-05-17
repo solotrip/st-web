@@ -12,7 +12,8 @@ const Analytics = ({
   recommendations,
   loading,
   defaultSelectedOption = { value: 'hotel-prices', label: 'Hotel Prices' },
-  contentType
+  contentType,
+  tabbed
 }) => {
   const [selectedOption, setSelectedOption] = useState(defaultSelectedOption)
 
@@ -20,23 +21,25 @@ const Analytics = ({
     setSelectedOption(event)
   }
 
-  const activeChart = useMemo(() => {
-    if (loading) {
-      return <ChartSkeleton />
-    }
-    switch (selectedOption.value) {
+  const activeChart = useMemo(
+    () => {
+      if (loading) {
+        return <ChartSkeleton />
+      }
+      switch (selectedOption.value) {
       case 'hotel-prices':
       case 'hostel-prices':
       case 'airbnb-prices':
       case 'temperature':
       case 'trip-days':
         return (
-          <AnalyticsChart
-            recommendations={recommendations}
-            title={selectedOption.label}
-            type={selectedOption.value}
-            contentType={contentType}
-          />
+            <AnalyticsChart
+              recommendations={recommendations}
+              title={selectedOption.label}
+              type={selectedOption.value}
+              contentType={contentType}
+              tabbed={tabbed}
+            />
         )
       case 'cost-of-living':
         return <CostOfLiving recommendations={recommendations} />
@@ -44,21 +47,25 @@ const Analytics = ({
         return <Restrictions recommendations={recommendations} />
       default:
         return null
-    }
-  }, [recommendations, selectedOption, loading])
+      }
+    },
+    [recommendations, selectedOption, loading]
+  )
 
   return (
     <div className={styles.middleContainer}>
       <div className={styles.select}>
         <div className={styles.selectItem}>
-          {!loading && recommendations && recommendations.length > 0 && (
-            <Dropdown
-              options={options}
-              onSelect={optionChange}
-              placeholder={selectedOption.label}
-              isSearchable={false}
-              defaultValue={[selectedOption]}
-            />
+          {!loading &&
+            recommendations &&
+            recommendations.length > 0 && (
+              <Dropdown
+                options={options}
+                onSelect={optionChange}
+                placeholder={selectedOption.label}
+                isSearchable={false}
+                defaultValue={[selectedOption]}
+              />
           )}
         </div>
       </div>
