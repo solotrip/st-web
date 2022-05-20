@@ -141,14 +141,14 @@ export const register = createCustomAsyncThunk(
   }
 )
 
+
 /**
- * If called with ensureAuth=true,
- * it will create a guest user if user has not authenticated before.
+ * Creates guest user if user is not authenticated
  */
 export const initialize = createAsyncThunk(
   'auth/init',
   async (
-    { ensureAuth, history } = false,
+    { history } = false,
     { dispatch, getState, rejectWithValue }
   ) => {
     const {
@@ -164,7 +164,7 @@ export const initialize = createAsyncThunk(
       dispatch(fetchExchangeRates())
     }
 
-    if (!isAuthenticated && ensureAuth) {
+    if (!isAuthenticated) {
       dispatch(createGuest({ history }))
     } else {
       // Fetch profile only once to prevent unnecessary calls

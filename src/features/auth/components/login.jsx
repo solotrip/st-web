@@ -117,7 +117,6 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
           New to Pulfy? <span>Join now!</span>
         </Link>
 
-        {/*<Link className={styles.link} to="/onboarding/1">*/}
         <Link className={styles.link} to="/browse">
           or <span>Continue as Guest </span>
         </Link>

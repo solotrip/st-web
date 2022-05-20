@@ -5,8 +5,7 @@ import RecommendationRoutes from './features/recommendations/routes'
 import NotificationRoutes from './features/notifications/routes'
 import WishlistRoutes from './features/wishlist/routes'
 import BrowseRoutes from './features/browse/routes'
-import SavedRoutes from './features/track/routes'
-import { OnboardingRoutes, SettingsRoute } from './features/preferences/routes'
+import { SettingsRoute } from './features/preferences/routes'
 import { BottomBar, Layout, Loader, MonthPicker, NotAuthenticatedRoute, SideBar } from 'components'
 import { BrowseLayout } from 'components'
 import DateSelectorContainer from 'features/recommendations/containers/date-selector'
@@ -37,7 +36,6 @@ const MainRoutes = () => {
           <RecommendationRoutes />
           <NotificationRoutes />
           <WishlistRoutes />
-          {/*<SavedRoutes />*/}
         </Layout>
       </Route>
       <Route path={['/browse']}>
@@ -53,7 +51,6 @@ const Routes = () => (
   <Router basename={process.env.PUBLIC_URL}>
     {window.scrollTo(0, 1)}
     <SEO />
-    <OnboardingRoutes />
     <AuthRoutes />
     <MainRoutes />
     <SettingsRoute />

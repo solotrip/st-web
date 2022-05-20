@@ -32,7 +32,7 @@ const OnboardedRoutesWrapper = ({ children, registeredOnly = false }) => {
       children
     )
   ) : (
-    <Redirect to="/onboarding/1" />
+    <Loader />
   )
 }
 
