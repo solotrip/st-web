@@ -39,16 +39,9 @@ export const removeFromWishlist = createAsyncThunk(
 
 export const fetchWishlist = createAsyncThunk(
   'wishlist/fetch',
-  async (_p, { getState }) => {
-    const { wishlist, initialized, loading } = wishlistSelector(getState())
-    if (!initialized && loading) {
-      const response = await RecommendationApi.getWishlist()
-      return _keyBy(response, 'wishlistId')
-    }
-    if (initialized) {
-      return wishlist
-    }
-    return null
+  async () => {
+    const response = await RecommendationApi.getWishlist()
+    return _keyBy(response, 'wishlistId')
   }
 )
 

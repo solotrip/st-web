@@ -17,7 +17,7 @@ const WishlistContainer = () => {
     () => {
       dispatch(fetchWishlist())
     },
-    [dispatch, wishlist]
+    [dispatch]
   )
 
   const removeFromWishlistHandler = useCallback(
