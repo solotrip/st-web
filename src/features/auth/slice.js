@@ -198,6 +198,7 @@ export const initialize = createAsyncThunk(
 const initialState = {
   error: null,
   loading: true,
+  actionInProgress: false,
   isAuthenticated: false,
   isGuest: false,
   username: ''
@@ -251,23 +252,55 @@ const authSlice = createSlice({
     },
     [login.pending]: state => {
       state.error = null
+      state.actionInProgress = true
+    },
+    [loginWithApple.pending]: state => {
+      state.error = null
+      state.actionInProgress = true
+    },
+    [loginWithGoogle.pending]: state => {
+      state.error = null
+      state.actionInProgress = true
     },
     [login.fulfilled]: state => {
       state.isAuthenticated = true
       state.isGuest = false
+      state.actionInProgress = false
+    },
+    [loginWithApple.fulfilled]: state => {
+      state.isAuthenticated = true
+      state.isGuest = false
+      state.actionInProgress = false
+    },
+    [loginWithGoogle.fulfilled]: state => {
+      state.isAuthenticated = true
+      state.isGuest = false
+      state.actionInProgress = false
     },
     [login.rejected]: (state, action) => {
       state.error = action.payload
+      state.actionInProgress = false
+    },
+    [loginWithApple.rejected]: (state, action) => {
+      state.error = action.payload
+      state.actionInProgress = false
+    },
+    [loginWithGoogle.rejected]: (state, action) => {
+      state.error = action.payload
+      state.actionInProgress = false
     },
     [register.pending]: state => {
       state.error = null
+      state.actionInProgress = true
     },
     [register.fulfilled]: state => {
       state.isAuthenticated = true
       state.isGuest = false
+      state.actionInProgress = false
     },
     [register.rejected]: (state, action) => {
       state.error = action.payload
+      state.actionInProgress = false
     },
     [logout.fulfilled]: state => {
       state = { ...initialState, loading: false }

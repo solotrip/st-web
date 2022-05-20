@@ -45,7 +45,14 @@ const schema = Joi.object({
   }).required()
 })
 
-const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, authWall = false }) => {
+const SignupPage = ({
+  registerFunc,
+  error,
+  loginWithApple,
+  loginWithGoogle,
+  authWall = false,
+  loading
+}) => {
   const onSubmit = ({ body }) => {
     const { email, password, username } = body
     registerFunc({
@@ -63,7 +70,10 @@ const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, auth
     () => {
       _get(error, 'details', []).forEach(e => {
         if (_get(e, 'context.key')) {
-          setError(_get(e, 'context.key'), { type: 'manual', message: e.message })
+          setError(_get(e, 'context.key'), {
+            type: 'manual',
+            message: e.message
+          })
         }
       })
     },
@@ -72,11 +82,15 @@ const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, auth
 
   return (
     <div className={styles.main}>
-      <div className={Capacitor.getPlatform() === 'ios' ? styles.contentIos : styles.content}>
+      <div
+        className={Capacitor.getPlatform() === 'ios' ? styles.contentIos : styles.content}
+      >
         {authWall && (
           <div className={styles.authWall}>
-            Looks like you're having a good time with Pulfy. Do you want to take it one step
-            further, and get access to our cool features like event notifications and wishlists?
+            Looks like you're having a good time with Pulfy. Do you want to take
+            it one step
+            further, and get access to our cool features like event
+            notifications and wishlists?
           </div>
         )}
         <h1 className={styles.heading}>Create new account</h1>
@@ -89,6 +103,7 @@ const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, auth
             })}
             error={_get(errors, 'body.username.message')}
             filled
+            disabled={loading}
           />
           <TextInput
             placeholder="Email"
@@ -98,6 +113,7 @@ const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, auth
             })}
             error={_get(errors, 'body.email.message')}
             filled
+            disabled={loading}
           />
           <TextInput
             placeholder="Password"
@@ -108,6 +124,7 @@ const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, auth
             })}
             error={_get(errors, 'body.password.message')}
             filled
+            disabled={loading}
           />
           <span className={styles.terms}>
             By clicking Sign Up or signing up with a social account, you agree to our
@@ -126,23 +143,25 @@ const SignupPage = ({ registerFunc, error, loginWithApple, loginWithGoogle, auth
               Cookie Use
             </a>.
           </span>
-          <Button text="Sign Up" icon={MdChevronRight} />
+          <Button text="Sign Up" icon={MdChevronRight}  loading={loading} disabled={loading}/>
         </form>
         <p className={styles.or}>Or</p>
         <div className={styles.socialButtons}>
           <button
             className={cn(styles.socialLogin, styles.loginWithGoogle)}
             onClick={loginWithGoogle}
+            disabled={loading}
           >
-            <GoogleIcon />
+            <GoogleIcon/>
             <span>Sign up with Google</span>
           </button>
           {Capacitor.getPlatform() !== 'android' && (
             <button
               className={cn(styles.socialLogin, styles.loginWithApple)}
               onClick={loginWithApple}
+              disabled={loading}
             >
-              <AppleIcon />
+              <AppleIcon/>
               <span>Sign up with Apple</span>
             </button>
           )}

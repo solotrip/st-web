@@ -7,12 +7,13 @@ import { useHistory } from 'react-router-dom'
 const LoginContainer = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const { error } = useSelector(state => state.auth)
+  const { error, actionInProgress } = useSelector(state => state.auth)
   return (
     <LoginPage
       loginFunc={({ email, password }) => {
         dispatch(login({ email, password, history }))
       }}
+      loading={actionInProgress}
       loginWithApple={() => dispatch(loginWithApple({ history }))}
       loginWithGoogle={() => dispatch(loginWithGoogle({ history }))}
       error={error}

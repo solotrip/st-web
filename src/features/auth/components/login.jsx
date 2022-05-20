@@ -36,7 +36,7 @@ const schema = Joi.object({
   }).required()
 })
 
-const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
+const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle, loading }) => {
   const onLogin = ({ body = {} }) => {
     const { email, password } = body
     loginFunc({ email, password })
@@ -67,6 +67,7 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             {...register('body.email')}
             error={_get(errors, 'body.email.message')}
             filled
+            disabled={loading}
           />
           <TextInput
             placeholder="Password"
@@ -75,14 +76,16 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             {...register('body.password')}
             error={_get(errors, 'body.password.message')}
             filled
+            disabled={loading}
           />
-          <Button text="Login" icon={MdChevronRight} />
+          <Button text="Login" icon={MdChevronRight} loading={loading} disabled={loading}/>
         </form>
         <p className={styles.or}>Or</p>
         <div className={styles.socialButtons}>
           <button
             className={cn(styles.socialLogin, styles.loginWithGoogle)}
             onClick={loginWithGoogle}
+            disabled={loading}
           >
             <GoogleIcon />
             <span>Sign in with Google</span>
@@ -91,6 +94,7 @@ const LoginPage = ({ loginFunc, error, loginWithApple, loginWithGoogle }) => {
             <button
               className={cn(styles.socialLogin, styles.loginWithApple)}
               onClick={loginWithApple}
+              disabled={loading}
             >
               <AppleIcon />
               <span>Sign in with Apple</span>

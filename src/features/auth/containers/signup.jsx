@@ -6,7 +6,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 const SignupContainer = ({ authWall }) => {
   const dispatch = useDispatch()
-  const { error } = useSelector(state => state.auth)
+  const { error, actionInProgress } = useSelector(state => state.auth)
   const history = useHistory()
   const location = useLocation()
   const redirectTo = authWall ? {
@@ -28,6 +28,7 @@ const SignupContainer = ({ authWall }) => {
           })
         )
       }
+      loading={actionInProgress}
       loginWithApple={() => dispatch(loginWithApple({ history }))}
       loginWithGoogle={() => dispatch(loginWithGoogle({ history }))}
       authWall={authWall}
