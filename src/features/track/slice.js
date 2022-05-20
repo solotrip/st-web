@@ -7,19 +7,19 @@ import { toast } from 'react-toastify'
 
 export const addToTracked = createAsyncThunk(
   'track/add',
-  async ({ recommendationId, name }) => {
-    await RecommendationApi.trackQuery(recommendationId, name)
+  async ({ recommendationHash, name }) => {
+    await RecommendationApi.trackQuery(recommendationHash, name)
     toast.info('You will be notified when this recommendation is updated')
-    return recommendationId
+    return recommendationHash
   }
 )
 
 export const removeFromTracked = createAsyncThunk(
   'track/remove',
-  async trackedId => {
-    await RecommendationApi.stopTrackingQuery(trackedId)
+  async recommendationHash => {
+    await RecommendationApi.stopTrackingQuery(recommendationHash)
     toast.info('You will not receive notifications for this recommendation')
-    return trackedId
+    return recommendationHash
   }
 )
 
@@ -60,7 +60,7 @@ export const trackSlice = createSlice({
     },
     [addToTracked.pending]: (state, action) => {
       state.loading = true
-      state.tracked[action.meta.arg.recommendationId] = true
+      state.tracked[action.meta.arg.recommendationHash] = true
       state.error = null
     },
     [removeFromTracked.fulfilled]: (state, action) => {
@@ -81,7 +81,7 @@ export const trackSlice = createSlice({
       state.error = null
     },
     [fetchTracked.fulfilled]: (state, action) => {
-      state.tracked = _keyBy(action.payload, 'recommendationId')
+      state.tracked = _keyBy(action.payload, 'hash')
       state.loading = false
       state.initialized = true
     },

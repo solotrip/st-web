@@ -33,8 +33,8 @@ export async function removeFromWishlist (wishlistId) {
   return response.data
 }
 
-export async function trackQuery (recommendationId, name = '') {
-  const url = SOLOTRIP_V1(`subscription/${recommendationId}`)
+export async function trackQuery (recommendationHash, name = '') {
+  const url = SOLOTRIP_V1(`subscription/${recommendationHash}`)
   const data = name === '' ? null : { name }
   const response = await axios.post(url, data)
   return response.data
@@ -46,8 +46,8 @@ export async function getTrackedQuery (recommendationId) {
   return response.data
 }
 
-export async function stopTrackingQuery (recommendationId) {
-  const url = SOLOTRIP_V1(`subscription/${recommendationId}`)
+export async function stopTrackingQuery (recommendationHash) {
+  const url = SOLOTRIP_V1(`subscription/${recommendationHash}`)
   const response = await axios.delete(url)
   return response.data
 }

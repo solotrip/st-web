@@ -132,6 +132,7 @@ const RecommendationsContainer = () => {
     <div className="flex-col">
       <Header
         recommendationId={activeRecommendationId}
+        recommendationHash={!loading && recommendations[activeRecommendationId].hash}
         loading={loading}
         defaultExpanded={isHeaderExpanded}
         alwaysShowBack={detailIndex !== -1}

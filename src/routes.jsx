@@ -37,7 +37,7 @@ const MainRoutes = () => {
           <RecommendationRoutes />
           <NotificationRoutes />
           <WishlistRoutes />
-          <SavedRoutes />
+          {/*<SavedRoutes />*/}
         </Layout>
       </Route>
       <Route path={['/browse']}>

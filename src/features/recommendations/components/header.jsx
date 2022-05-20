@@ -22,6 +22,7 @@ import {
 
 const Header = ({
   recommendationId,
+  recommendationHash,
   loading,
   defaultExpanded = false,
   backIsVisible = true,
@@ -42,6 +43,8 @@ const Header = ({
     setIsExpanded(!isExpanded)
   }
   const query = useQuery()
+
+  const isTracked = !!tracked[recommendationHash]
 
   useEffect(
     () => {
@@ -64,11 +67,11 @@ const Header = ({
       })
       return
     }
-    if (tracked[recommendationId]) {
-      dispatch(removeFromTracked(recommendationId))
+    if (isTracked) {
+      dispatch(removeFromTracked(recommendationHash))
     } else {
       //TODO: Add option to set name of the tracked query
-      dispatch(addToTracked({ recommendationId }))
+      dispatch(addToTracked({ recommendationHash }))
     }
   }
 
@@ -113,7 +116,7 @@ const Header = ({
         {(alwaysShowBack || backIsVisible) && (
           <button
             className={cx(styles.trackButton, {
-              [styles.active]: !!tracked[recommendationId]
+              [styles.active]: isTracked
             })}
             onClick={goBack}
             disabled={loading}
@@ -170,12 +173,12 @@ const Header = ({
               {trackIsVisible && (
                 <button
                   className={cx(styles.trackButton, {
-                    [styles.active]: !!tracked[recommendationId]
+                    [styles.active]: isTracked
                   })}
                   onClick={handleTrack}
                   disabled={loading}
                 >
-                  {tracked[recommendationId] ? (
+                  {isTracked ? (
                     <Icon
                       icon="fluent:alert-24-regular"
                       color="#3cafeb"
@@ -195,7 +198,7 @@ const Header = ({
               {trackIsVisible && (
                 <button
                   className={cx(styles.trackButton, {
-                    [styles.active]: !!tracked[recommendationId]
+                    [styles.active]: isTracked
                   })}
                   onClick={openShare}
                   disabled={loading}
