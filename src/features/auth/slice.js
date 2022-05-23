@@ -9,6 +9,7 @@ import {
 import { fetchProfile } from 'features/profile/slice'
 import * as AuthApi from 'api/auth'
 import { registerDevice } from 'utils/notification'
+import { isCacheExpired } from 'utils/date'
 import { fetchTracked, trackSelector } from 'features/track/slice'
 import { fetchWishlist, wishlistSelector } from 'features/wishlist/slice'
 import { FirebaseAuthentication } from '@robingenz/capacitor-firebase-authentication'
@@ -157,7 +158,9 @@ export const initialize = createAsyncThunk(
       username
     } = await initializeAuthentication()
 
-    if (!filtersSelector(getState()).initialized) {
+    if (!filtersSelector(getState()).initialized ||
+      filtersSelector(getState()).initialized === true ||
+      isCacheExpired(filtersSelector(getState()).initialized)) {
       dispatch(fetchFilters())
     }
     if (!exchangeRatesSelector(getState()).initialized) {

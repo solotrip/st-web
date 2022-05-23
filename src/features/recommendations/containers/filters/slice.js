@@ -23,7 +23,7 @@ const filtersSlice = createSlice({
     [fetchFilters.pending]: state => {
       state.error = null
       state.loading = true
-      state.initialized = true
+      state.initialized = new Date()
     },
     [fetchFilters.fulfilled]: (state, action) => {
       state.filters = action.payload.filter(f => !f.hidden)

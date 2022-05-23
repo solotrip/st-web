@@ -83,3 +83,5 @@ export const isExpired = d => dayjs(d).isSameOrBefore(new Date(), 'day')
 export const oneMonthLater = d => dayjs(d).add('29', 'days').toDate()
 
 export const getMonthName = d => dayjs(d).format('MMMM')
+
+export const isCacheExpired = d => dayjs().isAfter(dayjs(d).add('1', 'hours'))
