@@ -72,7 +72,7 @@ const FiltersContainer = () => {
     [recentFilters, filtersDict, filters]
   )
   return (
-    <SheetWrapper snapPoints={[900]}>
+    <SheetWrapper>
       <SheetWrapper.Content>
         <SettingsSection
           title="Filters"

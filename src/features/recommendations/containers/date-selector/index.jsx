@@ -70,7 +70,7 @@ const DateSelectorContainer = () => {
   }
   return (
     // TODO: Add holidays loader
-    <SheetWrapper snapPoints={[700]}>
+    <SheetWrapper>
       <SheetWrapper.Content>
         <SettingsSection
           title="Dates"
