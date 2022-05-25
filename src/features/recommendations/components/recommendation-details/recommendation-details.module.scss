@@ -673,10 +673,10 @@ background-color: red;
 }
 
 .title {
-  @extend .textShadow;
+
   width: calc(100% - 20px);
   
-  text-shadow: $text-shadow;
+ 
 }
 
 .report {
