@@ -47,13 +47,23 @@ const FiltersContainer = () => {
 
   const onUpdateCountries = useCallback(
     payload => {
-      setData(prevData => ({
-        ...prevData,
-        filters: {
-          ...prevData.filters,
-          c: { countryCodes: payload.map(p => p.value) }
-        }
-      }))
+      if (payload !== [] && payload.length && payload.length > 0) {
+        setData(prevData => ({
+          ...prevData,
+          filters: {
+            ...prevData.filters,
+            c: { countryCodes: payload.map(p => p.value) }
+          }
+        }))
+      } else if (payload && payload.length === 0) {
+        setData(prevData => ({
+          ...prevData,
+          filters: {
+            ...prevData.filters,
+            c: undefined
+          }
+        }))
+      }
     },
     [setData]
   )
