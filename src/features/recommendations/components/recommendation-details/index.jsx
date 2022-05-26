@@ -7,7 +7,7 @@ import activityImages from './activity-images.json'
 import dayjs from 'dayjs'
 
 import { MdIosShare } from 'react-icons/md'
-import { BsExclamationLg, BsHeartFill, BsInfoLg } from 'react-icons/bs'
+import { BsExclamationLg, BsHeartFill, BsInfoLg, BsHeart, BsBoxArrowUp } from 'react-icons/bs'
 import { Icon } from '@iconify/react'
 import { getImagePath, getSourceSet, SUPPORTED_SIZES } from 'utils/image'
 import {
@@ -215,14 +215,20 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               {wishlisted ? (
                 <BsHeartFill className={styles.likeIconFilled} />
               ) : (
-                <BsHeartFill className={styles.likeIcon} />
+                <BsHeart className={styles.likeIcon} />
               )}
             </button>
             <button onClick={openShare} className={styles.share}>
-              <MdIosShare className={styles.shareIcon} />
+              <BsBoxArrowUp className={styles.shareIcon} />
             </button>
           </div>
-          <div ref={overviewRef} className={styles.contentElement}>
+          <div className={styles.country}>
+            {' '}
+            <div className={styles.countryElement}>{country.emoji_flag}</div>
+            &nbsp;
+            <div>{country.name}</div>
+          </div>{' '}
+          <div ref={overviewRef} className={styles.contentElement3}>
             <div className={styles.elementIcon}>
               {' '}
               <Calendar />
@@ -252,14 +258,20 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               {wishlisted ? (
                 <BsHeartFill className={styles.likeIconFilled} />
               ) : (
-                <BsHeartFill className={styles.likeIcon} />
+                <BsHeart className={styles.likeIcon} />
               )}
             </button>
             <button onClick={openShare} className={styles.share}>
-              <MdIosShare className={styles.shareIcon} />
+              <BsBoxArrowUp className={styles.shareIcon} />
             </button>
           </div>
-          <div ref={overviewRef} className={styles.contentElement}>
+          <div className={styles.country}>
+            {' '}
+            <div className={styles.countryElement}>{country.emoji_flag}</div>
+            &nbsp;
+            <div>{country.name}</div>
+          </div>{' '}
+          <div ref={overviewRef} className={styles.contentElement3}>
             <div className={styles.elementIcon}>
               {' '}
               <Calendar />

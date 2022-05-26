@@ -9,18 +9,18 @@
 
 .heart {
   margin-top: 7%;
-  margin-right: 3px;
+  margin-right: 10px;
   padding: 2px;
   width: 40px;
   height: 40px;
  // background-image: $heart-not-selected;
   background-repeat: no-repeat;
   display: flex;
-  background-color: $card-content-recommendation;
+  //background-color: $card-content-recommendation;
   border-radius: 20px;
   justify-content: center;
   background-position: center;
-  box-shadow: $text-shadow;
+  //box-shadow: $text-shadow;
 
   margin-top: auto;
   margin-bottom: auto;
@@ -35,11 +35,11 @@
 
   background-repeat: no-repeat;
   display: flex;
-  background-color: $card-content-recommendation;
-  border-radius: 30px;
+  //background-color: $card-content-recommendation;
+  border-radius: 20px;
   justify-content: center;
   background-position: center;
-  box-shadow: $text-shadow;
+  //box-shadow: $text-shadow;
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -49,6 +49,7 @@
   margin: auto;
   width: 40px;
   font-size: 23px;
+  color: $sub-text-color;
 }
 
 .likeIconFilled{
@@ -63,7 +64,7 @@
   margin: auto;
   width: 40px;
   font-size: 23px;
-  color: #667A8f;
+  color: $sub-text-color;
 
 }
 
@@ -146,6 +147,19 @@ padding: 4px;
   font-size: 15px;
   //background-color: red;
   width: 100%;
+
+}
+
+.contentElement3 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6px;
+
+  margin-bottom: 12px;
+  font-size: 15px;
+  //background-color: red;
+  width: 100%;
+  padding-left: 5px;
 
 }
 
@@ -636,26 +650,29 @@ background-color: red;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   margin-top: 20px;
+  
 }
 
 .oneRow {
   display: flex;
   flex-direction: row;
-  margin-top: 40px;
+  margin-top: 0px;
   width: 100%;
   justify-content: space-between;
   
   align-items: center;
   align-content: center;
   align-self: center;
+  padding-left: 10px;
 
 }
 
 .headerHolder{
   z-index: 2;
-  margin-top: -100px;
+  margin-top: 0px;
 
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, $bg-color 55%);
+  //background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, $bg-color 55%);
+  background-color: $bg-color;
   width: 100%;
   min-height: 130px;
 
@@ -759,4 +776,23 @@ background-color: red;
   @include xs {
     display: none;
   }
+}
+
+.country {
+
+ 
+
+  display: flex;
+  flex-direction: row;
+margin-top: 8px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 25px;
+  padding-left: 8px;
+
+}
+
+.countryElement {
+  margin-right: 5px;
 }
