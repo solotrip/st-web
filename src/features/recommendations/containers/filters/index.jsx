@@ -10,6 +10,15 @@ import Filters from '../../components/filters'
 import { RECENT_FILTERS_CATEGORY, RECENT_FILTERS_COUNT } from 'constants/index'
 import SettingsSection from 'components/settings-section'
 import { fetchRecommendations, recommendationsSelector } from '../../slice'
+import Select from 'react-select'
+import styles from './filters.module.scss'
+
+import countries from 'assets/data/countries.json'
+
+const options = countries.map(c => ({
+  label: `${c.flag} ${c.name}`,
+  value: c.ISO
+}))
 
 const FiltersContainer = () => {
   const { loading, filters, recentFilters, filtersDict } = useSelector(filtersSelector)
@@ -30,6 +39,19 @@ const FiltersContainer = () => {
         filters: {
           ...prevData.filters,
           [filterId]: value === false ? undefined : value
+        }
+      }))
+    },
+    [setData]
+  )
+
+  const onUpdateCountries = useCallback(
+    payload => {
+      setData(prevData => ({
+        ...prevData,
+        filters: {
+          ...prevData.filters,
+          c: { countryCodes: payload.map(p => p.value) }
         }
       }))
     },
@@ -71,6 +93,13 @@ const FiltersContainer = () => {
     ],
     [recentFilters, filtersDict, filters]
   )
+  //const value = options.filter(o => data.passports.includes(o.value))
+  const value = options.filter(
+    o =>
+      data.filters && data.filters.c && data.filters.c.countryCodes
+        ? data.filters.c.countryCodes.includes(o.value)
+        : null
+  )
   return (
     <SheetWrapper>
       <SheetWrapper.Content>
@@ -84,6 +113,16 @@ const FiltersContainer = () => {
             loading={loading}
             updateFilter={onUpdate}
             filterValues={data.filters}
+          />
+          <span className={styles.country}>Countries</span>
+          <Select
+            options={options}
+            value={value}
+            isMulti
+            className="pulfy-select"
+            classNamePrefix="rs"
+            onChange={onUpdateCountries}
+            placeholder="Select countries..."
           />
         </SettingsSection>
       </SheetWrapper.Content>
