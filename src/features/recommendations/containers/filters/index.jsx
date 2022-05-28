@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom'
 import Filters from '../../components/filters'
 import { RECENT_FILTERS_CATEGORY, RECENT_FILTERS_COUNT } from 'constants/index'
 import SettingsSection from 'components/settings-section'
-import { fetchRecommendations, recommendationsSelector } from '../../slice'
+import { fetchRecommendations } from '../../slice'
 import Select from 'react-select'
 import styles from './filters.module.scss'
 

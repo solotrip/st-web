@@ -63,6 +63,7 @@
     "react-scripts": "^4.0.3",
     "react-select": "^4.3.1",
     "react-share": "^4.4.0",
+    "react-tiny-virtual-list": "^2.2.0",
     "react-toastify": "^8.1.0",
     "react-visibility-sensor": "^5.1.1",
     "redux": "^4.0.5",
