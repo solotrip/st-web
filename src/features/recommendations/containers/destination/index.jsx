@@ -78,10 +78,12 @@ const DestinationContainer = () => {
 
   const value = options.filter(
     o =>
-      data.filters && data.filters[0] ? data.filters[0].variables.areaSids.includes(o.value) : null
+      data.filters && data.filters[0]
+        ? data.filters[0].variables.areaSids.includes(o.value)
+        : //: query.filters && query.filters[0]
+      //  ? query.filters[0].variables.areaSids.includes(o.value)
+        null
   )
-
-  console.log('query here is:', query)
 
   return (
     <SheetWrapper snapPoints={[500]}>
