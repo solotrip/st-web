@@ -27,8 +27,6 @@ const DestinationContainer = () => {
   const [data, setData] = useState({
     ...query,
     filters: query.filters
-      ? _zipObject(query.filters.map(q => q.id), query.filters.map(q => q.variables || true))
-      : {}
   })
   const onUpdate = useCallback(
     payload => {
@@ -55,7 +53,7 @@ const DestinationContainer = () => {
             0: { id: undefined }
           }
         }))
-      } else if (payload && payload.length === 0 && (!data || !data.filters)) {
+      } else if (payload && payload.length === 0) {
         setData(prevData => ({
           ...prevData,
           filters: {
@@ -78,7 +76,10 @@ const DestinationContainer = () => {
 
   const value = options.filter(
     o =>
-      data.filters && data.filters[0]
+      data.filters &&
+      data.filters[0] &&
+      data.filters[0].variables &&
+      data.filters[0].variables.areaSids
         ? data.filters[0].variables.areaSids.includes(o.value)
         : //: query.filters && query.filters[0]
       //  ? query.filters[0].variables.areaSids.includes(o.value)
@@ -102,7 +103,7 @@ const DestinationContainer = () => {
             className="pulfy-select"
             classNamePrefix="rs"
             onChange={onUpdate}
-            placeholder="Select destination or destinations..."
+            placeholder="Search a destination or destinations..."
           />
         </SettingsSection>
       </SheetWrapper.Content>
