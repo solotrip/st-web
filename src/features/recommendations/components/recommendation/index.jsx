@@ -19,7 +19,7 @@ import useThemeState from 'utils/hooks/use-theme-state'
 import { formatAsMonthDay } from 'utils/date'
 import { getEventImage, getEventSourceSet, processRecommendation } from 'utils/recommendation'
 import ContentLoader from 'react-content-loader'
-import { getSourceSet, SUPPORTED_SIZES } from '../../../../utils/image'
+import { SUPPORTED_SIZES } from '../../../../utils/image'
 import { BsHeartFill, BsHeart } from 'react-icons/bs'
 
 const Recommendation = ({

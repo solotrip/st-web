@@ -17,12 +17,10 @@ import {
   Alert28Regular,
   CircleEdit24Regular,
   Heart28Regular,
-  List28Regular,
   Search28Regular
 } from '@fluentui/react-icons'
 
 const Header = ({
-  recommendationId,
   recommendationHash,
   loading,
   defaultExpanded = false,
@@ -40,9 +38,7 @@ const Header = ({
   const isGuest = useSelector(isGuestSelector)
 
   const [isExpanded, setIsExpanded] = useState(defaultExpanded)
-  const handleExpand = () => {
-    setIsExpanded(!isExpanded)
-  }
+
   const query = useQuery()
 
   const isTracked = !!tracked[recommendationHash]

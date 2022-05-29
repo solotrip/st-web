@@ -10,6 +10,7 @@ import { Icon } from '@iconify/react'
 import { NavLink } from 'react-router-dom'
 
 const Content = ({ items, recentQueries, filtersDict, locations }) => {
+  // eslint-disable-next-line no-unused-vars
   const bgs = [
     'linear-gradient(to right , rgba(99,193,176,1) 0%,rgba(78,125,214,1) 50%,#4BC0C8 100%)',
     'linear-gradient(to right , #FEAC5E 0%, #C779D0 50%,#4BC0C8 100%)',

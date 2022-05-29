@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Header from '../../recommendations/components/header'
 import Content from '../components/content'
 import { useDispatch, useSelector } from 'react-redux'

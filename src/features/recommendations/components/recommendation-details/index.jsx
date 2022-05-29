@@ -6,7 +6,6 @@ import styles from './recommendation-details.module.scss'
 import activityImages from './activity-images.json'
 import dayjs from 'dayjs'
 
-import { MdIosShare } from 'react-icons/md'
 import { BsExclamationLg, BsHeartFill, BsInfoLg, BsHeart, BsBoxArrowUp } from 'react-icons/bs'
 import { Icon } from '@iconify/react'
 import { getImagePath, getSourceSet, SUPPORTED_SIZES } from 'utils/image'
@@ -34,7 +33,6 @@ import {
   processRecommendation
 } from 'utils/recommendation'
 import useThemeState from 'utils/hooks/use-theme-state'
-import CostOfLiving from '../analytics/cost-of-living'
 
 const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted }) => {
   const [appTheme] = useThemeState()
@@ -69,7 +67,6 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     unvaccinatedQuarantineText,
     restaurantText,
     attractionsText,
-    weatherText,
     maskText,
     barText,
     publicTransportText,
