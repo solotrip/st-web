@@ -107,12 +107,7 @@ const DestinationContainer = () => {
           />
         </SettingsSection>
       </SheetWrapper.Content>
-      <SheetWrapper.Footer
-        onClick={onSubmit}
-        text="Go"
-        disabled={data.passports.length === -1}
-        previousEnabled={false}
-      />
+      <SheetWrapper.Footer onClick={onSubmit} text="Go" disabled={false} previousEnabled={false} />
     </SheetWrapper>
   )
 }
