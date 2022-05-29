@@ -17,7 +17,8 @@ import {
   Alert28Regular,
   CircleEdit24Regular,
   Heart28Regular,
-  List28Regular
+  List28Regular,
+  Search28Regular
 } from '@fluentui/react-icons'
 
 const Header = ({
@@ -224,7 +225,7 @@ const Header = ({
           className={styles.navigatorItem}
           activeClassName={styles.active}
         >
-          <List28Regular />Browse
+          <Search28Regular />Browse
         </NavLink>
         <NavLink
           to={{ pathname: '/wishlist', search: location.search }}
