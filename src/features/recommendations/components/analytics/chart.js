@@ -4,6 +4,7 @@ import { chartConfig } from './config'
 import Chart from 'components/chart/chart'
 import styles from './chart.module.scss'
 import { getImagePath, SUPPORTED_SIZES } from '../../../../utils/image'
+import { formatAsMonthDay } from 'utils/date'
 
 const AnalyticsChart = ({ recommendations, type, title, contentType, tabbed }) => {
   const chartData = recommendations.map((recommendation, k) => {
@@ -15,9 +16,19 @@ const AnalyticsChart = ({ recommendations, type, title, contentType, tabbed }) =
       : _get(recommendation, 'events[0].images[0]') &&
         getImagePath(`${recommendation.events[0].images[0]}`, SUPPORTED_SIZES['720'])
 
+    const dates =
+      recommendation.startDate && recommendation.endDate
+        ? recommendation.startDate !== recommendation.endDate
+          ? formatAsMonthDay(recommendation.startDate) +
+            ' - ' +
+            formatAsMonthDay(recommendation.endDate)
+          : formatAsMonthDay(recommendation.startDate)
+        : ' '
+
     return {
       name: '#' + (k + 1) + ' ' + recommendation.name,
       category: title,
+      dates: dates,
       min: min,
       max: max,
       bulletSettings: {

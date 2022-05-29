@@ -147,7 +147,7 @@ const Chart = ({
         cornerRadiusBR: 5,
         cornerRadiusBL: 5,
         strokeOpacity: 0,
-        tooltipText: '[bold]{name}[/]\n{category}\nmin: {min}\nmax:{max}',
+        tooltipText: '[bold]{name}[/]\n{dates}\n{category}\nmin: {min}\nmax:{max}',
         tooltipY: 0,
         minHeight: 5,
         templateField: 'columnConfig'
