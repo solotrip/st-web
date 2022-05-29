@@ -159,9 +159,16 @@ $title-size: 80px;
 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none;
+  
   flex-direction: row;
   justify-content: flex-start;
   
+  ::-webkit-scrollbar{
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb{
+    display: none;
+  }
 
  
 }
