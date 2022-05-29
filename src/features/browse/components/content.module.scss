@@ -163,10 +163,14 @@ $title-size: 80px;
   flex-direction: row;
   justify-content: flex-start;
   
-  ::-webkit-scrollbar{
+  &::-webkit-scrollbar{
     display: none;
   }
-  ::-webkit-scrollbar-thumb{
+  &::-webkit-scrollbar-thumb{
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track{
     display: none;
   }
 
