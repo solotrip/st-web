@@ -110,9 +110,11 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
             <Link className={styles.card} to={`recommendations?${qs.stringify(q)}`}>
               <div
                 className={styles.image}
-                style={{
-                  background: bgs[i % bgs.length]
-                }}
+                style={
+                  {
+                    // background: bgs[i % bgs.length]
+                  }
+                }
               />
               <div className={styles.content}>
                 <div className={styles.title}>
@@ -146,7 +148,7 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
                     )})`
                   }
                   : {
-                    background: bgs[i % bgs.length]
+                    // background: bgs[i % bgs.length]
                   }
               }
             />
