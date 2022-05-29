@@ -5,7 +5,8 @@ import {
   Alert28Regular,
   CircleEdit24Regular,
   Heart28Regular,
-  List28Regular
+  List28Regular,
+  Search28Regular
 } from '@fluentui/react-icons'
 
 import styles from './menu-bar.module.scss'
@@ -16,15 +17,9 @@ function MenuBar() {
 
   return (
     <div className={styles.menuBar}>
-      <MenuItem
-        to={{ pathname: '/browse', search: location.search }}
-        icon={<List28Regular />}
-      />
+      <MenuItem to={{ pathname: '/browse', search: location.search }} icon={<Search28Regular />} />
 
-      <MenuItem
-        to={{ pathname: '/wishlist', search: location.search }}
-        icon={<Heart28Regular />}
-      />
+      <MenuItem to={{ pathname: '/wishlist', search: location.search }} icon={<Heart28Regular />} />
       <MenuItem
         to={{ pathname: '/notifications', search: location.search }}
         icon={<Alert28Regular />}
