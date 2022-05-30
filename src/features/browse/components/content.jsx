@@ -51,7 +51,7 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
         <Icon icon="bx:map-pin" height="30" className={styles.tabIcon} />
         <span className={styles.tabName}>To Destination</span>
       </NavLink>
-      <NavLink
+      {/*<NavLink
         to={{ pathname: '/recommendations/destination', search: 'complete=true' }}
         className={styles.tabItem}
         //onClick={tabSelect}
@@ -59,23 +59,8 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
         <Icon icon="ic:round-compare-arrows" height="30" className={styles.tabIcon} />
         <span className={styles.tabName}>Compare</span>
       </NavLink>
-      <NavLink
-        to={{ pathname: '/recommendations' }}
-        className={styles.tabItem}
-        //onClick={tabSelect}
-      >
-        <Icon icon="fluent:data-histogram-24-regular" height="30" className={styles.tabIcon} />
-        <span className={styles.tabName}>Analytics</span>
-      </NavLink>
-      <NavLink
-        to={{ pathname: '/recommendations' }}
-        className={cn(styles.tabItem, { [styles.active]: activeTab === 'Map' })}
-        //onClick={tabSelect}
-      >
-        <Icon icon="fluent:map-24-regular" height="30" className={styles.tabIcon} />
-        <span className={styles.tabName}>Map</span>
-      </NavLink>
-      <NavLink
+
+     <NavLink
         to={{ pathname: '/recommendations' }}
         className={cn(styles.tabItem, { [styles.active]: activeTab === 'Map' })}
         //onClick={tabSelect}
@@ -98,7 +83,7 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
       >
         <Icon icon="fluent:filter-24-regular" height="30" className={styles.tabIcon} />
         <span className={styles.tabName}>Filters</span>
-      </NavLink>
+      </NavLink>*/}
     </div>
   )
 
