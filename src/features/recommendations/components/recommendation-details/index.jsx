@@ -151,15 +151,30 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
   const tabs = (
     <div className={styles.tabs}>
       <button className={styles.tabItem} onClick={tabSelect}>
-        <Icon icon="fluent:apps-list-24-regular" height="30" className={styles.tabIcon} />
+        <Icon icon="fluent:briefcase-24-regular" height="30" className={styles.tabIcon} />
         <span className={styles.tabName}>Overview</span>
+      </button>
+      <button className={styles.tabItem} onClick={tabSelect}>
+        <Icon icon="fluent:phone-status-bar-24-regular" height="30" className={styles.tabIcon} />
+        <span className={styles.tabName}>Status</span>
       </button>
       {uniqueEvents &&
         uniqueEvents.length > 0 && (
           <button className={styles.tabItem} onClick={tabSelect}>
-            <Icon icon="fluent:star-emphasis-24-regular" height="30" className={styles.tabIcon} />
+            <Icon icon="carbon:event" height="30" className={styles.tabIcon} />
             <span className={styles.tabName}>Events</span>
           </button>
+      )}
+      {(hotelPriceMin ||
+        hostelPriceMin ||
+        vacationRentalPriceMin ||
+        hotelPriceMax ||
+        hostelPriceMax ||
+        vacationRentalPriceMax) && (
+        <button className={styles.tabItem} onClick={tabSelect}>
+          <Icon icon="fluent:home-24-regular" height="30" className={styles.tabIcon} />
+          <span className={styles.tabName}>Acommodation</span>
+        </button>
       )}
       {colLabels && (
         <button className={styles.tabItem} onClick={tabSelect}>
@@ -178,11 +193,11 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
   )
 
   return (
-    <>
+    <div className={styles.page}>
       {areaHasImage && (
         <Image
           alt={name}
-          height={325}
+          height={400}
           srcsetProvided={true}
           src={getImagePath(`areas/${sid}`, SUPPORTED_SIZES['1080'])}
           srcset={getSourceSet(
@@ -281,7 +296,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           <div className={styles.description}>{description}</div>
         </div>
       )}
-      {/*tabs*/}
+
       <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
         {visaText && (
           <div className={styles.contentElement}>
@@ -959,7 +974,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           </a>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

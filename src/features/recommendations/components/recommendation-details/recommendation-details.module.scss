@@ -1,5 +1,12 @@
 @import 'styles/mixins';
 
+.page{
+  @include custom-scroll;
+  display: flex;
+  flex-direction: column;
+  
+}
+
 .recommendationCard {
   width: 100%;
   min-width: 322px;
@@ -631,7 +638,7 @@ background-color: red;
 .headerImage {
   margin-top: 0px;
   width: 100%;
-  height: 550px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   object-fit: cover;
@@ -678,7 +685,8 @@ background-color: red;
 
   padding-left: 16px;
   padding-right: 16px;
- margin-bottom: 70px;
+ margin-bottom: 10px;
+
 }
 
 .headerHolderCoverless{
@@ -703,33 +711,60 @@ background-color: red;
 
 
 .tabs {
-  margin-top: 50px;
-  margin-bottom: 8px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   width: 100%;
-  display: none;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+ 
+  
+  background-color: red;
 
-  @include xs-to-sm {
-    display: flex;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  
+  flex-direction: row;
+  justify-content: flex-start;
+  
+  &::-webkit-scrollbar{
+    display: none;
   }
+  &::-webkit-scrollbar-thumb{
+    display: none;
+  }
+
+  &::-webkit-scrollbar-track{
+    display: none;
+  }
+  
+
+ 
+
+ 
 }
 
 .tabItem {
   @include roboto-medium;
   background: transparent;
   font-size: 14px;
-  padding: 4px 2px;
+  padding: 0px 2px;
   max-height: 50px;
   text-align: center;
   border-radius: 16px;
   margin: 2px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   word-break: keep-all;
   flex: 0 0 auto;
+  
+  padding-left: 0px;
+  padding-right: 30px;
+  
+  
 
   @include xs {
     font-size: 14px;
@@ -739,6 +774,7 @@ background-color: red;
   }
 
   &.active {
+    color: rgb(64,176,233);
     //background: $card-content-recommendation;
     //background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
     //background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
@@ -749,10 +785,65 @@ background-color: red;
       //color: #f3f3f4;
       color: rgb(64,176,233);
       pointer-events: none;
+      
     }
 
     .tabName {
-      color: white;
+      color: rgb(64,176,233);
+      
+    }
+
+  }
+
+}
+
+.tabItemLast {
+  @include roboto-medium;
+  background: transparent;
+  font-size: 14px;
+  padding: 0px 2px;
+  max-height: 50px;
+  text-align: center;
+  border-radius: 16px;
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  flex: 0 0 auto;
+  
+  padding-left: 0px;
+  padding-right: 0px;
+
+  
+
+  @include xs {
+    font-size: 14px;
+    margin: 2px;
+    padding: 4px 2px;
+    flex-wrap: wrap;
+  }
+
+  &.active {
+    color: rgb(64,176,233);
+    //background: $card-content-recommendation;
+    //background-image: -webkit-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -o-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+    //background-image: -moz-linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+   // background-image: linear-gradient(90deg, #62b7dc, #ca67db, #df6967);
+
+    .tabIcon {
+      //color: #f3f3f4;
+      color: rgb(64,176,233);
+      pointer-events: none;
+      
+    }
+
+    .tabName {
+      color: rgb(64,176,233);
+      
     }
 
   }
@@ -762,20 +853,28 @@ background-color: red;
 .tabName {
   @include roboto-regular;
   margin: 2px 2px;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
-  color: #31afea;
-  display: none;
+  color: $browse-tab-color;
+  
+  //color: #31afea;
+  //display: none;
 }
 
 .tabIcon {
   //color: #31afea;
-  color: rgb(146,147,175);
+  color: $browse-tab-color;
   font-size: 24px;
   pointer-events: none;
   @include xs {
     display: none;
   }
+}
+
+.safetyMargin{
+  display: flex;
+  background-color: transparent;
+  height: 30px;
 }
 
 .country {
