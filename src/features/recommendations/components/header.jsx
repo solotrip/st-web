@@ -99,6 +99,12 @@ const Header = ({
     history.push({ pathname: '/recommendations', search: location.search })
   }
 
+  const openDatesDirectly = () => {
+    let locationreplacor = location.search
+    locationreplacor = locationreplacor.replace('&complete=true', '')
+    history.push({ pathname: '/recommendations/date', search: locationreplacor })
+  }
+
   return (
     <div
       className={cx(styles.navbarFixed, {
@@ -130,7 +136,7 @@ const Header = ({
           <>
             {trackIsVisible ? (
               query && Object.keys(query).length > 0 ? (
-                <button className={styles.editSearchBlue} onClick={openFilters}>
+                <button className={styles.editSearchBlue} onClick={openDatesDirectly}>
                   <Icon
                     icon="fluent:calendar-edit-24-regular"
                     height="30"

@@ -149,6 +149,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   const tabs = (
     <div className={styles.tabs}>
       <button className={styles.tabItem} onClick={tabSelect}>
