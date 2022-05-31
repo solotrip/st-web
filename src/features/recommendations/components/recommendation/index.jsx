@@ -16,7 +16,7 @@ import {
   Vaccine
 } from 'assets/images/new-icons'
 import useThemeState from 'utils/hooks/use-theme-state'
-import { formatAsMonthDay } from 'utils/date'
+import { formatAsMonthDay, formatTripDates } from 'utils/date'
 import { getEventImage, getEventSourceSet, processRecommendation } from 'utils/recommendation'
 import ContentLoader from 'react-content-loader'
 import { SUPPORTED_SIZES } from '../../../../utils/image'
@@ -37,6 +37,7 @@ const Recommendation = ({
     name,
     startDate,
     endDate,
+    duration,
     events,
     id,
     hotel_price_min: hotelPriceMin,
@@ -110,8 +111,7 @@ const Recommendation = ({
 
             <div className={styles.elementText}>
               <div className={styles.elementHighlight}>
-                {formatAsMonthDay(startDate)}
-                {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
+                {formatTripDates(startDate, endDate, duration)}
               </div>
             </div>
           </div>

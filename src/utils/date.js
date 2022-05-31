@@ -2,6 +2,7 @@ import _uniq from 'lodash/uniq'
 import dayjs from 'dayjs'
 import IsSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import relativeTime from 'dayjs/plugin/relativeTime'
+
 dayjs.extend(IsSameOrBefore)
 
 dayjs.extend(relativeTime)
@@ -21,10 +22,10 @@ export const getMonthsStartingFromToday = () => {
   const today = new Date()
   const monthIndex = today.getMonth()
   return [...months.slice(monthIndex), ...months.slice(0, monthIndex)]
-    .map((m, i) => ({
-      label: m,
-      value: (monthIndex + i) % 12 + 1
-    }))
+  .map((m, i) => ({
+    label: m,
+    value: (monthIndex + i) % 12 + 1
+  }))
 
 }
 
@@ -52,6 +53,18 @@ export const getTimeDiffString = date => {
 
 export const formatAsMonthDay = date => {
   return dayjs(date).format('MMM DD')
+}
+
+export const formatTripDates = (start, end, duration) => {
+  const startDate = dayjs(start)
+  const endDate = dayjs(end)
+
+  if (!endDate.isValid()) {
+    return `${formatDuration(duration)} in ${getMonth(startDate.toDate())}`
+  }
+
+  return formatAsMonthDay(startDate)
+    + (startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : '')
 }
 
 export const formatAsDate = date => {

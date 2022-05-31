@@ -24,7 +24,7 @@ import {
   Vaccine
 } from 'assets/images/new-icons'
 
-import { formatAsMonthDay, getMonthName } from 'utils/date'
+import { formatAsMonthDay, formatTripDates, getMonthName } from 'utils/date'
 import {
   getDefaultImage,
   getEventImage,
@@ -43,6 +43,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     sid,
     startDate,
     endDate,
+    duration,
     events,
     hotel_price_min: hotelPriceMin,
     hotel_price_max: hotelPriceMax,
@@ -246,8 +247,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               <Calendar />
             </div>
             <div className={styles.elementText3}>
-              {formatAsMonthDay(startDate)}
-              {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
+              {formatTripDates(startDate, endDate, duration)}
             </div>
           </div>
           <div className={styles.description}>{description}</div>
