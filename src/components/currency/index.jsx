@@ -7,9 +7,11 @@ const Currency = ({ value, decimalPlaces = 0 }) => {
   const { exchangeRates, loading } = useSelector(exchangeRatesSelector)
   return loading
     ? '...'
-    : exchangeRates[currency] && value
-      ? `${(exchangeRates[currency] * value).toFixed(decimalPlaces)} ${currency}`
-      : ' '
+    : value === 0
+      ? `0 ${currency}`
+      : exchangeRates[currency] && value
+        ? `${(exchangeRates[currency] * value).toFixed(decimalPlaces)} ${currency}`
+        : ' '
 }
 
 export default Currency
