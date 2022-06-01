@@ -192,7 +192,7 @@ const Recommendation = ({
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-                Hostel prices range from&nbsp;
+              Budget Inn prices range from&nbsp;
                 <div className={styles.elementHighlight}>
                   <Currency value={hostelPriceMin} />
                 </div>
@@ -210,7 +210,7 @@ const Recommendation = ({
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average hostel price is&nbsp;
+                  Average Budget Inn price is&nbsp;
                   <div className={styles.elementHighlight}>
                     <Currency value={hostelPriceMin} />
                   </div>
