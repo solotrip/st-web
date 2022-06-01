@@ -351,13 +351,22 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 {' '}
                 <Calendar />
               </div>
-              <div className={styles.elementText}>
-                Most travelers spend &nbsp;
-                <div className={styles.elementHighlight}>{tripdays.min_days}</div>
-                &nbsp;-&nbsp;
-                <div className={styles.elementHighlight}>{tripdays.max_days}</div>
-                days.
-              </div>
+              {tripdays.min_days !== tripdays.max_days && (
+                <div className={styles.elementText}>
+                  Most travelers spend &nbsp;
+                  <div className={styles.elementHighlight}>{tripdays.min_days}</div>
+                  &nbsp;-&nbsp;
+                  <div className={styles.elementHighlight}>{tripdays.max_days}</div>
+                  days.
+                </div>
+              )}
+              {tripdays.min_days === tripdays.max_days && (
+                <div className={styles.elementText}>
+                  Most travelers spend &nbsp;
+                  <div className={styles.elementHighlight}>{tripdays.min_days}</div>
+                  &nbsp;days.
+                </div>
+              )}
             </div>
         )}
         {tripdays &&
