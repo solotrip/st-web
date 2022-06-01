@@ -327,8 +327,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               </div>
             </div>
         )}
-        {humidity &&
-          rainyDays && (
+        {typeof humidity !== 'undefined' &&
+          typeof rainyDays !== 'undefined' && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
@@ -345,7 +345,8 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         )}
 
         {tripdays &&
-          (tripdays.min_days && tripdays.max_days) && (
+          tripdays.min_days &&
+          tripdays.max_days && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
