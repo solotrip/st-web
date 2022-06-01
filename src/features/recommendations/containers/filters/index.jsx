@@ -10,14 +10,22 @@ import Filters from '../../components/filters'
 import { RECENT_FILTERS_CATEGORY, RECENT_FILTERS_COUNT } from 'constants/index'
 import SettingsSection from 'components/settings-section'
 import { fetchRecommendations } from '../../slice'
-import Select from 'react-select'
+import Select, { createFilter } from 'react-select'
 import styles from './filters.module.scss'
 
 import countries from 'assets/data/countries.json'
+import areas from 'assets/data/areas.json'
+import CustomOption from 'components/custom-option'
+import CustomMenuList from '../destination/MenuList.js'
 
 const options = countries.map(c => ({
   label: `${c.flag} ${c.name}`,
   value: c.ISO
+}))
+
+const areaOptions = areas.map(c => ({
+  label: `${c.name}, ${c.flag} ${c.country}`,
+  value: c.sid
 }))
 
 const FiltersContainer = () => {
@@ -30,6 +38,11 @@ const FiltersContainer = () => {
     filters: query.filters
       ? _zipObject(query.filters.map(q => q.id), query.filters.map(q => q.variables || true))
       : {}
+  })
+
+  const [areaData, setAreaData] = useState({
+    ...query,
+    filters: query.filters
   })
 
   const onUpdate = useCallback(
@@ -68,6 +81,45 @@ const FiltersContainer = () => {
     [setData]
   )
 
+  const onUpdateDestinations = useCallback(
+    payload => {
+      console.log(areaData)
+      if (payload !== [] && payload.length && payload.length > 0) {
+        setAreaData(prevData => ({
+          ...prevData,
+          filters: {
+            ...prevData.filters,
+            0: { id: 'a', variables: { areaSids: payload.map(p => p.value) } }
+          }
+        }))
+      } else if (
+        payload &&
+        payload.length === 0 &&
+        areaData &&
+        areaData.filters &&
+        areaData.filters[0] &&
+        !areaData.filters[0].variables.areaSids
+      ) {
+        setAreaData(prevData => ({
+          ...prevData,
+          filters: {
+            ...prevData.filters,
+            0: { id: undefined }
+          }
+        }))
+      } else if (payload && payload.length === 0) {
+        setAreaData(prevData => ({
+          ...prevData,
+          filters: {
+            ...prevData.filters,
+            0: { id: undefined }
+          }
+        }))
+      }
+    },
+    [setAreaData]
+  )
+
   const onSubmit = () => {
     dispatch(fetchRecommendations(query))
     history.push({
@@ -79,7 +131,8 @@ const FiltersContainer = () => {
           .map(k => ({
             id: k,
             variables: data.filters[k] === true ? undefined : data.filters[k]
-          }))
+          })),
+        ...areaData
       })
     })
     if (Object.keys(data.filters) === [] || Object.keys(data.filters).length === 0) {
@@ -110,6 +163,18 @@ const FiltersContainer = () => {
         ? data.filters.c.countryCodes.includes(o.value)
         : null
   )
+
+  const areaValue = areaOptions.filter(
+    o =>
+      areaData.filters &&
+      areaData.filters[0] &&
+      areaData.filters[0].variables &&
+      areaData.filters[0].variables.areaSids
+        ? areaData.filters[0].variables.areaSids.includes(o.value)
+        : //: query.filters && query.filters[0]
+      //  ? query.filters[0].variables.areaSids.includes(o.value)
+        null
+  )
   return (
     <SheetWrapper>
       <SheetWrapper.Content>
@@ -126,6 +191,8 @@ const FiltersContainer = () => {
           />
           <span className={styles.country}>Countries</span>
           <Select
+            filterOption={createFilter({ ignoreAccents: false })}
+            components={{ Option: CustomOption, MenuList: CustomMenuList }}
             options={options}
             value={value}
             isMulti
@@ -133,6 +200,19 @@ const FiltersContainer = () => {
             classNamePrefix="rs"
             onChange={onUpdateCountries}
             placeholder="Select countries..."
+          />
+          <div className={styles.space} />
+          <span className={styles.country}>Destinations</span>
+          <Select
+            filterOption={createFilter({ ignoreAccents: false })}
+            components={{ Option: CustomOption, MenuList: CustomMenuList }}
+            options={areaOptions}
+            value={areaValue}
+            isMulti
+            className="pulfy-select"
+            classNamePrefix="rs"
+            onChange={onUpdateDestinations}
+            placeholder="Select destinations..."
           />
         </SettingsSection>
       </SheetWrapper.Content>
