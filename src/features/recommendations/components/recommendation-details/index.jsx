@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Card, Currency, Image, Temperature } from 'components'
 
 import styles from './recommendation-details.module.scss'
@@ -37,6 +37,7 @@ import useThemeState from 'utils/hooks/use-theme-state'
 const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted }) => {
   const [appTheme] = useThemeState()
   const history = useHistory()
+  const location = useLocation()
   const {
     id,
     name,
@@ -91,6 +92,14 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
       pathname: `/recommendations/r/${id}/share`,
       search: query.queryString
     })
+  }
+
+  const goBack = () => {
+    if (location.pathname.includes('/r/')) {
+      history.replace({ pathname: '/recommendations', search: location.search })
+    } else {
+      history.push('/browse')
+    }
   }
 
   const overviewRef = useRef(null)
@@ -214,6 +223,14 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
 
       <div className={styles.headerHolder}>
         <div className={styles.oneRow}>
+          <button className={styles.trackButton} onClick={goBack}>
+            <Icon
+              icon="fluent:ios-arrow-ltr-24-regular"
+              color="#3cafeb"
+              height="30"
+              className={styles.bell}
+            />
+          </button>
           <h1 className={styles.title}>
             {recommendation ? name : 'Go back to your recommendations'}
           </h1>
