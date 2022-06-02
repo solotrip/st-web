@@ -87,7 +87,7 @@ const DestinationContainer = () => {
   )
 
   return (
-    <SheetWrapper snapPoints={[500]}>
+    <SheetWrapper>
       <SheetWrapper.Content>
         <SettingsSection
           title="Destination"
