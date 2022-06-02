@@ -253,20 +253,25 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             <BsBoxArrowUp className={styles.shareIcon} />
           </button>
         </div>
-        <div className={styles.country}>
-          {' '}
-          <div className={styles.countryElement}>{country.emoji_flag}</div>
-          &nbsp;
-          <div>{country.name}</div>
-        </div>{' '}
-        <div ref={overviewRef} className={styles.contentElement3}>
-          <div className={styles.elementIcon}>
+        <div className={styles.holdzo}>
+          <div className={styles.country}>
             {' '}
-            <Calendar />
+            <div className={styles.countryElement}>{country.emoji_flag}</div>
+            &nbsp;
+            <div>{country.name}</div>
+          </div>{' '}
+          <div ref={overviewRef} className={styles.contentElement3}>
+            <div className={styles.elementIcon}>
+              {' '}
+              <Calendar />
+            </div>
+            <div className={styles.elementText3}>
+              {formatTripDates(startDate, endDate, duration)}
+            </div>
           </div>
-          <div className={styles.elementText3}>{formatTripDates(startDate, endDate, duration)}</div>
+          <div className={styles.description}>{description}</div>
         </div>
-        <div className={styles.description}>{description}</div>
+
         <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
           {visaText && (
             <div className={styles.contentElement}>
