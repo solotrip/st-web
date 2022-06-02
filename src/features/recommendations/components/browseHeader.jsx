@@ -114,9 +114,9 @@ const BrowseHeader = ({
         })}
       >
         <div className={styles.actions}>
-          <Link to="/browse" className={styles.headerLink}>
+          <a href="https://pulfy.com" className={styles.headerLink}>
             <div className={styles.headerLogo} />
-          </Link>
+          </a>
           {(alwaysShowBack || backIsVisible) && (
             <button
               className={cx(styles.trackButton, {
