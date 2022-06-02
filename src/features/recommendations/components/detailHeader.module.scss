@@ -12,21 +12,15 @@
    -webkit-tap-highlight-color: transparent;
    display: flex;
    flex-direction: row;
+   @include xs-to-md{
+       display: none;
+   }
 
 }
 
 .navbarFixed {
   z-index: 3;
   height: 72px;
-
-  @include xs-to-md {
-    height:52px;
-  }
-
-  @include xs {
-    height:52px;
-  }
-  
   width: 100%;
   outline: none;
    box-shadow: none;
@@ -39,14 +33,10 @@
    -moz-box-shadow: $header-shadow 0 6px 4px -6px;
    box-shadow: $header-shadow 0 6px 4px -6px;
    justify-content: space-between;
-align-content: center;
+    align-content: center;
 @include xs-to-md{
   display: none;
 }
-
-
-
-
 }
 
 .navbarFixedIos {
@@ -64,7 +54,10 @@ align-content: center;
    box-shadow: $header-shadow 0 6px 4px -6px;
    justify-content: space-between;
 align-content: center;
-
+@include xs-to-md{
+    display: none;
+  }
+  
 
 }
 

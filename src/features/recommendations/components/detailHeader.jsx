@@ -10,7 +10,7 @@ import { addToTracked, removeFromTracked, trackSelector } from 'features/track/s
 import { useQuery } from 'utils/hooks/use-query'
 import { NavLink } from 'react-router-dom'
 
-import styles from './header.module.scss'
+import styles from './detailHeader.module.scss'
 import { isGuestSelector } from 'features/profile/slice'
 
 import {
@@ -142,7 +142,7 @@ const DetailHeader = ({
                     height="30"
                     className={styles.tabIcon}
                   />
-                  <div className={styles.editSearchBlueText}>Edit your Search</div>
+                  <div className={styles.editSearchBlueText}>Edit your Search </div>
                 </button>
               ) : (
                 <button
