@@ -211,762 +211,715 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
           isRounded={false}
         />
       )}
-      {areaHasImage ? (
-        <div className={styles.headerHolder}>
-          <div className={styles.oneRow}>
-            <h1 className={styles.title}>
-              {recommendation ? name : 'Go back to your recommendations'}
-            </h1>
-            <button
-              className={styles.heart}
-              onClick={() =>
-                toggleWishlist({
-                  query: query.query,
-                  recommendation
-                })
-              }
-            >
-              {wishlisted ? (
-                <BsHeartFill className={styles.likeIconFilled} />
-              ) : (
-                <BsHeart className={styles.likeIcon} />
-              )}
-            </button>
-            <button onClick={openShare} className={styles.share}>
-              <BsBoxArrowUp className={styles.shareIcon} />
-            </button>
-          </div>
-          <div className={styles.country}>
-            {' '}
-            <div className={styles.countryElement}>{country.emoji_flag}</div>
-            &nbsp;
-            <div>{country.name}</div>
-          </div>{' '}
-          <div ref={overviewRef} className={styles.contentElement3}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Calendar />
-            </div>
-            <div className={styles.elementText3}>
-              {formatTripDates(startDate, endDate, duration)}
-            </div>
-          </div>
-          <div className={styles.description}>{description}</div>
-        </div>
-      ) : (
-        <div className={styles.headerHolderCoverless}>
-          <div className={styles.oneRow}>
-            <h1 className={styles.title}>
-              {recommendation ? name : 'Go back to your recommendations'}
-            </h1>
-            <button
-              className={styles.heart}
-              onClick={() =>
-                toggleWishlist({
-                  query: query.query,
-                  recommendation
-                })
-              }
-            >
-              {wishlisted ? (
-                <BsHeartFill className={styles.likeIconFilled} />
-              ) : (
-                <BsHeart className={styles.likeIcon} />
-              )}
-            </button>
-            <button onClick={openShare} className={styles.share}>
-              <BsBoxArrowUp className={styles.shareIcon} />
-            </button>
-          </div>
-          <div className={styles.country}>
-            {' '}
-            <div className={styles.countryElement}>{country.emoji_flag}</div>
-            &nbsp;
-            <div>{country.name}</div>
-          </div>{' '}
-          <div ref={overviewRef} className={styles.contentElement3}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Calendar />
-            </div>
-            <div className={styles.elementText3}>
-              {formatAsMonthDay(startDate)}
-              {startDate !== endDate ? ` - ${formatAsMonthDay(endDate)}` : ''}{' '}
-            </div>
-          </div>
-          <div className={styles.description}>{description}</div>
-        </div>
-      )}
 
-      <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
-        {visaText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Passport />
-            </div>
-            <div className={styles.elementText}>{visaText}</div>
+      <div className={styles.headerHolder}>
+        <div className={styles.oneRow}>
+          <h1 className={styles.title}>
+            {recommendation ? name : 'Go back to your recommendations'}
+          </h1>
+          <button
+            className={styles.heart}
+            onClick={() =>
+              toggleWishlist({
+                query: query.query,
+                recommendation
+              })
+            }
+          >
+            {wishlisted ? (
+              <BsHeartFill className={styles.likeIconFilled} />
+            ) : (
+              <BsHeart className={styles.likeIcon} />
+            )}
+          </button>
+          <button onClick={openShare} className={styles.share}>
+            <BsBoxArrowUp className={styles.shareIcon} />
+          </button>
+        </div>
+        <div className={styles.country}>
+          {' '}
+          <div className={styles.countryElement}>{country.emoji_flag}</div>
+          &nbsp;
+          <div>{country.name}</div>
+        </div>{' '}
+        <div ref={overviewRef} className={styles.contentElement3}>
+          <div className={styles.elementIcon}>
+            {' '}
+            <Calendar />
           </div>
-        )}
-        {minTemp &&
-          maxTemp && (
+          <div className={styles.elementText3}>{formatTripDates(startDate, endDate, duration)}</div>
+        </div>
+        <div className={styles.description}>{description}</div>
+        <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
+          {visaText && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Cloud />
+                <Passport />
               </div>
-              <div className={styles.elementText}>
-                min &nbsp;
-                <div className={styles.elementHighlight}>
-                  <Temperature value={minTemp} />{' '}
+              <div className={styles.elementText}>{visaText}</div>
+            </div>
+          )}
+          {minTemp &&
+            maxTemp && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Cloud />
                 </div>
-                , max &nbsp;
-                <div className={styles.elementHighlight}>
-                  <Temperature value={maxTemp} />
+                <div className={styles.elementText}>
+                  min &nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Temperature value={minTemp} />{' '}
+                  </div>
+                  , max &nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Temperature value={maxTemp} />
+                  </div>
                 </div>
               </div>
-            </div>
-        )}
-        {typeof humidity !== 'undefined' &&
-          typeof rainyDays !== 'undefined' && (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <Cloud />
+          )}
+          {typeof humidity !== 'undefined' &&
+            typeof rainyDays !== 'undefined' && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Cloud />
+                </div>
+                <div className={styles.elementText}>
+                  Humidity &nbsp;
+                  <div className={styles.elementHighlight}>{humidity}%</div>
+                  , Rainy days: &nbsp;
+                  <div className={styles.elementHighlight}>{rainyDays} </div>{' '}
+                  {rainyDays === '1' ? 'day/month' : 'days/month'}
+                </div>
               </div>
-              <div className={styles.elementText}>
-                Humidity &nbsp;
-                <div className={styles.elementHighlight}>{humidity}%</div>
-                , Rainy days: &nbsp;
-                <div className={styles.elementHighlight}>{rainyDays} </div>{' '}
-                {rainyDays === '1' ? 'day/month' : 'days/month'}
-              </div>
-            </div>
-        )}
+          )}
 
-        {tripdays &&
-          tripdays.min_days &&
-          tripdays.max_days && (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <Calendar />
+          {tripdays &&
+            tripdays.min_days &&
+            tripdays.max_days && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Calendar />
+                </div>
+                {tripdays.min_days !== tripdays.max_days && (
+                  <div className={styles.elementText}>
+                    Most travelers spend &nbsp;
+                    <div className={styles.elementHighlight}>{tripdays.min_days}</div>
+                    &nbsp;-&nbsp;
+                    <div className={styles.elementHighlight}>{tripdays.max_days}</div>
+                    days.
+                  </div>
+                )}
+                {tripdays.min_days === tripdays.max_days && (
+                  <div className={styles.elementText}>
+                    Most travelers spend &nbsp;
+                    <div className={styles.elementHighlight}>{tripdays.min_days}</div>
+                    &nbsp;days.
+                  </div>
+                )}
               </div>
-              {tripdays.min_days !== tripdays.max_days && (
+          )}
+          {tripdays &&
+            ((!tripdays.min_days || !tripdays.max_days) && tripdays.ideal_days) && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Calendar />
+                </div>
                 <div className={styles.elementText}>
                   Most travelers spend &nbsp;
-                  <div className={styles.elementHighlight}>{tripdays.min_days}</div>
-                  &nbsp;-&nbsp;
-                  <div className={styles.elementHighlight}>{tripdays.max_days}</div>
-                  days.
+                  <div className={styles.elementHighlight}>{tripdays.ideal_days}</div>
+                  &nbsp;-&nbsp; days.
                 </div>
-              )}
-              {tripdays.min_days === tripdays.max_days && (
-                <div className={styles.elementText}>
-                  Most travelers spend &nbsp;
-                  <div className={styles.elementHighlight}>{tripdays.min_days}</div>
-                  &nbsp;days.
-                </div>
-              )}
-            </div>
-        )}
-        {tripdays &&
-          ((!tripdays.min_days || !tripdays.max_days) && tripdays.ideal_days) && (
+              </div>
+          )}
+          {maskText && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Calendar />
+                <Mask />
               </div>
-              <div className={styles.elementText}>
-                Most travelers spend &nbsp;
-                <div className={styles.elementHighlight}>{tripdays.ideal_days}</div>
-                &nbsp;-&nbsp; days.
-              </div>
+              <div className={styles.elementText}>{maskText}</div>
             </div>
-        )}
-        {maskText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Mask />
-            </div>
-            <div className={styles.elementText}>{maskText}</div>
-          </div>
-        )}
-        {vaccinatedTestText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Vaccine />
-            </div>
-            <div className={styles.elementText}>{vaccinatedTestText}</div>
-          </div>
-        )}
-        {unvaccinatedTestText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Vaccine />
-            </div>
-            <div className={styles.elementText}>{unvaccinatedTestText}</div>
-          </div>
-        )}
-        {vaccinatedQuarantineText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Quarantine />
-            </div>
-            <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
-          </div>
-        )}
-        {unvaccinatedQuarantineText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Quarantine />
-            </div>
-            <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
-          </div>
-        )}
-
-        {recommendation['country'] &&
-          recommendation['country']['restrictions'] &&
-          recommendation['country']['restrictions']['Health Check Up on Arrival'] && (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <Quarantine />
-              </div>
-              <div className={styles.elementText}>
-                {recommendation['country']['restrictions']['Health Check Up on Arrival']}
-              </div>
-            </div>
-        )}
-        {recommendation['country'] &&
-          recommendation['country']['restrictions'] &&
-          recommendation['country']['restrictions']['Covid 19 negative certificate'] && (
+          )}
+          {vaccinatedTestText && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
                 <Vaccine />
               </div>
-              <div className={styles.elementText}>
-                {recommendation['country']['restrictions']['Covid 19 negative certificate']}
-              </div>
+              <div className={styles.elementText}>{vaccinatedTestText}</div>
             </div>
-        )}
-        {recommendation['country']['restrictions']['Official links'] &&
-          recommendation['country']['restrictions']['Official links'].length > 0 &&
-          recommendation['country']['restrictions']['Official links'][0].link && (
-            <button
-              className={styles.slideText8}
-              onClick={() =>
-                openInNewTab(recommendation['country']['restrictions']['Official links'][0].link)
-              }
-            >
-              Check Information on Official Website
-            </button>
-        )}
-      </Card>
-
-      <Card title="Status" type="Overview" className={styles.recommendationCard}>
-        {barText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Attraction />
-            </div>
-            <div className={styles.elementText}>{barText}</div>
-          </div>
-        )}
-        {restaurantText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Attraction />
-            </div>
-            <div className={styles.elementText}>{restaurantText}</div>
-          </div>
-        )}
-        {attractionsText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Attraction />
-            </div>
-            <div className={styles.elementText}>{attractionsText}</div>
-          </div>
-        )}
-        {publicTransportText && (
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Transport />
-            </div>
-            <div className={styles.elementText}>{publicTransportText}</div>
-          </div>
-        )}
-      </Card>
-
-      {uniqueEvents && uniqueEvents.length > 0 ? (
-        <Card title="Events" type="Major" className={styles.recommendationCard}>
-          <div ref={eventsRef} className={styles.events}>
-            {uniqueEvents.map(event => (
-              <div key={`event-${event.eid}`} className={styles.slide2}>
-                <Image
-                  src={getEventImage(event, appTheme === 'light', SUPPORTED_SIZES['1080'])}
-                  srcsetProvided
-                  srcset={getEventSourceSet(event, appTheme === 'light')}
-                  className={styles.slideImageRow}
-                  alt={event.title}
-                  key={event.eid}
-                />
-                <div className={styles.sideContent}>
-                  <div className={styles.sideContentTitle}>{event.title}</div>
-                  <div className={styles.sideContentSubtitle}>
-                    {formatAsMonthDay(event.start)}
-                    {event.start !== event.end ? ` - ${formatAsMonthDay(event.end)}` : ''}{' '}
-                  </div>
-                  {event.url && (
-                    <a href={event.url} className={styles.sideContentSubtitle}>
-                      Visit Official Website
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
-      ) : null}
-      {(hotelPriceMin ||
-        hostelPriceMin ||
-        vacationRentalPriceMin ||
-        hotelPriceMax ||
-        hostelPriceMax ||
-        vacationRentalPriceMax) && (
-        <Card title="Accommodation" type="Costs" className={styles.recommendationCard}>
-          {(hotelPriceMin || hotelPriceMax) && hotelPriceMin !== hotelPriceMax ? (
+          )}
+          {unvaccinatedTestText && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
                 {' '}
-                <Accommodation />
+                <Vaccine />
               </div>
-              <div className={styles.elementText}>
-                Hotel prices range from &nbsp;
-                <div className={styles.elementHighlight}>
-                  <Currency value={hotelPriceMin} />{' '}
-                </div>
-                &nbsp;to&nbsp;
-                <div className={styles.elementHighlight}>
-                  <Currency value={hotelPriceMax} />
-                </div>
-                .
-              </div>
+              <div className={styles.elementText}>{unvaccinatedTestText}</div>
             </div>
-          ) : (
-            Math.floor(hotelPriceMin) !== 0 && (
+          )}
+          {vaccinatedQuarantineText && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Quarantine />
+              </div>
+              <div className={styles.elementText}>{vaccinatedQuarantineText}</div>
+            </div>
+          )}
+          {unvaccinatedQuarantineText && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Quarantine />
+              </div>
+              <div className={styles.elementText}>{unvaccinatedQuarantineText}</div>
+            </div>
+          )}
+
+          {recommendation['country'] &&
+            recommendation['country']['restrictions'] &&
+            recommendation['country']['restrictions']['Health Check Up on Arrival'] && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Quarantine />
+                </div>
+                <div className={styles.elementText}>
+                  {recommendation['country']['restrictions']['Health Check Up on Arrival']}
+                </div>
+              </div>
+          )}
+          {recommendation['country'] &&
+            recommendation['country']['restrictions'] &&
+            recommendation['country']['restrictions']['Covid 19 negative certificate'] && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  {' '}
+                  <Vaccine />
+                </div>
+                <div className={styles.elementText}>
+                  {recommendation['country']['restrictions']['Covid 19 negative certificate']}
+                </div>
+              </div>
+          )}
+          {recommendation['country']['restrictions']['Official links'] &&
+            recommendation['country']['restrictions']['Official links'].length > 0 &&
+            recommendation['country']['restrictions']['Official links'][0].link && (
+              <button
+                className={styles.slideText8}
+                onClick={() =>
+                  openInNewTab(recommendation['country']['restrictions']['Official links'][0].link)
+                }
+              >
+                Check Information on Official Website
+              </button>
+          )}
+        </Card>
+        <Card title="Status" type="Overview" className={styles.recommendationCard}>
+          {barText && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Attraction />
+              </div>
+              <div className={styles.elementText}>{barText}</div>
+            </div>
+          )}
+          {restaurantText && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Attraction />
+              </div>
+              <div className={styles.elementText}>{restaurantText}</div>
+            </div>
+          )}
+          {attractionsText && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Attraction />
+              </div>
+              <div className={styles.elementText}>{attractionsText}</div>
+            </div>
+          )}
+          {publicTransportText && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                {' '}
+                <Transport />
+              </div>
+              <div className={styles.elementText}>{publicTransportText}</div>
+            </div>
+          )}
+        </Card>
+        {uniqueEvents && uniqueEvents.length > 0 ? (
+          <Card title="Events" type="Major" className={styles.recommendationCard}>
+            <div ref={eventsRef} className={styles.events}>
+              {uniqueEvents.map(event => (
+                <div key={`event-${event.eid}`} className={styles.slide2}>
+                  <Image
+                    src={getEventImage(event, appTheme === 'light', SUPPORTED_SIZES['1080'])}
+                    srcsetProvided
+                    srcset={getEventSourceSet(event, appTheme === 'light')}
+                    className={styles.slideImageRow}
+                    alt={event.title}
+                    key={event.eid}
+                  />
+                  <div className={styles.sideContent}>
+                    <div className={styles.sideContentTitle}>{event.title}</div>
+                    <div className={styles.sideContentSubtitle}>
+                      {formatAsMonthDay(event.start)}
+                      {event.start !== event.end ? ` - ${formatAsMonthDay(event.end)}` : ''}{' '}
+                    </div>
+                    {event.url && (
+                      <a href={event.url} className={styles.sideContentSubtitle}>
+                        Visit Official Website
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        ) : null}
+        {(hotelPriceMin ||
+          hostelPriceMin ||
+          vacationRentalPriceMin ||
+          hotelPriceMax ||
+          hostelPriceMax ||
+          vacationRentalPriceMax) && (
+          <Card title="Accommodation" type="Costs" className={styles.recommendationCard}>
+            {(hotelPriceMin || hotelPriceMax) && hotelPriceMin !== hotelPriceMax ? (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Hotel price is&nbsp;
+                  Hotel prices range from &nbsp;
                   <div className={styles.elementHighlight}>
-                    <Currency value={hotelPriceMin} />
+                    <Currency value={hotelPriceMin} />{' '}
+                  </div>
+                  &nbsp;to&nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Currency value={hotelPriceMax} />
                   </div>
                   .
                 </div>
               </div>
-            )
-          )}
-          {(hostelPriceMin || hostelPriceMax) && hostelPriceMin !== hostelPriceMax ? (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <Accommodation />
-              </div>
-              <div className={styles.elementText}>
-                Budget Inn prices range from&nbsp;
-                <div className={styles.elementHighlight}>
-                  <Currency value={hostelPriceMin} />
+            ) : (
+              Math.floor(hotelPriceMin) !== 0 && (
+                <div className={styles.contentElement}>
+                  <div className={styles.elementIcon}>
+                    {' '}
+                    <Accommodation />
+                  </div>
+                  <div className={styles.elementText}>
+                    Average Hotel price is&nbsp;
+                    <div className={styles.elementHighlight}>
+                      <Currency value={hotelPriceMin} />
+                    </div>
+                    .
+                  </div>
                 </div>
-                &nbsp;to&nbsp;
-                <div className={styles.elementHighlight}>
-                  <Currency value={hostelPriceMax} />{' '}
-                </div>
-                .
-              </div>
-            </div>
-          ) : (
-            Math.floor(hostelPriceMin) !== 0 && (
+              )
+            )}
+            {(hostelPriceMin || hostelPriceMax) && hostelPriceMin !== hostelPriceMax ? (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average Budget Inn price is&nbsp;
+                  Budget Inn prices range from&nbsp;
                   <div className={styles.elementHighlight}>
                     <Currency value={hostelPriceMin} />
                   </div>
+                  &nbsp;to&nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Currency value={hostelPriceMax} />{' '}
+                  </div>
                   .
                 </div>
               </div>
-            )
-          )}
-          {(vacationRentalPriceMin || vacationRentalPriceMax) &&
-          vacationRentalPriceMin !== vacationRentalPriceMax ? (
-            <div className={styles.contentElement}>
-              <div className={styles.elementIcon}>
-                {' '}
-                <Accommodation />
-              </div>
-              <div className={styles.elementText}>
-                Vacation rental prices range from&nbsp;
-                <div className={styles.elementHighlight}>
-                  <Currency value={vacationRentalPriceMin} />
-                </div>
-                &nbsp;to &nbsp;
-                <div className={styles.elementHighlight}>
-                  <Currency value={vacationRentalPriceMax} />
-                </div>
-                .
-              </div>
-            </div>
             ) : (
-              Math.floor(vacationRentalPriceMin) !== 0 && (
+              Math.floor(hostelPriceMin) !== 0 && (
+                <div className={styles.contentElement}>
+                  <div className={styles.elementIcon}>
+                    {' '}
+                    <Accommodation />
+                  </div>
+                  <div className={styles.elementText}>
+                    Average Budget Inn price is&nbsp;
+                    <div className={styles.elementHighlight}>
+                      <Currency value={hostelPriceMin} />
+                    </div>
+                    .
+                  </div>
+                </div>
+              )
+            )}
+            {(vacationRentalPriceMin || vacationRentalPriceMax) &&
+            vacationRentalPriceMin !== vacationRentalPriceMax ? (
               <div className={styles.contentElement}>
                 <div className={styles.elementIcon}>
                   {' '}
                   <Accommodation />
                 </div>
                 <div className={styles.elementText}>
-                  Average vacation rental price is &nbsp;
+                  Vacation rental prices range from&nbsp;
                   <div className={styles.elementHighlight}>
                     <Currency value={vacationRentalPriceMin} />
+                  </div>
+                  &nbsp;to &nbsp;
+                  <div className={styles.elementHighlight}>
+                    <Currency value={vacationRentalPriceMax} />
                   </div>
                   .
                 </div>
               </div>
-              )
-            )}
-        </Card>
-      )}
-      {colLabels && (
-        <Card title="Cost of Living" type="Costs" className={styles.recommendationCard}>
-          <div ref={costsRef}>
-            {colLabels.meal_cheap_restaurant_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  <div className={styles.elementIcon5}>
+              ) : (
+                Math.floor(vacationRentalPriceMin) !== 0 && (
+                <div className={styles.contentElement}>
+                  <div className={styles.elementIcon}>
                     {' '}
-                    <Food className={styles.food} />
+                    <Accommodation />
                   </div>
-                  <div>Meal at Cheap Restaurant</div>
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.meal_cheap_restaurant_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.meal_mid_range_restaurant_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Food />
+                  <div className={styles.elementText}>
+                    Average vacation rental price is &nbsp;
+                    <div className={styles.elementHighlight}>
+                      <Currency value={vacationRentalPriceMin} />
+                    </div>
+                    .
                   </div>
-                  Meal at Luxury Restaurant
                 </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.meal_mid_range_restaurant_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.mcmeal_at_mcdonalds_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Food />
-                  </div>
-                  McDonalds Menu
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.mcmeal_at_mcdonalds_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.beer_at_restaurant_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Food />
-                  </div>
-                  Beer at Restaurant
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.beer_at_restaurant_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.public_transport_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Transport />
-                  </div>
-                  Public Transport
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.public_transport_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.beer_from_market_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Food />
-                  </div>
-                  Beer from Market
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.beer_from_market_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.montly_transport_pass_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Transport />
-                  </div>
-                  Monthly Transport Pass
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.montly_transport_pass_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.gasoline_1_liter_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Transport />
-                  </div>
-                  Gasoline 1 Liter
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.gasoline_1_liter_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.prepaid_card_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <EventsIcon />
-                  </div>
-                  Prepaid Card
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.prepaid_card_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.internet_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Star />
-                  </div>
-                  Internet
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {costOfLivingReturner(colLabels.internet_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.cinema_ticket_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Star />
-                  </div>
-                  Cinema Ticket
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {' '}
-                  {costOfLivingReturner(colLabels.cinema_ticket_cost_label)}
-                </div>
-              </div>
-            )}
-            {colLabels.taxi_1km_cost_label && (
-              <div className={styles.contentElement2}>
-                <div className={styles.elementText2}>
-                  {' '}
-                  <div className={styles.elementIcon5}>
-                    {' '}
-                    <Transport />
-                  </div>
-                  Taxi 1km
-                </div>
-                <div className={styles.elementHighlight2}>
-                  {' '}
-                  {costOfLivingReturner(colLabels.taxi_1km_cost_label)}
-                </div>
-              </div>
-            )}
-          </div>
-        </Card>
-      )}
-      {country &&
-        country.safety &&
-        country.safety.description && (
-          <Card title="Safety" type="Country" className={styles.recommendationCard}>
-            {
-              <div className={styles.contentElement}>
-                <div className={styles.elementIcon}>
-                  {' '}
-                  <Attraction />
-                </div>
-                <div className={styles.elementText}>
-                  {' '}
-                  <div
-                    className={styles.dang}
-                    dangerouslySetInnerHTML={{ __html: country.safety.description }}
-                  />
-                </div>
-              </div>
-            }
+                )
+              )}
           </Card>
-      )}
-
-      {activities &&
-        activities.length > 0 && (
-          <Card title="Activities" type="Must Do" className={styles.recommendationCard}>
-            <div className={styles.events}>
-              {activities.map(activity => (
-                <div key={`activitiy-${activity}`} className={styles.slide2}>
-                  <Image
-                    src={
-                      activity &&
-                      activityImages &&
-                      activityImages[activity] &&
-                      activityImages[activity].image_hash
-                        ? getImagePath(
-                          activityImages[activity].image_hash,
-                          SUPPORTED_SIZES['720'],
-                          'activities/'
-                        )
-                        : ''
-                    }
-                    srcsetProvided={true}
-                    srcset={
-                      activity &&
-                      activityImages &&
-                      activityImages[activity] &&
-                      activityImages[activity].image_hash
-                        ? getSourceSet(
-                          activityImages[activity].image_hash,
-                          [
+        )}
+        {colLabels && (
+          <Card title="Cost of Living" type="Costs" className={styles.recommendationCard}>
+            <div ref={costsRef}>
+              {colLabels.meal_cheap_restaurant_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Food className={styles.food} />
+                    </div>
+                    <div>Meal at Cheap Restaurant</div>
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.meal_cheap_restaurant_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.meal_mid_range_restaurant_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Food />
+                    </div>
+                    Meal at Luxury Restaurant
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.meal_mid_range_restaurant_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.mcmeal_at_mcdonalds_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Food />
+                    </div>
+                    McDonalds Menu
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.mcmeal_at_mcdonalds_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.beer_at_restaurant_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Food />
+                    </div>
+                    Beer at Restaurant
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.beer_at_restaurant_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.public_transport_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Transport />
+                    </div>
+                    Public Transport
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.public_transport_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.beer_from_market_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Food />
+                    </div>
+                    Beer from Market
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.beer_from_market_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.montly_transport_pass_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Transport />
+                    </div>
+                    Monthly Transport Pass
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.montly_transport_pass_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.gasoline_1_liter_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Transport />
+                    </div>
+                    Gasoline 1 Liter
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.gasoline_1_liter_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.prepaid_card_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <EventsIcon />
+                    </div>
+                    Prepaid Card
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.prepaid_card_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.internet_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Star />
+                    </div>
+                    Internet
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {costOfLivingReturner(colLabels.internet_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.cinema_ticket_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Star />
+                    </div>
+                    Cinema Ticket
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {' '}
+                    {costOfLivingReturner(colLabels.cinema_ticket_cost_label)}
+                  </div>
+                </div>
+              )}
+              {colLabels.taxi_1km_cost_label && (
+                <div className={styles.contentElement2}>
+                  <div className={styles.elementText2}>
+                    {' '}
+                    <div className={styles.elementIcon5}>
+                      {' '}
+                      <Transport />
+                    </div>
+                    Taxi 1km
+                  </div>
+                  <div className={styles.elementHighlight2}>
+                    {' '}
+                    {costOfLivingReturner(colLabels.taxi_1km_cost_label)}
+                  </div>
+                </div>
+              )}
+            </div>
+          </Card>
+        )}
+        {country &&
+          country.safety &&
+          country.safety.description && (
+            <Card title="Safety" type="Country" className={styles.recommendationCard}>
+              {
+                <div className={styles.contentElement}>
+                  <div className={styles.elementIcon}>
+                    {' '}
+                    <Attraction />
+                  </div>
+                  <div className={styles.elementText}>
+                    {' '}
+                    <div
+                      className={styles.dang}
+                      dangerouslySetInnerHTML={{ __html: country.safety.description }}
+                    />
+                  </div>
+                </div>
+              }
+            </Card>
+        )}
+        {activities &&
+          activities.length > 0 && (
+            <Card title="Activities" type="Must Do" className={styles.recommendationCard}>
+              <div className={styles.events}>
+                {activities.map(activity => (
+                  <div key={`activitiy-${activity}`} className={styles.slide2}>
+                    <Image
+                      src={
+                        activity &&
+                        activityImages &&
+                        activityImages[activity] &&
+                        activityImages[activity].image_hash
+                          ? getImagePath(
+                            activityImages[activity].image_hash,
                             SUPPORTED_SIZES['720'],
-                            SUPPORTED_SIZES['1080'],
-                            SUPPORTED_SIZES['1920']
-                          ],
-                          'activities/'
-                        )
-                        : ''
-                    }
-                    className={styles.slideImageRow}
-                    alt={activity}
-                    key={activity}
-                  />
-                  <div className={styles.sideContent2}>
-                    {startMonth && endMonth && startMonth !== endMonth ? (
-                      <>
-                        <div className={styles.sideContentTitle}>
-                          {activity === 'Car' ? 'Scenic Drive' : activity}
-                        </div>
-                        <div className={styles.sideContentSubtitle}>
-                          from {startMonth} to {endMonth}
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className={styles.sideContentTitle}>
-                          {activity === 'Car' ? 'Scenic Drive' : activity}
-                        </div>
-                        <div className={styles.sideContentSubtitle}>in {startMonth} </div>
-                      </>
-                    )}
+                            'activities/'
+                          )
+                          : ''
+                      }
+                      srcsetProvided={true}
+                      srcset={
+                        activity &&
+                        activityImages &&
+                        activityImages[activity] &&
+                        activityImages[activity].image_hash
+                          ? getSourceSet(
+                            activityImages[activity].image_hash,
+                            [
+                              SUPPORTED_SIZES['720'],
+                              SUPPORTED_SIZES['1080'],
+                              SUPPORTED_SIZES['1920']
+                            ],
+                            'activities/'
+                          )
+                          : ''
+                      }
+                      className={styles.slideImageRow}
+                      alt={activity}
+                      key={activity}
+                    />
+                    <div className={styles.sideContent2}>
+                      {startMonth && endMonth && startMonth !== endMonth ? (
+                        <>
+                          <div className={styles.sideContentTitle}>
+                            {activity === 'Car' ? 'Scenic Drive' : activity}
+                          </div>
+                          <div className={styles.sideContentSubtitle}>
+                            from {startMonth} to {endMonth}
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className={styles.sideContentTitle}>
+                            {activity === 'Car' ? 'Scenic Drive' : activity}
+                          </div>
+                          <div className={styles.sideContentSubtitle}>in {startMonth} </div>
+                        </>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-      )}
-
-      {topPois &&
-        topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
-          <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
-            <div ref={attractionsRef} className={styles.events}>
-              {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
-                <div key={`poi-${i}-${poi.id}`} className={styles.slide}>
-                  <Image
-                    src={
-                      poi.poi_has_image
-                        ? getImagePath(
-                          getPoiImage(poi, appTheme === 'light'),
-                          SUPPORTED_SIZES['720'],
-                          'pois/'
-                        )
-                        : getDefaultImage(poi, appTheme === 'light')
-                    }
-                    srcsetProvided={true}
-                    srcset={getSourceSet(
-                      getPoiImage(poi, appTheme === 'light'),
-                      [SUPPORTED_SIZES['720'], SUPPORTED_SIZES['1080'], SUPPORTED_SIZES['1920']],
-                      'pois/'
-                    )}
-                    className={styles.slideImage}
-                    width={200}
-                    height={120}
-                    alt={poi.name}
-                    key={poi.id}
-                  />
-                  <div className={styles.slideText5}>{poi.name}</div>
-                  <div className={styles.slideText6}>{poi.perex}</div>
-                  <div className={styles.slideText7Holder}>
-                    {poi.references.map(r => (
-                      <a key={`poi-${poi.id}-${r.url}`} href={r.url} className={styles.slideText7}>
-                        Visit {r.title}
-                      </a>
-                    ))}
+                ))}
+              </div>
+            </Card>
+        )}
+        {topPois &&
+          topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
+            <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
+              <div ref={attractionsRef} className={styles.events}>
+                {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
+                  <div key={`poi-${i}-${poi.id}`} className={styles.slide}>
+                    <Image
+                      src={
+                        poi.poi_has_image
+                          ? getImagePath(
+                            getPoiImage(poi, appTheme === 'light'),
+                            SUPPORTED_SIZES['720'],
+                            'pois/'
+                          )
+                          : getDefaultImage(poi, appTheme === 'light')
+                      }
+                      srcsetProvided={true}
+                      srcset={getSourceSet(
+                        getPoiImage(poi, appTheme === 'light'),
+                        [SUPPORTED_SIZES['720'], SUPPORTED_SIZES['1080'], SUPPORTED_SIZES['1920']],
+                        'pois/'
+                      )}
+                      className={styles.slideImage}
+                      width={200}
+                      height={120}
+                      alt={poi.name}
+                      key={poi.id}
+                    />
+                    <div className={styles.slideText5}>{poi.name}</div>
+                    <div className={styles.slideText6}>{poi.perex}</div>
+                    <div className={styles.slideText7Holder}>
+                      {poi.references.map(r => (
+                        <a
+                          key={`poi-${poi.id}-${r.url}`}
+                          href={r.url}
+                          className={styles.slideText7}
+                        >
+                          Visit {r.title}
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-      )}
+                ))}
+              </div>
+            </Card>
+        )}
+      </div>
 
       <div className={styles.disclaimer}>
         {' '}

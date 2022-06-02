@@ -33,13 +33,16 @@
    -webkit-tap-highlight-color: transparent;
    display: flex;
    flex-direction: row;
-   //background-color: darkcyan;
+  
    
    -webkit-box-shadow: $header-shadow 0 6px 4px -6px;
    -moz-box-shadow: $header-shadow 0 6px 4px -6px;
    box-shadow: $header-shadow 0 6px 4px -6px;
    justify-content: space-between;
 align-content: center;
+@include xs-to-md{
+  display: none;
+}
 
 
 

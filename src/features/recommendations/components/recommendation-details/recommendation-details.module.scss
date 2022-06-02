@@ -671,6 +671,18 @@ background-color: red;
   align-content: center;
   align-self: center;
   padding-left: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+ 
+    background-color: $bg-color;
+    position: sticky;
+    top:0;
+    z-index: 999;
+    -webkit-box-shadow: $header-shadow 0 6px 4px -6px;
+   -moz-box-shadow: $header-shadow 0 6px 4px -6px;
+   box-shadow: $header-shadow 0 6px 4px -6px;
+  
+  
 
 }
 
@@ -678,15 +690,15 @@ background-color: red;
   z-index: 2;
   margin-top: 0px;
 
-  //background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, $bg-color 55%);
   background-color: $bg-color;
   width: 100%;
-  min-height: 130px;
+  //min-height: 130px;
 
-  padding-left: 16px;
-  padding-right: 16px;
+  
  margin-bottom: 10px;
 
+ position: relative;
+ 
 }
 
 .headerHolderCoverless{
@@ -700,6 +712,8 @@ background-color: red;
 .title {
 
   width: calc(100% - 20px);
+  font-size: 24px;
+  font-weight: 500;
   
  
 }

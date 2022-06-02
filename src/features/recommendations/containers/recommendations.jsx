@@ -21,6 +21,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import qs from 'qs'
 import _get from 'lodash/get'
 import { isVisaFilterSelector } from './filters/slice'
+import DetailHeader from '../components/detailHeader'
 
 const RecommendationsContainer = () => {
   let query = useQuery()
@@ -130,14 +131,26 @@ const RecommendationsContainer = () => {
 
   return (
     <div className="flex-col">
-      <Header
-        recommendationId={activeRecommendationId}
-        recommendationHash={!loading && recommendations[activeRecommendationId].hash}
-        loading={loading}
-        defaultExpanded={isHeaderExpanded}
-        alwaysShowBack={detailIndex !== -1}
-        basePath="/recommendations"
-      />
+      {detailIndex === -1 && (
+        <Header
+          recommendationId={activeRecommendationId}
+          recommendationHash={!loading && recommendations[activeRecommendationId].hash}
+          loading={loading}
+          defaultExpanded={isHeaderExpanded}
+          alwaysShowBack={detailIndex !== -1}
+          basePath="/recommendations"
+        />
+      )}
+      {detailIndex !== -1 && (
+        <DetailHeader
+          recommendationId={activeRecommendationId}
+          recommendationHash={!loading && recommendations[activeRecommendationId].hash}
+          loading={loading}
+          defaultExpanded={isHeaderExpanded}
+          alwaysShowBack={detailIndex !== -1}
+          basePath="/recommendations"
+        />
+      )}
       <Content
         loading={loading}
         recommendations={!loading && recommendations[activeRecommendationId].recommendations}
