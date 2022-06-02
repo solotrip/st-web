@@ -2,14 +2,18 @@
 $title-size: 80px;
 
 .page {
-  @include custom-scroll;
+  
   flex: 1;
-  overflow-y: scroll;
+  
   padding: 0 2px 48px 8px;
   width: 100%;
   @include xs-to-sm {
     justify-content: center;
   }
+  justify-content: center;
+  max-width: 1700px;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 

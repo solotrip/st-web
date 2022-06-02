@@ -106,44 +106,61 @@ const Header = ({
   }
 
   return (
-    <div
-      className={cx(styles.navbarFixed, {
-        [styles.expanded]: isExpanded,
-        [styles.navbarFixedIos]: Capacitor.getPlatform() === 'ios'
-      })}
-    >
-      <div className={styles.actions}>
-        <Link to="/browse" className={styles.headerLink}>
-          <div className={styles.headerLogo} />
-        </Link>
-        {(alwaysShowBack || backIsVisible) && (
-          <button
-            className={cx(styles.trackButton, {
-              [styles.active]: isTracked
-            })}
-            onClick={goBack}
-            disabled={loading}
-          >
-            <Icon
-              icon="fluent:ios-arrow-ltr-24-regular"
-              color="#3cafeb"
-              height="30"
-              className={styles.bell}
-            />
-          </button>
-        )}
-        {searchIsVisible && (
-          <>
-            {trackIsVisible ? (
-              query && Object.keys(query).length > 0 ? (
-                <button className={styles.editSearchBlue} onClick={openDatesDirectly}>
-                  <Icon
-                    icon="fluent:calendar-edit-24-regular"
-                    height="30"
-                    className={styles.tabIcon}
-                  />
-                  <div className={styles.editSearchBlueText}>Edit your Search</div>
-                </button>
+    <div className={styles.outer}>
+      <div
+        className={cx(styles.navbarFixed, {
+          [styles.expanded]: isExpanded,
+          [styles.navbarFixedIos]: Capacitor.getPlatform() === 'ios'
+        })}
+      >
+        <div className={styles.actions}>
+          <Link to="/browse" className={styles.headerLink}>
+            <div className={styles.headerLogo} />
+          </Link>
+          {(alwaysShowBack || backIsVisible) && (
+            <button
+              className={cx(styles.trackButton, {
+                [styles.active]: isTracked
+              })}
+              onClick={goBack}
+              disabled={loading}
+            >
+              <Icon
+                icon="fluent:ios-arrow-ltr-24-regular"
+                color="#3cafeb"
+                height="30"
+                className={styles.bell}
+              />
+            </button>
+          )}
+          {searchIsVisible && (
+            <>
+              {trackIsVisible ? (
+                query && Object.keys(query).length > 0 ? (
+                  <button className={styles.editSearchBlue} onClick={openDatesDirectly}>
+                    <Icon
+                      icon="fluent:calendar-edit-24-regular"
+                      height="30"
+                      className={styles.tabIcon}
+                    />
+                    <div className={styles.editSearchBlueText}>Edit your Search</div>
+                  </button>
+                ) : (
+                  <button
+                    className={cx(styles.editSearchTrackless, {
+                      [styles.withBack]: backIsVisible,
+                      [styles.exp]: isExpanded
+                    })}
+                    onClick={openDates}
+                  >
+                    <MdSearch className={styles.searchIcon} />
+                    <div className={styles.startText}>Start your search</div>
+                    {query &&
+                      Object.keys(query).length > 0 && (
+                        <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
+                    )}
+                  </button>
+                )
               ) : (
                 <button
                   className={cx(styles.editSearchTrackless, {
@@ -153,106 +170,91 @@ const Header = ({
                   onClick={openDates}
                 >
                   <MdSearch className={styles.searchIcon} />
-                  <div className={styles.startText}>Start your search</div>
-                  {query &&
-                    Object.keys(query).length > 0 && (
-                      <MdClose onClick={clearQuery} role="button" className={styles.clearIcon} />
-                  )}
-                </button>
-              )
-            ) : (
-              <button
-                className={cx(styles.editSearchTrackless, {
-                  [styles.withBack]: backIsVisible,
-                  [styles.exp]: isExpanded
-                })}
-                onClick={openDates}
-              >
-                <MdSearch className={styles.searchIcon} />
-                {<div className={styles.startText}>Start your search</div>}
-              </button>
-            )}
-            <div className={trackIsVisible ? styles.sideHolder : styles.sideHolderHidden}>
-              {trackIsVisible && (
-                <button
-                  className={cx(styles.trackButton, {
-                    [styles.active]: isTracked
-                  })}
-                  onClick={handleTrack}
-                  disabled={loading}
-                >
-                  {isTracked ? (
-                    <Icon
-                      icon="fluent:alert-24-regular"
-                      color="#3cafeb"
-                      height="30"
-                      className={styles.bell}
-                    />
-                  ) : (
-                    <Icon
-                      icon="fluent:alert-off-24-regular"
-                      color="#3cafeb"
-                      height="30"
-                      className={styles.bell}
-                    />
-                  )}
+                  {<div className={styles.startText}>Start your search</div>}
                 </button>
               )}
-              {trackIsVisible && (
-                <button
-                  className={cx(styles.trackButton, {
-                    [styles.active]: isTracked
-                  })}
-                  onClick={openShare}
-                  disabled={loading}
-                >
-                  {
-                    <Icon
-                      icon="fluent:share-ios-24-filled"
-                      color="#3cafeb"
-                      height="30"
-                      className={styles.bell}
-                    />
-                  }
-                </button>
-              )}
-            </div>
-          </>
-        )}
-      </div>
-      <div className={styles.navigator}>
-        {' '}
-        <NavLink
-          to={{ pathname: '/browse', search: location.search }}
-          className={styles.navigatorItem}
-          activeClassName={styles.active}
-        >
-          <Search28Regular />Browse
-        </NavLink>
-        <NavLink
-          to={{ pathname: '/wishlist', search: location.search }}
-          className={styles.navigatorItem}
-          activeClassName={styles.active}
-        >
-          <Heart28Regular />Wishlist
-        </NavLink>
-        <NavLink
-          to={{ pathname: '/notifications', search: location.search }}
-          className={styles.navigatorItem}
-          activeClassName={styles.active}
-        >
-          <Alert28Regular /> Notifications
-        </NavLink>
-        <NavLink
-          to={{
-            pathname: '/recommendations/preferences',
-            search: location.search
-          }}
-          className={styles.navigatorItem}
-          activeClassName={styles.active}
-        >
-          <CircleEdit24Regular />Preferences
-        </NavLink>
+              <div className={trackIsVisible ? styles.sideHolder : styles.sideHolderHidden}>
+                {trackIsVisible && (
+                  <button
+                    className={cx(styles.trackButton, {
+                      [styles.active]: isTracked
+                    })}
+                    onClick={handleTrack}
+                    disabled={loading}
+                  >
+                    {isTracked ? (
+                      <Icon
+                        icon="fluent:alert-24-regular"
+                        color="#3cafeb"
+                        height="30"
+                        className={styles.bell}
+                      />
+                    ) : (
+                      <Icon
+                        icon="fluent:alert-off-24-regular"
+                        color="#3cafeb"
+                        height="30"
+                        className={styles.bell}
+                      />
+                    )}
+                  </button>
+                )}
+                {trackIsVisible && (
+                  <button
+                    className={cx(styles.trackButton, {
+                      [styles.active]: isTracked
+                    })}
+                    onClick={openShare}
+                    disabled={loading}
+                  >
+                    {
+                      <Icon
+                        icon="fluent:share-ios-24-filled"
+                        color="#3cafeb"
+                        height="30"
+                        className={styles.bell}
+                      />
+                    }
+                  </button>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+        <div className={styles.navigator}>
+          {' '}
+          <NavLink
+            to={{ pathname: '/browse', search: location.search }}
+            className={styles.navigatorItem}
+            activeClassName={styles.active}
+          >
+            <Search28Regular />Browse
+          </NavLink>
+          <NavLink
+            to={{ pathname: '/wishlist', search: location.search }}
+            className={styles.navigatorItem}
+            activeClassName={styles.active}
+          >
+            <Heart28Regular />Wishlist
+          </NavLink>
+          <NavLink
+            to={{ pathname: '/notifications', search: location.search }}
+            className={styles.navigatorItem}
+            activeClassName={styles.active}
+          >
+            <Alert28Regular /> Notifications
+          </NavLink>
+          <NavLink
+            to={{
+              pathname: '/recommendations/preferences',
+              search: location.search
+            }}
+            className={styles.navigatorItem}
+            activeClassName={styles.active}
+          >
+            <CircleEdit24Regular />Preferences
+          </NavLink>
+        </div>
       </div>
     </div>
   )

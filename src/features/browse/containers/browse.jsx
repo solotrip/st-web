@@ -8,6 +8,7 @@ import { recentQueriesSelector } from 'reducers/recentQueriesSlice'
 import { filtersSelector } from 'features/recommendations/containers/filters/slice'
 import { locationSelector } from 'features/recommendations/containers/location/slice'
 
+import styles from './browse.module.scss'
 const BrowseContainer = () => {
   const { loading, browseItems } = useSelector(browseSelector)
   const recentQueries = useSelector(recentQueriesSelector)
@@ -22,20 +23,18 @@ const BrowseContainer = () => {
   )
 
   return (
-    <>
-      <div className="flex-col">
-        <Header backIsVisible={false} trackIsVisible={false} />
+    <div className={styles.page}>
+      <Header backIsVisible={false} trackIsVisible={false} className={styles.header} />
 
-        <Loader loading={loading}>
-          <Content
-            items={browseItems}
-            recentQueries={recentQueries}
-            filtersDict={filtersDict}
-            locations={locations}
-          />
-        </Loader>
-      </div>
-    </>
+      <Loader loading={loading}>
+        <Content
+          items={browseItems}
+          recentQueries={recentQueries}
+          filtersDict={filtersDict}
+          locations={locations}
+        />
+      </Loader>
+    </div>
   )
 }
 
