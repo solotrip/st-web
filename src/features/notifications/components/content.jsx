@@ -44,12 +44,7 @@ const Content = ({
     <div className={styles.page}>
       <div className={styles.notifications}>
         {tabs}
-        {loading &&
-          activeTab === 'Notifications' && (
-            <div className={styles.recommendations}>
-              <Recommendation.Skeleton />
-            </div>
-        )}
+        {loading && activeTab === 'Notifications' && <Recommendation.Skeleton />}
         {!loading &&
           notifications.length === 0 &&
           activeTab === 'Notifications' && (
