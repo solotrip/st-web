@@ -141,16 +141,7 @@ const RecommendationsContainer = () => {
           basePath="/recommendations"
         />
       )}
-      {detailIndex !== -1 && (
-        <DetailHeader
-          recommendationId={activeRecommendationId}
-          recommendationHash={!loading && recommendations[activeRecommendationId].hash}
-          loading={loading}
-          defaultExpanded={isHeaderExpanded}
-          alwaysShowBack={detailIndex !== -1}
-          basePath="/recommendations"
-        />
-      )}
+
       <Content
         loading={loading}
         recommendations={!loading && recommendations[activeRecommendationId].recommendations}

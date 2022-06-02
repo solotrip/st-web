@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Header from '../../recommendations/components/header'
+import BrowseHeader from '../../recommendations/components/browseHeader'
 import Content from '../components/content'
 import { useDispatch, useSelector } from 'react-redux'
 import { browseSelector, fetchBrowseItems } from '../slice'
@@ -24,7 +24,7 @@ const BrowseContainer = () => {
 
   return (
     <div className={styles.page}>
-      <Header backIsVisible={false} trackIsVisible={false} className={styles.header} />
+      <BrowseHeader backIsVisible={false} trackIsVisible={false} className={styles.header} />
 
       <Loader loading={loading}>
         <Content
