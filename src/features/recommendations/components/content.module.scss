@@ -8,6 +8,7 @@
   @include xs-to-md {
     justify-content: center;
   }
+  
 }
 
 .title {
@@ -34,13 +35,14 @@
   height: 100%;
   flex: 1;
   @include xs-to-md {
-    padding-bottom: 70px;
+    padding-bottom: 120px;
     max-width: unset;
   }
 
   @include xs {
     padding: 4px;
   }
+  padding-bottom: 50px;
 }
 
 .error {
