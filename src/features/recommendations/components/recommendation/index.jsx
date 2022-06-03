@@ -13,7 +13,9 @@ import {
   Food,
   Passport,
   Quarantine,
-  Vaccine
+  Vaccine,
+  LocationIcon,
+  Time
 } from 'assets/images/new-icons'
 import useThemeState from 'utils/hooks/use-theme-state'
 import { formatAsMonthDay, formatTripDates } from 'utils/date'
@@ -100,6 +102,14 @@ const Recommendation = ({
             {' '}
             <div className={styles.headerTitle}>{name}</div>{' '}
           </div>
+        </div>
+
+        <div className={styles.reason}>
+          <div className={styles.elementIconx}>
+            {' '}
+            <LocationIcon />
+          </div>{' '}
+          <b>Why to trip: </b> <br /> &nbsp;One of the trending destinations.{' '}
         </div>
 
         <div className={styles.content}>
@@ -192,7 +202,7 @@ const Recommendation = ({
                 <Accommodation />
               </div>
               <div className={styles.elementText}>
-              Budget Inn prices range from&nbsp;
+                Budget Inn prices range from&nbsp;
                 <div className={styles.elementHighlight}>
                   <Currency value={hostelPriceMin} />
                 </div>
