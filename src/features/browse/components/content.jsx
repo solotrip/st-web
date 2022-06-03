@@ -51,6 +51,14 @@ const Content = ({ items, recentQueries, filtersDict, locations }) => {
         <Icon icon="bx:map-pin" height="30" className={styles.tabIcon} />
         <span className={styles.tabName}>To Destination</span>
       </NavLink>
+      <NavLink
+        to={{ pathname: '/recommendations/country', search: 'complete=true' }}
+        className={styles.tabItem}
+        //onClick={tabSelect}
+      >
+        <Icon icon="ps:world" height="30" className={styles.tabIcon} />
+        <span className={styles.tabName}>To Country</span>
+      </NavLink>
       {/*<NavLink
         to={{ pathname: '/recommendations/destination', search: 'complete=true' }}
         className={styles.tabItem}
