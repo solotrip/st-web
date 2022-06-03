@@ -45,6 +45,13 @@ const FiltersContainer = () => {
     filters: query.filters
   })
 
+  const [hasCountry, setHasCountry] = useState(
+    query.filters && query.filters.filter(f => f.id === 'c').length > 0 ? true : false
+  )
+  const [hasArea, setHasArea] = useState(
+    query.filters && query.filters.filter(f => f.id === 'a').length > 0 ? true : false
+  )
+
   const onUpdate = useCallback(
     (filterId, value) => {
       setData(prevData => ({
@@ -61,6 +68,7 @@ const FiltersContainer = () => {
   const onUpdateCountries = useCallback(
     payload => {
       if (payload !== [] && payload.length && payload.length > 0) {
+        setHasCountry(true)
         setData(prevData => ({
           ...prevData,
           filters: {
@@ -69,6 +77,7 @@ const FiltersContainer = () => {
           }
         }))
       } else if (payload && payload.length === 0) {
+        setHasCountry(false)
         setData(prevData => ({
           ...prevData,
           filters: {
@@ -85,6 +94,8 @@ const FiltersContainer = () => {
     payload => {
       console.log(areaData)
       if (payload !== [] && payload.length && payload.length > 0) {
+        setHasArea(true)
+
         setAreaData(prevData => ({
           ...prevData,
           filters: {
@@ -100,6 +111,8 @@ const FiltersContainer = () => {
         areaData.filters[0] &&
         !areaData.filters[0].variables.areaSids
       ) {
+        setHasArea(false)
+
         setAreaData(prevData => ({
           ...prevData,
           filters: {
@@ -108,6 +121,8 @@ const FiltersContainer = () => {
           }
         }))
       } else if (payload && payload.length === 0) {
+        setHasArea(false)
+
         setAreaData(prevData => ({
           ...prevData,
           filters: {
@@ -121,20 +136,49 @@ const FiltersContainer = () => {
   )
 
   const onSubmit = () => {
-    dispatch(fetchRecommendations(query))
-    history.push({
-      pathname: '/recommendations',
-      search: qs.stringify({
-        ...data,
-        filters: Object.keys(data.filters)
-          .filter(k => data.filters[k] !== undefined)
-          .map(k => ({
-            id: k,
-            variables: data.filters[k] === true ? undefined : data.filters[k]
-          })),
-        ...areaData
+    if (hasArea && hasCountry) {
+      console.log({ hasArea, hasCountry })
+      history.push({
+        pathname: '/recommendations',
+        search: qs.stringify(areaData)
       })
-    })
+    } else if (hasArea && !hasCountry) {
+      console.log({ hasArea, hasCountry })
+      history.push({
+        pathname: '/recommendations',
+        search: qs.stringify(areaData)
+      })
+    } else if (!hasArea && hasCountry) {
+      dispatch(fetchRecommendations(query))
+      history.push({
+        pathname: '/recommendations',
+        search: qs.stringify({
+          ...data,
+          filters: Object.keys(data.filters)
+            .filter(k => data.filters[k] !== undefined)
+            .map(k => ({
+              id: k,
+              variables: data.filters[k] === true ? undefined : data.filters[k]
+            }))
+        })
+      })
+    } else if (!hasArea && !hasCountry) {
+      dispatch(fetchRecommendations(query))
+      history.push({
+        pathname: '/recommendations',
+        search: qs.stringify({
+          ...data,
+          filters: Object.keys(data.filters)
+            .filter(k => data.filters[k] !== undefined)
+            .map(k => ({
+              id: k,
+              variables: data.filters[k] === true ? undefined : data.filters[k]
+            })),
+          ...areaData
+        })
+      })
+    }
+
     if (Object.keys(data.filters) === [] || Object.keys(data.filters).length === 0) {
       //history.go(0)
     }
