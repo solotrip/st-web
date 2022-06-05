@@ -104,15 +104,16 @@ const Recommendation = ({
           </div>
         </div>
 
-        <div className={styles.reason}>
-          <div className={styles.elementIconx}>
-            {' '}
-            <LocationIcon />
-          </div>{' '}
-          <b>Why to trip: </b> <br /> &nbsp;One of the trending destinations.{' '}
-        </div>
-
         <div className={styles.content}>
+          <div className={styles.contentElement}>
+            <div className={styles.elementIcon}>
+              <LocationIcon />
+            </div>
+
+            <div className={styles.elementText}>
+              Reason for a trip:&nbsp;There are some good events
+            </div>
+          </div>
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
