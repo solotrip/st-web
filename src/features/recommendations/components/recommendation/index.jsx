@@ -317,24 +317,7 @@ const Recommendation = ({
               </div>
             </div>
           </div>
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Vaccine />
-            </div>
-            <div className={styles.elementText}>
-              {' '}
-              <div
-                className={
-                  unvaccinatedTestText.includes('Test Required')
-                    ? styles.elementRed
-                    : unvaccinatedTestText.includes('Test not required') && styles.elementGreen
-                }
-              >
-                {unvaccinatedTestText}{' '}
-              </div>{' '}
-            </div>
-          </div>
+
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
@@ -350,24 +333,6 @@ const Recommendation = ({
                 }
               >
                 {vaccinatedQuarantineText}
-              </div>
-            </div>
-          </div>
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              {' '}
-              <Quarantine />
-            </div>
-            <div className={styles.elementText}>
-              <div
-                className={
-                  unvaccinatedQuarantineText.includes('Quarantine Required')
-                    ? styles.elementRed
-                    : unvaccinatedQuarantineText.includes('Quarantine not required') &&
-                      styles.elementGreen
-                }
-              >
-                {unvaccinatedQuarantineText}
               </div>
             </div>
           </div>
