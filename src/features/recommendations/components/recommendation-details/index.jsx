@@ -871,9 +871,7 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                           )
                       )}{' '}
                     </div>
-                    <div className={styles.durationText}>
-                      Time spent visiting: {poi.duration / 60} minutes
-                    </div>
+
                     <div className={styles.slideText6}>
                       {poi.description && poi.description.text
                         ? poi.description.text
