@@ -846,6 +846,15 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                 {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
                   <div key={`poi-${i}-${poi.id}`} className={styles.slide}>
                     <div className={styles.slideText5}>{poi.name}</div>
+                    <div className={styles.tagtext}>
+                      {poi.tags.map(
+                        (t, index) =>
+                          index < 3 &&
+                          t.name !== '360° Content' && (
+                            <div className={styles.tagtextItem}> {t.name}</div>
+                          )
+                      )}{' '}
+                    </div>
                     <Image
                       src={
                         poi.poi_has_image
@@ -868,16 +877,6 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                       alt={poi.name}
                       key={poi.id}
                     />
-
-                    <div className={styles.tagtext}>
-                      {poi.tags.map(
-                        (t, index) =>
-                          index < 3 &&
-                          t.name !== '360° Content' && (
-                            <div className={styles.tagtextItem}> {t.name}</div>
-                          )
-                      )}{' '}
-                    </div>
 
                     <div className={styles.slideText6}>
                       {poi.description && poi.description.text
