@@ -324,6 +324,12 @@ padding: 4px;
 
 }
 
+.eventClick{
+  
+  width: 100%;
+}
+
+
 .sideContent2{
   padding-left: 15px;
   
@@ -341,12 +347,12 @@ padding: 4px;
   z-index: 2;
   text-align: left;
   @include xs-to-md {
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 18px;
+    line-height: 20px;
   }
 
-  font-size: 20px;
-  line-height: 22px;
+  font-size: 22px;
+  line-height: 24px;
 
   
   width: 100%;
@@ -359,6 +365,7 @@ padding: 4px;
   -webkit-box-orient: vertical;
   height: auto;
   margin-bottom: 0px;
+  margin-left: 10px;
 
 
 }
@@ -369,10 +376,10 @@ padding: 4px;
   text-align: left;
 
   @include xs-to-md {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 19px;
   }
-  font-size: 16px;
+  font-size: 18px;
   line-height: 22px;
 
   
@@ -387,6 +394,7 @@ padding: 4px;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   margin-bottom: 10px;
+  margin-left: 10px;
 
 }
 
@@ -609,13 +617,32 @@ padding: 4px;
 .tagtextItem{
   margin-right: 10px;
   background-color: $text-color;
+  color:$bg-color;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-radius: 6px;
- 
+  width: fit-content;
+  text-align: center;
+  
+}
 
+.tagtextItem2{
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: $text-color;
+  color:$bg-color;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 6px;
+ width: fit-content;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
 }
 
 .slideText7 {
@@ -638,6 +665,28 @@ padding: 4px;
   margin-left: 10px;
 
 }
+
+.slideText9 {
+  background-color: #1697dc;
+  z-index: 2;
+
+
+  
+  width: 60px;
+  height: 50px;
+
+  display: flex;
+ 
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  border-radius: 16px;
+  color:white;
+  margin-right: 10px;
+  margin-left: 10px;
+
+}
+
 
 .slideText8 {
   @extend .textShadow;

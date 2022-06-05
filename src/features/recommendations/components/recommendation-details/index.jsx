@@ -496,14 +496,21 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
                   />
                   <div className={styles.sideContent}>
                     <div className={styles.sideContentTitle}>{event.title}</div>
-                    <div className={styles.sideContentSubtitle}>
+                    <div className={styles.tagtextItem2}>
                       {formatAsMonthDay(event.start)}
                       {event.start !== event.end ? ` - ${formatAsMonthDay(event.end)}` : ''}{' '}
                     </div>
+
                     {event.url && (
-                      <a href={event.url} className={styles.sideContentSubtitle}>
-                        Visit Official Website
-                      </a>
+                      <div className={styles.eventClick}>
+                        <a href={event.url} className={styles.slideText9}>
+                          <Icon
+                            icon="charm:link-external"
+                            height="30"
+                            className={styles.poiDirect}
+                          />
+                        </a>
+                      </div>
                     )}
                   </div>
                 </div>
