@@ -291,6 +291,8 @@ padding: 4px;
 
 .slide {
   padding: 2px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .slide2 {
@@ -389,7 +391,7 @@ padding: 4px;
 }
 
 .sideContentSubtitles {
-background-color: red;
+
   display:flex;
  flex-direction: column-reverse;
   z-index: 2;
@@ -549,11 +551,12 @@ background-color: red;
 
 
 .slideText5 {
-  @extend .textShadow;
+  //@extend .textShadow;
   z-index: 2;
   text-align: left;
-  font-size: 19px;
-  line-height: 19px;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 24px;
   margin-top: 13px;
   width: 100%;
 
@@ -563,46 +566,76 @@ background-color: red;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  margin-bottom: 3px;
+  margin-bottom: 10px;
 
 }
 
 .slideText6 {
-  @extend .textShadow;
+  //@extend .textShadow;
   z-index: 2;
   text-align: left;
-  font-size: 14px;
-  line-height: 19px;
-  margin-top: 3px;
+  font-size: 17px;
+  line-height: 21px;
+  margin-top: 8px;
   width: 100%;
 
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 15;
   -webkit-box-orient: vertical;
   margin-bottom: 10px;
 
 }
 
-.slideText7 {
-  @extend .textShadow;
-  z-index: 2;
-  text-align: left;
-  font-size: 14px;
-  line-height: 19px;
-  margin-top: 3px;
-  width: 100%;
+.tagtext{
+  margin-top: 8px;
+  color:$bg-color;
+  display: flex;
+  flex-direction: row;
+  
+  
 
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: flex;
   flex-direction: row;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   margin-bottom: 10px;
+  
+}
+.tagtextItem{
+  margin-right: 10px;
+  background-color: $text-color;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 6px;
+ 
+
+}
+
+.slideText7 {
+  background-color: #1697dc;
+  z-index: 2;
+
+
+  
+  width: 60px;
+  height: 50px;
+
+  display: flex;
+ 
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  border-radius: 16px;
+  color:white;
+  margin-right: 10px;
+  margin-left: 10px;
 
 }
 
@@ -628,9 +661,21 @@ background-color: red;
 }
 .slideText7Holder {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 
  margin-bottom: 20px;
 
+
+}
+
+.durationText{
+  margin-top: 8px;
+  margin-bottom: 15px;
+  text-align: left;
+  font-size: 17px;
+  line-height: 21px;
 }
 
 
@@ -733,7 +778,7 @@ background-color: red;
   overflow-x: scroll;
  
   
-  background-color: red;
+ 
 
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none;
@@ -878,6 +923,17 @@ background-color: red;
 .tabIcon {
   //color: #31afea;
   color: $browse-tab-color;
+  font-size: 24px;
+  pointer-events: none;
+  @include xs {
+    display: none;
+  }
+}
+
+
+.poiDirect {
+  //color: #31afea;
+  color: white;
   font-size: 24px;
   pointer-events: none;
   @include xs {

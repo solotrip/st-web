@@ -831,6 +831,106 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               }
             </Card>
         )}
+
+        {topPois &&
+          topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
+            <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
+              <div ref={attractionsRef} className={styles.events}>
+                {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
+                  <div key={`poi-${i}-${poi.id}`} className={styles.slide}>
+                    <div className={styles.slideText5}>{poi.name}</div>
+                    <Image
+                      src={
+                        poi.poi_has_image
+                          ? getImagePath(
+                            getPoiImage(poi, appTheme === 'light'),
+                            SUPPORTED_SIZES['720'],
+                            'pois/'
+                          )
+                          : getDefaultImage(poi, appTheme === 'light')
+                      }
+                      srcsetProvided={true}
+                      srcset={getSourceSet(
+                        getPoiImage(poi, appTheme === 'light'),
+                        [SUPPORTED_SIZES['720'], SUPPORTED_SIZES['1080'], SUPPORTED_SIZES['1920']],
+                        'pois/'
+                      )}
+                      className={styles.slideImage}
+                      width={200}
+                      height={120}
+                      alt={poi.name}
+                      key={poi.id}
+                    />
+
+                    <div className={styles.tagtext}>
+                      {poi.tags.map(
+                        (t, index) =>
+                          index < 3 &&
+                          t.name !== '360° Content' && (
+                            <div className={styles.tagtextItem}> {t.name}</div>
+                          )
+                      )}{' '}
+                    </div>
+                    <div className={styles.durationText}>
+                      Time spent visiting: {poi.duration / 60} minutes
+                    </div>
+                    <div className={styles.slideText6}>
+                      {poi.description && poi.description.text
+                        ? poi.description.text
+                        : poi.perex ? poi.perex : poi.address ? poi.address : ' '}
+                    </div>
+
+                    <div className={styles.slideText7Holder}>
+                      {poi.phone && (
+                        <a
+                          key={`poi-${poi.id}-${poi.phone}`}
+                          href={`tel:${poi.phone}`}
+                          className={styles.slideText7}
+                        >
+                          {
+                            <Icon
+                              icon="fluent:call-28-regular"
+                              height="30"
+                              className={styles.poiDirect}
+                            />
+                          }
+                        </a>
+                      )}
+                      {poi.location && (
+                        <a
+                          key={`poi-${poi.id}-${poi.location.lng}-${poi.location.lat}`}
+                          href={`https://www.google.com/maps/dir///@${poi.location.lat},${
+                            poi.location.lng
+                          },15z`}
+                          className={styles.slideText7}
+                        >
+                          {<Icon icon="bx:navigation" height="30" className={styles.poiDirect} />}
+                        </a>
+                      )}
+                      {poi.references.map(r => (
+                        <a
+                          key={`poi-${poi.id}-${r.url}`}
+                          href={r.url}
+                          className={styles.slideText7}
+                        >
+                          {r.title !== 'Wikipedia' && (
+                            <Icon
+                              icon="charm:link-external"
+                              height="30"
+                              className={styles.poiDirect}
+                            />
+                          )}
+                          {r.title === 'Wikipedia' && (
+                            <Icon icon="cib:wikipedia" height="30" className={styles.poiDirect} />
+                          )}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+        )}
         {activities &&
           activities.length > 0 && (
             <Card title="Activities" type="Must Do" className={styles.recommendationCard}>
@@ -895,70 +995,6 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               </div>
             </Card>
         )}
-        {topPois &&
-          topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
-            <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
-              <div ref={attractionsRef} className={styles.events}>
-                {topPois.filter(poi => poi.poi_has_image === true).map((poi, i) => (
-                  <div key={`poi-${i}-${poi.id}`} className={styles.slide}>
-                    <Image
-                      src={
-                        poi.poi_has_image
-                          ? getImagePath(
-                            getPoiImage(poi, appTheme === 'light'),
-                            SUPPORTED_SIZES['720'],
-                            'pois/'
-                          )
-                          : getDefaultImage(poi, appTheme === 'light')
-                      }
-                      srcsetProvided={true}
-                      srcset={getSourceSet(
-                        getPoiImage(poi, appTheme === 'light'),
-                        [SUPPORTED_SIZES['720'], SUPPORTED_SIZES['1080'], SUPPORTED_SIZES['1920']],
-                        'pois/'
-                      )}
-                      className={styles.slideImage}
-                      width={200}
-                      height={120}
-                      alt={poi.name}
-                      key={poi.id}
-                    />
-                    <div className={styles.slideText5}>{poi.name}</div>
-                    <div className={styles.slideText6}>{poi.perex}</div>
-                    <div className={styles.slideText7Holder}>
-                      {poi.references.map(r => (
-                        <a
-                          key={`poi-${poi.id}-${r.url}`}
-                          href={r.url}
-                          className={styles.slideText7}
-                        >
-                          Visit {r.title}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
-        )}
-      </div>
-
-      <div className={styles.disclaimer}>
-        {' '}
-        <BsInfoLg className={styles.disclaimerIcon} /> Always double check information provided by
-        Pulfy with official websites before your trip.
-      </div>
-
-      <div className={styles.disclaimer}>
-        {' '}
-        <BsExclamationLg className={styles.disclaimerIcon2} />{' '}
-        <div className={styles.report}>
-          Did you find any inaccuracy or misinformation?{' '}
-          <a href={'mailto:support@pulfy.com?subject=Pulfy Inaccuracy or Misinformation&body='}>
-            {' '}
-            Report to us
-          </a>
-        </div>
       </div>
     </div>
   )
