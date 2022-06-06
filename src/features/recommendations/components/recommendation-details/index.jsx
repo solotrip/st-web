@@ -843,36 +843,6 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
             </Card>
         )}
 
-        <Card title={'More to know'} type="Overview" className={styles.recommendationCard}>
-          {area_description &&
-            area_description['text'] && (
-              <div className={styles.slideText6}>{area_description['text']}</div>
-          )}
-
-          <div className={styles.slideText7Holder}>
-            {lat &&
-              lon && (
-                <a
-                  key={`loc-${id}-0-${lat}-${lon}`}
-                  href={`https://www.google.com/maps/dir///@${lat},${lon},15z`}
-                  className={styles.slideText7}
-                >
-                  {<Icon icon="bx:navigation" height="30" className={styles.poiDirect} />}
-                </a>
-            )}
-            {area_description &&
-              area_description['link'] && (
-                <a
-                  key={`${id}-${lat}-${lon}`}
-                  href={area_description['link']}
-                  className={styles.slideText7}
-                >
-                  {<Icon icon="cib:wikipedia" height="30" className={styles.poiDirect} />}
-                </a>
-            )}
-          </div>
-        </Card>
-
         {topPois &&
           topPois.filter(poi => poi.poi_has_image === true).length > 0 && (
             <Card title="Attractions" type="Must Visit" className={styles.recommendationCard}>
@@ -969,6 +939,36 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
               </div>
             </Card>
         )}
+
+        <Card title={'More to know'} type="Overview" className={styles.recommendationCard}>
+          {area_description &&
+            area_description['text'] && (
+              <div className={styles.slideText6}>{area_description['text']}</div>
+          )}
+
+          <div className={styles.slideText7Holder}>
+            {lat &&
+              lon && (
+                <a
+                  key={`loc-${id}-0-${lat}-${lon}`}
+                  href={`https://www.google.com/maps/dir///@${lat},${lon},15z`}
+                  className={styles.slideText7}
+                >
+                  {<Icon icon="bx:navigation" height="30" className={styles.poiDirect} />}
+                </a>
+            )}
+            {area_description &&
+              area_description['link'] && (
+                <a
+                  key={`${id}-${lat}-${lon}`}
+                  href={area_description['link']}
+                  className={styles.slideText7}
+                >
+                  {<Icon icon="cib:wikipedia" height="30" className={styles.poiDirect} />}
+                </a>
+            )}
+          </div>
+        </Card>
         {activities &&
           activities.length > 0 && (
             <Card title="Activities" type="Must Do" className={styles.recommendationCard}>
