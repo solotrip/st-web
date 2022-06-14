@@ -50,7 +50,9 @@ const Recommendation = ({
     vacation_rental_price_max: vacationRentalPriceMax,
     fastestFlightCost,
     cheapestFlightCost,
-    bestFlightCost
+    bestFlightCost,
+    best_time,
+    experience
   } = recommendation
 
   const passports = query && query.passports ? query.passports : []
@@ -105,15 +107,49 @@ const Recommendation = ({
         </div>
 
         <div className={styles.content}>
-          <div className={styles.contentElement}>
-            <div className={styles.elementIcon}>
-              <LocationIcon />
-            </div>
+          {events.length > 0 &&
+            best_time !== true && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  <LocationIcon />
+                </div>
 
-            <div className={styles.elementText}>
-              Reason for a trip:&nbsp;There are some good events
+                <div className={styles.elementText}>
+                  Reason for a trip:&nbsp;There are some good events
+                </div>
+              </div>
+          )}
+          {events.length === 0 &&
+            best_time === true && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  <LocationIcon />
+                </div>
+
+                <div className={styles.elementText}>Reason for a trip:&nbsp;Best time to visit</div>
+              </div>
+          )}
+          {events.length > 0 &&
+            best_time === true && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  <LocationIcon />
+                </div>
+
+                <div className={styles.elementText}>
+                  Reason for a trip:&nbsp;There are some good events and it is best time to visit
+                </div>
+              </div>
+          )}
+          {experience && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                <EventsIcon />
+              </div>
+
+              <div className={styles.elementText}>{experience}</div>
             </div>
-          </div>
+          )}
           <div className={styles.contentElement}>
             <div className={styles.elementIcon}>
               {' '}
