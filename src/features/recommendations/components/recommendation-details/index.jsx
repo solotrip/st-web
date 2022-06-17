@@ -21,7 +21,8 @@ import {
   Quarantine,
   Star,
   Transport,
-  Vaccine
+  Vaccine,
+  LocationIcon
 } from 'assets/images/new-icons'
 
 import { formatAsMonthDay, formatTripDates, getMonthName } from 'utils/date'
@@ -61,7 +62,9 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
     area_description,
     lat,
     lon,
-    country
+    country,
+    best_time,
+    experience
   } = recommendation
 
   const {
@@ -276,6 +279,27 @@ const Details = ({ recommendation, passports, query, toggleWishlist, wishlisted 
         </div>
 
         <Card title="Overview" type="Highlights" className={styles.recommendationCard}>
+          {events.length > 0 &&
+            best_time === true && (
+              <div className={styles.contentElement}>
+                <div className={styles.elementIcon}>
+                  <LocationIcon />
+                </div>
+
+                <div className={styles.elementText}>
+                  Reason for a trip:&nbsp;There are some good events and it is best time to visit
+                </div>
+              </div>
+          )}
+          {experience && (
+            <div className={styles.contentElement}>
+              <div className={styles.elementIcon}>
+                <EventsIcon />
+              </div>
+
+              <div className={styles.elementText}>{experience}</div>
+            </div>
+          )}
           {visaText && (
             <div className={styles.contentElement}>
               <div className={styles.elementIcon}>
